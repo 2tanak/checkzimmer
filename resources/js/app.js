@@ -6,10 +6,6 @@
 
 require('./bootstrap');
 
-var jQuery = require("jquery");
-
-require('./ui');
-
 window.Vue = require('vue');
 
 /**

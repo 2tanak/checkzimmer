@@ -49505,10 +49505,6 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-var jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-
-__webpack_require__(/*! ./ui */ "./resources/js/ui.js");
-
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
  * The following block of code may be used to automatically register your
@@ -49647,49 +49643,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/ui.js":
-/*!****************************!*\
-  !*** ./resources/js/ui.js ***!
-  \****************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-jQuery(document).ready(function () {
-  jQuery('.distance').select2();
-  jQuery('.property-card-slider').slick({
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1
-  });
-  jQuery('a.collapse').click(function () {
-    jQuery('a.collapse').toggleClass('active');
-    jQuery('.property-card').toggleClass('collapse');
-  });
-  jQuery('a.favorites').click(function () {
-    jQuery('a.favorites').toggleClass('heart-active');
-  });
-  jQuery('.sorting a').click(function () {
-    jQuery('.sorting').toggleClass('up');
-  });
-  jQuery(".left-block a").click(function (e) {
-    e.preventDefault();
-    jQuery(".left-block a").removeClass('active');
-    jQuery(this).addClass('active');
-  });
-  jQuery('.left-block a.map').click(function () {
-    jQuery('.property .container').addClass('active');
-    jQuery('.property').addClass('show-map');
-    jQuery('.property').removeClass('no-map');
-  });
-  jQuery('.left-block a.list').click(function () {
-    jQuery('.property .container').removeClass('active');
-    jQuery('.property').removeClass('show-map');
-    jQuery('.property').addClass('no-map');
-  });
-});
-
-/***/ }),
-
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -49701,15 +49654,27 @@ jQuery(document).ready(function () {
 
 /***/ }),
 
+/***/ "./resources/sass/dashboard.scss":
+/*!***************************************!*\
+  !*** ./resources/sass/dashboard.scss ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
-  \*************************************************************/
+/*!*********************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/dashboard.scss ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\www\dev.immobilien.test-depot.info\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\www\dev.immobilien.test-depot.info\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Dev\_www\dev.immobilien.test-depot.info\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! D:\Dev\_www\dev.immobilien.test-depot.info\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! D:\Dev\_www\dev.immobilien.test-depot.info\resources\sass\dashboard.scss */"./resources/sass/dashboard.scss");
 
 
 /***/ })
