@@ -16,8 +16,6 @@
                         <option value="2">20 км.</option>
                         <option value="3">30 км.</option>
                         <option value="4">40 км.</option>
-                        <option value="5">50 км.</option>
-                        <option value="6">60 км.</option>
                     </select>
                 </div>
                 <div class="number-personse-block select-block">
@@ -27,8 +25,6 @@
                         <option value="2">2 чел.</option>
                         <option value="3">3 чел.</option>
                         <option value="4">4 чел.</option>
-                        <option value="5">5 чел.</option>
-                        <option value="6">6 чел.</option>
                     </select>
                 </div>
                 <a class="find-housing" href="#">Найти жильё</a>
@@ -57,6 +53,10 @@
                         <div class="property-card">
                             <div class="property-card-slider">
                                 <div><img src="/img/property-picture.png" alt="Property picture"></div>
+                                <div><img src="/img/property-picture2.png" alt="Property picture"></div>
+                                <div><img src="/img/property-picture.png" alt="Property picture"></div>
+                                <div><img src="/img/property-picture2.png" alt="Property picture"></div>
+                                <div><img src="/img/property-picture.png" alt="Property picture"></div>
                             </div>
                             <div class="data">
                                 <a href="#" class="title"><span>Maisonette-Whg in Markkleeberg-West mit viel Entfaltungspotenzial, Leipzig</span></a>
@@ -74,10 +74,10 @@
                                         7км от указанного вами адреса
                                     </div>
                                     <div class="additionally">
-                                        <div class="wi-fi data-block-circle"><img src="/svg/i-wifi.svg"></div>
-                                        <div class="double-bed data-block-circle"><img src="/svg/i-bedroom.svg"></div>
-                                        <div class="tv data-block-circle"><img src="/svg/i-tv.svg"></div>
-                                        <div class="washing-machine data-block-circle"><img src="/svg/i-washingmachine.svg"></div>
+                                        <div class="wi-fi data-block-circle" data-toggle="tooltip" data-placement="top" title="wi-fi"><img src="/svg/i-wifi.svg"></div>
+                                        <div class="double-bed data-block-circle" data-toggle="tooltip" data-placement="top" title="двухспальная кровать"><img src="/svg/i-bedroom.svg"></div>
+                                        <div class="tv data-block-circle" data-toggle="tooltip" data-placement="top" title="телевизор"><img src="/svg/i-tv.svg"></div>
+                                        <div class="washing-machine data-block-circle" data-toggle="tooltip" data-placement="top" title="стиральная машина"><img src="/svg/i-washingmachine.svg"></div>
                                         <div class="kitchen data-block-oval">
                                             <img src="/svg/i-canteen.svg">
                                             общая кухня
@@ -199,7 +199,7 @@
                                         7км от указанного вами адреса
                                     </div>
                                     <div class="additionally">
-                                        <div class="wi-fi data-block-circle"><img src="/svg/i-wifi.svg"></div>
+                                        <div class="wi-fi data-block-circle" data-toggle="tooltip" data-placement="top" title="wi-fi"><img src="/svg/i-wifi.svg"></div>
                                         <div class="kitchen data-block-oval">
                                             <img src="/svg/i-canteen.svg">
                                             своя + общая кухня
@@ -321,10 +321,10 @@
                                         7км от указанного вами адреса
                                     </div>
                                     <div class="additionally">
-                                        <div class="wi-fi data-block-circle"><img src="/svg/i-wifi.svg"></div>
-                                        <div class="double-bed data-block-circle"><img src="/svg/i-bedroom.svg"></div>
-                                        <div class="tv data-block-circle"><img src="/svg/i-tv.svg"></div>
-                                        <div class="washing-machine data-block-circle"><img src="/svg/i-washingmachine.svg"></div>
+                                        <div class="wi-fi data-block-circle" data-toggle="tooltip" data-placement="top" title="wi-fi"><img src="/svg/i-wifi.svg"></div>
+                                        <div class="double-bed data-block-circle" data-toggle="tooltip" data-placement="top" title="двухспальная кровать"><img src="/svg/i-bedroom.svg"></div>
+                                        <div class="tv data-block-circle" data-toggle="tooltip" data-placement="top" title="телевизор"><img src="/svg/i-tv.svg"></div>
+                                        <div class="washing-machine data-block-circle" data-toggle="tooltip" data-placement="top" title="стиральная машина"><img src="/svg/i-washingmachine.svg"></div>
                                         <div class="kitchen data-block-oval">
                                             <img src="/svg/i-canteen.svg">
                                             своя кухня
@@ -446,10 +446,10 @@
                                         7км от указанного вами адреса
                                     </div>
                                     <div class="additionally">
-                                        <div class="wi-fi data-block-circle"><img src="/svg/i-wifi.svg"></div>
-                                        <div class="double-bed data-block-circle"><img src="/svg/i-bedroom.svg"></div>
-                                        <div class="tv data-block-circle"><img src="/svg/i-tv.svg"></div>
-                                        <div class="washing-machine data-block-circle"><img src="/svg/i-washingmachine.svg"></div>
+                                        <div class="wi-fi data-block-circle" data-toggle="tooltip" data-placement="top" title="wi-fi"><img src="/svg/i-wifi.svg"></div>
+                                        <div class="double-bed data-block-circle" data-toggle="tooltip" data-placement="top" title="двухспальная кровать"><img src="/svg/i-bedroom.svg"></div>
+                                        <div class="tv data-block-circle" data-toggle="tooltip" data-placement="top" title="телевизор"><img src="/svg/i-tv.svg"></div>
+                                        <div class="washing-machine data-block-circle" data-toggle="tooltip" data-placement="top" title="стиральная машина"><img src="/svg/i-washingmachine.svg"></div>
                                         <div class="kitchen data-block-oval">
                                             <img src="/svg/i-canteen.svg">
                                             общая кухня
@@ -571,10 +571,10 @@
                                         7км от указанного вами адреса
                                     </div>
                                     <div class="additionally">
-                                        <div class="wi-fi data-block-circle"><img src="/svg/i-wifi.svg"></div>
-                                        <div class="double-bed data-block-circle"><img src="/svg/i-bedroom.svg"></div>
-                                        <div class="tv data-block-circle"><img src="/svg/i-tv.svg"></div>
-                                        <div class="washing-machine data-block-circle"><img src="/svg/i-washingmachine.svg"></div>
+                                        <div class="wi-fi data-block-circle" data-toggle="tooltip" data-placement="top" title="wi-fi"><img src="/svg/i-wifi.svg"></div>
+                                        <div class="double-bed data-block-circle" data-toggle="tooltip" data-placement="top" title="двухспальная кровать"><img src="/svg/i-bedroom.svg"></div>
+                                        <div class="tv data-block-circle" data-toggle="tooltip" data-placement="top" title="телевизор"><img src="/svg/i-tv.svg"></div>
+                                        <div class="washing-machine data-block-circle" data-toggle="tooltip" data-placement="top" title="стиральная машина"><img src="/svg/i-washingmachine.svg"></div>
                                         <div class="kitchen data-block-oval">
                                             <img src="/svg/i-canteen.svg">
                                             общая кухня

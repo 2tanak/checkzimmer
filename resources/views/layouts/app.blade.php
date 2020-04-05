@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"/>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app" class="property-list">
@@ -140,7 +140,7 @@
 
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <script src="{{ asset('js/jquery-3.3.1.min.js') }}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="{{ asset('js/select2.full.js') }}" defer></script>
     <script src="{{ asset('js/slick.min.js') }}" defer></script>
     <script src="{{ asset('js/ui.js') }}" defer></script>
