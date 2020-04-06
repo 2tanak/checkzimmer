@@ -431,6 +431,7 @@ footer#main-footer ul.footer-menu li a:active {
     padding: 16px 16px 10px 16px;
     display: flex;
     align-items: flex-start;
+    min-height: 183px;
 }
 .list-content .property .property-card:not(:last-of-type) {
     border-bottom: 1px solid #e8e8ed;
@@ -449,7 +450,7 @@ footer#main-footer ul.footer-menu li a:active {
     min-height: 156px;
     width: 100%;
 }
-.list-content .property .property-card .data a.title {
+.list-content .property a.title {
     margin-bottom: 4px;
     font-weight: 500;
     font-size: 16px;
@@ -458,7 +459,7 @@ footer#main-footer ul.footer-menu li a:active {
     max-width: 363px;
     width: 100%;
 }
-.list-content .property .property-card .data a.title span {
+.list-content .property a.title span {
     color: #333646;
 }
 .list-content .property .property-card .geolocation {
@@ -475,7 +476,7 @@ footer#main-footer ul.footer-menu li a:active {
     height: 14px;
     margin-right: 4px;
 }
-.list-content .property .property-card .humans {
+.list-content .property .humans {
     font-weight: 400;
     font-size: 12px;
     line-height: 100%;
@@ -485,12 +486,12 @@ footer#main-footer ul.footer-menu li a:active {
     margin-bottom: 9px;
     white-space: nowrap;
 }
-.list-content .property .property-card .humans img {
+.list-content .property .humans img {
     width: 13px;
     height: 14px;
     margin-right: 4px;
 }
-.list-content .property .property-card .distance {
+.list-content .property .distance {
     font-weight: 400;
     font-size: 12px;
     line-height: 100%;
@@ -500,12 +501,12 @@ footer#main-footer ul.footer-menu li a:active {
     margin-bottom: 7px;
     white-space: nowrap;
 }
-.list-content .property .property-card .distance img {
+.list-content .property .distance img {
     width: 15px;
     height: 15px;
     margin-right: 4px;
 }
-.list-content .property .property-card .additionally {
+.list-content .property .additionally {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -628,7 +629,7 @@ footer#main-footer ul.footer-menu li a:active {
 .list-content .property .property-card .favorites.active img.favorites-icon {
     display: none;
 }
-.list-content .property .property-card .night .price {
+.list-content .property .price {
     font-weight: 400;
     font-size: 16px;
     line-height: 100%;
@@ -637,7 +638,7 @@ footer#main-footer ul.footer-menu li a:active {
     width: 70px;
     margin-top: 23px;
 }
-.list-content .property .property-card .night .price span {
+.list-content .property .price span {
     font-weight: 700;
 }
 .list-content .property .property-card .rating {
@@ -764,7 +765,8 @@ footer#main-footer ul.footer-menu li a:active {
 .list-content .property.not-map .property-card.collapse {
     align-items: center;
     padding: 18px 16px 18px 16px;
-    height: auto;
+    min-height: 69px;
+    transition-duration: 0.5s;
 }
 .list-content .property.not-map .property-card.collapse .data a.title {
     margin-right: 46px;
@@ -1003,6 +1005,14 @@ footer#main-footer ul.footer-menu li a:active {
 .slick-dots li.slick-active button:before {
     opacity: 1;
     color: #ffffff;
+}
+.list-content .collapse-block a.title {
+    margin-right: 46px;
+    max-width: 556px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 0;
 }
 
 
