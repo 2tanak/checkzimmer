@@ -64,4 +64,64 @@ jQuery(document).ready(function() {
         jQuery('.mobile-menu').toggleClass('active')
     });
 
+    jQuery('.modal-block input').focus(function () {
+        var parent = jQuery(this).closest('.input-block');
+        jQuery(parent).find('label').addClass('active');
+    });
+
+    jQuery('.modal-block input').blur(function () {
+        var value = jQuery(this).val();
+        var parent = jQuery(this).closest('.input-block');
+        if (value === '') {
+            jQuery('label').removeClass('active');
+            jQuery(parent).find('label').css('display','inline-block');
+            jQuery(parent).find('input').css('padding-top','26px');
+            jQuery(parent).find('input').css('padding-bottom','13px');
+        } else {
+            jQuery(parent).find('label').css('display','none');
+            jQuery(parent).find('input').css('padding-top','0');
+            jQuery(parent).find('input').css('padding-bottom','0');
+        }
+    });
+
+    jQuery('#password').on('input', function () {
+        var value = jQuery(this).val();
+        if (value !== '') {
+            jQuery('a.forgot-password').addClass('active');
+        } else {
+            jQuery('a.forgot-password').removeClass('active');
+        }
+    });
+
+    jQuery('.personal-area-link').click(function (e) {
+        e.preventDefault();
+        jQuery('.modal-overlay').addClass('active');
+    });
+
+    jQuery('a.forgot-password').click(function (e) {
+        e.preventDefault();
+        jQuery('.modal-login').addClass('active');
+        jQuery('.modal-forgot-password').addClass('active');
+    });
+
+    jQuery('a.forgot-password-link').click(function (e) {
+        e.preventDefault();
+        jQuery('.modal-forgot-password').removeClass('active');
+        jQuery('.modal-success').addClass('active');
+    });
+
+    jQuery('.modal-close').click(function () {
+        jQuery('.modal-overlay').removeClass('active');
+        jQuery('.modal-block').removeClass('active');
+    });
+
+    jQuery('.login-link').click(function (e) {
+        e.preventDefault();
+        var value = jQuery(this).val();
+        if (value === '') {
+            jQuery('input').addClass('error');
+            jQuery('.error-text').addClass('active')
+        }
+    });
+
 });

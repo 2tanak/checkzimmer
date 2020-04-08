@@ -56,7 +56,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a class="personal-area-link" href="#">
                                     <img class="normal" src="/svg/i-account.svg" alt="Аренда Жилья">
                                     <img class="hover" src="/svg/i-account-hover.svg" alt="Аренда Жилья">
                                     Личный Кабинет
@@ -81,7 +81,7 @@
                         </svg>
                         +49 341 1234 2223
                     </a>
-                    <a href="#" class="mobile-accaunt"><img src="/svg/i-account-mobile.svg" alt="mobile-accaunt"></a>
+                    <a href="#" class="mobile-accaunt personal-area-link"><img src="/svg/i-account-mobile.svg" alt="mobile-accaunt"></a>
                 </div>
             </div>
 
@@ -159,6 +159,76 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <div class="modal-overlay">
+
+            <div class="modal-block modal-login">
+                <div class="modal-close">
+                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0956 2.0934C10.369 1.82004 10.369 1.37682 10.0956 1.10345C9.82227 0.830087 9.37906 0.830087 9.10569 1.10345L5.49959 4.70956L1.89389 1.10387C1.62053 0.830501 1.17731 0.830501 0.903944 1.10387C0.630577 1.37724 0.630577 1.82045 0.903944 2.09382L4.50964 5.69951L0.903253 9.30589C0.629887 9.57926 0.629886 10.0225 0.903253 10.2958C1.17662 10.5692 1.61984 10.5692 1.8932 10.2958L5.49959 6.68946L9.10638 10.2963C9.37975 10.5696 9.82297 10.5696 10.0963 10.2963C10.3697 10.0229 10.3697 9.57967 10.0963 9.30631L6.48954 5.69951L10.0956 2.0934Z" fill="#545769"/>
+                    </svg>
+                </div>
+                <div class="title">Войти</div>
+                <form class="modal-form">
+                    <div class="text input-block">
+                        <div class="input-block-item">
+                            <input id="mail-phone" type="text">
+                            <label for="mail-phone">Email или номер телефона</label>
+                        </div>
+                        <div class="error-text">Вы не указали Email</div>
+                    </div>
+                    <div class="password input-block">
+                        <div class="input-block-item">
+                            <input id="password" type="password">
+                            <label for="password">Пароль</label>
+                            <a class="forgot-password desctop-link" href="#">Забыли пароль?</a>
+                            <a class="forgot-password mobile-link" href="#">Забыли?</a>
+                        </div>
+                        <div class="error-text">Вы не указали пароль</div>
+                    </div>
+                    <a class="entry login-link" href="#">Войти</a>
+                </form>
+                <div class="or">Или</div>
+                <a class="facebook-entry" href="#">
+                    <img class="standart" src="/svg/i-facebook-cube.svg" alt="Facebook Icon">
+                    <img class="hover" src="/svg/i-facebook-cube-hover.svg" alt="Facebook Icon">
+                    Войти через Facebook
+                </a>
+                <div class="new">Новый пользователь? <a href="#">Регестрация</a></div>
+            </div>
+
+            <div class="modal-block modal-forgot-password">
+                <div class="modal-close">
+                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0956 2.0934C10.369 1.82004 10.369 1.37682 10.0956 1.10345C9.82227 0.830087 9.37906 0.830087 9.10569 1.10345L5.49959 4.70956L1.89389 1.10387C1.62053 0.830501 1.17731 0.830501 0.903944 1.10387C0.630577 1.37724 0.630577 1.82045 0.903944 2.09382L4.50964 5.69951L0.903253 9.30589C0.629887 9.57926 0.629886 10.0225 0.903253 10.2958C1.17662 10.5692 1.61984 10.5692 1.8932 10.2958L5.49959 6.68946L9.10638 10.2963C9.37975 10.5696 9.82297 10.5696 10.0963 10.2963C10.3697 10.0229 10.3697 9.57967 10.0963 9.30631L6.48954 5.69951L10.0956 2.0934Z" fill="#545769"/>
+                    </svg>
+                </div>
+                <div class="title">Восстановление пароля</div>
+                <form>
+                    <div class="email input-block">
+                        <div class="input-block-item">
+                            <input id="mail" type="mail">
+                            <label for="mail">Укажите ваш email</label>
+                        </div>
+                        <div class="error-text">Вы не указали Email</div>
+                    </div>
+                    <a class="entry forgot-password-link" href="#">Сбросить пароль</a>
+                </form>
+            </div>
+
+            <div class="modal-block modal-success">
+                <div class="modal-close">
+                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0956 2.0934C10.369 1.82004 10.369 1.37682 10.0956 1.10345C9.82227 0.830087 9.37906 0.830087 9.10569 1.10345L5.49959 4.70956L1.89389 1.10387C1.62053 0.830501 1.17731 0.830501 0.903944 1.10387C0.630577 1.37724 0.630577 1.82045 0.903944 2.09382L4.50964 5.69951L0.903253 9.30589C0.629887 9.57926 0.629886 10.0225 0.903253 10.2958C1.17662 10.5692 1.61984 10.5692 1.8932 10.2958L5.49959 6.68946L9.10638 10.2963C9.37975 10.5696 9.82297 10.5696 10.0963 10.2963C10.3697 10.0229 10.3697 9.57967 10.0963 9.30631L6.48954 5.69951L10.0956 2.0934Z" fill="#545769"/>
+                    </svg>
+                </div>
+                <img src="/svg/i-success-big.svg" alt="Success Icon">
+                <div class="title">Спасибо!</div>
+                <div class="description">На указанный вами email была отправленна инструкция по восстановлению пароля</div>
+            </div>
+
+        </div>
+
     </div>
 
     <footer id="main-footer">

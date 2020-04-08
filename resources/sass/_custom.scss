@@ -5,6 +5,277 @@ body {
     font-style: normal;
     background-color: #ffffff;
 }
+.modal-overlay {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    z-index: 999999;
+    background-color: #333646;
+    top: 0;
+    left: 0;
+}
+.modal-block {
+    background: #FFFFFF;
+    box-shadow: 0 0 14px rgba(51, 54, 70, 0.14);
+    border-radius: 12px;
+    width: 468px;
+    padding: 33px 44px 60px 44px;
+    position: relative;
+}
+.modal-block.modal-login {
+    min-height: 487px;
+}
+.modal-block .modal-close {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    cursor: pointer;
+}
+.modal-block .modal-close svg {
+    display: block;
+}
+.modal-block .title {
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 81%;
+    text-align: center;
+    color: #333646;
+    margin-bottom: 22px;
+}
+.modal-block input {
+    background: #F3F3F3;
+    border-radius: 6px;
+    border: 0;
+    width: 100%;
+    height: 54px;
+    outline: none;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 100%;
+    color: #333646;
+    padding: 26px 16px 13px 16px;
+}
+.modal-block input:focus {
+    background: #FFFFFF;
+    border: 1px solid #FDB64E;
+    box-shadow: 0 0 0 4px rgba(255, 240, 219,.9);
+}
+.modal-block input.active {
+    background: #FFFFFF;
+    border: 1px solid #FDB64E;
+    box-shadow: 0 0 0 4px rgba(255, 240, 219,.9);
+}
+.modal-block .input-block {
+    margin-bottom: 20px;
+}
+.modal-block label {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 100%;
+    color: #8F98A2;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 16px;
+    margin-bottom: 0;
+    pointer-events: none;
+    transition-duration: 0.3s;
+}
+.modal-block label.active {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 100%;
+    letter-spacing: 0.02em;
+    color: #545769;
+    transform: translateY(-16px);
+}
+.modal-block a.forgot-password {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 100%;
+    color: #5A9E32;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 16px;
+    text-decoration: none;
+}
+.modal-block a.forgot-password.active {
+    color: #333646;
+}
+.modal-block a.entry {
+    width: 100%;
+    height: 54px;
+    background: #FDB64E;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: #333646;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    outline: none;
+    margin-bottom: 18px;
+}
+.modal-block a.entry:hover,
+.modal-block a.entry:active {
+    background: #F8981D;
+    color: #ffffff;
+}
+.modal-block .or {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #545769;
+    margin-bottom: 19px;
+    width: 100%;
+    position: relative;
+}
+.modal-block .or:before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    max-width: 168px;
+    height: 1px;
+    background-color: #dfdfdf;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.modal-block .or:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    max-width: 168px;
+    height: 1px;
+    background-color: #dfdfdf;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.modal-block a.facebook-entry {
+    border: 1px solid #4267B2;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: #4267B2;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    text-decoration: none;
+    width: 100%;
+    height: 54px;
+}
+.modal-block a.facebook-entry:hover,
+.modal-block a.facebook-entry:active {
+    background: #4267B2;
+    color: #ffffff;
+}
+.modal-block a.facebook-entry img {
+    height: 22px;
+    width: 22px;
+    margin-right: 10px;
+}
+.modal-block a.facebook-entry img.hover {
+    display: none;
+}
+.modal-block a.facebook-entry:hover img.hover,
+.modal-block a.facebook-entry:active img.hover {
+    display: block;
+}
+.modal-block a.facebook-entry:hover img.standart,
+.modal-block a.facebook-entry:active img.standart {
+    display: none;
+}
+.modal-block .new {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    text-align: center;
+    color: #8F98A2;
+}
+.modal-block .new a {
+    text-decoration: none;
+    outline: none;
+    color: #5A9E32;
+}
+.modal-overlay {
+    display: none;
+}
+.modal-overlay.active {
+    display: flex;
+}
+.modal-block .error-text {
+    margin-top: 8px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 100%;
+    color: #EE483F;
+    display: none;
+}
+.modal-block .error-text.active {
+    display: block;
+}
+.modal-block .input-block-item {
+    position: relative;
+}
+.modal-block input.error {
+    border: 1px solid #EE483F;
+}
+.modal-block.modal-forgot-password {
+    min-height: 277px;
+}
+.modal-block.modal-success {
+    min-height: 277px;
+    transition-duration: 0.8s;
+    padding-top: 45px;
+    text-align: center;
+}
+.modal-block.modal-success img {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 20px;
+}
+.modal-block.modal-success .title {
+    margin-bottom: 8px;
+}
+.modal-block .description {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 150%;
+    text-align: center;
+    color: #545769;
+}
+.modal-block a.forgot-password.mobile-link {
+    display: none;
+}
+.modal-block.modal-login {
+    transform: none
+}
+.modal-block.modal-login.active {
+    display: none;
+}
+.modal-block.modal-forgot-password {
+    display: none;
+}
+.modal-block.modal-forgot-password.active {
+    display: block;
+}
+.modal-block.modal-success {
+    display: none;
+}
+.modal-block.modal-success.active {
+    display: block;
+}
 .property-list .property-list-head {
     background-color: #6BB63F;
     min-height: 68px;
@@ -1600,5 +1871,31 @@ label.mobile-label {
     }
     .list-content .property .property-card .rating {
         left: 54px;
+    }
+    .modal-block {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+        padding: 52px 16px 45px 16px;
+        top: 0;
+        left: 0;
+    }
+    .modal-block .modal-close {
+        width: 31px;
+        height: 31px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100%;
+        border: 1px solid #eeeeee;
+    }
+    .modal-block .title {
+        font-size: 20px;
+    }
+    .modal-block a.forgot-password.desctop-link {
+        display: none;
+    }
+    .modal-block a.forgot-password.mobile-link {
+        display: inline-block;
     }
 }
