@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -23,8 +23,20 @@
         <div class="property-list-head">
             <div class="container">
                 <div class="property-list-head-content">
+                    <div class="mobile-button">
+                        <input type="checkbox" id="checkbox-item" class="checkbox visuallyHidden">
+                        <label for="checkbox-item" class="hamburger-label">
+                            <div class="hamburger hamburger-item">
+                                <span class="bar bar1"></span>
+                                <span class="bar bar2"></span>
+                                <span class="bar bar3"></span>
+                                <span class="bar bar4"></span>
+                                <span class="bar bar5"></span>
+                            </div>
+                        </label>
+                    </div>
                     <a href="{{ url('/list') }}">
-                        <img src="/img/head-logo.png" alt="Logo">
+                        <img src="/img/head-logo.png" alt="Logo" class="logo">
                     </a>
                     <div class="property-list-head-menu">
                         <ul>
@@ -69,8 +81,32 @@
                         </svg>
                         +49 341 1234 2223
                     </a>
+                    <a href="#" class="mobile-accaunt"><img src="/svg/i-account-mobile.svg" alt="mobile-accaunt"></a>
                 </div>
             </div>
+
+            <div class="mobile-menu">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <img class="normal" src="/svg/i-favourites.svg" alt="Favourites">
+                            <img class="active" src="/svg/i-favourites-active.svg" alt="Favourites">
+                            Фавориты <span>(1)</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img class="normal" src="/svg/i-rent.svg" alt="Аренда Жилья">
+                            Сдать жилье
+                        </a>
+                    </li>
+                </ul>
+                <a class="whatsapp-number" href="tel:+49 341 1234 2223">
+                    <img src="/svg/whatsapp-mobile.svg" alt="Whatsapp">
+                    +49 341 1234 2223
+                </a>
+            </div>
+
         </div>
 
         <div class="property-list-subhead">
@@ -115,6 +151,8 @@
                     </a>
                     <a class="whatsapp-link-text" href="tel:+49 341 1234 2223">Просто напишите нам в Whatsapp</a>
                 </div>
+                <div class="mobile-underlink-text">Нажмите на кнопку и сделайте прямой запрос по WhatsApp. Сравните цены и доступность из более 150
+                    обьектов в городе Х</div>
             </div>
         </div>
 

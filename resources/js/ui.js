@@ -17,7 +17,13 @@ jQuery(document).ready(function() {
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: false,
-        dots: true
+        dots: true,
+        responsive: [
+            {
+                breakpoint: 1041,
+                settings: "unslick"
+            }
+        ]
     });
 
     jQuery('a.collapse').click(function(e) {
@@ -46,12 +52,16 @@ jQuery(document).ready(function() {
     jQuery('.left-block a.map').click(function() {
         jQuery('.property .container').addClass('active');
         jQuery('.property').addClass('show-map');
-        jQuery('.property').removeClass('no-map');
+        jQuery('.property').removeClass('not-map');
     });
     jQuery('.left-block a.list').click(function() {
         jQuery('.property .container').removeClass('active');
         jQuery('.property').removeClass('show-map');
-        jQuery('.property').addClass('no-map');
+        jQuery('.property').addClass('not-map');
+    });
+
+    jQuery('.mobile-button label').click(function () {
+        jQuery('.mobile-menu').toggleClass('active')
     });
 
 });
