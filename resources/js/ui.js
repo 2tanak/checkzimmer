@@ -26,10 +26,10 @@ jQuery(document).ready(function() {
         ]
     });
 
-    jQuery('a.collapse').click(function(e) {
+    jQuery('a.collapse-circle').click(function(e) {
         e.preventDefault();
         var parent = jQuery(this).closest('.property-card');
-        jQuery(parent).toggleClass('collapse');
+        jQuery(parent).toggleClass('collapse-item');
         jQuery(this).toggleClass('active');
     });
 
@@ -122,6 +122,18 @@ jQuery(document).ready(function() {
             jQuery('input').addClass('error');
             jQuery('.error-text').addClass('active')
         }
+    });
+
+    jQuery('.fullscreen-button').click(function () {
+        jQuery('.google-map').addClass('fullscreen');
+    });
+    jQuery('.close-button').click(function () {
+        jQuery('.google-map').removeClass('fullscreen');
+    });
+
+    jQuery('.expand-collapse').click(function () {
+        jQuery('.single-object-modal .property-card').toggleClass('active');
+        jQuery('.single-object-modal .modal-map').toggleClass('active');
     });
 
 });

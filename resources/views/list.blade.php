@@ -185,7 +185,7 @@
                                         <img src="/img/i-rate.png" alt="rating">
                                         4.6
                                     </div>
-                                    <a href="#" class="collapse">
+                                    <a href="#" class="collapse-circle">
                                         <svg class="minus" width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <rect x="12" width="2" height="12" rx="1" transform="rotate(90 12 0)" fill="#DF9D3C"/>
                                         </svg>
@@ -335,7 +335,7 @@
                                     <img src="/img/i-rate.png" alt="rating">
                                     4.6
                                 </div>
-                                <a href="#" class="collapse">
+                                <a href="#" class="collapse-circle">
                                     <svg class="minus" width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect x="12" width="2" height="12" rx="1" transform="rotate(90 12 0)" fill="#DF9D3C"/>
                                     </svg>
@@ -488,7 +488,7 @@
                                     <img src="/img/i-rate.png" alt="rating">
                                     4.6
                                 </div>
-                                <a href="#" class="collapse">
+                                <a href="#" class="collapse-circle">
                                     <svg class="minus" width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect x="12" width="2" height="12" rx="1" transform="rotate(90 12 0)" fill="#DF9D3C"/>
                                     </svg>
@@ -510,7 +510,9 @@
                     </div>
 
                         <div class="google-map">
+                            <div class="fullscreen-button"><img src="/svg/i-fullscrean.svg" alt="Full Screen Map"></div>
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d577325.3464555088!2d36.825138985066985!3d55.581524476867195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54afc73d4b0c9%3A0x3d44d6cc5757cf4c!2z0JzQvtGB0LrQstCw!5e0!3m2!1sru!2sru!4v1585977864342!5m2!1sru!2sru" width="800" height="600" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                            <div class="close-button"><img src="/svg/i-close-burger.svg" alt="Full Screen Map"></div>
                         </div>
 
                 </div>
