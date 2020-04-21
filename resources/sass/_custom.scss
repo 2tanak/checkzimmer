@@ -341,7 +341,7 @@ header a.whatsapp-number {
 .mobile-menu a.whatsapp-number {
     font-size: 16px !important;
     margin-top: 24px;
-    color: #ffffff !important;
+    display: block;
 }
 .mobile-menu a.whatsapp-number img {
     width: 26px;
@@ -408,7 +408,7 @@ header .mobile-menu ul {
     flex-direction: column;
     align-items: flex-start;
     padding-bottom: 8px;
-    border-bottom: 1px solid #7AAE5B;
+    border-bottom: 1px solid #e3e4e6;
 }
 header .mobile-menu ul li {
     margin-bottom: 22px;
@@ -416,12 +416,11 @@ header .mobile-menu ul li {
     margin-left: 0;
 }
 header .mobile-menu ul a {
-    color: #ffffff !important;
     display: flex;
     align-items: center;
 }
 header .mobile-menu ul a svg {
-    margin-right: 8px;
+    margin-right: 6px;
 }
 .property-list .property-list-subhead {
     padding-top: 42px;
@@ -1547,7 +1546,7 @@ label.mobile-label {
     position: absolute;
     left: 0;
     top: 64px;
-    background-color: #559431;
+    background-color: #f7f8fa;
     width: 100%;
     height: calc(100vh - 64px);
     z-index: 10000;
