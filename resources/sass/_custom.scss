@@ -146,23 +146,28 @@ body {
 .modal-block a.entry {
     width: 100%;
     height: 54px;
-    background: #FDB64E;
+    background: #6bb63f;
     border-radius: 6px;
     font-weight: 500;
     font-size: 16px;
     line-height: 100%;
-    color: #333646;
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
     outline: none;
     margin-bottom: 18px;
+    transition: all 0.4s ease;
+
 }
 .modal-block a.entry:hover,
 .modal-block a.entry:active {
-    background: #F8981D;
-    color: #ffffff;
+    background: #60a338;
+    transition: all 0.4s ease;
+}
+.modal-block a.entry.forgot-password-link {
+    margin-bottom: 0;
 }
 .modal-block .or {
     font-weight: 400;
@@ -212,27 +217,33 @@ body {
     text-decoration: none;
     width: 100%;
     height: 54px;
+    transition: all 0.4s ease;
 }
 .modal-block a.facebook-entry:hover,
 .modal-block a.facebook-entry:active {
     background: #4267B2;
     color: #ffffff;
+    transition: all 0.4s ease;
 }
 .modal-block a.facebook-entry img {
     height: 22px;
     width: 22px;
     margin-right: 10px;
+    transition: all 0.4s ease;
 }
 .modal-block a.facebook-entry img.hover {
     display: none;
+    transition: all 0.4s ease;
 }
 .modal-block a.facebook-entry:hover img.hover,
 .modal-block a.facebook-entry:active img.hover {
     display: block;
+    transition: all 0.4s ease;
 }
 .modal-block a.facebook-entry:hover img.standart,
 .modal-block a.facebook-entry:active img.standart {
     display: none;
+    transition: all 0.4s ease;
 }
 .modal-block .new {
     font-weight: 400;
@@ -264,7 +275,7 @@ body {
     border: 1px solid #EE483F;
 }
 .modal-block.modal-forgot-password {
-    min-height: 277px;
+    min-height: 264px;
 }
 .modal-block.modal-success {
     min-height: 277px;
