@@ -43,6 +43,14 @@
                     <div class="sorting">
                         <a href="#">Сортировка по умолчанию</a>
                         <img src="/svg/i-arrow-dropdown-input.svg" alt="arrow">
+                        <div class="filter-block">
+                            <ul>
+                                <li class="check">Сортировка по умолчанию</li>
+                                <li>От дешевых к дорогим</li>
+                                <li>От дорогих к дешевым</li>
+                                <li>По рейтингу</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -95,24 +95,23 @@ jQuery(document).ready(function() {
 
     jQuery('.personal-area-link').click(function (e) {
         e.preventDefault();
-        jQuery('.modal-overlay').addClass('active');
+        jQuery('.modal-overlay').addClass('modal-show');
     });
 
     jQuery('a.forgot-password').click(function (e) {
         e.preventDefault();
-        jQuery('.modal-login').addClass('active');
-        jQuery('.modal-forgot-password').addClass('active');
+        jQuery('.modal-login').removeClass('show');
+        jQuery('.modal-forgot-password').addClass('show');
     });
 
     jQuery('a.forgot-password-link').click(function (e) {
         e.preventDefault();
-        jQuery('.modal-forgot-password').removeClass('active');
-        jQuery('.modal-success').addClass('active');
+        jQuery('.modal-forgot-password').removeClass('show');
+        jQuery('.modal-success').addClass('show');
     });
 
     jQuery('.modal-close').click(function () {
-        jQuery('.modal-overlay').removeClass('active');
-        jQuery('.modal-block').removeClass('active');
+        jQuery('.modal-overlay').removeClass('modal-show');
     });
 
     jQuery('.login-link').click(function (e) {
