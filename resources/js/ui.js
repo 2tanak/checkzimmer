@@ -188,6 +188,19 @@ jQuery(document).ready(function() {
         e.preventDefault();
         jQuery('.empty-block').addClass('active');
         jQuery('.give-feedback').addClass('hide');
-    })
+    });
+
+    jQuery.fn.textToggle = function(cls, str) {
+        return this.each(function(i) {
+            jQuery(this).click(function() {
+                var c = 0, el = $(cls).eq(i), arr = [str,el.text()];
+                return function() {
+                    el.text(arr[c++ % arr.length]);
+                }}());
+        })};
+    jQuery(function() {
+        jQuery('.sh_nmr').textToggle(".sh_nmr","").click();
+        jQuery('.sh_nmr').textToggle(".num_hide","ХХХХХХХX").click();
+    });
 
 });

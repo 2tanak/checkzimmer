@@ -1338,8 +1338,58 @@
                         </div>
                     </div>
                 </div>
-
         </div>
+            <div class="sidebar">
+                <div class="sidebar-top">
+                    <div class="sidebar-top-block roominess">
+                        <img src="/svg/i-people.svg" alt="alt">
+                        <div class="sidebar-top-block-item roominess-item">
+                            <div class="title">Вместит.:</div>
+                            <div class="subtitle">2 – 14 чел.</div>
+                        </div>
+                    </div>
+                    <div class="sidebar-top-block rental-period">
+                        <img src="/svg/i-clock.svg" alt="alt">
+                        <div class="sidebar-top-block-item rental-period-item">
+                            <div class="title">Мин. срок аренды:</div>
+                            <div class="subtitle">3 дня</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-middle">
+                    <div class="price">
+                        <div class="left">от</div>
+                        <div class="middle">€250</div>
+                        <div class="right">на человека (включая НДС)</div>
+                    </div>
+                    <a href="#" class="inquiry">Отправить запрос</a>
+                    <div class="number-phone">
+                        <a href="tel:+49176">+49 176&nbsp;<span class="num_hide">6666 9999</span></a>
+                        <span class="sh_nmr">показать</span>
+                    </div>
+                    <div class="address-map">
+                        <div class="address">DKN Immobilien <span>Anja Klepzigolf</span> Kolonnadenstr. 1 04109 Leipzig</div>
+                        <div class="map">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2492.551932385999!2d12.36563791593532!3d51.33776073091309!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sDKN%20Immobilien%20Anja%20Klepzigolf%20Kolonnadenstr.%201%2004109%20Leipzig!5e0!3m2!1sru!2sru!4v1588597677861!5m2!1sru!2sru" width="200" height="200" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-bottom">
+                    <div class="sidebar-bottom-block">
+                        <img src="/svg/i-share.svg" alt="">
+                        Teilen
+                    </div>
+                    <div class="sidebar-bottom-block">
+                        <img src="/svg/i-print.svg" alt="">
+                        Drucken
+                    </div>
+                    <div class="sidebar-bottom-block">
+                        <img src="/svg/i-report.svg" alt="">
+                        Melden
+                    </div>
+                </div>
+            </div>
+    </div>
     </div>
 
 @endsection
