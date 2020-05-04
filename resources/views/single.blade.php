@@ -995,6 +995,9 @@
                                 </div>
                                 <div class="empty-block">
                                 <div class="reviews-form">
+                                    <div class="close-form">
+                                        <img src="/svg/i-close-popup.svg" alt="alt">
+                                    </div>
                                     <div class="rate">
                                         <div class="title">Оцените объект:</div>
                                         <div class="stars">

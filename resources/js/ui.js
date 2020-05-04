@@ -190,6 +190,11 @@ jQuery(document).ready(function() {
         jQuery('.give-feedback').addClass('hide');
     });
 
+    jQuery('.close-form').click(function () {
+        jQuery('.empty-block').removeClass('active');
+        jQuery('.give-feedback').removeClass('hide');
+    });
+
     jQuery.fn.textToggle = function(cls, str) {
         return this.each(function(i) {
             jQuery(this).click(function() {
@@ -202,5 +207,19 @@ jQuery(document).ready(function() {
         jQuery('.sh_nmr').textToggle(".sh_nmr","").click();
         jQuery('.sh_nmr').textToggle(".num_hide","ХХХХХХХX").click();
     });
+
+    jQuery('.inquiry-modal .input-block-item input').focus(function () {
+        var parent = jQuery(this).closest('.input-block-item');
+        jQuery(parent).find('label').addClass('active');
+    });
+    jQuery('.inquiry-modal .input-block-item input').blur(function () {
+        var value = jQuery(this).val();
+        var parent = jQuery(this).closest('.input-block-item');
+        if (value === '') {
+            jQuery('label').removeClass('active');
+        }
+    });
+
+    jQuery('#number-persons').select2();
 
 });

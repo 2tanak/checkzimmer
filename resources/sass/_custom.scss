@@ -2796,7 +2796,7 @@ label.mobile-label {
     transition-duration: 0.4s;
 }
 .single-content .object-description .reviews-content a.give-feedback.hide {
-    transition-duration: 1s;
+    transition-duration: 0.4s;
     opacity: 0;
     pointer-events: none;
 }
@@ -2989,11 +2989,7 @@ label.mobile-label {
     border: 1px solid #EDEEF0;
     border-radius: 12px;
     padding: 22px 16px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translateX(-9999px);
-    transition-duration: 1s;
+    opacity: 0;
 }
 .single-content .object-description .reviews-form .rate {
     display: flex;
@@ -3088,21 +3084,32 @@ label.mobile-label {
     color: #fff;
     transition-duration: 0.4s;
 }
-.empty-block {
+.single-content .object-description .empty-block {
     height: 0;
-    transition-duration: 1s;
+    transition-duration: 0.4s;
     position: relative;
+    overflow: hidden;
 }
-.empty-block.active {
+.single-content .object-description .empty-block .close-form {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    cursor: pointer;
+}
+.single-content .object-description .empty-block .close-form img {
+    display: block;
+}
+.single-content .object-description .empty-block.active {
     width: 100%;
     margin-top: 20px;
     margin-bottom: 8px;
     height: 321px;
-    transition-duration: 1s;
+    transition-duration: 0.4s;
 }
-.empty-block.active .reviews-form {
+.single-content .object-description .empty-block.active .reviews-form {
     transform: translateX(0);
-    transition-duration: 1s;
+    transition-duration: 0.4s;
+    opacity: 1;
 }
 .single-content .left-part {
     margin-right: 18px;
@@ -3260,5 +3267,115 @@ label.mobile-label {
 .single-content .sidebar .sidebar-bottom-block img {
     margin-right: 8px;
 }
+.inquiry-modal {
+    max-width: 668px;
+    width: 100%;
+    background: #FFFFFF;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 20000;
+    visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateX(-50%) translateY(-50%);
+    transition: all 0.3s;
+    padding: 33px 44px 60px 44px;
+    box-shadow: 0 0 14px rgba(51, 54, 70, 0.14);
+    border-radius: 12px;
+    height: 708px;
+}
+.inquiry-modal .title {
+    margin-bottom: 22px;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 130%;
+    text-align: center;
+    color: #333646;
+}
+.inquiry-modal .modal-close {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    cursor: pointer;
+}
+.inquiry-modal form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.inquiry-modal form input[type="text"],
+.inquiry-modal form input[type="email"],
+.inquiry-modal form input[type="tel"] {
+    width: 100%;
+    height: 54px;
+    background: #F3F3F3;
+    border-radius: 6px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 100%;
+    color: #333646;
+    padding: 26px 16px 13px 16px;
+    outline: none;
+    border: 0;
+}
+.inquiry-modal .input-block-item,
+.inquiry-modal .select-block {
+    position: relative;
+    width: 100%;
+    max-width: 280px;
+    margin-bottom: 20px;
+}
+.inquiry-modal .input-block-item label {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 100%;
+    color: #8F98A2;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 16px;
+    margin-bottom: 0;
+    pointer-events: none;
+    transition-duration: 0.3s;
+}
+.inquiry-modal .input-block-item label.active {
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    color: #545769;
+    transform: translateY(-16px);
+}
+.inquiry-modal form input[type="text"]:focus,
+.inquiry-modal form input[type="email"]:focus,
+.inquiry-modal form input[type="tel"]:focus {
+    background: #FFFFFF;
+    border: 1px solid #C0C1C2;
+    border-radius: 6px;
+}
+.inquiry-modal .select-block label {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 100%;
+    letter-spacing: 0.02em;
+    color: #545769;
+    position: absolute;
+    left: 16px;
+    top: 16px;
+}
+.inquiry-modal .select-block .select2 {
+    width: 100% !important;
+}
+.inquiry-modal .select-block .select2-container--default .select2-selection--single {
+    width: 100%;
+    border: 0;
+}
+.inquiry-modal .select-block .select2-container--default .select2-selection--single .select2-selection__rendered {
+    width: 100%;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 100%;
+    color: #333646;
+}
+
 
 /*---end-single---*/
