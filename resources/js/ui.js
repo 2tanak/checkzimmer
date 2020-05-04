@@ -135,4 +135,59 @@ jQuery(document).ready(function() {
         jQuery('.single-object-modal .modal-map').toggleClass('active');
     });
 
+    jQuery('a.full').click(function (e) {
+        e.preventDefault();
+        jQuery('.reviews-text').toggleClass('full');
+        jQuery('a.full').toggleClass('active');
+    });
+
+    jQuery('.reviews-form .stars img').mouseover(function() {
+        jQuery(this).addClass('hovered');
+
+        var block = false;
+        jQuery('.reviews-form .stars img').each(function() {
+            if (block) {
+                return;
+            }
+            jQuery(this).attr('src', '/svg/star-yellow.svg');
+            if (jQuery(this).hasClass('hovered')) {
+                block = true;
+            }
+        })
+    });
+    jQuery('.reviews-form .stars img').mouseout(function() {
+        jQuery('.reviews-form .stars img').removeClass('hovered')
+        jQuery('.reviews-form .stars img').each(function() {
+            if (!jQuery(this).hasClass('clicked')) {
+                jQuery(this).attr('src', '/svg/star-gray.svg');
+            }
+        })
+    })
+    jQuery('.reviews-form .stars img').click(function() {
+        jQuery('.reviews-form .stars img').removeClass('clicked')
+        jQuery(this).addClass('clicked');
+
+        var block = false;
+        var count = 0;
+        jQuery('.reviews-form .stars img').each(function() {
+            if (block) {
+                jQuery(this).attr('src', '/img/star-gray.svg');
+                return;
+            }
+            count++;
+            if (jQuery(this).hasClass('clicked')) {
+                block = true;
+                return;
+            }
+            jQuery(this).addClass('clicked');
+        })
+        jQuery('.reviews-form .stars').val(count);
+    });
+
+    jQuery('.give-feedback').click(function (e) {
+        e.preventDefault();
+        jQuery('.empty-block').addClass('active');
+        jQuery('.give-feedback').addClass('hide');
+    })
+
 });

@@ -252,11 +252,10 @@
     </footer>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="{{ asset('js/select2.full.js') }}" defer></script>
     <script src="{{ asset('js/slick.min.js') }}" defer></script>
-    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <script src="{{ asset('node_modules/readmore-js/readmore.min.js') }}" defer></script>
     <script src="{{ asset('js/ui.js') }}" defer></script>
 
 </body>

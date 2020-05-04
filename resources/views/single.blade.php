@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-single')
 
 @section('content')
 
@@ -894,10 +894,10 @@
                             <a class="nav-link active" data-toggle="tab" href="#description">Описание объекта</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#reviews">Характеристики</a>
+                            <a class="nav-link" data-toggle="tab" href="#reviews">Отзывы<span>(72)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#questions">Отзывы</a>
+                            <a class="nav-link" data-toggle="tab" href="#questions">Вопросы<span>(12)</span></a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -930,10 +930,411 @@
                             </a>
                         </div>
                         <div class="tab-pane fade reviews-content" id="reviews">
-                            Проверка!
+                            <div class="top-block">
+                                <div class="top-block-head">
+                                    <div class="overall-rating">
+                                        <div class="top">
+                                            <div class="stars">
+                                                <svg width="14" height="14" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.91396 4.02558L11.755 4.5743C11.9881 4.6076 12.0831 4.89269 11.9166 5.05917L9.16051 7.8153L9.71173 11.6739C9.74666 11.9184 9.47589 12.089 9.2704 11.952L6.00032 9.77196Z" fill="#F5C61C"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="12" height="12" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <svg width="14" height="14" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.91396 4.02558L11.755 4.5743C11.9881 4.6076 12.0831 4.89269 11.9166 5.05917L9.16051 7.8153L9.71173 11.6739C9.74666 11.9184 9.47589 12.089 9.2704 11.952L6.00032 9.77196Z" fill="#F5C61C"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="12" height="12" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <svg width="14" height="14" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.91396 4.02558L11.755 4.5743C11.9881 4.6076 12.0831 4.89269 11.9166 5.05917L9.16051 7.8153L9.71173 11.6739C9.74666 11.9184 9.47589 12.089 9.2704 11.952L6.00032 9.77196Z" fill="#F5C61C"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="12" height="12" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <svg width="14" height="14" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.91396 4.02558L11.755 4.5743C11.9881 4.6076 12.0831 4.89269 11.9166 5.05917L9.16051 7.8153L9.71173 11.6739C9.74666 11.9184 9.47589 12.089 9.2704 11.952L6.00032 9.77196Z" fill="#F5C61C"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="12" height="12" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <svg width="14" height="14" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.91396 4.02558L11.755 4.5743C11.9881 4.6076 12.0831 4.89269 11.9166 5.05917L9.16051 7.8153L9.71173 11.6739C9.74666 11.9184 9.47589 12.089 9.2704 11.952L6.00032 9.77196Z" fill="#CBCDD1"/>
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.04586 2L7.91396 4.02558C7.91396 6 7.91396 8.58101 7.91396 11.05L6.00032 9.77196Z" fill="#F5C61C"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="12" height="12" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                            </div>
+                                            <span>4.6</span>
+                                        </div>
+                                        <div class="bottom">На основе отзывов</div>
+                                    </div>
+                                    <a class="give-feedback" href="#">Оставить отзыв</a>
+                                </div>
+                                <div class="empty-block">
+                                <div class="reviews-form">
+                                    <div class="rate">
+                                        <div class="title">Оцените объект:</div>
+                                        <div class="stars">
+                                            <img src="/svg/star-gray.svg" alt="alt">
+                                            <img src="/svg/star-gray.svg" alt="alt">
+                                            <img src="/svg/star-gray.svg" alt="alt">
+                                            <img src="/svg/star-gray.svg" alt="alt">
+                                            <img src="/svg/star-gray.svg" alt="alt">
+                                        </div>
+                                    </div>
+                                    <form>
+                                        <div class="top-form">
+                                            <input type="text" placeholder="Ваше имя">
+                                            <input type="text" placeholder="Название компании">
+                                        </div>
+                                        <input type="text" placeholder="Заголовок отзыва">
+                                        <textarea placeholder="Текст отзыва"></textarea>
+                                        <input type="submit" value="Отправить">
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="reviews-block">
+                                <div class="reviews-block-item">
+                                    <div class="reviews-head">
+                                        <img class="avatar" src="/svg/avatar.svg" alt="avatar">
+                                        <div class="customer-data">
+                                            <div class="name">Amina</div>
+                                            <div class="entity">Tmobile LTD</div>
+                                        </div>
+                                    </div>
+                                    <div class="set-rating">
+                                        <div class="stars-item">
+                                            <div class="stars-block">
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.91396 4.02558L11.755 4.5743C11.9881 4.6076 12.0831 4.89269 11.9166 5.05917L9.16051 7.8153L9.71173 11.6739C9.74666 11.9184 9.47589 12.089 9.2704 11.952L6.00032 9.77196Z" fill="#F5C61C"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="12" height="12" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.91396 4.02558L11.755 4.5743C11.9881 4.6076 12.0831 4.89269 11.9166 5.05917L9.16051 7.8153L9.71173 11.6739C9.74666 11.9184 9.47589 12.089 9.2704 11.952L6.00032 9.77196Z" fill="#F5C61C"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="12" height="12" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.91396 4.02558L11.755 4.5743C11.9881 4.6076 12.0831 4.89269 11.9166 5.05917L9.16051 7.8153L9.71173 11.6739C9.74666 11.9184 9.47589 12.089 9.2704 11.952L6.00032 9.77196Z" fill="#F5C61C"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="12" height="12" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.91396 4.02558L11.755 4.5743C11.9881 4.6076 12.0831 4.89269 11.9166 5.05917L9.16051 7.8153L9.71173 11.6739C9.74666 11.9184 9.47589 12.089 9.2704 11.952L6.00032 9.77196Z" fill="#F5C61C"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="12" height="12" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.91396 4.02558L11.755 4.5743C11.9881 4.6076 12.0831 4.89269 11.9166 5.05917L9.16051 7.8153L9.71173 11.6739C9.74666 11.9184 9.47589 12.089 9.2704 11.952L6.00032 9.77196Z" fill="#CBCDD1"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="12" height="12" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                            </div>
+                                            <span>4.1</span>
+                                        </div>
+                                        <div class="title">Sehr gute Qualität</div>
+                                    </div>
+                                    <div class="reviews-text">
+                                        Dem Band liegt eine kleine Anleitung / Broschüre bei, in der ein paar Übungen abgebildet
+                                        sind die mit dem Band durchführen kann. Das Resistance Band ist vor allem für das
+                                        Sprinttraining geeignet. Man kann sich das Band um die Hüfte legen und sich wunderbar
+                                        dagegen anlehnen. Vorausgesetzt, das Band ist auf der anderen Seite gut festgemacht.
+                                        So lassen sich Sprints auf der Stelle durchführen. Dem Band liegt eine kleine Anleitung /
+                                        Broschüre bei, in der ein paar Übungen abgebildet sind die mit dem Band durchführen kann.
+                                        Das Resistance Band ist vor allem für das Sprinttraining geeignet. Man kann sich das Band um die Hüfte legen und sich wunderbar
+                                        dagegen anlehnen. Vorausgesetzt, das Band ist auf der anderen Seite gut festgemacht.
+                                        So lassen sich Sprints auf der Stelle durchführen.
+
+                                    </div>
+                                    <a class="full" href="#">
+                                        Читать полностью
+                                        <img src="/svg/i-arrow-show-more.svg" alt="alt">
+                                    </a>
+                                </div>
+
+                                <div class="reviews-block-item">
+                                    <div class="reviews-head">
+                                        <img class="avatar" src="/svg/avatar.svg" alt="avatar">
+                                        <div class="customer-data">
+                                            <div class="name">Amina</div>
+                                            <div class="entity">Tmobile LTD</div>
+                                        </div>
+                                    </div>
+                                    <div class="set-rating">
+                                        <div class="stars-item">
+                                            <div class="stars-block">
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.91396 4.02558L11.755 4.5743C11.9881 4.6076 12.0831 4.89269 11.9166 5.05917L9.16051 7.8153L9.71173 11.6739C9.74666 11.9184 9.47589 12.089 9.2704 11.952L6.00032 9.77196Z" fill="#F5C61C"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="12" height="12" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.91396 4.02558L11.755 4.5743C11.9881 4.6076 12.0831 4.89269 11.9166 5.05917L9.16051 7.8153L9.71173 11.6739C9.74666 11.9184 9.47589 12.089 9.2704 11.952L6.00032 9.77196Z" fill="#F5C61C"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="12" height="12" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.91396 4.02558L11.755 4.5743C11.9881 4.6076 12.0831 4.89269 11.9166 5.05917L9.16051 7.8153L9.71173 11.6739C9.74666 11.9184 9.47589 12.089 9.2704 11.952L6.00032 9.77196Z" fill="#F5C61C"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="12" height="12" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.91396 4.02558L11.755 4.5743C11.9881 4.6076 12.0831 4.89269 11.9166 5.05917L9.16051 7.8153L9.71173 11.6739C9.74666 11.9184 9.47589 12.089 9.2704 11.952L6.00032 9.77196Z" fill="#F5C61C"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="12" height="12" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.91396 4.02558L11.755 4.5743C11.9881 4.6076 12.0831 4.89269 11.9166 5.05917L9.16051 7.8153L9.71173 11.6739C9.74666 11.9184 9.47589 12.089 9.2704 11.952L6.00032 9.77196Z" fill="#CBCDD1"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="12" height="12" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                            </div>
+                                            <span>4.1</span>
+                                        </div>
+                                        <div class="title">Sehr gute Qualität</div>
+                                    </div>
+                                    <div class="reviews-text">
+                                        Dem Band liegt eine kleine Anleitung / Broschüre bei, in der ein paar Übungen
+                                        abgebildet sind die mit dem Band durchführen kann. Das Resistance Band ist vor
+                                        allem für das Sprinttraining geeignet.
+                                    </div>
+                                </div>
+
+                                <div class="reviews-block-item">
+                                    <div class="reviews-head">
+                                        <img class="avatar" src="/svg/avatar.svg" alt="avatar">
+                                        <div class="customer-data">
+                                            <div class="name">Amina</div>
+                                            <div class="entity">Tmobile LTD</div>
+                                        </div>
+                                    </div>
+                                    <div class="set-rating">
+                                        <div class="stars-item">
+                                            <div class="stars-block">
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.91396 4.02558L11.755 4.5743C11.9881 4.6076 12.0831 4.89269 11.9166 5.05917L9.16051 7.8153L9.71173 11.6739C9.74666 11.9184 9.47589 12.089 9.2704 11.952L6.00032 9.77196Z" fill="#F5C61C"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="12" height="12" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.91396 4.02558L11.755 4.5743C11.9881 4.6076 12.0831 4.89269 11.9166 5.05917L9.16051 7.8153L9.71173 11.6739C9.74666 11.9184 9.47589 12.089 9.2704 11.952L6.00032 9.77196Z" fill="#F5C61C"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="12" height="12" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.91396 4.02558L11.755 4.5743C11.9881 4.6076 12.0831 4.89269 11.9166 5.05917L9.16051 7.8153L9.71173 11.6739C9.74666 11.9184 9.47589 12.089 9.2704 11.952L6.00032 9.77196Z" fill="#F5C61C"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="12" height="12" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.91396 4.02558L11.755 4.5743C11.9881 4.6076 12.0831 4.89269 11.9166 5.05917L9.16051 7.8153L9.71173 11.6739C9.74666 11.9184 9.47589 12.089 9.2704 11.952L6.00032 9.77196Z" fill="#F5C61C"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="12" height="12" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                        <path d="M6.00032 9.77196L2.73023 11.952C2.52474 12.089 2.25398 11.9184 2.2889 11.6739L2.84013 7.8153L0.0840011 5.05917C-0.0824812 4.89269 0.0125503 4.6076 0.245625 4.5743L4.08667 4.02558L5.7377 0.173166C5.83666 -0.057722 6.16398 -0.057722 6.26293 0.173166L7.91396 4.02558L11.755 4.5743C11.9881 4.6076 12.0831 4.89269 11.9166 5.05917L9.16051 7.8153L9.71173 11.6739C9.74666 11.9184 9.47589 12.089 9.2704 11.952L6.00032 9.77196Z" fill="#CBCDD1"/>
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0">
+                                                            <rect width="12" height="12" fill="white"/>
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                            </div>
+                                            <span>4.1</span>
+                                        </div>
+                                        <div class="title">Sehr gute Qualität</div>
+                                    </div>
+                                    <div class="reviews-text">
+                                        Dem Band liegt eine kleine Anleitung / Broschüre bei, in der ein paar Übungen abgebildet
+                                        sind die mit dem Band durchführen kann. Das Resistance Band ist vor allem für das
+                                        Sprinttraining geeignet. Man kann sich das Band um die Hüfte legen und sich wunderbar
+                                        dagegen anlehnen. Vorausgesetzt, das Band ist auf der anderen Seite gut festgemacht.
+                                        So lassen sich Sprints auf der Stelle durchführen. Dem Band liegt eine kleine Anleitung /
+                                        Broschüre bei, in der ein paar Übungen abgebildet sind die mit dem Band durchführen kann.
+                                        Das Resistance Band ist vor allem für das Sprinttraining geeignet. Man kann sich das Band um die Hüfte legen und sich wunderbar
+                                        dagegen anlehnen. Vorausgesetzt, das Band ist auf der anderen Seite gut festgemacht.
+                                        So lassen sich Sprints auf der Stelle durchführen.
+
+                                    </div>
+                                    <a class="full" href="#">
+                                        Читать полностью
+                                        <img src="/svg/i-arrow-show-more.svg" alt="alt">
+                                    </a>
+                                </div>
+
+                            </div>
+                            <div class="pagination-block">
+                                <ul class="pagination-list">
+                                    <li class="prev">
+                                        <a href="">
+                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.4227 1.57613C9.65702 1.81044 9.65702 2.19034 9.4227 2.42465L4.84697 7.00039L9.4227 11.5761C9.65702 11.8104 9.65702 12.1903 9.4227 12.4247C9.18839 12.659 8.80849 12.659 8.57417 12.4247L3.57417 7.42465C3.33986 7.19034 3.33986 6.81044 3.57417 6.57613L8.57417 1.57613C8.80849 1.34181 9.18839 1.34181 9.4227 1.57613Z" fill="#3B8B3E"/>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="number-page"><a class="active" href="#">1</a></li>
+                                    <li class="number-page"><a href="#">2</a></li>
+                                    <li class="number-page"><a href="#">3</a></li>
+                                    <li class="number-page"><a href="#">4</a></li>
+                                    <li class="next">
+                                        <a href="">
+                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.5773 1.57613C4.34298 1.81044 4.34298 2.19034 4.5773 2.42465L9.15303 7.00039L4.5773 11.5761C4.34298 11.8104 4.34298 12.1903 4.5773 12.4247C4.81161 12.659 5.19151 12.659 5.42583 12.4247L10.4258 7.42465C10.6601 7.19034 10.6601 6.81044 10.4258 6.57613L5.42583 1.57613C5.19151 1.34181 4.81161 1.34181 4.5773 1.57613Z" fill="#3B8B3E"/>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                         <div class="tab-pane fade questions-content" id="questions">
-                            Проверка 2!
+                            <form class="questions-form">
+                                <input type="text" placeholder="Задайте свой вопрос">
+                                <a class="submit" href="#">Отправить</a>
+                            </form>
+                            <div class="questions-received">
+                                <div class="questions-block">
+                                    <div class="questions" data-toggle="collapse" data-target="#questions1" aria-expanded="false" aria-controls="questions1">
+                                        <div class="collapse-button"></div>
+                                        Сколько квартир в этом доме?
+                                    </div>
+                                    <div class="collapse " id="questions1">
+                                        <div class="answer">
+                                            Dem Band liegt eine kleine Anleitung / Broschüre bei, in der ein paar Übungen
+                                            abgebildet sind die mit dem Band durchführen kann. Das Resistance Band ist vor
+                                            allem für das Sprinttraining geeignet. Man kann sich das Band um die Hüfte legen
+                                            und sich wunderbar dagegen anlehnen. Vorausgesetzt, das Band ist auf der anderen
+                                            Seite gut festgemacht.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="questions-block">
+                                    <div class="questions" data-toggle="collapse" data-target="#questions2" aria-expanded="false" aria-controls="questions2">
+                                        <div class="collapse-button"></div>
+                                        Мы хотим приехать большой компанией. Вы сможете нас встретить?
+                                    </div>
+                                    <div class="collapse " id="questions2">
+                                        <div class="answer">
+                                            Dem Band liegt eine kleine Anleitung / Broschüre bei, in der ein paar Übungen
+                                            abgebildet sind die mit dem Band durchführen kann. Das Resistance Band ist vor
+                                            allem für das Sprinttraining geeignet. Man kann sich das Band um die Hüfte legen
+                                            und sich wunderbar dagegen anlehnen. Vorausgesetzt, das Band ist auf der anderen
+                                            Seite gut festgemacht.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="questions-block">
+                                    <div class="questions" data-toggle="collapse" data-target="#questions3" aria-expanded="false" aria-controls="questions3">
+                                        <div class="collapse-button"></div>
+                                        Мы хотим приехать большой компанией. Вы сможете нас встретить?
+                                    </div>
+                                    <div class="collapse " id="questions3">
+                                        <div class="answer">
+                                            Dem Band liegt eine kleine Anleitung / Broschüre bei, in der ein paar Übungen
+                                            abgebildet sind die mit dem Band durchführen kann. Das Resistance Band ist vor
+                                            allem für das Sprinttraining geeignet. Man kann sich das Band um die Hüfte legen
+                                            und sich wunderbar dagegen anlehnen. Vorausgesetzt, das Band ist auf der anderen
+                                            Seite gut festgemacht.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
