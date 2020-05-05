@@ -141,11 +141,11 @@ jQuery(document).ready(function() {
         jQuery('a.full').toggleClass('active');
     });
 
-    jQuery('.reviews-form .stars img').mouseover(function() {
+    jQuery('.stars img').mouseover(function() {
         jQuery(this).addClass('hovered');
 
         var block = false;
-        jQuery('.reviews-form .stars img').each(function() {
+        jQuery('.stars img').each(function() {
             if (block) {
                 return;
             }
@@ -155,23 +155,23 @@ jQuery(document).ready(function() {
             }
         })
     });
-    jQuery('.reviews-form .stars img').mouseout(function() {
-        jQuery('.reviews-form .stars img').removeClass('hovered')
-        jQuery('.reviews-form .stars img').each(function() {
+    jQuery('.stars img').mouseout(function() {
+        jQuery('.stars img').removeClass('hovered')
+        jQuery('.stars img').each(function() {
             if (!jQuery(this).hasClass('clicked')) {
                 jQuery(this).attr('src', '/svg/star-gray.svg');
             }
         })
     })
-    jQuery('.reviews-form .stars img').click(function() {
-        jQuery('.reviews-form .stars img').removeClass('clicked')
+    jQuery('.stars img').click(function() {
+        jQuery('.stars img').removeClass('clicked')
         jQuery(this).addClass('clicked');
 
         var block = false;
         var count = 0;
-        jQuery('.reviews-form .stars img').each(function() {
+        jQuery('.stars img').each(function() {
             if (block) {
-                jQuery(this).attr('src', '/img/star-gray.svg');
+                jQuery(this).attr('src', '/svg/star-gray.svg');
                 return;
             }
             count++;
@@ -181,7 +181,7 @@ jQuery(document).ready(function() {
             }
             jQuery(this).addClass('clicked');
         })
-        jQuery('.reviews-form .stars').val(count);
+        jQuery('.stars').val(count);
     });
 
     jQuery('.give-feedback').click(function (e) {
@@ -198,14 +198,17 @@ jQuery(document).ready(function() {
     jQuery.fn.textToggle = function(cls, str) {
         return this.each(function(i) {
             jQuery(this).click(function() {
-                var c = 0, el = $(cls).eq(i), arr = [str,el.text()];
+                var c = 0, el = jQuery(cls).eq(i), arr = [str,el.text()];
                 return function() {
                     el.text(arr[c++ % arr.length]);
                 }}());
         })};
     jQuery(function() {
         jQuery('.sh_nmr').textToggle(".sh_nmr","").click();
-        jQuery('.sh_nmr').textToggle(".num_hide","ХХХХХХХX").click();
+        jQuery('.sh_nmr').textToggle(".num_hide","ХХХХ ХХХX").click();
+        jQuery('.sh_nmr').click(function () {
+            jQuery('.sidebar .number-phone').addClass('gray');
+        });
     });
 
     jQuery('.inquiry-modal .input-block-item input').focus(function () {
@@ -219,6 +222,32 @@ jQuery(document).ready(function() {
             jQuery('label').removeClass('active');
         }
     });
+
+    jQuery('a.teilen').click(function (e) {
+        e.preventDefault();
+        jQuery('.share-block').addClass('active');
+    });
+
+    jQuery('.number-phone a').click(function (e) {
+        e.preventDefault();
+        jQuery('.quality').addClass('active');
+    });
+
+    jQuery('a.another-time').click(function (e) {
+        e.preventDefault();
+        jQuery('.quality').removeClass('active');
+    });
+
+    jQuery('a.melden').click(function (e) {
+        e.preventDefault();
+        jQuery('.offer').addClass('active');
+    });
+
+    jQuery('.close-block').click(function () {
+        jQuery('.sidebar-small-block').removeClass('active');
+    });
+
+    jQuery('#offer-select').select2();
 
     jQuery('#number-persons').select2();
 
