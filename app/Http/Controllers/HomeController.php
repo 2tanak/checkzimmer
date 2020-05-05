@@ -29,4 +29,8 @@ class HomeController extends Controller
     {
         return view('list');
     }
+    public function single()
+    {
+        return view('single');
+    }
 }
