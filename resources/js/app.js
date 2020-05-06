@@ -4,7 +4,14 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+import Vue from 'vue'
+import App from './StarAdmin/App'
+import router from './StarAdmin/router'
+import BootstrapVue from 'bootstrap-vue'
+
+Vue.use(BootstrapVue);
+
+Vue.config.productionTip = false;
 
 window.Vue = require('vue');
 
@@ -28,5 +35,9 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  */
 
 const app = new Vue({
-    el: '#app',
+    el: '#application',
+    router,
+    components: {
+        App
+    },
 });

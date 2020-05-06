@@ -1,5 +1,8 @@
 // Variables
 @import 'variables';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "~@mdi/font/css/materialdesignicons.min.css";
+@import "~flag-icon-css/css/flag-icon.min.css";
+@import "~font-awesome/css/font-awesome.min.css";
+
+@import "../js/StarAdmin/assets/scss/style";
