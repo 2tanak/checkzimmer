@@ -251,4 +251,9 @@ jQuery(document).ready(function() {
 
     jQuery('#number-persons').select2();
 
+    jQuery('.mobile-card-button').click(function () {
+        jQuery('.property-card').toggleClass('big');
+        jQuery('.mobile-picture').toggleClass('active');
+    });
+
 });
