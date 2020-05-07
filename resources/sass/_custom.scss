@@ -13,7 +13,7 @@ body {
     width: 100%;
     height: 100vh;
     position: fixed;
-    z-index: 10000;
+    z-index: 100;
     background-color: #333646;
     top: 0;
     left: 0;
@@ -22,6 +22,9 @@ body {
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .modal-overlay.modal-show {
     opacity: 1;
@@ -29,17 +32,10 @@ body {
 }
 .modal-block {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    z-index: 20000;
     visibility: hidden;
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     backface-visibility: hidden;
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -ms-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
 }
 .modal-overlay.modal-show .modal-block.show {
     visibility: visible;
@@ -145,6 +141,9 @@ body {
     text-decoration: none;
 }
 .modal-block a.forgot-password.active {
+    color: #333646;
+}
+.modal-block .password.input-block .input-block-item:hover a.forgot-password {
     color: #333646;
 }
 .modal-block a.entry {
@@ -3901,12 +3900,13 @@ label.mobile-label {
 .inquiry-modal .select-block label {
     font-weight: 400;
     font-size: 11px;
-    line-height: 100%;
+    line-height: 11px;
     letter-spacing: 0.02em;
     color: #545769;
     position: absolute;
     left: 16px;
-    top: 16px;
+    top: 11px;
+    margin: 0;
 }
 .inquiry-modal .select-block .select2 {
     width: 100% !important;
@@ -3914,12 +3914,16 @@ label.mobile-label {
 .inquiry-modal .select-block .select2-container--default .select2-selection--single {
     width: 100%;
     border: 0;
+    background-color: #f3f3f3;
+    border-radius: 6px;
+    display: flex;
+    align-items: flex-end;
 }
 .inquiry-modal .select-block .select2-container--default .select2-selection--single .select2-selection__rendered {
     width: 100%;
     font-weight: 400;
     font-size: 15px;
-    line-height: 100%;
+    line-height: 32px;
     color: #333646;
 }
 
