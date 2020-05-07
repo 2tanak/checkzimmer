@@ -35,18 +35,48 @@ import register from '../views/sample-pages/register'
 Vue.use(Router)
 
 export default new Router({
-  linkActiveClass: 'active',
-  routes: [{
-    path: '/',
-    name: 'dashboard',
-    component: dashboard
-  },
-  {
-    path: '/widgets',
-    name: 'widgets',
-    component: widgets
-  },
-  {
+    linkActiveClass: 'active',
+    routes: [{
+            path: '/dashboard',
+            name: 'dashboard',
+            component: dashboard
+        },
+        {
+            path: '/dashboard/requests',
+            name: 'requests',
+            component: widgets
+        },
+        {
+            path: '/dashboard/property/items',
+            name: 'property',
+            component: widgets
+        },
+        {
+            path: '/dashboard/property/rooms',
+            name: 'rooms',
+            component: widgets
+        },
+        {
+            path: '/dashboard/categories',
+            name: 'categories',
+            component: widgets
+        },
+        {
+            path: '/dashboard/website/header',
+            name: 'website-header',
+            component: widgets
+        },
+        {
+            path: '/dashboard/website/footer',
+            name: 'website-footer',
+            component: widgets
+        },
+        {
+            path: '/dashboard/users',
+            name: 'users',
+            component: widgets
+        },
+        {
     path: '/404',
     name: 'error-404',
     component: error404
@@ -56,16 +86,16 @@ export default new Router({
     name: 'error-500',
     component: error500
   },
-  {
-    path: '/login',
-    name: 'login',
-    component: login
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: register
-  },
+        {
+            path: '/login',
+            name: 'login',
+            component: login
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component: register
+        },
   {
     path: '/alerts',
     name: 'alerts',
