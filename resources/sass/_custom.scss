@@ -1602,12 +1602,11 @@ label.mobile-label {
     left: 0;
     top: 64px;
     background-color: #f7f8fa;
-    width: 100%;
+    width: 0;
+    overflow: hidden;
     height: calc(100vh - 64px);
     z-index: 10000;
-    padding: 24px 16px;
-    transform: translateX(-9999px);
-    transition-duration: 5s;
+    transition: all .2s;
 }
 .list-content .google-map .fullscreen-button {
     position: absolute;
@@ -2166,8 +2165,8 @@ label.mobile-label {
         display: block;
     }
     header .mobile-menu.active {
-        transform: translateX(0);
-        transition-duration: 0.8s;
+        padding: 24px 16px;
+        width: 100%;
     }
     .mobile-button {
         display: block;
@@ -3501,7 +3500,7 @@ label.mobile-label {
 }
 .single-content .sidebar .number-phone span.sh_nmr {
     position: absolute;
-    z-index: 10;
+    z-index: 100;
     top: 50%;
     transform: translateY(-50%);
     right: 13px;
