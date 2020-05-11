@@ -293,4 +293,20 @@ jQuery(document).ready(function() {
         jQuery('.slider-modal-overlay').addClass('modal-show');
     });
 
+    jQuery('.single-main-slider').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        infinite: true,
+        dots: true
+    });
+});
+
+jQuery(window).on('load', function() {
+    if(jQuery(window).width() <= 1220) {
+        jQuery('body .single-main-slider').css({'opacity': 1, 'transition-duration': '0.4s'});
+    };
+    if(jQuery(window).width() <= 991) {
+        jQuery('.comfort .collapse').removeClass('show');
+    };
 });

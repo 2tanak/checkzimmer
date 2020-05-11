@@ -24,7 +24,7 @@
 <div id="app" class="property-list">
     <header>
         <div class="container">
-            <div class="header-content">
+            <div class="header-content single-header-content">
                 <div class="mobile-button">
                     <input type="checkbox" id="checkbox-item" class="checkbox visuallyHidden">
                     <label for="checkbox-item" class="hamburger-label">
