@@ -3985,6 +3985,7 @@ label.mobile-label {
 .inquiry-modal .text-area-block {
     width: 100%;
     margin-bottom: 20px;
+    height: 100px;
 }
 .inquiry-modal .input-block-item label {
     font-weight: 400;
@@ -4042,9 +4043,13 @@ label.mobile-label {
     border-radius: 6px;
     display: flex;
     align-items: flex-end;
+    height: 54px;
 }
 .inquiry-modal .select-block .select2-container--default .select2-selection__arrow {
     transition: all 0.2s;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
 }
 .inquiry-modal .select-block .select2-container--default .select2-selection--single[aria-expanded="true"] .select2-selection__arrow {
     transform: rotate(180deg);
@@ -4056,6 +4061,8 @@ label.mobile-label {
     font-size: 15px;
     line-height: 32px;
     color: #333646;
+    padding-left: 16px;
+    padding-right: 16px;
 }
 .inquiry-modal .text-area-block textarea {
     height: 100px;
@@ -4305,6 +4312,7 @@ label.mobile-label {
 }
 .slider-modal-overlay .big-slider .slick-list {
     height: 348px;
+    border-radius: 6.5px;
 }
 .slider-modal-overlay .big-slider .slider-item {
     width: 522px;
@@ -4314,7 +4322,6 @@ label.mobile-label {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 6.5px;
 }
 .slider-modal-overlay .big-slider img.prev-arrow {
     position: absolute;
@@ -4520,6 +4527,9 @@ label.mobile-label {
 .modal-quality-block .close-block {
     display: none;
 }
+.inquiry-modal .modal-close svg {
+    display: block;
+}
 
 
 @media (max-width: 1211px) {
@@ -4565,12 +4575,12 @@ label.mobile-label {
         box-shadow: none;
         min-height: 396px;
         min-width: 248px;
+        margin-left: 15px;
     }
     .slick-dotted.slick-slider {
         margin-bottom: 0;
         max-width: 916px;
         width: calc(100% - 263px);
-        margin-right: 15px;
     }
     .single-content .main-top-block {
         margin-bottom: 30px;
@@ -4759,6 +4769,53 @@ label.mobile-label {
     .modal-quality-block .close-block {
         display: block;
     }
+    .slider-modal-overlay .small-slider {
+        display: none;
+    }
+    .modal-overlay.slider-modal-overlay {
+        background-color: #13141a;
+    }
+    .slider-modal-overlay .slider-block {
+        max-width: none;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+    .slider-modal-overlay .big-slider {
+        width: 100%;
+        height: 512px;
+        margin: 0;
+        position: static;
+    }
+    .slider-modal-overlay .big-slider .slick-list {
+        height: 512px;
+        border-radius: 0;
+    }
+    .slider-modal-overlay .big-slider .slider-item {
+        width: 100%;
+        height: 512px;
+    }
+    .slider-modal-overlay .name-slide-number {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 24px;
+    }
+    .slider-modal-overlay .modal-close {
+        z-index: 10;
+    }
+    .slider-modal-overlay .big-slider img.prev-arrow {
+        left: calc(44.4% - 60px);
+        top: auto;
+        transform: none;
+        bottom: 23px;
+    }
+    .slider-modal-overlay .big-slider img.next-arrow {
+        right: calc(44.4% - 60px);
+        top: auto;
+        transform: none;
+        bottom: 23px;
+    }
 }
 @media (max-width: 991px) {
     .single-header-content .main-menu {
@@ -4798,6 +4855,34 @@ label.mobile-label {
     .comfort a.comfort-collapse-link[aria-expanded="true"] img {
         transform: rotate(180deg);
         padding-bottom: 3px;
+    }
+    .inquiry-modal .title {
+        font-size: 22px;
+        margin-bottom: 19px;
+    }
+    .inquiry-modal .checkbox-block {
+        margin-bottom: 12px;
+    }
+    .inquiry-modal a.send-request {
+        margin-top: 9px;
+    }
+    .inquiry-modal {
+        height: 697px;
+    }
+    .slider-modal-overlay .modal-close {
+        right: 16px;
+        top: 16px;
+    }
+    .slider-modal-overlay .modal-close svg {
+        width: 14px;
+        height: 14px;
+        display: block;
+    }
+    .slider-modal-overlay .name-slide-number .dash {
+        display: none;
+    }
+    .slider-modal-overlay .name-slide-number .name {
+        display: none;
     }
 }
 @media (max-width: 720px) {
@@ -4997,6 +5082,54 @@ label.mobile-label {
     }
     .single-content .mobile-price-situation .position-content .name {
         font-weight: 400;
+    }
+    .slider-modal-overlay .big-slider {
+        height: 412px;
+    }
+    .slider-modal-overlay .big-slider .slick-list {
+        height: 412px;
+    }
+    .slider-modal-overlay .big-slider .slider-item {
+        height: 412px;
+    }
+}
+@media (max-width: 680px) {
+    .inquiry-modal {
+        padding: 50px 16px 43px 16px;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        overflow-y: auto;
+    }
+    .inquiry-modal .modal-close {
+        width: 31px;
+        height: 31px;
+        border: 1px solid #EEEEEE;
+        border-radius: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .inquiry-modal .title {
+        font-size: 20px;
+        margin-bottom: 19px;
+    }
+    .inquiry-modal .input-block-item,
+    .inquiry-modal .select-block,
+    .inquiry-modal .data-block {
+        max-width: none;
+    }
+    .inquiry-modal .checkbox-block {
+        margin-bottom: 10px;
+    }
+    .inquiry-modal a.send-request {
+        margin-top: 11px;
+    }
+    .inquiry-modal-overlay {
+        background-color: transparent;
+    }
+    .datepicker.dropdown-menu {
+        width: calc(100% - 32px);
     }
 }
 @media (max-width: 650px) {
@@ -5212,8 +5345,17 @@ label.mobile-label {
     .quality h3 {
         margin-bottom: 19px;
     }
+    .slider-modal-overlay .big-slider {
+        height: 312px;
+    }
+    .slider-modal-overlay .big-slider .slick-list {
+        height: 312px;
+    }
+    .slider-modal-overlay .big-slider .slider-item {
+        height: 312px;
+    }
 }
-@media (max-width: 400px) {
+@media (max-width: 420px) {
     .col-6 {
         flex: 0 0 100%;
         max-width: 100%;
@@ -5223,6 +5365,15 @@ label.mobile-label {
     }
     .single-content .single-main-slider .main-slider-item {
         height: 200px;
+    }
+    .slider-modal-overlay .big-slider {
+        height: 212px;
+    }
+    .slider-modal-overlay .big-slider .slick-list {
+        height: 212px;
+    }
+    .slider-modal-overlay .big-slider .slider-item {
+        height: 212px;
     }
 }
 

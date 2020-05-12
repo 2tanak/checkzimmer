@@ -290,6 +290,12 @@ jQuery(document).ready(function() {
         asNavFor: '.big-slider',
         focusOnSelect: true,
         centerMode: true,
+        responsive: [
+            {
+                breakpoint: 1212,
+                settings: "unslick"
+            }
+        ]
     });
 
     jQuery('a.open-gallery').click(function (e) {
