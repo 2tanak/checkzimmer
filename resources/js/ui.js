@@ -252,7 +252,6 @@ jQuery(document).ready(function() {
     });
 
     jQuery('a.inquiry').click(function (e) {
-        e.preventDefault();
         jQuery('.inquiry-modal-overlay').addClass('modal-show');
     });
 

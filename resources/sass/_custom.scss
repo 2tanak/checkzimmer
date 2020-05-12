@@ -4530,7 +4530,55 @@ label.mobile-label {
 .inquiry-modal .modal-close svg {
     display: block;
 }
-
+.fixed-bar {
+    width: 100%;
+    height: 76px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    background: #FFFFFF;
+    box-shadow: 0 0 14px rgba(51, 54, 70, 0.14);
+    display: none;
+    padding: 16px;
+    align-items: center;
+    justify-content: space-between;
+}
+.fixed-bar a.send-inquiry {
+    background: #6BB63F;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    width: 100%;
+    max-width: 360px;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 100%;
+    color: #FFFFFF;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+    text-decoration: none;
+    margin-right: 16px;
+    transition: all .4s;
+}
+.fixed-bar a.inquiry:hover {
+    background-color: #60A338;
+}
+.fixed-bar a.see-number-phone {
+    border: 1px solid #6BB63F;
+    border-radius: 6px;
+    height: 44px;
+    width: 100%;
+    max-width: 360px;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 100%;
+    color: #3B8B3E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 @media (max-width: 1211px) {
     .single-content .single-gallery {
@@ -4883,6 +4931,9 @@ label.mobile-label {
     }
     .slider-modal-overlay .name-slide-number .name {
         display: none;
+    }
+    .fixed-bar {
+        display: flex;
     }
 }
 @media (max-width: 720px) {
@@ -5354,6 +5405,19 @@ label.mobile-label {
     .slider-modal-overlay .big-slider .slider-item {
         height: 312px;
     }
+    .fixed-bar a.send-inquiry {
+        font-size: 14px;
+        height: 40px;
+        margin-right: 10px;
+    }
+    .fixed-bar a.see-number-phone {
+        font-size: 14px;
+        height: 40px;
+    }
+    .fixed-bar {
+        padding: 14px 16px;
+        height: 68px;
+    }
 }
 @media (max-width: 420px) {
     .col-6 {
@@ -5374,6 +5438,10 @@ label.mobile-label {
     }
     .slider-modal-overlay .big-slider .slider-item {
         height: 212px;
+    }
+    .fixed-bar {
+        padding: 10px;
+        height: 60px;
     }
 }
 

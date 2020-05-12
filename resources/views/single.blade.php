@@ -2770,6 +2770,12 @@
                 </div>
             </div>
     </div>
+
+        <div class="fixed-bar">
+            <a href="#" class="send-inquiry inquiry">Отправить запрос</a>
+            <a href="#" class="see-number-phone">Показать телефон</a>
+        </div>
+
     </div>
 
 @endsection
