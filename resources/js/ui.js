@@ -218,29 +218,33 @@ jQuery(document).ready(function() {
 
     jQuery('a.teilen').click(function (e) {
         e.preventDefault();
-        jQuery('.share-block').addClass('active');
-    });
-
-    jQuery('.number-phone a').click(function (e) {
-        e.preventDefault();
-        jQuery('.quality').addClass('active');
-    });
-
-    jQuery('a.another-time').click(function (e) {
-        e.preventDefault();
-        jQuery('.quality').removeClass('active');
+        jQuery('.share-block, .modal-share-block.modal-share-block').addClass('active');
     });
 
     jQuery('a.melden').click(function (e) {
         e.preventDefault();
-        jQuery('.offer').addClass('active');
+        jQuery('.offer, .modal-offer-block.modal-offer-block').addClass('active');
+    });
+
+    jQuery('.number-phone a').click(function (e) {
+        e.preventDefault();
+        jQuery('.quality, .modal-quality-block.sidebar-modal-block').addClass('active');
+    });
+
+    jQuery('a.another-time').click(function (e) {
+        e.preventDefault();
+        jQuery('.quality, .modal-quality-block.sidebar-modal-block').removeClass('active');
     });
 
     jQuery('.close-block').click(function () {
-        jQuery('.sidebar-small-block').removeClass('active');
+        jQuery('.sidebar-small-block, .sidebar-modal-block').removeClass('active');
     });
 
-    jQuery('#offer-select, #number-persons, #type').select2();
+    jQuery('.sidebar-modal-block .overlay').click(function () {
+        jQuery('.sidebar-modal-block').removeClass('active');
+    });
+
+    jQuery('#offer-select, #number-persons, #type, #offer-select2').select2();
 
     jQuery('.mobile-card-button').click(function () {
         jQuery('.property-card').toggleClass('big');
