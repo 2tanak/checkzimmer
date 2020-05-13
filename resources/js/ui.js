@@ -318,4 +318,21 @@ jQuery(window).on('load', function() {
     if(jQuery(window).width() <= 991) {
         jQuery('.comfort .collapse').removeClass('show');
     };
+
 });
+
+jQuery(window).scroll(function () {
+    if (jQuery(this).scrollTop() > 500) {
+        jQuery('.scroll-top').fadeIn();
+    } else {
+        jQuery('.scroll-top').fadeOut();
+    }
+});
+
+jQuery('.scroll-top').click(function () {
+    jQuery('body').animate({
+        scrollTop: 0
+    }, 400);
+    return false;
+});
+
