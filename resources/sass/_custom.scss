@@ -2966,7 +2966,7 @@ label.mobile-label {
     cursor: pointer;
 }
 .single-content .object-description .questions .collapse-button {
-    width: 30px;
+    min-width: 30px;
     height: 30px;
     border: 1px solid #C5C5C7;
     border-radius: 50%;
