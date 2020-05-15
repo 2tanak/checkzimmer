@@ -319,20 +319,21 @@ jQuery(window).on('load', function() {
         jQuery('.comfort .collapse').removeClass('show');
     };
 
+    jQuery(window).scroll(function () {
+        if (jQuery(this).scrollTop() > 500) {
+            jQuery('.scroll-top').fadeIn();
+        } else {
+            jQuery('.scroll-top').fadeOut();
+        }
+    });
+
+    jQuery('.scroll-top').click(function () {
+        jQuery('html, body').animate({
+            scrollTop: 0
+        }, 400);
+    });
+
 });
 
-jQuery(window).scroll(function () {
-    if (jQuery(this).scrollTop() > 500) {
-        jQuery('.scroll-top').fadeIn();
-    } else {
-        jQuery('.scroll-top').fadeOut();
-    }
-});
 
-jQuery('.scroll-top').click(function () {
-    jQuery('body').animate({
-        scrollTop: 0
-    }, 400);
-    return false;
-});
 

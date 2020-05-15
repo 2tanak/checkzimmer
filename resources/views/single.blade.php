@@ -1461,27 +1461,27 @@
                     <div class="comfort-block">
                         <h3>Кухня</h3>
                         <div class="row">
-                            <div class="col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                            <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                                 <img src="/svg/i-own-kitchen.svg" alt="alt">
                                 <span>Eigene kuche</span>
                             </div>
-                            <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                            <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                                 <img src="/svg/i-shared-kitchen.svg" alt="alt">
                                 <span>Gemeinschaftskuche</span>
                             </div>
-                            <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                            <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                                 <img src="/svg/i-fridge.svg" alt="alt">
                                 <span>Kuchlshrank</span>
                             </div>
-                            <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                            <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                                 <img src="/svg/i-coffee-machine.svg" alt="alt">
                                 <span>Kaffemaschine</span>
                             </div>
-                            <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                            <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                                 <img src="/svg/i-microwave-oven.svg" alt="alt">
                                 <span>Mikrowelle</span>
                             </div>
-                            <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                            <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                                 <img src="/svg/i-dishwasher.svg" alt="alt">
                                 <span>Spulmaschine</span>
                             </div>
@@ -1490,47 +1490,47 @@
                 <div class="comfort-block">
                     <h3>Ванная</h3>
                     <div class="row">
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-bath.svg" alt="alt">
                             <span>Badewanne</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-bath.svg" alt="alt">
                             <span>Gemeinschafstbad</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-towel.svg" alt="alt">
                             <span>Handtuscher inkl.</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-no-towel.svg" alt="alt">
                             <span>Handtuscher nicht verf.</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/sauna.svg" alt="alt">
                             <span>Sauna</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-hair-dryer.svg" alt="alt">
                             <span>Fon</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-toilet.svg" alt="alt">
                             <span>Personlich toilette</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-shared-toilet.svg" alt="alt">
                             <span>Gemeinsame toilette</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-washingmachine.svg" alt="alt">
                             <span>Waschmaschine</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-own-shower.svg" alt="alt">
                             <span>Deinee dusche</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-shared-shower.svg" alt="alt">
                             <span>Gemeinschaftsdusche</span>
                         </div>
@@ -1540,67 +1540,67 @@
                 <div class="comfort-block">
                     <h3>Комната</h3>
                     <div class="row">
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-signlebed.svg" alt="alt">
                             <span>Einzelbett</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-combined-bed.svg" alt="alt">
                             <span>Getrente betten</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-extra-bed.svg" alt="alt">
                             <span>Zustellbett</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-double-bed.svg" alt="alt">
                             <span>Doppelbett</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-linens.svg" alt="alt">
                             <span>Bettwasche inkl.</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-no-linens.svg" alt="alt">
                             <span>Bettwasche nicht verf.</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-restroom.svg" alt="alt">
                             <span>Gemeinschafrsraum</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-radio.svg" alt="alt">
                             <span>Radio</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-safe.svg" alt="alt">
                             <span> Spind/Safe</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-darts.svg" alt="alt">
                             <span>Dart</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-tv.svg" alt="alt">
                             <span>TV</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-table-billiard.svg" alt="alt">
                             <span>Billiartisch</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-balcony.svg" alt="alt">
                             <span>Balkon</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-air-conditioning.svg" alt="alt">
                             <span>Kimaanlage</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-fireplace.svg" alt="alt">
                             <span>Kamin</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-computer-place.svg" alt="alt">
                             <span>Platz fur computer</span>
                         </div>
@@ -1609,43 +1609,43 @@
                 <div class="comfort-block">
                     <h3>Прочее</h3>
                     <div class="row">
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-dryer.svg" alt="alt">
                             <span>Trockenschrank</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-friendly.svg" alt="alt">
                             <span>Familienfreundlich</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-gym.svg" alt="alt">
                             <span>Fitness</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-pets-friendly.svg" alt="alt">
                             <span>Haustier</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-wifi.svg" alt="alt">
                             <span>WiFi</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-iron.svg" alt="alt">
                             <span>Bugeleisen zum Bugeln</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-jacuzi.svg" alt="alt">
                             <span>Whirpool</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-table-soccer.svg" alt="alt">
                             <span>Tisch-futbal</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-smoking.svg" alt="alt">
                             <span>Raucher</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-no-smoking.svg" alt="alt">
                             <span>Nicht rauchen</span>
                         </div>
@@ -1654,47 +1654,47 @@
                 <div class="comfort-block">
                     <h3>Снаружи</h3>
                     <div class="row">
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-terrace.svg" alt="alt">
                             <span>Terrace</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-parking.svg" alt="alt">
                             <span>Offentliche parkzplatz</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-car-parking.svg" alt="alt">
                             <span>PKW-Parkzplatz</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-truck-parking.svg" alt="alt">
                             <span>LKW-Parkzplatz</span>
                         </div>
-                        <div class="col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-swimming-pool.svg" alt="alt">
                             <span>Schwimmbad</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-garden.svg" alt="alt">
                             <span>Wintergarten</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/garden.svg" alt="alt">
                             <span>Garten</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-disabled.svg" alt="alt">
                             <span>Barrierefrei</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-barbecue.svg" alt="alt">
                             <span>Grillmoglichkeit</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-bike.svg" alt="alt">
                             <span>Fahhradelveih</span>
                         </div>
-                        <div class="col-xl-3 col-xl-3 colg-3 col-md-3 col-sm-4 col-6 comfort-block-item">
+                        <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                             <img src="/svg/i-elevator.svg" alt="alt">
                             <span>Heben</span>
                         </div>
@@ -2780,6 +2780,460 @@
             <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1.29079 9.28982C1.47816 9.47607 1.73161 9.58061 1.99579 9.58061C2.25998 9.58061 2.51343 9.47607 2.70079 9.28982L7.36079 4.63982C7.37894 4.62238 7.40177 4.61059 7.42649 4.60587C7.45121 4.60116 7.47677 4.60372 7.50007 4.61325C7.52336 4.62278 7.54339 4.63887 7.55772 4.65956C7.57205 4.68025 7.58007 4.70466 7.58079 4.72982V15.5898C7.58079 15.855 7.68615 16.1094 7.87369 16.2969C8.06122 16.4845 8.31558 16.5898 8.58079 16.5898C8.84601 16.5898 9.10036 16.4845 9.2879 16.2969C9.47544 16.1094 9.58079 15.855 9.58079 15.5898V4.71982C9.58152 4.69466 9.58953 4.67025 9.60386 4.64956C9.61819 4.62887 9.63822 4.61278 9.66152 4.60325C9.68481 4.59372 9.71037 4.59116 9.7351 4.59587C9.75982 4.60059 9.78264 4.61238 9.80079 4.62982L14.4608 9.29982C14.6482 9.48607 14.9016 9.59061 15.1658 9.59061C15.43 9.59061 15.6834 9.48607 15.8708 9.29982C16.057 9.11245 16.1616 8.859 16.1616 8.59482C16.1616 8.33063 16.057 8.07718 15.8708 7.88982L9.29079 1.28982C9.10343 1.10357 8.84998 0.999023 8.58579 0.999023C8.32161 0.999023 8.06816 1.10357 7.88079 1.28982L1.29079 7.87982C1.10454 8.06718 1 8.32063 1 8.58482C1 8.849 1.10454 9.10245 1.29079 9.28982Z" fill="#7A8793"/>
             </svg>
+        </div>
+
+        <div class="single-load-content">
+            <div class="main-load-block">
+                <div class="top-block">
+                    <div class="mobile-images-sidebar">
+                    <div class="images-block">
+                        <svg width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="62" height="62" rx="4" fill="#D8D8D8"/>
+                            <path d="M19.375 36.8125L7.75 52.3125H54.25L40.6875 31L29.0625 46.5L19.375 36.8125Z" fill="#EDEDEF"/>
+                        </svg>
+                    </div>
+                        <div class="load-sidebar load-sidebar-mobile">
+                            <div class="sidebar-head">
+                                <div class="sidebar-head-item"></div>
+                                <div class="sidebar-head-item"></div>
+                                <div class="sidebar-head-item"></div>
+                                <div class="sidebar-head-item"></div>
+                            </div>
+                            <div class="sidebar-body">
+                                <div class="small-block"></div>
+                                <div class="big-block"></div>
+                                <div class="big-block"></div>
+                                <div class="sidebar-body-item">
+                                    <div class="address">
+                                        <div class="address-item"></div>
+                                        <div class="address-item"></div>
+                                        <div class="address-item"></div>
+                                    </div>
+                                    <div class="map">
+                                        <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect y="0.00195312" width="22" height="22" rx="2" fill="#D8D8D8"/>
+                                            <path d="M6.875 13.0645L2.75 18.5645H19.25L14.4375 11.002L10.3125 16.502L6.875 13.0645Z" fill="#EDEDEF"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sidebar-footer"></div>
+                        </div>
+                        <div class="head-title-block"></div>
+                        <div class="subtitle-block"></div>
+                    </div>
+                    <div class="top-block-content top-block-content-desctop">
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                        <div class="content-item"></div>
+                    </div>
+                    <div class="top-block-content top-block-content-mobile">
+                        <div class="title"></div>
+                        <div class="mobile-block-item">
+                            <div class="line-block">
+                                <div class="block-item"></div>
+                                <div class="block-item"></div>
+                                <div class="circle-item"></div>
+                            </div>
+                            <div class="line-block">
+                                <div class="block-item"></div>
+                                <div class="block-item"></div>
+                                <div class="empty"></div>
+                            </div>
+                            <div class="line-block">
+                                <div class="block-item"></div>
+                                <div class="block-item"></div>
+                                <div class="empty"></div>
+                            </div>
+                        </div>
+                        <div class="mobile-block-item">
+                            <div class="line-block">
+                                <div class="block-item"></div>
+                                <div class="block-item"></div>
+                                <div class="circle-item"></div>
+                            </div>
+                            <div class="line-block">
+                                <div class="block-item"></div>
+                                <div class="block-item"></div>
+                                <div class="empty"></div>
+                            </div>
+                            <div class="line-block">
+                                <div class="block-item"></div>
+                                <div class="block-item"></div>
+                                <div class="empty"></div>
+                            </div>
+                        </div>
+                        <div class="mobile-block-item">
+                            <div class="line-block">
+                                <div class="block-item"></div>
+                                <div class="block-item"></div>
+                                <div class="circle-item"></div>
+                            </div>
+                            <div class="line-block">
+                                <div class="block-item"></div>
+                                <div class="block-item"></div>
+                                <div class="empty"></div>
+                            </div>
+                            <div class="line-block">
+                                <div class="block-item"></div>
+                                <div class="block-item"></div>
+                                <div class="empty"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="middle-block">
+                    <div class="head-title-block"></div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-4 col-6 middle-block-item">
+                            <div class="title"></div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-6 middle-block-item">
+                            <div class="title"></div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-6 middle-block-item">
+                            <div class="title"></div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-6 middle-block-item">
+                            <div class="title"></div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 col-sm-4 col-6 middle-block-item">
+                            <div class="title"></div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-6 middle-block-item">
+                            <div class="title"></div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-6 middle-block-item">
+                            <div class="title"></div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-6 middle-block-item">
+                            <div class="title"></div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 col-sm-4 col-6 middle-block-item">
+                            <div class="title"></div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-6 middle-block-item">
+                            <div class="title"></div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-6 middle-block-item">
+                            <div class="title"></div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-6 middle-block-item">
+                            <div class="title"></div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 col-sm-4 col-6 middle-block-item">
+                            <div class="title"></div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-6 middle-block-item">
+                            <div class="title"></div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-6 middle-block-item">
+                            <div class="title"></div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-6 middle-block-item">
+                            <div class="title"></div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                            <div class="content-block">
+                                <div class="circle"></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="link"></div>
+                </div>
+                <div class="bottom-block bottom-block-desctop">
+                    <div class="head-block">
+                        <div class="head-block-item"></div>
+                        <div class="head-block-item"></div>
+                        <div class="head-block-item"></div>
+                    </div>
+                    <div class="middle-content-block">
+                        <div class="middle-content-block-item"></div>
+                        <div class="middle-content-block-item"></div>
+                        <div class="middle-content-block-item"></div>
+                        <div class="middle-content-block-item"></div>
+                        <div class="middle-content-block-item"></div>
+                        <div class="middle-content-block-item"></div>
+                        <div class="middle-content-block-item"></div>
+                    </div>
+                    <div claSS="footer-block"></div>
+                </div>
+                <div class="bottom-block bottom-block-mobile">
+                    <div class="mobile-block">
+                        <div class="content"></div>
+                        <div class="circle-item"></div>
+                    </div>
+                    <div class="mobile-block">
+                        <div class="content"></div>
+                        <div class="circle-item"></div>
+                    </div>
+                    <div class="mobile-block">
+                        <div class="content"></div>
+                        <div class="circle-item"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="load-sidebar load-sidebar-desctope">
+                <div class="sidebar-head">
+                    <div class="sidebar-head-item"></div>
+                    <div class="sidebar-head-item"></div>
+                    <div class="sidebar-head-item"></div>
+                    <div class="sidebar-head-item"></div>
+                </div>
+                <div class="sidebar-body">
+                    <div class="small-block"></div>
+                    <div class="big-block"></div>
+                    <div class="big-block"></div>
+                    <div class="sidebar-body-item">
+                        <div class="address">
+                            <div class="address-item"></div>
+                            <div class="address-item"></div>
+                            <div class="address-item"></div>
+                        </div>
+                        <div class="map">
+                            <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect y="0.00195312" width="22" height="22" rx="2" fill="#D8D8D8"/>
+                                <path d="M6.875 13.0645L2.75 18.5645H19.25L14.4375 11.002L10.3125 16.502L6.875 13.0645Z" fill="#EDEDEF"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-footer"></div>
+            </div>
         </div>
 
     </div>
