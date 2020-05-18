@@ -7,26 +7,30 @@
             <div class="sample-block">
                 <div class="input-block sample-block-item">
                     <label for="text">адрес рабочего места:</label>
-                    <input id="text" type="text">
+                    <div class="input-container"><input id="text" type="text"></div>
                 </div>
                 <div class="distance-block select-block">
                     <label for="distance-select">дистанция:</label>
+                    <div class="select-container">
                     <select name="distance" id="distance-select" class="distance">
                         <option value="1">10 км.</option>
                         <option value="2">20 км.</option>
                         <option value="3">30 км.</option>
                         <option value="4">40 км.</option>
                     </select>
+                    </div>
                 </div>
                 <div class="number-personse-block select-block">
                     <label class="desctop-label" for="number-personse">Кол-во человек:</label>
                     <label class="mobile-label" for="number-personse">Кол-во чел.:</label>
+                    <div class="select-container">
                     <select name="distance" id="number-personse" class="number-personse">
                         <option value="1">1 чел.</option>
                         <option value="2">2 чел.</option>
                         <option value="3">3 чел.</option>
                         <option value="4">4 чел.</option>
                     </select>
+                    </div>
                 </div>
                 <a class="find-housing" href="#">Найти жильё</a>
             </div>
@@ -80,7 +84,7 @@
                                         </div>
                                         <div class="distance">
                                             <img src="/svg/i-distance.svg" alt="distance">
-                                            7км от указанного вами адреса
+                                            7км от &nbsp; <span class="desctop-span">указанного</span> <span class="mobile-span">указ.</span> &nbsp; вами адреса
                                         </div>
                                     </div>
                                     <div class="additionally">
@@ -227,7 +231,7 @@
                                     <div class="data-item">
                                         <div class="geolocation">
                                             <img src="/svg/i-pin.svg" alt="geo">
-                                            04668 Grimma, Leipzig (Kreis)
+                                            04668 Grimma, Leipzig
                                         </div>
                                         <div class="humans">
                                             <img src="/svg/i-people.svg" alt="humans">
@@ -235,7 +239,7 @@
                                         </div>
                                         <div class="distance">
                                             <img src="/svg/i-distance.svg" alt="distance">
-                                            7км от указанного вами адреса
+                                            7км от &nbsp; <span class="desctop-span">указанного</span> <span class="mobile-span">указ.</span> &nbsp; вами адреса
                                         </div>
                                         <div class="additionally">
                                             <div class="wi-fi data-block-circle" data-toggle="tooltip" data-placement="top" title="wi-fi"><img src="/svg/i-wifi.svg"></div>
@@ -387,7 +391,7 @@
                                         </div>
                                         <div class="distance">
                                             <img src="/svg/i-distance.svg" alt="distance">
-                                            7км от указанного вами адреса
+                                            7км от &nbsp; <span class="desctop-span">указанного</span> <span class="mobile-span">указ.</span> &nbsp; вами адреса
                                         </div>
                                         <div class="additionally">
                                             <div class="wi-fi data-block-circle" data-toggle="tooltip" data-placement="top" title="wi-fi"><img src="/svg/i-wifi.svg"></div>
