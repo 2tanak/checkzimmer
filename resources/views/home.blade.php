@@ -7,7 +7,7 @@
             <div class="sample-block">
                 <div class="input-block sample-block-item">
                     <label for="text">адрес рабочего места:</label>
-                    <div class="input-container"><input id="text" type="text"></div>
+                    <div class="input-container"><input id="text" type="text" placeholder="Например: 04158 Leipzig"></div>
                 </div>
                 <div class="distance-block select-block">
                     <label for="distance-select">дистанция:</label>

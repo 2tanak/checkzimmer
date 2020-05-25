@@ -735,6 +735,18 @@ footer#main-footer ul.footer-menu li a:active {
     color: #333646;
     border: 0;
 }
+.list-content .sample-block input::-webkit-input-placeholder {
+    color: #8F98A2;
+}
+.list-content .sample-block input::-moz-placeholder {
+    color: #8F98A2;
+}
+.list-content .sample-block input:-moz-placeholder {
+    color: #8F98A2;
+}
+.list-content .sample-block input:-ms-input-placeholder {
+    color: #8F98A2;
+}
 .list-content .sample-block .select-block {
     display: flex;
     flex-direction: column;
@@ -1128,7 +1140,7 @@ footer#main-footer ul.footer-menu li a:active {
     line-height: 130%;
     color: #333646;
     display: flex;
-    align-items: center;
+    align-items: baseline;
     margin-bottom: 31px;
 }
 .property-card .rating-number img {
@@ -1418,6 +1430,7 @@ footer#main-footer ul.footer-menu li a:active {
     margin: 0;
     left: 0;
     top: 0;
+    display: block;
 }
 .select2 .select2-selection.select2-selection--single[aria-expanded="true"] .select2-selection__arrow {
     transform: translateY(-50%) rotate(180deg);
@@ -2033,9 +2046,10 @@ label.mobile-label {
     }
     .list-content .sorting-block .result {
         font-size: 14px;
+        margin-left: 11px;
     }
     .list-content .sorting-block .left-block a {
-        margin-right: 20px;
+        margin-right: 9px;
         min-width: 89px;
         height: 28px;
         font-size: 14px;
@@ -2068,7 +2082,7 @@ label.mobile-label {
     }
     .property-card a.title {
         margin-bottom: 18px;
-        max-height: 42px;
+        max-height: 46px;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -2711,7 +2725,7 @@ label.mobile-label {
     margin-bottom: 8px;
 }
 .single-content .parameters .title {
-    font-weight: 600;
+    font-weight: 400;
     font-size: 10px;
     line-height: 140%;
     letter-spacing: 0.02em;
@@ -4970,7 +4984,7 @@ label.mobile-label {
     .single-content .top-bloc-collapse .price-item {
         padding: 0;
     }
-    .single-content .parameters .title {
+    .single-content .parameters .parameters-left-block .title {
         padding: 0;
     }
 }
@@ -6081,7 +6095,7 @@ label.mobile-label {
 }
 @media (max-width: 680px) {
     .inquiry-modal {
-        padding: 50px 16px 43px 16px;
+        padding: 0;
         width: 100%;
         height: 100%;
         border-radius: 0;
@@ -6095,10 +6109,16 @@ label.mobile-label {
         display: flex;
         align-items: center;
         justify-content: center;
+        top: 10px;
+        right: 10px;
+    }
+    .inquiry-modal form {
+        padding: 0 16px 43px 16px;
     }
     .inquiry-modal .title {
         font-size: 20px;
         margin-bottom: 19px;
+        margin-top: 50px;
     }
     .inquiry-modal .input-block-item,
     .inquiry-modal .select-block,
