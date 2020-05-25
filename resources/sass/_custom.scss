@@ -4059,6 +4059,8 @@ label.mobile-label {
     -ms-transform: scale(0.7);
     transform: scale(0.7);
     opacity: 0;
+    top: 0;
+    left: 0;
 }
 .modal-overlay.modal-show .inquiry-modal {
     -webkit-transform: scale(1);
