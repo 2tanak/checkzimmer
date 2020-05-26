@@ -9,6 +9,8 @@ import App from './StarAdmin/App'
 import router from './StarAdmin/router'
 import BootstrapVue from 'bootstrap-vue'
 
+require('./bootstrap');
+
 Vue.use(BootstrapVue);
 
 Vue.config.productionTip = false;

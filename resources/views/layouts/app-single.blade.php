@@ -15,6 +15,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
     <!-- Styles -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -23,7 +24,7 @@
 <div id="app" class="property-list">
     <header>
         <div class="container">
-            <div class="header-content">
+            <div class="header-content single-header-content">
                 <div class="mobile-button">
                     <input type="checkbox" id="checkbox-item" class="checkbox visuallyHidden">
                     <label for="checkbox-item" class="hamburger-label">
@@ -118,7 +119,7 @@
 
 
 
-    <div class="modal-overlay">
+    <div class="modal-overlay inquiry-modal-overlay">
         <div class="inquiry-modal">
             <div class="modal-close">
                 <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -143,6 +144,20 @@
                     <input id="telephone" type="tel">
                     <label for="telephone">Номер телефона*</label>
                 </div>
+                <div class="data-block">
+                    <input id="arrival-date" data-provide="datepicker">
+                    <label for="arrival-date">Дата заезда</label>
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13 0H14V2H16C16.5523 2 17 2.44772 17 3V6V7V17C17 17.5523 16.5523 18 16 18H2C1.44772 18 1 17.5523 1 17V7V6V3C1 2.44772 1.44772 2 2 2H4V0H5V2H13V0ZM5 3H4H2V6H16V3H14H13H5ZM16 17H2V7H16V17ZM10 12H14V13H10V12ZM14 10H10V11H14V10ZM4 12H8V13H4V12ZM8 10H4V11H8V10Z" fill="#7A8793"/>
+                    </svg>
+                </div>
+                <div class="data-block">
+                    <input id="date-departure" data-provide="datepicker">
+                    <label for="date-departure">Дата выезда</label>
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13 0H14V2H16C16.5523 2 17 2.44772 17 3V6V7V17C17 17.5523 16.5523 18 16 18H2C1.44772 18 1 17.5523 1 17V7V6V3C1 2.44772 1.44772 2 2 2H4V0H5V2H13V0ZM5 3H4H2V6H16V3H14H13H5ZM16 17H2V7H16V17ZM10 12H14V13H10V12ZM14 10H10V11H14V10ZM4 12H8V13H4V12ZM8 10H4V11H8V10Z" fill="#7A8793"/>
+                    </svg>
+                </div>
                 <div class="select-block">
                     <select id="number-persons">
                         <option>1 человек</option>
@@ -154,7 +169,69 @@
                     </select>
                     <label for="number-persons">Количество человек</label>
                 </div>
+                <div class="select-block">
+                    <select id="type">
+                        <option>квартира целиком</option>
+                        <option>дом</option>
+                        <option>комната</option>
+                        <option>гараж</option>
+                    </select>
+                    <label for="number-persons">Тип жилья</label>
+                </div>
+                <div class="text-area-block">
+                    <textarea placeholder="Сообщение собственнику"></textarea>
+                </div>
+                <div class="checkbox-block checkbox-middle">
+                    <input id="email-checkbox" class="checkbox" type="checkbox">
+                    <label for="email-checkbox">Отправьте мне копию на email</label>
+                </div>
+                <div class="checkbox-block checkbox-top">
+                    <input id="consent-checkbox" class="checkbox" type="checkbox">
+                    <label for="consent-checkbox">Я даю согласие на обработку моих данных, как описано в <a href="#">заявлении о согласии</a> от Checkzimmer.</label>
+                </div>
+                <a class="send-request" href="#">Отправить запрос</a>
             </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay slider-modal-overlay">
+        <div class="modal-close">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M23.2514 24.0004C23.0614 24.0004 22.8714 23.9304 22.7214 23.7804L12.0014 13.0604L1.28141 23.7804C0.991406 24.0704 0.511406 24.0704 0.221406 23.7804C-0.0685937 23.4904 -0.0685937 23.0104 0.221406 22.7204L10.9414 12.0004L0.221406 1.28043C-0.0685937 0.99043 -0.0685937 0.51043 0.221406 0.22043C0.511406 -0.0695703 0.991406 -0.0695703 1.28141 0.22043L12.0014 10.9404L22.7214 0.22043C23.0114 -0.0695703 23.4914 -0.0695703 23.7814 0.22043C24.0714 0.51043 24.0714 0.99043 23.7814 1.28043L13.0614 12.0004L23.7814 22.7204C24.0714 23.0104 24.0714 23.4904 23.7814 23.7804C23.6314 23.9304 23.4414 24.0004 23.2514 24.0004Z" fill="white"/>
+            </svg>
+        </div>
+        <div class="slider-block">
+            <div class="big-slider">
+                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
+                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
+                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
+                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
+                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
+                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
+                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
+                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
+                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
+                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
+                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
+            </div>
+            <div class="small-slider">
+                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
+                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
+                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
+                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
+                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
+                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
+                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
+                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
+                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
+                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
+                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
+            </div>
+            <div class="name-slide-number">
+                <div class="number">1/20</div>
+                <div class="dash">-</div>
+                <div class="name">Balkon</div>
+            </div>
         </div>
     </div>
 
@@ -165,6 +242,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="{{ asset('js/select2.full.js') }}" defer></script>
 <script src="{{ asset('js/slick.min.js') }}" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" defer></script>
 <script src="{{ asset('js/ui.js') }}" defer></script>
 
 </body>
