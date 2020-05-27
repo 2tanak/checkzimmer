@@ -14,6 +14,6 @@ class DatabaseSeeder extends Seeder
         $this->call(FeaturesCategoriesSeeder::class);
         $this->call(FeaturesSeeder::class);
         $this->call(RoomTypesSeeder::class);
-        // $this->call(UsersTableSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }

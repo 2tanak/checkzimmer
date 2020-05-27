@@ -32,6 +32,8 @@ import error500 from '../views/sample-pages/error-500'
 import login from '../views/sample-pages/login'
 import register from '../views/sample-pages/register'
 
+import Header from '../../components/Dashboard/Website/Header';
+
 Vue.use(Router)
 
 export default new Router({
@@ -64,7 +66,7 @@ export default new Router({
         {
             path: '/dashboard/website/header',
             name: 'website-header',
-            component: widgets
+            component: Header
         },
         {
             path: '/dashboard/website/footer',
