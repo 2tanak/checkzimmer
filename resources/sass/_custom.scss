@@ -2404,6 +2404,12 @@ label.mobile-label {
         padding: 52px 16px 45px 16px;
         top: 0;
         left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .modal-content-item {
+        padding: 33px 20px 60px 20px;
     }
     .modal-block .modal-close {
         width: 31px;
@@ -2453,6 +2459,12 @@ label.mobile-label {
     }
     .list-content h1 {
         font-size: 22px;
+    }
+    .modal-block .or:before {
+        max-width: 120px;
+    }
+    .modal-block .or:after {
+        max-width: 120px;
     }
 }
 @media (max-width: 420px) {
@@ -3985,7 +3997,7 @@ label.mobile-label {
 }
 .offer .select2 .select2-selection--single .select2-selection__rendered {
     width: 100% !important;
-    line-height: 24px;
+    line-height: 28px;
     font-weight: 400;
     font-size: 14px;
     color: #333646;
@@ -4009,6 +4021,7 @@ label.mobile-label {
     line-height: 200%;
     color: #333646;
     outline: none;
+    line-height: 1.2;
 }
 .offer .textarea-block textarea::-webkit-input-placeholder {
     color: #8F98A2;
@@ -5882,7 +5895,7 @@ label.mobile-label {
     .slider-modal-overlay .name-slide-number .name {
         display: none;
     }
-    .fixed-bar {
+    .fixed-bar.active {
         display: flex;
     }
 }
@@ -6186,6 +6199,7 @@ label.mobile-label {
         min-height: 396px;
         height: auto;
         order: 4;
+        margin-left: 0;
     }
     .single-content h1 {
         display: block;
@@ -6305,6 +6319,11 @@ label.mobile-label {
     .single-content .object-description .reviews-block-item {
         padding-left: 16px;
         padding-right: 16px;
+    }
+    .single-content .object-description .reviews-block-item:last-of-type {
+        margin-bottom: 0;
+        border-bottom: 0;
+        padding-bottom: 0;
     }
     .single-content .object-description .reviews-form .top-form input:first-of-type {
         margin-right: 0;
