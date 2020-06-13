@@ -335,5 +335,27 @@ jQuery(window).on('load', function() {
 
 });
 
+/*jQuery(window).scroll( function() {
+    if (jQuery(window).scrollTop() > 300)
+    {
+        jQuery(".fixed-bar").addClass('active');
+    }
+    else
+    {
+        jQuery(".fixed-bar").removeClass('active');
+    }
+});*/
 
-
+jQuery(window).scroll( function() {
+    if (jQuery(window).scrollTop() > 300 && jQuery(window).width() <= 991 && jQuery(window).width() >= 650)
+    {
+        jQuery(".fixed-bar").addClass('active');
+    }
+    else if (jQuery(window).scrollTop() > 700 && jQuery(window).width() <= 650) {
+        jQuery(".fixed-bar").addClass('active');
+    }
+    else
+    {
+        jQuery(".fixed-bar").removeClass('active');
+    }
+});

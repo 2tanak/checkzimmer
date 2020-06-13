@@ -49,6 +49,19 @@
             </ul>
           </b-collapse>
         </li>
+        <li class="nav-item">
+          <span class="nav-link" v-b-toggle="'utilities'">
+            <img class="menu-icon" src="../../assets/images/menu_icons/06.png" alt="menu icon">
+            <span class="menu-title">Data</span>
+              <i class="fa fa-angle-down ml-auto mr-0"></i>
+          </span>
+          <b-collapse id="utilities">
+             <ul class="nav flex-column sub-menu">
+               <li class="nav-item"><router-link class="nav-link" :to="{ name: 'website-header' }">Room Types</router-link></li>
+               <li class="nav-item"><router-link class="nav-link" :to="{ name: 'website-footer' }">Features</router-link></li>
+             </ul>
+          </b-collapse>
+        </li>
         <li class="nav-item"><router-link class="nav-link" to="/forms/"><img class="menu-icon" src="../../assets/images/menu_icons/04.png" alt="menu icon"><span class="menu-title">Users</span></router-link></li>
       </ul>
     </nav>

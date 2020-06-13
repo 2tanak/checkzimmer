@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use App\User;
-use Hash;
 
 class UserSeeder extends Seeder
 {
@@ -19,5 +19,6 @@ class UserSeeder extends Seeder
             'email' => 'max@sharlaev.com',
             'password' => Hash::make('dddddddd'),
         ]);
+        $user->save();
     }
 }

@@ -31,6 +31,7 @@
     },
     "dependencies": {
         "@mdi/font": "^5.1.45",
+        "@websanova/vue-auth": "^3.2.1-beta",
         "core-js": "^3.6.5",
         "npm": "^6.14.4",
         "readmore-js": "^2.2.1"
