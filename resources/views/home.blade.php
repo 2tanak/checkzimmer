@@ -45,8 +45,9 @@
                         <div class="result">Найдено 1240 вариантов жилья</div>
                     </div>
                     <div class="sorting">
-                        <a href="#">Сортировка по умолчанию</a>
-                        <img src="/svg/i-arrow-dropdown-input.svg" alt="arrow">
+                        <a href="#">Сортировка по умолчанию
+                            <img src="/svg/i-arrow-dropdown-input.svg" alt="arrow">
+                        </a>
                         <div class="filter-block">
                             <ul>
                                 <li class="check">Сортировка по умолчанию</li>
@@ -61,7 +62,7 @@
 
             <div class="property not-map">
                 <div class="container">
-                    <div>
+                    <div style="position: relative;">
                         <div class="property-item">
                             <div class="property-card">
                                 <div class="property-card-slider">
@@ -524,8 +525,8 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+                        <div class="property-shadow"></div>
 
                         <div class="google-map">
                             <div id="map"></div>
@@ -773,7 +774,10 @@
                 <div class="description">
                     Предложения по вашему запросу закончились, увеличьте дистанцию или свяжитесь с менежером напрямую
                 </div>
-                <a href="#">Связаться с менеджером</a>
+                <div class="link-block">
+                    <a href="#">Связаться с менеджером</a>
+                    <div class="shadow-block"></div>
+                </div>
             </div>
 
         </div>
