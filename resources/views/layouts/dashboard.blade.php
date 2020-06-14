@@ -11,10 +11,10 @@
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Inter:400,500,600,700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}?ver={{ time() }}" rel="stylesheet">
 </head>
 <body>
     @yield('content')
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}?ver={{ time() }}" defer></script>
 </body>
 </html>

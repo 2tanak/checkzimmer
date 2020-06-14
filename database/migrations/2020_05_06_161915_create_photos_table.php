@@ -16,6 +16,7 @@ class CreatePhotosTable extends Migration
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('property_id');
+            $table->enum('type', ['property', 'room']);
             $table->integer('ord');
             $table->string('path');
             $table->timestamps();

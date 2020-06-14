@@ -23,6 +23,7 @@ class CreateRoomsTable extends Migration
             $table->enum('bed', ['single', 'double']);
             $table->enum('shower', ['single', 'shared']);
             $table->enum('kitchen', ['single', 'shared']);
+            $table->enum('status', ['pending', 'approved', 'declined']);
             $table->timestamps();
         });
     }
