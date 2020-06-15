@@ -57,6 +57,7 @@ class BookingController extends Controller {
 
         } while(count($json['result']) == 100);
 
+        Storage::put('cities.json', json_encode($citiesUpdate));
         BookingCity::insert($citiesUpdate);
 
         return response()->json([]);
@@ -102,24 +103,38 @@ class BookingController extends Controller {
         return response()->json($featuresUpdate);
     }
     function importRoomTypes() {
-        RoomType::truncate();
+        BookingType::truncate();
 
         $json = $this->getApiData('roomTypes');
+        $typesUpdate = [];
+
         foreach ($json['result'] as $item) {
-            $featuresUpdate[] = [
+            $typesUpdate[] = [
                 'name' => $item['name'],
-                'parent' => 0,
-                'type' => 'general',
-                'native_id' => $item['facility_type_id'],
+                'type' => 'room',
+                'native_id' => $item['room_type_id'],
             ];
         }
+        BookingType::insert($typesUpdate);
+
+        $json = $this->getApiData('hotelTypes');
+        $typesUpdate = [];
+
+        foreach ($json['result'] as $item) {
+            $typesUpdate[] = [
+                'name' => $item['name'],
+                'type' => 'hotel',
+                'native_id' => $item['hotel_type_id'],
+            ];
+        }
+        BookingType::insert($typesUpdate);
     }
     function getFeatures() {
         $features = BookingFeatures::params(['parent' => 0]);
         return response()->json($features);
     }
     function getRoomTypes() {
-        $features = BookingType::params(['parent' => 0]);
-        return response()->json($features);
+        $types = BookingType::params(['type' => 'hotel']);
+        return response()->json($types);
     }
 }

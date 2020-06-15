@@ -13,6 +13,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4>Типы недвижимости</h4>
+                        <b-table striped hover :items="types" :fields="fields"></b-table>
                     </div>
 
                 </div>
@@ -44,7 +45,7 @@
     import ApiRequest from '../../../API/ApiRequest';
     let CitiesRequest = ApiRequest('booking-cities');
     let FeaturesRequest = ApiRequest('booking-facilities');
-    let TypesRequest = ApiRequest('booking-types');
+    let TypesRequest = ApiRequest('booking-roomtypes');
     let cities = new CitiesRequest;
     let features = new FeaturesRequest;
     let types = new TypesRequest;
@@ -54,6 +55,8 @@
         data() {
             return {
                 features: [],
+                types: [],
+                fields: [ 'id', 'name', 'type' ],
                 loading: true
             }
         },
@@ -62,10 +65,14 @@
                 .then(resp => {
                     this.features = resp.data;
                 });
+            types.all()
+                .then(resp => {
+                    this.types = resp.data;
+                });
         },
         methods: {
             loadTypes() {
-                types.all()
+                types.create()
                     .then( () => {
                         this.$bvModal.show('save-success');
                     })
@@ -80,7 +87,7 @@
                     });
             },
             loadFeatures() {
-                features.create({})
+                features.create({});
             }
         },
         computed: {

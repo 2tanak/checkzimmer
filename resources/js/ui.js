@@ -1,3 +1,5 @@
+require('./bootstrap');
+
 jQuery(document).ready(function() {
 
     jQuery('#distance-select').select2();
@@ -254,8 +256,6 @@ jQuery(document).ready(function() {
     jQuery('a.inquiry').click(function (e) {
         jQuery('.inquiry-modal-overlay').addClass('modal-show');
     });
-
-    jQuery('#arrival-date, #date-departure').datepicker();
 
     jQuery('.inquiry-modal .data-block input').focus(function () {
         var parent = jQuery(this).closest('.data-block');

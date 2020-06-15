@@ -32,4 +32,5 @@ Route::middleware('api')->namespace('Api')->group(function () {
     Route::post('/booking-roomtypes', 'BookingController@importRoomTypes');
 
     Route::get('/booking-facilities', 'BookingController@getFeatures');
+    Route::get('/booking-roomtypes', 'BookingController@getRoomTypes');
 });
