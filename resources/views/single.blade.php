@@ -49,8 +49,8 @@
                             </div>
                             <div class="address-map">
                                 <div class="address">DKN Immobilien <span>Anja Klepzigolf</span> Kolonnadenstr. 1 04109 Leipzig</div>
-                                <div class="map">
-                                    <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2492.551932385999!2d12.36563791593532!3d51.33776073091309!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sDKN%20Immobilien%20Anja%20Klepzigolf%20Kolonnadenstr.%201%2004109%20Leipzig!5e0!3m2!1sru!2sru!4v1588597677861!5m2!1sru!2sru" width="200" height="200" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                                <div class="map-container">
+                                    <a class="map-picture" href="#object-description"><img src="/img/map-button.png" alt="alt"></a>
                                 </div>
                             </div>
                         </div>
@@ -1707,7 +1707,7 @@
                 </a>
             </div>
 
-                <div class="object-description object-description-desctope">
+                <div class="object-description object-description-desctope" id="object-description">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#description">Описание объекта</a>
@@ -1717,6 +1717,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#questions">Вопросы<span>(12)</span></a>
+                        </li>
+                        <li class="nav-item map-active">
+                            <a class="nav-link" data-toggle="tab" href="#map-block">Карта</a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -2157,6 +2160,33 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="tab-pane fade map-content" id="map-block">
+                            <div id="map"></div>
+                            <script>
+                            var map;
+                            function initMap() {
+                                var mapCanvas = document.getElementById("map");
+                                var myCenter = new google.maps.LatLng(51.337542, 12.367605);
+                                var mapOptions = {
+                                    center: myCenter,
+                                    zoom: 12,
+                                    disableDefaultUI: true,
+                                    zoomControl: true,
+                                    zoomControlOptions: {
+                                        style: google.maps.ZoomControlStyle.DEFAULT,
+                                        position: google.maps.ControlPosition.TOP_RIGHT
+                                    }
+                                };
+                                var marker = new google.maps.Marker ({
+                                    position: myCenter,
+                                    map: mapCanvas
+                                });
+                                var map = new google.maps.Map(mapCanvas ,mapOptions);
+                                marker.setMap(map);
+                            }
+                        </script>
+                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChFeaunpThR-Lo4t-SMP3n7s-fDBs67hU&callback=initMap" async defer></script>
                         </div>
                     </div>
                 </div>
@@ -2637,8 +2667,8 @@
                     </div>
                     <div class="address-map">
                         <div class="address">DKN Immobilien <span>Anja Klepzigolf</span> Kolonnadenstr. 1 04109 Leipzig</div>
-                        <div class="map">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2492.551932385999!2d12.36563791593532!3d51.33776073091309!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sDKN%20Immobilien%20Anja%20Klepzigolf%20Kolonnadenstr.%201%2004109%20Leipzig!5e0!3m2!1sru!2sru!4v1588597677861!5m2!1sru!2sru" width="200" height="200" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                        <div class="map-container">
+                            <a class="map-picture" href="#object-description"><img src="/img/map-button.png" alt="alt"></a>
                         </div>
                     </div>
                 </div>
