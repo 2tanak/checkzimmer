@@ -329,6 +329,20 @@ jQuery(document).ready(function() {
         jQuery('.map-active a').addClass('active');
     });
 
+    jQuery('a.map-mobile-picture').bind("click", function(e){
+        e.preventDefault();
+        var anchor = jQuery(this);
+        jQuery('html, body').stop().animate({
+            scrollTop: jQuery(anchor.attr('href')).offset().top
+        }, 650);
+        jQuery('#mobile-map-content-collapse').addClass('show');
+    });
+
+    jQuery('.map-mobile-picture').click(function(e) {
+        e.preventDefault();
+        jQuery('.click-collapse').find('.head-collapse').attr("aria-expanded", true).removeClass('collapsed');
+    });
+
     jQuery(window).scroll(function () {
         if(jQuery(this).scrollTop() > 68) {
             jQuery('.single-content .sidebar.desctop-sidebar').addClass('scroll');
