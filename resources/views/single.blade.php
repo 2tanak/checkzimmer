@@ -49,8 +49,9 @@
                             </div>
                             <div class="address-map">
                                 <div class="address">DKN Immobilien <span>Anja Klepzigolf</span> Kolonnadenstr. 1 04109 Leipzig</div>
-                                <div class="map">
-                                    <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2492.551932385999!2d12.36563791593532!3d51.33776073091309!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sDKN%20Immobilien%20Anja%20Klepzigolf%20Kolonnadenstr.%201%2004109%20Leipzig!5e0!3m2!1sru!2sru!4v1588597677861!5m2!1sru!2sru" width="200" height="200" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                                <div class="map-container">
+                                    <a class="map-picture" href="#object-description"><img src="/img/map-button.png" alt="alt"></a>
+                                    <a class="map-mobile-picture" href="#map-mobile-block"><img src="/img/map-button.png" alt="alt"></a>
                                 </div>
                             </div>
                         </div>
@@ -1707,7 +1708,7 @@
                 </a>
             </div>
 
-                <div class="object-description object-description-desctope">
+                <div class="object-description object-description-desctope" id="object-description">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#description">Описание объекта</a>
@@ -1717,6 +1718,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#questions">Вопросы<span>(12)</span></a>
+                        </li>
+                        <li class="nav-item map-active">
+                            <a class="nav-link" data-toggle="tab" href="#map-block">Карта</a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -2158,6 +2162,109 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="tab-pane fade map-content" id="map-block">
+                            <div id="map"></div>
+                            <script>
+                                var map, map2;
+                            function initMap() {
+                                var mapCanvas = document.getElementById("map");
+                                var mapCanvas2 = document.getElementById("map-mobile");
+                                var myCenter = new google.maps.LatLng(51.337542, 12.367605);
+                                var myCenter2 = new google.maps.LatLng(51.337542, 12.367605);
+                                var myTrip = [{lat:51.306084, lng:12.208921},
+                                              {lat:51.219721, lng:12.327711},
+                                              {lat:51.276026, lng:12.377149},
+                                              {lat:51.330974, lng:12.601682},
+                                              {lat:51.380715, lng:12.488386},
+                                              {lat:51.463781, lng:12.453367},
+                                              {lat:51.423980, lng:12.304365},
+                                              {lat:51.397426, lng:12.211668}];
+                                var myTrip2 = [{lat:51.306084, lng:12.208921},
+                                    {lat:51.219721, lng:12.327711},
+                                    {lat:51.276026, lng:12.377149},
+                                    {lat:51.330974, lng:12.601682},
+                                    {lat:51.380715, lng:12.488386},
+                                    {lat:51.463781, lng:12.453367},
+                                    {lat:51.423980, lng:12.304365},
+                                    {lat:51.397426, lng:12.211668}];
+                                var mapOptions = {
+                                    center: myCenter,
+                                    zoom: 10,
+                                    disableDefaultUI: true,
+                                    zoomControl: true,
+                                    zoomControlOptions: {
+                                        style: google.maps.ZoomControlStyle.DEFAULT,
+                                        position: google.maps.ControlPosition.TOP_RIGHT
+                                    },
+                                    mapTypeId: google.maps.MapTypeId.DESCTOPE
+                                };
+                                var mapOptions2 = {
+                                    center: myCenter,
+                                    zoom: 10,
+                                    disableDefaultUI: true,
+                                    zoomControl: true,
+                                    zoomControlOptions: {
+                                        style: google.maps.ZoomControlStyle.DEFAULT,
+                                        position: google.maps.ControlPosition.TOP_RIGHT
+                                    },
+                                    mapTypeId: google.maps.MapTypeId.MOBILE
+                                };
+                                var images = '/img/point-img.png';
+                                var marker = new google.maps.Marker ({
+                                    position: myCenter,
+                                    map: mapCanvas,
+                                    icon: images
+                                });
+                                var marker2 = new google.maps.Marker ({
+                                    position: myCenter2,
+                                    map: mapCanvas2
+                                });
+                                var map = new google.maps.Map(mapCanvas ,mapOptions);
+                                var map2 = new google.maps.Map(mapCanvas2 ,mapOptions2);
+
+                                var contentString = '<div id="content">'+
+                                                    '<span class="index">04109</span>'+
+                                                    '<span>&nbsp;</span>'+
+                                                    '<span class="town">Leipzig</span>'+
+                                                    '</div>';
+                                var contentString2 = '<div id="content">'+
+                                    '<span class="index">04109</span>'+
+                                    '<span>&nbsp;</span>'+
+                                    '<span class="town">Leipzig</span>'+
+                                    '</div>';
+                                var infowindow = new google.maps.InfoWindow({
+                                    content: contentString
+                                });
+                                var infowindow2 = new google.maps.InfoWindow({
+                                    content: contentString2
+                                });
+                                infowindow.open(map, marker);
+                                infowindow2.open(map2, marker2);
+
+                                var flightPath = new google.maps.Polygon({
+                                    path: myTrip,
+                                    strokeColor: "#6bb638",
+                                    strokeOpacity: 0.8,
+                                    strokeWeight: 2,
+                                    fillColor: "rgb(117, 242, 122)",
+                                    fillOpacity: 0.2
+                                });
+                                var flightPath2 = new google.maps.Polygon({
+                                    path: myTrip2,
+                                    strokeColor: "#6bb638",
+                                    strokeOpacity: 1,
+                                    strokeWeight: 2,
+                                    fillColor: "rgb(117, 242, 122)",
+                                    fillOpacity: 0.2
+                            });
+
+                                marker.setMap(map);
+                                marker2.setMap(map2);
+                                flightPath.setMap(map);
+                                flightPath2.setMap(map2);
+                            }
+                        </script>
+                        </div>
                     </div>
                 </div>
 
@@ -2597,7 +2704,51 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="mobile-map-content paddings-block click-collapse" id="map-mobile-block">
+                        <div class="head-collapse" data-toggle="collapse" data-target="#mobile-map-content-collapse" aria-expanded="false" aria-controls="mobile-questions-content-collapse">
+                            <div>Карта</div>
+                            <div class="decompose-button"></div>
+                        </div>
+                        <div class="collapse" id="mobile-map-content-collapse">
+                            <div class="map-content">
+                            <div id="map-mobile"></div>
+                            <!--<script>
+                                function initMap() {
+                                    var mapCanvas = document.getElementById("map-mobile");
+                                    var myCenter = new google.maps.LatLng(51.337542, 12.367605);
+                                    var mapOptions = {
+                                        center: myCenter,
+                                        zoom: 12,
+                                        disableDefaultUI: true,
+                                        zoomControl: true,
+                                        zoomControlOptions: {
+                                            style: google.maps.ZoomControlStyle.DEFAULT,
+                                            position: google.maps.ControlPosition.TOP_RIGHT
+                                        }
+                                    };
+                                    var marker = new google.maps.Marker ({
+                                        position: myCenter,
+                                        map: mapCanvas
+                                    });
+                                    var map = new google.maps.Map(mapCanvas ,mapOptions);
+                                    marker.setMap(map);
+                                    var contentString = '<div id="content">'+
+                                        '<span class="index">04109</span>'+
+                                        '<span>&nbsp;</span>'+
+                                        '<span class="town">Leipzig</span>'+
+                                        '</div>';
+                                    var infowindow = new google.maps.InfoWindow({
+                                        content: contentString
+                                    });
+                                    marker.addListener('click', function() {
+                                        infowindow.open(map, marker);
+                                    });
+                                    infowindow.open(map, marker);
+                                }
+                            </script>-->
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
         </div>
@@ -2637,8 +2788,8 @@
                     </div>
                     <div class="address-map">
                         <div class="address">DKN Immobilien <span>Anja Klepzigolf</span> Kolonnadenstr. 1 04109 Leipzig</div>
-                        <div class="map">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2492.551932385999!2d12.36563791593532!3d51.33776073091309!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sDKN%20Immobilien%20Anja%20Klepzigolf%20Kolonnadenstr.%201%2004109%20Leipzig!5e0!3m2!1sru!2sru!4v1588597677861!5m2!1sru!2sru" width="200" height="200" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                        <div class="map-container">
+                            <a class="map-picture" href="#object-description"><img src="/img/map-button.png" alt="alt"></a>
                         </div>
                     </div>
                 </div>
@@ -3235,6 +3386,8 @@
                 <div class="sidebar-footer"></div>
             </div>
         </div>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChFeaunpThR-Lo4t-SMP3n7s-fDBs67hU&callback=initMap" async defer></script>
 
     </div>
 
