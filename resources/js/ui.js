@@ -1,5 +1,9 @@
 require('./bootstrap');
 
+jQuery(window).on('load', function() {
+    jQuery('.property-card-slider').css({'opacity': 1, 'transition-duration': '0.2s'})
+});
+
 jQuery(document).ready(function() {
 
     jQuery('#distance-select').select2();
@@ -8,10 +12,6 @@ jQuery(document).ready(function() {
 
     jQuery(function () {
         jQuery('[data-toggle="tooltip"]').tooltip()
-    });
-
-    jQuery(window).on('load', function() {
-        jQuery('.property-card-slider').css({'opacity': 1, 'transition-duration': '0.2s'})
     });
 
     jQuery('.property-card-slider').slick({

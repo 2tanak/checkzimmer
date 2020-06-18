@@ -14,6 +14,9 @@ export default (base) => class ApiRequest {
     get(id) {
         return client.get(`api/${base}/${id}`);
     }
+    query(data) {
+        return client.post(`api/${base}/query`, data);
+    }
     update(id, data) {
         return client.put(`api/${base}/${id}`, data);
     }

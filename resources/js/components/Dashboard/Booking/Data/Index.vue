@@ -6,6 +6,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4>Города</h4>
+                        Импортировано: <strong>{{ cities.count }}</strong> городов
                     </div>
                 </div>
             </div>
@@ -54,6 +55,7 @@
         name: "Index",
         data() {
             return {
+                cities: { count: 0 },
                 features: [],
                 types: [],
                 fields: [ 'id', 'name', 'type' ],
@@ -61,6 +63,10 @@
             }
         },
         mounted() {
+            cities.all()
+                .then(resp => {
+                   this.cities = resp.data;
+                });
             features.all()
                 .then(resp => {
                     this.features = resp.data;
