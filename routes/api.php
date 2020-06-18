@@ -14,6 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});*/
+
+Route::middleware('api')->namespace('Api')->group(function () {
+
+    Route::resource('options', 'OptionsController');
+    Route::resource('users', 'UsersController');
+    Route::resource('features', 'FeaturesController');
+    Route::resource('room-types', 'RoomTypesController');
+    Route::get('/options/bytype/{type}', 'OptionsController@showByType');
+    /* Booking integration */
+    Route::post('/booking-test', 'BookingController@test');
+    Route::post('/booking-cities', 'BookingController@importCities');
+    Route::post('/booking-facilities', 'BookingController@importFacilities');
+    Route::post('/booking-roomtypes', 'BookingController@importRoomTypes');
+
+    Route::get('/booking-facilities', 'BookingController@getFeatures');
+    Route::get('/booking-roomtypes', 'BookingController@getRoomTypes');
 });

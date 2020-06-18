@@ -15,6 +15,9 @@ class CreatePropertyTable extends Migration
     {
         Schema::create('property', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('user_id');
+            $table->enum('type', ['general', 'affiliate']);
+            $table->enum('status', ['pending', 'approved', 'declined']);
             $table->unsignedInteger('views');
             $table->float('lat');
             $table->float('lng');

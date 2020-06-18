@@ -15,6 +15,8 @@ class CreateOptionsTable extends Migration
     {
         Schema::create('options', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('parent');
+            $table->enum('type', ['property', 'options', 'system', 'room', 'city', 'room_type', 'feature']);
             $table->string('key');
             $table->text('value');
             $table->timestamps();

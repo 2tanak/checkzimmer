@@ -1,12 +1,15 @@
-<?php
-
-namespace App;
+<?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\noCRUD;
 
-class Feature extends Model
-{
-    //
-    protected $table = 'features';
-    protected $fillable = ['feature_category_id', 'ord', 'picture', 'name'];
+class Feature extends Model {
+    static $optionType = 'feature';
+    private static $identifier = 'id';
+    private static $children = ['feature_category'];
+    use noCRUD;
+
+    function feature_category() {
+        return $this->belongsTo(FeatureCategory::class);
+    }
 }

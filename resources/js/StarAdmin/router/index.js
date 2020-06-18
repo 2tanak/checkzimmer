@@ -33,12 +33,24 @@ import login from '../views/sample-pages/login'
 import register from '../views/sample-pages/register'
 
 import Header from '../../components/Dashboard/Website/Header';
+import Footer from '../../components/Dashboard/Website/Footer';
+import Users from '../../components/Dashboard/Users';
+import Features from '../../components/Dashboard/Data/Features';
+import RoomTypes from '../../components/Dashboard/Data/RoomTypes';
+import Property from '../../components/Dashboard/Property/Property';
+import Rooms from '../../components/Dashboard/Property/Rooms';
+import AssignedRoomTypes from '../../components/Dashboard/Property/AssignedRoomTypes';
+import BookingItems from '../../components/Dashboard/Booking/Items';
+import BookingMapping from '../../components/Dashboard/Booking/Mapping';
+import BookingData from '../../components/Dashboard/Booking/Data';
+import BookingSettings from '../../components/Dashboard/Booking/Settings';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
     linkActiveClass: 'active',
-    routes: [{
+    routes: [
+        {
             path: '/dashboard',
             name: 'dashboard',
             component: dashboard
@@ -51,12 +63,37 @@ export default new Router({
         {
             path: '/dashboard/property/items',
             name: 'property',
-            component: widgets
+            component: Property
         },
         {
             path: '/dashboard/property/rooms',
             name: 'rooms',
-            component: widgets
+            component: Rooms
+        },
+        {
+            path: '/dashboard/property/assigned-room-types',
+            name: 'assigned-room-types',
+            component: AssignedRoomTypes
+        },
+        {
+            path: '/dashboard/booking/items',
+            name: 'booking-items',
+            component: BookingItems
+        },
+        {
+            path: '/dashboard/booking/mapping',
+            name: 'booking-mapping',
+            component: BookingMapping
+        },
+        {
+            path: '/dashboard/booking/data',
+            name: 'booking-data',
+            component: BookingData
+        },
+        {
+            path: '/dashboard//booking/settings',
+            name: 'booking-settings',
+            component: BookingSettings
         },
         {
             path: '/dashboard/categories',
@@ -71,12 +108,22 @@ export default new Router({
         {
             path: '/dashboard/website/footer',
             name: 'website-footer',
-            component: widgets
+            component: Footer
         },
         {
             path: '/dashboard/users',
             name: 'users',
-            component: widgets
+            component: Users
+        },
+        {
+            path: '/dashboard/data/features',
+            name: 'features',
+            component: Features
+        },
+        {
+            path: '/dashboard/data/room-types',
+            name: 'room-types',
+            component: RoomTypes
         },
         {
     path: '/404',
