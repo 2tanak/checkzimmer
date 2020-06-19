@@ -767,6 +767,7 @@ footer#main-footer ul.footer-menu li a:active {
     line-height: 100%;
     color: #333646;
     outline: none;
+    background: #ffffff;
 }
 .list-content .sample-block a.find-housing {
     min-width: 165px;
@@ -2601,7 +2602,7 @@ label.mobile-label {
         flex-direction: column-reverse;
         background: #F3F3F3;
         border-radius: 6px;
-        padding: 26px 16px 10px 16px;
+        padding: 26px 16px 10px 12px;
     }
     .inquiry-modal .select-block select {
         width: 100%;
