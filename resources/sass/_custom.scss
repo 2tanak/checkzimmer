@@ -761,13 +761,9 @@ footer#main-footer ul.footer-menu li a:active {
 .list-content .sample-block select {
     width: 100%;
     height: 54px;
-    border-top: 4px solid #e7e7e7;
-    border-bottom: 4px solid #e7e7e7;
-    border-right: 4px solid #e7e7e7;
-    border-left: 0;
-    padding: 0 16px;
+    border: 0;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 100%;
     color: #333646;
     outline: none;
@@ -2434,6 +2430,9 @@ label.mobile-label {
     .list-content .sample-block .distance-block.select-block .select-container {
         border-radius: 6px;
         border: 0;
+        display: flex;
+        flex-direction: column-reverse;
+        padding: 23px 13px 10px 12px;
     }
     .list-content .sample-block .input-container {
         border-radius: 6px;
@@ -2443,6 +2442,9 @@ label.mobile-label {
     .list-content .sample-block .number-personse-block.select-block .select-container {
         border-radius: 6px;
         border: 0;
+        display: flex;
+        flex-direction: column-reverse;
+        padding: 23px 13px 10px 12px;
     }
     .list-content .sample-block .number-personse-block.select-block .select2-selection__rendered {
         padding: 23px 13px 13px 15px;
@@ -2451,7 +2453,7 @@ label.mobile-label {
         padding: 23px 13px 13px 13px;
     }
     .list-content .select-container {
-       height: 54px;
+        height: 54px;
     }
     .select2-container--default .select2-selection--single {
         height: 54px;
@@ -2593,17 +2595,52 @@ label.mobile-label {
     .modal-block .or:after {
         max-width: 120px;
     }
-}
-@media (max-width: 420px) {
-    .property.not-map .property-card .distance .mobile-span {
-        display: inline;
+    .inquiry-modal .select-block {
+        height: 54px;
+        display: flex;
+        flex-direction: column-reverse;
+        background: #F3F3F3;
+        border-radius: 6px;
+        padding: 26px 16px 10px 16px;
     }
-    .property.not-map .property-card .distance .desctop-span {
-        display: none;
+    .inquiry-modal .select-block select {
+        width: 100%;
+        height: 32px;
+        border: 0;
+        background: #F3F3F3;
+        border-radius: 0 0 6px 6px;
+        outline: none;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 100%;
+        color: #333646;
+    }
+    .offer .offer-select {
+        display: flex !important;
+        flex-direction: column-reverse !important;
+        padding: 0 12px;
+        align-items: end;
+    }
+    .offer .offer-select select {
+        height: 28px;
+        border: 0;
+        width: 100%;
+        font-weight: 400;
+        font-size: 14px;
+        color: #333646;
+        outline: none;
     }
 }
+    @media (max-width: 420px) {
+        .property.not-map .property-card .distance .mobile-span {
+            display: inline;
+        }
+        .property.not-map .property-card .distance .desctop-span {
+            display: none;
+        }
+    }
 
-/*---single---*/
+    /*---single---*/
 
 .single-content {
     padding-top: 40px;

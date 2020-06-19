@@ -2,10 +2,6 @@ require('./bootstrap');
 
 jQuery(document).ready(function() {
 
-    jQuery('#distance-select').select2();
-
-    jQuery('#number-personse').select2();
-
     jQuery(function () {
         jQuery('[data-toggle="tooltip"]').tooltip()
     });
@@ -235,7 +231,16 @@ jQuery(document).ready(function() {
         jQuery('.sidebar-modal-block').removeClass('active');
     });
 
-    jQuery('#offer-select, #number-persons, #type, #offer-select2, #offer-select3').select2();
+    jQuery('#offer-select').select2();
+
+    jQuery(window).on('load', function() {
+        if (jQuery(window).width() <= 575) {
+            jQuery('#number-persons, #type, #offer-select3, #distance-select, #number-personse').select2('destroy');
+        } else {
+            jQuery('#number-persons, #type, #offer-select3, #distance-select, #number-personse').select2();
+        }
+    });
+
 
     jQuery('.mobile-card-button').click(function () {
         jQuery('.property-card').toggleClass('big');
