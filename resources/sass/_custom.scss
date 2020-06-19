@@ -3870,9 +3870,11 @@ label.mobile-label {
     position: relative;
     display: none;
 }
-.single-content .sidebar .address-map a.map-picture img {
-    height: 88px;
-    width: 102px;
+.single-content .sidebar .address-map a.map-picture svg.pin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .single-content .sidebar .address-map .map-container {
     position: relative;

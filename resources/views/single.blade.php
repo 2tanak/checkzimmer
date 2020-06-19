@@ -50,8 +50,34 @@
                             <div class="address-map">
                                 <div class="address">DKN Immobilien <span>Anja Klepzigolf</span> Kolonnadenstr. 1 04109 Leipzig</div>
                                 <div class="map-container">
-                                    <a class="map-picture" href="#object-description"><img src="/img/map-button.png" alt="alt"></a>
-                                    <a class="map-mobile-picture" href="#map-mobile-block"><img src="/img/map-button.png" alt="alt"></a>
+                                    <a class="map-picture" href="#object-description">
+                                        <svg width="102" height="88" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M96 0H6C2.7 0 0 2.7 0 6v76c0 3.3 2.7 6 6 6h90c3.3 0 6-2.7 6-6V6c0-3.3-2.7-6-6-6z" fill="#fff"/>
+                                            <path d="M0 6v3.9l48.5 53.6 53.3-58.9C101.2 2 98.8 0 96 0H6C2.7 0 0 2.7 0 6zM0 45.2L7 37l-7-7.8v16zM15.5 47L0 65.2V82c0 3.3 2.7 6 6 6h46.4L15.5 47z" fill="#E4EBF3"/>
+                                            <path d="M24 22L45 0H6c-.6 0-1.2.1-1.8.3L24 22zM16 57L0 74.8V82c0 3.3 2.7 6 6 6h38.2L16 57z" fill="#B5F5D2"/>
+                                            <path d="M54.5 69.5L70.8 88H96c3.3 0 6-2.7 6-6V15.3L54.5 69.5z" fill="#E4EBF3"/>
+                                            <path d="M102 55.2V29L90.5 43 102 55.2zM102 71.8v-4.4L84.5 49.5 67 69.5 82.9 88h5.2L102 71.8z" fill="#D4DEE8"/>
+                                            <rect x=".5" y=".5" width="101" height="87" rx="5.5" stroke="#E1E3E8"/>
+                                        </svg>
+                                        <svg class="pin" width="14" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <ellipse cx="7.001" cy="7.143" rx="4.2" ry="4.286" fill="#fff"/>
+                                            <path d="M.427 9.69c1.204 3.385 4.516 8.062 5.92 9.974a.81.81 0 001.305 0c1.405-1.912 4.717-6.59 5.921-9.974A7.346 7.346 0 0014 7.21C14 3.23 10.864 0 7 0S0 3.23 0 7.21c0 .878.15 1.705.427 2.48zm10.336-2.48c0 2.144-1.68 3.85-3.763 3.85-2.082 0-3.738-1.732-3.738-3.85 0-2.145 1.68-3.877 3.738-3.877 2.082.026 3.763 1.732 3.763 3.876z" fill="#6BB63F"/>
+                                        </svg>
+                                    </a>
+                                    <a class="map-picture map-mobile-picture" href="#map-mobile-block">
+                                        <svg width="102" height="88" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M96 0H6C2.7 0 0 2.7 0 6v76c0 3.3 2.7 6 6 6h90c3.3 0 6-2.7 6-6V6c0-3.3-2.7-6-6-6z" fill="#fff"/>
+                                            <path d="M0 6v3.9l48.5 53.6 53.3-58.9C101.2 2 98.8 0 96 0H6C2.7 0 0 2.7 0 6zM0 45.2L7 37l-7-7.8v16zM15.5 47L0 65.2V82c0 3.3 2.7 6 6 6h46.4L15.5 47z" fill="#E4EBF3"/>
+                                            <path d="M24 22L45 0H6c-.6 0-1.2.1-1.8.3L24 22zM16 57L0 74.8V82c0 3.3 2.7 6 6 6h38.2L16 57z" fill="#B5F5D2"/>
+                                            <path d="M54.5 69.5L70.8 88H96c3.3 0 6-2.7 6-6V15.3L54.5 69.5z" fill="#E4EBF3"/>
+                                            <path d="M102 55.2V29L90.5 43 102 55.2zM102 71.8v-4.4L84.5 49.5 67 69.5 82.9 88h5.2L102 71.8z" fill="#D4DEE8"/>
+                                            <rect x=".5" y=".5" width="101" height="87" rx="5.5" stroke="#E1E3E8"/>
+                                        </svg>
+                                        <svg class="pin" width="14" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <ellipse cx="7.001" cy="7.143" rx="4.2" ry="4.286" fill="#fff"/>
+                                            <path d="M.427 9.69c1.204 3.385 4.516 8.062 5.92 9.974a.81.81 0 001.305 0c1.405-1.912 4.717-6.59 5.921-9.974A7.346 7.346 0 0014 7.21C14 3.23 10.864 0 7 0S0 3.23 0 7.21c0 .878.15 1.705.427 2.48zm10.336-2.48c0 2.144-1.68 3.85-3.763 3.85-2.082 0-3.738-1.732-3.738-3.85 0-2.145 1.68-3.877 3.738-3.877 2.082.026 3.763 1.732 3.763 3.876z" fill="#6BB63F"/>
+                                        </svg>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -2843,7 +2869,20 @@
                     <div class="address-map">
                         <div class="address">DKN Immobilien <span>Anja Klepzigolf</span> Kolonnadenstr. 1 04109 Leipzig</div>
                         <div class="map-container">
-                            <a class="map-picture" href="#object-description"><img src="/img/map-button.png" alt="alt"></a>
+                            <a class="map-picture" href="#object-description">
+                                <svg width="102" height="88" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M96 0H6C2.7 0 0 2.7 0 6v76c0 3.3 2.7 6 6 6h90c3.3 0 6-2.7 6-6V6c0-3.3-2.7-6-6-6z" fill="#fff"/>
+                                    <path d="M0 6v3.9l48.5 53.6 53.3-58.9C101.2 2 98.8 0 96 0H6C2.7 0 0 2.7 0 6zM0 45.2L7 37l-7-7.8v16zM15.5 47L0 65.2V82c0 3.3 2.7 6 6 6h46.4L15.5 47z" fill="#E4EBF3"/>
+                                    <path d="M24 22L45 0H6c-.6 0-1.2.1-1.8.3L24 22zM16 57L0 74.8V82c0 3.3 2.7 6 6 6h38.2L16 57z" fill="#B5F5D2"/>
+                                    <path d="M54.5 69.5L70.8 88H96c3.3 0 6-2.7 6-6V15.3L54.5 69.5z" fill="#E4EBF3"/>
+                                    <path d="M102 55.2V29L90.5 43 102 55.2zM102 71.8v-4.4L84.5 49.5 67 69.5 82.9 88h5.2L102 71.8z" fill="#D4DEE8"/>
+                                    <rect x=".5" y=".5" width="101" height="87" rx="5.5" stroke="#E1E3E8"/>
+                                </svg>
+                                <svg class="pin" width="14" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <ellipse cx="7.001" cy="7.143" rx="4.2" ry="4.286" fill="#fff"/>
+                                    <path d="M.427 9.69c1.204 3.385 4.516 8.062 5.92 9.974a.81.81 0 001.305 0c1.405-1.912 4.717-6.59 5.921-9.974A7.346 7.346 0 0014 7.21C14 3.23 10.864 0 7 0S0 3.23 0 7.21c0 .878.15 1.705.427 2.48zm10.336-2.48c0 2.144-1.68 3.85-3.763 3.85-2.082 0-3.738-1.732-3.738-3.85 0-2.145 1.68-3.877 3.738-3.877 2.082.026 3.763 1.732 3.763 3.876z" fill="#6BB63F"/>
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </div>
