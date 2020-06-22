@@ -4588,7 +4588,7 @@ label.mobile-label {
     color: #333646;
     position: fixed;
 }
-.datepicker td, .datepicker th {
+.datepicker td.day {
     width: 32px;
     height: 32px;
 }
@@ -4600,7 +4600,7 @@ label.mobile-label {
     background: #f1f1f1 !important;
     border-radius: 50%;
 }
-.datepicker table tr td.active.active {
+.datepicker table tr td.active {
     background-color: #6BB63F !important;
     color: #ffffff;
     background-image: none;
@@ -6661,6 +6661,22 @@ label.mobile-label {
     .fixed-bar {
         padding: 14px 16px;
         height: 68px;
+    }
+    .datepicker table tr td.day.active {
+        position: relative;
+        background-color: transparent !important;
+    }
+    .datepicker table tr td.day.active:before {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        content: "";
+        background-color: #6BB63F;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        z-index: -1;
     }
 }
 @media (max-width: 420px) {
