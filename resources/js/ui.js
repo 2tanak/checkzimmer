@@ -200,6 +200,10 @@ jQuery(document).ready(function() {
             jQuery(parent).find('label').removeClass('active');
         }
     });
+    jQuery('.inquiry-modal .data-block input').focus(function () {
+        var parent = jQuery(this).closest('.data-block');
+        jQuery(parent).find('label').addClass('active');
+    });
 
     jQuery('.sidebar-bottom a').click(function (e) {
         e.preventDefault();
