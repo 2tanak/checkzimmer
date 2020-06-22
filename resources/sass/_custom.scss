@@ -6678,6 +6678,10 @@ label.mobile-label {
         height: 32px;
         z-index: -1;
     }
+    .datepicker table tr td.day.focused, .datepicker table tr td.day:hover {
+        background: transparent !important;
+        color: #333646;
+    }
 }
 @media (max-width: 420px) {
     .col-6 {
