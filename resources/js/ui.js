@@ -195,7 +195,7 @@ jQuery(document).ready(function() {
     });
     jQuery('.inquiry-modal .input-block-item input').blur(function () {
         var value = jQuery(this).val();
-        var parent = jQuery(this).closest('.inquiry-modal .input-block-item input');
+        var parent = jQuery(this).closest('.input-block-item');
         if (value === '') {
             jQuery(parent).find('label').removeClass('active');
         }

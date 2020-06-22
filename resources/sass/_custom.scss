@@ -2632,6 +2632,23 @@ label.mobile-label {
         outline: none;
         background: #ffffff;
     }
+    .datepicker.dropdown-menu {
+        left: 0 !important;
+        transform: none;
+        top: 0 !important;
+        width: 100%;
+        height: 100%;
+    }
+    .datepicker.dropdown-menu .datepicker-days,
+    .datepicker.dropdown-menu .datepicker-months,
+    .datepicker.dropdown-menu .datepicker-years,
+    .datepicker.dropdown-menu .datepicker-centuries,
+    .datepicker.dropdown-menu .datepicker-decades {
+        height: 100%;
+    }
+    .datepicker.dropdown-menu table.table-condensed {
+        height: 100%;
+    }
 }
     @media (max-width: 420px) {
         .property.not-map .property-card .distance .mobile-span {
