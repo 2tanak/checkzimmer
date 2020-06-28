@@ -4996,6 +4996,12 @@ label.mobile-label {
     background: #6BB63F !important;
     color: #ffffff;
 }
+button,
+[type=button],
+[type=reset],
+[type=submit] {
+    -webkit-appearance: inherit !important;
+}
 
 
 /*---Загрузчик на главной странице---*/
@@ -6682,6 +6688,10 @@ label.mobile-label {
         background: transparent !important;
         color: #333646;
     }
+    .single-content {
+        overflow-x: hidden;
+    }
+
 }
 @media (max-width: 420px) {
     .col-6 {
