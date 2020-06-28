@@ -4997,18 +4997,6 @@ label.mobile-label {
     background: #6BB63F !important;
     color: #ffffff;
 }
-button,
-[type=button],
-[type=reset],
-[type=submit] {
-    -webkit-appearance: inherit !important;
-}
-input[type="text"],
-input[type="mail"],
-input[type="tel"],
-textarea {
-    -webkit-appearance: inherit;
-}
 
 
 /*---Загрузчик на главной странице---*/
@@ -6698,7 +6686,18 @@ textarea {
     .single-content {
         overflow-x: hidden;
     }
-
+    button,
+    [type=button],
+    [type=reset],
+    [type=submit] {
+        -webkit-appearance: inherit !important;
+    }
+    input[type="text"],
+    input[type="mail"],
+    input[type="tel"],
+    textarea {
+        -webkit-appearance: inherit;
+    }
 }
 @media (max-width: 420px) {
     .col-6 {
