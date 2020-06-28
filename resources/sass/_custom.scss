@@ -4402,6 +4402,7 @@ label.mobile-label {
     background: #FFFFFF;
     border: 1px solid #C0C1C2;
     box-shadow: 0 0 0 4px rgba(243, 243, 243, 0.9);
+    -webkit-appearance: inherit;
 }
 .inquiry-modal .select-block label {
     font-weight: 400;
@@ -5001,6 +5002,12 @@ button,
 [type=reset],
 [type=submit] {
     -webkit-appearance: inherit !important;
+}
+input[type="text"],
+input[type="mail"],
+input[type="tel"],
+textarea {
+    -webkit-appearance: inherit;
 }
 
 
