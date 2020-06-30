@@ -359,6 +359,16 @@ jQuery(window).on('load', function() {
     if(jQuery(window).width() <= 991) {
         jQuery('.comfort .collapse').removeClass('show');
     };
+    if (jQuery(window).width() <= 680) {
+        jQuery('a.inquiry').click(function (e) {
+            e.preventDefault();
+            jQuery('body').addClass('overflow');
+        });
+        jQuery('.inquiry-modal .modal-close').click(function (e) {
+            e.preventDefault();
+            jQuery('body').removeClass('overflow');
+        });
+    };
 
     jQuery(window).scroll(function () {
         if (jQuery(this).scrollTop() > 500) {
