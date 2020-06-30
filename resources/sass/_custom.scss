@@ -763,7 +763,7 @@ footer#main-footer ul.footer-menu li a:active {
     height: 54px;
     border: 0;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 100%;
     color: #333646;
     outline: none;
@@ -2091,7 +2091,6 @@ label.mobile-label {
     }
     .list-content .sample-block input {
         padding: 23px 13px 13px 13px;
-        font-size: 15px;
     }
     .list-content .select2-container--default .select2-selection--single .select2-selection__rendered {
         font-size: 15px;
@@ -2603,6 +2602,14 @@ label.mobile-label {
         background: #F3F3F3;
         border-radius: 6px;
         padding: 26px 16px 10px 12px;
+        position: relative;
+    }
+    .inquiry-modal .select-block:before {
+        content: url("/../svg/i-arrow-dropdown-input.svg");
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 13px;
     }
     .inquiry-modal .select-block select {
         width: 100%;
@@ -2612,10 +2619,13 @@ label.mobile-label {
         border-radius: 0 0 6px 6px;
         outline: none;
         font-weight: 400;
-        font-size: 15px;
+        font-size: 16px;
         line-height: 100%;
         color: #333646;
+        padding-left: 5px;
+        -webkit-appearance: none;
     }
+
     .offer .offer-select {
         display: flex !important;
         flex-direction: column-reverse !important;
@@ -2648,6 +2658,20 @@ label.mobile-label {
     }
     .datepicker.dropdown-menu table.table-condensed {
         height: 100%;
+    }
+    .list-content .sample-block select {
+        -webkit-appearance: none;
+        padding-left: 5px;
+    }
+    .list-content .sample-block .select-container {
+        position: relative;
+    }
+    .list-content .sample-block .select-container:before {
+        content: url("/../svg/i-arrow-dropdown-input.svg");
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 13px;
     }
 }
     @media (max-width: 420px) {
@@ -4353,7 +4377,7 @@ label.mobile-label {
     background: #F3F3F3;
     border-radius: 6px;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 100%;
     color: #333646;
     padding: 26px 16px 10px 16px;
@@ -4460,7 +4484,7 @@ label.mobile-label {
     outline: none;
     padding: 19px 16px;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 100%;
     color: #333646;
 }
@@ -4638,7 +4662,7 @@ label.mobile-label {
     outline: none;
     padding: 26px 16px 13px 16px;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 100%;
     color: #333646;
 }
@@ -6365,6 +6389,9 @@ label.mobile-label {
     }
 }
 @media (max-width: 680px) {
+    body {
+        overflow-x: hidden;
+    }
     body.overflow {
         overflow: hidden;
     }
@@ -6376,7 +6403,10 @@ label.mobile-label {
         top: 0;
         left: 0;
         max-width: none;
-        padding: 0 16px 43px 16px;
+        padding: 0 16px;
+    }
+    .inquiry-modal form {
+        margin-bottom: 43px;
     }
     .inquiry-modal .modal-close {
         width: 31px;
