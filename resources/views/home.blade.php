@@ -68,6 +68,7 @@
                     <div style="position: relative;">
                         <div class="property-item">
                             <div class="property-card">
+                                <div class="property-card-container">
                                 <div class="property-card-slider">
                                     <div><img src="/img/property-picture.png" alt="Property picture"></div>
                                     <div><img src="/img/property-picture2.png" alt="Property picture"></div>
@@ -220,9 +221,11 @@
                                         </a>
                                     </div>
                                 </div>
+                                </div>
                             </div>
 
                             <div class="property-card">
+                                <div class="property-card-container">
                                 <div class="property-card-slider">
                                     <div><img src="/img/property-picture.png" alt="Property picture"></div>
                                     <div><img src="/img/property-picture2.png" alt="Property picture"></div>
@@ -372,9 +375,11 @@
                                         </a>
                                     </div>
                                 </div>
+                                </div>
                             </div>
 
                             <div class="property-card">
+                                <div class="property-card-container">
                                 <div class="property-card-slider">
                                     <div><img src="/img/property-picture.png" alt="Property picture"></div>
                                     <div><img src="/img/property-picture2.png" alt="Property picture"></div>
@@ -527,6 +532,7 @@
                                         </a>
                                     </div>
                                 </div>
+                            </div>
                             </div>
                         </div>
                         <div class="property-shadow"></div>
