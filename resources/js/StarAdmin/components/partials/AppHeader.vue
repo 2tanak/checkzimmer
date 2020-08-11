@@ -5,13 +5,13 @@
       <a class="navbar-brand brand-logo-mini" href="/"><img src="/img/head-logo.png" alt="logo"/></a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-center ml-auto ml-lg-0">
-      <b-navbar-nav class="header-links d-none d-md-flex">
+      <b-navbar-nav class="header-links d-none d-md-flex" v-if="$auth.ready() && $auth.user()">
         <b-nav-item href="#"><i class="mdi mdi-image-filter"></i>Gallery</b-nav-item>
         <b-nav-item href="#" active><i class="mdi mdi-email-outline"></i>Inbox</b-nav-item>
         <b-nav-item href="#"><i class="mdi mdi-calendar"></i>Calendar</b-nav-item>
       </b-navbar-nav>
       <!-- Right aligned nav items -->
-      <b-navbar-nav class="ml-auto">
+      <b-navbar-nav class="ml-auto" v-if="$auth.ready() && $auth.user()">
         <b-nav-item-dropdown right class="preview-list">
           <template slot="button-content">
             <div class="count-indicator">
@@ -108,10 +108,11 @@
             <img src="../../assets/images/faces/face4.jpg" alt="profile image"  class="img-xs rounded-circle">
           </template>
           <b-dropdown-item href="#" class="preview-item flex-wrap">Profile</b-dropdown-item>
-          <b-dropdown-item href="#" class="preview-item flex-wrap">Signout</b-dropdown-item>
+          <b-dropdown-item href="#" class="preview-item flex-wrap" @click.prevent="logout">Signout</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
-      <button class="navbar-toggler navbar-toggler-right align-self-center" type="button" @click="collapedMobileSidebar()">
+      <button v-if="$auth.ready() && $auth.user()"
+              class="navbar-toggler navbar-toggler-right align-self-center" type="button" @click="collapedMobileSidebar()">
         <span class="mdi mdi-menu"></span>
       </button>
     </div>
@@ -120,12 +121,18 @@
 
 <script lang="js">
 export default {
-  name: 'app-header',
-  methods: {
-    collapedMobileSidebar() {
-      document.querySelector('.sidebar').classList.toggle('active')
+    name: 'app-header',
+    methods: {
+        collapedMobileSidebar() {
+            document.querySelector('.sidebar').classList.toggle('active')
+        },
+        logout() {
+            this.$auth.logout({
+                makeRequest: true,
+                redirect: {name: 'login'},
+            })
+        }
     }
-  }
 }
 </script>
 

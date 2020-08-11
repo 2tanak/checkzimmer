@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <div id="application">
+        <Public/>
+    </div>
     <div class="list-content">
         <div class="container">
             <h1>Найди лучшее жилье для монтеров в Лейпциге!</h1>

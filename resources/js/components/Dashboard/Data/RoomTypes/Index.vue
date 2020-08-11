@@ -5,14 +5,11 @@
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Категория"  label-for="input-phone">
-                            <b-dropdown>
-                                <template v-slot:button-content>
-                                    Тип жилья
-                                </template>
-                                <b-dropdown-item href="#" :value="0">Не выбран</b-dropdown-item>
+                        <b-form-group label="Типы жилья"  label-for="input-phone">
+                            <b-select v-model="types">
+                                <b-select-option href="#" :value="0">Все типы</b-select-option>
                                 <b-dropdown-item v-for="rootType in rootTypes" href="#" :value="rootType.id">{{ rootType.name }}</b-dropdown-item>
-                            </b-dropdown>
+                            </b-select>
                         </b-form-group>
                     </div>
                 </div>
@@ -78,6 +75,7 @@
         components: { Forms },
         data() {
             return {
+                types: '',
                 loading: true,
                 room_types: [
                     {

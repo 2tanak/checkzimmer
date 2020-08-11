@@ -1,8 +1,48 @@
+import Vue from 'vue'
+import Public from './components/Public'
+
 require('./bootstrap');
+
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+import {store} from './store';
+import router from "./StarAdmin/router";
+
+Vue.config.productionTip = false;
+
+axios.defaults.baseURL = '/api';
+Vue.use(VueAxios, axios);
+
+Vue.router = router;
+
+import auth from '@websanova/vue-auth';
+import authBasic from '@websanova/vue-auth/dist/drivers/auth/bearer.min.js';
+import httpAxios from '@websanova/vue-auth/dist/drivers/http/axios.1.x.js';
+import routerVueRouter from '@websanova/vue-auth/dist/drivers/router/vue-router.2.x.esm.js';
+
+Vue.use(auth, {
+    auth: authBasic,
+    http: httpAxios,
+    router: routerVueRouter,
+    rolesKey: 'role',
+    authRedirect: { path: '/dashboard/login' }
+});
+
+window.Vue = require('vue');
 
 jQuery(window).on('load', function() {
     jQuery('.property-card-slider').css({'opacity': 1, 'transition-duration': '0.2s'})
 });
+
+const app = new Vue({
+    el: '#application',
+    router,
+    components: {
+        Public
+    },
+    store
+});
+
 
 jQuery(document).ready(function() {
 
@@ -98,6 +138,11 @@ jQuery(document).ready(function() {
         jQuery('.modal-login').removeClass('show');
         jQuery('.modal-forgot-password').addClass('show');
     });
+    jQuery('a.remember-login').click(function (e) {
+        e.preventDefault();
+        jQuery('.modal-forgot-password').removeClass('show');
+        jQuery('.modal-login').addClass('show');
+    });
 
     jQuery('a.forgot-password-link').click(function (e) {
         e.preventDefault();
@@ -107,15 +152,6 @@ jQuery(document).ready(function() {
 
     jQuery('.modal-close').click(function () {
         jQuery('.modal-overlay').removeClass('modal-show');
-    });
-
-    jQuery('.login-link').click(function (e) {
-        e.preventDefault();
-        var value = jQuery(this).val();
-        if (value === '') {
-            jQuery('input').addClass('error');
-            jQuery('.error-text').addClass('active')
-        }
     });
 
     jQuery('.fullscreen-button').click(function () {

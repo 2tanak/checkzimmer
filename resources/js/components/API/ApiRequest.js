@@ -9,25 +9,25 @@ export default (base) => class ApiRequest {
         console.log(base);
     }
     all() {
-        return client.get(`api/${base}`);
+        return client.get(`/api/${base}`);
     }
     get(id) {
-        return client.get(`api/${base}/${id}`);
+        return client.get(`/api/${base}/${id}`);
     }
     query(data) {
-        return client.post(`api/${base}/query`, data);
+        return client.post(`/api/${base}/query`, data);
     }
     update(id, data) {
-        return client.put(`api/${base}/${id}`, data);
+        return client.put(`/api/${base}/${id}`, data);
     }
     updateAll(data) {
-        return client.put(`api/${base}`, data);
+        return client.put(`/api/${base}`, data);
     }
     delete(id) {
-        return client.delete(`api/${base}/${id}`);
+        return client.delete(`/api/${base}/${id}`);
     }
     create(data) {
-        return client.post(`api/${base}`, data);
+        return client.post(`/api/${base}`, data);
     }
 };
 

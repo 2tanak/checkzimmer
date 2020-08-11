@@ -165,7 +165,7 @@
                         </svg>
                     </div>
                     <div class="title">Войти</div>
-                    <form class="modal-form">
+                    <form class="modal-form login">
                         <div class="text input-block">
                             <div class="input-block-item">
                                 <input id="mail-phone" type="text">
@@ -190,7 +190,7 @@
                         <img class="hover" src="/svg/i-facebook-cube-hover.svg" alt="Facebook Icon">
                         Войти через Facebook
                     </a>
-                    <div class="new">Новый пользователь? <a href="#">Регестрация</a></div>
+                    <div class="new">Новый пользователь? <a href="#">Регистрация</a></div>
                 </div>
             </div>
 
@@ -211,6 +211,7 @@
                             <div class="error-text">Вы не указали Email</div>
                         </div>
                         <a class="entry forgot-password-link" href="#">Сбросить пароль</a>
+                        <div class="new">Помните свой пароль? <a href="#" class="remember-login ">Войти</a></div>
                     </form>
                 </div>
             </div>

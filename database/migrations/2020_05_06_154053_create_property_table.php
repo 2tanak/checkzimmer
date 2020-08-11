@@ -21,7 +21,9 @@ class CreatePropertyTable extends Migration
             $table->unsignedInteger('views');
             $table->float('lat');
             $table->float('lng');
+            $table->string('name');
             $table->string('city');
+            $table->integer('zip');
             $table->string('address');
             $table->timestamps();
         });

@@ -23,7 +23,14 @@
                 <div class="card">
                     <div class="card-body">
                         <h4>Удобства</h4>
-                        <b-table striped hover :items="rootFeatures"></b-table>
+                        <b-card v-for="feature in features.root" :header="feature.id + ': ' + feature.name ">
+                            <b-list-group>
+                                <b-list-group-item v-for="child in rootedFeatures(feature.id)">
+                                    {{ child.id }}: {{ child.name }}
+                                </b-list-group-item>
+                            </b-list-group>
+                        </b-card>
+                        <!--<b-table responsive striped hover :items="rootFeatures"></b-table>-->
                     </div>
                 </div>
             </div>
@@ -56,7 +63,7 @@
         data() {
             return {
                 cities: { count: 0 },
-                features: [],
+                features: { root: [], rooted: [], children: []},
                 types: [],
                 fields: [ 'id', 'name', 'type' ],
                 loading: true
@@ -94,21 +101,13 @@
             },
             loadFeatures() {
                 features.create({});
+            },
+            rootedFeatures(parent) {
+                console.log(this.features.rooted[parent]);
+                return this.features.rooted[parent];
             }
         },
         computed: {
-            rootFeatures() {
-                let _rootFeatures = [];
-                for (let i in this.features) {
-                    _rootFeatures.push( {
-                            name: this.features[i].name,
-                            hotelFeatures: this.features[i].hotel_features.length,
-                            roomFeatures: this.features[i].room_features.length
-                        }
-                    )
-                }
-                return _rootFeatures;
-            }
         }
     }
 </script>

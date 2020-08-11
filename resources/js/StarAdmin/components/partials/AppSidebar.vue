@@ -1,5 +1,5 @@
 <template>
-  <section class="app-sidebar">
+  <section class="app-sidebar" v-if="$auth.ready() && $auth.user()">
     <nav class="sidebar sidebar-offcanvas" id="sidebar">
       <ul class="nav">
         <li class="nav-item nav-profile">

@@ -5,14 +5,11 @@
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Категория"  label-for="input-phone">
-                            <b-dropdown>
-                                <template v-slot:button-content>
-                                    Тип жилья
-                                </template>
-                                <b-dropdown-item href="#" :value="0">Не выбран</b-dropdown-item>
-                                <b-dropdown-item v-for="rootType in rootTypes" href="#" :value="rootType.id">{{ rootType.name }}</b-dropdown-item>
-                            </b-dropdown>
+                        <b-form-group label="Тип жилья"  label-for="input-phone">
+                            <b-select>
+                                <b-select-option href="#" :value="0">Не выбран</b-select-option>
+                                <b-select-option v-for="rootType in rootTypes" href="#" :value="rootType.id">{{ rootType.name }}</b-select-option>
+                            </b-select>
                         </b-form-group>
                     </div>
                 </div>
@@ -21,14 +18,11 @@
                 <div class="card">
                     <div class="card-body">
                         <b-form-group label="Администрирование"  label-for="input-phone">
-                            <b-dropdown>
-                                <template v-slot:button-content>
-                                    Пользователь
-                                </template>
-                                <b-dropdown-item href="#" :value="0">Админ</b-dropdown-item>
-                                <b-dropdown-item href="#" :value="0">Все пользователи</b-dropdown-item>
-                                <b-dropdown-item v-for="rootType in rootTypes" href="#" :value="rootType.id">{{ rootType.name }}</b-dropdown-item>
-                            </b-dropdown>
+                            <b-select v-model="role">
+                                <b-select-option href="#" :value="0" selected>Админ</b-select-option>
+                                <b-select-option href="#" :value="-1">Все пользователи</b-select-option>
+                                <b-select-option v-for="rootType in rootTypes" href="#" :value="rootType.id">{{ rootType.name }}</b-select-option>
+                            </b-select>
                         </b-form-group>
                     </div>
                 </div>
@@ -39,9 +33,12 @@
                 <div class="card">
                     <div class="card-body">
                         <b-form-group label="Объекты недвижимости"  label-for="input-phone">
-                            <b-table striped hover responsive :items="property" >
+                            <b-table striped hover responsive :items="property" :fields="fields">
                                 <template v-slot:cell(status)="data">
                                     <b-badge :variant="badge(data.item)">{{ data.item.status }}</b-badge>
+                                </template>
+                                <template v-slot:cell(name)="data">
+                                    <router-link :to="{ name: 'property-single',  params: { item: data.item.id } }">{{ data.item.name }}</router-link>
                                 </template>
                                 <template v-slot:table-busy>
                                     <div class="text-center text-danger my-2">
@@ -65,10 +62,16 @@
 </template>
 
 <script>
+    import ApiRequest from '../../../API/ApiRequest';
+    let PropertyRequest = ApiRequest('property')
+    let properties = new PropertyRequest;
+
     export default {
         name: "Index",
         data() {
             return {
+                role: 0,
+                fields: ['id', 'user', 'type', 'hotelType', 'status', 'views', 'name'],
                 property: [
                     {
                         id: 1,
@@ -124,6 +127,12 @@
                 ],
 
             }
+        },
+        created() {
+            properties.all()
+                .then(resp => {
+                    this.property = resp.data;
+                })
         },
         methods: {
             badge(item) {

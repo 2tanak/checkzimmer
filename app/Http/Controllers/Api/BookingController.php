@@ -6,6 +6,7 @@ use App\BookingFeatures;
 use App\BookingType;
 use App\Option;
 use App\BookingCity;
+use App\Property;
 use App\RoomType;
 use GuzzleHttp;
 use App\Http\Controllers\Controller;
@@ -129,9 +130,24 @@ class BookingController extends Controller {
         }
         BookingType::insert($typesUpdate);
     }
+    function filterFeatures(&$features, $parent) {
+        $result = [];
+        foreach ($features as $key => $feature) {
+            if ($feature->parent == $parent) {
+                $result[] = $feature;
+                unset($features[$key]);
+            }
+        }
+        return $result;
+    }
     function getFeatures() {
-        $features = BookingFeatures::params(['parent' => 0]);
-        return response()->json($features);
+        $features = BookingFeatures::ind();
+        $rootFeatures = $this->filterFeatures($features, 0);
+        $rootedFeatures = [];
+        foreach ($rootFeatures as $feature) {
+            $rootedFeatures[$feature->id] = $this->filterFeatures($features, $feature->id);
+        }
+        return response()->json(['root' => $rootFeatures, 'rooted' => $rootedFeatures, 'children' => $features]);
     }
     function getRoomTypes() {
         $types = BookingType::params(['type' => 'hotel']);
@@ -147,6 +163,64 @@ class BookingController extends Controller {
         $type = $fields['type']; //BookingType::where('native_id', $fields['type'])->first();
         $json = $this->getApiData('hotels?city_ids='.$city->native_id.'&hotel_type_ids='.$type.'&rows=100'.
             '&extras=payment_details,key_collection_info,room_info,room_photos,hotel_description_formatted,room_facilities,hotel_photos,room_description,hotel_policies,hotel_info,hotel_facilities,hotel_description');
+        //dd($json);
+        $ids = [];
+        foreach ($json['result'] as $item) {
+            $ids[] = $item['hotel_id'];
+        }
+        $natives = Option::where('type', 'property')->where('key', 'native_id')->whereIn('value', $ids)->get()->pluck('parent', 'value');
+
+        foreach ($json['result'] as $i => $item) {
+            $imported = $natives[$item['hotel_id']] ?? null;
+            $json['result'][$i]['imported'] = $imported;
+        }
         return response()->json($json['result']);
+    }
+    function saveHotels(Request $request) {
+        $hotels = $request->all();
+        foreach($hotels as $hotel) {
+            $hotel_data = [
+                'user_id' => 1,
+                'type' => 'affiliate',
+                'status' => 'approved',
+                'views' => 0,
+                'lat' => $hotel['hotel_data']['location']['latitude'],
+                'lng' =>  $hotel['hotel_data']['location']['longitude'],
+                'name' => $hotel['hotel_data']['name'],
+                'city' => $hotel['hotel_data']['city'],
+                'zip' => $hotel['hotel_data']['zip'],
+                'address' => $hotel['hotel_data']['address']
+            ];
+            $new_hotel = new Property;
+            $new_hotel->fill($hotel_data);
+            $new_hotel->save();
+
+            $option = new Option;
+            $option->fill([
+                'parent' => $new_hotel->id,
+                'type' => 'property',
+                'key' => 'languages',
+                'value' => implode(',', $hotel['hotel_data']['spoken_languages'])
+            ]);
+            $option->save();
+
+            $option = new Option;
+            $option->fill([
+                'parent' => $new_hotel->id,
+                'type' => 'property',
+                'key' => 'photos',
+                'value' => json_encode($hotel['hotel_data']['hotel_photos'])
+            ]);
+            $option->save();
+
+            $option = new Option;
+            $option->fill([
+                'parent' => $new_hotel->id,
+                'type' => 'property',
+                'key' => 'native_id',
+                'value' => json_encode($hotel['hotel_id'])
+            ]);
+            $option->save();
+        }
     }
 }
