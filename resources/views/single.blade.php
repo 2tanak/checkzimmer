@@ -2,6 +2,8 @@
 
 @section('content')
 
+    @include('css.loader-single')
+
     <div class="container single-container">
         <div class="single-content">
             <div class="left-part">
