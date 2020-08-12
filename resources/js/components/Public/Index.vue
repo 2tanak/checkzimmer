@@ -44,9 +44,7 @@
                             <div class="result">Найдено 1240 вариантов жилья</div>
                         </div>
                         <div class="sorting">
-                            <a href="#">Сортировка по умолчанию
-                                <img src="/svg/i-arrow-dropdown-input.svg" alt="arrow">
-                            </a>
+                            <a href="#">Сортировка по умолчанию</a>
                             <div class="filter-block">
                                 <ul>
                                     <li class="check">Сортировка по умолчанию</li>

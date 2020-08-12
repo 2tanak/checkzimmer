@@ -36,7 +36,7 @@
                             </div>
                         </label>
                     </div>
-                    <a class="head-logo" href="{{ url('/list') }}">
+                    <a class="head-logo" href="{{ url('/') }}">
                         <img src="/img/head-logo.png" alt="Logo" class="head-logo-img">
                         Immobilien.de
                     </a>

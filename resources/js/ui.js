@@ -54,20 +54,6 @@ jQuery(document).ready(function() {
         jQuery('[data-toggle="tooltip"]').tooltip()
     });
 
-    jQuery('.property-card-slider').slick({
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        dots: true,
-        responsive: [
-            {
-                breakpoint: 1041,
-                settings: "unslick"
-            }
-        ]
-    });
-
     jQuery('a.collapse-circle').click(function(e) {
         e.preventDefault();
         var parent = jQuery(this).closest('.property-card');
@@ -83,6 +69,21 @@ jQuery(document).ready(function() {
     jQuery('.sorting a').click(function(e) {
         e.preventDefault();
         jQuery('.sorting').toggleClass('up');
+    });
+
+    jQuery('.filter-block li').click(function () {
+        var paragraph = jQuery(this).text();
+        jQuery('.filter-block li').removeClass('check');
+        jQuery(this).addClass('check');
+        jQuery('.sorting a').text(paragraph);
+        jQuery('.sorting').removeClass('up');
+    });
+
+    jQuery(document).mouseup(function (e){
+        var modal = jQuery(".filter-block");
+        if (!modal.is(e.target) && modal.has(e.target).length === 0){
+            jQuery('.sorting').removeClass('up');
+        }
     });
 
     jQuery(".left-block a").click(function(e) {
@@ -417,7 +418,7 @@ jQuery(window).on('load', function() {
     };
 
     jQuery(window).scroll(function () {
-        if (jQuery(this).scrollTop() > 500) {
+        if (jQuery(this).scrollTop() > 300) {
             jQuery('.scroll-top').fadeIn();
         } else {
             jQuery('.scroll-top').fadeOut();
@@ -454,5 +455,21 @@ jQuery(window).scroll( function() {
     else
     {
         jQuery(".fixed-bar").removeClass('active');
+    }
+});
+
+jQuery(window).on("load resize", function(){
+    var width = jQuery(document).width();
+
+    if (width <= 1040) {
+        jQuery('.property-card-slider').slick('unslick');
+    } else {
+        jQuery('.property-card-slider').not('.slick-initialized').slick({
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            dots: true
+        });
     }
 });
