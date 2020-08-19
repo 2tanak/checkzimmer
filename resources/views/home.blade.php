@@ -62,7 +62,7 @@
 
             <div class="property not-map">
                 <div class="container">
-                    <div style="position: relative;">
+                    <div class="shadow-item" style="position: relative;">
                         <div class="property-item">
                             <div class="property-card">
                                 <div class="property-card-slider">
@@ -533,13 +533,214 @@
                             <script>
                                 var map;
                                 function initMap() {
-                                    map = new google.maps.Map(document.getElementById('map'), {
-                                        center: {lat: -34.397, lng: 150.644},
-                                        zoom: 8
+                                    var mapCanvas = document.getElementById("map");
+                                    var myCenter = new google.maps.LatLng(51.337542, 12.367605);
+                                    var mapOptions = {
+                                        center: myCenter,
+                                        zoom: 10,
+                                        disableDefaultUI: true,
+                                        zoomControl: true,
+                                        zoomControlOptions: {
+                                            style: google.maps.ZoomControlStyle.DEFAULT,
+                                            position: google.maps.ControlPosition.TOP_RIGHT
+                                        },
+                                        mapTypeId: google.maps.MapTypeId.DESCTOPE
+                                    };
+                                    var images = '/img/point-img.png';
+                                    var marker = new google.maps.Marker ({
+                                        position: myCenter,
+                                        map: mapCanvas,
+                                        icon: images
                                     });
+                                    var map = new google.maps.Map(mapCanvas ,mapOptions);
+                                    var contentString = '<div id="content">'+
+                                        '<span>от</span>'+
+                                        '<span>&nbsp;</span>'+
+                                        '<span class="banknote">€</span>'+
+                                        '<span>&nbsp;</span>'+
+                                        '<span class="price">50</span>'+
+                                        '</div>';
+                                    var infowindow = new google.maps.InfoWindow({
+                                        content: contentString
+                                    });
+                                    infowindow.open(map, marker);
+                                    marker.setMap(map);
+                                    var styles = [
+                                        {
+                                            "featureType": "administrative.province",
+                                            "elementType": "labels.text.fill",
+                                            "stylers": [
+                                                {
+                                                    "visibility": "off"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "featureType": "administrative.locality",
+                                            "elementType": "labels.text.fill",
+                                            "stylers": [
+                                                {
+                                                    "color": "#a8aeb6"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "featureType": "administrative.neighborhood",
+                                            "elementType": "labels.text.fill",
+                                            "stylers": [
+                                                {
+                                                    "color": "#a8aeb6"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "featureType": "administrative.land_parcel",
+                                            "elementType": "labels.text.fill",
+                                            "stylers": [
+                                                {
+                                                    "color": "#a8aeb6"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "featureType": "poi.attraction",
+                                            "elementType": "all",
+                                            "stylers": [
+                                                {
+                                                    "visibility": "off"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "featureType": "poi.business",
+                                            "elementType": "all",
+                                            "stylers": [
+                                                {
+                                                    "visibility": "off"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "featureType": "poi.government",
+                                            "elementType": "all",
+                                            "stylers": [
+                                                {
+                                                    "visibility": "off"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "featureType": "poi.medical",
+                                            "elementType": "all",
+                                            "stylers": [
+                                                {
+                                                    "visibility": "off"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "featureType": "poi.park",
+                                            "elementType": "geometry.fill",
+                                            "stylers": [
+                                                {
+                                                    "color": "#c2e5a7"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "featureType": "poi.place_of_worship",
+                                            "elementType": "all",
+                                            "stylers": [
+                                                {
+                                                    "visibility": "off"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "featureType": "poi.school",
+                                            "elementType": "all",
+                                            "stylers": [
+                                                {
+                                                    "visibility": "off"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "featureType": "poi.sports_complex",
+                                            "elementType": "all",
+                                            "stylers": [
+                                                {
+                                                    "visibility": "off"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "featureType": "road",
+                                            "elementType": "labels.text.fill",
+                                            "stylers": [
+                                                {
+                                                    "color": "#a8aeb6"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "featureType": "road.highway",
+                                            "elementType": "geometry.fill",
+                                            "stylers": [
+                                                {
+                                                    "color": "#e1e4e6"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "featureType": "road.highway",
+                                            "elementType": "geometry.stroke",
+                                            "stylers": [
+                                                {
+                                                    "color": "#c4cfd6"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "featureType": "road.highway",
+                                            "elementType": "labels.icon",
+                                            "stylers": [
+                                                {
+                                                    "visibility": "off"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "featureType": "transit.station.airport",
+                                            "elementType": "all",
+                                            "stylers": [
+                                                {
+                                                    "visibility": "off"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "featureType": "transit.station.bus",
+                                            "elementType": "all",
+                                            "stylers": [
+                                                {
+                                                    "visibility": "off"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "featureType": "transit.station.rail",
+                                            "elementType": "all",
+                                            "stylers": [
+                                                {
+                                                    "visibility": "off"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                    map.setOptions({styles: styles});
                                 }
                             </script>
-                            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChFeaunpThR-Lo4t-SMP3n7s-fDBs67hU&callback=initMap" async defer></script>
                             <div class="fullscreen-button"><img src="/svg/i-fullscrean.svg" alt="Full Screen Map"></div>
                             <div class="close-button"><img src="/svg/i-close-burger.svg" alt="Full Screen Map"></div>
 
@@ -782,6 +983,7 @@
 
         </div>
 
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChFeaunpThR-Lo4t-SMP3n7s-fDBs67hU&callback=initMap" async defer></script>
 
     </div>
 

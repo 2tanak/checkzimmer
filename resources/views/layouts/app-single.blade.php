@@ -145,14 +145,14 @@
                     <label for="telephone">Номер телефона*</label>
                 </div>
                 <div class="data-block">
-                    <input id="arrival-date" data-provide="datepicker">
+                    <input id="arrival-date" data-provide="datepicker" readonly>
                     <label for="arrival-date">Дата заезда</label>
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M13 0H14V2H16C16.5523 2 17 2.44772 17 3V6V7V17C17 17.5523 16.5523 18 16 18H2C1.44772 18 1 17.5523 1 17V7V6V3C1 2.44772 1.44772 2 2 2H4V0H5V2H13V0ZM5 3H4H2V6H16V3H14H13H5ZM16 17H2V7H16V17ZM10 12H14V13H10V12ZM14 10H10V11H14V10ZM4 12H8V13H4V12ZM8 10H4V11H8V10Z" fill="#7A8793"/>
                     </svg>
                 </div>
                 <div class="data-block">
-                    <input id="date-departure" data-provide="datepicker">
+                    <input id="date-departure" data-provide="datepicker" readonly>
                     <label for="date-departure">Дата выезда</label>
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M13 0H14V2H16C16.5523 2 17 2.44772 17 3V6V7V17C17 17.5523 16.5523 18 16 18H2C1.44772 18 1 17.5523 1 17V7V6V3C1 2.44772 1.44772 2 2 2H4V0H5V2H13V0ZM5 3H4H2V6H16V3H14H13H5ZM16 17H2V7H16V17ZM10 12H14V13H10V12ZM14 10H10V11H14V10ZM4 12H8V13H4V12ZM8 10H4V11H8V10Z" fill="#7A8793"/>
@@ -245,7 +245,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" defer></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        jQuery('#arrival-date, #date-departure').datepicker();
+        jQuery('#arrival-date, #date-departure').datepicker({
+            autoclose: true
+        });
     });
 </script>
 

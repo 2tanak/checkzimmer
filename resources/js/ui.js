@@ -2,10 +2,6 @@ require('./bootstrap');
 
 jQuery(document).ready(function() {
 
-    jQuery('#distance-select').select2();
-
-    jQuery('#number-personse').select2();
-
     jQuery(function () {
         jQuery('[data-toggle="tooltip"]').tooltip()
     });
@@ -64,19 +60,6 @@ jQuery(document).ready(function() {
 
     jQuery('.mobile-button label').click(function () {
         jQuery('.mobile-menu').toggleClass('active')
-    });
-
-    jQuery('.modal-block input, .input-block-item input, .data-block input').focus(function () {
-        var parent = jQuery(this).closest('.input-block, .input-block-item, .data-block');
-        jQuery(parent).find('label').addClass('active');
-    });
-
-    jQuery('.modal-block input, .input-block-item input, .data-block input').blur(function () {
-        var value = jQuery(this).val();
-        var parent = jQuery(this).closest('.input-block, .input-block-item, .data-block');
-        if (value === '') {
-            jQuery('label').removeClass('active');
-        }
     });
 
     jQuery('#password').on('input', function () {
@@ -214,18 +197,24 @@ jQuery(document).ready(function() {
         var value = jQuery(this).val();
         var parent = jQuery(this).closest('.input-block-item');
         if (value === '') {
-            jQuery('label').removeClass('active');
+            jQuery(parent).find('label').removeClass('active');
         }
     });
-
-    jQuery('a.teilen').click(function (e) {
-        e.preventDefault();
-        jQuery('.share-block, .modal-share-block.modal-share-block').addClass('active');
+    jQuery('.inquiry-modal .data-block input').focus(function () {
+        var parent = jQuery(this).closest('.data-block');
+        jQuery(parent).find('label').addClass('active');
     });
 
-    jQuery('a.melden').click(function (e) {
+    jQuery('.sidebar-bottom a').click(function (e) {
         e.preventDefault();
-        jQuery('.offer, .modal-offer-block.modal-offer-block').addClass('active');
+        var parent = jQuery(this).closest('.sidebar-bottom-block');
+        jQuery('.sidebar-modal-block').removeClass('active');
+        jQuery(parent).find('.sidebar-modal-block').addClass('active');
+    });
+
+    jQuery('a.drucken').click(function (e) {
+        e.preventDefault();
+        jQuery('.sidebar-modal-block').removeClass('active');
     });
 
     jQuery('.number-phone a').click(function (e) {
@@ -246,7 +235,16 @@ jQuery(document).ready(function() {
         jQuery('.sidebar-modal-block').removeClass('active');
     });
 
-    jQuery('#offer-select, #number-persons, #type, #offer-select2').select2();
+    jQuery('#offer-select').select2();
+
+    jQuery(window).on('load', function() {
+        if (jQuery(window).width() <= 575) {
+            jQuery('#number-persons, #type, #offer-select3, #distance-select, #number-personse').select2('destroy');
+        } else {
+            jQuery('#number-persons, #type, #offer-select3, #distance-select, #number-personse').select2();
+        }
+    });
+
 
     jQuery('.mobile-card-button').click(function () {
         jQuery('.property-card').toggleClass('big');
@@ -254,19 +252,8 @@ jQuery(document).ready(function() {
     });
 
     jQuery('a.inquiry').click(function (e) {
+        e.preventDefault();
         jQuery('.inquiry-modal-overlay').addClass('modal-show');
-    });
-
-    jQuery('.inquiry-modal .data-block input').focus(function () {
-        var parent = jQuery(this).closest('.data-block');
-        jQuery(parent).find('svg').addClass('color');
-    });
-    jQuery('.inquiry-modal .data-block input').blur(function () {
-        var value = jQuery(this).val();
-        var parent = jQuery(this).closest('.input-block-item');
-        if (value === '') {
-            jQuery('svg').removeClass('color');
-        }
     });
 
     jQuery('.big-slider').slick({
@@ -310,13 +297,6 @@ jQuery(document).ready(function() {
         dots: true
     });
 
-    /*jQuery('a.map-picture').on('click', function(e) {
-        jQuery('.tab-pane').removeClass('active show');
-        jQuery('a.nav-link').removeClass('active');
-        jQuery('.map-content').addClass('active show');
-        jQuery('.map-active a').addClass('active');
-    });*/
-
     jQuery('a.map-picture').bind("click", function(e){
         e.preventDefault();
         var anchor = jQuery(this);
@@ -344,10 +324,10 @@ jQuery(document).ready(function() {
     });
 
     jQuery(window).scroll(function () {
-        if(jQuery(this).scrollTop() > 68) {
-            jQuery('.single-content .sidebar.desctop-sidebar').addClass('scroll');
+        if(jQuery(this).scrollTop() > 108) {
+            jQuery('.single-content .right-part-item').addClass('scroll');
         } else {
-            jQuery('.single-content .sidebar.desctop-sidebar').removeClass('scroll');
+            jQuery('.single-content .right-part-item').removeClass('scroll');
         }
     });
 
@@ -379,6 +359,16 @@ jQuery(window).on('load', function() {
     if(jQuery(window).width() <= 991) {
         jQuery('.comfort .collapse').removeClass('show');
     };
+    if (jQuery(window).width() <= 680) {
+        jQuery('a.inquiry').click(function (e) {
+            e.preventDefault();
+            jQuery('body').addClass('overflow');
+        });
+        jQuery('.inquiry-modal .modal-close').click(function (e) {
+            e.preventDefault();
+            jQuery('body').removeClass('overflow');
+        });
+    };
 
     jQuery(window).scroll(function () {
         if (jQuery(this).scrollTop() > 500) {
@@ -388,6 +378,7 @@ jQuery(window).on('load', function() {
         }
     });
 
+
     jQuery('.scroll-top').click(function () {
         jQuery('html, body').animate({
             scrollTop: 0
@@ -395,17 +386,6 @@ jQuery(window).on('load', function() {
     });
 
 });
-
-/*jQuery(window).scroll( function() {
-    if (jQuery(window).scrollTop() > 300)
-    {
-        jQuery(".fixed-bar").addClass('active');
-    }
-    else
-    {
-        jQuery(".fixed-bar").removeClass('active');
-    }
-});*/
 
 jQuery(window).scroll( function() {
     if (jQuery(window).scrollTop() > 300 && jQuery(window).width() <= 991 && jQuery(window).width() >= 650)
