@@ -6,12 +6,10 @@
                 <div class="card">
                     <div class="card-body">
                         <b-form-group label="Категория"  label-for="input-phone">
-                            <b-dropdown>
-                                <template v-slot:button-content>
-                                    Select category
-                                </template>
-                                <b-dropdown-item v-for="category in categories" href="#" :value="category.id">{{ category.name }}</b-dropdown-item>
-                            </b-dropdown>
+                            <b-select v-model="cats">
+                                <b-select-option value="">Все категории</b-select-option>
+                                <b-select-option v-for="category in catList" href="#" :value="category">{{ category }}</b-select-option>
+                            </b-select>
                         </b-form-group>
                     </div>
                 </div>
@@ -31,12 +29,18 @@
                 <div class="card">
                     <div class="card-body">
                         <b-form-group label="Текст под заголовком"  label-for="input-phone">
-                            <b-table striped hover :busy="loading" :items="features" :fields="fields">
+                            <b-table striped hover :busy="loading" :items="featureList" :fields="fields">
                                 <template v-slot:cell(feature_category)="data">
                                     {{ data.item.feature_category.name }}
                                 </template>
                                 <template v-slot:cell(picture)="data">
                                     <img :src="data.item.picture">
+                                </template>
+                                <template v-slot:cell(edit)="data">
+                                    <a href="" @click.prevent="">&#9998;</a>
+                                </template>
+                                <template v-slot:cell(delete)="data">
+                                    <a href="" @click.prevent="">&times;</a>
                                 </template>
                                 <template v-slot:table-busy>
                                     <div class="text-center text-danger my-2">
@@ -77,6 +81,7 @@
 
         data() {
             return {
+                cats: '',
                 loading: true,
                 categories: [
                     {
@@ -114,7 +119,7 @@
                 data: featuresForm
             }
         },
-        mounted() {
+        created() {
             features.all()
                 .then(resp => {
                     this.features = resp.data;
@@ -129,6 +134,26 @@
                     }
                 }
                 return {};
+            }
+        },
+        computed: {
+            catList() {
+                let cats = []
+                this.features.forEach( item => {
+                    if (item.feature_category && cats.indexOf( item.feature_category.name ) === -1 ) {
+                        cats.push(item.feature_category.name);
+                    }
+                });
+                return cats;
+            },
+            featureList() {
+                let featList = [];
+                if (this.cats) {
+                    featList = this.features.filter( item => item.feature_category && item.feature_category.name == this. cats);
+                } else {
+                    featList = this.features;
+                }
+                return featList;
             }
         }
     }

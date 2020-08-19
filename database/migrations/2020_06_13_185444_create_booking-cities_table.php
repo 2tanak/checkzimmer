@@ -17,6 +17,7 @@ class CreateBookingCitiesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('native_id');
+            $table->integer('hotels_number');
             $table->timestamps();
         });
     }
