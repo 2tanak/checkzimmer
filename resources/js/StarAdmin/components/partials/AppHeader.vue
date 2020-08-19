@@ -5,14 +5,14 @@
       <a class="navbar-brand brand-logo-mini" href="/"><img src="/img/head-logo.png" alt="logo"/></a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-center ml-auto ml-lg-0">
-      <b-navbar-nav class="header-links d-none d-md-flex" v-if="$auth.ready() && $auth.user()">
+      <!--<b-navbar-nav class="header-links d-none d-md-flex" v-if="$auth.ready() && $auth.user()">
         <b-nav-item href="#"><i class="mdi mdi-image-filter"></i>Gallery</b-nav-item>
         <b-nav-item href="#" active><i class="mdi mdi-email-outline"></i>Inbox</b-nav-item>
         <b-nav-item href="#"><i class="mdi mdi-calendar"></i>Calendar</b-nav-item>
-      </b-navbar-nav>
+      </b-navbar-nav>-->
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto" v-if="$auth.ready() && $auth.user()">
-        <b-nav-item-dropdown right class="preview-list">
+        <!--<b-nav-item-dropdown right class="preview-list">
           <template slot="button-content">
             <div class="count-indicator">
               <i class="icon mdi mdi-email-variant"></i>
@@ -63,8 +63,8 @@
               </p>
             </div>
           </b-dropdown-item>
-        </b-nav-item-dropdown>
-        <b-nav-item-dropdown right class="preview-list">
+        </b-nav-item-dropdown>-->
+        <!--<b-nav-item-dropdown right class="preview-list">
           <template slot="button-content">
             <div class="count-indicator">
               <i class="icon mdi mdi-bell-outline"></i>
@@ -102,12 +102,12 @@
               <p class="font-weight-light small-text"> The meeting is cancelled </p>
             </div>
           </b-dropdown-item>
-        </b-nav-item-dropdown>
+        </b-nav-item-dropdown>-->
         <b-nav-item-dropdown right class="preview-list">
           <template slot="button-content">
-            <img src="../../assets/images/faces/face4.jpg" alt="profile image"  class="img-xs rounded-circle">
+              <i class="fa fa-user-circle text-white profile-pic"></i>
           </template>
-          <b-dropdown-item href="#" class="preview-item flex-wrap">Profile</b-dropdown-item>
+          <!--<b-dropdown-item href="#" class="preview-item flex-wrap">Profile</b-dropdown-item>-->
           <b-dropdown-item href="#" class="preview-item flex-wrap" @click.prevent="logout">Signout</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
@@ -136,7 +136,11 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .app-header {
 }
+.profile-pic {
+    font-size: 24px;
+}
+
 </style>

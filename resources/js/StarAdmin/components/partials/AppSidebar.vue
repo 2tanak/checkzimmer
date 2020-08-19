@@ -4,10 +4,12 @@
       <ul class="nav">
         <li class="nav-item nav-profile">
           <div class="nav-link">
-            <div class="profile-image"> <img src="../../assets/images/faces/face4.jpg" alt="image"/> <span class="online-status online"></span> </div>
+            <div class="profile-image">
+                <i class="fa fa-user-circle text-info userpic"></i>
+            </div>
             <div class="profile-name">
-              <p class="name">Richard V.Welsh</p>
-              <p class="designation">Manager</p>
+              <p class="name">{{ name }}</p>
+              <p class="designation">{{ role }}</p>
               <div class="badge badge-teal mx-auto mt-3">Online</div>
             </div>
           </div>
@@ -86,12 +88,33 @@
 
 <script lang="js">
 export default {
-  name: 'app-sidebar'
+    name: 'app-sidebar',
+    data() {
+        return {
+            name: '',
+            role: ''
+        }
+    },
+    mounted() {
+        this.$auth
+            .load()
+            .then(() => {
+                this.$auth.fetch()
+                    .then( user => {
+                        this.name = user.data.name;
+                        this.role = user.data.role;
+                    })
+            });
+    },
+    computed: {
+    }
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .app-sidebar {
-
+}
+.userpic {
+    font-size: 76px!important;
 }
 </style>

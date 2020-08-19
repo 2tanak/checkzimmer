@@ -1,4 +1,10 @@
 export default {
+    category: {
+        label: 'Категория',
+        placeholder: 'Please enter feature category',
+        type: 'select',
+        options: []
+    },
     name: {
         label: 'Name',
         placeholder: 'Please enter feature name',
@@ -9,9 +15,4 @@ export default {
         placeholder: 'Please enter feature picture',
         type: 'file',
     },
-    feature_category: {
-        label: 'Категория',
-        placeholder: 'Please enter feature category',
-        type: 'text',
-    }
 }

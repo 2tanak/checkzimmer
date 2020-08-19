@@ -10,4 +10,7 @@ class PropertyController extends Controller
     {
         return response()->json(Property::ind());
     }
+    function show($id) {
+        return response()->json(Property::findOrFail($id));
+    }
 }
