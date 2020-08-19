@@ -59,7 +59,7 @@
 
                 <div class="property not-map">
                     <div class="container">
-                        <div style="position: relative;">
+                        <div v-if="!loading" style="position: relative;">
                             <div class="property-item">
                                 <div class="property-card">
                                     <div class="property-card-container">
@@ -700,7 +700,7 @@
 
                         </div>
 
-                        <div class="load-block-content">
+                        <div v-else class="load-block-content">
                             <div class="load-block-item">
                                 <div class="load-block big-load-block">
                                     <div class="left-part images-block">
@@ -783,9 +783,20 @@
 
 <script>
 
+import ApiRequest from "../API/ApiRequest";
+
+let PropertyRequest = ApiRequest('property')
+let properties = new PropertyRequest;
+
 export default{
     name: 'app',
     components: {
+    },
+    data() {
+        return {
+            loading: true,
+            property: []
+        };
     },
     mounted() {
         let that = this;
@@ -796,7 +807,11 @@ export default{
             jQuery(this).removeClass('error');
             jQuery(this).closest('.input-block').find('.error-text').removeClass('active')
         });
-
+        properties.all()
+            .then( resp => {
+                that.property = resp.data;
+                that.loading = false;
+            })
         setTimeout(function() {
             console.log(that.$auth.user());
         }, 1000);
