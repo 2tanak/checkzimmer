@@ -6,9 +6,9 @@
                 <div class="card">
                     <div class="card-body">
                         <b-form-group label="Тип жилья"  label-for="input-phone">
-                            <b-select>
-                                <b-select-option href="#" :value="0">Не выбран</b-select-option>
-                                <b-select-option v-for="rootType in rootTypes" href="#" :value="rootType.id">{{ rootType.name }}</b-select-option>
+                            <b-select v-model="type">
+                                <b-select-option href="#" value="">Не выбран</b-select-option>
+                                <b-select-option v-for="rootType in propertyTypes" href="#" :value="rootType.native_id">{{ rootType.name }}</b-select-option>
                             </b-select>
                         </b-form-group>
                     </div>
@@ -19,9 +19,10 @@
                     <div class="card-body">
                         <b-form-group label="Администрирование"  label-for="input-phone">
                             <b-select v-model="role">
-                                <b-select-option href="#" :value="0" selected>Админ</b-select-option>
+                                <b-select-option href="#" value="" selected>Не выбрано</b-select-option>
+                                <b-select-option href="#" value="admin" selected>Админ</b-select-option>
                                 <b-select-option href="#" :value="-1">Все пользователи</b-select-option>
-                                <b-select-option v-for="rootType in rootTypes" href="#" :value="rootType.id">{{ rootType.name }}</b-select-option>
+                                <!--<b-select-option v-for="rootType in rootTypes" href="#" :value="rootType.id">{{ rootType.name }}</b-select-option>-->
                             </b-select>
                         </b-form-group>
                     </div>
@@ -33,12 +34,22 @@
                 <div class="card">
                     <div class="card-body">
                         <b-form-group label="Объекты недвижимости"  label-for="input-phone">
-                            <b-table striped hover responsive :items="property" :fields="fields">
+                            <b-table striped hover responsive :items="filteredHotels" :fields="fields">
+                                <template v-slot:cell(user)="data">
+                                    {{ data.item.user ? data.item.user.name : '' }}
+                                </template>
                                 <template v-slot:cell(status)="data">
                                     <b-badge :variant="badge(data.item)">{{ data.item.status }}</b-badge>
                                 </template>
+                                <template v-slot:cell(hotelType)="data">
+                                    {{ getTypeName( getTypeId(data.item) ).name }}
+                                </template>
                                 <template v-slot:cell(name)="data">
                                     <router-link :to="{ name: 'property-single',  params: { item: data.item.id } }">{{ data.item.name }}</router-link>
+                                </template>
+
+                                <template v-slot:cell(delete)="data">
+                                    <a href="" v-b-modal.modal-feature-delete @click.prevent="featureDelete(data)">&times;</a>
                                 </template>
                                 <template v-slot:table-busy>
                                     <div class="text-center text-danger my-2">
@@ -55,7 +66,6 @@
         <div class="row">
             <div class="col-md-12">
                 <b-button type="submit" variant="success" class="mr-2">Новый объект</b-button>
-                <b-button variant="light">Отмена</b-button>
             </div>
         </div>
     </section>
@@ -65,66 +75,18 @@
     import ApiRequest from '../../../API/ApiRequest';
     let PropertyRequest = ApiRequest('property')
     let properties = new PropertyRequest;
+    let TypesRequest = ApiRequest('booking-roomtypes');
+    let types = new TypesRequest;
 
     export default {
         name: "Index",
         data() {
             return {
-                role: 0,
-                fields: ['id', 'user', 'type', 'hotelType', 'status', 'views', 'name'],
-                property: [
-                    {
-                        id: 1,
-                        room_type_id: 0,
-                        picture: '+',
-                        name: 'дом (целиком)',
-                        status: 'approved',
-                        views: '78',
-                        city: 'Лейпциг',
-                        address: 'улица ААБ',
-                    },
-                    {
-                        id: 6,
-                        room_type_id: 1,
-                        picture: '+',
-                        name: 'одноместный',
-                        status: 'approved',
-                        views: '14',
-                        city: 'Берлин',
-                        address: 'улица Фонарей',
-                    },
-                    {
-                        id: 8,
-                        room_type_id: 1,
-                        picture: '+',
-                        name: 'одноместный',
-                        status: 'approved',
-                        views: '11',
-                        city: 'Лейпциг',
-                        address: 'Улица Проверки, 65-34',
-                    },
-                    {
-                        id: 16,
-                        room_type_id: 0,
-                        picture: '+',
-                        name: 'квартира',
-                        status: 'pending',
-                        views: '234',
-                        city: 'Берлин',
-                        address: 'ул. Неизвестного, 32',
-                    },
-                    {
-                        id: 31,
-                        room_type_id: 16,
-                        picture: '+',
-                        name: 'двухместная',
-                        status: 'declined',
-                        views: '102',
-                        city: 'Франкфурт-на-Майне',
-                        address: 'бульв Бульвар, 93-17',
-                        },
-
-                ],
+                role: 'admin',
+                type: '',
+                fields: ['id', 'user', 'type', 'hotelType', 'status', 'views', 'name', 'delete'],
+                types: [],
+                property: [],
 
             }
         },
@@ -132,6 +94,10 @@
             properties.all()
                 .then(resp => {
                     this.property = resp.data;
+                })
+            types.all()
+                .then(resp => {
+                    this.types = resp.data;
                 })
         },
         methods: {
@@ -143,14 +109,66 @@
                     case 'declined': return 'danger';
                 }
                 return 'dark';
+            },
+            getTypeName(type) {
+                for (let j in this.types) {
+                    if (this.types[j].native_id === type) {
+                        return this.types[j];
+                    }
+                }
+                return false;
+            },
+            getTypeId(item) {
+                for (let i in item.options) {
+                    if (item.options[i].key === 'hotel_type') {
+                        return item.options[i].value;
+                    }
+                }
+                return false;
             }
         },
         computed: {
-            rootTypes() {
-                return this.property.filter( item => item.room_type_id === 0)
+            propertyTypes() {
+                let types = [];
+                let typeNames = [];
+                this.property.forEach( item => {
+                    let typeId = this.getTypeId(item);
+
+                    if (types.indexOf(typeId) === -1) {
+                        types.push(typeId);
+                    }
+                });
+
+                for (let i in types) {
+                    typeNames.push( this.getTypeName(types[i]));
+                }
+                return typeNames;
             },
-            subTypes() {
-                return this.property.filter( item => item.room_type_id !== 0)
+            filteredHotels() {
+                let hotels = [];
+                let hotelsv2 = []
+                if (this.type) {
+                    for (let i in this.property) {
+                        let id = this.getTypeId(this.property[i]);
+                        if (id === this.type) {
+                            hotels.push(this.property[i]);
+                        }
+                    }
+                } else {
+                    hotels = this.property;
+                }
+                if (this.role) {
+                    for (let i in hotels) {
+                        if (
+                            hotels[i].user.role === 'admin' && this.role === 'admin' ||
+                            hotels[i].user.role !== 'admin' && this.role === -1) {
+                                hotelsv2.push( hotels[i] );
+                            }
+                    }
+                } else {
+                    return hotels;
+                }
+                return hotelsv2;
             }
         },
     }

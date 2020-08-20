@@ -5,7 +5,7 @@
         background: #FFFFFF;
         box-shadow: 0 0 14px rgba(51, 54, 70, 0.14);
         border-radius: 12px;
-        margin-top: 100px;
+        /*margin-top: 100px;*/
         display: block !important;
     }
     .list-content .property .load-block.big-load-block {

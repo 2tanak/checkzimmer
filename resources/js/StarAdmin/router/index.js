@@ -76,7 +76,7 @@ export default new Router({
             meta: { auth: true }
         },
         {
-            path: '/dashboard/property/items/:item',
+            path: '/dashboard/property/:item',
             name: 'property-single',
             component: PropertySingle,
             meta: { auth: true }

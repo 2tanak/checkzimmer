@@ -7,7 +7,7 @@ use App\BookingType;
 use App\Option;
 use App\BookingCity;
 use App\Property;
-use App\RoomType;
+use App\Room;
 use GuzzleHttp;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -199,6 +199,15 @@ class BookingController extends Controller {
             $option->fill([
                 'parent' => $new_hotel->id,
                 'type' => 'property',
+                'key' => 'hotel_type',
+                'value' => $hotel['hotel_data']['hotel_type_id']
+            ]);
+            $option->save();
+
+            $option = new Option;
+            $option->fill([
+                'parent' => $new_hotel->id,
+                'type' => 'property',
                 'key' => 'languages',
                 'value' => implode(',', $hotel['hotel_data']['spoken_languages'])
             ]);
@@ -217,10 +226,90 @@ class BookingController extends Controller {
             $option->fill([
                 'parent' => $new_hotel->id,
                 'type' => 'property',
-                'key' => 'native_id',
-                'value' => json_encode($hotel['hotel_id'])
+                'key' => 'policies',
+                'value' => json_encode($hotel['hotel_data']['hotel_policies'])
             ]);
             $option->save();
+
+            $option = new Option;
+            $option->fill([
+                'parent' => $new_hotel->id,
+                'type' => 'property',
+                'key' => 'features',
+                'value' => json_encode($hotel['hotel_data']['hotel_facilities'])
+            ]);
+            $option->save();
+
+            $option = new Option;
+            $option->fill([
+                'parent' => $new_hotel->id,
+                'type' => 'property',
+                'key' => 'native_id',
+                'value' => $hotel['hotel_id']
+            ]);
+            $option->save();
+
+            foreach ($hotel['room_data'] as $key => $room) {
+                $new_room = new Room;
+
+                $new_room->fill([
+                    'property_id' => $new_hotel->id,
+                    'room_type_id' => 0,
+                    'number' => 1,
+                    'person' => $room['room_info']['max_persons'],
+                    'price' => $room['room_info']['min_price'],
+                    'bed' => Room::getBedroomType($room['room_info']['bedrooms'] ?? []),
+                    'shower' => Room::getShowerType($room['room_facilities']),
+                    'kitchen' => Room::getKitchenType($room['room_facilities'], $hotel['hotel_data']['hotel_facilities']),
+                    'status' => 'approved'
+                ]);
+                $new_room->save();
+
+                $option = new Option;
+                $option->fill([
+                    'parent' => $new_room->id,
+                    'type' => 'room',
+                    'key' => 'facilities',
+                    'value' => json_encode($room['room_facilities'])
+                ]);
+                $option->save();
+
+                $option = new Option;
+                $option->fill([
+                    'parent' => $new_room->id,
+                    'type' => 'room',
+                    'key' => 'native_id',
+                    'value' => json_encode($room['room_id'])
+                ]);
+                $option->save();
+
+                $option = new Option;
+                $option->fill([
+                    'parent' => $new_room->id,
+                    'type' => 'room',
+                    'key' => 'photos',
+                    'value' => json_encode($room['room_photos'])
+                ]);
+                $option->save();
+
+                $option = new Option;
+                $option->fill([
+                    'parent' => $new_room->id,
+                    'type' => 'room',
+                    'key' => 'name',
+                    'value' => $room['room_name'] ?? ''
+                ]);
+                $option->save();
+
+                $option = new Option;
+                $option->fill([
+                    'parent' => $new_room->id,
+                    'type' => 'room',
+                    'key' => 'description',
+                    'value' => $room['room_description'] ?? ''
+                ]);
+                $option->save();
+            }
         }
     }
 }

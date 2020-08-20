@@ -8,7 +8,7 @@
                         <b-form-group label="Категория"  label-for="input-phone">
                             <b-select v-model="cats">
                                 <b-select-option value="">Все категории</b-select-option>
-                                <b-select-option v-for="category in catList" href="#" :value="category">{{ category }}</b-select-option>
+                                <b-select-option v-for="(category, i) in catList.concat(categoriesTemp)" href="#" :value="category" :key="'cat-key-'+i">{{ category }}</b-select-option>
                             </b-select>
                         </b-form-group>
                     </div>
@@ -18,7 +18,7 @@
                 <div class="card">
                     <div class="card-body">
                         <b-form-group label="Создать категорию" label-for="input-phone">
-                            <b-form-input type="text" id="input-phone" placeholder="Название, Enter для подтверждения" ></b-form-input>
+                            <b-form-input v-model="newCat" type="text" id="input-phone" placeholder="Название, Enter для подтверждения" @keyup="catInput"></b-form-input>
                         </b-form-group>
                     </div>
                 </div>
@@ -37,10 +37,10 @@
                                     <img :src="data.item.picture">
                                 </template>
                                 <template v-slot:cell(edit)="data">
-                                    <a href="" @click.prevent="">&#9998;</a>
+                                    <a href="" v-b-modal.modal-feature @click.prevent="featureEdit(data)">&#9998;</a>
                                 </template>
                                 <template v-slot:cell(delete)="data">
-                                    <a href="" @click.prevent="">&times;</a>
+                                    <a href="" v-b-modal.modal-feature-delete @click.prevent="featureDelete(data)">&times;</a>
                                 </template>
                                 <template v-slot:table-busy>
                                     <div class="text-center text-danger my-2">
@@ -56,12 +56,15 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <b-button type="submit" variant="success" class="mr-2" v-b-modal.modal-feature >Новое удобство</b-button>
-                <b-button variant="light">Отмена</b-button>
+                <b-button type="submit" variant="success" class="mr-2" v-b-modal.modal-feature @click="featureNew">Новое удобство</b-button>
             </div>
         </div>
-        <b-modal id="modal-feature" title="Feature add/edit">
-            <Forms v-model="features[0]" :fields="features[0]" :data="data"></Forms>
+        <b-modal id="modal-feature" :title="editFeature.id ? 'Feature edit' : 'Feature add'">
+            <Forms v-model="editFeature" :fields="editFeature" :data="data"></Forms>
+        </b-modal>
+        <b-modal id="modal-feature-delete" title="Feature delete">
+            <span class="text-danger">A you sure you want to delete feature <strong>{{ deleteFeature.name}}</strong>
+                in <strong>{{ deleteFeature.feature_category ? deleteFeature.feature_category.name : ''}}</strong> category?</span>
         </b-modal>
     </section>
 </template>
@@ -75,6 +78,17 @@
 
     let FeaturesRequest = ApiRequest('features');
     let features = new FeaturesRequest;
+
+    let newFeature = {
+        id: 0,
+        name: '',
+        picture: '',
+        feature_category: {
+            id: 0,
+            name: ''
+        }
+    };
+
     export default {
         name: "Index",
         components: {Forms},
@@ -83,40 +97,15 @@
             return {
                 cats: '',
                 loading: true,
-                categories: [
-                    {
-                        id: 5,
-                        picture: '+',
-                        name: 'Кухня'
-                    },
-                    {
-                        id: 6,
-                        picture: '+',
-                        name: 'Ванная'
-                    },
+                categoriesTemp: [
+
                 ],
-                features: [
-                    {
-                        id: 39,
-                        feature_category_id: 5,
-                        picture: '+',
-                        name: 'Eigene kuche',
-                    },
-                    {
-                        id: 40,
-                        feature_category_id: 5,
-                        picture: '-',
-                        name: 'Gemeinschaftskuche',
-                    },
-                    {
-                        id: 41,
-                        feature_category_id: 6,
-                        picture: '*',
-                        name: 'Sauna'
-                    }
-                ],
+                features: [],
                 fields: ['id', 'feature_category', 'picture', 'name', 'edit', 'delete'],
-                data: featuresForm
+                data: featuresForm,
+                newCat: '',
+                editFeature: '',
+                deleteFeature: '',
             }
         },
         created() {
@@ -134,10 +123,8 @@
                     }
                 }
                 return {};
-            }
-        },
-        computed: {
-            catList() {
+            },
+            getCategories() {
                 let cats = []
                 this.features.forEach( item => {
                     if (item.feature_category && cats.indexOf( item.feature_category.name ) === -1 ) {
@@ -145,6 +132,34 @@
                     }
                 });
                 return cats;
+            },
+            catInput(e) {
+                if (e.key === 'Enter') {
+                    console.log(this.newCat);
+                    this.categoriesTemp.push( this.newCat );
+                    this.cats = this.newCat;
+                    this.newCat = '';
+                }
+            },
+            featureNew() {
+                this.editFeature = { ...newFeature }
+                this.editFeature.feature_category.name = this.cats;
+                this.data.category.options = this.getCategories().concat(this.categoriesTemp);
+                this.editFeature.category = this.data.category.options.indexOf(this.editFeature.feature_category.name);
+
+            },
+            featureEdit(data) {
+                this.editFeature = { ...data.item }
+                this.data.category.options = this.getCategories().concat(this.categoriesTemp);
+                this.editFeature.category = this.data.category.options.indexOf(this.editFeature.feature_category.name);
+            },
+            featureDelete(data) {
+                this.deleteFeature = { ...data.item }
+            }
+        },
+        computed: {
+            catList() {
+                return this.getCategories();
             },
             featureList() {
                 let featList = [];

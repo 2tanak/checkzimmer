@@ -26,6 +26,7 @@ Route::middleware('api')->namespace('Api')->group(function () {
     Route::resource('room-types', 'RoomTypesController');
     Route::resource('property', 'PropertyController');
     Route::get('options/bytype/{type}', 'OptionsController@showByType');
+    Route::get('property/init', 'PropertyController@init');
 
     /* Booking integration */
     Route::post('/booking-test', 'BookingController@test');

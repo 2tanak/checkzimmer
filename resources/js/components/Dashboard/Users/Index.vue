@@ -31,10 +31,10 @@
                     <div class="card-body">
                         <b-table striped hover :busy="loading" :items="userList" :fields="userFields">
                             <template v-slot:cell(edit)="data">
-                                <a href="" @click.prevent="userEdit(data)">&#9998;</a>
+                                <a href="" v-b-modal.modal-user @click.prevent="userEdit(data)">&#9998;</a>
                             </template>
                             <template v-slot:cell(delete)="data">
-                                <a href="" @click.prevent="userDelete(data)">&times;</a>
+                                <a href="" v-b-modal.modal-user-delete @click.prevent="userDelete(data)">&times;</a>
                             </template>
                             <template v-slot:table-busy>
                                 <div class="text-center text-danger my-2">
@@ -50,16 +50,18 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <b-button type="submit" variant="success" class="mr-2" v-b-modal.modal-user>Новый пользователь</b-button>
+                <b-button type="submit" variant="success" class="mr-2" v-b-modal.modal-user @click="newUser">Новый пользователь</b-button>
                 <!--<b-button variant="light">Отмена</b-button>-->
             </div>
         </div>
 
-        <b-modal id="modal-user" title="User add/edit">
-            <Forms v-model="users[0]" :fields="users[0]" :data="data"></Forms>
+        <b-modal id="modal-user" :title="editUser.id ? 'Edit user' : 'New user'">
+            <Forms v-model="editUser" :fields="editUser" :data="data" />
         </b-modal>
         <b-modal id="modal-user-delete" title="Delete user">
-            <Forms v-model="users[0]" :fields="users[0]" :data="data"></Forms>
+            <span class="text-danger">A you sure you want to delete user <strong>{{ deleteUser.name}}</strong>
+                (<strong>{{ deleteUser.email }}</strong>)
+            </span>
         </b-modal>
     </section>
 </template>
@@ -72,6 +74,14 @@
     let UsersRequest = ApiRequest('users');
     let users = new UsersRequest;
 
+    let newUser = {
+        id: '',
+        name: '',
+        email: '',
+        role: 'user',
+        password: ''
+    };
+
     export default {
         name: "Index",
         components: {Forms},
@@ -81,6 +91,8 @@
                 order: 'name',
                 search: '',
                 loading: true,
+                editUser: { ...newUser },
+                deleteUser: {},
                 users: [],
                 userFields: [
                     'id', 'name', 'email', 'role', 'edit', 'delete'
@@ -108,10 +120,21 @@
             }
         },
         methods: {
+            newUser() {
+                this.editUser = { ...newUser };
+            },
             userEdit(data) {
-
+                console.log(data);
+                this.editUser = data.item;
             },
             userDelete(data) {
+                this.deleteUser = data.item;
+            },
+            userUpdate() {
+
+            },
+            userDeleteApproved() {
+
             }
         },
         created() {
