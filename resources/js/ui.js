@@ -30,9 +30,9 @@ Vue.use(auth, {
 
 window.Vue = require('vue');
 
-jQuery(window).on('load', function() {
+/*jQuery(window).on('load', function() {
     jQuery('.property-card-slider').css({'opacity': 1, 'transition-duration': '0.2s'})
-});
+});*/
 
 const app = new Vue({
     el: '#application',
@@ -48,18 +48,6 @@ jQuery(document).ready(function() {
 
     jQuery(function () {
         jQuery('[data-toggle="tooltip"]').tooltip()
-    });
-
-    jQuery('a.collapse-circle').click(function(e) {
-        e.preventDefault();
-        var parent = jQuery(this).closest('.property-card');
-        jQuery(parent).toggleClass('collapse-item');
-        jQuery(this).toggleClass('active');
-    });
-
-    jQuery('a.favorites').click(function(e) {
-        e.preventDefault();
-        jQuery(this).toggleClass('active');
     });
 
     jQuery('.sorting a').click(function(e) {
@@ -453,3 +441,4 @@ jQuery(window).on("load resize", function(){
         });
     }
 });
+

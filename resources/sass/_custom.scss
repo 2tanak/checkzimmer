@@ -60,7 +60,7 @@ body {
     padding: 33px 44px 60px 44px;
 }
 .modal-overlay.modal-show .modal-block.show .modal-content-item {
-    webkit-transform: scale(1);
+    -webkit-transform: scale(1);
     -moz-transform: scale(1);
     -ms-transform: scale(1);
     transform: scale(1);
@@ -1362,9 +1362,10 @@ footer#main-footer ul.footer-menu li a:active {
     position: relative;
     transition-duration: .4s;
 }
-.property-card-slider {
+/*.property-card-slider {
     opacity: 0;
-}
+}*/
+
 .tooltip .tooltip-inner {
     background-color: #333646;
     opacity: 0.94;
