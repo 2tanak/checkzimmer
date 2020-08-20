@@ -226,13 +226,13 @@ jQuery(document).ready(function() {
         });
     });
 
-    jQuery('.inquiry-modal .input-block-item input').focus(function () {
-        var parent = jQuery(this).closest('.input-block-item');
+    jQuery('.inquiry-modal .input-block-item input, .modal-block input').focus(function () {
+        var parent = jQuery(this).closest('.input-block-item, .modal-block');
         jQuery(parent).find('label').addClass('active');
     });
-    jQuery('.inquiry-modal .input-block-item input').blur(function () {
+    jQuery('.inquiry-modal .input-block-item input, .modal-block input').blur(function () {
         var value = jQuery(this).val();
-        var parent = jQuery(this).closest('.input-block-item');
+        var parent = jQuery(this).closest('.input-block-item, .modal-block');
         if (value === '') {
             jQuery(parent).find('label').removeClass('active');
         }
