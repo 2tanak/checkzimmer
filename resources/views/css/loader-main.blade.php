@@ -15,6 +15,7 @@
         padding: 16px;
         border-bottom: 1px solid #e8e8ed;
         display: flex;
+        border-radius: 12px 12px 0 0;
     }
     .list-content .property .load-block.small-load-block {
         height: 62px;
@@ -24,6 +25,7 @@
         border-bottom: 1px solid #e8e8ed;
         background-color: #ffffff;
         padding: 16px;
+        border-radius: 0 0 12px 12px;
     }
     .list-content .property .load-block .images-block {
         min-width: 156px;

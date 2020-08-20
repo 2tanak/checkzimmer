@@ -116,7 +116,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="type">
+                                        <!--<div class="type">
                                             <div class="type-item">
                                                 <div class="title">Тип</div>
                                                 <div class="type-block">
@@ -194,7 +194,64 @@
                                                     <span><b>15&#8364;</b>/persone</span>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>-->
+                                        <table class="type">
+                                            <thead>
+                                            <tr>
+                                                <th class="title">Тип</th>
+                                                <th class="title">Кол-во</th>
+                                                <th class="title">Personen</th>
+                                                <th class="title">Цена</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td class="type-block">
+                                                    <img  src="svg/i-one.svg" alt="Одноместный">
+                                                    одноместный
+                                                </td>
+                                                <td class="type-block quantity-block">1</td>
+                                                <td class="type-block personen-block">1</td>
+                                                <td class="type-block price-block"><b>25&#8364;</b>/persone</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="type-block">
+                                                    <img  src="svg/i-two.svg" alt="двухместный">
+                                                    двухместный
+                                                </td>
+                                                <td class="type-block quantity-block">2</td>
+                                                <td class="type-block personen-block">2</td>
+                                                <td class="type-block price-block"><b>22&#8364;</b>/persone</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="type-block">
+                                                    <img  src="svg/i-multi.svg" alt="многоместный">
+                                                    многоместный
+                                                </td>
+                                                <td class="type-block quantity-block">3</td>
+                                                <td class="type-block personen-block">3</td>
+                                                <td class="type-block price-block"><b>20&#8364;</b>/persone</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="type-block">
+                                                    <img  src="svg/i-flat.svg" alt="квартира целиком">
+                                                    квартира целиком
+                                                </td>
+                                                <td class="type-block quantity-block">5</td>
+                                                <td class="type-block personen-block">5</td>
+                                                <td class="type-block price-block"><b>18&#8364;</b>/persone</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="type-block">
+                                                    <img  src="svg/i-house.svg" alt="дом">
+                                                    дом
+                                                </td>
+                                                <td class="type-block quantity-block">12</td>
+                                                <td class="type-block personen-block">20</td>
+                                                <td class="type-block price-block"><b>15&#8364;</b>/persone</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                     <div class="night">
                                         <a href="#" class="favorites">
