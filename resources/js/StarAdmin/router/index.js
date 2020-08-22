@@ -38,6 +38,7 @@ import Users from '../../components/Dashboard/Users';
 import Features from '../../components/Dashboard/Data/Features';
 import RoomTypes from '../../components/Dashboard/Data/RoomTypes';
 import Property from '../../components/Dashboard/Property/Property';
+import PropertySingle from '../../components/Dashboard/Property/Property/Single';
 import Rooms from '../../components/Dashboard/Property/Rooms';
 import AssignedRoomTypes from '../../components/Dashboard/Property/AssignedRoomTypes';
 import BookingItems from '../../components/Dashboard/Booking/Items';
@@ -47,13 +48,21 @@ import BookingSettings from '../../components/Dashboard/Booking/Settings';
 
 Vue.use(Router);
 
+const permissionsAdmin = {
+    roles: 'admin',
+    redirect: { name: 'login' },
+    forbiddenRedirect:  { name: 'login' }
+}
+
 export default new Router({
     linkActiveClass: 'active',
+    mode: 'history',
     routes: [
         {
             path: '/dashboard',
             name: 'dashboard',
-            component: dashboard
+            component: dashboard,
+            meta: { auth: true }
         },
         {
             path: '/dashboard/requests',
@@ -63,80 +72,99 @@ export default new Router({
         {
             path: '/dashboard/property/items',
             name: 'property',
-            component: Property
+            component: Property,
+            meta: { auth: true }
+        },
+        {
+            path: '/dashboard/property/:item',
+            name: 'property-single',
+            component: PropertySingle,
+            meta: { auth: true }
         },
         {
             path: '/dashboard/property/rooms',
             name: 'rooms',
-            component: Rooms
+            component: Rooms,
+            meta: { auth: true }
         },
         {
-            path: '/dashboard/property/assigned-room-types',
+            path: '/property/assigned-room-types',
             name: 'assigned-room-types',
-            component: AssignedRoomTypes
+            component: AssignedRoomTypes,
+            meta: { auth: true }
         },
         {
             path: '/dashboard/booking/items',
             name: 'booking-items',
-            component: BookingItems
+            component: BookingItems,
+            meta: { auth: true }
         },
         {
             path: '/dashboard/booking/mapping',
             name: 'booking-mapping',
-            component: BookingMapping
+            component: BookingMapping,
+            meta: { auth: true }
         },
         {
             path: '/dashboard/booking/data',
             name: 'booking-data',
-            component: BookingData
+            component: BookingData,
+            meta: { auth: true }
         },
         {
-            path: '/dashboard//booking/settings',
+            path: '/dashboard/booking/settings',
             name: 'booking-settings',
-            component: BookingSettings
+            component: BookingSettings,
+            meta: { auth: true }
         },
         {
             path: '/dashboard/categories',
             name: 'categories',
-            component: widgets
+            component: widgets,
+            meta: { auth: true }
         },
         {
             path: '/dashboard/website/header',
             name: 'website-header',
-            component: Header
+            component: Header,
+            meta: { auth: true }
         },
         {
             path: '/dashboard/website/footer',
             name: 'website-footer',
-            component: Footer
+            component: Footer,
+            meta: { auth: true }
         },
         {
             path: '/dashboard/users',
             name: 'users',
-            component: Users
+            component: Users,
+            meta: { auth: true }
         },
         {
             path: '/dashboard/data/features',
             name: 'features',
-            component: Features
+            component: Features,
+            meta: { auth: true }
         },
         {
             path: '/dashboard/data/room-types',
             name: 'room-types',
-            component: RoomTypes
+            component: RoomTypes,
+            meta: { auth: true }
         },
         {
-    path: '/404',
-    name: 'error-404',
-    component: error404
-  },
-  {
-    path: '/500',
-    name: 'error-500',
-    component: error500
-  },
+            path: '/404',
+            name: 'error-404',
+            component: error404
+        },
         {
-            path: '/login',
+            path: '/500',
+            name: 'error-500',
+            component: error500
+        },
+        {
+            path: '/dashboard/login',
             name: 'login',
             component: login
         },
@@ -145,15 +173,15 @@ export default new Router({
             name: 'register',
             component: register
         },
-  {
-    path: '/alerts',
-    name: 'alerts',
-    component: alerts
-  },
-  {
-    path: '/badges',
-    name: 'badges',
-    component: badges
+        {
+            path: '/alerts',
+            name: 'alerts',
+            component: alerts
+        },
+        {
+            path: '/badges',
+            name: 'badges',
+            component: badges
   },
   {
     path: '/breadcrumbs',

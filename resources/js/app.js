@@ -4,6 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+//window.Vue = require('vue');
+
 import Vue from 'vue'
 import App from './StarAdmin/App'
 import router from './StarAdmin/router'
@@ -13,9 +15,30 @@ require('./bootstrap');
 
 Vue.use(BootstrapVue);
 
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 import {store} from './store';
 
 Vue.config.productionTip = false;
+
+axios.defaults.baseURL = '/api';
+Vue.use(VueAxios, axios);
+
+Vue.router = router;
+
+import auth from '@websanova/vue-auth';
+import authBasic from '@websanova/vue-auth/dist/drivers/auth/bearer.min.js';
+import httpAxios from '@websanova/vue-auth/dist/drivers/http/axios.1.x.js';
+import routerVueRouter from '@websanova/vue-auth/dist/drivers/router/vue-router.2.x.esm.js';
+
+Vue.use(auth, {
+    auth: authBasic,
+    http: httpAxios,
+    router: routerVueRouter,
+    rolesKey: 'role',
+    authRedirect: { path: '/dashboard/login' }
+});
+
 
 window.Vue = require('vue');
 
@@ -30,7 +53,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

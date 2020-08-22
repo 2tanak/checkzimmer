@@ -17,7 +17,7 @@ class CreateBookingFeaturesTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('parent');
-            $table->enum('type', ['hotel', 'room']);
+            $table->enum('type', ['hotel', 'room', 'general']);
             $table->string('native_id');
             $table->timestamps();
         });

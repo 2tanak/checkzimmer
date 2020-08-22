@@ -24,13 +24,33 @@ Route::middleware('api')->namespace('Api')->group(function () {
     Route::resource('users', 'UsersController');
     Route::resource('features', 'FeaturesController');
     Route::resource('room-types', 'RoomTypesController');
-    Route::get('/options/bytype/{type}', 'OptionsController@showByType');
+    Route::resource('property', 'PropertyController');
+    Route::get('options/bytype/{type}', 'OptionsController@showByType');
+    Route::get('property/init', 'PropertyController@init');
+
     /* Booking integration */
     Route::post('/booking-test', 'BookingController@test');
     Route::post('/booking-cities', 'BookingController@importCities');
     Route::post('/booking-facilities', 'BookingController@importFacilities');
     Route::post('/booking-roomtypes', 'BookingController@importRoomTypes');
 
+    Route::get('/booking-cities', 'BookingController@getCities');
     Route::get('/booking-facilities', 'BookingController@getFeatures');
     Route::get('/booking-roomtypes', 'BookingController@getRoomTypes');
+    Route::post('/hotels-request/query', 'BookingController@getHotels');
+    Route::post('/hotels-request', 'BookingController@saveHotels');
+});
+
+
+Route::group([
+    //'middleware' => 'jwt.auth',
+    'namespace' => 'Api',
+    'prefix' => 'auth'
+], function ($router) {
+    Route::post('login', 'AuthController@login');
+    Route::get('user', 'AuthController@me');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+    Route::get('refresh', 'AuthController@refresh');
 });

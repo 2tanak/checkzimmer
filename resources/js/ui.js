@@ -1,4 +1,48 @@
+import Vue from 'vue'
+import Public from './components/Public'
+
 require('./bootstrap');
+
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+import {store} from './store';
+import router from "./StarAdmin/router";
+
+Vue.config.productionTip = false;
+
+axios.defaults.baseURL = '/api';
+Vue.use(VueAxios, axios);
+
+Vue.router = router;
+
+import auth from '@websanova/vue-auth';
+import authBasic from '@websanova/vue-auth/dist/drivers/auth/bearer.min.js';
+import httpAxios from '@websanova/vue-auth/dist/drivers/http/axios.1.x.js';
+import routerVueRouter from '@websanova/vue-auth/dist/drivers/router/vue-router.2.x.esm.js';
+
+Vue.use(auth, {
+    auth: authBasic,
+    http: httpAxios,
+    router: routerVueRouter,
+    rolesKey: 'role',
+    authRedirect: { path: '/dashboard/login' }
+});
+
+window.Vue = require('vue');
+
+/*jQuery(window).on('load', function() {
+    jQuery('.property-card-slider').css({'opacity': 1, 'transition-duration': '0.2s'})
+});*/
+
+const app = new Vue({
+    el: '#application',
+    router,
+    components: {
+        Public
+    },
+    store
+});
+
 
 jQuery(document).ready(function() {
 
@@ -6,39 +50,24 @@ jQuery(document).ready(function() {
         jQuery('[data-toggle="tooltip"]').tooltip()
     });
 
-    jQuery(window).on('load', function() {
-        jQuery('.property-card-slider').css({'opacity': 1, 'transition-duration': '0.2s'})
-    });
-
-    jQuery('.property-card-slider').slick({
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        dots: true,
-        responsive: [
-            {
-                breakpoint: 1041,
-                settings: "unslick"
-            }
-        ]
-    });
-
-    jQuery('a.collapse-circle').click(function(e) {
-        e.preventDefault();
-        var parent = jQuery(this).closest('.property-card');
-        jQuery(parent).toggleClass('collapse-item');
-        jQuery(this).toggleClass('active');
-    });
-
-    jQuery('a.favorites').click(function(e) {
-        e.preventDefault();
-        jQuery(this).toggleClass('active');
-    });
-
     jQuery('.sorting a').click(function(e) {
         e.preventDefault();
         jQuery('.sorting').toggleClass('up');
+    });
+
+    jQuery('.filter-block li').click(function () {
+        var paragraph = jQuery(this).text();
+        jQuery('.filter-block li').removeClass('check');
+        jQuery(this).addClass('check');
+        jQuery('.sorting a').text(paragraph);
+        jQuery('.sorting').removeClass('up');
+    });
+
+    jQuery(document).mouseup(function (e){
+        var modal = jQuery(".filter-block");
+        if (!modal.is(e.target) && modal.has(e.target).length === 0){
+            jQuery('.sorting').removeClass('up');
+        }
     });
 
     jQuery(".left-block a").click(function(e) {
@@ -81,6 +110,11 @@ jQuery(document).ready(function() {
         jQuery('.modal-login').removeClass('show');
         jQuery('.modal-forgot-password').addClass('show');
     });
+    jQuery('a.remember-login').click(function (e) {
+        e.preventDefault();
+        jQuery('.modal-forgot-password').removeClass('show');
+        jQuery('.modal-login').addClass('show');
+    });
 
     jQuery('a.forgot-password-link').click(function (e) {
         e.preventDefault();
@@ -90,15 +124,6 @@ jQuery(document).ready(function() {
 
     jQuery('.modal-close').click(function () {
         jQuery('.modal-overlay').removeClass('modal-show');
-    });
-
-    jQuery('.login-link').click(function (e) {
-        e.preventDefault();
-        var value = jQuery(this).val();
-        if (value === '') {
-            jQuery('input').addClass('error');
-            jQuery('.error-text').addClass('active')
-        }
     });
 
     jQuery('.fullscreen-button').click(function () {
@@ -189,13 +214,13 @@ jQuery(document).ready(function() {
         });
     });
 
-    jQuery('.inquiry-modal .input-block-item input').focus(function () {
-        var parent = jQuery(this).closest('.input-block-item');
+    jQuery('.inquiry-modal .input-block-item input, .modal-block input').focus(function () {
+        var parent = jQuery(this).closest('.input-block-item, .modal-block');
         jQuery(parent).find('label').addClass('active');
     });
-    jQuery('.inquiry-modal .input-block-item input').blur(function () {
+    jQuery('.inquiry-modal .input-block-item input, .modal-block input').blur(function () {
         var value = jQuery(this).val();
-        var parent = jQuery(this).closest('.input-block-item');
+        var parent = jQuery(this).closest('.input-block-item, .modal-block');
         if (value === '') {
             jQuery(parent).find('label').removeClass('active');
         }
@@ -371,7 +396,7 @@ jQuery(window).on('load', function() {
     };
 
     jQuery(window).scroll(function () {
-        if (jQuery(this).scrollTop() > 500) {
+        if (jQuery(this).scrollTop() > 300) {
             jQuery('.scroll-top').fadeIn();
         } else {
             jQuery('.scroll-top').fadeOut();
@@ -400,3 +425,20 @@ jQuery(window).scroll( function() {
         jQuery(".fixed-bar").removeClass('active');
     }
 });
+
+jQuery(window).on("load resize", function(){
+    var width = jQuery(document).width();
+
+    if (width <= 1040) {
+        jQuery('.property-card-slider').slick('unslick');
+    } else {
+        jQuery('.property-card-slider').not('.slick-initialized').slick({
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            dots: true
+        });
+    }
+});
+

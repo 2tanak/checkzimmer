@@ -82,7 +82,7 @@
                     })
             },
             connectionTest() {
-                axios.post( '/api/booking-test', this.options)
+                axios.post( 'booking-test', this.options)
                     .then( resp => {
                         this.$bvModal.show('connect-success');
                     })
