@@ -84,7 +84,6 @@
                                         <div><img src="/img/property-picture2.png" alt="Property picture"></div>
                                         <div><img src="/img/property-picture.png" alt="Property picture"></div>
                                     </div>
-                                    <div class="middle-block">
                                         <div class="data">
                                             <a href="#" class="title"><span>Frisch renovierte 4 Zimmer in Grimma West Leipzig</span></a>
                                             <div class="data-item">
@@ -116,95 +115,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--<div class="type">
-                                            <div class="type-item">
-                                                <div class="title">Тип</div>
-                                                <div class="type-block">
-                                                    <img src="svg/i-one.svg" alt="Одноместный">
-                                                    <span>одноместный</span>
-                                                </div>
-                                                <div class="type-block">
-                                                    <img src="svg/i-two.svg" alt="Двухместный">
-                                                    <span>двухместный</span>
-                                                </div>
-                                                <div class="type-block">
-                                                    <img src="svg/i-multi.svg" alt="Многоместный">
-                                                    <span>многоместный</span>
-                                                </div>
-                                                <div class="type-block">
-                                                    <img src="/svg/i-flat.svg" alt="Квартира целиком">
-                                                    <span>квартира целиком</span>
-                                                </div>
-                                                <div class="type-block">
-                                                    <img src="/svg/i-house.svg" alt="Дом">
-                                                    <span>дом</span>
-                                                </div>
-                                            </div>
-                                            <div class="quantity">
-                                                <div class="title">Кол-во</div>
-                                                <div class="type-block quantity-block">
-                                                    <span>1</span>
-                                                </div>
-                                                <div class="type-block quantity-block">
-                                                    <span>2</span>
-                                                </div>
-                                                <div class="type-block quantity-block">
-                                                    <span>3</span>
-                                                </div>
-                                                <div class="type-block quantity-block">
-                                                    <span>5</span>
-                                                </div>
-                                                <div class="type-block quantity-block">
-                                                    <span>12</span>
-                                                </div>
-                                            </div>
-                                            <div class="personen">
-                                                <div class="title">Personen</div>
-                                                <div class="type-block personen-block">
-                                                    <span>1</span>
-                                                </div>
-                                                <div class="type-block personen-block">
-                                                    <span>2</span>
-                                                </div>
-                                                <div class="type-block personen-block">
-                                                    <span>3</span>
-                                                </div>
-                                                <div class="type-block personen-block">
-                                                    <span>5</span>
-                                                </div>
-                                                <div class="type-block personen-block">
-                                                    <span>20</span>
-                                                </div>
-                                            </div>
-                                            <div class="price-item">
-                                                <div class="title">Цена</div>
-                                                <div class="type-block price-block">
-                                                    <span><b>25&#8364;</b>/persone</span>
-                                                </div>
-                                                <div class="type-block price-block">
-                                                    <span><b>22&#8364;</b>/persone</span>
-                                                </div>
-                                                <div class="type-block price-block">
-                                                    <span><b>20&#8364;</b>/persone</span>
-                                                </div>
-                                                <div class="type-block price-block">
-                                                    <span><b>18&#8364;</b>/persone</span>
-                                                </div>
-                                                <div class="type-block price-block">
-                                                    <span><b>15&#8364;</b>/persone</span>
-                                                </div>
-                                            </div>
-                                        </div>-->
-                                        <table class="type">
-                                            <thead>
+                                    <table class="type">
+                                        <thead>
                                             <tr>
                                                 <th class="title">Тип</th>
                                                 <th class="title">Кол-во</th>
                                                 <th class="title">Personen</th>
                                                 <th class="title">Цена</th>
                                             </tr>
-                                            </thead>
-                                            <tbody>
+                                        </thead>
+                                        <tbody>
                                             <tr>
                                                 <td class="type-block">
                                                     <img  src="svg/i-one.svg" alt="Одноместный">
@@ -250,9 +170,8 @@
                                                 <td class="type-block personen-block">20</td>
                                                 <td class="type-block price-block"><b>15&#8364;</b>/persone</td>
                                             </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                        </tbody>
+                                    </table>
                                     <div class="night">
                                         <a href="#" class="favorites">
                                             <svg class="favorites-usual" width="12" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
