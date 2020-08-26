@@ -38,85 +38,63 @@
                     </div>
                 </div>
             </div>
-            <div class="type">
-                <div class="type-item">
-                    <div class="title">Тип</div>
-                    <div class="type-block">
-                        <img src="svg/i-one.svg" alt="Одноместный">
+            <table class="type">
+                <thead>
+                <tr>
+                    <th class="title">Тип</th>
+                    <th class="title">Кол-во</th>
+                    <th class="title">Personen</th>
+                    <th class="title">Цена</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="type-block">
+                        <img  src="svg/i-one.svg" alt="Одноместный">
                         <span>одноместный</span>
-                    </div>
-                    <div class="type-block">
-                        <img src="svg/i-two.svg" alt="Двухместный">
+                    </td>
+                    <td class="type-block quantity-block">1</td>
+                    <td class="type-block personen-block">1</td>
+                    <td class="type-block price-block"><b>25&#8364;</b>/persone</td>
+                </tr>
+                <tr>
+                    <td class="type-block">
+                        <img  src="svg/i-two.svg" alt="двухместный">
                         <span>двухместный</span>
-                    </div>
-                    <div class="type-block">
-                        <img src="svg/i-multi.svg" alt="Многоместный">
+                    </td>
+                    <td class="type-block quantity-block">2</td>
+                    <td class="type-block personen-block">2</td>
+                    <td class="type-block price-block"><b>22&#8364;</b>/persone</td>
+                </tr>
+                <tr>
+                    <td class="type-block">
+                        <img  src="svg/i-multi.svg" alt="многоместный">
                         <span>многоместный</span>
-                    </div>
-                    <div class="type-block">
-                        <img src="/svg/i-flat.svg" alt="Квартира целиком">
+                    </td>
+                    <td class="type-block quantity-block">3</td>
+                    <td class="type-block personen-block">3</td>
+                    <td class="type-block price-block"><b>20&#8364;</b>/persone</td>
+                </tr>
+                <tr>
+                    <td class="type-block">
+                        <img  src="svg/i-flat.svg" alt="квартира целиком">
                         <span>квартира целиком</span>
-                    </div>
-                    <div class="type-block">
-                        <img src="/svg/i-house.svg" alt="Дом">
+                    </td>
+                    <td class="type-block quantity-block">5</td>
+                    <td class="type-block personen-block">5</td>
+                    <td class="type-block price-block"><b>18&#8364;</b>/persone</td>
+                </tr>
+                <tr>
+                    <td class="type-block">
+                        <img  src="svg/i-house.svg" alt="дом">
                         <span>дом</span>
-                    </div>
-                </div>
-                <div class="quantity">
-                    <div class="title">Кол-во</div>
-                    <div class="type-block quantity-block">
-                        <span>1</span>
-                    </div>
-                    <div class="type-block quantity-block">
-                        <span>2</span>
-                    </div>
-                    <div class="type-block quantity-block">
-                        <span>3</span>
-                    </div>
-                    <div class="type-block quantity-block">
-                        <span>5</span>
-                    </div>
-                    <div class="type-block quantity-block">
-                        <span>12</span>
-                    </div>
-                </div>
-                <div class="personen">
-                    <div class="title">Personen</div>
-                    <div class="type-block personen-block">
-                        <span>1</span>
-                    </div>
-                    <div class="type-block personen-block">
-                        <span>2</span>
-                    </div>
-                    <div class="type-block personen-block">
-                        <span>3</span>
-                    </div>
-                    <div class="type-block personen-block">
-                        <span>5</span>
-                    </div>
-                    <div class="type-block personen-block">
-                        <span>20</span>
-                    </div>
-                </div>
-                <div class="price-item">
-                    <div class="title">Цена</div>
-                    <div class="type-block price-block">
-                        <span><b>25&#8364;</b>/persone</span>
-                    </div>
-                    <div class="type-block price-block">
-                        <span><b>22&#8364;</b>/persone</span>
-                    </div>
-                    <div class="type-block price-block">
-                        <span><b>20&#8364;</b>/persone</span>
-                    </div>
-                    <div class="type-block price-block">
-                        <span><b>18&#8364;</b>/persone</span>
-                    </div>
-                    <div class="type-block price-block">
-                        <span><b>15&#8364;</b>/persone</span>
-                    </div>
-                </div>
-            </div>
+                    </td>
+                    <td class="type-block quantity-block">12</td>
+                    <td class="type-block personen-block">20</td>
+                    <td class="type-block price-block"><b>15&#8364;</b>/persone</td>
+                </tr>
+                </tbody>
+            </table>
             <div class="night-rating-block">
                 <div class="night">
                     <a href="#" class="favorites">
