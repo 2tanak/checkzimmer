@@ -17,10 +17,19 @@ class UsersController extends Controller
         return response()->json( $option->pluck('value', 'key', 'id') );
     }
     function store(Request $request) {
-        return response()->json([]);
+        request()->validate([
+            'name' => 'required',
+            'password' => 'required|confirmed|min:5',
+            'email' => 'required|email|unique:users'
+        ]);
+        $data = $request->input();
+        $item = new User($data);
+        $item->save();
+        return $item ? response()->json(['code' => 'ok']) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
     }
-    function update(Request $request, $id) {
 
+
+    function update(Request $request, $id) {
         return response()->json([]);
     }
     function delete($id) {

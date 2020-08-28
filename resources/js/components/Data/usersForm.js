@@ -16,7 +16,7 @@ export default {
         label: 'Role',
         placeholder: 'Please enter user role',
         type: 'select',
-        options: { user: 'User', admin: 'Admin' }
+        options: { client: 'Съемщик', admin: 'Admin', holder: 'Владелец' }
     },
     divider: {
         type: 'divider'
@@ -26,9 +26,9 @@ export default {
             placeholder: 'Please type your password',
             type: 'password',
     },
-    password_approve: {
+    password_confirmation: {
         label: 'Password approve',
-            placeholder: 'Please confirm your password',
-            type: 'password',
+        placeholder: 'Please confirm your password',
+        type: 'password',
     },
 }
