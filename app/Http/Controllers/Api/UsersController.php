@@ -30,7 +30,14 @@ class UsersController extends Controller
 
 
     function update(Request $request, $id) {
-        return response()->json([]);
+        request()->validate([
+            'name' => 'required',
+            'password' => 'confirmed|min:5',
+            'email' => 'required|email'
+        ]);
+        $user = User::find($id);
+        return $user->update($request->input()) ? response()->json(['code' => 'ok']) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
+
     }
     function delete($id) {
         return response()->json(['code' => 'ok']);

@@ -134,39 +134,63 @@ export default {
             this.deleteUser = data.item;
         },
         userUpdate() {
+            this.clearModalErrors();
+            users.update(this.editUser.id,this.editUser).then(response => {
+                console.log(response);
+                if (response.data.code == 'ok') {
+                    document.querySelector('.modal-body').textContent = "Пользователь обновлен";
+                }
+                else if(response.data.code == 'error'){
+                    document.querySelector('.modal-body').textContent = "Ошибка обновления пользователя";
+                }
+                location.reload();
 
+            }).catch(error => {
+                this.generateModalErrors(error.response.data.errors);
+            });
         },
         userDeleteApproved() {
 
         },
         userCreate(bvModalEvt) {
             bvModalEvt.preventDefault();
-            var errText = document.querySelectorAll('.errText');
-            errText.forEach((n, i) => {
-                n.parentNode.removeChild(n);
-            });
+            if(this.editUser.id){
+                this.userUpdate();
+                return;
+            }
+            this.clearModalErrors();
             users.create(this.editUser).then(response => {
                 console.log(response);
                 if (response.data.code == 'ok') {
                     document.querySelector('.modal-body').textContent = "Пользователь добавлен";
                 }
                 else if(response.data.code == 'error'){
-                    document.querySelector('.modal-body').textContent = "Ошибка сохранения";
+                    document.querySelector('.modal-body').textContent = "Ошибка сохранения пользователя";
                 }
                 location.reload();
-                
+
             }).catch(error => {
-                var errors = error.response.data.errors;
-                var keys = Object.keys(errors)
-                for (var i = 0, l = keys.length; i < l; i++) {
-                    let p = document.createElement("p");
-                    p.textContent = errors[keys[i]];
-                    p.style.cssText = "color: red; font-size:12px;";
-                    p.setAttribute('class','errText');
-                    document.querySelector('#input-' + keys[i]).parentNode.append(p);
-                }
+                this.generateModalErrors(error.response.data.errors);
             });
+        },
+        //helpers
+        clearModalErrors() {
+            var errText = document.querySelectorAll('.errText');
+            errText.forEach((n, i) => {
+                n.parentNode.removeChild(n);
+            });
+        },
+        generateModalErrors(errors){
+            var keys = Object.keys(errors)
+            for (var i = 0, l = keys.length; i < l; i++) {
+                let p = document.createElement("p");
+                p.textContent = errors[keys[i]];
+                p.style.cssText = "color: red; font-size:12px;";
+                p.setAttribute('class','errText');
+                document.querySelector('#input-' + keys[i]).parentNode.append(p);
+            }
         }
+
     },
     created() {
         users.all()
