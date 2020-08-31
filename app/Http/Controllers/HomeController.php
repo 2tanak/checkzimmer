@@ -36,4 +36,8 @@ class HomeController extends Controller
     {
         return view('single');
     }
+    public function favorites()
+    {
+        return view('favorites');
+    }
 }

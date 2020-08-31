@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Public from './components/Public'
+import Favorites from './components/Public/Favorites'
 
 require('./bootstrap');
 
@@ -38,7 +39,8 @@ const app = new Vue({
     el: '#application',
     router,
     components: {
-        Public
+        Public,
+        Favorites
     },
     store
 });
