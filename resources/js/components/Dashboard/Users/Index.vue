@@ -54,11 +54,12 @@
                 <b-button type="submit" variant="success" class="mr-2" v-b-modal.modal-user @click="newUser">Новый
                     пользователь
                 </b-button>
+
                 <!--<b-button variant="light">Отмена</b-button>-->
             </div>
         </div>
 
-        <b-modal id="modal-user" :title="editUser.id ? 'Edit user' : 'New user'" @ok="userCreate">
+        <b-modal id="modal-user" :title="editUser.id ? 'Редактирование пользователя' : 'Новый пользователь'" @ok="userCreate">
             <Forms v-model="editUser" :fields="editUser" :data="data"/>
         </b-modal>
         <b-modal id="modal-user-delete" title="Delete user">
@@ -92,6 +93,8 @@ export default {
     data() {
         return {
             order: 'name',
+            operationOk : false,
+            operationError : false,
             search: '',
             loading: true,
             editUser: {...newUser},
@@ -127,7 +130,6 @@ export default {
             this.editUser = {...newUser};
         },
         userEdit(data) {
-            console.log(data);
             this.editUser = data.item;
         },
         userDelete(data) {
@@ -136,15 +138,7 @@ export default {
         userUpdate() {
             this.clearModalErrors();
             users.update(this.editUser.id,this.editUser).then(response => {
-                console.log(response);
-                if (response.data.code == 'ok') {
-                    document.querySelector('.modal-body').textContent = "Пользователь обновлен";
-                }
-                else if(response.data.code == 'error'){
-                    document.querySelector('.modal-body').textContent = "Ошибка обновления пользователя";
-                }
-                location.reload();
-
+                response.data.code == 'ok' ? this.operationOk = true : this.operationError = true;
             }).catch(error => {
                 this.generateModalErrors(error.response.data.errors);
             });
@@ -152,22 +146,18 @@ export default {
         userDeleteApproved() {
 
         },
-        userCreate(bvModalEvt) {
-            bvModalEvt.preventDefault();
+        userCreate() {
+
+            //vot tut mazafaka
+            this.$bvToast.toast();
+
             if(this.editUser.id){
                 this.userUpdate();
                 return;
             }
             this.clearModalErrors();
             users.create(this.editUser).then(response => {
-                console.log(response);
-                if (response.data.code == 'ok') {
-                    document.querySelector('.modal-body').textContent = "Пользователь добавлен";
-                }
-                else if(response.data.code == 'error'){
-                    document.querySelector('.modal-body').textContent = "Ошибка сохранения пользователя";
-                }
-                location.reload();
+                response.data.code == 'ok' ? this.operationOk = true : this.operationError = true;
 
             }).catch(error => {
                 this.generateModalErrors(error.response.data.errors);
@@ -185,7 +175,6 @@ export default {
             for (var i = 0, l = keys.length; i < l; i++) {
                 let p = document.createElement("p");
                 p.textContent = errors[keys[i]];
-                p.style.cssText = "color: red; font-size:12px;";
                 p.setAttribute('class','errText');
                 document.querySelector('#input-' + keys[i]).parentNode.append(p);
             }
@@ -202,6 +191,9 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+    .errText{
+        color:red;
+        font-size: 12px;
+    }
 </style>
