@@ -1,5 +1,7 @@
 <template>
     <section class="users-dashboard">
+
+
         <h1>Пользователи</h1>
         <div class="row mt-4">
             <div class="col-md-6 grid-margin">
@@ -58,8 +60,18 @@
                 <!--<b-button variant="light">Отмена</b-button>-->
             </div>
         </div>
+        <div class="row mt-5">
+            <div class="col-md-12">
 
-        <b-modal id="modal-user" :title="editUser.id ? 'Редактирование пользователя' : 'Новый пользователь'" @ok="userCreate">
+                <b-alert dismissible v-model="operationOk" variant="success">
+                    {{ editUser.id ? "Пользователь обновлен" : "Пользователь добавлен" }}
+                </b-alert>
+                <b-alert dismissible v-model="operationError" variant="danger">
+                    {{ editUser.id ? "Ошибка обновления" : "Ошибка добавления" }}
+                </b-alert>
+            </div>
+        </div>
+        <b-modal id="modal-user" :title="editUser.id ? 'Редактирование пользователя' : 'Новый пользователь'" @ok.prevent="userCreate">
             <Forms v-model="editUser" :fields="editUser" :data="data"/>
         </b-modal>
         <b-modal id="modal-user-delete" title="Delete user">
@@ -82,7 +94,7 @@ let newUser = {
     id: '',
     name: '',
     email: '',
-    role: 'user',
+    role: 'client',
     password: ''
 };
 
@@ -139,6 +151,9 @@ export default {
             this.clearModalErrors();
             users.update(this.editUser.id,this.editUser).then(response => {
                 response.data.code == 'ok' ? this.operationOk = true : this.operationError = true;
+                this.$nextTick(() => {
+                    this.$bvModal.hide('modal-user');
+                });
             }).catch(error => {
                 this.generateModalErrors(error.response.data.errors);
             });
@@ -157,8 +172,15 @@ export default {
             }
             this.clearModalErrors();
             users.create(this.editUser).then(response => {
-                response.data.code == 'ok' ? this.operationOk = true : this.operationError = true;
-
+                if(response.data.code == 'ok'){
+                    this.operationOk = true
+                    this.users.push(response.data.user);
+                } else{
+                    this.operationError = true;
+                }
+                this.$nextTick(() => {
+                    this.$bvModal.hide('modal-user');
+                });
             }).catch(error => {
                 this.generateModalErrors(error.response.data.errors);
             });
