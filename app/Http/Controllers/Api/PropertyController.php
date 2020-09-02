@@ -17,7 +17,7 @@ class PropertyController extends Controller
     function query(Request $request){
         $data = $request->input();
         $address = $data['address'];
-        $km = $data['km'];
+        $km = $data['km'] ? $data['km']  : 10;
         $people = $data['people'];
 
         $client = new \GuzzleHttp\Client();
@@ -27,6 +27,7 @@ class PropertyController extends Controller
         $geo_data = $geocoder->getCoordinatesForAddress($address);
 
         $objects = Property::where(Property::raw('abs('.$geo_data['lat'].' - lat) * 111'), '<', $km)->where(Property::raw('abs('.$geo_data['lng'].' - lng) * 111'), '<', $km)->paginate(5);
+
         return response()->json($objects);
 
     }

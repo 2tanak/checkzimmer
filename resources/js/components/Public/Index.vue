@@ -330,11 +330,11 @@ export default{
             jQuery(this).removeClass('error');
             jQuery(this).closest('.input-block').find('.error-text').removeClass('active')
         });
-        /*properties.all()
+        properties.all()
             .then( resp => {
                 that.property = resp.data;
                 that.loading = false;
-            })*/
+            })
         setTimeout(function() {
             console.log(that.$auth.user());
         }, 1000);
