@@ -406,11 +406,13 @@ export default{
 
            properties.query(this.search)
                 .then( resp => {
-
+                    that.property = resp.data.data;
+                    that.loading = false;
                 })
         },
     }
 }
+
 </script>
 <style>
 .fade-enter-active, .fade-leave-active {

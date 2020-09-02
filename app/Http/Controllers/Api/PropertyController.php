@@ -24,8 +24,10 @@ class PropertyController extends Controller
         $geocoder = new Geocoder($client);
         $geocoder->setApiKey(config('geocoder.key'));
         $geocoder->setCountry(config('geocoder.country', 'US'));
-        print_r($geocoder->getCoordinatesForAddress($address));
-        //Sql....
+        $geo_data = $geocoder->getCoordinatesForAddress($address);
+
+        $objects = Property::where(Property::raw('abs('.$geo_data['lat'].' - lat) * 111'), '<', $km)->where(Property::raw('abs('.$geo_data['lng'].' - lng) * 111'), '<', $km)->paginate(5);
+        return response()->json($objects);
 
     }
 
