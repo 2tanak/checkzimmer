@@ -6,16 +6,16 @@
                 <div class="sample-block">
                     <div class="input-block sample-block-item">
                         <label for="text">адрес рабочего места:</label>
-                        <div class="input-container"><input id="text" type="text" placeholder="Например: 04158 Leipzig"></div>
+                        <div class="input-container"><input  v-model="search.address" id="text" type="text" placeholder="Например: 04158 Leipzig"></div>
                     </div>
                     <div class="distance-block select-block">
                         <label for="distance-select">дистанция:</label>
                         <div class="select-container">
-                            <select name="distance" id="distance-select" class="distance">
-                                <option value="1">10 км.</option>
-                                <option value="2">20 км.</option>
-                                <option value="3">30 км.</option>
-                                <option value="4">40 км.</option>
+                            <select v-model="search.km" name="distance" id="distance-select" class="distance">
+                                <option value="10">10 км.</option>
+                                <option value="20">20 км.</option>
+                                <option value="30">30 км.</option>
+                                <option value="40">40 км.</option>
                             </select>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                         <label class="desctop-label" for="number-personse">Кол-во человек:</label>
                         <label class="mobile-label" for="number-personse">Кол-во чел.:</label>
                         <div class="select-container">
-                            <select name="distance" id="number-personse" class="number-personse">
+                            <select v-model="search.people" name="distance" id="number-personse" class="number-personse">
                                 <option value="1">1 чел.</option>
                                 <option value="2">2 чел.</option>
                                 <option value="3">3 чел.</option>
@@ -302,6 +302,12 @@ import PropertyListItem from "./PropertyListItem";
 let PropertyRequest = ApiRequest('property')
 let properties = new PropertyRequest;
 
+let newSearch = {
+    address: '',
+    km: '',
+    people: '',
+};
+
 export default{
     name: 'app',
     components: {
@@ -311,7 +317,8 @@ export default{
         return {
             loading: true,
             endoflist: false,
-            property: []
+            property: [],
+            search: {...newSearch},
         };
     },
     mounted() {
@@ -323,11 +330,11 @@ export default{
             jQuery(this).removeClass('error');
             jQuery(this).closest('.input-block').find('.error-text').removeClass('active')
         });
-        properties.all()
+        /*properties.all()
             .then( resp => {
                 that.property = resp.data;
                 that.loading = false;
-            })
+            })*/
         setTimeout(function() {
             console.log(that.$auth.user());
         }, 1000);
@@ -396,10 +403,10 @@ export default{
         submitForm() {
             this.loading = true;
             let that = this;
-            properties.all()
+
+           properties.query(this.search)
                 .then( resp => {
-                    that.property = resp.data;
-                    that.loading = false;
+
                 })
         },
     }
