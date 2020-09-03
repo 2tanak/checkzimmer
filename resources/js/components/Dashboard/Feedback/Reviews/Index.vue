@@ -37,8 +37,8 @@
                                     {{ data.item.review }}
                                 </template>
                                 <template v-slot:cell(publish)="data">
-                                    <b-button variant="success" v-b-modal.reviewsModal @click="showReviews(data.item)" v-if="withdrawn">Опубликовать</b-button>
-                                    <b-button variant="success" v-b-modal.withdrawReviewModal @click="withdrawReview(data.item)" v-if="published">Отозвать</b-button>
+                                    <b-button variant="success" v-b-modal.reviewsModal @click="showReviews(data.item)" v-if=" data.item.status === 'waiting' ">Опубликовать</b-button>
+                                    <b-button variant="outline-primary" v-b-modal.withdrawReviewModal @click="withdrawReview(data.item)" v-else>Отозвать</b-button>
                                 </template>
                                 <template v-slot:cell(delete)="data">
                                     <b-button variant="danger" v-b-modal.deleteReviewModal @click='deleteReview(data.item)'>Удалить</b-button>
@@ -90,11 +90,6 @@
 
 <script>
 
-    import ApiRequest from "../../../API/ApiRequest";
-
-    let ReviewsRequest = ApiRequest('reviews');
-    let reviews = new ReviewsRequest;
-
 export default {
     name: "Index",
     data() {
@@ -109,29 +104,23 @@ export default {
             reviews: [],
             fields: ['created_at', 'rating', 'name', 'company', 'title', 'review', 'publish', 'delete'],
             reviewList: [
-                { id: 1, created_at: '01.01.2020', rating: 1 , name: 'Иван', company: 'Билайн', title: 'Заголовок', review: 'Текст отзыва' },
-                { id: 2, created_at: '02.02.2020', rating: 2, name: 'Сергей', company: 'МТС', title: 'Заголовок2', review: 'Текст отзыва2' },
-                { id: 3, created_at: '03.03.2020', rating: 3,  name: 'Дмитрий', company: 'Йота', title: 'Заголовок3', review: 'Текст отзыва3' }
+                { id: 1, status: 'published', created_at: '01.01.2020', rating: 1 , name: 'Иван', company: 'Билайн', title: 'Заголовок', review: 'Текст отзыва' },
+                { id: 2, status: 'published', created_at: '02.02.2020', rating: 2, name: 'Сергей', company: 'МТС', title: 'Заголовок2', review: 'Текст отзыва 2' },
+                { id: 3, status: 'waiting', created_at: '03.03.2020', rating: 3,  name: 'Дмитрий', company: 'Йота', title: 'Заголовок3', review: 'Текст отзыва 3' }
             ],
             activeReview: {
                 id: 0,
+                status: '',
                 created_at: '',
                 rating: '',
                 name: '',
                 company: '',
                 title: '',
                 review: ''
-            },
-            published: false,
-            withdrawn: true
+            }
         }
     },
     created() {
-        reviews.all()
-            .then(resp => {
-                this.reviews = resp.data;
-                this.loading = false;
-            })
     },
     mounted() {
     },
@@ -146,12 +135,16 @@ export default {
             this.activeReview = item;
         },
         handleOk() {
+            let index = this.reviewList.find( (elem, index, arr) => elem.id === this.activeReview.id);
+            index.status = 'published';
         },
         handleDeleteReview() {
-
+            let index = this.reviewList.find( (elem, index, arr) => elem.id === this.activeReview.id);
+            this.reviewList.splice(index, 1);
         },
         handleWithdrawReview() {
-
+            let index = this.reviewList.find( (elem, index, arr) => elem.id === this.activeReview.id);
+            index.status = 'waiting';
         }
     }
 }
