@@ -5,30 +5,46 @@
             <div class="col-md-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-table striped hover :items="items" :fields="fields">
+                        <b-table striped hover :items="questionItems" :fields="fields">
                             <template v-slot:cell(created_at)="data">
-                                01.01.2020
+                                {{ data.item.created_at }}
                             </template>
                             <template v-slot:cell(question)="data">
-                                Текст вопроса
+                                {{ data.item.question }}
                             </template>
                             <template v-slot:cell(response)="data">
-                                {{ answerText }}
+                                {{ data.item.response }}
                             </template>
                             <template v-slot:cell(answer)="data">
-                                <b-button v-b-modal.modal-question variant="success" v-if="answer">Ответить</b-button>
-                                <b-button v-b-modal.modal-question variant="outline-primary" v-if="edit">Редактировать</b-button>
+                                <b-button v-b-modal.modalQuestion variant="success" @click="answerModal(data.item)" v-if="data.item.response === ''">Ответить</b-button>
+                                <b-button v-b-modal.modalQuestion variant="outline-primary" @click="answerModal(data.item)" v-else>Редактировать</b-button>
+                            </template>
+                            <template v-slot:cell(delete)="data">
+                                <b-button v-b-modal.modalQuestionDelete variant="danger" @click="answerModalDelete(data.item)">Удалить</b-button>
                             </template>
                         </b-table>
                     </div>
                 </div>
             </div>
         </div>
-        <b-modal id="modal-question">
-            <template>
-                <b-form-textarea id="textarea-answer" v-model="answerText" placeholder="Enter answer"></b-form-textarea>
-            </template>
+
+        <b-modal id="modalQuestion" @ok="handleAnswerOk" @hidden="handleAnswerCancel" title="Answer to the question">
+            <div><span><strong>Data:</strong></span> {{ answerObject.created_at }}  </div>
+            <div><span><strong>Question:</strong></span> {{ answerObject.question }}  </div>
+            <div>
+                <div class="mb-2 mt-3"><strong>Your answer:</strong></div>
+                <div>
+                    <b-form-textarea id="textareaAnswer" v-model="answerObject.response" placeholder="Enter your answer" rows="10"></b-form-textarea>
+                </div>
+            </div>
         </b-modal>
+
+        <b-modal id="modalQuestionDelete" @ok="handleAnswerDelete" title="Delete question">
+            <p class="mb-3">Are you sure you want to delete?</p>
+            <div><span><strong>Data:</strong></span> {{ answerObject.created_at }}  </div>
+            <div><span><strong>Question:</strong></span> {{ answerObject.question }}  </div>
+        </b-modal>
+
     </section>
 </template>
 
@@ -37,19 +53,42 @@ export default {
 name: "Index",
     data() {
         return {
-            answerText: '',
-            fields: ['created_at', 'question', 'response', 'answer'],
-            items: [
-                { created_at: '01.01.2020', question: 'Текст вопроса', response: 'Текст ответа' }
+            textareaAnswer: '',
+            fields: ['created_at', 'question', 'response', 'answer', 'delete'],
+            questionItems: [
+                { id: 1, status: 'waiting', created_at: '01.01.2020', question: 'Текст вопроса', response: '' },
+                { id: 2, status: 'waiting', created_at: '02.02.2020', question: 'Текст вопроса 2', response: '' },
+                { id: 3, status: 'answered', created_at: '03.03.2020', question: 'Текст вопроса 3', response: '' }
             ],
             answer: true,
-            edit: false
+            answerObject: {
+                id: 0,
+                status: '',
+                created_at: '',
+                question: '',
+                response: ''
+            }
         }
     },
     mounted() {
     },
     methods: {
+        answerModal(item) {
+            this.answerObject = item;
+        },
+        answerModalDelete(item) {
+            this.answerObject = item;
+        },
+        handleAnswerOk() {
 
+        },
+        handleAnswerCancel() {
+            this.answerObject.response = '';
+        },
+        handleAnswerDelete() {
+            let index = this.questionItems.find( (elem, index, arr) => elem.id === this.answerObject.id);
+            this.questionItems.splice(index, 1);
+        }
     }
 }
 </script>
