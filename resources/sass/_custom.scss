@@ -967,7 +967,7 @@ footer#main-footer ul.footer-menu li a:active {
     object-fit: cover;
 }
 .property-card .data {
-    margin-right: 52px;
+    margin-right: 44px;
     margin-left: 18px;
     display: flex;
     flex-direction: column;
@@ -1039,6 +1039,9 @@ footer#main-footer ul.footer-menu li a:active {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+}
+.property-card .additionally > div:last-of-type {
+    margin-right: 0;
 }
 .property-card .data-block-circle {
     width: 28px;

@@ -43,10 +43,10 @@
                     <div class="main-menu">
                         <ul>
                             <li>
-                                <a href="#">
+                                <a href="/favorites">
                                     <img class="normal" src="/svg/i-favourites-header.svg" alt="Favourites">
                                     <img class="hover" src="/svg/i-favourites-hover.svg" alt="Favourites">
-                                    Фавориты <span>(1)</span>
+                                    Фавориты <span>()</span>
                                 </a>
                             </li>
                             <li>

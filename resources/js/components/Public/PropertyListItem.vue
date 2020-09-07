@@ -97,7 +97,7 @@
             </table>
             <div class="night-rating-block">
                 <div class="night">
-                    <a href="#" class="favorites">
+                    <a href="#" class="favorites" :class="{ active: isFavorite }" @click.prevent="addToFavorites">
                         <svg class="favorites-usual" width="12" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11.6211 5.98172C12.6977 4.8747 12.6977 3.07667 11.6211 1.96965C10.5487 0.867074 8.8134 0.867074 7.74102 1.96965L7.20482 2.52096C7.09263 2.6363 6.90737 2.6363 6.79518 2.52096L6.25898 1.96965C5.1866 0.867074 3.45132 0.867074 2.37895 1.96965C1.30226 3.07667 1.30226 4.8747 2.37895 5.98172L7 10.7329L11.6211 5.98172ZM7.33139 1.57124C8.62813 0.237973 10.7339 0.237973 12.0307 1.57124C13.3231 2.90006 13.3231 5.05131 12.0307 6.38013L7.20482 11.3419C7.09263 11.4573 6.90737 11.4573 6.79518 11.3419L1.96932 6.38013C0.676895 5.05131 0.676895 2.90006 1.96932 1.57124C3.26606 0.237973 5.37187 0.237973 6.66861 1.57124L7 1.91196L7.33139 1.57124Z" fill="#333646" stroke="#333646" stroke-width="0.2"/>
                         </svg>
@@ -149,6 +149,23 @@ export default {
         maxPeopleNum() {
             return Math.max( ...this.item.rooms.map( elem => elem.person ) )
         },
+        addToFavorites() {
+            let id = this.item.id;
+            let favoritesObject = JSON.parse(localStorage.getItem("favoritesList"));
+
+            if (favoritesObject === null) {
+                favoritesObject = [];
+            }
+            if (favoritesObject.indexOf(id) !== -1) {
+               favoritesObject.splice(favoritesObject.indexOf(id), 1);
+                console.log(favoritesObject);
+            } else {
+                favoritesObject.push(id);
+                console.log(favoritesObject);
+            }
+            localStorage.setItem('favoritesList', JSON.stringify(favoritesObject));
+
+        }
     },
     computed: {
         maxPeopleNumStr() {
@@ -170,6 +187,12 @@ export default {
         },
         getRooms() {
             return this.item.rooms;
+        },
+        isFavorite() {
+            let id = this.item.id;
+            let favoritesObject = JSON.parse(localStorage.getItem("favoritesList"));
+
+            return favoritesObject.includes(id);
         }
     }
 }
