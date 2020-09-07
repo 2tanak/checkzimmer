@@ -64,17 +64,17 @@
             <div class="col-md-12">
 
                 <b-alert dismissible v-model="operationOk" variant="success">
-                    {{ editUser.id ? "Пользователь обновлен" : "Пользователь добавлен" }}
+                    {{ textOperation}}
                 </b-alert>
                 <b-alert dismissible v-model="operationError" variant="danger">
-                    {{ editUser.id ? "Ошибка обновления" : "Ошибка добавления" }}
+                    {{ textOperation}}
                 </b-alert>
             </div>
         </div>
         <b-modal id="modal-user" :title="editUser.id ? 'Редактирование пользователя' : 'Новый пользователь'" @ok.prevent="userCreate">
             <Forms v-model="editUser" :fields="editUser" :data="data"/>
         </b-modal>
-        <b-modal id="modal-user-delete" title="Delete user">
+        <b-modal id="modal-user-delete" title="Delete user" @ok.prevent="userDeleteApproved">
             <span class="text-danger">A you sure you want to delete user <strong>{{ deleteUser.name }}</strong>
                 (<strong>{{ deleteUser.email }}</strong>)
             </span>
@@ -110,6 +110,7 @@ export default {
             search: '',
             loading: true,
             editUser: {...newUser},
+            textOperation: '',
             deleteUser: {},
             users: [],
             userFields: [
@@ -150,7 +151,13 @@ export default {
         userUpdate() {
             this.clearModalErrors();
             users.update(this.editUser.id,this.editUser).then(response => {
-                response.data.code == 'ok' ? this.operationOk = true : this.operationError = true;
+                if(response.data.code == 'ok'){
+                    this.textOperation = 'Пользователь обновлен';
+                    this.operationOk = true
+                }else{
+                    this.textOperation = 'Ошибка обновления';
+                    this.operationError = true;
+                }
                 this.$nextTick(() => {
                     this.$bvModal.hide('modal-user');
                 });
@@ -159,13 +166,30 @@ export default {
             });
         },
         userDeleteApproved() {
+            users.delete(this.deleteUser.id).then(response => {
+                if(response.data.code == 'ok'){
+                    this.textOperation = 'Пользователь удален';
+                    this.operationOk = true;
+                    var index = this.users.findIndex(n => n.id === this.deleteUser.id);
+                    if (index !== -1) {
+                        this.users.splice(index, 1);
+                    }
 
+
+                } else{
+                    this.textOperation = 'Ошибка удаления пользователя';
+                    this.operationError = true;
+                    this.operationError = true;
+                }
+
+            }).catch(error => {
+            });
+            this.$nextTick(() => {
+                this.$bvModal.hide('modal-user-delete');
+            });
         },
         userCreate() {
-
-            //vot tut mazafaka
             this.$bvToast.toast();
-
             if(this.editUser.id){
                 this.userUpdate();
                 return;
@@ -173,9 +197,11 @@ export default {
             this.clearModalErrors();
             users.create(this.editUser).then(response => {
                 if(response.data.code == 'ok'){
-                    this.operationOk = true
+                    this.textOperation = 'Пользователь добавлен';
+                    this.operationOk = true;
                     this.users.push(response.data.user);
                 } else{
+                    this.textOperation = 'Ошибка добавления пользователя';
                     this.operationError = true;
                 }
                 this.$nextTick(() => {

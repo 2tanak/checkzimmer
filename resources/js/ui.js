@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Public from './components/Public'
+import Favorites from './components/Public/Favorites'
 
 require('./bootstrap');
 
@@ -38,7 +39,8 @@ const app = new Vue({
     el: '#application',
     router,
     components: {
-        Public
+        Public,
+        Favorites
     },
     store
 });
@@ -429,8 +431,12 @@ jQuery(window).scroll( function() {
 jQuery(window).on("load resize", function(){
     var width = jQuery(document).width();
 
+    if (jQuery('.property-card-slider').length === 0) {
+        return;
+    }
+
     if (width <= 1040) {
-        jQuery('.property-card-slider').slick('unslick');
+        jQuery('.property-card-slider').filter('.slick-initialized').slick('unslick');
     } else {
         jQuery('.property-card-slider').not('.slick-initialized').slick({
             infinite: true,

@@ -39,4 +39,10 @@ class PropertyController extends Controller
         $property = Property::orderBy('created_at')->limit(10)->get();
         return response()->json($property);
     }
+    function queryProperty(Request $request) {
+        $fields = $request->all();
+        $property = Property::whereIn('id', $fields['id'])->get();
+
+        return response()->json($property);
+    }
 }

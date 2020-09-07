@@ -62,9 +62,9 @@
                         <transition name="fade" appear>
                         <div :style="{position: 'relative', opacity: loading ? 0:1, position: loading ? 'absolute':'relative' }">
                             <div class="property-item">
-                                <PropertyListItem v-for="item in property" :key="'id-'+item.id" :item="item"/>
+                                <PropertyListItem v-for="item in property" :key="'id-'+item.id" :item="item" @favsUpdated="updateFavCount"/>
                             </div>
-                            <div class="property-shadow"></div>
+                            <div class="property-shadow" v-if="property.length"></div>
 
                             <div class="google-map">
                                 <div id="map"></div>
@@ -334,6 +334,7 @@ export default{
             .then( resp => {
                 that.property = resp.data;
                 that.loading = false;
+                that.favoritesDisplay();
             })
         setTimeout(function() {
             console.log(that.$auth.user());
@@ -348,7 +349,6 @@ export default{
             e.preventDefault();
             jQuery(this).toggleClass('active');
         });
-
         function initMap() {
             if (typeof google === 'undefined' || !document.getElementById('map')) {
                 setTimeout( () => { initMap() }, 100 )
@@ -410,6 +410,17 @@ export default{
                     that.loading = false;
                 })
         },
+        favoritesCount() {
+            let favs = JSON.parse(localStorage.getItem("favoritesList")) || [];
+            return favs.length;
+        },
+        favoritesDisplay() {
+            jQuery('.favoritesCount').text( this.favoritesCount() )
+        },
+        updateFavCount() {
+            this.favoritesDisplay();
+        }
+
     }
 }
 
