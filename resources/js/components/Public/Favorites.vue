@@ -245,7 +245,7 @@
                 </div>
 
                 <transition>
-                    <div class="communication" v-if="property.length === 0">
+                    <div class="communication" v-if="!loading && property.length === 0">
                         <div class="description">
                             Вы еще ничего не добавили в избранное
                         </div>
@@ -277,7 +277,7 @@ export default {
     },
     data() {
         return {
-            loading: false,
+            loading: true,
             endoflist: false,
             notAddFavorites: true,
             property: []
@@ -289,9 +289,9 @@ export default {
 
         properties.query({id: favs})
             .then( resp => {
-                that.property = resp.data;
                 that.loading = false;
                 that.favoritesDisplay();
+                that.property = resp.data;
             })
 
         jQuery('.entry.login-link').click(function(e) {

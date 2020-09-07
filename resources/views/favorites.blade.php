@@ -2,8 +2,7 @@
 
 @section('content')
 
-
-
+    @include('css.loader-main')
 
     <div id="application" class="init-container">
         <Favorites />
