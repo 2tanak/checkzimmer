@@ -5,14 +5,11 @@
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Категория"  label-for="input-phone">
-                            <b-dropdown>
-                                <template v-slot:button-content>
-                                    Тип жилья
-                                </template>
-                                <b-dropdown-item href="#" :value="0">Не выбран</b-dropdown-item>
-                                <b-dropdown-item v-for="rootType in rootTypes" href="#" :value="rootType.id">{{ rootType.name }}</b-dropdown-item>
-                            </b-dropdown>
+                        <b-form-group label="Объект" label-for="input-phone">
+                            <b-select v-model="selectedObject">
+                                <b-select-option value="not_choice">Не выбран</b-select-option>
+                                <b-select-option v-for="rootType in rootTypes" :value="rootType.id">{{ rootType.name }}</b-select-option>
+                            </b-select>
                         </b-form-group>
                     </div>
                 </div>
@@ -20,15 +17,22 @@
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Объект" label-for="input-phone">
-                            <b-dropdown>
-                                <template v-slot:button-content>
-                                    Объект недвижимости
-                                </template>
-                                <b-dropdown-item href="#" :value="0">Не выбран</b-dropdown-item>
-                                <b-dropdown-item v-for="rootType in rootTypes" href="#" :value="rootType.id">{{ rootType.name }}</b-dropdown-item>
-                            </b-dropdown>
-                        </b-form-group>
+                        <div class="d-flex" style="width:100%;">
+                            <b-form-group label="Администрирование"  label-for="selectedUser" class="mr-3" style="width:50%;">
+                                <b-select v-model="selectedUser">
+                                    <b-select-option href="#" value="admin">Админ</b-select-option>
+                                    <b-select-option href="#" value="choice">Выбор пользователя</b-select-option>
+                                </b-select>
+                            </b-form-group>
+                            <b-form-group label="Пользователи" label-for="selectedUserItem" style="width:50%;" v-if="selectedUser === 'choice' ">
+                                <b-select v-model="selectedUserItem">
+                                    <b-select-option href="#" value="not_choice">Не выбрано</b-select-option>
+                                    <b-select-option href="#" value="user_1">Пользователь 1</b-select-option>
+                                    <b-select-option href="#" value="user_2">Пользователь 2</b-select-option>
+                                    <b-select-option href="#" value="user_3">Пользователь 3</b-select-option>
+                                </b-select>
+                            </b-form-group>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -61,79 +65,36 @@
 </template>
 
 <script>
+
     export default {
         name: "Index",
         data() {
             return {
+                selectedObject: 'not_choice',
+                selectedUser: 'admin',
+                selectedUserItem: 'not_choice',
                 room_types: [
-                    {
-                        id: 1,
-                        room_type_id: 0,
-                        picture: '+',
-                        name: 'дом (целиком)',
-                        persons: 2
-                    },
-                    {
-                        id: 6,
-                        room_type_id: 1,
-                        picture: '+',
-                        name: 'одноместный',
-                        persons: 2
-                    },
-                    {
-                        id: 8,
-                        room_type_id: 1,
-                        picture: '+',
-                        name: 'одноместный',
-                        persons: 2
-                    },
-                    {
-                        id: 16,
-                        room_type_id: 0,
-                        picture: '+',
-                        name: 'квартира',
-                        persons: 2
-                    },
-                    {
-                        id: 31,
-                        room_type_id: 16,
-                        picture: '+',
-                        name: 'двухместная',
-                        persons: 2
-                    },
-
-                ],
-                features: [
-                    {
-                        id: 39,
-                        room_type_id: 5,
-                        picture: '+',
-                        name: 'Eigene kuche',
-                    },
-                    {
-                        id: 40,
-                        room_type_id: 5,
-                        picture: '-',
-                        name: 'Gemeinschaftskuche',
-                    },
-                    {
-                        id: 41,
-                        room_type_id: 6,
-                        picture: '*',
-                        name: 'Sauna'
-                    }
+                    { id: 1, room_type_id: 0, picture: '+', name: 'дом (целиком)', persons: 2 },
+                    { id: 6, room_type_id: 1, picture: '+', name: 'одноместный', persons: 2 },
+                    { id: 8, room_type_id: 1, picture: '+', name: 'одноместный', persons: 2 },
+                    { id: 16, room_type_id: 0, picture: '+', name: 'квартира', persons: 2 },
+                    { id: 31, room_type_id: 16, picture: '+', name: 'двухместная', persons: 2 }
                 ]
             }
         },
         computed: {
             rootTypes() {
-                return this.room_types.filter( item => item.room_type_id === 0)
+                return this.room_types.filter( item => item.room_type_id === 0);
             },
             subTypes() {
-                return this.room_types.filter( item => item.room_type_id !== 0)
+                return this.room_types.filter( item => item.room_type_id !== 0);
             }
         },
+        methods: {
+
+        }
     }
+
 </script>
 
 <style scoped>
