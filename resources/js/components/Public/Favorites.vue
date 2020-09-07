@@ -1,47 +1,16 @@
 <template>
     <div id="app">
-        <div class="list-content">
+        <div class="list-content favorites-content">
             <div class="container">
                 <h1>Избранное</h1>
-                <div class="sample-block">
-                    <div class="input-block sample-block-item">
-                        <label for="text">адрес рабочего места:</label>
-                        <div class="input-container"><input id="text" type="text" placeholder="Например: 04158 Leipzig"></div>
-                    </div>
-                    <div class="distance-block select-block">
-                        <label for="distance-select">дистанция:</label>
-                        <div class="select-container">
-                            <select name="distance" id="distance-select" class="distance">
-                                <option value="1">10 км.</option>
-                                <option value="2">20 км.</option>
-                                <option value="3">30 км.</option>
-                                <option value="4">40 км.</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="number-personse-block select-block">
-                        <label class="desctop-label" for="number-personse">Кол-во человек:</label>
-                        <label class="mobile-label" for="number-personse">Кол-во чел.:</label>
-                        <div class="select-container">
-                            <select name="distance" id="number-personse" class="number-personse">
-                                <option value="1">1 чел.</option>
-                                <option value="2">2 чел.</option>
-                                <option value="3">3 чел.</option>
-                                <option value="4">4 чел.</option>
-                            </select>
-                        </div>
-                    </div>
-                    <a class="find-housing" href="#" @click.prevent="submitForm">Найти жильё</a>
-                </div>
             </div>
 
             <div class="list-content-item">
                 <div class="container">
-                    <div class="sorting-block">
+                    <div class="sorting-block" v-if="property.length !== 0">
                         <div class="left-block">
                             <a class="list active" href="#">Список</a>
                             <a class="map" href="#">На карте</a>
-                            <div class="result">Найдено 1240 вариантов жилья</div>
                         </div>
                         <div class="sorting">
                             <a href="#">Сортировка по умолчанию</a>
@@ -64,7 +33,7 @@
                                 <div class="property-item">
                                     <PropertyListItem v-for="item in property" :key="'id-'+item.id" :item="item"/>
                                 </div>
-                                <div class="property-shadow"></div>
+                                <div class="property-shadow" v-if="property.length"></div>
 
                                 <div class="google-map">
                                     <div id="map"></div>
@@ -275,13 +244,13 @@
                     </div>
                 </div>
 
-                <transition name="fade">
-                    <div class="communication" v-if="endoflist">
+                <transition>
+                    <div class="communication" v-if="property.length === 0">
                         <div class="description">
-                            Предложения по вашему запросу закончились, увеличьте дистанцию или свяжитесь с менежером напрямую
+                            Вы еще ничего не добавили в избранное
                         </div>
                         <div class="link-block">
-                            <a href="#">Связаться с менеджером</a>
+                            <a href="/">Перейти на главную</a>
                             <div class="shadow-block"></div>
                         </div>
                     </div>
@@ -295,11 +264,80 @@
 </template>
 
 <script>
+import ApiRequest from "../API/ApiRequest";
+import PropertyListItem from "./PropertyListItem";
+
+let PropertyRequest = ApiRequest('property')
+let properties = new PropertyRequest;
+
 export default {
     name: "favorites",
+    components: {
+        PropertyListItem
+    },
     data() {
         return {
+            loading: false,
+            endoflist: false,
+            notAddFavorites: true,
             property: []
+        }
+    },
+    mounted() {
+        let that = this;
+        let favs = JSON.parse(localStorage.getItem("favoritesList")) || [];
+
+        properties.query({id: favs})
+            .then( resp => {
+                that.property = resp.data;
+                that.loading = false;
+                that.favoritesDisplay();
+            })
+
+        jQuery('.entry.login-link').click(function(e) {
+            that.login(e);
+        })
+        jQuery('.modal-form.login input').on('input', function() {
+            jQuery(this).removeClass('error');
+            jQuery(this).closest('.input-block').find('.error-text').removeClass('active')
+        });
+
+        setTimeout(function() {
+            console.log(that.$auth.user());
+        }, 1000);
+        jQuery('body').on('click', 'a.collapse-circle', function(e) {
+            e.preventDefault();
+            var parent = jQuery(this).closest('.property-card');
+            jQuery(parent).toggleClass('collapse-item');
+            jQuery(this).toggleClass('active');
+        });
+        jQuery('body').on('click', 'a.favorites', function(e) {
+            e.preventDefault();
+            jQuery(this).toggleClass('active');
+        });
+        function initMap() {
+            if (typeof google === 'undefined' || !document.getElementById('map')) {
+                setTimeout( () => { initMap() }, 100 )
+                return;
+            }
+            console.log(document.getElementById('map'));
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 51.340000, lng: 12.382000},
+                zoom: 8
+            });
+        }
+        initMap()
+    },
+    methods: {
+        favoritesCount() {
+            let favs = JSON.parse(localStorage.getItem("favoritesList")) || [];
+            return favs.length;
+        },
+        favoritesDisplay() {
+            jQuery('.favoritesCount').text( this.favoritesCount() )
+        },
+        updateFavCount() {
+            this.favoritesDisplay();
         }
     }
 }

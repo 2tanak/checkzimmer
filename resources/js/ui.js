@@ -431,8 +431,12 @@ jQuery(window).scroll( function() {
 jQuery(window).on("load resize", function(){
     var width = jQuery(document).width();
 
+    if (jQuery('.property-card-slider').length === 0) {
+        return;
+    }
+
     if (width <= 1040) {
-        jQuery('.property-card-slider').slick('unslick');
+        jQuery('.property-card-slider').filter('.slick-initialized').slick('unslick');
     } else {
         jQuery('.property-card-slider').not('.slick-initialized').slick({
             infinite: true,
