@@ -158,13 +158,11 @@ export default {
             }
             if (favoritesObject.indexOf(id) !== -1) {
                favoritesObject.splice(favoritesObject.indexOf(id), 1);
-                console.log(favoritesObject);
             } else {
                 favoritesObject.push(id);
-                console.log(favoritesObject);
             }
             localStorage.setItem('favoritesList', JSON.stringify(favoritesObject));
-
+            this.$emit('favsUpdated');
         }
     },
     computed: {
@@ -190,7 +188,7 @@ export default {
         },
         isFavorite() {
             let id = this.item.id;
-            let favoritesObject = JSON.parse(localStorage.getItem("favoritesList"));
+            let favoritesObject = JSON.parse(localStorage.getItem("favoritesList")) || [];
 
             return favoritesObject.includes(id);
         }

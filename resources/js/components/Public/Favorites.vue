@@ -64,7 +64,7 @@
                                 <div class="property-item">
                                     <PropertyListItem v-for="item in property" :key="'id-'+item.id" :item="item"/>
                                 </div>
-                                <div class="property-shadow"></div>
+                                <div class="property-shadow" v-if="property.length"></div>
 
                                 <div class="google-map">
                                     <div id="map"></div>
@@ -295,11 +295,80 @@
 </template>
 
 <script>
+import ApiRequest from "../API/ApiRequest";
+import PropertyListItem from "./PropertyListItem";
+
+let PropertyRequest = ApiRequest('property')
+let properties = new PropertyRequest;
+
 export default {
     name: "favorites",
+    components: {
+        PropertyListItem
+    },
     data() {
         return {
+            loading: true,
+            endoflist: false,
             property: []
+        }
+    },
+    mounted() {
+        let that = this;
+        let favs = JSON.parse(localStorage.getItem("favoritesList")) || [];
+
+        properties.query({id: favs})
+            .then( resp => {
+                that.property = resp.data;
+                that.loading = false;
+                that.favoritesDisplay();
+            })
+
+        jQuery('.entry.login-link').click(function(e) {
+            that.login(e);
+        })
+        jQuery('.modal-form.login input').on('input', function() {
+            jQuery(this).removeClass('error');
+            jQuery(this).closest('.input-block').find('.error-text').removeClass('active')
+        });
+
+        setTimeout(function() {
+            console.log(that.$auth.user());
+        }, 1000);
+        jQuery('body').on('click', 'a.collapse-circle', function(e) {
+            e.preventDefault();
+            var parent = jQuery(this).closest('.property-card');
+            jQuery(parent).toggleClass('collapse-item');
+            jQuery(this).toggleClass('active');
+        });
+        jQuery('body').on('click', 'a.favorites', function(e) {
+            e.preventDefault();
+            jQuery(this).toggleClass('active');
+        });
+        function initMap() {
+            if (typeof google === 'undefined' || !document.getElementById('map')) {
+                setTimeout( () => { initMap() }, 100 )
+                return;
+            }
+            console.log(document.getElementById('map'));
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 51.340000, lng: 12.382000},
+                zoom: 8
+            });
+        }
+        initMap()
+    },
+    methods: {
+        favoritesCount() {
+            let favs = JSON.parse(localStorage.getItem("favoritesList")) || [];
+            return favs.length;
+        },
+        favoritesDisplay() {
+            console.log('!!!!!!'+this.favoritesCount());
+            jQuery('.favoritesCount').text( this.favoritesCount() )
+        },
+        updateFavCount() {
+            this.favoritesDisplay();
         }
     }
 }
