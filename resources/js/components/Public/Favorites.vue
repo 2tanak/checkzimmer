@@ -1,47 +1,16 @@
 <template>
     <div id="app">
-        <div class="list-content">
+        <div class="list-content favorites-content">
             <div class="container">
                 <h1>Избранное</h1>
-                <div class="sample-block">
-                    <div class="input-block sample-block-item">
-                        <label for="text">адрес рабочего места:</label>
-                        <div class="input-container"><input id="text" type="text" placeholder="Например: 04158 Leipzig"></div>
-                    </div>
-                    <div class="distance-block select-block">
-                        <label for="distance-select">дистанция:</label>
-                        <div class="select-container">
-                            <select name="distance" id="distance-select" class="distance">
-                                <option value="1">10 км.</option>
-                                <option value="2">20 км.</option>
-                                <option value="3">30 км.</option>
-                                <option value="4">40 км.</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="number-personse-block select-block">
-                        <label class="desctop-label" for="number-personse">Кол-во человек:</label>
-                        <label class="mobile-label" for="number-personse">Кол-во чел.:</label>
-                        <div class="select-container">
-                            <select name="distance" id="number-personse" class="number-personse">
-                                <option value="1">1 чел.</option>
-                                <option value="2">2 чел.</option>
-                                <option value="3">3 чел.</option>
-                                <option value="4">4 чел.</option>
-                            </select>
-                        </div>
-                    </div>
-                    <a class="find-housing" href="#" @click.prevent="submitForm">Найти жильё</a>
-                </div>
             </div>
 
             <div class="list-content-item">
                 <div class="container">
-                    <div class="sorting-block">
+                    <div class="sorting-block" v-if="property.length !== 0">
                         <div class="left-block">
                             <a class="list active" href="#">Список</a>
                             <a class="map" href="#">На карте</a>
-                            <div class="result">Найдено 1240 вариантов жилья</div>
                         </div>
                         <div class="sorting">
                             <a href="#">Сортировка по умолчанию</a>
@@ -275,13 +244,13 @@
                     </div>
                 </div>
 
-                <transition name="fade">
-                    <div class="communication" v-if="endoflist">
+                <transition>
+                    <div class="communication" v-if="property.length === 0">
                         <div class="description">
-                            Предложения по вашему запросу закончились, увеличьте дистанцию или свяжитесь с менежером напрямую
+                            Вы еще ничего не добавили в избранное
                         </div>
                         <div class="link-block">
-                            <a href="#">Связаться с менеджером</a>
+                            <a href="/">Перейти на главную</a>
                             <div class="shadow-block"></div>
                         </div>
                     </div>
@@ -308,8 +277,9 @@ export default {
     },
     data() {
         return {
-            loading: true,
+            loading: false,
             endoflist: false,
+            notAddFavorites: true,
             property: []
         }
     },
@@ -364,7 +334,6 @@ export default {
             return favs.length;
         },
         favoritesDisplay() {
-            console.log('!!!!!!'+this.favoritesCount());
             jQuery('.favoritesCount').text( this.favoritesCount() )
         },
         updateFavCount() {
