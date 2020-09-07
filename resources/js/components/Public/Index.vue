@@ -341,7 +341,6 @@ export default{
             e.preventDefault();
             jQuery(this).toggleClass('active');
         });
-
         function initMap() {
             if (typeof google === 'undefined' || !document.getElementById('map')) {
                 setTimeout( () => { initMap() }, 100 )
