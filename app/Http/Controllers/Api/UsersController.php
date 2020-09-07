@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Api;
 
 use App\User;
+use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -17,13 +18,32 @@ class UsersController extends Controller
         return response()->json( $option->pluck('value', 'key', 'id') );
     }
     function store(Request $request) {
-        return response()->json([]);
+        request()->validate([
+            'name' => 'required',
+            'password' => 'required|confirmed|min:5',
+            'role' => 'required',
+            'email' => 'required|email|unique:users'
+        ]);
+        $data = $request->input();
+        $item = new User($data);
+        $item->save();
+        return $item ? response()->json(['code' => 'ok','user' => $item]) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
     }
+
+
     function update(Request $request, $id) {
 
-        return response()->json([]);
+        request()->validate([
+            'name' => 'required',
+            'password' => 'confirmed|min:5',
+            'email' => 'required|email'
+        ]);
+        $user = User::find($id);
+        return $user->update($request->input()) ? response()->json(['code' => 'ok']) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
+
     }
-    function delete($id) {
+    function destroy($id) {
+        User::find($id)->delete();
         return response()->json(['code' => 'ok']);
     }
 }
