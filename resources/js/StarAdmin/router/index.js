@@ -72,18 +72,6 @@ export default new Router({
             component: widgets
         },
         {
-            path: '/dashboard/property/rooms',
-            name: 'rooms',
-            component: Rooms,
-            meta: { auth: true }
-        },
-        {
-            path: '/dashboard/property/assigned-room-types',
-            name: 'assigned-room-types',
-            component: AssignedRoomTypes,
-            meta: { auth: true }
-        },
-        {
             path: '/dashboard/property/items',
             name: 'property',
             component: Property,
@@ -93,6 +81,18 @@ export default new Router({
             path: '/dashboard/property/:item',
             name: 'property-single',
             component: PropertySingle,
+            meta: { auth: true }
+        },
+        {
+            path: '/dashboard/property/rooms',
+            name: 'rooms',
+            component: Rooms,
+            meta: { auth: true }
+        },
+        {
+            path: '/property/assigned-room-types',
+            name: 'assigned-room-types',
+            component: AssignedRoomTypes,
             meta: { auth: true }
         },
         {
@@ -162,7 +162,7 @@ export default new Router({
             meta: { auth: true }
         },
         {
-            path: '/dashboard/feedback/reviews',
+            path: '/dashboard/data/reviews',
             name: 'reviews',
             component: Reviews,
             meta: { auth: true }
