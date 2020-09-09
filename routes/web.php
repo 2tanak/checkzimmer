@@ -17,7 +17,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'HomeController@dashboard')->name('home');
-Route::get('/dashboard/{page?}/{subpage?}', 'HomeController@dashboard')->name('dashboar-page');
+Route::get('/dashboard/{page?}/{subpage?}', 'HomeController@dashboard')->name('dashboard-page');
 Route::get('/list', 'HomeController@list')->name('list');
 Route::get('/single', 'HomeController@single')->name('single');
 Route::get('/favorites', 'HomeController@favorites')->name('favorites');

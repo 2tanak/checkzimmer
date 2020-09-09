@@ -37,6 +37,8 @@ import Footer from '../../components/Dashboard/Website/Footer';
 import Users from '../../components/Dashboard/Users';
 import Features from '../../components/Dashboard/Data/Features';
 import RoomTypes from '../../components/Dashboard/Data/RoomTypes';
+import Questions from '../../components/Dashboard/Feedback/Questions';
+import Reviews from '../../components/Dashboard/Feedback/Reviews';
 import Property from '../../components/Dashboard/Property/Property';
 import PropertySingle from '../../components/Dashboard/Property/Property/Single';
 import Rooms from '../../components/Dashboard/Property/Rooms';
@@ -70,6 +72,18 @@ export default new Router({
             component: widgets
         },
         {
+            path: '/dashboard/property/rooms',
+            name: 'rooms',
+            component: Rooms,
+            meta: { auth: true }
+        },
+        {
+            path: '/dashboard/property/assigned-room-types',
+            name: 'assigned-room-types',
+            component: AssignedRoomTypes,
+            meta: { auth: true }
+        },
+        {
             path: '/dashboard/property/items',
             name: 'property',
             component: Property,
@@ -79,18 +93,6 @@ export default new Router({
             path: '/dashboard/property/:item',
             name: 'property-single',
             component: PropertySingle,
-            meta: { auth: true }
-        },
-        {
-            path: '/dashboard/property/rooms',
-            name: 'rooms',
-            component: Rooms,
-            meta: { auth: true }
-        },
-        {
-            path: '/property/assigned-room-types',
-            name: 'assigned-room-types',
-            component: AssignedRoomTypes,
             meta: { auth: true }
         },
         {
@@ -151,6 +153,18 @@ export default new Router({
             path: '/dashboard/data/room-types',
             name: 'room-types',
             component: RoomTypes,
+            meta: { auth: true }
+        },
+        {
+            path: '/dashboard/feedback/questions',
+            name: 'questions',
+            component: Questions,
+            meta: { auth: true }
+        },
+        {
+            path: '/dashboard/feedback/reviews',
+            name: 'reviews',
+            component: Reviews,
             meta: { auth: true }
         },
         {
