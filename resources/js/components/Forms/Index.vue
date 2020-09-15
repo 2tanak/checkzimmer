@@ -36,7 +36,7 @@
         },
         computed: {
             inputTypes() {
-                return ['text', 'email', 'password']
+                return ['text', 'email', 'password', 'number']
             }
         },
     }

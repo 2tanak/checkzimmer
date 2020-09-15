@@ -139,7 +139,7 @@ export default {
             index.status = 'published';
         },
         handleDeleteReview() {
-            let index = this.reviewList.find( (elem, index, arr) => elem.id === this.activeReview.id);
+            let index = this.reviewList.findIndex( (elem, index, arr) => elem.id === this.activeReview.id);
             this.reviewList.splice(index, 1);
         },
         handleWithdrawReview() {

@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <b-modal id="modalQuestion" @ok="handleAnswerOk" @hidden="handleAnswerCancel" title="Answer to the question">
+        <b-modal id="modalQuestion" @ok="answerOk" @cancel="answerCancel" @hidden="answerHidden" title="Answer to the question">
             <div><span><strong>Data:</strong></span> {{ answerObject.created_at }}  </div>
             <div><span><strong>Question:</strong></span> {{ answerObject.question }}  </div>
             <div>
@@ -39,7 +39,7 @@
             </div>
         </b-modal>
 
-        <b-modal id="modalQuestionDelete" @ok="handleAnswerDelete" title="Delete question">
+        <b-modal id="modalQuestionDelete" @ok="answerDelete" title="Delete question">
             <p class="mb-3">Are you sure you want to delete?</p>
             <div><span><strong>Data:</strong></span> {{ answerObject.created_at }}  </div>
             <div><span><strong>Question:</strong></span> {{ answerObject.question }}  </div>
@@ -54,6 +54,7 @@ export default {
     data() {
         return {
             textareaAnswer: '',
+            modalApproove: false,
             fields: ['created_at', 'question', 'response', 'answer', 'delete'],
             questionItems: [
                 { id: 1, status: 'waiting', created_at: '01.01.2020', question: 'Текст вопроса', response: '' },
@@ -79,15 +80,20 @@ export default {
         answerModalDelete(item) {
             this.answerObject = item;
         },
-        handleAnswerOk() {
-
+        answerOk() {
+            this.modalApproove = true;
         },
-        handleAnswerCancel() {
-            this.answerObject.response = '';
+        answerCancel() {
+            this.modalApproove = false;
         },
-        handleAnswerDelete() {
-            let index = this.questionItems.find( (elem, index, arr) => elem.id === this.answerObject.id);
+        answerDelete() {
+            let index = this.questionItems.findIndex( (elem, index, arr) => elem.id === this.answerObject.id);
             this.questionItems.splice(index, 1);
+        },
+        answerHidden() {
+            if (this.modalApproove === false) {
+                this.answerObject.response = '';
+            }
         }
     }
 }
