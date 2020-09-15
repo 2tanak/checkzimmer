@@ -78,42 +78,11 @@
                 types: '',
                 loading: true,
                 room_types: [
-                    {
-                        id: 1,
-                        room_type_id: 0,
-                        picture: '+',
-                        name: 'дом (целиком)',
-                        persons: 2
-                    },
-                    {
-                        id: 6,
-                        room_type_id: 1,
-                        picture: '+',
-                        name: 'одноместный',
-                        persons: 2
-                    },
-                    {
-                        id: 8,
-                        room_type_id: 1,
-                        picture: '+',
-                        name: 'одноместный',
-                        persons: 2
-                    },
-                    {
-                        id: 16,
-                        room_type_id: 0,
-                        picture: '+',
-                        name: 'квартира',
-                        persons: 2
-                    },
-                    {
-                        id: 31,
-                        room_type_id: 16,
-                        picture: '+',
-                        name: 'двухместная',
-                        persons: 2
-                    },
-
+                    { id: 1, room_type_id: 0, picture: '+', name: 'дом (целиком)', persons: 2 },
+                    { id: 6, room_type_id: 1, picture: '+', name: 'одноместный', persons: 2 },
+                    { id: 8, room_type_id: 1, picture: '+', name: 'одноместный', persons: 2 },
+                    { id: 16, room_type_id: 0, picture: '+', name: 'квартира', persons: 2 },
+                    { id: 31, room_type_id: 16, picture: '+', name: 'двухместная', persons: 2 },
                 ],
                 fields: ['id', 'room_type', 'picture', 'name', 'persons'],
                 data: roomTypesForm,
