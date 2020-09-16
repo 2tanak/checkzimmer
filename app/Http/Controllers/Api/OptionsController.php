@@ -21,7 +21,6 @@ class OptionsController extends Controller
         return response()->json( $options->pluck('value', 'key') );
     }
     function store(Request $request) {
-
         return response()->json(['111']);
     }
     function update(Request $request, $id) {
