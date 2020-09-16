@@ -44,6 +44,7 @@ Route::middleware('api')->namespace('Api')->group(function () {
     Route::post('/hotels-request', 'BookingController@saveHotels');
 
     Route::post('/property/query', 'PropertyController@queryProperty');
+    Route::post('/property/queryFilter', 'PropertyController@queryFilter');
 });
 
 

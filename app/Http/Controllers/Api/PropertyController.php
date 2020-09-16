@@ -14,7 +14,7 @@ class PropertyController extends Controller
         return response()->json(Property::ind());
     }
 
-    function query(Request $request){
+    function queryFilter(Request $request){
         $data = $request->input();
         $address = $data['address'];
         $km = $data['km'] ? $data['km']  : 10;
@@ -26,7 +26,8 @@ class PropertyController extends Controller
         $geocoder->setCountry(config('geocoder.country', 'US'));
         $geo_data = $geocoder->getCoordinatesForAddress($address);
 
-        $objects = Property::where(Property::raw('abs('.$geo_data['lat'].' - lat) * 111'), '<', $km)->where(Property::raw('abs('.$geo_data['lng'].' - lng) * 111'), '<', $km)->paginate(5);
+        $objects = Property::where(Property::raw('abs('.$geo_data['lat'].' - lat) * 111'), '<', $km)
+            ->where(Property::raw('abs('.$geo_data['lng'].' - lng) * 111'), '<', $km)->paginate(20);
 
         return response()->json($objects);
 

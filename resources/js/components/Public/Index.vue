@@ -41,7 +41,7 @@
                         <div class="left-block">
                             <a class="list active" href="#">Список</a>
                             <a class="map" href="#">На карте</a>
-                            <div class="result">Найдено 1240 вариантов жилья</div>
+                            <div class="result">Найдено <span class="property-found">0</span> вариантов жилья</div>
                         </div>
                         <div class="sorting">
                             <a href="#">Сортировка по умолчанию</a>
@@ -304,8 +304,8 @@ let properties = new PropertyRequest;
 
 let newSearch = {
     address: '',
-    km: '',
-    people: '',
+    km: '20',
+    people: '2',
 };
 
 export default{
@@ -335,6 +335,7 @@ export default{
                 that.property = resp.data;
                 that.loading = false;
                 that.favoritesDisplay();
+                that.foundTotal();
             })
         setTimeout(function() {
             console.log(that.$auth.user());
@@ -404,10 +405,11 @@ export default{
             this.loading = true;
             let that = this;
 
-           properties.query(this.search)
+           properties.request('queryFilter', this.search)
                 .then( resp => {
                     that.property = resp.data.data;
                     that.loading = false;
+                    that.foundTotal()
                 })
         },
         favoritesCount() {
@@ -419,8 +421,10 @@ export default{
         },
         updateFavCount() {
             this.favoritesDisplay();
+        },
+        foundTotal() {
+            jQuery('.property-found').text(this.property.length);
         }
-
     }
 }
 

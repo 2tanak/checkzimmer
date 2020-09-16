@@ -5,10 +5,6 @@
                 <div v-for="photo in getPhotos">
                     <img :src="photo.url_max300" alt="Property picture">
                 </div>
-                <div><img src="/img/property-picture2.png" alt="Property picture"></div>
-                <div><img src="/img/property-picture.png" alt="Property picture"></div>
-                <div><img src="/img/property-picture2.png" alt="Property picture"></div>
-                <div><img src="/img/property-picture.png" alt="Property picture"></div>
             </div>
             <div class="data">
                 <a :href="'/single/'+item.id" class="title"><span>{{ item.name }}</span></a>
@@ -105,7 +101,7 @@
                             <path d="M12.1 1.5c-.6-.7-1.5-1-2.4-1-.9 0-1.8.4-2.4 1l-.3.3-.3-.3C6.1.8 5.2.5 4.3.5c-.9 0-1.8.4-2.4 1C.6 2.9.6 5.1 1.9 6.4l4.8 5c.1.1.2.1.3.1.1 0 .2 0 .3-.1l4.8-5c1.3-1.3 1.3-3.5 0-4.9z" fill="#EE483F"/>
                         </svg>
                     </a>
-                    <div class="price"><span>от &euro; {{ minRoomPrice }}</span> ночь</div>
+                    <div class="price"><span>от &euro;{{ minRoomPrice }}</span> ночь</div>
                 </div>
                 <div class="rating">
                     <div v-if="item.rating" class="rating-number">
@@ -181,7 +177,7 @@ export default {
             if (!photos) {
                 return []
             }
-            return JSON.parse(photos.value);
+            return JSON.parse(photos.value).slice(0, 5);
         },
         getRooms() {
             return this.item.rooms;
