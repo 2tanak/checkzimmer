@@ -17,6 +17,20 @@ export default (base) => class ApiRequest {
     query(data) {
         return client.post(`/api/${base}/query`, data);
     }
+    request(action, data, reqType) {
+        reqType = reqType || 'post';
+        let url = `/api/${base}/${action}`;
+        switch (reqType) {
+            case 'post':
+                return client.post(url, data);
+            case 'get':
+                return client.get(url, data);
+            case 'put':
+                return client.put(url, data);
+            case 'delete':
+                return client.delete(url, data);
+        }
+    }
     update(id, data) {
         return client.put(`/api/${base}/${id}`, data);
     }

@@ -6,16 +6,16 @@
                 <div class="sample-block">
                     <div class="input-block sample-block-item">
                         <label for="text">адрес рабочего места:</label>
-                        <div class="input-container"><input id="text" type="text" placeholder="Например: 04158 Leipzig"></div>
+                        <div class="input-container"><input  v-model="search.address" id="text" type="text" placeholder="Например: 04158 Leipzig"></div>
                     </div>
                     <div class="distance-block select-block">
                         <label for="distance-select">дистанция:</label>
                         <div class="select-container">
-                            <select name="distance" id="distance-select" class="distance">
-                                <option value="1">10 км.</option>
-                                <option value="2">20 км.</option>
-                                <option value="3">30 км.</option>
-                                <option value="4">40 км.</option>
+                            <select v-model="search.km" name="distance" id="distance-select" class="distance">
+                                <option value="10">10 км.</option>
+                                <option value="20">20 км.</option>
+                                <option value="30">30 км.</option>
+                                <option value="40">40 км.</option>
                             </select>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                         <label class="desctop-label" for="number-personse">Кол-во человек:</label>
                         <label class="mobile-label" for="number-personse">Кол-во чел.:</label>
                         <div class="select-container">
-                            <select name="distance" id="number-personse" class="number-personse">
+                            <select v-model="search.people" name="distance" id="number-personse" class="number-personse">
                                 <option value="1">1 чел.</option>
                                 <option value="2">2 чел.</option>
                                 <option value="3">3 чел.</option>
@@ -41,7 +41,7 @@
                         <div class="left-block">
                             <a class="list active" href="#">Список</a>
                             <a class="map" href="#">На карте</a>
-                            <div class="result">Найдено 1240 вариантов жилья</div>
+                            <div class="result">Найдено <span class="property-found">0</span> вариантов жилья</div>
                         </div>
                         <div class="sorting">
                             <a href="#">Сортировка по умолчанию</a>
@@ -302,6 +302,12 @@ import PropertyListItem from "./PropertyListItem";
 let PropertyRequest = ApiRequest('property')
 let properties = new PropertyRequest;
 
+let newSearch = {
+    address: '',
+    km: '20',
+    people: '2',
+};
+
 export default{
     name: 'app',
     components: {
@@ -311,7 +317,8 @@ export default{
         return {
             loading: true,
             endoflist: false,
-            property: []
+            property: [],
+            search: {...newSearch},
         };
     },
     mounted() {
@@ -328,6 +335,7 @@ export default{
                 that.property = resp.data;
                 that.loading = false;
                 that.favoritesDisplay();
+                that.foundTotal();
             })
         setTimeout(function() {
             console.log(that.$auth.user());
@@ -396,10 +404,12 @@ export default{
         submitForm() {
             this.loading = true;
             let that = this;
-            properties.all()
+
+           properties.request('queryFilter', this.search)
                 .then( resp => {
-                    that.property = resp.data;
+                    that.property = resp.data.data;
                     that.loading = false;
+                    that.foundTotal()
                 })
         },
         favoritesCount() {
@@ -411,10 +421,13 @@ export default{
         },
         updateFavCount() {
             this.favoritesDisplay();
+        },
+        foundTotal() {
+            jQuery('.property-found').text(this.property.length);
         }
-
     }
 }
+
 </script>
 <style>
 .fade-enter-active, .fade-leave-active {

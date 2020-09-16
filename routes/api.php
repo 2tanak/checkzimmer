@@ -25,6 +25,9 @@ Route::middleware('api')->namespace('Api')->group(function () {
     Route::resource('features', 'FeaturesController');
     Route::resource('room-types', 'RoomTypesController');
     Route::resource('property', 'PropertyController');
+
+    Route::post('property/query', 'PropertyController@query');
+
     Route::get('options/bytype/{type}', 'OptionsController@showByType');
     Route::get('property/init', 'PropertyController@init');
 
@@ -41,6 +44,7 @@ Route::middleware('api')->namespace('Api')->group(function () {
     Route::post('/hotels-request', 'BookingController@saveHotels');
 
     Route::post('/property/query', 'PropertyController@queryProperty');
+    Route::post('/property/queryFilter', 'PropertyController@queryFilter');
 });
 
 
