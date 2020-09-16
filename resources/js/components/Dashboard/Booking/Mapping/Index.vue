@@ -1,27 +1,33 @@
 <template>
-
     <section class="header-dashboard">
         <h1>Маппинг объектов</h1>
 
-
         <div class="row mt-5">
-            <div class="col-md-6">
-                <h2>Маппинг удобств</h2>
+            <div class="col-md-12 col-lg-6 mt-4">
+                <h4>Маппинг удобств</h4>
                 <div class="card">
                     <div class="card-body">
-                        <div class="row mb-4" v-for="(row, i) in mappingFeatureRows">
-                            <div class="col-md-6">
-                                <h4>Типы удобств на Booking.com</h4>
-                                <b-select v-model="mappingFeatureRows[i].mapping_booking_feature_select, selected">
-                                    <b-select-option value="null">Ничего не выбрано</b-select-option>
-                                    <b-select-option v-for="elementName in featureBooking" href="#" :value="elementName.name">{{ elementName.name }}</b-select-option>
+                        <div class="row">
+                            <div class="col-md-12 col-lg-6 mt-4">
+                                <strong>Типы удобств на Booking.com</strong>
+                            </div>
+                            <div class="col-md-12 col-lg-6 mt-4">
+                                <strong>Типы удобств на сайте</strong>
+                            </div>
+                        </div>
+                        <div class="row pb-4" v-for="(row, i) in mappingFeatureRows">
+                            <div class="col-md-12 col-lg-6 mt-4">
+                                <b-select v-model="mappingFeatureRows[i].mapping_booking_feature_select">
+                                    <b-select-option value="">Ничего не выбрано</b-select-option>
+                                    <b-select-option v-for="item in featureBookingList" :value="item ?  item.native_id : 0" >
+                                        {{ item ? item.name : '' }}
+                                    </b-select-option>
                                 </b-select>
                             </div>
-                            <div class="col-md-6">
-                                <h4>Типы удобств на сайте</h4>
-                                <b-select v-model="mappingFeatureRows[i].mapping_site_feature_select, selected">
-                                    <b-select-option value="null">Ничего не выбрано</b-select-option>
-                                    <b-select-option v-for="elementName in featureSite" href="#" :value="elementName.name">{{ elementName.name }}</b-select-option>
+                            <div class="col-md-12 col-lg-6 mt-4">
+                                <b-select v-model="mappingFeatureRows[i].mapping_site_feature_select">
+                                    <b-select-option value="">Ничего не выбрано</b-select-option>
+                                    <b-select-option v-for="item in featuresSite" :value="item.id">{{ item.name }}</b-select-option>
                                 </b-select>
                             </div>
                         </div>
@@ -33,23 +39,33 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <h2>Маппинг типов жилья</h2>
+            <div class="col-md-12 col-lg-6 mt-4">
+                <h4>Маппинг типов жилья</h4>
                 <div class="card">
                     <div class="card-body">
-                        <div class="row mb-4" v-for="(row, i) in mappingHousingRows">
-                            <div class="col-md-6">
-                                <h4>Типы жилья на Booking.com</h4>
-                                <b-select v-model="mappingHousingRows[i].mapping_booking_housing_select, selected">
-                                    <b-select-option value="null">Ничего не выбрано</b-select-option>
-                                    <b-select-option v-for="elementName in housingBooking" href="#" :value="elementName.name">{{ elementName.name }}</b-select-option>
+                        <div class="row">
+                            <div class="col-md-12 col-lg-6 mt-4">
+                                <strong>Типы жилья на Booking.com</strong>
+                            </div>
+                            <div class="col-md-12 col-lg-6 mt-4">
+                                <strong>Типы жилья на сайте</strong>
+                            </div>
+                        </div>
+                        <div class="row pb-4" v-for="(row, i) in mappingHousingRows">
+                            <div class="col-md-12 col-lg-6 mt-4">
+                                <b-select v-model="mappingHousingRows[i].mapping_booking_housing_select">
+                                    <b-select-option value="">Ничего не выбрано</b-select-option>
+                                    <b-select-option v-for="item in housingBooking" :value="item ? item.native_id : ''">
+                                        {{ item ? item.name : '' }}
+                                    </b-select-option>
                                 </b-select>
                             </div>
-                            <div class="col-md-6">
-                                <h4>Типы жилья на сайте</h4>
-                                <b-select v-model="mappingHousingRows[i].mapping_site_housing_select, selected">
-                                    <b-select-option value="null">Ничего не выбрано</b-select-option>
-                                    <b-select-option v-for="elementName in housingSite" href="#" :value="elementName.name">{{ elementName.name }}</b-select-option>
+                            <div class="col-md-12 col-lg-6 mt-4">
+                                <b-select v-model="mappingHousingRows[i].mapping_site_housing_select">
+                                    <b-select-option value="">Ничего не выбрано</b-select-option>
+                                    <b-select-option v-for="item in housingSite" :value="item.id">
+                                        {{ item.name }}
+                                    </b-select-option>
                                 </b-select>
                             </div>
                         </div>
@@ -62,24 +78,41 @@
                 </div>
             </div>
         </div>
+        <div class="row mt-4" v-if="!loading">
+            <div class="col-md-12">
+                <b-button type="submit" variant="success" class="mr-2" @click.prevent="save">Сохранить</b-button>
+            </div>
+        </div>
+        <b-modal id="save-success">Данные успешно сохранены</b-modal>
     </section>
 
 </template>
 
 <script>
+import ApiRequest from '../../../API/ApiRequest';
+
+let FeaturesRequestBooking = ApiRequest('booking-facilities');
+let TypesRequestBooking = ApiRequest('booking-roomtypes');
+let FeaturesRequest = ApiRequest('features');
+let RoomTypesRequest = ApiRequest('room-types');
+let OptionsRequest = ApiRequest('options');
+
+let featuresBooking = new FeaturesRequestBooking;
+let typesBooking = new TypesRequestBooking;
+let features = new FeaturesRequest;
+let roomTypes = new RoomTypesRequest;
+let options = new OptionsRequest;
 
 export default {
     name: "Index",
     data() {
         return {
-            selected: null,
+            loading: true,
             typeHousingSiteSelect: '',
             typeHousingBookingSelect: '',
-            housingSite: [
-                { created_at: '', feature_category: '', feature_category_id: 1, id: 1, name: 'Квартира', ord: 1, picture: '', updated_at: '' },
-                { created_at: '', feature_category: '', feature_category_id: 1, id: 1, name: 'Гостиница', ord: 1, picture: '', updated_at: '' },
-                { created_at: '', feature_category: '', feature_category_id: 1, id: 1, name: 'Дом', ord: 1, picture: '', updated_at: '' },
-            ],
+            featuresBooking: { children: [], root: [], rooted: [] },
+            features: [],
+            roomTypes: [],
             housingBooking: [
                 { created_at: '', id: 1, name: "Apartments", native_id: "201", type: "hotel", updated_at: '' },
                 { created_at: '', id: 2, name: "Hostels", native_id: "201", type: "hotel", updated_at: '' },
@@ -90,11 +123,7 @@ export default {
                 { created_at: '', id: 2, name: "Wi-Fi", native_id: "2", parent: 1, type: "hotel", updated_at: '' },
                 { created_at: '', id: 3, name: "Darts", native_id: "2", parent: 1, type: "hotel", updated_at: '' }
             ],
-            featureSite: [
-                { created_at: '', id: 1, lang: "ru", name: "Кухня", ord: 1, updated_at: '' },
-                { created_at: '', id: 2, lang: "ru", name: "Wi-Fi", ord: 1, updated_at: '' },
-                { created_at: '', id: 3, lang: "ru", name: "Игры", ord: 1, updated_at: '' }
-            ],
+
             mappingFeatureRows: [
                 { mapping_booking_feature_select: '', mapping_site_feature_select: '' }
             ],
@@ -104,6 +133,29 @@ export default {
         }
     },
     mounted() {
+        options.get('bytype/system')
+            .then(resp => {
+                this.mappingFeatureRows = resp.data.mapping_features ? JSON.parse(resp.data.mapping_features) : this.mappingFeatureRows;
+                this.mappingHousingRows = resp.data.mapping_housing ? JSON.parse(resp.data.mapping_housing) : this.mappingHousingRows;
+
+                featuresBooking.all()
+                    .then(resp => {
+                        this.featuresBooking = resp.data;
+                    });
+                typesBooking.all()
+                    .then(resp => {
+                        this.housingBooking = resp.data;
+                    });
+                features.all()
+                    .then(resp => {
+                        this.features = resp.data;
+                    });
+                roomTypes.all()
+                    .then(resp => {
+                        this.room_types = resp.data;
+                    })
+                this.loading = false;
+            });
     },
     methods: {
         addRowFeature() {
@@ -117,6 +169,40 @@ export default {
                 mapping_booking_housing_select: '',
                 mapping_site_housing_select: ''
             });
+        },
+        save() {
+            options.update('system',
+                {
+                        mapping_features: JSON.stringify(this.mappingFeatureRows),
+                        mapping_housing: JSON.stringify(this.mappingHousingRows)
+                })
+                .then( () => {
+                    this.$bvModal.show('save-success');
+                })
+        }
+    },
+    computed: {
+        featureBookingList() {
+            // let featuresSelected = this.mappingFeatureRows.map( item => item.mapping_booking_feature_select );
+
+            if (this.featuresBooking.root.length === 0) {
+                return [{name: '', native_id: ''}];
+            }
+            this.featureBooking = this.featuresBooking.root || [];
+            for (let key in this.featureBooking.rooted) {
+                this.featureBooking = this.featureBooking.concat(this.featureBooking.rooted[key]);
+            }
+            this.featureBooking = this.featureBooking.concat(this.featureBooking.children);
+            return this.featureBooking.sort( (a, b) => a.name.localeCompare(b.name));
+        },
+        housingBookingList() {
+            return this.housingBooking.sort( (a, b) => a.name.localeCompare(b.name) )
+        },
+        featuresSite() {
+            return this.features;
+        },
+        housingSite() {
+            return this.roomTypes;
         }
     }
 }
