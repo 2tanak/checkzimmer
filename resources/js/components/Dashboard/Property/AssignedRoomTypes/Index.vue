@@ -2,11 +2,11 @@
     <section class="header-dashboard">
         <h1>Типы комнат</h1>
         <div class="row mt-4">
-            <div class="col-md-6 grid-margin">
+            <div class="col-xl-6 grid-margin">
                 <div class="card">
                     <div class="card-body" style="min-height:135px;">
                         <div style="width:100%;" class="d-flex">
-                            <b-form-group label="Объект" label-for="input-phone" v-if=" selectedUser === 'admin' " style="width:50%;" class="mr-3">
+                            <b-form-group label="Объект" label-for="input-phone" style="width:50%;" class="mr-3">
                                 <b-select v-model="selectedObject">
                                     <b-select-option value="not_choice">Не выбран</b-select-option>
                                     <!-- <b-select-option v-for="rootType in rootTypes" :value="rootType.id">{{ rootType.name }}</b-select-option> -->
@@ -15,7 +15,7 @@
                                     <b-select-option href="#" value="3">Многоэтажный дом</b-select-option>
                                 </b-select>
                             </b-form-group>
-                            <b-form-group label="Тип объекта" label-for="selectedObjectItem" v-if=" selectedObject === '1' " style="width:50%;" class="mr-3">
+                            <b-form-group label="Тип комнаты" label-for="selectedObjectItem" style="width:50%;" class="mr-3">
                                 <b-select v-model="selectedObjectItem">
                                     <b-select-option value="not_choice">Не выбран</b-select-option>
                                     <!-- <b-select-option v-for="rootType in rootTypes" :value="rootType.id">{{ rootType.name }}</b-select-option> -->
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 grid-margin">
+            <div class="col-xl-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex" style="width:100%;">
@@ -55,7 +55,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 grid-margin">
+            <div class="col-xl-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
                         <b-form-group label="Комнаты"  label-for="input-phone">
@@ -85,7 +85,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-xl-12">
                 <b-button v-b-modal.roomModal type="submit" variant="success" class="mr-2">Добавить тип комнаты</b-button>
             </div>
         </div>

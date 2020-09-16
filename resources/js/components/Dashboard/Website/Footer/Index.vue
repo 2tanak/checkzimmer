@@ -18,10 +18,9 @@
         </div>
         <div class="row mt-4" v-if="!loading">
             <div class="col-md-12">
-                <b-button type="submit" variant="success" class="mr-2" @click.prevent="save">Сохранить</b-button>
+                <b-button type="submit" variant="success" class="mr-2" @click="save">Сохранить</b-button>
             </div>
         </div>
-
         <b-modal id="save-success">Данные успешно сохранены</b-modal>
     </section>
 </template>
@@ -45,7 +44,7 @@
                 .then(resp => {
                     this.options = resp.data;
 
-                    if (this.options.copyrigt == null) {
+                    if (this.options.copyrigt === null) {
                         this.options.copyrigt = '';
                     }
 

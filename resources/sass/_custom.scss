@@ -3881,6 +3881,12 @@ label.mobile-label {
     z-index: 10;
     position: relative;
 }
+.single-content .sidebar .address-map a.map-picture svg.pin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 .single-content .sidebar .address-map a.map-mobile-picture {
     z-index: 10;
     position: relative;
@@ -3943,16 +3949,10 @@ label.mobile-label {
     display: flex;
     align-items: center;
     text-decoration: none;
-}.single-content .sidebar .sidebar-bottom-block a span {
-    padding-bottom: 2px;
- }
+}
 .single-content .sidebar .sidebar-bottom-block a:hover span {
     border-bottom: 1px solid #d0d2dd;
     color: #333646;
-}
-.single-content .sidebar .sidebar-bottom-block img {
-    margin-right: 8px;
-    margin-bottom: 2px;
 }
 .single-content .sidebar .sidebar-bottom-block a img.hover {
     display: none;
