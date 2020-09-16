@@ -65,13 +65,13 @@
                             </li>
                         </ul>
                     </div>
-                    <a class="whatsapp-number" href="tel:+49 341 1234 2223">
+                    <a class="whatsapp-number" href="tel:{{ str_replace(' ', '', $options['website_phone'] ?? '') }}">
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M27.36 4.59867C24.32 1.66 20.32 0 16.06 0C3.83333 0 -3.844 13.2467 2.26133 23.784L0 32L8.44667 29.7973C12.1267 31.7853 15.1413 31.6093 16.068 31.7267C30.2453 31.7267 37.3027 14.5747 27.34 4.65067L27.36 4.59867Z" fill="#E8E9EB"/>
                             <path d="M16.0892 29.0011L16.0812 28.9998H16.0598C11.8172 28.9998 9.10651 26.9905 8.83984 26.8745L3.83984 28.1745L5.17984 23.3145L4.86118 22.8145C3.54118 20.7131 2.83984 18.2931 2.83984 15.8011C2.83984 4.07713 17.1665 -1.78554 25.4572 6.50113C33.7278 14.7011 27.9212 29.0011 16.0892 29.0011Z" fill="#4CAF50"/>
                             <path d="M23.3429 19.0759L23.3309 19.1759C22.9295 18.9759 20.9749 18.0199 20.6109 17.8879C19.7935 17.5852 20.0242 17.8399 18.4549 19.6372C18.2215 19.8972 17.9895 19.9172 17.5935 19.7372C17.1935 19.5372 15.9095 19.1172 14.3895 17.7572C13.2055 16.6972 12.4109 15.3972 12.1762 14.9972C11.7855 14.3226 12.6029 14.2266 13.3469 12.8186C13.4802 12.5386 13.4122 12.3186 13.3135 12.1199C13.2135 11.9199 12.4175 9.9599 12.0842 9.17857C11.7642 8.3999 11.4349 8.49857 11.1882 8.49857C10.4202 8.4319 9.85885 8.44257 9.36418 8.95723C7.21218 11.3226 7.75485 13.7626 9.59618 16.3572C13.2149 21.0932 15.1429 21.9652 18.6682 23.1759C19.6202 23.4786 20.4882 23.4359 21.1749 23.3372C21.9402 23.2159 23.5309 22.3759 23.8629 21.4359C24.2029 20.4959 24.2029 19.7159 24.1029 19.5359C24.0042 19.3559 23.7429 19.2559 23.3429 19.0759Z" fill="#FAFAFA"/>
                         </svg>
-                        +49 341 1234 2223
+                        {{ $options['website_phone'] ?? '' }}
                     </a>
                     <a href="#" class="mobile-accaunt personal-area-link"><img src="/svg/i-account-mobile.svg" alt="mobile-accaunt"></a>
                 </div>
@@ -96,9 +96,9 @@
                         </a>
                     </li>
                 </ul>
-                <a class="whatsapp-number" href="tel:+49 341 1234 2223">
+                <a class="whatsapp-number" href="tel:{{ str_replace(' ', '', $options['website_phone'] ?? '') }}">
                     <img src="/svg/whatsapp-mobile.svg" alt="Whatsapp">
-                    +49 341 1234 2223
+                    {{ $options['website_phone'] ?? '' }}
                 </a>
             </div>
 
@@ -106,8 +106,8 @@
 
         <div class="property-list-subhead">
             <div class="container">
-                <div class="title">4 быстрых шага к жилью в городе Х</div>
-                <div class="subtitle">Обратитесь к нам мы сравним для вас объекты в городе Х и подберем для вас самое оптимальное размещение!</div>
+                <div class="title">{{ $options['motto_header'] }}</div>
+                <div class="subtitle">{{ $options['motto_subtitle'] }}</div>
                 <div class="property-list-subhead-gallery">
                         <div class="gallery-block step-one">
                             <div class="double-photo">
@@ -142,7 +142,7 @@
                 <div class="whatsapp-link">
                     <a class="whatsapp-link-number" href="tel:+49 341 1234 2223">
                         <img src="/svg/whatsapp-big.svg" alt="Whatsapp">
-                        +49 341 1234 2223
+                        {{ $options['website_phone'] ?? '' }}
                     </a>
                     <a class="whatsapp-link-text" href="tel:+49 341 1234 2223">Просто напишите нам в Whatsapp</a>
                 </div>
@@ -245,7 +245,7 @@
                     <li><a href="#">Impressum</a></li>
                 </ul>
                 <div class="copyright">
-                    Copyright 2020 Immobilien.de LLC All rights reserved.
+                    {{ $options['copyright'] }}
                 </div>
             </div>
         </div>
