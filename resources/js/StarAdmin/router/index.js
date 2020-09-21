@@ -32,21 +32,21 @@ import error500 from '../views/sample-pages/error-500'
 import login from '../views/sample-pages/login'
 import register from '../views/sample-pages/register'
 
-import Header from '../../components/Dashboard/Website/Header';
-import Footer from '../../components/Dashboard/Website/Footer';
-import Users from '../../components/Dashboard/Users';
-import Features from '../../components/Dashboard/Data/Features';
-import RoomTypes from '../../components/Dashboard/Data/RoomTypes';
-import Questions from '../../components/Dashboard/Feedback/Questions';
-import Reviews from '../../components/Dashboard/Feedback/Reviews';
-import Property from '../../components/Dashboard/Property/Property';
+import Header from '../../components/Dashboard/Website/Header/Index';
+import Footer from '../../components/Dashboard/Website/Footer/Index';
+import Users from '../../components/Dashboard/Users/Index';
+import Features from '../../components/Dashboard/Data/Features/Index';
+import RoomTypes from '../../components/Dashboard/Data/RoomTypes/Index';
+import Questions from '../../components/Dashboard/Feedback/Questions/Index';
+import Reviews from '../../components/Dashboard/Feedback/Reviews/Index';
+import Property from '../../components/Dashboard/Property/Property/Index';
 import PropertySingle from '../../components/Dashboard/Property/Property/Single';
-import Rooms from '../../components/Dashboard/Property/Rooms';
-import AssignedRoomTypes from '../../components/Dashboard/Property/AssignedRoomTypes';
-import BookingItems from '../../components/Dashboard/Booking/Items';
-import BookingMapping from '../../components/Dashboard/Booking/Mapping';
-import BookingData from '../../components/Dashboard/Booking/Data';
-import BookingSettings from '../../components/Dashboard/Booking/Settings';
+import Rooms from '../../components/Dashboard/Property/Rooms/Index';
+import AssignedRoomTypes from '../../components/Dashboard/Property/AssignedRoomTypes/Index';
+import BookingItems from '../../components/Dashboard/Booking/Items/Index';
+import BookingMapping from '../../components/Dashboard/Booking/Mapping/Index';
+import BookingData from '../../components/Dashboard/Booking/Data/Index';
+import BookingSettings from '../../components/Dashboard/Booking/Settings/Index';
 
 Vue.use(Router);
 

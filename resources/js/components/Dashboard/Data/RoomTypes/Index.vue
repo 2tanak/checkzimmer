@@ -61,7 +61,7 @@
 </template>
 
 <script>
-    import Forms from '../../../Forms';
+    import Forms from '../../../Forms/Index';
 
     import ApiRequest from "../../../API/ApiRequest";
 
