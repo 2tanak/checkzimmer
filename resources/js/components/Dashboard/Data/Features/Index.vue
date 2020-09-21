@@ -29,7 +29,7 @@
                 <div class="card">
                     <div class="card-body">
                         <b-form-group>
-                            <b-table striped hover :busy="loading" :items="featureList" :fields="fields">
+                            <b-table striped hover responsive :busy="loading" :items="featureList" :fields="fields">
                                 <template v-slot:cell(feature_category)="data">
                                     {{ data.item.feature_category.name }}
                                 </template>
@@ -59,10 +59,10 @@
                 <b-button type="submit" variant="success" class="mr-2" v-b-modal.modal-feature @click="featureNew">Новое удобство</b-button>
             </div>
         </div>
-        <b-modal id="modal-feature" :title="editFeature.id ? 'Feature edit' : 'Feature add'">
+        <b-modal id="modal-feature" :title="editFeature.id ? 'Feature edit' : 'Feature add'" @ok="featureAddOk">
             <Forms v-model="editFeature" :fields="editFeature" :data="data"></Forms>
         </b-modal>
-        <b-modal id="modal-feature-delete" title="Feature delete">
+        <b-modal id="modal-feature-delete" title="Feature delete" @ok="featureDeleteOk">
             <span class="text-danger">A you sure you want to delete feature <strong>{{ deleteFeature.name}}</strong>
                 in <strong>{{ deleteFeature.feature_category ? deleteFeature.feature_category.name : ''}}</strong> category?</span>
         </b-modal>
@@ -118,14 +118,14 @@
         methods: {
             parentCat(item) {
                 for(let i in this.features) {
-                    if (item.feature_category_id == this.features[i].id) {
+                    if (item.feature_category_id === this.features[i].id) {
                         return this.features[i];
                     }
                 }
                 return {};
             },
             getCategories() {
-                let cats = []
+                let cats = [];
                 this.features.forEach( item => {
                     if (item.feature_category && cats.indexOf( item.feature_category.name ) === -1 ) {
                         cats.push(item.feature_category.name);
@@ -135,26 +135,31 @@
             },
             catInput(e) {
                 if (e.key === 'Enter') {
-                    console.log(this.newCat);
                     this.categoriesTemp.push( this.newCat );
                     this.cats = this.newCat;
                     this.newCat = '';
                 }
             },
             featureNew() {
-                this.editFeature = { ...newFeature }
+                this.editFeature = { ...newFeature };
                 this.editFeature.feature_category.name = this.cats;
                 this.data.category.options = this.getCategories().concat(this.categoriesTemp);
                 this.editFeature.category = this.data.category.options.indexOf(this.editFeature.feature_category.name);
 
             },
             featureEdit(data) {
-                this.editFeature = { ...data.item }
+                this.editFeature = { ...data.item };
                 this.data.category.options = this.getCategories().concat(this.categoriesTemp);
                 this.editFeature.category = this.data.category.options.indexOf(this.editFeature.feature_category.name);
             },
             featureDelete(data) {
                 this.deleteFeature = { ...data.item }
+            },
+            featureDeleteOk() {
+                let index = this.featureList.findIndex( (elem, index, arr) => elem.id === this.deleteFeature.id);
+                this.featureList.splice(index, 1);
+            },
+            featureAddOk(data) {
             }
         },
         computed: {
@@ -164,7 +169,7 @@
             featureList() {
                 let featList = [];
                 if (this.cats) {
-                    featList = this.features.filter( item => item.feature_category && item.feature_category.name == this. cats);
+                    featList = this.features.filter( item => item.feature_category && item.feature_category.name === this.cats);
                 } else {
                     featList = this.features;
                 }
