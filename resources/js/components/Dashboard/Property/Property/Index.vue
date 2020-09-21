@@ -33,7 +33,7 @@
             <div class="col-md-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Объекты недвижимости"  label-for="input-phone">
+                        <b-form-group>
                             <b-table striped hover responsive :items="filteredHotels" :fields="fields">
                                 <template v-slot:cell(user)="data">
                                     {{ data.item.user ? data.item.user.name : '' }}
@@ -49,7 +49,7 @@
                                 </template>
 
                                 <template v-slot:cell(delete)="data">
-                                    <a href="" v-b-modal.modal-feature-delete @click.prevent="featureDelete(data)">&times;</a>
+                                    <a style="text-decoration:none;" href="" v-b-modal.modal-object-delete @click.prevent="featureDelete(data)"><span style="font-size:22px;">&times;</span></a>
                                 </template>
                                 <template v-slot:table-busy>
                                     <div class="text-center text-danger my-2">
@@ -68,6 +68,11 @@
                 <b-button type="submit" variant="success" class="mr-2">Новый объект</b-button>
             </div>
         </div>
+
+        <b-modal id="modal-object-delete" title="Object delete">
+            <span class="text-danger">A you sure you want to delete?</span>
+        </b-modal>
+
     </section>
 </template>
 

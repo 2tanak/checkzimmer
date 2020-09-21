@@ -5,7 +5,7 @@
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Категория"  label-for="input-phone">
+                        <b-form-group label="Категория"  label-for="cats">
                             <b-select v-model="cats">
                                 <b-select-option value="">Все категории</b-select-option>
                                 <b-select-option v-for="(category, i) in catList.concat(categoriesTemp)" href="#" :value="category" :key="'cat-key-'+i">{{ category }}</b-select-option>
@@ -17,7 +17,7 @@
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Создать категорию" label-for="input-phone">
+                        <b-form-group label="Создать категорию" label-for="newCat">
                             <b-form-input v-model="newCat" type="text" id="input-phone" placeholder="Название, Enter для подтверждения" @keyup="catInput"></b-form-input>
                         </b-form-group>
                     </div>
@@ -28,7 +28,7 @@
             <div class="col-md-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Текст под заголовком"  label-for="input-phone">
+                        <b-form-group>
                             <b-table striped hover :busy="loading" :items="featureList" :fields="fields">
                                 <template v-slot:cell(feature_category)="data">
                                     {{ data.item.feature_category.name }}
@@ -37,10 +37,10 @@
                                     <img :src="data.item.picture">
                                 </template>
                                 <template v-slot:cell(edit)="data">
-                                    <a href="" v-b-modal.modal-feature @click.prevent="featureEdit(data)">&#9998;</a>
+                                    <a style="text-decoration:none;" href="" v-b-modal.modal-feature @click.prevent="featureEdit(data)"><span style="font-size:18px;">&#9998;</span></a>
                                 </template>
                                 <template v-slot:cell(delete)="data">
-                                    <a href="" v-b-modal.modal-feature-delete @click.prevent="featureDelete(data)">&times;</a>
+                                    <a style="text-decoration:none;" href="" v-b-modal.modal-feature-delete @click.prevent="featureDelete(data)"><span style="font-size:22px;">&times;</span></a>
                                 </template>
                                 <template v-slot:table-busy>
                                     <div class="text-center text-danger my-2">

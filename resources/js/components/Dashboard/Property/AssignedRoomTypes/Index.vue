@@ -58,8 +58,8 @@
             <div class="col-xl-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Комнаты"  label-for="input-phone">
-                            <b-table striped hover :items="subTypes" :fields="fields">
+                        <b-form-group>
+                            <b-table striped hover responsive :busy="loading" :items="subTypes" :fields="fields">
                                 <template v-slot:cell(room_type)="data">
                                     {{ rootCategory(data.item).name }}
                                 </template>
@@ -71,6 +71,12 @@
                                 </template>
                                 <template v-slot:cell(persons)="data">
                                     {{ data.item.persons }}
+                                </template>
+                                <template v-slot:cell(edit)="data">
+                                    <a style="text-decoration:none;" href="" v-b-modal.assignedModal @click.prevent="assignedEdit(data)"><span style="font-size:18px;">&#9998;</span></a>
+                                </template>
+                                <template v-slot:cell(delete)="data">
+                                    <a style="text-decoration:none;" href="" v-b-modal.assignedModalDelete @click.prevent="assignedDelete(data)"><span style="font-size:22px;">&times;</span></a>
                                 </template>
                                 <template v-slot:table-busy>
                                     <div class="text-center text-danger my-2">
@@ -86,13 +92,16 @@
         </div>
         <div class="row">
             <div class="col-xl-12">
-                <b-button v-b-modal.roomModal type="submit" variant="success" class="mr-2">Добавить тип комнаты</b-button>
+                <b-button v-b-modal.assignedModal type="submit" variant="success" class="mr-2">Добавить тип комнаты</b-button>
             </div>
         </div>
 
 
-        <b-modal @ok="roomModalOk" @cancel="roomModalCancel" @hidden="roomModalHidden" id="roomModal" title="Добавить тип комнаты">
+        <b-modal id="assignedModal" title="Добавить тип комнаты">
             <Forms v-model="addTypeRooms" :fields="addTypeRooms" :data="data"></Forms>
+        </b-modal>
+        <b-modal id="assignedModalDelete" title="Feature delete">
+            <span class="text-danger">A you sure you want to delete?</span>
         </b-modal>
 
     </section>
@@ -116,11 +125,12 @@ import addTypeRooms from "../../../Data/addTypeRooms";
         data() {
             return {
                 types: '',
+                loading: false,
                 selectedObject: 'not_choice',
                 selectedUser: 'admin',
                 selectedUserItem: 'not_choice',
                 selectedObjectItem: 'not_choice',
-                fields: ['id', 'room_type', 'picture', 'name', 'persons'],
+                fields: ['id', 'room_type', 'picture', 'name', 'persons', 'edit', 'delete'],
                 room_types: [
                     { id: 1, room_type_id: 0, picture: '', name: 'дом (целиком)', persons: 2 },
                     { id: 6, room_type_id: 1, picture: '', name: 'многоместный', persons: 10 },
@@ -148,15 +158,6 @@ import addTypeRooms from "../../../Data/addTypeRooms";
                 })
         },
         methods: {
-            roomModalOk() {
-
-            },
-            roomModalCancel() {
-
-            },
-            roomModalHidden() {
-
-            },
             rootCategory(item) {
                 for (let i in this.room_types) {
                     if (item.room_type_id === this.room_types[i].id) {

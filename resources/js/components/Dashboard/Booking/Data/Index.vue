@@ -14,7 +14,14 @@
                 <div class="card">
                     <div class="card-body">
                         <h4>Типы недвижимости</h4>
-                        <b-table striped hover :items="types" :fields="fields"></b-table>
+                        <b-table striped hover responsive :busy="loading" :items="types" :fields="fields">
+                            <template v-slot:table-busy>
+                                <div class="text-center text-danger my-2">
+                                    <b-spinner class="align-middle"></b-spinner>
+                                    <strong>Loading...</strong>
+                                </div>
+                            </template>
+                        </b-table>
                     </div>
 
                 </div>
@@ -81,6 +88,7 @@
             types.all()
                 .then(resp => {
                     this.types = resp.data;
+                    this.loading = false;
                 });
         },
         methods: {

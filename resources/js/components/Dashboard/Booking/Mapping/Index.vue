@@ -31,8 +31,11 @@
                                 </b-select>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12 mt-4" style="text-align:right;">
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <p v-if="errorText" class="error-text">Вы ничего не выбрали</p>
+                            </div>
+                            <div class="col-md-6" style="text-align:right;">
                                 <b-button @click="addRowFeature" variant="success">Добавить ряд</b-button>
                             </div>
                         </div>
@@ -108,6 +111,7 @@ export default {
     data() {
         return {
             loading: true,
+            errorText: false,
             typeHousingSiteSelect: '',
             typeHousingBookingSelect: '',
             featuresBooking: { children: [], root: [], rooted: [] },

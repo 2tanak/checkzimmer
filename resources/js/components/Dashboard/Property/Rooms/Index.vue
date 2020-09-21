@@ -31,8 +31,8 @@
             <div class="col-md-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Комнаты"  label-for="input-phone">
-                            <b-table striped hover :items="subTypes" :fields="fields">
+                        <b-form-group>
+                            <b-table striped hover responsive :busy="loading" :items="subTypes" :fields="fields">
                                 <template v-slot:cell(room_type_id)="data">
                                     {{ data.item.room_type_id }}
                                 </template>
@@ -44,6 +44,12 @@
                                 </template>
                                 <template v-slot:cell(persons)="data">
                                     {{ data.item.persons }}
+                                </template>
+                                <template v-slot:cell(edit)="data">
+                                    <a style="text-decoration:none;" href="" v-b-modal.modal-rooms @click.prevent="roomsEdit(data)"><span style="font-size:18px;">&#9998;</span></a>
+                                </template>
+                                <template v-slot:cell(delete)="data">
+                                    <a style="text-decoration:none;" href="" v-b-modal.modal-rooms-delete @click.prevent="roomsDelete(data)"><span style="font-size:22px;">&times;</span></a>
                                 </template>
                                 <template v-slot:table-busy>
                                     <div class="text-center text-danger my-2">
@@ -59,12 +65,15 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <b-button v-b-modal.newRoomTypeModal type="submit" variant="success" class="mr-2">Новый тип комнаты</b-button>
+                <b-button v-b-modal.modal-rooms type="submit" variant="success" class="mr-2">Новый тип комнаты</b-button>
             </div>
         </div>
 
-        <b-modal @ok="newRoomTypeModalOk" @cancel="newRoomTypeModalCancel" @hidden="newRoomTypeModalHidden" id="newRoomTypeModal" title="Добавить новый тип комнаты">
+        <b-modal id="modal-rooms" title="Add/Edit type rooms">
             <Forms v-model="addNewRoomType" :fields="addNewRoomType" :data="data"></Forms>
+        </b-modal>
+        <b-modal id="modal-rooms-delete" title="Feature delete">
+            <span class="text-danger">A you sure you want to delete?</span>
         </b-modal>
 
     </section>
@@ -82,8 +91,9 @@
             return {
                 typePropertySelect: 'not_choice',
                 propertyObjectSelect: 'not_choice',
+                loading: false,
                 types: '',
-                fields: [ 'id', 'room_type_id', 'picture', 'name', 'persons' ],
+                fields: [ 'id', 'room_type_id', 'picture', 'name', 'persons', 'edit', 'delete' ],
                 room_types: [
                     { id: 1, room_type_id: 0, picture: '', name: 'дом (целиком)', persons: 2 },
                     { id: 6, room_type_id: 1, picture: '', name: 'одноместный', persons: 2 },
@@ -105,15 +115,6 @@
             }
         },
         methods: {
-            newRoomTypeModalOk() {
-
-            },
-            newRoomTypeModalCancel() {
-
-            },
-            newRoomTypeModalHidden() {
-
-            }
         }
     }
 </script>
