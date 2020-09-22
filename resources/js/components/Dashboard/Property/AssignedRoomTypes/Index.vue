@@ -105,7 +105,7 @@ import ApiRequest from "../../../API/ApiRequest";
 let RoomTypesRequest = ApiRequest('room-types');
 let roomTypes = new RoomTypesRequest;
 
-import Forms from '../../../Forms';
+import Forms from '../../../Forms/Index';
 
 import addTypeRooms from "../../../Data/addTypeRooms";
 

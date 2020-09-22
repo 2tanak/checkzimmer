@@ -106,8 +106,8 @@
 
         <div class="property-list-subhead">
             <div class="container">
-                <div class="title">{{ $options['motto_header'] }}</div>
-                <div class="subtitle">{{ $options['motto_subtitle'] }}</div>
+                <div class="title">{{ $options['motto_header'] ?? '' }}</div>
+                <div class="subtitle">{{ $options['motto_subtitle'] ?? '' }}</div>
                 <div class="property-list-subhead-gallery">
                         <div class="gallery-block step-one">
                             <div class="double-photo">
@@ -245,7 +245,7 @@
                     <li><a href="#">Impressum</a></li>
                 </ul>
                 <div class="copyright">
-                    {{ $options['copyright'] }}
+                    {{ $options['copyright'] ?? '' }}
                 </div>
             </div>
         </div>

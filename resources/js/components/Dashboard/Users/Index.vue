@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import Forms from "../../Forms";
+import Forms from "../../Forms/Index";
 import usersTable from "../../Data/usersForm"
 import ApiRequest from "../../API/ApiRequest";
 
