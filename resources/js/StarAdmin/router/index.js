@@ -156,6 +156,12 @@ export default new Router({
             meta: { auth: true }
         },
         {
+            path: '/dashboard/data/geocoder-cache',
+            name: 'geocoder-cache',
+            component: GeocoderCache,
+            meta: { auth: true }
+        },
+        {
             path: '/dashboard/feedback/questions',
             name: 'questions',
             component: Questions,
