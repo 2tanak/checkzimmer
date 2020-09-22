@@ -45,16 +45,12 @@ class GeocoderService
      */
     private function storeToCache(string $address, array $data): void
     {
-        $old_data = $this->cacheModel->whereAddress($address)->firstOrNew();
-
-        $old_data->fill([
+        $this->cacheModel->upd([
             'address' => $address,
             'lat' => $data['lat'],
             'lng' => $data['lng'],
             'timestamp' => time()
-        ]);
-
-        $old_data->save();
+        ], ['address' => $address]);
     }
 
     /**

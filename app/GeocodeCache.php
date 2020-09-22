@@ -2,13 +2,18 @@
 
 namespace App;
 
+use App\Traits\noCRUD;
 use Illuminate\Database\Eloquent\Model;
 
 class GeocodeCache extends Model
 {
+    use noCRUD;
+
     protected $table = 'geocoder-cache';
     protected $fillable = ['address', 'lat', 'lng', 'timestamp'];
     public $timestamps = false;
+    private static $children = [];
+    private static $identifier = 'address';
 
     /**
      * Filter actual data by configured expiration time
