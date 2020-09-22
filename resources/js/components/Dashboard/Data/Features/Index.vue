@@ -105,7 +105,7 @@
                 data: featuresForm,
                 newCat: '',
                 editFeature: '',
-                deleteFeature: '',
+                deleteFeature: ''
             }
         },
         created() {
@@ -159,7 +159,10 @@
                 let index = this.featureList.findIndex( (elem, index, arr) => elem.id === this.deleteFeature.id);
                 this.featureList.splice(index, 1);
             },
-            featureAddOk(data) {
+            featureAddOk() {
+                this.editFeature.feature_category.name = this.editFeature.name;
+                this.editFeature.feature_category.id = this.editFeature.category;
+                this.features.push(this.editFeature);
             }
         },
         computed: {

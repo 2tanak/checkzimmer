@@ -68,7 +68,7 @@
         <b-modal id="modal-room-type" title="Room Type add/edit">
             <Forms v-model="room_types[0]" :fields="room_types[0]" :data="data"></Forms>
         </b-modal>
-        <b-modal id="modal-room-type-delete" title="Feature delete">
+        <b-modal id="modal-room-type-delete" title="Room type delete?" @ok='roomTypeDeleteOk'>
             <span class="text-danger">A you sure you want to delete?</span>
         </b-modal>
     </section>
@@ -91,12 +91,13 @@
             return {
                 types: '',
                 loading: true,
+                modalApproove: false,
                 room_types: [
-                    { id: 1, room_type_id: 0, picture: '+', name: 'дом (целиком)', persons: 2 },
-                    { id: 6, room_type_id: 1, picture: '+', name: 'одноместный', persons: 2 },
-                    { id: 8, room_type_id: 1, picture: '+', name: 'одноместный', persons: 2 },
-                    { id: 16, room_type_id: 0, picture: '+', name: 'квартира', persons: 2 },
-                    { id: 31, room_type_id: 16, picture: '+', name: 'двухместная', persons: 2 },
+                    { id: 1, room_type_id: 0, picture: '', name: 'дом (целиком)', persons: 2 },
+                    { id: 6, room_type_id: 1, picture: '', name: 'одноместный', persons: 2 },
+                    { id: 8, room_type_id: 1, picture: '', name: 'одноместный', persons: 2 },
+                    { id: 16, room_type_id: 0, picture: '', name: 'квартира', persons: 2 },
+                    { id: 31, room_type_id: 16, picture: '', name: 'двухместная', persons: 2 },
                 ],
                 fields: ['id', 'room_type', 'picture', 'name', 'persons', 'edit', 'delete'],
                 data: roomTypesForm,
@@ -120,11 +121,16 @@
         methods: {
             rootCategory(item) {
                 for (let i in this.room_types) {
-                    if (item.room_type_id == this.room_types[i].id) {
+                    if (item.room_type_id === this.room_types[i].id) {
                         return this.room_types[i]
                     }
                 }
                 return this.room_types;
+            },
+            roomTypeDelete() {
+            },
+            roomTypeDeleteOk() {
+
             }
         }
     }
