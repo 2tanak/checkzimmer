@@ -36,4 +36,9 @@ return [
      */
     'country' => '',
 
+    /*
+     * Geocoder cache life time
+     */
+    'cache_time' => env('GEOCODE_CACHE_TIME', 2592000),
+
 ];
