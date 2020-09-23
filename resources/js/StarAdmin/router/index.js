@@ -37,6 +37,7 @@ import Footer from '../../components/Dashboard/Website/Footer/Index';
 import Users from '../../components/Dashboard/Users/Index';
 import Features from '../../components/Dashboard/Data/Features/Index';
 import RoomTypes from '../../components/Dashboard/Data/RoomTypes/Index';
+import GeocoderCache from '../../components/Dashboard/Data/GeocoderCache/Index';
 import Questions from '../../components/Dashboard/Feedback/Questions/Index';
 import Reviews from '../../components/Dashboard/Feedback/Reviews/Index';
 import Property from '../../components/Dashboard/Property/Property/Index';
