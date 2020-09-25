@@ -13,6 +13,6 @@ export default {
     picture: {
         label: 'Picture',
         placeholder: 'Please enter feature picture',
-        type: 'file',
+        type: 'picture',
     },
 }
