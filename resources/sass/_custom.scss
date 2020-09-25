@@ -3208,7 +3208,7 @@ label.mobile-label {
 .single-content .object-description .questions-form input[type="text"]:-ms-input-placeholder {
     color: #8F98A2;
 }
-.single-content .object-description .questions-form a.submit {
+.single-content .object-description .questions-form input[type="submit"] {
     width: 128px;
     height: 44px;
     display: flex;
@@ -3226,7 +3226,7 @@ label.mobile-label {
     transition-duration: 0.4s;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
 }
-.single-content .object-description .questions-form a.submit:hover {
+.single-content .object-description .questions-form input[type="submit"]:hover {
     background-color: #60A338;
     transition-duration: 0.4s;
 }
