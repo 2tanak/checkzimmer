@@ -11,6 +11,9 @@ export default (base) => class ApiRequest {
     all() {
         return client.get(`/api/${base}`);
     }
+    byPage(page) {
+        return client.get(`/api/${base}?page=${page}`);
+    }
     get(id) {
         return client.get(`/api/${base}/${id}`);
     }
