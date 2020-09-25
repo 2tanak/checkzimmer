@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PropertyListRequest;
 use App\Services\GeocoderService;
 use Illuminate\Http\Request;
 use App\Property;
@@ -24,10 +25,9 @@ class PropertyController extends Controller
         $this->service = $service;
     }
 
-    function index()
+    function index(PropertyListRequest $request)
     {
-
-        return response()->json(Property::ind());
+        return response()->json(Property::indPaginated());
     }
 
     function queryFilter(Request $request){

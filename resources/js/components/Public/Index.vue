@@ -65,7 +65,6 @@
                                 <PropertyListItem v-for="item in property" :key="'id-'+item.id" :item="item" @favsUpdated="updateFavCount"/>
                             </div>
                             <div class="property-shadow" v-if="property.length"></div>
-
                             <div class="google-map">
                                 <div id="map"></div>
 
@@ -208,6 +207,9 @@
                                 </div>
 
                             </div>
+                            <div class="load-more" v-if="additional_pages" style="width: 100%;float:left">
+                                <div class="btn btn-success" @click.prevent="loadMore">Загрузить еще</div>
+                            </div>
                         </div>
                         </transition>
                         <transition name="fade">
@@ -318,6 +320,8 @@ export default{
             loading: true,
             endoflist: false,
             property: [],
+            page: 1,
+            additional_pages: true,
             search: {...newSearch},
         };
     },
@@ -330,10 +334,15 @@ export default{
             jQuery(this).removeClass('error');
             jQuery(this).closest('.input-block').find('.error-text').removeClass('active')
         });
-        properties.all()
+        properties.byPage(1)
             .then( resp => {
-                that.property = resp.data;
+                that.property = resp.data.data;
                 that.loading = false;
+                if (resp.data.current_page < resp.data.last_page) {
+                    that.additional_pages = true;
+                } else {
+                    that.additional_pages = false;
+                }
                 that.favoritesDisplay();
                 that.foundTotal();
             })
@@ -408,8 +417,27 @@ export default{
            properties.request('queryFilter', this.search)
                 .then( resp => {
                     that.property = resp.data.data;
+                    that.page = resp.data.current_page;
                     that.loading = false;
                     that.foundTotal()
+                })
+        },
+        loadMore() {
+            let that = this;
+            that.page = ++that.page;
+
+            properties.byPage(that.page)
+                .then( resp => {
+                    that.property = that.property.concat(resp.data.data);
+                    that.loading = false;
+                    if (resp.data.current_page < resp.data.last_page) {
+                        that.additional_pages = true;
+                    } else {
+                        that.additional_pages = false;
+                    }
+                    that.favoritesDisplay();
+                    that.foundTotal();
+                    console.log(that.property);
                 })
         },
         favoritesCount() {
