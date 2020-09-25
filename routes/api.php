@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('api')->namespace('Api')->group(function () {
 
+    Route::post('/image-upload', 'ImageUploadController@imageUploadPost');
     Route::resource('options', 'OptionsController');
     Route::resource('users', 'UsersController');
     Route::resource('features', 'FeaturesController');
