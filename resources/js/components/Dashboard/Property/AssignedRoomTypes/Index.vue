@@ -73,10 +73,10 @@
                                     {{ data.item.persons }}
                                 </template>
                                 <template v-slot:cell(edit)="data">
-                                    <a style="text-decoration:none;" href="" v-b-modal.assignedModal @click.prevent="assignedEdit(data)"><span style="font-size:18px;">&#9998;</span></a>
+                                    <a style="text-decoration:none;" href="" v-b-modal.assignedModal @click.prevent="assignedEdit(data.item)"><span style="font-size:18px;">&#9998;</span></a>
                                 </template>
                                 <template v-slot:cell(delete)="data">
-                                    <a style="text-decoration:none;" href="" v-b-modal.assignedModalDelete @click.prevent="assignedDelete(data)"><span style="font-size:22px;">&times;</span></a>
+                                    <a style="text-decoration:none;" href="" v-b-modal.assignedModalDelete @click.prevent="assignedDelete(data.item)"><span style="font-size:22px;">&times;</span></a>
                                 </template>
                                 <template v-slot:table-busy>
                                     <div class="text-center text-danger my-2">
@@ -98,10 +98,11 @@
 
 
         <b-modal id="assignedModal" title="Добавить тип комнаты">
-            <Forms v-model="addTypeRooms" :fields="addTypeRooms" :data="data"></Forms>
+            <Forms v-model="assignedAction" :fields="assignedAction" :data="data"></Forms>
         </b-modal>
         <b-modal id="assignedModalDelete" title="Feature delete">
-            <span class="text-danger">A you sure you want to delete?</span>
+            <span class="text-danger">A you sure you want to delete {{ assignedAction.name }}?</span>
+            <span>This action can not be undone!</span>
         </b-modal>
 
     </section>
@@ -138,8 +139,8 @@ import addTypeRooms from "../../../Data/addTypeRooms";
                     { id: 16, room_type_id: 0, picture: '', name: 'квартира', persons: 2 },
                     { id: 31, room_type_id: 16, picture: '', name: 'двухместная', persons: 2 }
                 ],
-                addTypeRooms: '',
                 data: addTypeRooms,
+                assignedAction: { name: '' }
             }
         },
         computed: {
@@ -153,18 +154,26 @@ import addTypeRooms from "../../../Data/addTypeRooms";
         mounted() {
             roomTypes.all()
                 .then(resp => {
-                    this.room_types = resp.data;
+                    //this.room_types = resp.data;
                     this.loading = false;
                 })
         },
         methods: {
-            rootCategory(item) {
-                for (let i in this.room_types) {
-                    if (item.room_type_id === this.room_types[i].id) {
-                        return this.room_types[i]
-                    }
+            getRootTypes() {
+                let types = { 0: 'Родительский тип' };
+                for (let i in this.rootTypes) {
+                    types[this.rootTypes[i].id] = this.rootTypes[i].name;
                 }
-                return this.room_types;
+                return types;
+            },
+            rootCategory(item) {
+                return this.room_types.find( ch => ch.id === item.room_type_id )
+            },
+            assignedEdit(item) {
+                this.assignedAction = item;
+            },
+            assignedDelete(item) {
+                this.assignedAction = item;
             }
         }
     }

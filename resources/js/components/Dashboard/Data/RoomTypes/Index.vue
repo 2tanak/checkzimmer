@@ -8,7 +8,7 @@
                         <b-form-group label="Типы жилья"  label-for="types">
                             <b-select v-model="types">
                                 <b-select-option href="#" :value="0">Все типы</b-select-option>
-                                <b-dropdown-item v-for="rootType in rootTypes" href="#" :value="rootType.id">{{ rootType.name }}</b-dropdown-item>
+                                <b-select-option v-for="rootType in rootTypes" :value="rootType.id">{{ rootType.name }}</b-select-option>
                             </b-select>
                         </b-form-group>
                     </div>
@@ -29,7 +29,7 @@
                 <div class="card">
                     <div class="card-body">
                         <b-form-group>
-                            <b-table striped hover responsive :busy="loading" :items="subTypes" :fields="fields">
+                            <b-table striped hover responsive :busy="loading" :items="subTypesFiltered" :fields="fields">
                                 <template v-slot:cell(room_type)="data">
                                     {{ rootCategory(data.item).name }}
                                 </template>
@@ -43,10 +43,10 @@
                                     {{ data.item.persons }}
                                 </template>
                                 <template v-slot:cell(edit)="data">
-                                    <a style="text-decoration:none;" href="" v-b-modal.modal-room-type @click.prevent="roomTypeEdit(data)"><span style="font-size:18px;">&#9998;</span></a>
+                                    <a style="text-decoration:none;" href="" v-b-modal.modal-room-type @click.prevent="roomTypeEdit(data.item)"><span style="font-size:18px;">&#9998;</span></a>
                                 </template>
                                 <template v-slot:cell(delete)="data">
-                                    <a style="text-decoration:none;" href="" v-b-modal.modal-room-type-delete @click.prevent="roomTypeDelete(data)"><span style="font-size:22px;">&times;</span></a>
+                                    <a style="text-decoration:none;" href="" v-b-modal.modal-room-type-delete @click.prevent="roomTypeDelete(data.item)"><span style="font-size:22px;">&times;</span></a>
                                 </template>
                                 <template v-slot:table-busy>
                                     <div class="text-center text-danger my-2">
@@ -66,10 +66,10 @@
             </div>
         </div>
         <b-modal id="modal-room-type" title="Room Type add/edit">
-            <Forms v-model="room_types[0]" :fields="room_types[0]" :data="data"></Forms>
+            <Forms v-model="roomTypesAction" :fields="roomTypesAction" :data="data"></Forms>
         </b-modal>
         <b-modal id="modal-room-type-delete" title="Room type delete?" @ok='roomTypeDeleteOk'>
-            <span class="text-danger">A you sure you want to delete?</span>
+            <span class="text-danger">A you sure you want to delete <strong>{{ roomTypesAction.name }}</strong>?</span>
         </b-modal>
     </section>
 </template>
@@ -89,7 +89,7 @@
         components: { Forms },
         data() {
             return {
-                types: '',
+                types: 0,
                 loading: true,
                 modalApproove: false,
                 room_types: [
@@ -101,24 +101,36 @@
                 ],
                 fields: ['id', 'room_type', 'picture', 'name', 'persons', 'edit', 'delete'],
                 data: roomTypesForm,
-            }
-        },
-        computed: {
-            rootTypes() {
-                return this.room_types.filter( item => item.room_type_id === 0)
-            },
-            subTypes() {
-                return this.room_types.filter( item => item.room_type_id !== 0)
+                roomTypesAction: { name: ''}
             }
         },
         mounted() {
             roomTypes.all()
                 .then(resp => {
-                    this.room_types = resp.data;
+                    //this.room_types = resp.data;
                     this.loading = false;
+                    this.data.room_type_id.options = this.getRootTypes();
                 })
         },
+        computed: {
+            rootTypes() {
+                return this.room_types.filter( item => item.room_type_id === 0 );
+            },
+            subTypes() {
+                return this.room_types.filter( item => item.room_type_id !== 0)
+            },
+            subTypesFiltered() {
+                return this.subTypes.filter( item => !this.types || item.room_type_id === this.types );
+            }
+        },
         methods: {
+            getRootTypes() {
+                let types = { 0: 'Родительский тип' };
+                for (let i in this.rootTypes) {
+                    types[this.rootTypes[i].id] = this.rootTypes[i].name;
+                }
+                return types;
+            },
             rootCategory(item) {
                 for (let i in this.room_types) {
                     if (item.room_type_id === this.room_types[i].id) {
@@ -127,10 +139,14 @@
                 }
                 return this.room_types;
             },
-            roomTypeDelete() {
+            roomTypeEdit(item) {
+                this.roomTypesAction = item;
             },
-            roomTypeDeleteOk() {
-
+            roomTypeDelete(item) {
+                this.roomTypesAction = item;
+            },
+            roomTypeDeleteOk(item) {
+                this.roomTypesAction = item;
             }
         }
     }

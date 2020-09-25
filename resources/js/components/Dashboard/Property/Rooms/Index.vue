@@ -34,10 +34,10 @@
                         <b-form-group>
                             <b-table striped hover responsive :busy="loading" :items="subTypes" :fields="fields">
                                 <template v-slot:cell(room_type_id)="data">
-                                    {{ data.item.room_type_id }}
+                                    {{ getTypeName(data.item.room_type_id) }}
                                 </template>
                                 <template v-slot:cell(picture)="data">
-                                    <img src="/svg/i-one.svg" alt="">
+                                    <img :src="data.item.picture || '/svg/i-multi.svg'" alt="">
                                 </template>
                                 <template v-slot:cell(name)="data">
                                     {{ data.item.name }}
@@ -46,10 +46,10 @@
                                     {{ data.item.persons }}
                                 </template>
                                 <template v-slot:cell(edit)="data">
-                                    <a style="text-decoration:none;" href="" v-b-modal.modal-rooms @click.prevent="roomsEdit(data)"><span style="font-size:18px;">&#9998;</span></a>
+                                    <a style="text-decoration:none;" href="" v-b-modal.modal-rooms @click.prevent="roomsEdit(data.item)"><span style="font-size:18px;">&#9998;</span></a>
                                 </template>
                                 <template v-slot:cell(delete)="data">
-                                    <a style="text-decoration:none;" href="" v-b-modal.modal-rooms-delete @click.prevent="roomsDelete(data)"><span style="font-size:22px;">&times;</span></a>
+                                    <a style="text-decoration:none;" href="" v-b-modal.modal-rooms-delete @click.prevent="roomsDelete(data.item)"><span style="font-size:22px;">&times;</span></a>
                                 </template>
                                 <template v-slot:table-busy>
                                     <div class="text-center text-danger my-2">
@@ -70,10 +70,11 @@
         </div>
 
         <b-modal id="modal-rooms" title="Add/Edit type rooms">
-            <Forms v-model="addNewRoomType" :fields="addNewRoomType" :data="data"></Forms>
+            <Forms v-model="roomTypeAction" :fields="roomTypeAction" :data="data"></Forms>
         </b-modal>
         <b-modal id="modal-rooms-delete" title="Feature delete">
-            <span class="text-danger">A you sure you want to delete?</span>
+            <span class="text-danger">A you sure you want to delete {{ roomTypeAction.name }}?</span>
+            <span>This action cannot be undone!</span>
         </b-modal>
 
     </section>
@@ -96,25 +97,44 @@
                 fields: [ 'id', 'room_type_id', 'picture', 'name', 'persons', 'edit', 'delete' ],
                 room_types: [
                     { id: 1, room_type_id: 0, picture: '', name: 'дом (целиком)', persons: 2 },
-                    { id: 6, room_type_id: 1, picture: '', name: 'одноместный', persons: 2 },
+                    { id: 6, room_type_id: 1, picture: '/svg/i-one.svg', name: 'одноместный', persons: 2 },
                     { id: 8, room_type_id: 1, picture: '', name: 'одноместный', persons: 2 },
                     { id: 16, room_type_id: 0, picture: '', name: 'квартира', persons: 2 },
                     { id: 31, room_type_id: 16, picture: '', name: 'двухместная', persons: 2
                     },
                 ],
-                addNewRoomType: '',
-                data: addNewRoomType
+                data: addNewRoomType,
+                roomTypeAction: { name: '' }
             }
+        },
+        mounted() {
+            this.data.room_type_id.options = this.getRootTypes();
         },
         computed: {
             rootTypes() {
-                return this.room_types.filter( item => item.room_type_id === 0)
+                return this.room_types.filter( item => item.room_type_id === 0 )
             },
             subTypes() {
-                return this.room_types.filter( item => item.room_type_id !== 0)
+                return this.room_types.filter( item => item.room_type_id !== 0 )
             }
         },
         methods: {
+            getRootTypes() {
+                let types = { 0: 'Родительский тип' };
+                for (let i in this.rootTypes) {
+                    types[this.rootTypes[i].id] = this.rootTypes[i].name;
+                }
+                return types;
+            },
+            getTypeName(id) {
+                return this.room_types.find( item => item.id === id ).name;
+            },
+            roomsEdit(item) {
+                this.roomTypeAction = item;
+            },
+            roomsDelete(item) {
+                this.roomTypeAction = item;
+            }
         }
     }
 </script>

@@ -9,9 +9,10 @@ export default {
         placeholder: 'Please enter room type picture',
         type: 'file',
     },
-    feature_category: {
+    room_type_id: {
         label: 'Категория',
         placeholder: 'Please enter room type category',
-        type: 'text',
+        type: 'options',
+        options: []
     }
 }

@@ -49,7 +49,7 @@
                                 </template>
 
                                 <template v-slot:cell(delete)="data">
-                                    <a style="text-decoration:none;" href="" v-b-modal.modal-object-delete @click.prevent="featureDelete(data)"><span style="font-size:22px;">&times;</span></a>
+                                    <a style="text-decoration:none;" href="" v-b-modal.modal-object-delete @click.prevent="featureDelete(data.item)"><span style="font-size:22px;">&times;</span></a>
                                 </template>
                                 <template v-slot:table-busy>
                                     <div class="text-center text-danger my-2">
@@ -65,12 +65,17 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <b-button type="submit" variant="success" class="mr-2">Новый объект</b-button>
+                <b-button v-b-modal.modal-object-create type="button" variant="success" class="mr-2">Новый объект</b-button>
             </div>
         </div>
 
-        <b-modal id="modal-object-delete" title="Object delete">
-            <span class="text-danger">A you sure you want to delete?</span>
+        <b-modal id="modal-object-delete" title="Property delete" @ok="deleteOk">
+            <span class="text-danger">A you sure you want to delete hotel {{ hotelDelete.name }}?</span>
+            <span>This action can not be undone</span>
+        </b-modal>
+
+        <b-modal id="modal-object-create" title="New property" @ok="deleteOk">
+            <Forms v-model="this.property[0]" :fields="this.property[0]" :data="data" />
         </b-modal>
 
     </section>
@@ -78,6 +83,10 @@
 
 <script>
     import ApiRequest from '../../../API/ApiRequest';
+    import Forms from '../../../Forms';
+
+    import propertyForm from "../../../Data/propertyForm";
+
     let PropertyRequest = ApiRequest('property')
     let properties = new PropertyRequest;
     let TypesRequest = ApiRequest('booking-roomtypes');
@@ -85,6 +94,7 @@
 
     export default {
         name: "Index",
+        components: {Forms},
         data() {
             return {
                 role: 'admin',
@@ -92,7 +102,8 @@
                 fields: ['id', 'user', 'type', 'hotelType', 'status', 'views', 'name', 'delete'],
                 types: [],
                 property: [],
-
+                hotelDelete: { name: '' },
+                data: propertyForm
             }
         },
         created() {
@@ -124,56 +135,29 @@
                 return false;
             },
             getTypeId(item) {
-                for (let i in item.options) {
-                    if (item.options[i].key === 'hotel_type') {
-                        return item.options[i].value;
-                    }
-                }
-                return false;
+                let type = item.options.find( ch => ch.key === 'hotel_type')
+                return type ? type.value : false;
+            },
+            featureDelete(item) {
+                this.hotelDelete = item;
+            },
+            deleteOk() {
+                properties.delete(this.hotelDelete.id)
+                    .then(resp => {
+                        let toDeleteIndex = this.property.findIndex( item => item.id === this.hotelDelete.id );
+                        this.property.splice(toDeleteIndex, 1);
+                    });
             }
         },
         computed: {
             propertyTypes() {
-                let types = [];
-                let typeNames = [];
-                this.property.forEach( item => {
-                    let typeId = this.getTypeId(item);
-
-                    if (types.indexOf(typeId) === -1) {
-                        types.push(typeId);
-                    }
-                });
-
-                for (let i in types) {
-                    typeNames.push( this.getTypeName(types[i]));
-                }
-                return typeNames;
+                let types = [ ...new Set(this.property.map( item => this.getTypeId(item))) ];
+                return this.types.filter( item => types.includes(item.native_id));
             },
             filteredHotels() {
-                let hotels = [];
-                let hotelsv2 = []
-                if (this.type) {
-                    for (let i in this.property) {
-                        let id = this.getTypeId(this.property[i]);
-                        if (id === this.type) {
-                            hotels.push(this.property[i]);
-                        }
-                    }
-                } else {
-                    hotels = this.property;
-                }
-                if (this.role) {
-                    for (let i in hotels) {
-                        if (
-                            hotels[i].user.role === 'admin' && this.role === 'admin' ||
-                            hotels[i].user.role !== 'admin' && this.role === -1) {
-                                hotelsv2.push( hotels[i] );
-                            }
-                    }
-                } else {
-                    return hotels;
-                }
-                return hotelsv2;
+                return this.property
+                    .filter( item => !this.type || this.getTypeId(item) === this.type )
+                    .filter( item => !this.role || item.user.role === this.role || (this.role === -1 && item.user.role !== 'admin'));
             }
         },
     }

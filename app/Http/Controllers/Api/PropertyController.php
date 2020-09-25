@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Option;
 use Illuminate\Http\Request;
 use App\Property;
 use Spatie\Geocoder\Geocoder;
@@ -10,7 +11,6 @@ class PropertyController extends Controller
 {
     function index()
     {
-
         return response()->json(Property::ind());
     }
 
@@ -45,5 +45,15 @@ class PropertyController extends Controller
         $property = Property::whereIn('id', $fields['id'])->get();
 
         return response()->json($property);
+    }
+    function destroy(Property $property) {
+
+        foreach ($property->rooms as $room) {
+            Option::where(['parent' => $room->id, 'type' => 'room'])->delete();
+        }
+        $property->rooms()->delete();
+        $property->delete();
+
+        return response()->json(['code' => 'ok']);
     }
 }

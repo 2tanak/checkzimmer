@@ -78,27 +78,27 @@ export default new Router({
             meta: { auth: true }
         },
         {
-            path: '/dashboard/property/assigned-room-types',
-            name: 'assigned-room-types',
-            component: AssignedRoomTypes,
-            meta: { auth: true }
-        },
-        {
             path: '/dashboard/booking/items',
             name: 'booking-items',
             component: BookingItems,
             meta: { auth: true }
         },
         {
-            path: '/dashboard/property/:item',
-            name: 'property-single',
-            component: PropertySingle,
+            path: '/dashboard/property/assigned-room-types',
+            name: 'assigned-room-types',
+            component: AssignedRoomTypes,
             meta: { auth: true }
         },
         {
             path: '/dashboard/property/rooms',
             name: 'rooms',
             component: Rooms,
+            meta: { auth: true }
+        },
+        {
+            path: '/dashboard/property/:item',
+            name: 'property-single',
+            component: PropertySingle,
             meta: { auth: true }
         },
         {
