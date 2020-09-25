@@ -58,8 +58,14 @@ trait noCRUD
         }
     }
     static function ind() {
-         return static::with(self::$children)->get();
+         return static::with(self::$children)->paginate(30);
     }
+
+    public static function indPaginated()
+    {
+        return static::with(self::$children)->paginate(30);
+    }
+
     static function get($id) {
         static::with(static::$children)->where(static::$identifier, $id)->get();
     }

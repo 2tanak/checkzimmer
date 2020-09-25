@@ -8,6 +8,7 @@
 /public/js/ui.js
 /public/css/app.css
 /public/css/style.css
+/storage/debugbar/*
 .idea
 /vendor
 .env
