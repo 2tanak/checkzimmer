@@ -18,6 +18,7 @@ class Property extends Model
         $features = array_column($features, 'name');
         return array_search($name, $features) !== false;
     }
+
     function options() {
         return $this->hasMany(Option::class, 'parent')->where('type', 'property');
     }

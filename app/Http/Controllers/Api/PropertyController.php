@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Controller;
 use App\Option;
+use App\Http\Requests\PropertyListRequest;
+use App\Services\GeocoderService;
 use Illuminate\Http\Request;
 use App\Property;
 use Spatie\Geocoder\Geocoder;
@@ -9,9 +11,25 @@ use Spatie\Geocoder\Geocoder;
 
 class PropertyController extends Controller
 {
-    function index()
+    /**
+     * @var GeocoderService
+     */
+    private $service;
+
+
+    /**
+     * PropertyController constructor.
+     * @param GeocoderService $service
+     */
+    public function __construct(GeocoderService $service)
     {
         return response()->json(Property::ind());
+        $this->service = $service;
+    }
+
+    function index(PropertyListRequest $request)
+    {
+        return response()->json(Property::indPaginated());
     }
 
     function queryFilter(Request $request){
@@ -20,11 +38,8 @@ class PropertyController extends Controller
         $km = $data['km'] ? $data['km']  : 10;
         $people = $data['people'];
 
-        $client = new \GuzzleHttp\Client();
-        $geocoder = new Geocoder($client);
-        $geocoder->setApiKey(config('geocoder.key'));
-        $geocoder->setCountry(config('geocoder.country', 'US'));
-        $geo_data = $geocoder->getCoordinatesForAddress($address);
+//        $geo_data = $geocoder->getCoordinatesForAddress($address);
+        $geo_data = $this->service->getCoords($address);
 
         $objects = Property::where(Property::raw('abs('.$geo_data['lat'].' - lat) * 111'), '<', $km)
             ->where(Property::raw('abs('.$geo_data['lng'].' - lng) * 111'), '<', $km)->paginate(20);

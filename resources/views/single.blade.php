@@ -1946,7 +1946,7 @@
                                             <img src="/svg/star-gray.svg" alt="alt">
                                         </div>
                                     </div>
-                                    <form>
+                                    <form action="POST">
                                         <div class="top-form">
                                             <input type="text" placeholder="Ваше имя">
                                             <input type="text" placeholder="Название компании">
@@ -2227,7 +2227,7 @@
                         <div class="tab-pane fade questions-content" id="questions">
                             <form class="questions-form">
                                 <input type="text" placeholder="Задайте свой вопрос">
-                                <a class="submit" href="#">Отправить</a>
+                                <input type="submit" value="Отправить">
                             </form>
                             <div class="questions-received">
                                 <div class="questions-block">
@@ -3490,5 +3490,16 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChFeaunpThR-Lo4t-SMP3n7s-fDBs67hU&callback=initMap" async defer></script>
 
     </div>
+
+        <script>
+        function onClick(e) {
+            e.preventDefault();
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LejY9AZAAAAAFpdc0QzQzrqRtaaflf3PfP64qdE', {action: 'submit'}).then(function(token) {
+                    // Add your logic to submit to your backend server here.
+                });
+            });
+        }
+    </script>
 
 @endsection

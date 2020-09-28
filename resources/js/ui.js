@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Public from './components/Public'
+import Public from './components/Public/Index'
 import Favorites from './components/Public/Favorites'
 
 require('./bootstrap');

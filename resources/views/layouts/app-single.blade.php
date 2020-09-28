@@ -243,6 +243,7 @@
 <script src="{{ asset('js/select2.full.js') }}" defer></script>
 <script src="{{ asset('js/slick.min.js') }}" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" defer></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LejY9AZAAAAAFpdc0QzQzrqRtaaflf3PfP64qdE"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         jQuery('#arrival-date, #date-departure').datepicker({
