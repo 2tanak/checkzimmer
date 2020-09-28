@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\noCRUD;
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Property extends Model
 {
@@ -32,6 +33,6 @@ class Property extends Model
         return $this->hasMany(Question::class);
     }
     function rating() {
-        return $this->hasMany(Question::class)->select('SUM rating as rate')->groupBy('property_id');
+        return $this->hasMany(Rating::class)->select(DB::raw('SUM(rating) as rate'))->groupBy('property_id');
     }
 }

@@ -65,7 +65,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <b-button v-b-modal.modal-rooms type="submit" variant="success" class="mr-2">Новый тип комнаты</b-button>
+                <b-button v-b-modal.modal-rooms type="submit" variant="success" class="mr-2" @click="roomsNew">Новый тип комнаты</b-button>
             </div>
         </div>
 
@@ -104,6 +104,7 @@
                     },
                 ],
                 data: addNewRoomType,
+                roomTypeDefault: { name: '', room_type_id: 0, picture: '', persons: 1 },
                 roomTypeAction: { name: '' }
             }
         },
@@ -134,6 +135,9 @@
             },
             roomsDelete(item) {
                 this.roomTypeAction = item;
+            },
+            roomsNew() {
+                this.roomTypeAction = { ...this.roomTypeDefault };
             }
         }
     }

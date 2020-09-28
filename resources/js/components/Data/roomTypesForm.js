@@ -7,7 +7,7 @@ export default {
     picture: {
         label: 'Picture',
         placeholder: 'Please enter room type picture',
-        type: 'file',
+        type: 'picture',
     },
     room_type_id: {
         label: 'Категория',

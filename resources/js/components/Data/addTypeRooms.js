@@ -13,7 +13,7 @@ export default {
     picture: {
         label: 'Picture',
         placeholder: 'Please enter room type picture',
-        type: 'file',
+        type: 'picture',
     },
     persons: {
         label: 'Persons',

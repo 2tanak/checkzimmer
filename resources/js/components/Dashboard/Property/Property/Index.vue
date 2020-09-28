@@ -65,7 +65,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <b-button v-b-modal.modal-object-create type="button" variant="success" class="mr-2">Новый объект</b-button>
+                <b-button v-b-modal.modal-object-create type="button" variant="success" class="mr-2" @click="hotelNew">Новый объект</b-button>
             </div>
         </div>
 
@@ -75,7 +75,7 @@
         </b-modal>
 
         <b-modal id="modal-object-create" title="New property" @ok="deleteOk">
-            <Forms v-model="this.property[0]" :fields="this.property[0]" :data="data" />
+            <Forms v-model="this.hotelNewData" :fields="this.hotelNewData" :data="data" />
         </b-modal>
 
     </section>
@@ -103,13 +103,15 @@
                 types: [],
                 property: [],
                 hotelDelete: { name: '' },
-                data: propertyForm
+                hotelNewData: '',
+                data: propertyForm,
+                hotelDefault: { name: '', address: '', city: 'Leipzig', zip: '' }
             }
         },
         created() {
             properties.all()
                 .then(resp => {
-                    this.property = resp.data;
+                    this.property = resp.data.data;
                 })
             types.all()
                 .then(resp => {
@@ -118,7 +120,6 @@
         },
         methods: {
             badge(item) {
-
                 switch (item.status) {
                     case 'approved': return 'success';
                     case 'pending': return 'warning';
@@ -147,14 +148,25 @@
                         let toDeleteIndex = this.property.findIndex( item => item.id === this.hotelDelete.id );
                         this.property.splice(toDeleteIndex, 1);
                     });
+            },
+            hotelNew() {
+                this.hotelNewData = { ...this.hotelDefault }
             }
         },
         computed: {
             propertyTypes() {
+                if (!this.property.length) {
+                    return []
+                }
+
                 let types = [ ...new Set(this.property.map( item => this.getTypeId(item))) ];
                 return this.types.filter( item => types.includes(item.native_id));
             },
             filteredHotels() {
+                if (!this.property.length) {
+                    return []
+                }
+
                 return this.property
                     .filter( item => !this.type || this.getTypeId(item) === this.type )
                     .filter( item => !this.role || item.user.role === this.role || (this.role === -1 && item.user.role !== 'admin'));
