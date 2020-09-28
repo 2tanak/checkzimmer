@@ -7,11 +7,12 @@ export default {
     picture: {
         label: 'Picture',
         placeholder: 'Please enter room type picture',
-        type: 'file',
+        type: 'picture',
     },
-    feature_category: {
+    room_type_id: {
         label: 'Категория',
         placeholder: 'Please enter room type category',
-        type: 'text',
+        type: 'options',
+        options: []
     }
 }

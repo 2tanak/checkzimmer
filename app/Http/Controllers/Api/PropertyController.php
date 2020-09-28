@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Option;
 use App\Http\Requests\PropertyListRequest;
 use App\Services\GeocoderService;
 use Illuminate\Http\Request;
@@ -22,6 +23,7 @@ class PropertyController extends Controller
      */
     public function __construct(GeocoderService $service)
     {
+        return response()->json(Property::ind());
         $this->service = $service;
     }
 
@@ -58,5 +60,15 @@ class PropertyController extends Controller
         $property = Property::whereIn('id', $fields['id'])->get();
 
         return response()->json($property);
+    }
+    function destroy(Property $property) {
+
+        foreach ($property->rooms as $room) {
+            Option::where(['parent' => $room->id, 'type' => 'room'])->delete();
+        }
+        $property->rooms()->delete();
+        $property->delete();
+
+        return response()->json(['code' => 'ok']);
     }
 }

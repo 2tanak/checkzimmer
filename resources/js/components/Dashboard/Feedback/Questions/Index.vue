@@ -5,7 +5,7 @@
             <div class="col-md-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-table striped hover :items="questionItems" :fields="fields">
+                        <b-table striped hover responsive :busy="loading" :items="questionItems" :fields="fields">
                             <template v-slot:cell(created_at)="data">
                                 {{ data.item.created_at }}
                             </template>
@@ -21,6 +21,12 @@
                             </template>
                             <template v-slot:cell(delete)="data">
                                 <b-button v-b-modal.modalQuestionDelete variant="danger" @click="answerModalDelete(data.item)">Удалить</b-button>
+                            </template>
+                            <template v-slot:table-busy>
+                                <div class="text-center text-danger my-2">
+                                    <b-spinner class="align-middle"></b-spinner>
+                                    <strong>Loading...</strong>
+                                </div>
                             </template>
                         </b-table>
                     </div>
@@ -62,6 +68,7 @@ export default {
                 { id: 3, status: 'answered', created_at: '03.03.2020', question: 'Текст вопроса 3', response: '' }
             ],
             answer: true,
+            loading: false,
             answerObject: {
                 id: 0,
                 status: '',

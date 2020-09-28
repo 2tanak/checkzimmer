@@ -15,7 +15,7 @@
                 <div class="card">
                     <div class="card-body">
                         <b-form-group>
-                            <b-table striped hover :busy="loading" :items="reviewList" :fields="fields">
+                            <b-table striped hover responsive :busy="loading" :items="reviewList" :fields="fields">
                                 <template v-slot:cell(created_at)="data">
                                     {{ data.item.created_at }}
                                 </template>
