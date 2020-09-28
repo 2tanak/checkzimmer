@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Property;
 use Spatie\Geocoder\Geocoder;
 use Auth;
+use App\User;
 
 class PropertyController extends Controller
 {
@@ -16,14 +17,12 @@ class PropertyController extends Controller
      */
     private $service;
 
-
     /**
      * PropertyController constructor.
      * @param GeocoderService $service
      */
     public function __construct(GeocoderService $service)
     {
-        return response()->json(Property::ind());
         $this->service = $service;
     }
 
@@ -38,29 +37,30 @@ class PropertyController extends Controller
         $km = $data['km'] ? $data['km']  : 10;
         $people = $data['people'];
 
-//        $geo_data = $geocoder->getCoordinatesForAddress($address);
         $geo_data = $this->service->getCoords($address);
 
         $objects = Property::where(Property::raw('abs('.$geo_data['lat'].' - lat) * 111'), '<', $km)
             ->where(Property::raw('abs('.$geo_data['lng'].' - lng) * 111'), '<', $km)->paginate(20);
 
         return response()->json($objects);
-
     }
 
     function show($id) {
         return response()->json(Property::findOrFail($id));
     }
+    
     function init() {
         $property = Property::orderBy('created_at')->limit(10)->get();
         return response()->json($property);
     }
+    
     function queryProperty(Request $request) {
         $fields = $request->all();
         $property = Property::whereIn('id', $fields['id'])->get();
 
         return response()->json($property);
     }
+    
     function destroy(Property $property) {
 
         foreach ($property->rooms as $room) {
@@ -77,14 +77,23 @@ class PropertyController extends Controller
             'name'      => 'required',
             'address'   => 'required',
             'zip'       => 'required',
-        ]);
+        ]); 
         
-        $data = $request->input();
-        $data['user_id'] = 1;
-        $data['views']   = 0;
-        $data['lat']   = '51.34126';
-        $data['lng']   = '51.34126';
+        $geo_data = $this->service->getCoords($request->address);
 
+        $data = [
+            'name'      => $request->name,
+            'address'   => $request->address,
+            'zip'       => $request->zip,
+            'city'      => $request->city,
+            'user_id'   => User::ADMIN,
+            'views'     => 0,
+            'type'      => Property::AFFILIATE,
+            'status'    => Property::APPROVED,
+            'lat'       => $geo_data['lat'],
+            'lng'       => $geo_data['lng'],
+        ];
+        
         $item = new Property($data);
         $item->save();
         
