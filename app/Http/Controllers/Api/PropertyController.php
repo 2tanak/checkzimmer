@@ -7,7 +7,7 @@ use App\Services\GeocoderService;
 use Illuminate\Http\Request;
 use App\Property;
 use Spatie\Geocoder\Geocoder;
-
+use Auth;
 
 class PropertyController extends Controller
 {
@@ -70,5 +70,24 @@ class PropertyController extends Controller
         $property->delete();
 
         return response()->json(['code' => 'ok']);
+    }
+    
+    function store(Request $request) {
+        request()->validate([
+            'name'      => 'required',
+            'address'   => 'required',
+            'zip'       => 'required',
+        ]);
+        
+        $data = $request->input();
+        $data['user_id'] = 1;
+        $data['views']   = 0;
+        $data['lat']   = '51.34126';
+        $data['lng']   = '51.34126';
+
+        $item = new Property($data);
+        $item->save();
+        
+        return $item ? response()->json(['code' => 'ok','user' => $item]) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
     }
 }

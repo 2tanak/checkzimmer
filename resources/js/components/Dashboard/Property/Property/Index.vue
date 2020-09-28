@@ -69,12 +69,23 @@
             </div>
         </div>
 
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <b-alert dismissible v-model="operationOk" variant="success">
+                    {{ textOperation}}
+                </b-alert>
+                <b-alert dismissible v-model="operationError" variant="danger">
+                    {{ textOperation}}
+                </b-alert>
+            </div>
+        </div>
+
         <b-modal id="modal-object-delete" title="Property delete" @ok="deleteOk">
             <span class="text-danger">A you sure you want to delete hotel {{ hotelDelete.name }}?</span>
             <span>This action can not be undone</span>
         </b-modal>
 
-        <b-modal id="modal-object-create" title="New property" @ok="deleteOk">
+        <b-modal id="modal-object-create" title="New property" @ok.prevent="createProperty">
             <Forms v-model="this.hotelNewData" :fields="this.hotelNewData" :data="data" />
         </b-modal>
 
@@ -102,6 +113,9 @@
                 fields: ['id', 'user', 'type', 'hotelType', 'status', 'views', 'name', 'delete'],
                 types: [],
                 property: [],
+                operationOk : false,
+                operationError : false,
+                textOperation: '',
                 hotelDelete: { name: '' },
                 hotelNewData: '',
                 data: propertyForm,
@@ -142,6 +156,23 @@
             featureDelete(item) {
                 this.hotelDelete = item;
             },
+            createProperty() {
+                this.clearModalErrors();
+                properties.create(this.hotelNewData).then(response => {
+                    if(response.data.code == 'ok'){
+                        this.textOperation = 'Добавлено';
+                        this.operationOk = true
+                    }else{
+                        this.textOperation = 'Ошибка добавления';
+                        this.operationError = true;
+                    }
+                    this.$nextTick(() => {
+                        this.$bvModal.hide('modal-object-create');
+                    });
+                }).catch(error => {
+                    this.generateModalErrors(error.response.data.errors);
+                });
+            },
             deleteOk() {
                 properties.delete(this.hotelDelete.id)
                     .then(resp => {
@@ -151,6 +182,22 @@
             },
             hotelNew() {
                 this.hotelNewData = { ...this.hotelDefault }
+            },    
+            //helpers
+            clearModalErrors() {
+                var errText = document.querySelectorAll('.errText');
+                errText.forEach((n, i) => {
+                    n.parentNode.removeChild(n);
+                });
+            },
+            generateModalErrors(errors){
+                var keys = Object.keys(errors)
+                for (var i = 0, l = keys.length; i < l; i++) {
+                    let p = document.createElement("p");
+                    p.textContent = errors[keys[i]];
+                    p.setAttribute('class','errText');
+                    document.querySelector('#input-' + keys[i]).parentNode.append(p);
+                }
             }
         },
         computed: {
@@ -175,6 +222,10 @@
     }
 </script>
 
-<style scoped>
-
+<style>
+    .errText{
+        color:red;
+        font-size: 12px;
+    }
 </style>
+
