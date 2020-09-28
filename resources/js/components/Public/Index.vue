@@ -60,7 +60,7 @@
                 <div class="property not-map">
                     <div class="container">
                         <transition name="fade" appear>
-                        <div :style="{position: 'relative', opacity: loading ? 0:1, position: loading ? 'absolute':'relative' }">
+                        <div class="property-container" :style="{position: 'relative', opacity: loading ? 0:1, position: loading ? 'absolute':'relative'}">
                             <div class="property-item">
                                 <PropertyListItem v-for="item in property" :key="'id-'+item.id" :item="item" @favsUpdated="updateFavCount"/>
                             </div>
@@ -207,8 +207,8 @@
                                 </div>
 
                             </div>
-                            <div class="load-more" v-if="additional_pages" style="width: 100%;float:left">
-                                <div class="btn btn-success" @click.prevent="loadMore">Загрузить еще</div>
+                            <div class="load-more">
+                                <div class="btn btn-success" v-if="additional_pages" @click.prevent="loadMore">Загрузить еще</div>
                             </div>
                         </div>
                         </transition>

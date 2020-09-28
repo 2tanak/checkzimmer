@@ -476,7 +476,7 @@ header .head-search img {
     background-color: #ffffff;
     box-shadow: 0 7px 14px rgba(51, 54, 70, 0.14);
     position: absolute;
-    bottom: 0;
+    bottom: 137px;
     left: 50%;
     transform: translateX(-50%);
     border-radius: 14px;
@@ -1868,6 +1868,23 @@ label.mobile-label {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.property .load-more {
+    text-align: center;
+    margin-top: 100px;
+}
+.property .property-container {
+    display: flex;
+    flex-direction: column;
+}
+.property .load-more .btn {
+    background: #6bb63f;
+    border-color: #6bb63f;
+    color: #ffffff;
+}
+.property .load-more .btn:hover {
+    background-color: #60a338;
+    transition: all 0.4s ease;
+}
 
 @media (min-width: 1200px) {
     .container {
@@ -3208,7 +3225,7 @@ label.mobile-label {
 .single-content .object-description .questions-form input[type="text"]:-ms-input-placeholder {
     color: #8F98A2;
 }
-.single-content .object-description .questions-form a.submit {
+.single-content .object-description .questions-form input[type="submit"] {
     width: 128px;
     height: 44px;
     display: flex;
@@ -3226,7 +3243,7 @@ label.mobile-label {
     transition-duration: 0.4s;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
 }
-.single-content .object-description .questions-form a.submit:hover {
+.single-content .object-description .questions-form input[type="submit"]:hover {
     background-color: #60A338;
     transition-duration: 0.4s;
 }
