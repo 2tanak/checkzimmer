@@ -213,7 +213,7 @@
                         </div>
                         </transition>
                         <transition name="fade">
-                        <div class="load-block-content" :style="{ visibility: loading ? 'visible':'hidden' }">
+                        <div class="load-block-content" :style="{ display: loading ? 'display':'none !important' }">
                             <div class="load-block-item">
                                 <div class="load-block big-load-block">
                                     <div class="left-part images-block">
