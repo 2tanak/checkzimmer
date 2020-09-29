@@ -69,10 +69,22 @@
             </div>
         </div>
 
-        <b-modal id="modal-rooms" title="Add/Edit type rooms">
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <b-alert dismissible v-model="operationOk" variant="success">
+                    {{ textOperation}}
+                </b-alert>
+                <b-alert dismissible v-model="operationError" variant="danger">
+                    {{ textOperation}}
+                </b-alert>
+            </div>
+        </div>
+
+        <b-modal id="modal-rooms" title="Add/Edit type rooms" @ok.prevent="createRoom">
             <Forms v-model="roomTypeAction" :fields="roomTypeAction" :data="data"></Forms>
         </b-modal>
-        <b-modal id="modal-rooms-delete" title="Feature delete">
+
+        <b-modal id="modal-rooms-delete" title="Feature delete" @ok="deleteRoom">
             <span class="text-danger">A you sure you want to delete {{ roomTypeAction.name }}?</span>
             <span>This action cannot be undone!</span>
         </b-modal>
@@ -82,8 +94,12 @@
 
 <script>
     import Forms from "../../../Forms/Index";
+    import ApiRequest from '../../../API/ApiRequest';
 
     import addNewRoomType from "../../../Data/addTypeRooms";
+    
+    let RoomRequest = ApiRequest('room-types')
+    let room_types = new RoomRequest;
 
     export default {
         name: "Index",
@@ -94,19 +110,25 @@
                 propertyObjectSelect: 'not_choice',
                 loading: false,
                 types: '',
+                operationOk : false,
+                operationError : false,
+                textOperation: '',
                 fields: [ 'id', 'room_type_id', 'picture', 'name', 'persons', 'edit', 'delete' ],
                 room_types: [
-                    { id: 1, room_type_id: 0, picture: '', name: 'дом (целиком)', persons: 2 },
-                    { id: 6, room_type_id: 1, picture: '/svg/i-one.svg', name: 'одноместный', persons: 2 },
-                    { id: 8, room_type_id: 1, picture: '', name: 'одноместный', persons: 2 },
-                    { id: 16, room_type_id: 0, picture: '', name: 'квартира', persons: 2 },
-                    { id: 31, room_type_id: 16, picture: '', name: 'двухместная', persons: 2
-                    },
+                    { id: 1, room_type_id: 0, name: 'дом (целиком)' },
+                    { id: 6, room_type_id: 1,  name: 'одноместный' }
                 ],
+                
                 data: addNewRoomType,
-                roomTypeDefault: { name: '', room_type_id: 0, picture: '', persons: 1 },
+                roomTypeDefault: { name: '', room_type_id: 0, picture: 'src//', persons: 1 },
                 roomTypeAction: { name: '' }
             }
+        },
+        created() {
+            room_types.all()
+                .then(resp => {
+                    this.room_types = resp.data;
+             })
         },
         mounted() {
             this.data.room_type_id.options = this.getRootTypes();
@@ -138,11 +160,56 @@
             },
             roomsNew() {
                 this.roomTypeAction = { ...this.roomTypeDefault };
+            },
+            createRoom() {
+                this.clearModalErrors();
+
+                room_types.create(this.roomTypeAction).then(response => {
+                    if(response.data.code == 'ok'){
+                        this.textOperation = 'Добавлено';
+                        this.operationOk = true
+                    }else{
+                        this.textOperation = 'Ошибка добавления';
+                        this.operationError = true;
+                    }
+                    this.$nextTick(() => {
+                        this.$bvModal.hide('modal-rooms');
+                    });
+                }).catch(error => {
+                    this.generateModalErrors(error.response.data.errors);
+                });
+            },
+            deleteRoom() {
+                room_types.delete(this.roomTypeAction.id)
+                    .then(resp => {
+                        let toDeleteIndex = this.room_types.findIndex( item => item.id === this.roomTypeAction.id );
+                        this.room_types.splice(toDeleteIndex, 1);
+                });
+            },
+
+            //helpers
+            clearModalErrors() {
+                var errText = document.querySelectorAll('.errText');
+                errText.forEach((n, i) => {
+                    n.parentNode.removeChild(n);
+                });
+            },
+            generateModalErrors(errors){
+                var keys = Object.keys(errors)
+                for (var i = 0, l = keys.length; i < l; i++) {
+                    let p = document.createElement("p");
+                    p.textContent = errors[keys[i]];
+                    p.setAttribute('class','errText');
+                    document.querySelector('#input-' + keys[i]).parentNode.append(p);
+                }
             }
         }
     }
 </script>
 
-<style scoped>
-
+<style>
+    .errText{
+        color:red;
+        font-size: 12px;
+    }
 </style>
