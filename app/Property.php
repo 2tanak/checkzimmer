@@ -14,6 +14,13 @@ class Property extends Model
     protected $with = ['options', 'user', 'rooms', 'questions', 'rating', 'questions'];
     private static $identifier = 'id';
     private static $children = ['options', 'user'];
+    
+    public const PENDING = 'pending';
+    public const APPROVED = 'approved';
+    public const DESCLINED = 'declined';
+    
+    public const GENERAL = 'general';
+    public const AFFILIATE = 'affiliate';
 
     static function hasFeature($name, $features) {
         $features = array_column($features, 'name');
