@@ -5,8 +5,6 @@
         background: #FFFFFF;
         box-shadow: 0 0 14px rgba(51, 54, 70, 0.14);
         border-radius: 12px;
-        /*margin-top: 100px;*/
-        display: block !important;
     }
     .list-content .property .load-block.big-load-block {
         width: 100%;
@@ -139,6 +137,7 @@
     .list-content .property .load-block-item {
         display: flex;
         flex-direction: column;
+        width: 100%;
     }
     .list-content .property .place-card {
         width: 100%;
