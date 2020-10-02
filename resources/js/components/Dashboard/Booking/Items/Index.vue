@@ -6,12 +6,13 @@
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Город"  label-for="input-city">
-                            <b-form-input type="text" id="input-city" v-model="filter.city" placeholder="Город"></b-form-input>
+                        <b-form-group label="Город">
+                            <b-form-input type="text" v-model="filter.city" placeholder="Город"></b-form-input>
                         </b-form-group>
                     </div>
                 </div>
             </div>
+
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body constraight-list">
@@ -21,15 +22,48 @@
                     </div>
                 </div>
             </div>
-            <!--<div class="col-md-4 grid-margin">
+
+            <div class="col-md-3 grid-margin">
                 <div class="card">
-                    <div class="card-body">
-                        <b-form-group label="Цена" label-for="input-city">
-                            <b-form-input type="range" id="input-city" v-model="filter.city" placeholder="Город"></b-form-input>
+                    <div class="card-body constraight-list">
+                        <b-form-group label="Кровать" label-for="input-hotel-type">
+                            <b-form-select v-model="filter.type" :options="getBed"></b-form-select>
                         </b-form-group>
                     </div>
                 </div>
-            </div>-->
+            </div>
+            
+            <div class="col-md-3 grid-margin">
+                <div class="card">
+                    <div class="card-body constraight-list">
+                        <b-form-group label="Душ" label-for="input-hotel-type">
+                            <b-form-select v-model="filter.shower" :options="getShower"></b-form-select>
+                        </b-form-group>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 grid-margin">
+                <div class="card">
+                    <div class="card-body constraight-list">
+                        <b-form-group label="Кухня" label-for="input-hotel-type">
+                            <b-form-select v-model="filter.kitchen" :options="getKitchen"></b-form-select>
+                        </b-form-group>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 grid-margin">
+                <div class="card">
+                    <span class="card-price_value">{{ filter.price }}</span>
+                    <div class="card-body">
+                        <b-form-group label="Цена" label-for="input-city">
+                            <b-form-input type="range" id="input-city" min="1" max="500" 
+                                v-model="filter.price" placeholder="Город"></b-form-input>
+                        </b-form-group> 
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="row">
@@ -136,8 +170,15 @@
     import ApiRequest from '../../../API/ApiRequest';
     let HotelsRequest = ApiRequest('hotels-request');
     let TypesRequest = ApiRequest('booking-roomtypes');
+    let BedRequest = ApiRequest('booking-bedtypes');
+    let ShowerRequest = ApiRequest('booking-showertypes');
+    let KitchenRequest = ApiRequest('booking-kitchentypes');
+
     let types = new TypesRequest;
     let hotelsAPI = new HotelsRequest;
+    let bed = new BedRequest;
+    let shower = new ShowerRequest;
+    let kitchen = new KitchenRequest;
 
     export default {
         name: "Index",
@@ -145,30 +186,40 @@
             return {
                 filter: {
                     city: 'Leipzig',
-                    type: ''
+                    type: '',
+                    bed: ''
                 },
                 types: [],
+                bed: [],
+                shower: [],
+                kitchen: [],
                 hotels: [],
                 loading: false
             }
         },
         mounted() {
             types.all()
-                .then(resp => {
+                .then(resp => {  
                     this.types = resp.data;
+                });
+            bed.all()
+                .then(resp => {
+                    this.bed = resp.data;
+                });
+            shower.all()
+                .then(resp => {
+                    this.shower = resp.data;
+                });
+            kitchen.all()
+                .then(resp => {
+                    this.kitchen = resp.data;
                 });
         },
         methods: {
             loadHotels() {
                 this.loading = true;
-                hotelsAPI.query(this.filter)
-                    .then(resp => {
-                        this.hotels = resp.data;
-                        for(let i in this.hotels) {
-                            this.hotels[i].tbi = this.hotels[i].imported === null;
-                        }
-                        this.loading = false;
-                    })
+                console.log(this.filter);
+
             },
             getMainHotelPhoto(hotel) {
                 for (let i in hotel.hotel_data.hotel_photos) {
@@ -259,6 +310,33 @@
                 }
                 return types;
             },
+            getBed() {
+                let bed = [];
+
+                for (let i in this.bed) {
+                    bed.push( { value: this.bed[i].type, text: this.bed[i].name } )
+                }
+
+                return bed;
+            },
+            getShower() {
+                let shower = [];
+
+                for (let i in this.shower) {
+                    shower.push( { value: this.shower[i].type, text: this.shower[i].name } )
+                }
+
+                return shower;
+            },
+            getKitchen() {
+                let kitchen = [];
+
+                for (let i in this.kitchen) {
+                    kitchen.push( { value: this.kitchen[i].type, text: this.kitchen[i].name } )
+                }
+
+                return kitchen;
+            },
         },
 
     }
@@ -279,6 +357,11 @@
         height: 60px;
         width: 60px;
         object-fit: cover;
+    }
+    .card-price_value {
+        position:absolute;
+        top:25px;
+        left:80px;
     }
 </style>
 

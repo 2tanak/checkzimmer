@@ -41,6 +41,10 @@ Route::middleware('api')->namespace('Api')->group(function () {
     Route::get('/booking-cities', 'BookingController@getCities');
     Route::get('/booking-facilities', 'BookingController@getFeatures');
     Route::get('/booking-roomtypes', 'BookingController@getRoomTypes');
+    Route::get('/booking-bedtypes', 'BookingController@getBedTypes');
+    Route::get('/booking-showertypes', 'BookingController@getShowerTypes');
+    Route::get('/booking-kitchentypes', 'BookingController@getKitchenTypes');
+
     Route::post('/hotels-request/query', 'BookingController@getHotels');
     Route::post('/hotels-request', 'BookingController@saveHotels');
 

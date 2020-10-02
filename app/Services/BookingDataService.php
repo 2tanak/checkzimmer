@@ -66,7 +66,69 @@ class BookingDataService
     {
         return $this->bookingType->params(['type' => $type]);
     }
+    
+    public function getBedTypes()
+    {
+        return [
+            [
+                'type' => 'single',
+                'name' => 'односпальная',
+            ],
+            [
+                'type' => 'double',
+                'name' => 'двуспальная',
+            ]    
+        ];
+    }
+    
+    public function getShowerTypes()
+    {
+        return [
+            [
+                'type' => 'All',
+                'name' => 'все',
+            ],
+            [
+                'type' => 'single',
+                'name' => 'свой',
+            ],
+            [
+                'type' => 'shared',
+                'name' => 'совместный',
+            ],
+            [
+                'type' => 'none',
+                'name' => 'без душа',
+            ]  
+        ];
+    }
 
+    public function getKitchenTypes()
+    {
+        return [
+            [
+                'type' => 'All',
+                'name' => 'все',
+            ],
+            [
+                'type' => 'single',
+                'name' => 'cвоя',
+            ],
+            [
+                'type' => 'shared',
+                'name' => 'совместная',
+            ],
+            [
+                'type' => 'none',
+                'name' => 'кухонька (Kitchenette)',
+            ],
+            [
+                'type' => 'none',
+                'name' => 'без кухни',
+            ]  
+        ];
+    }
+    
     public function getChildrenFeatures()
     {
         return $this->bookingFeatures->ind();
