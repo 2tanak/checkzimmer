@@ -85,15 +85,15 @@ class BookingDataService
     {
         return [
             [
-                'type' => 'All',
+                'type' => 'all',
                 'name' => 'все',
             ],
             [
-                'type' => 'single',
+                'type' => 'shared bathroom',
                 'name' => 'свой',
             ],
             [
-                'type' => 'shared',
+                'type' => 'shower',
                 'name' => 'совместный',
             ],
             [
@@ -107,19 +107,19 @@ class BookingDataService
     {
         return [
             [
-                'type' => 'All',
+                'type' => 'all',
                 'name' => 'все',
             ],
             [
-                'type' => 'single',
+                'type' => 'kitchen',
                 'name' => 'cвоя',
             ],
             [
-                'type' => 'shared',
+                'type' => 'shared kitchen',
                 'name' => 'совместная',
             ],
             [
-                'type' => 'none',
+                'type' => 'kitchenette',
                 'name' => 'кухонька (Kitchenette)',
             ],
             [
@@ -180,15 +180,22 @@ class BookingDataService
         $json = $this->bookingApiService->getHotelsByCityAndType($city->native_id, $type);
 
         $ids = [];
+        
         foreach ($json['result'] as $item) {
             $ids[] = $item['hotel_id'];
         }
-        $natives = Option::where('type', 'property')->where('key', 'native_id')->whereIn('value', $ids)->get()->pluck('parent', 'value');
+
+        $natives = Option::where('type', 'property')
+            ->where('key', 'native_id')
+            ->whereIn('value', $ids)
+            ->get()
+            ->pluck('parent', 'value');
 
         foreach ($json['result'] as $i => $item) {
             $imported = $natives[$item['hotel_id']] ?? null;
             $json['result'][$i]['imported'] = $imported;
         }
+        
         return $json['result'];
     }
 

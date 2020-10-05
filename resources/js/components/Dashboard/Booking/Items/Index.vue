@@ -27,7 +27,7 @@
                 <div class="card">
                     <div class="card-body constraight-list">
                         <b-form-group label="Кровать" label-for="input-hotel-type">
-                            <b-form-select v-model="filter.type" :options="getBed"></b-form-select>
+                            <b-form-select v-model="filter.bed" :options="getBed"></b-form-select>
                         </b-form-group>
                     </div>
                 </div>
@@ -187,7 +187,10 @@
                 filter: {
                     city: 'Leipzig',
                     type: '',
-                    bed: ''
+                    shower: 'all',
+                    kitchen: 'all',
+                    bed: 'single',
+                    price: 250
                 },
                 types: [],
                 bed: [],
@@ -218,8 +221,50 @@
         methods: {
             loadHotels() {
                 this.loading = true;
-                console.log(this.filter);
+                var filterNew = this.filter;
 
+                hotelsAPI.query(this.filter).then(resp => {
+                    this.hotels = resp.data;
+                    var arr_hotels = this.hotels;
+                       
+                    if (filterNew.shower.toLowerCase() !== 'all' 
+                            || filterNew.kitchen.toLowerCase() !== 'all' 
+                            || filterNew.bed.toLowerCase() !== 'single') {
+                        arr_hotels = [];
+                        for(let i in this.hotels) {
+                            if(this.hotels.hasOwnProperty(i) && this.hotels[i].room_data[i] !== undefined) {
+                            
+                                for(let room in this.hotels[i].room_data[i].room_facilities) {
+                                    if (this.hotels[i].room_data[i].room_facilities[room].name.toLowerCase() === filterNew.shower.toLowerCase()) {
+                                        arr_hotels.push(this.hotels[i]);
+                                    }
+                                    
+                                    if (this.hotels[i].room_data[i].room_facilities[room].name.toLowerCase() === filterNew.kitchen.toLowerCase()) {
+                                        arr_hotels.push(this.hotels[i]);
+                                    }
+                                    
+                                    if (this.hotels[i].room_data[i].room_info.bedrooms[i] !== undefined && filterNew.bed.toLowerCase() !== 'single') {
+                                        if (this.hotels[i].room_data[i].room_info.bedrooms[i].description.toLowerCase().includes(filterNew.bed.toLowerCase())) {
+                                            arr_hotels.push(this.hotels[i]);
+                                        } 
+                                    }     
+
+                                    if (this.hotels[i].room_data[i].room_info.bedrooms[i] !== undefined && filterNew.price !== 250) {
+                                        if (this.hotels[i].room_data[i].room_info.min_price >= filterNew.price) {
+                                            arr_hotels.push(this.hotels[i]);
+                                        } 
+                                    }     
+                                }
+                            }
+
+                        this.hotels[i].tbi = this.hotels[i].imported === null;
+
+                        }
+                     }
+                    this.hotels = arr_hotels;
+                   
+                    this.loading = false;
+                })
             },
             getMainHotelPhoto(hotel) {
                 for (let i in hotel.hotel_data.hotel_photos) {
@@ -299,7 +344,7 @@
             importHotels() {
                 let hotelsToImport = this.hotels.filter( item => item.tbi === true);
                 //console.log(hotelsToImport);
-                hotelsAPI.create({ ...hotelsToImport});
+                hotelsAPI.create({ ...hotelsToImport}, this.filter);
             }
         },
         computed: {
