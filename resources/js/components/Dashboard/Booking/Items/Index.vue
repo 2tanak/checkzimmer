@@ -225,12 +225,14 @@
 
                 hotelsAPI.query(this.filter).then(resp => {
                     this.hotels = resp.data;
+
                     var arr_hotels = this.hotels;
                        
                     if (filterNew.shower.toLowerCase() !== 'all' 
                             || filterNew.kitchen.toLowerCase() !== 'all' 
                             || filterNew.bed.toLowerCase() !== 'single') {
                         arr_hotels = [];
+
                         for(let i in this.hotels) {
                             if(this.hotels.hasOwnProperty(i) && this.hotels[i].room_data[i] !== undefined) {
                             
@@ -249,7 +251,7 @@
                                         } 
                                     }     
 
-                                    if (this.hotels[i].room_data[i].room_info.bedrooms[i] !== undefined && filterNew.price !== 10) {
+                                    if (this.hotels[i].room_data[i].room_info.bedrooms[i] !== undefined && filterNew.price > 10) {
                                         if (this.hotels[i].room_data[i].room_info.min_price >= filterNew.price) {
                                             arr_hotels.push(this.hotels[i]);
                                         } 
@@ -261,6 +263,7 @@
 
                         }
                      }
+
                     this.hotels = arr_hotels;
                    
                     this.loading = false;
