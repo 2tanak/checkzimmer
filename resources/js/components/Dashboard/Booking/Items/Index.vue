@@ -58,7 +58,7 @@
                     <span class="card-price_value">{{ filter.price }}</span>
                     <div class="card-body">
                         <b-form-group label="Цена" label-for="input-city">
-                            <b-form-input type="range" id="input-city" min="1" max="500" 
+                            <b-form-input type="range" id="input-city" min="10" max="25" 
                                 v-model="filter.price" placeholder="Город"></b-form-input>
                         </b-form-group> 
                     </div>
@@ -190,7 +190,7 @@
                     shower: 'all',
                     kitchen: 'all',
                     bed: 'single',
-                    price: 250
+                    price: 10
                 },
                 types: [],
                 bed: [],
@@ -249,7 +249,7 @@
                                         } 
                                     }     
 
-                                    if (this.hotels[i].room_data[i].room_info.bedrooms[i] !== undefined && filterNew.price !== 250) {
+                                    if (this.hotels[i].room_data[i].room_info.bedrooms[i] !== undefined && filterNew.price !== 10) {
                                         if (this.hotels[i].room_data[i].room_info.min_price >= filterNew.price) {
                                             arr_hotels.push(this.hotels[i]);
                                         } 
