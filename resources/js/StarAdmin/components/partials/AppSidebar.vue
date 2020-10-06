@@ -32,9 +32,9 @@
           </span>
           <b-collapse id="sample-pages">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'property' }">Property</router-link></li>
-              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'assigned-room-types' }">Assigned Rooms</router-link></li>
-              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'rooms' }">Rooms</router-link></li>
+              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'property' }">Property List</router-link></li>
+              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'assigned-room-types' }">Assigned Types</router-link></li>
+              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'rooms' }">Property Rooms</router-link></li>
             </ul>
           </b-collapse>
         </li>
