@@ -129,7 +129,7 @@ class BookingController extends Controller
      * @return JsonResponse
      */
     function getHotels(Request $request) {
-        try {            
+        try {
             $hotelsArray = $this->bookingDataService->getHotelsByCityAndTypeFromApi($request->city, $request->type);
         } catch (GuzzleHttp\Exception\GuzzleException $e) {
             return response()->json(['error' => 'Something went wrong'], 500);
@@ -141,8 +141,6 @@ class BookingController extends Controller
 
     public function saveHotels(Request $request, $data)
     {
-        var_dump($data);
-        exit;
         $hotels = $request->all();
         $this->bookingDataService->storeHotels($hotels);
         return response()->json(['message' => 'Hotels successful stored']);

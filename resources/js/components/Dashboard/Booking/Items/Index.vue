@@ -347,7 +347,7 @@
             importHotels() {
                 let hotelsToImport = this.hotels.filter( item => item.tbi === true);
                 //console.log(hotelsToImport);
-                hotelsAPI.create({ ...hotelsToImport}, this.filter);
+                hotelsAPI.create({ ...hotelsToImport});
             }
         },
         computed: {
@@ -406,10 +406,6 @@
         width: 60px;
         object-fit: cover;
     }
-    .card-price_value {
-        position:absolute;
-        top:25px;
-        left:80px;
-    }
+
 </style>
 
