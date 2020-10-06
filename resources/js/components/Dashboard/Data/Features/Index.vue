@@ -126,6 +126,9 @@
             },
             getCategories() {
                 let cats = [];
+                if (this.features.length) {
+                    return cats;
+                }
                 this.features.forEach( item => {
                     if (item.feature_category && cats.indexOf( item.feature_category.name ) === -1 ) {
                         cats.push(item.feature_category.name);
