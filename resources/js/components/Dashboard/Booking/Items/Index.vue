@@ -221,53 +221,40 @@
         methods: {
             loadHotels() {
                 this.loading = true;
+
                 var filterNew = this.filter;
 
                 hotelsAPI.query(this.filter).then(resp => {
                     this.hotels = resp.data;
 
-                    var arr_hotels = this.hotels;
-                       
-                    if (filterNew.shower.toLowerCase() !== 'all' 
-                            || filterNew.kitchen.toLowerCase() !== 'all' 
-                            || filterNew.bed.toLowerCase() !== 'single') {
-                        arr_hotels = [];
-
-                        for(let i in this.hotels) {
-                            if(this.hotels.hasOwnProperty(i) && this.hotels[i].room_data[i] !== undefined) {
-                            
-                                for(let room in this.hotels[i].room_data[i].room_facilities) {
-                                    if (this.hotels[i].room_data[i].room_facilities[room].name.toLowerCase() === filterNew.shower.toLowerCase()) {
-                                        arr_hotels.push(this.hotels[i]);
-                                    }
-                                    
-                                    if (this.hotels[i].room_data[i].room_facilities[room].name.toLowerCase() === filterNew.kitchen.toLowerCase()) {
-                                        arr_hotels.push(this.hotels[i]);
-                                    }
-                                    
-                                    if (this.hotels[i].room_data[i].room_info.bedrooms[i] !== undefined && filterNew.bed.toLowerCase() !== 'single') {
-                                        if (this.hotels[i].room_data[i].room_info.bedrooms[i].description.toLowerCase().includes(filterNew.bed.toLowerCase())) {
-                                            arr_hotels.push(this.hotels[i]);
-                                        } 
-                                    }     
-
-                                    if (this.hotels[i].room_data[i].room_info.bedrooms[i] !== undefined && filterNew.price > 10) {
-                                        if (this.hotels[i].room_data[i].room_info.min_price >= filterNew.price) {
-                                            arr_hotels.push(this.hotels[i]);
-                                        } 
-                                    }     
-                                }
-                            }
-
-                        this.hotels[i].tbi = this.hotels[i].imported === null;
-
-                        }
-                     }
-
-                    this.hotels = arr_hotels;
+                    this.hotels.map((item, index) => this.hotels[index].tbi = this.hotels[index].imported === null));
                    
                     this.loading = false;
                 })
+            },
+            getTypes() {
+                return this.types.map((item) => ({
+                    value: item.native,
+                    text:  item.name
+                }));
+            },
+            getBed() {                
+                return this.bed.map((item) => ({
+                    value: item.type,
+                    text: item.name
+                }));
+            },
+            getShower() {
+                return this.shower.map((item) => ({
+                    value: item.type,
+                    text: item.name
+                }));
+            },
+            getKitchen() {
+                return this.kitchen.map((item) => ({
+                    value: item.type,
+                    text: item.name
+                }));
             },
             getMainHotelPhoto(hotel) {
                 for (let i in hotel.hotel_data.hotel_photos) {
@@ -346,45 +333,13 @@
             },
             importHotels() {
                 let hotelsToImport = this.hotels.filter( item => item.tbi === true);
-                //console.log(hotelsToImport);
                 hotelsAPI.create({ ...hotelsToImport});
             }
         },
         computed: {
-            getTypes() {
-                let types = [];
-                for (let i in this.types) {
-                    types.push( { value: this.types[i].native_id, text: this.types[i].name } )
-                }
-                return types;
-            },
-            getBed() {
-                let bed = [];
-
-                for (let i in this.bed) {
-                    bed.push( { value: this.bed[i].type, text: this.bed[i].name } )
-                }
-
-                return bed;
-            },
-            getShower() {
-                let shower = [];
-
-                for (let i in this.shower) {
-                    shower.push( { value: this.shower[i].type, text: this.shower[i].name } )
-                }
-
-                return shower;
-            },
-            getKitchen() {
-                let kitchen = [];
-
-                for (let i in this.kitchen) {
-                    kitchen.push( { value: this.kitchen[i].type, text: this.kitchen[i].name } )
-                }
-
-                return kitchen;
-            },
+            filteredItems() {
+                return this.hotels;
+            }
         },
 
     }
@@ -406,6 +361,5 @@
         width: 60px;
         object-fit: cover;
     }
-
 </style>
 
