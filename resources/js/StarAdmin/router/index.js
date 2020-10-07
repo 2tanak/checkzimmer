@@ -32,6 +32,7 @@ import error500 from '../views/sample-pages/error-500'
 import login from '../views/sample-pages/login'
 import register from '../views/sample-pages/register'
 
+import Requests from '../../components/Dashboard/Requests/Index';
 import Header from '../../components/Dashboard/Website/Header/Index';
 import Footer from '../../components/Dashboard/Website/Footer/Index';
 import Users from '../../components/Dashboard/Users/Index';
@@ -70,7 +71,8 @@ export default new Router({
         {
             path: '/dashboard/requests',
             name: 'requests',
-            component: widgets
+            component: Requests,
+            meta: { auth: true }
         },
         {
             path: '/dashboard/property/items',

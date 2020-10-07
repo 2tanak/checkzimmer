@@ -9,6 +9,7 @@ use App\Option;
 use App\Property;
 use App\Room;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\Eloquent\Collection;
 
 class BookingDataService
 {
@@ -157,7 +158,7 @@ class BookingDataService
      * @param array $childrenFeatures
      * @return array
      */
-    public function getRootedFeatures(array $rootFeatures, array $childrenFeatures): array
+    public function getRootedFeatures(array $rootFeatures, Collection $childrenFeatures): array
     {
         $rootedFeatures = [];
         foreach ($rootFeatures as $feature) {

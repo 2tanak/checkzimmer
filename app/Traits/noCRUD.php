@@ -57,8 +57,11 @@ trait noCRUD
             $child::update($fields[$child]);
         }
     }
-    static function ind() {
-         return static::with(self::$children)->paginate(30);
+    static function ind($paginate = 0) {
+        if (!$paginate) {
+            return static::with(self::$children)->get();
+        }
+        return static::with(self::$children)->paginate($paginate);
     }
 
     public static function indPaginated()
