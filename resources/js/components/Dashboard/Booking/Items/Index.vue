@@ -22,32 +22,43 @@
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="col-md-3 grid-margin">
+            <div class="row">
+                <div class="col-md-12">
+                    <b-button variant="info" class="float-right" @click.prevent="loadHotels">Загрузить отели</b-button>
+                    <b-button v-if="this.hotels.length" variant="success" class="mr-2" @click.prevent="importHotels">Импортировать</b-button>
+                    <!--<b-button variant="light" @click.prevent="loadTypes">Загрузить типы </b-button>-->
+                </div>
+            </div>
+
+            <div class="row mt-4">
+
+            <div class="col-md-4 grid-margin">
                 <div class="card">
                     <div class="card-body constraight-list">
                         <b-form-group label="Кровать" label-for="input-hotel-type">
-                            <b-form-select v-model="filter.bed" :options="getBed"></b-form-select>
-                        </b-form-group>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-3 grid-margin">
-                <div class="card">
-                    <div class="card-body constraight-list">
-                        <b-form-group label="Душ" label-for="input-hotel-type">
-                            <b-form-select v-model="filter.shower" :options="getShower"></b-form-select>
+                            <b-form-select v-model="filter.bed" :options="bedTypes"></b-form-select>
                         </b-form-group>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-3 grid-margin">
+            <div class="col-md-4 grid-margin">
+                <div class="card">
+                    <div class="card-body constraight-list">
+                        <b-form-group label="Душ" label-for="input-hotel-type">
+                            <b-form-select v-model="filter.shower" :options="showerTypes"></b-form-select>
+                        </b-form-group>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 grid-margin">
                 <div class="card">
                     <div class="card-body constraight-list">
                         <b-form-group label="Кухня" label-for="input-hotel-type">
-                            <b-form-select v-model="filter.kitchen" :options="getKitchen"></b-form-select>
+                            <b-form-select v-model="filter.kitchen" :options="kitchenTypes"></b-form-select>
                         </b-form-group>
                     </div>
                 </div>
@@ -58,21 +69,14 @@
                     <span class="card-price_value">{{ filter.price }}</span>
                     <div class="card-body">
                         <b-form-group label="Цена" label-for="input-city">
-                            <b-form-input type="range" id="input-city" min="10" max="25" 
+                            <b-form-input type="range" id="input-city" min="10" max="25"
                                 v-model="filter.price" placeholder="Город"></b-form-input>
-                        </b-form-group> 
+                        </b-form-group>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <b-button variant="info" class="float-right" @click.prevent="loadHotels">Загрузить отели</b-button>
-                <b-button v-if="this.hotels.length" variant="success" class="mr-2" @click.prevent="importHotels">Импортировать</b-button>
-                <!--<b-button variant="light" @click.prevent="loadTypes">Загрузить типы </b-button>-->
-            </div>
-        </div>
         </b-overlay>
         <div class="row mt-4" v-for="(hotel, ind) in hotels">
             <div class="col-md-12 grid-margin">
@@ -193,16 +197,71 @@
                     price: 10
                 },
                 types: [],
-                bed: [],
-                shower: [],
-                kitchen: [],
+                bedTypes: [
+                    {
+                        value: 'all',
+                        text: 'Все типы'
+                    },
+                    {
+                        value: 'single',
+                        text:  'Одиночная кровать'
+                    },
+                    {
+                        value: 'single+',
+                        text:  'Одиночная кровать + варианты'
+                    },
+                    {
+                        value: 'double',
+                        text:  'Двойная кровать'
+                    },
+                ],
+                showerTypes: [
+                    {
+                        value: 'all',
+                        text: 'Все типы'
+                    },
+                    {
+                        value: 'shared',
+                        text: 'Раздельный душ'
+                    },
+                    {
+                        value: 'private',
+                        text: 'Свой душ'
+                    },
+                    {
+                        value: 'none',
+                        text: 'Без душа'
+                    }
+                ],
+                kitchenTypes: [
+                    {
+                        value: 'all',
+                        text: 'Все типы'
+                    },
+                    {
+                        value: 'kitchenette',
+                        text: 'Кухонька'
+                    },
+                    {
+                        value: 'private kitchen',
+                        text: 'Своя кухня'
+                    },
+                    {
+                        value: 'shared kitchen',
+                        text: 'Совместная кухня'
+                    },
+                    {
+                        value: 'none',
+                        text: 'Без кухни'
+                    }
+                ],
                 hotels: [],
                 loading: false
             }
         },
         mounted() {
             types.all()
-                .then(resp => {  
+                .then(resp => {
                     this.types = resp.data;
                 });
             bed.all()
@@ -222,40 +281,15 @@
             loadHotels() {
                 this.loading = true;
 
-                var filterNew = this.filter;
-
                 hotelsAPI.query(this.filter).then(resp => {
                     this.hotels = resp.data;
 
-                    this.hotels.map((item, index) => this.hotels[index].tbi = this.hotels[index].imported === null));
-                   
+                    this.hotels.map((item, index) => this.hotels[index].tbi = this.hotels[index].imported === null);
+
                     this.loading = false;
-                })
+                });
             },
-            getTypes() {
-                return this.types.map((item) => ({
-                    value: item.native,
-                    text:  item.name
-                }));
-            },
-            getBed() {                
-                return this.bed.map((item) => ({
-                    value: item.type,
-                    text: item.name
-                }));
-            },
-            getShower() {
-                return this.shower.map((item) => ({
-                    value: item.type,
-                    text: item.name
-                }));
-            },
-            getKitchen() {
-                return this.kitchen.map((item) => ({
-                    value: item.type,
-                    text: item.name
-                }));
-            },
+
             getMainHotelPhoto(hotel) {
                 for (let i in hotel.hotel_data.hotel_photos) {
                     if (hotel.hotel_data.hotel_photos[i].main_photo) {
@@ -333,12 +367,52 @@
             },
             importHotels() {
                 let hotelsToImport = this.hotels.filter( item => item.tbi === true);
-                hotelsAPI.create({ ...hotelsToImport});
+                hotelsAPI.create({ ...hotelsToImport });
             }
         },
         computed: {
+            getTypes() {
+                return this.types.map((item) => ({
+                    value: item.native_id,
+                    text:  item.name
+                }));
+            },
+            getBed() {
+                return this.bed.map((item) => ({
+                    value: item.type,
+                    text: item.name
+                }));
+            },
+            getShower() {
+                return this.shower.map((item) => ({
+                    value: item.type,
+                    text: item.name
+                }));
+            },
+            getKitchen() {
+                return this.kitchen.map((item) => ({
+                    value: item.type,
+                    text: item.name
+                }));
+            },
             filteredItems() {
-                return this.hotels;
+                return this.hotels.filter( item =>
+                    (
+                        filter.shower === 'all' ||
+                        item.room_data.some( child => this.typeShower(child.room_facilities) === filter.shower )
+                    ) &&
+                    (
+                        filter.kitchen === 'all' ||
+                        item.room_data.some( child => this.typeKitchen(child.room_facilities) === filter.kitchen )
+                    ) &&
+                    (
+                        filter.bed === 'all' ||
+                        item.room_data.some( child =>
+                            this.typeBed(child.room_facilities) === filter.bed && filter.bed !== 'single+' ||
+                            this.typeBed(child.room_facilities) !== 'double' && filter.bed === 'single+'
+                        )
+                    )
+                );
             }
         },
 

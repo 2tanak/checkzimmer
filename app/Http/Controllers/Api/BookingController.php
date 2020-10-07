@@ -97,28 +97,28 @@ class BookingController extends Controller
         $types = $this->bookingDataService->getRoomTypes('hotel');
         return response()->json($types);
     }
-    
+
     public function getBedTypes()
     {
-        $bed = $this->bookingDataService->getBedTypes(); 
-        
+        $bed = $this->bookingDataService->getBedTypes();
+
         return response()->json($bed);
     }
-    
+
     public function getShowerTypes()
     {
-        $shower = $this->bookingDataService->getShowerTypes(); 
-        
+        $shower = $this->bookingDataService->getShowerTypes();
+
         return response()->json($shower);
     }
 
     public function getKitchenTypes()
     {
-        $shower = $this->bookingDataService->getKitchenTypes(); 
-        
+        $shower = $this->bookingDataService->getKitchenTypes();
+
         return response()->json($shower);
     }
-    
+
     public function getCities() {
         $citiesCount = $this->bookingDataService->getCitiesCount();
         return response()->json(['count' => $citiesCount]);
