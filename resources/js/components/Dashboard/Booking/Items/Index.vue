@@ -46,41 +46,46 @@
                     <div class="card-body">
                         <div class="row mb-4">
                             <div class="col-md-3">
-                                <img :src="getMainHotelPhoto(hotel)" class="w-100">
+                                <div class="pictures-block">
+                                    <img :src="getMainHotelPhoto(hotel)" class="w-100">
+                                </div>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-9">
                                 <h3>{{ hotel.hotel_data.name }}</h3>
                                 <div class="">{{ hotel.hotel_data.address }}</div>
                                 <div class="">
                                 </div>
-                            </div>
-                            <div class="col-md-2">
-                                <small class="mb-4 d-block"><strong>Состояние:</strong>
-                                <b-form-checkbox v-if="hotel.imported === null" :id="'checkbox-hotel-'+hotel.hotel_id"
-                                    v-model="hotels[ind].tbi"
-                                    :name="'checkbox-hotel-' + hotel.hotel_id"
-                                    value="true"
-                                    unchecked-value="false">
-                                    Импортировать
-                                </b-form-checkbox>
-                                <span v-else>Импортировано</span>
-                                </small>
-                                <b-button v-b-toggle="'collapse-rooms-'+hotel.hotel_id" variant="info">Показать комнаты</b-button>
-                                <b-button v-b-toggle="'collapse-hotel-'+hotel.hotel_id" size="sm">Удобства отеля</b-button>
+                                <div class="state-block mt-3">
+                                    <small class="d-block mb-3"><strong>Состояние:</strong>
+                                        <b-form-checkbox v-if="hotel.imported === null" :id="'checkbox-hotel-'+hotel.hotel_id"
+                                                         v-model="hotels[ind].tbi"
+                                                         :name="'checkbox-hotel-' + hotel.hotel_id"
+                                                         value="true"
+                                                         unchecked-value="false">
+                                            Импортировать
+                                        </b-form-checkbox>
+                                        <span v-else>Импортировано</span>
+                                    </small>
+                                    <div class="collapse-button">
+                                        <b-button class="mr-4" v-b-toggle="'collapse-rooms-'+hotel.hotel_id" variant="info">Показать комнаты</b-button>
+                                        <b-button v-b-toggle="'collapse-hotel-'+hotel.hotel_id" size="sm">Удобства отеля</b-button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="mb-4">
-
+                        <div>
                             <b-collapse :id="'collapse-hotel-'+hotel.hotel_id" class="mt-2">
                                 <b-card>
+                                    <h3 class="mb-4">Удобства</h3>
                                     <b-list-group>
                                         <b-list-group-item v-for="feature in hotel.hotel_data.hotel_facilities">{{ feature.name }}</b-list-group-item>
                                     </b-list-group>
+                                    <b-button class="mt-4" v-b-toggle="'collapse-hotel-'+hotel.hotel_id" size="sm">Свернуть</b-button>
                                 </b-card>
-                                <b-button v-b-toggle="'collapse-hotel-'+hotel.hotel_id" size="sm">Свернуть</b-button>
                             </b-collapse>
                         </div>
                         <b-collapse :id="'collapse-rooms-'+hotel.hotel_id">
+                            <h3 class="mb-4">Комнаты</h3>
                         <div class="row">
                             <div v-for="room in hotel.room_data" class="col-md-12 mb-2">
                                 <div class="d-flex room-item mb-3">
@@ -123,7 +128,7 @@
                                 </div>
                             </div>
                         </div>
-
+                            <b-button v-b-toggle="'collapse-rooms-'+hotel.hotel_id" size="sm">Свернуть</b-button>
                         </b-collapse>
                     </div>
                 </div>
@@ -278,6 +283,23 @@
     .room-item .room-photo {
         height: 60px;
         width: 60px;
+        object-fit: cover;
+    }
+    .state-block {
+        display: flex;
+        flex-direction: column;
+    }
+    .collapse-button {
+        display: flex;
+        align-items: center;
+    }
+    .pictures-block {
+        width: 100%;
+        height: 255px;
+    }
+    .pictures-block img {
+        width: 100%;
+        height: 100%;
         object-fit: cover;
     }
 </style>
