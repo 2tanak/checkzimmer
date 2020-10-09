@@ -225,7 +225,7 @@ class BookingDataService
                     'bed' => Room::getBedroomType($room['room_info']['bedrooms'] ?? []),
                     'shower' => Room::getShowerType($room['room_facilities']),
                     'kitchen' => Room::getKitchenType($room['room_facilities'], $hotel['hotel_data']['hotel_facilities']),
-                    'booking_room_id' => json_encode($room['room_id']),
+                    'native_id' => json_encode($room['room_id']),
                     'status' => 'approved'
                 ];
 

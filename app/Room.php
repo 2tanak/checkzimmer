@@ -9,7 +9,7 @@ class Room extends Model
 {
     //
     protected $table = 'rooms';
-    protected $fillable = ['property_id', 'room_type_id', 'number', 'person', 'price', 'bed', 'shower', 'kitchen', 'status'];
+    protected $fillable = ['property_id', 'room_type_id', 'number', 'person', 'price', 'bed', 'shower', 'kitchen', 'status', 'native_id'];
     protected $with = ['options'];
 
     static function hasFeature($name, $room_facilities) {

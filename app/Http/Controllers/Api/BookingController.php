@@ -2,12 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\BookingFeatures;
-use App\BookingType;
-use App\Option;
-use App\BookingCity;
-use App\Property;
-use App\Room;
 use App\Services\BookingDataImportService;
 use App\Services\BookingDataService;
 use GuzzleHttp;

@@ -62,7 +62,7 @@ class updateBookingProperties extends Command
 
                 foreach ($hotelsArray as $key => $room) {
                     $room = Room::where('property_id', '=', $hotel)
-                        ->where($room['room_id'])
+                        ->where('native_id', $room['room_id'])
                         ->first();
 
                     if (!empty($room)) {
