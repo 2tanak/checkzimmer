@@ -124,6 +124,15 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <tr v-for="room in property.rooms">
+                                                <td class="type-block">
+                                                    <img  src="svg/i-one.svg" alt="Одноместный">
+                                                    одноместный
+                                                </td>
+                                                <td class="type-block quantity-block">{{ room.number }}</td>
+                                                <td class="type-block personen-block">{{ room.person }}</td>
+                                                <td class="type-block price-block"><b>{{  minRoomPrice(item, room) }}&#8364;</b>/persone</td>
+                                            </tr>
                                             <tr>
                                                 <td class="type-block">
                                                     <img  src="svg/i-one.svg" alt="Одноместный">
@@ -365,7 +374,7 @@ export default{
                 return;
             }
             console.log(document.getElementById('map'));
-            map = new google.maps.Map(document.getElementById('map'), {
+            let map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: 51.340000, lng: 12.382000},
                 zoom: 8
             });
@@ -452,6 +461,12 @@ export default{
         },
         foundTotal() {
             jQuery('.property-found').text(this.property.length);
+        },
+        minRoomPrice(property, room) {
+            if (room.price) {
+                return room.price;
+            }
+            return property.rooms.reduce( (acc, cur) => acc = Math.min(acc, cur.price) )
         }
     }
 }
