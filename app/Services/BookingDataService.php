@@ -67,7 +67,69 @@ class BookingDataService
     {
         return $this->bookingType->params(['type' => $type]);
     }
+    
+    public function getBedTypes()
+    {
+        return [
+            [
+                'type' => 'single',
+                'name' => 'односпальная',
+            ],
+            [
+                'type' => 'double',
+                'name' => 'двуспальная',
+            ]    
+        ];
+    }
+    
+    public function getShowerTypes()
+    {
+        return [
+            [
+                'type' => 'all',
+                'name' => 'все',
+            ],
+            [
+                'type' => 'shared bathroom',
+                'name' => 'свой',
+            ],
+            [
+                'type' => 'shower',
+                'name' => 'совместный',
+            ],
+            [
+                'type' => 'none',
+                'name' => 'без душа',
+            ]  
+        ];
+    }
 
+    public function getKitchenTypes()
+    {
+        return [
+            [
+                'type' => 'all',
+                'name' => 'все',
+            ],
+            [
+                'type' => 'kitchen',
+                'name' => 'cвоя',
+            ],
+            [
+                'type' => 'shared kitchen',
+                'name' => 'совместная',
+            ],
+            [
+                'type' => 'kitchenette',
+                'name' => 'кухонька (Kitchenette)',
+            ],
+            [
+                'type' => 'none',
+                'name' => 'без кухни',
+            ]  
+        ];
+    }
+    
     public function getChildrenFeatures()
     {
         return $this->bookingFeatures->ind();
@@ -119,15 +181,22 @@ class BookingDataService
         $json = $this->bookingApiService->getHotelsByCityAndType($city->native_id, $type);
 
         $ids = [];
+        
         foreach ($json['result'] as $item) {
             $ids[] = $item['hotel_id'];
         }
-        $natives = Option::where('type', 'property')->where('key', 'native_id')->whereIn('value', $ids)->get()->pluck('parent', 'value');
+
+        $natives = Option::where('type', 'property')
+            ->where('key', 'native_id')
+            ->whereIn('value', $ids)
+            ->get()
+            ->pluck('parent', 'value');
 
         foreach ($json['result'] as $i => $item) {
             $imported = $natives[$item['hotel_id']] ?? null;
             $json['result'][$i]['imported'] = $imported;
         }
+        
         return $json['result'];
     }
 

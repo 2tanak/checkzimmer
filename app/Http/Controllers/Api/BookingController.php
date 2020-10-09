@@ -98,6 +98,27 @@ class BookingController extends Controller
         return response()->json($types);
     }
 
+    public function getBedTypes()
+    {
+        $bed = $this->bookingDataService->getBedTypes();
+
+        return response()->json($bed);
+    }
+
+    public function getShowerTypes()
+    {
+        $shower = $this->bookingDataService->getShowerTypes();
+
+        return response()->json($shower);
+    }
+
+    public function getKitchenTypes()
+    {
+        $shower = $this->bookingDataService->getKitchenTypes();
+
+        return response()->json($shower);
+    }
+
     public function getCities() {
         $citiesCount = $this->bookingDataService->getCitiesCount();
         return response()->json(['count' => $citiesCount]);
@@ -118,7 +139,7 @@ class BookingController extends Controller
         return response()->json($hotelsArray);
     }
 
-    public function saveHotels(Request $request)
+    public function saveHotels(Request $request, $data)
     {
         $hotels = $request->all();
         $this->bookingDataService->storeHotels($hotels);

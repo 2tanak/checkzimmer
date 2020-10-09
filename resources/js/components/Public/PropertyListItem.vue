@@ -22,14 +22,16 @@
                         7км от &nbsp; <span class="desctop-span">указанного</span> <span class="mobile-span">указ.</span> &nbsp; вами адреса
                     </div>
                     <div class="additionally">
-                        <div class="wi-fi data-block-circle" data-toggle="tooltip" data-placement="top" title="wi-fi"><img src="/svg/i-wifi.svg"></div>
-                        <div class="kitchen data-block-oval">
+                        <div v-if="hasWiFi" class="wi-fi data-block-circle" data-toggle="tooltip" data-placement="top" title="wi-fi"><img src="/svg/i-wifi.svg"></div>
+                        <div v-if="hasLaundry" class="laundry data-block-circle" data-toggle="tooltip" data-placement="top" title="Laundry"><img src="/svg/i-washingmachine.svg"></div>
+                        <div v-if="hasTV" class="tv data-block-circle" data-toggle="tooltip" data-placement="top" title="TV"><img src="/svg/i-tv.svg"></div>
+                        <div v-if="kitchenTypeStr() !== ''" class="kitchen data-block-oval">
                             <img src="/svg/i-canteen.svg">
-                            своя + общая кухня
+                            {{ kitchenTypeStr() }} кухня
                         </div>
-                        <div class="shower data-block-oval">
+                        <div v-if="showerStr()" class="shower data-block-oval">
                             <img src="/svg/i-shower.svg">
-                            общий + общий душ
+                            {{  showerStr() }} душ
                         </div>
                     </div>
                 </div>
@@ -44,51 +46,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td class="type-block">
-                        <img  src="svg/i-one.svg" alt="Одноместный">
-                        <span>одноместный</span>
-                    </td>
-                    <td class="type-block quantity-block">1</td>
-                    <td class="type-block personen-block">1</td>
-                    <td class="type-block price-block"><b>25&#8364;</b>/persone</td>
-                </tr>
-                <tr>
-                    <td class="type-block">
-                        <img  src="svg/i-two.svg" alt="двухместный">
-                        <span>двухместный</span>
-                    </td>
-                    <td class="type-block quantity-block">2</td>
-                    <td class="type-block personen-block">2</td>
-                    <td class="type-block price-block"><b>22&#8364;</b>/persone</td>
-                </tr>
-                <tr>
-                    <td class="type-block">
-                        <img  src="svg/i-multi.svg" alt="многоместный">
-                        <span>многоместный</span>
-                    </td>
-                    <td class="type-block quantity-block">3</td>
-                    <td class="type-block personen-block">3</td>
-                    <td class="type-block price-block"><b>20&#8364;</b>/persone</td>
-                </tr>
-                <tr>
-                    <td class="type-block">
-                        <img  src="svg/i-flat.svg" alt="квартира целиком">
-                        <span>квартира целиком</span>
-                    </td>
-                    <td class="type-block quantity-block">5</td>
-                    <td class="type-block personen-block">5</td>
-                    <td class="type-block price-block"><b>18&#8364;</b>/persone</td>
-                </tr>
-                <tr>
-                    <td class="type-block">
-                        <img  src="svg/i-house.svg" alt="дом">
-                        <span>дом</span>
-                    </td>
-                    <td class="type-block quantity-block">12</td>
-                    <td class="type-block personen-block">20</td>
-                    <td class="type-block price-block"><b>15&#8364;</b>/persone</td>
-                </tr>
+                    <tr v-for="room in item.rooms">
+                        <td class="type-block">
+                            <img :src="getPersonsPic(room.person)" :alt="getPersonsText(room.person)">
+                            {{ findOptionRoom(room, 'name').value }}
+                        </td>
+                        <td class="type-block quantity-block">{{ room.number }}</td>
+                        <td class="type-block personen-block">{{ room.person }}</td>
+                        <td class="type-block price-block"><b>{{ getMinRoomPrice(item, room) }}&#8364;</b>/persone</td>
+                    </tr>
                 </tbody>
             </table>
             <div class="night-rating-block">
@@ -142,6 +108,9 @@ export default {
         findOption(name) {
             return this.item.options.find( elem => elem.key === name);
         },
+        findOptionRoom(room, name) {
+            return room.options.find( elem => elem.key === name);
+        },
         maxPeopleNum() {
             return Math.max( ...this.item.rooms.map( elem => elem.person ) )
         },
@@ -159,6 +128,90 @@ export default {
             }
             localStorage.setItem('favoritesList', JSON.stringify(favoritesObject));
             this.$emit('favsUpdated');
+        },
+        getMinRoomPrice(property, room) {
+            if (room.price) {
+                return Math.floor(room.price);
+            }
+            return this.minRoomPrice;
+        },
+        getPersonsPic(number) {
+            switch (number) {
+                case 1: return '/svg/i-one.svg';
+                case 2: return '/svg/i-two.svg';
+                default: return '/svg/i-multi.svg';
+            }
+        },
+        getPersonsText(number) {
+            switch (number) {
+                case 1: return 'одноместный';
+                case 2: return 'двухместый';
+                case 3: return 'трехместный';
+                case 4: return 'четырехместный';
+                case 5: return 'пятиместный';
+                case 6: return 'шестиместный';
+                case 7: return 'семиместный';
+                case 8: return 'восьмиместный';
+                default: return 'не указано';
+            }
+        },
+        typeKitchen(roomFacilities) {
+            if (roomFacilities.some(item => item.name === 'Kitchenette')) {
+                return 'kitchenette';
+            }
+            if (roomFacilities.some(item => item.name === 'Kitchen')) {
+                return 'private kitchen'
+            }
+            if (roomFacilities.some(item => item.name === 'Shared kitchen')) {
+                return 'shared kitchen'
+            }
+            return 'none';
+        },
+        typeShower(roomFacilities) {
+            if (roomFacilities.some(item => item.name === 'Shared bathroom')) {
+                return 'shared';
+            }
+            if (roomFacilities.some(item => item.name === 'Shower') || roomFacilities.some(item => item.name === 'Private bathroom')) {
+                return 'private'
+            }
+
+            return 'none';
+        },
+        kitchenTypeStr() {
+            let priv = this.item.rooms.some( room => {
+                let features = JSON.parse(this.findOptionRoom(room, 'facilities').value);
+                return ['private kitchen', 'kitchenette'].includes( this.typeKitchen(features) );
+            } );
+            let shared = this.item.rooms.some( room => {
+                let features = JSON.parse(this.findOptionRoom(room, 'facilities').value);
+                return this.typeKitchen(features) === 'shared kitchen';
+            } );
+            let types = [];
+            if (priv) {
+                types.push('своя');
+            }
+            if (shared) {
+                types.push('общая');
+            }
+            return types.join(' + ');
+        },
+        showerStr() {
+            let priv = this.item.rooms.some( room => {
+                let features = JSON.parse(this.findOptionRoom(room, 'facilities').value);
+                return this.typeShower(features) === 'private';
+            } );
+            let shared = this.item.rooms.some( room => {
+                let features = JSON.parse(this.findOptionRoom(room, 'facilities').value);
+                return this.typeShower(features) === 'shared';
+            } );
+            let types = [];
+            if (priv) {
+                types.push('свой');
+            }
+            if (shared) {
+                types.push('общий');
+            }
+            return types.join(' + ');
         }
     },
     computed: {
@@ -170,7 +223,7 @@ export default {
             return max + ' человек';
         },
         minRoomPrice() {
-            return Math.min( ...this.item.rooms.map( elem => elem.price ).filter( elem => elem > 0) )
+            return Math.floor(Math.min( ...this.item.rooms.map( elem => elem.price ).filter( elem => elem > 0) ));
         },
         getPhotos() {
             let photos = this.findOption('photos');
@@ -187,7 +240,21 @@ export default {
             let favoritesObject = JSON.parse(localStorage.getItem("favoritesList")) || [];
 
             return favoritesObject.includes(id);
-        }
+        },
+        hasWiFi() {
+            let features = JSON.parse(this.findOption('features').value);
+            return features.some( itm => itm.name === 'WiFi' );
+        },
+        hasLaundry() {
+            let features = JSON.parse(this.findOption('features').value);
+            return features.some( itm => itm.name === 'Laundry' );
+        },
+        hasTV() {
+            return this.item.rooms.some( room => {
+                let features = JSON.parse(this.findOptionRoom(room, 'facilities').value);
+                return features.some( feature => feature.name === 'TV')
+            })
+        },
     }
 }
 </script>
