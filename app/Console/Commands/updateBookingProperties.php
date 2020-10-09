@@ -1,19 +1,10 @@
 <?php
-
 namespace App\Console\Commands;
-use App\BookingFeatures;
-use App\BookingType;
+
 use App\Option;
-use App\BookingCity;
-use App\Property;
 use App\Room;
-use App\Services\BookingDataImportService;
 use App\Services\BookingDataService;
-use GuzzleHttp;
-use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Console\Command;
 
 /**
@@ -38,18 +29,55 @@ class updateBookingProperties extends Command
     protected $description = 'update booking properties';
 
     /**
+     * @var BookingDataService
+     */
+    private $bookingDataService;
+
+    /**
+     * BookingController constructor.
+     * @param BookingDataService $bookingDataService
+     */
+    public function __construct(
+        BookingDataService $bookingDataService
+    )
+    {
+        parent::__construct();
+        $this->bookingDataService = $bookingDataService;
+    }
+
+    /**
      * Execute the console command.
      *
      * @return mixed
      */
     public function handle() {
-        $fields = $request->all();
-        $client = new GuzzleHttp\Client(['base_uri' => $fields['booking_url']]);
-        $response = $client->request('GET', 'hotels?hotel_ids=10004',
-            [ 'auth' => [ $fields['booking_login'], $fields['booking_password'] ] ] );
-        
-        var_dump($response);
-        exit;
-    }
+        try {
+            $hotels = Option::where('type', 'property')
+                ->where('key', 'native_id')
+                ->get()
+                ->pluck('parent', 'value');
 
+            foreach ($hotels as $key => $hotel) {
+                $hotelsArray = $this->bookingDataService->getHotelsInfoFromApi($key);
+
+                foreach ($hotelsArray as $key => $room) {
+                    $room = Room::where('property_id', '=', $hotel)
+                        ->where($room['room_id'])
+                        ->first();
+
+                    if (!empty($room)) {
+                        $room->update([
+                            'person'    =>  $room['room_data'][$key]['room_info']['max_persons'],
+                            'price'     =>  $room['room_data'][$key]['room_info']['min_price'],
+                            'bed'       =>  Room::getBedroomType($room['room_info']['bedrooms'] ?? []),
+                            'shower'    =>  Room::getShowerType($room['room_data'][$key]['room_facilities']),
+                            'kitchen'   =>  Room::getKitchenType($room['room_data'][$key]['room_facilities'], $room['hotel_data']['hotel_facilities']),
+                        ]);
+                    }
+                }
+            }
+        } catch (ModelNotFoundException $e) {
+            return $e->getMessage();
+        }
+    }
 }
