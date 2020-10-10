@@ -932,7 +932,6 @@ footer#main-footer ul.footer-menu li a:active {
 }
 .property-card {
     min-height: 189px;
-    max-height: 250px;
     background-color: #ffffff;
     transition-duration: 0.4s;
     overflow: hidden;
@@ -964,18 +963,17 @@ footer#main-footer ul.footer-menu li a:active {
     margin-left: 18px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     min-height: 156px;
     width: 100%;
 }
 .property-card a.title {
-    margin-bottom: 4px;
+    margin-bottom: 9px;
     font-weight: 500;
     font-size: 16px;
     color: #333646;
     line-height: 150%;
     max-width: 363px;
-    width: 100%;
+    width: fit-content;
     text-decoration: none;
 }
 .property-card a.title:hover span {
@@ -1080,7 +1078,7 @@ footer#main-footer ul.footer-menu li a:active {
     text-transform: uppercase;
     color: #8F98A2;
     white-space: nowrap;
-    margin-bottom: 9px;
+    padding-bottom: 9px;
     padding-right: 20px;
 }
 .property-card .type th.title:first-of-type {
@@ -1117,6 +1115,11 @@ footer#main-footer ul.footer-menu li a:active {
 }
 .property-card .type {
     margin-right: 44px;
+}
+.property-card .type .type-block.filling-block {
+    max-width: 155px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .property-card .night {
     padding-right: 7px;
@@ -1956,9 +1959,12 @@ label.mobile-label {
         border-right: 0;
         height: auto;
         position: absolute;
-        bottom: 16px;
+        bottom: 17px;
         right: 16px;
         padding-top: 0;
+    }
+    .property-card .property-card-container {
+        padding-bottom: 61px;
     }
     .property-card .price {
         margin-top: 0;
@@ -1995,6 +2001,9 @@ label.mobile-label {
     }
     .property-card .type .type-item span {
         display: none;
+    }
+    .property-card .type .type-block.filling-block {
+        text-align: center;
     }
     .property-card .type img {
         margin: auto;
@@ -2037,9 +2046,6 @@ label.mobile-label {
     }
     .property-card .type th.title:first-of-type {
         padding-left: 0;
-    }
-    .property-card .type .type-block:first-of-type {
-        text-align: center;
     }
     .property-card .type .type-block span {
         display: none;
@@ -2212,11 +2218,6 @@ label.mobile-label {
     .property-card .type .type-item, .property-card .type .personen, .property-card .type .quantity {
         margin-right: 14px;
     }
-    .list-content .property .additionally {
-        margin-top: 0;
-        position: absolute;
-        bottom: 16px;
-    }
     .list-content .property.not-map .container {
         padding-left: 0;
         padding-right: 0;
@@ -2263,9 +2264,24 @@ label.mobile-label {
         height: calc(100vh - 229px);
     }
 }
+@media (max-width: 767px) {
+    .property-card .table-container {
+        width: 388px;
+        overflow-x: auto;
+    }
+    .property-card .data {
+        width: auto;
+    }
+}
 @media (max-width: 720px) {
     .property-card .type {
         display: none;
+    }
+    .property-card .table-container {
+        display: none;
+    }
+    .property-card .property-card-container {
+        padding-bottom: 16px;
     }
     .list-content .property .additionally {
         display: none;

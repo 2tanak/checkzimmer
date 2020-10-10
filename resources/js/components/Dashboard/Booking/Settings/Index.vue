@@ -42,9 +42,9 @@
                 <b-button variant="light">Отмена</b-button>
             </div>
         </div>
-        <b-modal id="save-success" title="Сохранение настроек">Данные успешно сохранены</b-modal>
-        <b-modal id="connect-success" title="Проверка подключения">Подключение успешно</b-modal>
-        <b-modal id="connect-fail" title="Проверка подключения">Подключение не удалось, проверьте учётные данные</b-modal>
+        <b-modal id="save-success" title="Сохранение настроек"><strong>Данные успешно сохранены</strong></b-modal>
+        <b-modal id="connect-success" title="Проверка подключения"><strong>Подключение успешно</strong></b-modal>
+        <b-modal id="connect-fail" title="Проверка подключения"><strong>Подключение не удалось, проверьте учётные данные</strong></b-modal>
     </section>
 </template>
 
