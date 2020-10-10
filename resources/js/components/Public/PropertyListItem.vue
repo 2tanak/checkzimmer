@@ -17,9 +17,9 @@
                         <img src="/svg/i-people.svg" alt="humans">
                         {{  maxPeopleNumStr }}
                     </div>
-                    <div class="distance">
+                    <div class="distance" v-if="distance">
                         <img src="/svg/i-distance.svg" alt="distance">
-                        7км от &nbsp; <span class="desctop-span">указанного</span> <span class="mobile-span">указ.</span> &nbsp; вами адреса
+                        {{ distance }}км от &nbsp; <span class="desctop-span">указанного</span> <span class="mobile-span">указ.</span> &nbsp; вами адреса
                     </div>
                     <div class="additionally">
                         <div v-if="hasWiFi" class="wi-fi data-block-circle" data-toggle="tooltip" data-placement="top" title="wi-fi"><img src="/svg/i-wifi.svg"></div>
@@ -70,9 +70,9 @@
                     <div class="price"><span>от &euro;{{ minRoomPrice }}</span> ночь</div>
                 </div>
                 <div class="rating">
-                    <div v-if="item.rating" class="rating-number">
+                    <div v-if="item.rate" class="rating-number">
                         <img src="/img/i-rate.png" alt="rating">
-                        4.6
+                        {{ item.rate }}
                     </div>
                     <a href="#" class="collapse-circle">
                         <svg class="minus" width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -156,15 +156,17 @@ export default {
             }
         },
         typeKitchen(roomFacilities) {
+            let features = JSON.parse(this.findOption('features').value)
+            if (features.some(item => item.name === 'Shared kitchen')) {
+                return 'shared kitchen'
+            }
             if (roomFacilities.some(item => item.name === 'Kitchenette')) {
                 return 'kitchenette';
             }
             if (roomFacilities.some(item => item.name === 'Kitchen')) {
                 return 'private kitchen'
             }
-            if (roomFacilities.some(item => item.name === 'Shared kitchen')) {
-                return 'shared kitchen'
-            }
+
             return 'none';
         },
         typeShower(roomFacilities) {
@@ -255,6 +257,14 @@ export default {
                 return features.some( feature => feature.name === 'TV')
             })
         },
+        distance() {
+            if (!this.item.geo) {
+                return 0;
+            }
+            let c_1 = Math.abs(parseFloat(this.item.geo.lng) - parseFloat(this.item.lng));
+            let c_2 = Math.abs(parseFloat(this.item.geo.lat) - parseFloat(this.item.lat));
+            return Math.ceil(Math.sqrt( c_1 ** 2 + c_2 ** 2 ) * 111);
+        }
     }
 }
 </script>

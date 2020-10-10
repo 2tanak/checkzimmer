@@ -345,9 +345,9 @@ export default{
         });
         properties.byPage(1)
             .then( resp => {
-                that.property = resp.data.data;
+                that.property = resp.data.objects.data;
                 that.loading = false;
-                if (resp.data.current_page < resp.data.last_page) {
+                if (resp.data.current_page < resp.data.objects.last_page) {
                     that.additional_pages = true;
                 } else {
                     that.additional_pages = false;
@@ -425,8 +425,8 @@ export default{
 
            properties.request('queryFilter', this.search)
                 .then( resp => {
-                    that.property = resp.data.data;
-                    that.page = resp.data.current_page;
+                    that.property = resp.data.objects.data;
+                    that.page = resp.data.objects.current_page;
                     that.loading = false;
                     that.foundTotal()
                 })
@@ -439,11 +439,8 @@ export default{
                 .then( resp => {
                     that.property = that.property.concat(resp.data.data);
                     that.loading = false;
-                    if (resp.data.current_page < resp.data.last_page) {
-                        that.additional_pages = true;
-                    } else {
-                        that.additional_pages = false;
-                    }
+                    that.additional_pages = resp.data.current_page < resp.data.last_page;
+
                     that.favoritesDisplay();
                     that.foundTotal();
                     console.log(that.property);

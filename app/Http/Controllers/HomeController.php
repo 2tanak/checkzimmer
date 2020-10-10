@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Option;
+use App\Property;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -37,6 +38,17 @@ class HomeController extends Controller
     public function single()
     {
         return view('single');
+    }
+    public function singleProperty($id)
+    {
+        $hotel = Property::findOrFail($id);
+        $hotel->views++;
+        $hotel->save();
+        $options = $hotel->options->toArray();
+        $hotel->rate = array_reduce( $hotel->rating->toArray(), function($carry, $item) { return $carry + $item['rating']; } ) / count($hotel->rating);
+
+        $rooms = $hotel->rooms;
+        return view('single', compact('hotel','rooms'));
     }
     public function favorites()
     {

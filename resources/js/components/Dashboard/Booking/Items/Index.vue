@@ -149,7 +149,7 @@
                                             <div class="w-25">
                                                 <div class="mr-4">
                                                     <img src="/svg/i-own-kitchen.svg">
-                                                    <small>{{ typeKitchenStr(room.room_facilities) }}</small>
+                                                    <small>{{ typeKitchenStr(hotel, room.room_facilities) }}</small>
                                                 </div>
                                                 <div class="mr-4">
                                                     <img src="/svg/i-own-shower.svg">
@@ -333,21 +333,26 @@
                     default: return 'не указано';
                 }
             },
-            typeKitchen(roomFacilities) {
+            findOption(item, name) {
+                return item.options.find( elem => elem.key === name);
+            },
+            typeKitchen(item, roomFacilities) {
+                let features = JSON.parse(this.findOption(item, 'features').value)
+                if (features.some(item => item.name === 'Shared kitchen')) {
+                    return 'shared kitchen'
+                }
                 if (roomFacilities.some(item => item.name === 'Kitchenette')) {
                     return 'kitchenette';
                 }
                 if (roomFacilities.some(item => item.name === 'Kitchen')) {
                     return 'private kitchen'
                 }
-                if (roomFacilities.some(item => item.name === 'Shared kitchen')) {
-                    return 'shared kitchen'
-                }
+
                 return 'none';
             },
-            typeKitchenStr(roomFaclities) {
+            typeKitchenStr(item, roomFaclities) {
                 let str = { 'none': 'Без кухни', ' kitchen kitchen': 'Совместная кухня', 'private kitchen': 'Личная кухня', 'kitchenette': 'Мини-кухня' };
-                let type = this.typeKitchen(roomFaclities);
+                let type = this.typeKitchen(item, roomFaclities);
                 return str[type];
             },
             typeShower(roomFacilities) {
@@ -403,7 +408,7 @@
                     ) &&
                     (
                         filter.kitchen === 'all' ||
-                        item.room_data.some( child => this.typeKitchen(child.room_facilities) === filter.kitchen )
+                        item.room_data.some( child => this.typeKitchen(item, child.room_facilities) === filter.kitchen )
                     ) &&
                     (
                         filter.bed === 'all' ||
