@@ -2066,6 +2066,11 @@ label.mobile-label {
         margin-top: 13px;
     }
 }
+@media (max-width: 1105px) {
+    .property-list .property-list-subhead .gallery-block:last-of-type {
+        margin-right: 29px;
+    }
+}
 @media (max-width: 991px) {
     header a.whatsapp-number {
         display: none;
@@ -2695,6 +2700,18 @@ label.mobile-label {
     -moz-transform: scale(1.1);
     -o-transform: scale(1.1);
     transform: scale(1.1);
+}
+.single-content .single-gallery.option-one .big-photo {
+    min-width: auto;
+    width: 100%;
+    margin-right: 0;
+    border-radius: 6px;
+}
+.single-content .single-gallery.option-one .big-photo img {
+    width: 100%;
+}
+.single-content .single-gallery.option-four .big-photo:last-of-type {
+    border-radius: 0 6px 6px 0;
 }
 .single-content .single-gallery .small-photo {
     width: 423px;
