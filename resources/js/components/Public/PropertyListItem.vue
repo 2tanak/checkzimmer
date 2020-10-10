@@ -36,27 +36,29 @@
                     </div>
                 </div>
             </div>
-            <table class="type">
-                <thead>
-                <tr>
-                    <th class="title">Тип</th>
-                    <th class="title">Кол-во</th>
-                    <th class="title">Personen</th>
-                    <th class="title">Цена</th>
-                </tr>
-                </thead>
-                <tbody>
+            <div class="table-container">
+                <table class="type">
+                    <thead>
+                    <tr>
+                        <th class="title">Тип</th>
+                        <th class="title">Кол-во</th>
+                        <th class="title">Personen</th>
+                        <th class="title">Цена</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     <tr v-for="room in item.rooms">
-                        <td class="type-block">
+                        <td class="type-block filling-block">
                             <img :src="getPersonsPic(room.person)" :alt="getPersonsText(room.person)">
-                            {{ findOptionRoom(room, 'name').value }}
+                            <span> {{ findOptionRoom(room, 'name').value }} </span>
                         </td>
                         <td class="type-block quantity-block">{{ room.number }}</td>
                         <td class="type-block personen-block">{{ room.person }}</td>
                         <td class="type-block price-block"><b>{{ getMinRoomPrice(item, room) }}&#8364;</b>/persone</td>
                     </tr>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
             <div class="night-rating-block">
                 <div class="night">
                     <a href="#" class="favorites" :class="{ active: isFavorite }" @click.prevent="addToFavorites">

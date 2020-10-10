@@ -125,7 +125,7 @@
                                         </thead>
                                         <tbody>
                                             <tr v-for="room in property.rooms">
-                                                <td class="type-block">
+                                                <td class="type-block filling-block">
                                                     <img  src="svg/i-one.svg" alt="Одноместный">
                                                     одноместный
                                                 </td>
