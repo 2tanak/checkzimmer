@@ -6,7 +6,6 @@ use App\Http\Requests\PropertyListRequest;
 use App\Services\GeocoderService;
 use Illuminate\Http\Request;
 use App\Property;
-use Spatie\Geocoder\Geocoder;
 use Auth;
 use App\User;
 
@@ -28,7 +27,14 @@ class PropertyController extends Controller
 
     function index(PropertyListRequest $request)
     {
-        return response()->json(Property::indPaginated());
+        $objects = Property::indPaginated();
+        foreach($objects as $key => $object) {
+            $ratings = $object->rating->toArray();
+            $count = count($object->rating) ?: 1;
+            $objects[$key]->rate = array_reduce( $ratings, function($carry, $item) { return $carry + $item['rating']; } ) / $count;
+            $objects[$key]->geo = [];
+        }
+        return response()->json(['objects' => $objects, 'coords' => null]);
     }
 
     function queryFilter(Request $request){
@@ -42,25 +48,31 @@ class PropertyController extends Controller
         $objects = Property::where(Property::raw('abs('.$geo_data['lat'].' - lat) * 111'), '<', $km)
             ->where(Property::raw('abs('.$geo_data['lng'].' - lng) * 111'), '<', $km)->paginate(20);
 
-        return response()->json($objects);
+        foreach($objects as $key => $object) {
+            $ratings = $object->rating->toArray();
+            $count = count($object->rating) ?: 1;
+            $objects[$key]->rate = array_reduce( $ratings, function($carry, $item) { return $carry + $item['rating']; } ) / $count;
+            $objects[$key]->geo = $geo_data;
+        }
+        return response()->json(['objects' => $objects, 'coords' => $geo_data]);
     }
 
     function show($id) {
         return response()->json(Property::findOrFail($id));
     }
-    
+
     function init() {
         $property = Property::orderBy('created_at')->limit(10)->get();
         return response()->json($property);
     }
-    
+
     function queryProperty(Request $request) {
         $fields = $request->all();
         $property = Property::whereIn('id', $fields['id'])->get();
 
         return response()->json($property);
     }
-    
+
     function destroy(Property $property) {
 
         foreach ($property->rooms as $room) {
@@ -71,14 +83,14 @@ class PropertyController extends Controller
 
         return response()->json(['code' => 'ok']);
     }
-    
+
     function store(Request $request) {
         request()->validate([
             'name'      => 'required',
             'address'   => 'required',
             'zip'       => 'required',
-        ]); 
-        
+        ]);
+
         $geo_data = $this->service->getCoords($request->address);
 
         $data = [
@@ -93,10 +105,10 @@ class PropertyController extends Controller
             'lat'       => $geo_data['lat'],
             'lng'       => $geo_data['lng'],
         ];
-        
+
         $item = new Property($data);
         $item->save();
-        
+
         return $item ? response()->json(['code' => 'ok','user' => $item]) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
     }
 }
