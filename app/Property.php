@@ -5,6 +5,7 @@ namespace App;
 use App\Traits\noCRUD;
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Carbon\Carbon;
 
 class Property extends Model
 {
@@ -42,4 +43,21 @@ class Property extends Model
     function rating() {
         return $this->hasMany(Rating::class)->select(DB::raw('SUM(rating) as rate'))->groupBy('property_id');
     }
+    
+    public static function getTotalNumberObjects($type) {
+        if ($type) {
+            return self::count();    
+        } else {
+            return self::where('type','=','affiliate')->count();  
+        }
+    }
+    
+    public static function getNumberObjectViewsLastMonth() {    
+        return self::where('created_at', '>=', Carbon::now()->subMonth())->sum('views');  
+    }
+    
+    public static function getTopObjectsReferrals() {
+        return self::orderBy('views', 'desc')->take(20)->get()->toArray();
+    }
+   
 }

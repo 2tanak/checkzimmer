@@ -53,4 +53,12 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+    
+    public static function getTotalUsersVerifiedProfiles($type) {
+        if (!$type) {
+            return self::whereNotNull('email_verified_at')->count();  
+        } else {
+            return self::whereNull('email_verified_at')->count();  
+        }
+    }
 }
