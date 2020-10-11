@@ -10,6 +10,7 @@ use App\Property;
 use App\Room;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Str;
 
 class BookingDataService
 {
@@ -221,6 +222,7 @@ class BookingDataService
                 'lat' => $hotel['hotel_data']['location']['latitude'],
                 'lng' =>  $hotel['hotel_data']['location']['longitude'],
                 'name' => $hotel['hotel_data']['name'],
+                'slug' => (string) Str::uuid(),
                 'city' => $hotel['hotel_data']['city'],
                 'zip' => $hotel['hotel_data']['zip'],
                 'address' => $hotel['hotel_data']['address']

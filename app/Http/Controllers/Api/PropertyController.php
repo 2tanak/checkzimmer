@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Property;
 use Auth;
 use App\User;
+use Illuminate\Support\Str;
 
 class PropertyController extends Controller
 {
@@ -95,6 +96,7 @@ class PropertyController extends Controller
 
         $data = [
             'name'      => $request->name,
+            'slug'      => (string) Str::uuid(),
             'address'   => $request->address,
             'zip'       => $request->zip,
             'city'      => $request->city,
