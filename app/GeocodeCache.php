@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\noCRUD;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class GeocodeCache extends Model
 {
@@ -27,6 +28,12 @@ class GeocodeCache extends Model
 
     public function toArray()
     {
-        return ['lat' => $this->lat, 'lng' => $this->lng, 'address' => $this->address];
+        return [
+            'id'        => $this->id, 
+            'lat'       => $this->lat, 
+            'lng'       => $this->lng, 
+            'address'   => $this->address, 
+            'timestamp' => Carbon::parse($this->timestamp)->format('Y m d H:m:s')
+        ];
     }
 }

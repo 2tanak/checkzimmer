@@ -26,6 +26,7 @@ Route::middleware('api')->namespace('Api')->group(function () {
     Route::resource('features', 'FeaturesController');
     Route::resource('room-types', 'RoomTypesController');
     Route::resource('property', 'PropertyController');
+    Route::resource('geocode-cache', 'GeocodeCacheController');
 
     Route::post('property/query', 'PropertyController@query');
 

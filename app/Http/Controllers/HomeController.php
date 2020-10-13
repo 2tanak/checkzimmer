@@ -39,15 +39,18 @@ class HomeController extends Controller
     {
         return view('single');
     }
-    public function singleProperty($id)
+    public function singleProperty($slug)
     {
-        $hotel = Property::findOrFail($id);
+        $hotel = Property::where('slug', $slug)->firstOrFail();
+
         $hotel->views++;
         $hotel->save();
         $options = $hotel->options->toArray();
         
         if (count($hotel->rating) > 0) {
-            $hotel->rate = array_reduce( $hotel->rating->toArray(), function($carry, $item) { return $carry + $item['rating']; } ) / count($hotel->rating);
+             $hotel->rate = array_reduce( $hotel->rating->toArray(), function($carry, $item) { 
+                return $carry + $item['rating']; 
+            } ) / count($hotel->rating);
         }
 
         $rooms = $hotel->rooms;

@@ -10,6 +10,7 @@ use App\Property;
 use App\Room;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Str;
 
 class BookingDataService
 {
@@ -201,6 +202,19 @@ class BookingDataService
     }
 
     /**
+     * @param int $hotel_id
+     * @return array
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws ModelNotFoundException
+     */
+    public function getHotelsInfoFromApi(int $hotel_id): array
+    {
+        $json = $this->bookingApiService->getHotelsInfo($hotel_id);
+
+        return $json['result'];
+    }
+
+    /**
      * @param string $city
      * @return BookingCity
      * @throws ModelNotFoundException
@@ -221,6 +235,7 @@ class BookingDataService
                 'lat' => $hotel['hotel_data']['location']['latitude'],
                 'lng' =>  $hotel['hotel_data']['location']['longitude'],
                 'name' => $hotel['hotel_data']['name'],
+                'slug' => (string) Str::uuid(),
                 'city' => $hotel['hotel_data']['city'],
                 'zip' => $hotel['hotel_data']['zip'],
                 'address' => $hotel['hotel_data']['address']
@@ -281,6 +296,7 @@ class BookingDataService
                     'bed' => Room::getBedroomType($room['room_info']['bedrooms'] ?? []),
                     'shower' => Room::getShowerType($room['room_facilities']),
                     'kitchen' => Room::getKitchenType($room['room_facilities'], $hotel['hotel_data']['hotel_facilities']),
+                    'native_id' => json_encode($room['room_id']),
                     'status' => 'approved'
                 ];
 
