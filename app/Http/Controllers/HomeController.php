@@ -47,9 +47,11 @@ class HomeController extends Controller
         $hotel->save();
         $options = $hotel->options->toArray();
         
-        $hotel->rate = array_reduce( $hotel->rating->toArray(), function($carry, $item) { 
-            return $carry + $item['rating']; 
-        } ) / count($hotel->rating);
+        if (count($hotel->rating) > 0) {
+             $hotel->rate = array_reduce( $hotel->rating->toArray(), function($carry, $item) { 
+                return $carry + $item['rating']; 
+            } ) / count($hotel->rating);
+        }
 
         $rooms = $hotel->rooms;
         
