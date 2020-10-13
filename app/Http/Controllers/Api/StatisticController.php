@@ -3,6 +3,8 @@
 use App\Statistic;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Property;
+use App\User;
 
 class StatisticController extends Controller
 {
@@ -36,4 +38,30 @@ class StatisticController extends Controller
         
         return response()->json(['code' => 'ok']);
     }
+    
+    function conclusionToMain() {
+        $totalNumberObjects             = Property::getTotalNumberObjects(true);
+        $totalAffiliateObjects          = Property::getTotalNumberObjects(false);  
+        $totalUsersVerifiedProfiles     = User::getTotalUsersVerifiedProfiles(true);
+        $totalUsersNotVerifiedProfiles  = User::getTotalUsersVerifiedProfiles(false);
+        $numberObjectViewsLastMonth     = (int) Property::getNumberObjectViewsLastMonth();
+        $numberClicksAffiliate          = (int) Statistic::getNumberClicksAffiliate();
+        $numberClicksAffiliateMonth     = (int) Statistic::getNumberClicksAffiliateMonth();
+        $topObjectsReferrals            = Property::getTopObjectsReferrals();
+        $topObjectsViews                = Statistic::getTopObjectsViews();
+
+        return response()->json([
+            'totalNumberObjects'            => $totalNumberObject,
+            'totalAffiliateObjects'         => $totalAffiliateObjects,
+            'totalUsersVerifiedProfiles'    => $totalUsersVerifiedProfiles,
+            'totalUsersNotVerifiedProfiles' => $totalUsersNotVerifiedProfiles,
+            'numberObjectViewsLastMonth'    => $numberObjectViewsLastMonth,
+            'numberClicksAffiliate'         => $numberClicksAffiliate,
+            'numberClicksAffiliateMonth'    => $numberClicksAffiliateMonth,
+            'topObjectsReferrals'           => $topObjectsReferrals,
+            'topObjectsViews'               => $topObjectsViews,
+            'topReferralsAndViews'          => [$topObjectsReferrals, $topObjectsViews]
+        ]);
+    }
+    
 }
