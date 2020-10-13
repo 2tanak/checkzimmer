@@ -320,6 +320,7 @@
                         </div>
                     </div>
 
+                    <!--
                     <div class="position">
                         <div class="top-bloc-collapse" data-toggle="collapse" data-target="#position1-collapse" role="button" aria-expanded="false" aria-controls="position1-collapse">
                             <div class="row">
@@ -493,6 +494,7 @@
                             </div>
                         </div>
                 </div>
+                      -->
 
                     <div class="position">
                         <div class="top-bloc-collapse" data-toggle="collapse" data-target="#position2-collapse" role="button" aria-expanded="false" aria-controls="position2-collapse">
@@ -534,97 +536,83 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="collapse show" id="position2-collapse">
-                                <div class="collapse-content-line">
-                                    <div class="row">
-                                        <div class="collapse-left-block col-xl-6 col-lg-6 col-md-6 col-sm-6 pr-1">
-                                            <div class="row">
-                                                <div class="name col-xl-5 col-lg-5 col-md-5 col-sm-5">
-                                                    <img src="/svg/i-two.svg" alt="alt">
-                                                    двухместный
-                                                </div>
-                                                <div class="quantity-item col-xl-2 col-lg-2 col-md-2 col-sm-2">2x</div>
-                                                <div class="personen-item col-xl-2 col-lg-2 col-md-2 col-sm-2 text-center">5</div>
-                                                <div class="price-item col-xl-3 col-lg-3 col-md-3 col-sm-3 col-sm-3">от<span>22€</span>/person</div>
-                                            </div>
-                                        </div>
-                                        <div class="collapse-right-block col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-0">
-                                            <div class="row" style="height:100%;">
-                                                <div class="type-bed-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
-                                                    <div class="type-bed-item-block type-bed-item-block-green">
-                                                        <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <circle cx="3.5" cy="3.5" r="3.5" fill="#4CAF50"/>
-                                                        </svg>
-                                                        одноместная
+                            
+                             @foreach ($rooms as $key => $room)
+                                <div class="collapse show" id="position2-collapse">
+                                    <div class="collapse-content-line">
+                                        <div class="row">
+                                            <div class="collapse-left-block col-xl-6 col-lg-6 col-md-6 col-sm-6 pr-1">
+                                                <div class="row">
+                                                    <div class="name col-xl-5 col-lg-5 col-md-5 col-sm-5">
+                                                        @if ($room->bed == 'single')
+                                                             <img src="/svg/i-one.svg" alt="alt">
+                                                        @else
+                                                            <img src="/svg/i-two.svg" alt="alt">
+                                                        @endif
+                                                        {{$room->bed}}
                                                     </div>
-                                                </div>
-                                                <div class="shower-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
-                                                    <div class="shower-item-block shower-item-block-orange">
-                                                        <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <circle cx="3.5" cy="3.5" r="3.5" fill="#F8981D"/>
-                                                        </svg>
-                                                        совместный
-                                                    </div>
-                                                </div>
-                                                <div class="kitchen-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
-                                                    <div class="kitchen-item-block kitchen-item-block-orange">
-                                                        <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <circle cx="3.5" cy="3.5" r="3.5" fill="#F8981D"/>
-                                                        </svg>
-                                                        совместная
-                                                    </div>
+                                                    <div class="quantity-item col-xl-2 col-lg-2 col-md-2 col-sm-2">{{$room->number}}x</div>
+                                                    <div class="personen-item col-xl-2 col-lg-2 col-md-2 col-sm-2 text-center">{{$room->person}}</div>
+                                                    <div class="price-item col-xl-3 col-lg-3 col-md-3 col-sm-3 col-sm-3">от<span>{{$room->price}}€</span>/person</div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                            <div class="collapse-right-block col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-0">
+                                                <div class="row" style="height:100%;">
+                                                    <div class="type-bed-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
+                                                        <div class="type-bed-item-block type-bed-item-block-green">
+                                                             @if ($room->bed === 'single')
+                                                                  <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <circle cx="3.5" cy="3.5" r="3.5" fill="#4CAF50"/>
+                                                                  </svg>
+                                                                  одноместная
+                                                             @else
+                                                                 <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                   <circle cx="3.5" cy="3.5" r="3.5" fill="#F8981D"/>
+                                                                 </svg>
+                                                                  двухместная
+                                                             @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="shower-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
+                                                        <div class="shower-item-block shower-item-block-orange">
+                                                             @if ($room->shower === 'shared')
+                                                                 <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <circle cx="3.5" cy="3.5" r="3.5" fill="#4CAF50"/>
+                                                                 </svg>
+                                                                 совместный
+                                                             @else
+                                                                 <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                   <circle cx="3.5" cy="3.5" r="3.5" fill="#F8981D"/>
+                                                                 </svg>
+                                                                 свой
+                                                             @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="kitchen-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
+                                                        <div class="kitchen-item-block kitchen-item-block-orange">
+                                                             @if ($room->kitchen === 'single' || $room->kitchen === 'kitchenette')
+                                                                 <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                   <circle cx="3.5" cy="3.5" r="3.5" fill="#F8981D"/>
+                                                                 </svg>
+                                                                 своя
+                                                             @else
+                                                                 <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <circle cx="3.5" cy="3.5" r="3.5" fill="#4CAF50"/>
+                                                                 </svg>
+                                                                 совместная
+                                                             @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                     </div>
                                 </div>
-                                <div class="collapse-content-line">
-                                    <div class="row">
-                                        <div class="collapse-left-block col-xl-6 col-lg-6 col-md-6 col-sm-6 pr-1">
-                                            <div class="row">
-                                                <div class="name col-xl-5 col-lg-5 col-md-5 col-sm-5">
-                                                    <img src="/svg/i-multi.svg" alt="alt">
-                                                    трехместный
-                                                </div>
-                                                <div class="quantity-item col-xl-2 col-lg-2 col-md-2 col-sm-2">3x</div>
-                                                <div class="personen-item col-xl-2 col-lg-2 col-md-2 col-sm-2 text-center">3</div>
-                                                <div class="price-item col-xl-3 col-lg-3 col-md-3 col-sm-3">от<span>20€</span>/person</div>
-                                            </div>
-                                        </div>
-                                        <div class="collapse-right-block col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-0">
-                                            <div class="row" style="height:100%;">
-                                                <div class="type-bed-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
-                                                    <div class="type-bed-item-block type-bed-item-block-green">
-                                                        <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <circle cx="3.5" cy="3.5" r="3.5" fill="#4CAF50"/>
-                                                        </svg>
-                                                        одноместная
-                                                    </div>
-                                                </div>
-                                                <div class="shower-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
-                                                    <div class="shower-item-block shower-item-block-orange">
-                                                        <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <circle cx="3.5" cy="3.5" r="3.5" fill="#F8981D"/>
-                                                        </svg>
-                                                        совместный
-                                                    </div>
-                                                </div>
-                                                <div class="kitchen-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
-                                                    <div class="kitchen-item-block kitchen-item-block-orange">
-                                                        <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <circle cx="3.5" cy="3.5" r="3.5" fill="#F8981D"/>
-                                                        </svg>
-                                                        совместная
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
+                            @endforeach
                     </div>
-
+                   </div>
+                  
+                      <!--
                     <div class="position">
                         <div class="top-bloc-collapse" data-toggle="collapse" data-target="#position3-collapse" role="button" aria-expanded="false" aria-controls="position3-collapse">
                             <div class="row">
@@ -840,7 +828,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
 
                     <div class="bottom-text">
                         * Текст комментария к таблице с ценами. Предложения по вашему запросу закончились, увеличьте дистанцию или свяжитесь с менежером напрямую
