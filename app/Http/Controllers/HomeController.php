@@ -26,6 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $options = Option::where('type', 'system')->get()->pluck('value', 'key');
+        
         return view('home', compact('options'));
     }
     public function dashboard() {
@@ -45,7 +46,7 @@ class HomeController extends Controller
         $hotel->views++;
         $hotel->save();
         $options = $hotel->options->toArray();
-        $hotel->rate = array_reduce( $hotel->rating->toArray(), function($carry, $item) { return $carry + $item['rating']; } ) / count($hotel->rating);
+        //$hotel->rate = array_reduce( $hotel->rating->toArray(), function($carry, $item) { return $carry + $item['rating']; } ) / count($hotel->rating);
 
         $rooms = $hotel->rooms;
         return view('single', compact('hotel','rooms'));

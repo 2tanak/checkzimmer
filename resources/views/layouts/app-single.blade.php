@@ -41,10 +41,14 @@
                     <img src="/img/head-logo.png" alt="Logo" class="head-logo-img">
                     Immobilien.de
                 </a>
+                
                 <div class="head-search">
-                    <img src="/svg/i-search-input.svg" alt="alt">
-                    <input type="search" placeholder="Введите город почтовый индекс или регион">
+                    <form action="{{route('home.index')}}" method="GET">
+                        <img src="/svg/i-search-input.svg" alt="alt">
+                        <input type="search" name="search" placeholder="Введите город почтовый индекс или регион">
+                    </form>
                 </div>
+           
                 <div class="main-menu">
                     <ul>
                         <li>
