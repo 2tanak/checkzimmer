@@ -5,7 +5,7 @@
     @include('css.loader-single')
 
     <div class="container single-container">
-        <div class="single-content">
+        <div class="single-content not-active">
             <div class="left-part">
             <div class="main-block">
                 <div class="main-top-block">
@@ -3482,10 +3482,6 @@
                 });
             });
         }
-        jQuery(window).on('load', function () {
-            jQuery('.single-load-content').addClass('active');
-            jQuery('.single-content').addClass('.not-active');
-        });
     </script>
 
     <style>

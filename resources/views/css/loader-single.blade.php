@@ -1,11 +1,12 @@
 <style>
 
     .single-load-content {
-        display: none;
-        margin-bottom: 40px;
-    }
-    .single-load-content.active {
         display: flex;
+        margin-bottom: 40px;
+        margin-top: 40px;
+    }
+    .single-load-content.hide {
+        display: none;
     }
     .single-load-content .main-load-block {
         max-width: 882px;
