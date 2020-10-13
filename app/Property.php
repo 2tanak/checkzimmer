@@ -6,6 +6,7 @@ use App\Traits\noCRUD;
 use App\Traits\propertyFeatures;
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Carbon\Carbon;
 
 class Property extends Model
 {
@@ -13,7 +14,7 @@ class Property extends Model
     use propertyFeatures;
 
     protected $table = 'property';
-    protected $fillable = ['user_id', 'type', 'status', 'views', 'lat', 'lng', 'name', 'city', 'zip', 'address' ];
+    protected $fillable = ['user_id', 'type', 'status', 'views', 'lat', 'lng', 'name', 'city', 'zip', 'address', 'slug' ];
     protected $with = ['options', 'user', 'rooms', 'questions', 'rating', 'questions'];
     private static $identifier = 'id';
     private static $children = ['options', 'user'];
@@ -28,7 +29,7 @@ class Property extends Model
 
     public const GENERAL = 'general';
     public const AFFILIATE = 'affiliate';
-
+    
     static function hasFeature($name, $features) {
         $features = array_column($features, 'name');
         return array_search($name, $features) !== false;
@@ -81,4 +82,21 @@ class Property extends Model
     function rating() {
         return $this->hasMany(Rating::class, 'property_id', 'id');
     }
+    
+    public static function getTotalNumberObjects($type) {
+        if ($type) {
+            return self::count();    
+        } else {
+            return self::where('type','=','affiliate')->count();  
+        }
+    }
+    
+    public static function getNumberObjectViewsLastMonth() {    
+        return self::where('created_at', '>=', Carbon::now()->subMonth())->sum('views');  
+    }
+    
+    public static function getTopObjectsReferrals() {
+        return self::orderBy('views', 'desc')->take(20)->get()->toArray();
+    }
+   
 }

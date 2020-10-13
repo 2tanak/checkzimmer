@@ -43,6 +43,9 @@ export default (base) => class ApiRequest {
     delete(id) {
         return client.delete(`/api/${base}/${id}`);
     }
+    deleteAll() {
+        return client.post(`/api/${base}`);
+    }
     create(data) {
         return client.post(`/api/${base}`, data);
     }

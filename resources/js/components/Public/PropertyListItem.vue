@@ -7,7 +7,7 @@
                 </div>
             </div>
             <div class="data">
-                <a :href="'/single/'+item.id" class="title"><span>{{ item.name }}</span></a>
+                <a :href="'/single/'+item.slug" class="title"><span>{{ item.name }}</span></a>
                 <div class="data-item">
                     <div class="geolocation">
                         <img src="/svg/i-pin.svg" alt="geo">
