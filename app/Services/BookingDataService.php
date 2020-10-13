@@ -201,6 +201,19 @@ class BookingDataService
     }
 
     /**
+     * @param int $hotel_id
+     * @return array
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws ModelNotFoundException
+     */
+    public function getHotelsInfoFromApi(int $hotel_id): array
+    {
+        $json = $this->bookingApiService->getHotelsInfo($hotel_id);
+
+        return $json['result'];
+    }
+
+    /**
      * @param string $city
      * @return BookingCity
      * @throws ModelNotFoundException
@@ -281,6 +294,7 @@ class BookingDataService
                     'bed' => Room::getBedroomType($room['room_info']['bedrooms'] ?? []),
                     'shower' => Room::getShowerType($room['room_facilities']),
                     'kitchen' => Room::getKitchenType($room['room_facilities'], $hotel['hotel_data']['hotel_facilities']),
+                    'native_id' => json_encode($room['room_id']),
                     'status' => 'approved'
                 ];
 

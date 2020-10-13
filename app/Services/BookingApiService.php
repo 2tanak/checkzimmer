@@ -119,4 +119,17 @@ class BookingApiService
         return $this->getApiData('GET','hotels?city_ids='.$city_id.'&hotel_type_ids='.$type.'&rows=100'.
         '&extras=payment_details,key_collection_info,room_info,room_photos,hotel_description_formatted,room_facilities,hotel_photos,room_description,hotel_policies,hotel_info,hotel_facilities,hotel_description');
     }
+
+    /**
+     * @param int $hotel_id
+     * @return mixed
+     * @throws GuzzleException
+     */
+    public function getHotelsInfo(int $hotel_id)
+    {
+        return $this->getApiData('GET','hotels?hotel_ids='.$hotel_id.'&rows=1'.
+            '&extras=room_info,room_photos,room_description,room_facilities,hotel_facilities,');
+    }
+
+
 }
