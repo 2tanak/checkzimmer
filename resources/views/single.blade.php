@@ -10,11 +10,9 @@
             <div class="main-block">
                 <div class="main-top-block">
                     <div class="single-main-slider">
-                        <div class="main-slider-item"><a class="open-gallery" href="#"><img src="/img/gallery-big-photo.png" alt="alt"></a></div>
-                        <div class="main-slider-item"><a class="open-gallery" href="#"><img src="/img/gallery-small-photo1.png" alt="alt"></a></div>
-                        <div class="main-slider-item"><a class="open-gallery" href="#"><img src="/img/gallery-small-photo2.png" alt="alt"></a></div>
-                        <div class="main-slider-item"><a class="open-gallery" href="#"><img src="/img/gallery-small-photo3.png" alt="alt"></a></div>
-                        <div class="main-slider-item"><a class="open-gallery" href="#"><img src="/img/gallery-small-photo4.png" alt="alt"></a></div>
+                        @foreach ($hotel->photos() as $key => $photo)
+                            <div class="main-slider-item"><a class="open-gallery" href="#"><img src="{{ $photo['url_original'] }}" alt="alt"></a></div>
+                        @endforeach
                     </div>
                     <div class="sidebar mobile-sidebar">
                         <div class="sidebar-top">
