@@ -2661,6 +2661,9 @@ label.mobile-label {
     display: flex;
     align-items: flex-start;
 }
+.single-content.not-active {
+    display: none;
+}
 .single-content .main-block {
     width: 100%;
     max-width: 882px;

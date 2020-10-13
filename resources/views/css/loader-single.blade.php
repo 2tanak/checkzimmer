@@ -1,8 +1,11 @@
 <style>
 
     .single-load-content {
-        display: flex;
+        display: none;
         margin-bottom: 40px;
+    }
+    .single-load-content.active {
+        display: flex;
     }
     .single-load-content .main-load-block {
         max-width: 882px;
