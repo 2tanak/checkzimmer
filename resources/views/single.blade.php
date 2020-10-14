@@ -2798,22 +2798,28 @@
                             <div class="subtitle">2 – 14 чел.</div>
                         </div>
                     </div>
-                    <div class="sidebar-top-block rental-period">
+                    <!--<div class="sidebar-top-block rental-period">
                         <img src="/svg/i-clock.svg" alt="alt">
                         <div class="sidebar-top-block-item rental-period-item">
                             <div class="title">Мин. срок аренды:</div>
                             <div class="subtitle">3 дня</div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
+                
                 <div class="sidebar-middle">
                     <div class="price">
                         <div class="left">от</div>
-                        <div class="middle">€250</div>
+                         @foreach ($rooms as $key => $room)    
+                            @if ($room->price > 0)
+                                <div class="middle">€{{$room->price}}</div>
+                                @break;
+                            @endif
+                         @endforeach                          
                         <div class="right">на человека (включая НДС)</div>
                     </div>
                     <a href="#" class="inquiry">Отправить запрос</a>
-                    <div class="number-phone">
+                    <!--<div class="number-phone">
                         <a href="tel:+4917616573456">+49 176&nbsp;<span class="num_hide">1657 3456</span></a>
                         <span class="sh_nmr">показать</span>
                         <div class="message">Сообщите что вы с сайта Immbilien.de</div>
@@ -2821,9 +2827,9 @@
                             <div class="speaks">Говорит на:</div>
                             <div class="language-item">EN, RU, DE</div>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="address-map">
-                        <div class="address">DKN Immobilien <span>Anja Klepzigolf</span> Kolonnadenstr. 1 04109 Leipzig</div>
+                        <div class="address">{{$hotel->address}}<span></span> {{$hotel->zip}} {{$hotel->city}} </div>
                         <div class="map-container">
                             <a class="map-picture" href="#object-description">
                                 <svg width="102" height="88" fill="none" xmlns="http://www.w3.org/2000/svg">
