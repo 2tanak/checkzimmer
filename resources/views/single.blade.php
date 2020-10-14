@@ -2249,24 +2249,13 @@
                             function initMap() {
                                 var mapCanvas = document.getElementById("map");
                                 var mapCanvas2 = document.getElementById("map-mobile");
-                                var myCenter = new google.maps.LatLng(51.337542, 12.367605);
-                                var myCenter2 = new google.maps.LatLng(51.337542, 12.367605);
-                                var myTrip = [{lat:51.306084, lng:12.208921},
-                                              {lat:51.219721, lng:12.327711},
-                                              {lat:51.276026, lng:12.377149},
-                                              {lat:51.330974, lng:12.601682},
-                                              {lat:51.380715, lng:12.488386},
-                                              {lat:51.463781, lng:12.453367},
-                                              {lat:51.423980, lng:12.304365},
-                                              {lat:51.397426, lng:12.211668}];
-                                var myTrip2 = [{lat:51.306084, lng:12.208921},
-                                    {lat:51.219721, lng:12.327711},
-                                    {lat:51.276026, lng:12.377149},
-                                    {lat:51.330974, lng:12.601682},
-                                    {lat:51.380715, lng:12.488386},
-                                    {lat:51.463781, lng:12.453367},
-                                    {lat:51.423980, lng:12.304365},
-                                    {lat:51.397426, lng:12.211668}];
+                                var myCenter = new google.maps.LatLng({{$hotel->lat}}, {{$hotel->lng}});
+                                var myCenter2 = new google.maps.LatLng({{$hotel->lat}}, {{$hotel->lng}});
+                                
+                                var myTrip = [{lat:{{$hotel->lat}}, lng:{{$hotel->lng}}}];
+                                          
+                                var myTrip2 = [{lat:{{$hotel->lat}}, lng:{{$hotel->lng}}}];
+                                
                                 var mapOptions = {
                                     center: myCenter,
                                     zoom: 10,
@@ -2303,14 +2292,14 @@
                                 var map2 = new google.maps.Map(mapCanvas2 ,mapOptions2);
 
                                 var contentString = '<div id="content">'+
-                                                    '<span class="index">04109</span>'+
+                                                    '<span class="index">{{$hotel->city}}</span>'+
                                                     '<span>&nbsp;</span>'+
-                                                    '<span class="town">Leipzig</span>'+
+                                                    '<span class="town">{{$hotel->zip}}</span>'+
                                                     '</div>';
                                 var contentString2 = '<div id="content">'+
-                                    '<span class="index">04109</span>'+
+                                    '<span class="index">{{$hotel->city}}</span>'+
                                     '<span>&nbsp;</span>'+
-                                    '<span class="town">Leipzig</span>'+
+                                    '<span class="town">{{$hotel->zip}}</span>'+
                                     '</div>';
                                 var infowindow = new google.maps.InfoWindow({
                                     content: contentString
