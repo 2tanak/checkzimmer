@@ -5,7 +5,7 @@
     @include('css.loader-single')
 
     <div class="container single-container">
-        <div class="single-content">
+        <div class="single-content not-active">
             <div class="left-part">
             <div class="main-block">
                 <div class="main-top-block">
@@ -190,9 +190,12 @@
                             </div>
                         </div>
                     </div>
+
                     @if (count($hotel->photos()) >= 5)
                         <div class="single-gallery">
-                            <div class="big-photo"><a class="open-gallery" href="#"><img src="{{ $hotel->photoMain()['url_original'] }}" alt="alt"></a></div>
+                            <div class="big-photo">
+                                <a class="open-gallery" href="#"><img src="{{ $hotel->photoMain()['url_original'] }}" alt="alt"></a>
+                            </div>
                             <div class="small-photo">
                                 @foreach ($hotel->photos() as $key => $photo)
                                     @if ($key == 3 && count($hotel->photos()) > 5)
@@ -3480,5 +3483,51 @@
             });
         }
     </script>
+
+    <style>
+        @media print {
+            .single-load-content {
+                display: none;
+            }
+            a.inquiry {
+                background-color: #6BB63F;
+                -webkit-print-color-adjust: exact;
+            }
+            footer {
+                display: none;
+            }
+            header {
+                display: none;
+            }
+            .single-content .sidebar .sidebar-top {
+                display: none !important;
+            }
+            .single-content .sidebar .sidebar-middle {
+                display: none !important;
+            }
+            .single-content .sidebar .sidebar-bottom {
+                display: none !important;
+            }
+            img {
+                max-width: 100% !important;
+            }
+            ul, img {
+                page-break-inside: avoid;
+            }
+            #print-none {
+                position: absolute;
+                width: 0;
+                height: 0;
+                overflow: hidden;
+            }
+            body {
+                margin: 0;
+            }
+            .single-content {
+                padding: 0 !important;
+                display: block !important;
+            }
+        }
+    </style>
 
 @endsection

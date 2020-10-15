@@ -339,10 +339,17 @@
                 }
             },
             findOption(item, name) {
+                if (!item.options) {
+                    return false;
+                }
                 return item.options.find( elem => elem.key === name);
             },
             typeKitchen(item, roomFacilities) {
-                let features = JSON.parse(this.findOption(item, 'features').value)
+                let rawOptions = this.findOption(item, 'features')
+                if (rawOptions === false) {
+                    return 'none';
+                }
+                let features = JSON.parse(rawOptions.value)
                 if (features.some(item => item.name === 'Shared kitchen')) {
                     return 'shared kitchen'
                 }
