@@ -10,11 +10,9 @@
             <div class="main-block">
                 <div class="main-top-block">
                     <div class="single-main-slider">
-                        <div class="main-slider-item"><a class="open-gallery" href="#"><img src="/img/gallery-big-photo.png" alt="alt"></a></div>
-                        <div class="main-slider-item"><a class="open-gallery" href="#"><img src="/img/gallery-small-photo1.png" alt="alt"></a></div>
-                        <div class="main-slider-item"><a class="open-gallery" href="#"><img src="/img/gallery-small-photo2.png" alt="alt"></a></div>
-                        <div class="main-slider-item"><a class="open-gallery" href="#"><img src="/img/gallery-small-photo3.png" alt="alt"></a></div>
-                        <div class="main-slider-item"><a class="open-gallery" href="#"><img src="/img/gallery-small-photo4.png" alt="alt"></a></div>
+                        @foreach ($hotel->photos() as $key => $photo)
+                            <div class="main-slider-item"><a class="open-gallery" href="#"><img src="{{ $photo['url_original'] }}" alt="alt"></a></div>
+                        @endforeach
                     </div>
                     <div class="sidebar mobile-sidebar">
                         <div class="sidebar-top">
@@ -325,6 +323,7 @@
                         </div>
                     </div>
 
+                    <!--
                     <div class="position">
                         <div class="top-bloc-collapse" data-toggle="collapse" data-target="#position1-collapse" role="button" aria-expanded="false" aria-controls="position1-collapse">
                             <div class="row">
@@ -498,6 +497,7 @@
                             </div>
                         </div>
                 </div>
+                      -->
 
                     <div class="position">
                         <div class="top-bloc-collapse" data-toggle="collapse" data-target="#position2-collapse" role="button" aria-expanded="false" aria-controls="position2-collapse">
@@ -539,97 +539,83 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="collapse show" id="position2-collapse">
-                                <div class="collapse-content-line">
-                                    <div class="row">
-                                        <div class="collapse-left-block col-xl-6 col-lg-6 col-md-6 col-sm-6 pr-1">
-                                            <div class="row">
-                                                <div class="name col-xl-5 col-lg-5 col-md-5 col-sm-5">
-                                                    <img src="/svg/i-two.svg" alt="alt">
-                                                    двухместный
-                                                </div>
-                                                <div class="quantity-item col-xl-2 col-lg-2 col-md-2 col-sm-2">2x</div>
-                                                <div class="personen-item col-xl-2 col-lg-2 col-md-2 col-sm-2 text-center">5</div>
-                                                <div class="price-item col-xl-3 col-lg-3 col-md-3 col-sm-3 col-sm-3">от<span>22€</span>/person</div>
-                                            </div>
-                                        </div>
-                                        <div class="collapse-right-block col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-0">
-                                            <div class="row" style="height:100%;">
-                                                <div class="type-bed-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
-                                                    <div class="type-bed-item-block type-bed-item-block-green">
-                                                        <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <circle cx="3.5" cy="3.5" r="3.5" fill="#4CAF50"/>
-                                                        </svg>
-                                                        одноместная
+                            
+                             @foreach ($rooms as $key => $room)
+                                <div class="collapse show" id="position2-collapse">
+                                    <div class="collapse-content-line">
+                                        <div class="row">
+                                            <div class="collapse-left-block col-xl-6 col-lg-6 col-md-6 col-sm-6 pr-1">
+                                                <div class="row">
+                                                    <div class="name col-xl-5 col-lg-5 col-md-5 col-sm-5">
+                                                        @if ($room->bed == 'single')
+                                                             <img src="/svg/i-one.svg" alt="alt">
+                                                        @else
+                                                            <img src="/svg/i-two.svg" alt="alt">
+                                                        @endif
+                                                        {{$room->bed}}
                                                     </div>
-                                                </div>
-                                                <div class="shower-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
-                                                    <div class="shower-item-block shower-item-block-orange">
-                                                        <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <circle cx="3.5" cy="3.5" r="3.5" fill="#F8981D"/>
-                                                        </svg>
-                                                        совместный
-                                                    </div>
-                                                </div>
-                                                <div class="kitchen-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
-                                                    <div class="kitchen-item-block kitchen-item-block-orange">
-                                                        <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <circle cx="3.5" cy="3.5" r="3.5" fill="#F8981D"/>
-                                                        </svg>
-                                                        совместная
-                                                    </div>
+                                                    <div class="quantity-item col-xl-2 col-lg-2 col-md-2 col-sm-2">{{$room->number}}x</div>
+                                                    <div class="personen-item col-xl-2 col-lg-2 col-md-2 col-sm-2 text-center">{{$room->person}}</div>
+                                                    <div class="price-item col-xl-3 col-lg-3 col-md-3 col-sm-3 col-sm-3">от<span>{{$room->price}}€</span>/person</div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                            <div class="collapse-right-block col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-0">
+                                                <div class="row" style="height:100%;">
+                                                    <div class="type-bed-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
+                                                        <div class="type-bed-item-block type-bed-item-block-green">
+                                                             @if ($room->bed === 'single')
+                                                                  <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <circle cx="3.5" cy="3.5" r="3.5" fill="#4CAF50"/>
+                                                                  </svg>
+                                                                  одноместная
+                                                             @else
+                                                                 <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                   <circle cx="3.5" cy="3.5" r="3.5" fill="#F8981D"/>
+                                                                 </svg>
+                                                                  двухместная
+                                                             @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="shower-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
+                                                        <div class="shower-item-block shower-item-block-orange">
+                                                             @if ($room->shower === 'shared')
+                                                                 <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <circle cx="3.5" cy="3.5" r="3.5" fill="#4CAF50"/>
+                                                                 </svg>
+                                                                 совместный
+                                                             @else
+                                                                 <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                   <circle cx="3.5" cy="3.5" r="3.5" fill="#F8981D"/>
+                                                                 </svg>
+                                                                 свой
+                                                             @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="kitchen-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
+                                                        <div class="kitchen-item-block kitchen-item-block-orange">
+                                                             @if ($room->kitchen === 'single' || $room->kitchen === 'kitchenette')
+                                                                 <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                   <circle cx="3.5" cy="3.5" r="3.5" fill="#F8981D"/>
+                                                                 </svg>
+                                                                 своя
+                                                             @else
+                                                                 <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <circle cx="3.5" cy="3.5" r="3.5" fill="#4CAF50"/>
+                                                                 </svg>
+                                                                 совместная
+                                                             @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                     </div>
                                 </div>
-                                <div class="collapse-content-line">
-                                    <div class="row">
-                                        <div class="collapse-left-block col-xl-6 col-lg-6 col-md-6 col-sm-6 pr-1">
-                                            <div class="row">
-                                                <div class="name col-xl-5 col-lg-5 col-md-5 col-sm-5">
-                                                    <img src="/svg/i-multi.svg" alt="alt">
-                                                    трехместный
-                                                </div>
-                                                <div class="quantity-item col-xl-2 col-lg-2 col-md-2 col-sm-2">3x</div>
-                                                <div class="personen-item col-xl-2 col-lg-2 col-md-2 col-sm-2 text-center">3</div>
-                                                <div class="price-item col-xl-3 col-lg-3 col-md-3 col-sm-3">от<span>20€</span>/person</div>
-                                            </div>
-                                        </div>
-                                        <div class="collapse-right-block col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-0">
-                                            <div class="row" style="height:100%;">
-                                                <div class="type-bed-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
-                                                    <div class="type-bed-item-block type-bed-item-block-green">
-                                                        <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <circle cx="3.5" cy="3.5" r="3.5" fill="#4CAF50"/>
-                                                        </svg>
-                                                        одноместная
-                                                    </div>
-                                                </div>
-                                                <div class="shower-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
-                                                    <div class="shower-item-block shower-item-block-orange">
-                                                        <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <circle cx="3.5" cy="3.5" r="3.5" fill="#F8981D"/>
-                                                        </svg>
-                                                        совместный
-                                                    </div>
-                                                </div>
-                                                <div class="kitchen-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
-                                                    <div class="kitchen-item-block kitchen-item-block-orange">
-                                                        <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <circle cx="3.5" cy="3.5" r="3.5" fill="#F8981D"/>
-                                                        </svg>
-                                                        совместная
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
+                            @endforeach
                     </div>
-
+                   </div>
+                  
+                      <!--
                     <div class="position">
                         <div class="top-bloc-collapse" data-toggle="collapse" data-target="#position3-collapse" role="button" aria-expanded="false" aria-controls="position3-collapse">
                             <div class="row">
@@ -845,7 +831,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
 
                     <div class="bottom-text">
                         * Текст комментария к таблице с ценами. Предложения по вашему запросу закончились, увеличьте дистанцию или свяжитесь с менежером напрямую
@@ -2266,24 +2252,13 @@
                             function initMap() {
                                 var mapCanvas = document.getElementById("map");
                                 var mapCanvas2 = document.getElementById("map-mobile");
-                                var myCenter = new google.maps.LatLng(51.337542, 12.367605);
-                                var myCenter2 = new google.maps.LatLng(51.337542, 12.367605);
-                                var myTrip = [{lat:51.306084, lng:12.208921},
-                                              {lat:51.219721, lng:12.327711},
-                                              {lat:51.276026, lng:12.377149},
-                                              {lat:51.330974, lng:12.601682},
-                                              {lat:51.380715, lng:12.488386},
-                                              {lat:51.463781, lng:12.453367},
-                                              {lat:51.423980, lng:12.304365},
-                                              {lat:51.397426, lng:12.211668}];
-                                var myTrip2 = [{lat:51.306084, lng:12.208921},
-                                    {lat:51.219721, lng:12.327711},
-                                    {lat:51.276026, lng:12.377149},
-                                    {lat:51.330974, lng:12.601682},
-                                    {lat:51.380715, lng:12.488386},
-                                    {lat:51.463781, lng:12.453367},
-                                    {lat:51.423980, lng:12.304365},
-                                    {lat:51.397426, lng:12.211668}];
+                                var myCenter = new google.maps.LatLng({{$hotel->lat}}, {{$hotel->lng}});
+                                var myCenter2 = new google.maps.LatLng({{$hotel->lat}}, {{$hotel->lng}});
+                                
+                                var myTrip = [{lat:{{$hotel->lat}}, lng:{{$hotel->lng}}}];
+                                          
+                                var myTrip2 = [{lat:{{$hotel->lat}}, lng:{{$hotel->lng}}}];
+                                
                                 var mapOptions = {
                                     center: myCenter,
                                     zoom: 10,
@@ -2320,14 +2295,14 @@
                                 var map2 = new google.maps.Map(mapCanvas2 ,mapOptions2);
 
                                 var contentString = '<div id="content">'+
-                                                    '<span class="index">04109</span>'+
+                                                    '<span class="index">{{$hotel->city}}</span>'+
                                                     '<span>&nbsp;</span>'+
-                                                    '<span class="town">Leipzig</span>'+
+                                                    '<span class="town">{{$hotel->zip}}</span>'+
                                                     '</div>';
                                 var contentString2 = '<div id="content">'+
-                                    '<span class="index">04109</span>'+
+                                    '<span class="index">{{$hotel->city}}</span>'+
                                     '<span>&nbsp;</span>'+
-                                    '<span class="town">Leipzig</span>'+
+                                    '<span class="town">{{$hotel->zip}}</span>'+
                                     '</div>';
                                 var infowindow = new google.maps.InfoWindow({
                                     content: contentString
@@ -2826,22 +2801,28 @@
                             <div class="subtitle">2 – 14 чел.</div>
                         </div>
                     </div>
-                    <div class="sidebar-top-block rental-period">
+                    <!--<div class="sidebar-top-block rental-period">
                         <img src="/svg/i-clock.svg" alt="alt">
                         <div class="sidebar-top-block-item rental-period-item">
                             <div class="title">Мин. срок аренды:</div>
                             <div class="subtitle">3 дня</div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
+                
                 <div class="sidebar-middle">
                     <div class="price">
                         <div class="left">от</div>
-                        <div class="middle">€250</div>
+                         @foreach ($rooms as $key => $room)    
+                            @if ($room->price > 0)
+                                <div class="middle">€{{$room->price}}</div>
+                                @break;
+                            @endif
+                         @endforeach                          
                         <div class="right">на человека (включая НДС)</div>
                     </div>
                     <a href="#" class="inquiry">Отправить запрос</a>
-                    <div class="number-phone">
+                    <!--<div class="number-phone">
                         <a href="tel:+4917616573456">+49 176&nbsp;<span class="num_hide">1657 3456</span></a>
                         <span class="sh_nmr">показать</span>
                         <div class="message">Сообщите что вы с сайта Immbilien.de</div>
@@ -2849,9 +2830,9 @@
                             <div class="speaks">Говорит на:</div>
                             <div class="language-item">EN, RU, DE</div>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="address-map">
-                        <div class="address">DKN Immobilien <span>Anja Klepzigolf</span> Kolonnadenstr. 1 04109 Leipzig</div>
+                        <div class="address">{{$hotel->address}}<span></span> {{$hotel->zip}} {{$hotel->city}} </div>
                         <div class="map-container">
                             <a class="map-picture" href="#object-description">
                                 <svg width="102" height="88" fill="none" xmlns="http://www.w3.org/2000/svg">
