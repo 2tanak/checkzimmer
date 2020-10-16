@@ -38,6 +38,19 @@ class GeocoderService
         return $cache_data?($cache_data->toArray()):$this->getDataFromGeocoder($address);
     }
 
+     /**
+     * @param string $city
+     * @param string $zip
+     * @return array
+     */
+    public function getCoordsFromZipAndCity(string $city, string $zip): array
+    {
+        $address = $city . ' ' . $zip;
+        $cache_data = $this->getFromCache($address);
+        
+        return $cache_data?($cache_data->toArray()):$this->getDataFromGeocoder($address);
+    }
+    
     /**
      * Store retrieved data
      * @param string $address

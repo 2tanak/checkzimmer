@@ -49,11 +49,11 @@ class HomeController extends Controller
         $options = $hotel->options->toArray();
         
         if (count($hotel->rating) > 0) {
-            $hotel->rate = array_reduce( $hotel->rating->toArray(), function($carry, $item) { 
+             $hotel->rate = array_reduce( $hotel->rating->toArray(), function($carry, $item) { 
                 return $carry + $item['rating']; 
             } ) / count($hotel->rating);
         }
-        
+
         $rooms = $hotel->rooms;
         
         return view('single', compact('hotel','rooms'));

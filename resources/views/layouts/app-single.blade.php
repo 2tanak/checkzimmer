@@ -206,35 +206,17 @@
         </div>
         <div class="slider-block">
             <div class="big-slider">
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
+                @foreach ($hotel->photos() as $key => $photo)
+                    <div class="slider-item"><img src="{{ $photo['url_original'] }}" alt="alt"></div>
+                @endforeach
             </div>
             <div class="small-slider">
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
+                @foreach ($hotel->photos() as $key => $photo)
+                    <div class="slider-item"><img src="{{ $photo['url_max300'] }}" alt="alt"></div>
+                @endforeach
             </div>
             <div class="name-slide-number">
-                <div class="number">1/20</div>
-                <div class="dash">-</div>
-                <div class="name">Balkon</div>
+                <div class="number">1/{{count($hotel->photos())}}</div>
             </div>
         </div>
     </div>
