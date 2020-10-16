@@ -133,7 +133,7 @@ class BookingController extends Controller
         return response()->json($hotelsArray);
     }
 
-    public function saveHotels(Request $request, $data)
+    public function saveHotels(Request $request)
     {
         $hotels = $request->all();
         $this->bookingDataService->storeHotels($hotels);

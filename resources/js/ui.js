@@ -448,3 +448,7 @@ jQuery(window).on("load resize", function(){
     }
 });
 
+window.onload = function () {
+    jQuery('.single-load-content').addClass('hide');
+    jQuery('.single-content').removeClass('not-active');
+};
