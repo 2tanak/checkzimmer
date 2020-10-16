@@ -238,6 +238,11 @@ class BookingDataService
                 'slug' => (string) Str::uuid(),
                 'city' => $hotel['hotel_data']['city'],
                 'zip' => $hotel['hotel_data']['zip'],
+                'description' => json_encode([
+                    'hotel_description' => $hotel['hotel_data']['hotel_description'],
+                    'hotel_important_information' => $hotel['hotel_data']['hotel_important_information'],
+                    'hotelier_welcome_message' => $hotel['hotel_data']['hotelier_welcome_message']
+                ]),
                 'address' => $hotel['hotel_data']['address']
             ];
 
@@ -255,6 +260,13 @@ class BookingDataService
                 'type' => 'property',
                 'key' => 'languages',
                 'value' => implode(',', $hotel['hotel_data']['spoken_languages'])
+            ]);
+
+            $this->storeOption([
+                'parent' => $property->id,
+                'type' => 'property',
+                'key' => 'languages',
+                'value' => implode(',', $hotel['hotel_data']['url'])
             ]);
 
             $this->storeOption([

@@ -26,6 +26,7 @@ class CreatePropertyTable extends Migration
             $table->integer('zip');
             $table->string('address');
             $table->string('slug');
+            $table->longText('description');
             $table->timestamps();
         });
     }
