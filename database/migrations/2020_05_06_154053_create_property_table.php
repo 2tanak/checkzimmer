@@ -24,6 +24,8 @@ class CreatePropertyTable extends Migration
             $table->string('name');
             $table->string('city');
             $table->integer('zip');
+            $table->integer('price');
+            $table->integer('rating');
             $table->string('address');
             $table->string('slug');
             $table->timestamps();
