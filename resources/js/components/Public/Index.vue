@@ -474,7 +474,7 @@ export default{
             } else if (order == 'max') {
                 data = {'sort' : 'asc', 'field' : 'price'};
             } else {
-                data = {'sort' : 'desc', 'field' : 'stock'};
+                data = {'sort' : 'desc', 'field' : 'hotel_rating'};
             }
 
             properties.request('querySort', data)
