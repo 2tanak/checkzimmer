@@ -22,3 +22,5 @@ Route::get('/list', 'HomeController@list')->name('list');
 Route::get('/single', 'HomeController@single')->name('single');
 Route::get('/single/{slug}', 'HomeController@singleProperty')->name('single');
 Route::get('/favorites', 'HomeController@favorites')->name('favorites');
+Route::get('single/question/create', 'Api\QuestionsController@create');
+Route::get('single/review/create', 'Api\ReviewsController@create');

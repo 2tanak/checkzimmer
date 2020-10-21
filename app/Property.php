@@ -54,14 +54,17 @@ class Property extends Model
     function photos() {
         return $this->getPhotos();
     }
+    
     function photoMain() {
         $this->getPhotos();
         return $this->_photoMain;
     }
+    
     function languages() {
         $this->getOptions();
         return json_decode(self::optionFind($this->_options, 'languages'), true) ?: [];
     }
+    
     function features() {
         $this->getOptions();
         return json_decode(self::optionFind($this->_options, 'features'), true) ?: [];
@@ -70,15 +73,23 @@ class Property extends Model
     function options() {
         return $this->hasMany(Option::class, 'parent')->where('type', 'property');
     }
+    
     function rooms() {
         return $this->hasMany(Room::class);
     }
+    
     function user() {
         return $this->belongsTo(User::class);
     }
+    
     function questions() {
         return $this->hasMany(Question::class);
     }
+    
+    function reviews() {
+        return $this->hasMany(Reviews::class);
+    }
+    
     function rating() {
         return $this->hasMany(Rating::class, 'property_id', 'id');
     }

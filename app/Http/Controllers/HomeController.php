@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Option;
 use App\Property;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class HomeController extends Controller
 {
@@ -35,7 +36,7 @@ class HomeController extends Controller
     {
         return view('list');
     }
-    public function single()
+    public function single(Request $request)
     {
         return view('single');
     }
@@ -54,11 +55,14 @@ class HomeController extends Controller
         }
 
         $rooms = $hotel->rooms;
-        
-        return view('single', compact('hotel','rooms'));
+        $questions = $hotel->questions;
+        $reviews = $hotel->reviews;
+
+        return view('single', compact('hotel','rooms','questions','reviews', 'paginate'));
     }
     public function favorites()
     {
         return view('favorites');
     }
+    
 }
