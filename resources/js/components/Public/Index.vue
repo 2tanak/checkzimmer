@@ -48,9 +48,9 @@
                             <div class="filter-block">
                                 <ul>
                                     <li class="check">Сортировка по умолчанию</li>
-                                    <li>От дешевых к дорогим</li>
-                                    <li>От дорогих к дешевым</li>
-                                    <li>По рейтингу</li>
+                                    <li @click.prevent="loadSort('min')">От дешевых к дорогим</li>
+                                    <li @click.prevent="loadSort('max')">От дорогих к дешевым</li>
+                                    <li @click.prevent="loadSort('rating')">По рейтингу</li>
                                 </ul>
                             </div>
                         </div>
@@ -217,7 +217,7 @@
 
                             </div>
                             <div class="load-more">
-                                <div class="btn btn-success" v-if="additional_pages" @click.prevent="loadMore">Загрузить еще</div>
+                                <div class="btn btn-success" v-if="additional_load" @click.prevent="loadMore">Загрузить еще</div>
                             </div>
                         </div>
                         </transition>
@@ -287,7 +287,7 @@
                 </div>
 
                 <transition name="fade">
-                <div class="communication" v-if="endoflist">
+                <div class="communication" style="top:100px;position:relative;">
                     <div class="description">
                         Предложения по вашему запросу закончились, увеличьте дистанцию или свяжитесь с менежером напрямую
                     </div>
@@ -330,6 +330,8 @@ export default{
             endoflist: false,
             property: [],
             page: 1,
+            additional_load: true,
+            coords_load: [],
             additional_pages: true,
             search: {...newSearch},
         };
@@ -343,6 +345,7 @@ export default{
             jQuery(this).removeClass('error');
             jQuery(this).closest('.input-block').find('.error-text').removeClass('active')
         });
+
         properties.byPage(1)
             .then( resp => {
                 that.property = resp.data.objects.data;
@@ -373,15 +376,28 @@ export default{
                 setTimeout( () => { initMap() }, 100 )
                 return;
             }
-            console.log(document.getElementById('map'));
+
             let map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: 51.340000, lng: 12.382000},
                 zoom: 8
             });
+
+            properties.request('initMap')
+                .then( resp => {
+                    var myTrip = resp.data.coords;
+                    
+                    for (var i = 0; i < myTrip.length; i++) {  
+                      var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(myTrip[i].lat, myTrip[i].lng),
+                        map: map
+                      });
+                    }
+                
+                    marker.setMap(map);
+            })    
         }
+
         initMap();
-
-
     },
     created() {
         if (this.$route.query.search !== '') {
@@ -440,15 +456,38 @@ export default{
 
             properties.byPage(that.page)
                 .then( resp => {
-                    that.property = that.property.concat(resp.data.data);
+                    that.property = that.property.concat(resp.data.objects.data);
                     that.loading = false;
                     that.additional_pages = resp.data.current_page < resp.data.last_page;
 
+                    if (resp.data.objects.current_page  >= resp.data.objects.last_page - 1) {
+                        that.additional_load = false;
+                    }
+
                     that.favoritesDisplay();
                     that.foundTotal();
-                    console.log(that.property);
+            })
+        },
+
+        loadSort(order) {
+            let data = {};
+
+            if (order == 'min') {
+                data = {'sort' : 'desc', 'field' : 'price'};
+            } else if (order == 'max') {
+                data = {'sort' : 'asc', 'field' : 'price'};
+            } else {
+                data = {'sort' : 'desc', 'field' : 'hotel_rating'};
+            }
+
+            properties.request('querySort', data)
+                .then( resp => {
+                    this.property = resp.data.objects.data;
+                    that.favoritesDisplay();
+                    that.foundTotal();
                 })
         },
+
         favoritesCount() {
             let favs = JSON.parse(localStorage.getItem("favoritesList")) || [];
             return favs.length;
