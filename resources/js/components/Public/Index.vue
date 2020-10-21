@@ -384,7 +384,10 @@ export default{
 
     },
     created() {
-
+        if (this.$route.query.search !== '') {
+            this.search.address = this.$route.query.search;
+            this.submitForm(); 
+        }	
     },
     updated: function () {
 

@@ -27,6 +27,7 @@ class HomeController extends Controller
     public function index()
     {
         $options = Option::where('type', 'system')->get()->pluck('value', 'key');
+        
         return view('home', compact('options'));
     }
     public function dashboard() {
