@@ -117,7 +117,7 @@ class BookingApiService
     public function getHotelsByCityAndType(int $city_id, int $type)
     {
         return $this->getApiData('GET','hotels?city_ids='.$city_id.'&hotel_type_ids='.$type.'&rows=100'.
-        '&extras=payment_details,key_collection_info,room_info,room_photos,hotel_description_formatted,room_facilities,hotel_photos,room_description,hotel_policies,hotel_info,hotel_facilities,hotel_description');
+        '&extras=payment_details,key_collection_info,room_info,room_photos,hotel_description_formatted,room_facilities,hotel_photos,room_description,hotel_policies,hotel_info,hotel_facilities,hotel_description,hotel_important_information,hotelier_welcome_message,url');
     }
 
     /**
