@@ -12,3 +12,24 @@
     margin-bottom: 0;
   }
 }
+.head-logo .logo-mobile {
+    display: none;
+}
+.head-logo {
+    display: flex;
+    align-items: center;
+}
+@media (max-width: 991px) {
+    .head-logo .logo-desctope {
+        display: none;
+    }
+    .head-logo .logo-mobile {
+        display: block;
+    }
+    .navbar .navbar-brand-wrapper {
+        width: 185px;
+    }
+    .navbar .navbar-menu-wrapper {
+        width: calc(100% - 185px);
+    }
+}
