@@ -51,10 +51,28 @@
             <div><span><strong>Question:</strong></span> {{ answerObject.question }}  </div>
         </b-modal>
 
+        <div class="row mt-5">
+            <div class="col-md-12">
+
+                <b-alert dismissible v-model="operationOk" variant="success">
+                    {{ textOperation}}
+                </b-alert>
+                <b-alert dismissible v-model="operationError" variant="danger">
+                    {{ textOperation}}
+                </b-alert>
+            </div>
+        </div>
+
     </section>
 </template>
 
 <script>
+import ApiRequest from '../../../API/ApiRequest';
+import Forms from '../../../Forms';
+
+let QuestionsRequest = ApiRequest('questions');
+let questionsData = new QuestionsRequest;
+
 export default {
     name: "Index",
     data() {
@@ -62,13 +80,12 @@ export default {
             textareaAnswer: '',
             modalApproove: false,
             fields: ['created_at', 'question', 'response', 'answer', 'delete'],
-            questionItems: [
-                { id: 1, status: 'waiting', created_at: '01.01.2020', question: 'Текст вопроса', response: '' },
-                { id: 2, status: 'waiting', created_at: '02.02.2020', question: 'Текст вопроса 2', response: '' },
-                { id: 3, status: 'answered', created_at: '03.03.2020', question: 'Текст вопроса 3', response: '' }
-            ],
+            questionItems: [],
             answer: true,
             loading: false,
+            operationOk : false,
+            operationError : false,
+            textOperation: '',
             answerObject: {
                 id: 0,
                 status: '',
@@ -78,6 +95,12 @@ export default {
             }
         }
     },
+    created() {
+        questionsData.all()
+            .then(resp => {
+                this.questionItems = resp.data;
+            })
+     },
     mounted() {
     },
     methods: {
@@ -89,13 +112,35 @@ export default {
         },
         answerOk() {
             this.modalApproove = true;
+
+            let data = {'answer' : this.answerObject.response};
+            questionsData.update(this.answerObject.id, data)
+                .then(response => {
+                    if(response.data.code == 'ok') {
+                        this.textOperation = 'Ответ добавлен';
+                        this.operationOk = true;
+                    } else {
+                        this.textOperation = 'Ошибка';
+                        this.operationError = true;
+                    } 
+            });
         },
         answerCancel() {
             this.modalApproove = false;
         },
         answerDelete() {
-            let index = this.questionItems.findIndex( (elem, index, arr) => elem.id === this.answerObject.id);
-            this.questionItems.splice(index, 1);
+            questionsData.delete(this.answerObject.id)
+                .then(response => {
+                    if(response.data.code == 'ok') {
+                        this.textOperation = 'удален';
+                        this.operationOk = true;
+                        let index = this.questionItems.findIndex( (elem, index, arr) => elem.id === this.answerObject.id);
+                        this.questionItems.splice(index, 1);
+                    } else {
+                        this.textOperation = 'Ошибка удаления';
+                        this.operationError = true;
+                    } 
+            });
         },
         answerHidden() {
             if (this.modalApproove === false) {
