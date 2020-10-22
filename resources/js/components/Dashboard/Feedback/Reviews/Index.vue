@@ -150,6 +150,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+
+.table td, .table th {
+    white-space: normal !important;
+}
 
 </style>
