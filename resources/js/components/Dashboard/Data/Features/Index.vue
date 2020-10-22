@@ -66,6 +66,18 @@
             <span class="text-danger">A you sure you want to delete feature <strong>{{ deleteFeature.name}}</strong>
                 in <strong>{{ deleteFeature.feature_category ? deleteFeature.feature_category.name : ''}}</strong> category?</span>
         </b-modal>
+
+        <div class="row mt-5">
+            <div class="col-md-12">
+
+                <b-alert dismissible v-model="operationOk" variant="success">
+                    {{ textOperation}}
+                </b-alert>
+                <b-alert dismissible v-model="operationError" variant="danger">
+                    {{ textOperation}}
+               </b-alert>
+            </div>
+        </div>
     </section>
 </template>
 
@@ -103,6 +115,9 @@
                 features: [],
                 fields: ['id', 'feature_category', 'picture', 'name', 'edit', 'delete'],
                 data: featuresForm,
+                operationOk : false,
+                operationError : false,
+                textOperation: '',
                 newCat: '',
                 editFeature: '',
                 deleteFeature: ''
@@ -124,6 +139,7 @@
                 }
                 return {};
             },
+
             getCategories() {
                 let cats = [];
                 if (this.features.length) {
@@ -136,6 +152,7 @@
                 });
                 return cats;
             },
+
             catInput(e) {
                 if (e.key === 'Enter') {
                     this.categoriesTemp.push( this.newCat );
@@ -143,6 +160,7 @@
                     this.newCat = '';
                 }
             },
+
             featureNew() {
                 this.editFeature = { ...newFeature };
                 this.editFeature.feature_category.name = this.cats;
@@ -150,22 +168,55 @@
                 this.editFeature.category = this.data.category.options.indexOf(this.editFeature.feature_category.name);
 
             },
+
             featureEdit(data) {
                 this.editFeature = { ...data.item };
                 this.data.category.options = this.getCategories().concat(this.categoriesTemp);
                 this.editFeature.category = this.data.category.options.indexOf(this.editFeature.feature_category.name);
             },
+
             featureDelete(data) {
                 this.deleteFeature = { ...data.item }
             },
+
             featureDeleteOk() {
-                let index = this.featureList.findIndex( (elem, index, arr) => elem.id === this.deleteFeature.id);
-                this.featureList.splice(index, 1);
+                features.delete(this.deleteFeature.id)
+                    .then(response => {
+                        if(response.data.code == 'ok') {
+                            this.textOperation = 'удален';
+                            this.operationOk = true;
+                             let index = this.featureList.findIndex( (elem, index, arr) => elem.id === this.deleteFeature.id);
+                             this.featureList.splice(index, 1);
+                        } else {
+                            this.textOperation = 'Ошибка удаления';
+                            this.operationError = true;
+                        } 
+                });
             },
+
             featureAddOk() {
                 this.editFeature.feature_category.name = this.editFeature.name;
                 this.editFeature.feature_category.id = this.editFeature.category;
+                this.editFeature.feature_category.picture = this.editFeature.picture;
+                console.log(this.editFeature.feature_category);
                 this.features.push(this.editFeature);
+                
+                let data = {
+                    'name' : this.editFeature.feature_category.name,
+                    'category' : this.editFeature.feature_category.id,
+                    'picture' : this.editFeature.feature_category.picture
+                };
+
+                features.update(this.deleteFeature.id, data)
+                    .then(response => {
+                        if(response.data.code == 'ok') {
+                            this.textOperation = 'удален';
+                            this.operationOk = true;
+                        } else {
+                            this.textOperation = 'Ошибка удаления';
+                            this.operationError = true;
+                        } 
+                });
             }
         },
         computed: {
