@@ -68,7 +68,7 @@ class BookingDataService
     {
         return $this->bookingType->params(['type' => $type]);
     }
-    
+
     public function getBedTypes()
     {
         return [
@@ -79,10 +79,10 @@ class BookingDataService
             [
                 'type' => 'double',
                 'name' => 'двуспальная',
-            ]    
+            ]
         ];
     }
-    
+
     public function getShowerTypes()
     {
         return [
@@ -101,7 +101,7 @@ class BookingDataService
             [
                 'type' => 'none',
                 'name' => 'без душа',
-            ]  
+            ]
         ];
     }
 
@@ -127,10 +127,10 @@ class BookingDataService
             [
                 'type' => 'none',
                 'name' => 'без кухни',
-            ]  
+            ]
         ];
     }
-    
+
     public function getChildrenFeatures()
     {
         return $this->bookingFeatures->ind();
@@ -182,7 +182,7 @@ class BookingDataService
         $json = $this->bookingApiService->getHotelsByCityAndType($city->native_id, $type);
 
         $ids = [];
-        
+
         foreach ($json['result'] as $item) {
             $ids[] = $item['hotel_id'];
         }
@@ -197,7 +197,7 @@ class BookingDataService
             $imported = $natives[$item['hotel_id']] ?? null;
             $json['result'][$i]['imported'] = $imported;
         }
-        
+
         return $json['result'];
     }
 
@@ -349,6 +349,13 @@ class BookingDataService
                     'value' => $room['room_description'] ?? ''
                 ]);
             }
+            // Mapping properties
+            $this->mapFeatures($hotel);
+            $mapHotels = Option::where('key', 'mapping_housing')->first();
+            if ($mapHotels) {
+                $mapHotels = json_decode($mapHotels, true);
+            }
+
         }
 
     }
@@ -383,5 +390,13 @@ class BookingDataService
         $room->fill($roomData);
         $room->save();
         return $room;
+    }
+    private function mapFeatures($hotel) {
+        $mapFeatures = Option::where('key', 'mapping_features')->first();
+        if ($mapFeatures) {
+            $mapFeatures = json_decode($mapFeatures, true);
+        }
+
+
     }
 }
