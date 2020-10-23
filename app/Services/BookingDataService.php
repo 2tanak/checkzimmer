@@ -384,6 +384,9 @@ class BookingDataService
         $mapFeatures = Option::where('key', 'mapping_features')->first();
         if ($mapFeatures) {
             $mapFeatures = json_decode($mapFeatures, true);
+            foreach ($hotel->features as $item) {
+
+            }
         }
 
 

@@ -126,7 +126,6 @@ class BookingController extends Controller
         try {
             $hotelsArray = $this->bookingDataService->getHotelsByCityAndTypeFromApi($request->city, $request->type);
         } catch (GuzzleHttp\Exception\GuzzleException $e) {
-            file_put_contents('d.d', $e->getMessage());
             return response()->json(['error' => 'Something went wrong', 'message' => $e->getMessage()], 500);
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'City not found'], 500);
