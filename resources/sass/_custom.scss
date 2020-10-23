@@ -689,7 +689,7 @@ footer#main-footer ul.footer-menu li a:active {
 .list-content {
     background: #F7F8FA;
     padding-top: 32px;
-    padding-bottom: 180px;
+    padding-bottom: 114px;
 }
 .list-content h1 {
     font-weight: 600;
@@ -1104,11 +1104,13 @@ footer#main-footer ul.footer-menu li a:active {
 }
 .property-card .type {
     margin-right: 44px;
+    width: 390px;
 }
 .property-card .type .type-block.filling-block {
     max-width: 155px;
     text-overflow: ellipsis;
     overflow: hidden;
+    min-width: 155px;
 }
 .property-card .night {
     padding-right: 7px;
@@ -1213,6 +1215,9 @@ footer#main-footer ul.footer-menu li a:active {
     align-items: center;
     padding: 0 15px;
     width: 100%;
+}
+.list-content .communication.not-active {
+    display: none !important;
 }
 .list-content .communication .description {
     max-width: 530px;
@@ -1377,6 +1382,9 @@ footer#main-footer ul.footer-menu li a:active {
 .list-content .property.show-map .property-item {
    min-width: 740px;
    max-width: 740px;
+}
+.list-content .property.show-map .property-card {
+    cursor: pointer;
 }
 .list-content .property.show-map .property-card .type {
     display: none;
@@ -1858,16 +1866,15 @@ label.mobile-label {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.property .load-more .btn {
+.load-more {
+    margin-bottom: 34px;
+}
+.load-more .btn {
     background: #6bb63f;
     border-color: #6bb63f;
     color: #ffffff;
-    position: absolute;
-    bottom: -100px;
-    left: 50%;
-    transform: translateX(-50%);
 }
-.property .load-more .btn:hover {
+.load-more .btn:hover {
     background-color: #60a338;
     transition: all 0.4s ease;
 }
@@ -2040,6 +2047,15 @@ label.mobile-label {
     .property-card .type .type-block span {
         display: none;
     }
+    .property-card .type .type-block:not(:last-of-type) {
+        text-align: center;
+    }
+    .property-card .type .type-block {
+        text-align: left;
+    }
+    .property-card .type .title:not(:last-of-type) {
+        text-align: center;
+    }
 }
 @media (max-width: 1020px) {
     footer#main-footer a.footer-logo {
@@ -2155,7 +2171,7 @@ label.mobile-label {
     }
     .list-content {
         padding-top: 29px;
-        padding-bottom: 30px;
+        padding-bottom: 59px;
     }
     .list-content h1 {
         font-size: 24px;
@@ -2258,6 +2274,12 @@ label.mobile-label {
     }
     .head-logo .logo-mobile {
         display: block;
+    }
+    .load-more .btn {
+        bottom: -68px;
+    }
+    .list-content .communication {
+        top: 30px !important;
     }
 }
 @media (max-width: 840px) {
@@ -2524,16 +2546,17 @@ label.mobile-label {
         font-size: 15px;
     }
     .property-card-slider {
-        min-width: 82px;
-        max-width: 82px;
+        min-width: 96px;
+        max-width: 96px;
     }
     .property-card-slider > div {
-        min-width: 82px;
-        max-width: 82px;
+        min-width: 96px;
+        max-width: 96px;
     }
     .property-card .night {
-        padding-left: 118px;
-        bottom: 9px;
+        padding-left: 129px;
+        bottom: 16px;
+        align-items: flex-end;
     }
     .property-card .data {
         margin-right: 0;
@@ -2635,6 +2658,19 @@ label.mobile-label {
     }
     .list-content .property.show-map .property-card .property-card-container {
         flex-direction: column;
+    }
+    .load-more .btn {
+        bottom: -78px;
+    }
+    .list-content {
+        padding-bottom: 69px;
+    }
+    .list-content .link-block {
+        width: 100%;
+        text-align: center;
+    }
+    .list-content .link-block .shadow-block {
+        max-width: none;
     }
 }
 @media (max-width: 420px) {
