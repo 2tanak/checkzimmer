@@ -95,10 +95,7 @@
         id: 0,
         name: '',
         picture: '',
-        feature_category: {
-            id: 0,
-            name: ''
-        }
+        feature_category: {}
     };
 
     export default {
@@ -109,9 +106,7 @@
             return {
                 cats: '',
                 loading: true,
-                categoriesTemp: [
-
-                ],
+                categoriesTemp: [],
                 features: [],
                 fields: ['id', 'feature_category', 'picture', 'name', 'edit', 'delete'],
                 data: featuresForm,
@@ -120,7 +115,7 @@
                 textOperation: '',
                 newCat: '',
                 editFeature: '',
-                deleteFeature: ''
+                deleteFeature: '',  
             }
         },
         created() {
@@ -142,9 +137,7 @@
 
             getCategories() {
                 let cats = [];
-                if (this.features.length) {
-                    return cats;
-                }
+
                 this.features.forEach( item => {
                     if (item.feature_category && cats.indexOf( item.feature_category.name ) === -1 ) {
                         cats.push(item.feature_category.name);
@@ -166,13 +159,12 @@
                 this.editFeature.feature_category.name = this.cats;
                 this.data.category.options = this.getCategories().concat(this.categoriesTemp);
                 this.editFeature.category = this.data.category.options.indexOf(this.editFeature.feature_category.name);
-
             },
 
             featureEdit(data) {
                 this.editFeature = { ...data.item };
                 this.data.category.options = this.getCategories().concat(this.categoriesTemp);
-                this.editFeature.category = this.data.category.options.indexOf(this.editFeature.feature_category.name);
+                this.editFeature.category = this.editFeature.feature_category.name;
             },
 
             featureDelete(data) {
@@ -195,19 +187,32 @@
             },
 
             featureAddOk() {
+                let cat = 0;
+
                 this.editFeature.feature_category.name = this.editFeature.name;
                 this.editFeature.feature_category.id = this.editFeature.category;
-                this.editFeature.feature_category.picture = this.editFeature.picture;
-                console.log(this.editFeature.feature_category);
+                
+                if (this.editFeature.picture.data !== undefined) {
+                    this.editFeature.feature_category.picture = this.editFeature.picture.data.image;
+                } else {
+                    this.editFeature.feature_category.picture = this.editFeature.picture;
+                }
+
+                if (this.editFeature.category > 0) {
+                    cat = this.editFeature.category;
+                } else {
+                    cat = this.editFeature.feature_category_id;
+                }
+
                 this.features.push(this.editFeature);
                 
                 let data = {
                     'name' : this.editFeature.feature_category.name,
-                    'category' : this.editFeature.feature_category.id,
-                    'picture' : this.editFeature.feature_category.picture
+                    'category' : cat,
+                    'image' : this.editFeature.feature_category.picture
                 };
 
-                features.update(this.deleteFeature.id, data)
+                features.update(this.editFeature.id, data)
                     .then(response => {
                         if(response.data.code == 'ok') {
                             this.textOperation = 'удален';

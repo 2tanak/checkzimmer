@@ -8,6 +8,7 @@
                 <b-form-file
                     v-if="item.type === 'file'"
                     v-model="fileObj"
+                    v-on:change="onFileChanged"
                     :state="Boolean(fields[ind])"
                     placeholder="Choose a file or drop it here..."
                     drop-placeholder="Drop file here..."
@@ -36,9 +37,26 @@
         data() {
             return {
                 fileObj: null,
+                selectedFile: null
             }
         },
         methods: {
+
+        onFileChanged (event) {
+            let that = this;
+            this.selectedFile = event.target.files[0];
+            
+            const formData = new FormData();
+            formData.append('image', this.selectedFile, this.selectedFile.name);
+
+            axios({
+              method: 'post',
+              url: '/image-upload',
+              data: formData
+            }).then(function (response) {
+                that.fields.picture = response;
+            });
+        },
 
         },
         computed: {

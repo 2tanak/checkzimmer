@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\ImageUploadRequest;
 use App\Services\ImageService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ImageUploadController
 {
@@ -28,10 +29,12 @@ class ImageUploadController
      * @param ImageUploadRequest $request
      * @return JsonResponse
      */
-    public function imageUploadPost(ImageUploadRequest $request): JsonResponse
+    public function imageUploadPost(Request $request): JsonResponse
     {
+
         $image = $this->imageService->storeImage($request->image);
-        return response()->json(['image' => $image]);
+
+        return response()->json(['image' => str_replace("/public", "", $image)]);
 
     }
 }

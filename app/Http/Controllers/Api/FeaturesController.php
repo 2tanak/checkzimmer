@@ -12,6 +12,7 @@ class FeaturesController extends Controller
     
     function show($id) {
         $feature = static::get($id);
+        
         return response()->json( $feature->pluck('value', 'key', 'id') );
     }
     
@@ -20,9 +21,18 @@ class FeaturesController extends Controller
     }
     
     function update(Request $request, $id) {
-        var_dump($request->all());
-        exit;
-      //  Feature::find($id)->update(['response' => $request->answer]);
+        $data = [
+            'feature_category_id'   => $request->category,
+            'picture'               => $request->image,
+            'name'                  => $request->name
+        ];
+        
+        if (!empty(Feature::find($id)->first())) {
+            Feature::find($id)->update($data);
+        } else {
+            Feature::create($data);
+        }
+      
         return response()->json(['code' => 'ok']);
     }
     

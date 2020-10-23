@@ -7,6 +7,8 @@ class Feature extends Model {
     static $optionType = 'feature';
     private static $identifier = 'id';
     private static $children = ['feature_category'];
+    protected $fillable = ['feature_category_id', 'picture', 'name'];
+
     use noCRUD;
 
     function feature_category() {
