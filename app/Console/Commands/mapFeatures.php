@@ -12,7 +12,7 @@ use Illuminate\Console\Command;
  *
  * @package App\Console\Commands
  */
-class updateBookingProperties extends Command
+class mapFeatures extends Command
 {
     /**
      * The name and signature of the console command.
