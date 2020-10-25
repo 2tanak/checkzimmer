@@ -182,10 +182,10 @@
                                     </table>
                                     <div class="night">
                                         <a href="#" class="favorites">
-                                            <svg class="favorites-usual" width="12" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg class="favorites-usual" width="12" height="11" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M11.6211 5.98172C12.6977 4.8747 12.6977 3.07667 11.6211 1.96965C10.5487 0.867074 8.8134 0.867074 7.74102 1.96965L7.20482 2.52096C7.09263 2.6363 6.90737 2.6363 6.79518 2.52096L6.25898 1.96965C5.1866 0.867074 3.45132 0.867074 2.37895 1.96965C1.30226 3.07667 1.30226 4.8747 2.37895 5.98172L7 10.7329L11.6211 5.98172ZM7.33139 1.57124C8.62813 0.237973 10.7339 0.237973 12.0307 1.57124C13.3231 2.90006 13.3231 5.05131 12.0307 6.38013L7.20482 11.3419C7.09263 11.4573 6.90737 11.4573 6.79518 11.3419L1.96932 6.38013C0.676895 5.05131 0.676895 2.90006 1.96932 1.57124C3.26606 0.237973 5.37187 0.237973 6.66861 1.57124L7 1.91196L7.33139 1.57124Z" fill="#333646" stroke="#333646" stroke-width="0.2"/>
                                             </svg>
-                                            <svg class="favorites-active" width="14" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg class="favorites-active" width="14" height="11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M12.1 1.5c-.6-.7-1.5-1-2.4-1-.9 0-1.8.4-2.4 1l-.3.3-.3-.3C6.1.8 5.2.5 4.3.5c-.9 0-1.8.4-2.4 1C.6 2.9.6 5.1 1.9 6.4l4.8 5c.1.1.2.1.3.1.1 0 .2 0 .3-.1l4.8-5c1.3-1.3 1.3-3.5 0-4.9z" fill="#EE483F"/>
                                             </svg>
                                         </a>
@@ -215,9 +215,6 @@
                                     </div>
                                 </div>
 
-                            </div>
-                            <div class="load-more">
-                                <div class="btn btn-success" v-if="additional_load" @click.prevent="loadMore">Загрузить еще</div>
                             </div>
                         </div>
                         </transition>
@@ -287,7 +284,10 @@
                 </div>
 
                 <transition name="fade">
-                <div class="communication" style="top:100px;position:relative;">
+                <div class="communication not-active" style="top:34px;position:relative;">
+                    <div class="load-more">
+                        <div class="btn btn-success" v-if="additional_load" @click.prevent="loadMore">Загрузить еще</div>
+                    </div>
                     <div class="description">
                         Предложения по вашему запросу закончились, увеличьте дистанцию или свяжитесь с менежером напрямую
                     </div>
@@ -378,23 +378,198 @@ export default{
             }
 
             let map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 51.340000, lng: 12.382000},
-                zoom: 8
+                center: {lat: 51.340654, lng: 12.375411},
+                disableDefaultUI: true,
+                zoom: 15,
+                styles: [
+                    {
+                        "featureType": "administrative.province",
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    },
+            {
+                "featureType": "administrative.locality",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                {
+                    "color": "#a8aeb6"
+                }
+            ]
+            },
+            {
+                "featureType": "administrative.neighborhood",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                {
+                    "color": "#a8aeb6"
+                }
+            ]
+            },
+            {
+                "featureType": "administrative.land_parcel",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                {
+                    "color": "#a8aeb6"
+                }
+            ]
+            },
+            {
+                "featureType": "poi.attraction",
+                "elementType": "all",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+            },
+            {
+                "featureType": "poi.business",
+                "elementType": "all",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+            },
+            {
+                "featureType": "poi.government",
+                "elementType": "all",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+            },
+            {
+                "featureType": "poi.medical",
+                "elementType": "all",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+            },
+            {
+                "featureType": "poi.park",
+                "elementType": "geometry.fill",
+                "stylers": [
+                {
+                    "color": "#c2e5a7"
+                }
+            ]
+            },
+            {
+                "featureType": "poi.place_of_worship",
+                "elementType": "all",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+            },
+            {
+                "featureType": "poi.school",
+                "elementType": "all",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+            },
+            {
+                "featureType": "poi.sports_complex",
+                "elementType": "all",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                {
+                    "color": "#a8aeb6"
+                }
+            ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "geometry.fill",
+                "stylers": [
+                {
+                    "color": "#e1e4e6"
+                }
+            ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                {
+                    "color": "#c4cfd6"
+                }
+            ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "labels.icon",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+            },
+            {
+                "featureType": "transit.station.airport",
+                "elementType": "all",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+            },
+            {
+                "featureType": "transit.station.bus",
+                "elementType": "all",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+            },
+            {
+                "featureType": "transit.station.rail",
+                "elementType": "all",
+                "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+            }
+        ]
             });
+            map.setOptions({styles: styles});
 
             properties.request('initMap')
                 .then( resp => {
                     var myTrip = resp.data.coords;
-                    
-                    for (var i = 0; i < myTrip.length; i++) {  
+
+                    for (var i = 0; i < myTrip.length; i++) {
                       var marker = new google.maps.Marker({
                         position: new google.maps.LatLng(myTrip[i].lat, myTrip[i].lng),
                         map: map
                       });
                     }
-                
+
                     marker.setMap(map);
-            })    
+            })
         }
 
         initMap();
@@ -402,8 +577,8 @@ export default{
     created() {
         if (this.$route.query.search !== '') {
             this.search.address = this.$route.query.search;
-            this.submitForm(); 
-        }	
+            this.submitForm();
+        }
     },
     updated: function () {
 
