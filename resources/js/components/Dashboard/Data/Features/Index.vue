@@ -66,6 +66,18 @@
             <span class="text-danger">A you sure you want to delete feature <strong>{{ deleteFeature.name}}</strong>
                 in <strong>{{ deleteFeature.feature_category ? deleteFeature.feature_category.name : ''}}</strong> category?</span>
         </b-modal>
+
+        <div class="row mt-5">
+            <div class="col-md-12">
+
+                <b-alert dismissible v-model="operationOk" variant="success">
+                    {{ textOperation}}
+                </b-alert>
+                <b-alert dismissible v-model="operationError" variant="danger">
+                    {{ textOperation}}
+               </b-alert>
+            </div>
+        </div>
     </section>
 </template>
 
@@ -83,10 +95,7 @@
         id: 0,
         name: '',
         picture: '',
-        feature_category: {
-            id: 0,
-            name: ''
-        }
+        feature_category: {}
     };
 
     export default {
@@ -97,15 +106,16 @@
             return {
                 cats: '',
                 loading: true,
-                categoriesTemp: [
-
-                ],
+                categoriesTemp: [],
                 features: [],
                 fields: ['id', 'feature_category', 'picture', 'name', 'edit', 'delete'],
                 data: featuresForm,
+                operationOk : false,
+                operationError : false,
+                textOperation: '',
                 newCat: '',
                 editFeature: '',
-                deleteFeature: ''
+                deleteFeature: '',  
             }
         },
         created() {
@@ -124,11 +134,10 @@
                 }
                 return {};
             },
+
             getCategories() {
                 let cats = [];
-                if (this.features.length) {
-                    return cats;
-                }
+
                 this.features.forEach( item => {
                     if (item.feature_category && cats.indexOf( item.feature_category.name ) === -1 ) {
                         cats.push(item.feature_category.name);
@@ -136,6 +145,7 @@
                 });
                 return cats;
             },
+
             catInput(e) {
                 if (e.key === 'Enter') {
                     this.categoriesTemp.push( this.newCat );
@@ -143,29 +153,75 @@
                     this.newCat = '';
                 }
             },
+
             featureNew() {
                 this.editFeature = { ...newFeature };
                 this.editFeature.feature_category.name = this.cats;
                 this.data.category.options = this.getCategories().concat(this.categoriesTemp);
                 this.editFeature.category = this.data.category.options.indexOf(this.editFeature.feature_category.name);
-
             },
+
             featureEdit(data) {
                 this.editFeature = { ...data.item };
                 this.data.category.options = this.getCategories().concat(this.categoriesTemp);
-                this.editFeature.category = this.data.category.options.indexOf(this.editFeature.feature_category.name);
+                this.editFeature.category = this.editFeature.feature_category.name;
             },
+
             featureDelete(data) {
                 this.deleteFeature = { ...data.item }
             },
+
             featureDeleteOk() {
-                let index = this.featureList.findIndex( (elem, index, arr) => elem.id === this.deleteFeature.id);
-                this.featureList.splice(index, 1);
+                features.delete(this.deleteFeature.id)
+                    .then(response => {
+                        if(response.data.code == 'ok') {
+                            this.textOperation = 'удален';
+                            this.operationOk = true;
+                             let index = this.featureList.findIndex( (elem, index, arr) => elem.id === this.deleteFeature.id);
+                             this.featureList.splice(index, 1);
+                        } else {
+                            this.textOperation = 'Ошибка удаления';
+                            this.operationError = true;
+                        } 
+                });
             },
+
             featureAddOk() {
+                let cat = 0;
+
                 this.editFeature.feature_category.name = this.editFeature.name;
                 this.editFeature.feature_category.id = this.editFeature.category;
+                
+                if (this.editFeature.picture.data !== undefined) {
+                    this.editFeature.feature_category.picture = this.editFeature.picture.data.image;
+                } else {
+                    this.editFeature.feature_category.picture = this.editFeature.picture;
+                }
+
+                if (this.editFeature.category > 0) {
+                    cat = this.editFeature.category;
+                } else {
+                    cat = this.editFeature.feature_category_id;
+                }
+
                 this.features.push(this.editFeature);
+                
+                let data = {
+                    'name' : this.editFeature.feature_category.name,
+                    'category' : cat,
+                    'image' : this.editFeature.feature_category.picture
+                };
+
+                features.update(this.editFeature.id, data)
+                    .then(response => {
+                        if(response.data.code == 'ok') {
+                            this.textOperation = 'удален';
+                            this.operationOk = true;
+                        } else {
+                            this.textOperation = 'Ошибка удаления';
+                            this.operationError = true;
+                        } 
+                });
             }
         },
         computed: {
