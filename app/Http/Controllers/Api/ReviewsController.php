@@ -11,15 +11,21 @@ use Illuminate\Support\Str;
 
 class ReviewsController extends Controller
 {
-    function index(PropertyListRequest $request)
+    function index()
     {
-        $objects = Reviews::indPaginated();
-       
-        return response()->json(['objects' => $objects]);
+       return response()->json( Reviews::all() );
     }
 
-    function destroy(Property $property) {
-
+    function destroy($id) {
+        Reviews::find($id)->delete();
+        
+        return response()->json(['code' => 'ok']);
+    }
+    
+    function update(Request $request, $id) {
+       Reviews::find($id)->update(['status' => $request->status]);
+       
+       return response()->json(['code' => 'ok']);
     }
 
     function create(Request $request) {

@@ -19,9 +19,9 @@
                                 <template v-slot:cell(created_at)="data">
                                     {{ data.item.created_at }}
                                 </template>
-                                <template v-slot:cell(rating)="data">
+                                <template v-slot:cell(raiting)="data">
                                     <div class="d-flex align-items-center">
-                                        <img src="/svg/star-yellow.svg" v-for="star in data.item.rating">
+                                        <img src="/svg/star-yellow.svg" v-for="star in data.item.raiting">
                                     </div>
                                 </template>
                                 <template v-slot:cell(name)="data">
@@ -33,15 +33,15 @@
                                 <template v-slot:cell(title)="data">
                                     {{ data.item.title }}
                                 </template>
-                                <template v-slot:cell(review)="data">
-                                    {{ data.item.review }}
+                                <template v-slot:cell(description)="data">
+                                    {{ data.item.description }}
                                 </template>
                                 <template v-slot:cell(publish)="data">
-                                    <b-button variant="success" v-b-modal.reviewsModal @click="showReviews(data.item)" v-if=" data.item.status === 'waiting' ">Опубликовать</b-button>
-                                    <b-button variant="outline-primary" v-b-modal.withdrawReviewModal @click="withdrawReview(data.item)" v-else>Отозвать</b-button>
+                                    <b-button variant="success" @click="showReviews(data.item, 1)" v-if=" data.item.status === 2 ">Опубликовать</b-button>
+                                    <b-button variant="outline-primary" @click="withdrawReview(data.item, 2)" v-else>Отозвать</b-button>
                                 </template>
                                 <template v-slot:cell(delete)="data">
-                                    <b-button variant="danger" v-b-modal.deleteReviewModal @click='deleteReview(data.item)'>Удалить</b-button>
+                                    <b-button variant="danger" @click='deleteReview(data.item)'>Удалить</b-button>
                                 </template>
                                 <template v-slot:table-busy>
                                     <div class="text-center text-danger my-2">
@@ -85,10 +85,27 @@
             <div><span class="mr-2"><strong>Text review:</strong></span> {{ activeReview.review }}</div>
         </b-modal>
 
+        <div class="row mt-5">
+            <div class="col-md-12">
+
+                <b-alert dismissible v-model="operationOk" variant="success">
+                    {{ textOperation}}
+                </b-alert>
+                <b-alert dismissible v-model="operationError" variant="danger">
+                    {{ textOperation}}
+                </b-alert>
+            </div>
+        </div>
+
     </section>
 </template>
 
 <script>
+import ApiRequest from '../../../API/ApiRequest';
+import Forms from '../../../Forms';
+
+let ReviewsRequest = ApiRequest('reviews');
+let reviewsData = new ReviewsRequest;
 
 export default {
     name: "Index",
@@ -102,12 +119,11 @@ export default {
                 { value: 'c', text: 'Не опубликованные' }
             ],
             reviews: [],
-            fields: ['created_at', 'rating', 'name', 'company', 'title', 'review', 'publish', 'delete'],
-            reviewList: [
-                { id: 1, status: 'published', created_at: '01.01.2020', rating: 1 , name: 'Иван', company: 'Билайн', title: 'Заголовок', review: 'Текст отзыва' },
-                { id: 2, status: 'published', created_at: '02.02.2020', rating: 2, name: 'Сергей', company: 'МТС', title: 'Заголовок2', review: 'Текст отзыва 2' },
-                { id: 3, status: 'waiting', created_at: '03.03.2020', rating: 3,  name: 'Дмитрий', company: 'Йота', title: 'Заголовок3', review: 'Текст отзыва 3' }
-            ],
+            operationOk : false,
+            operationError : false,
+            textOperation: '',
+            fields: ['created_at', 'raiting', 'name', 'company', 'title', 'description', 'publish', 'delete'],
+            reviewList: [],
             activeReview: {
                 id: 0,
                 status: '',
@@ -121,18 +137,54 @@ export default {
         }
     },
     created() {
+        reviewsData.all()
+            .then(resp => {
+                this.reviewList = resp.data;
+            })
     },
     mounted() {
     },
+
     methods: {
         deleteReview(item) {
-            this.activeReview = item;
+            reviewsData.delete(item.id)
+                .then(response => {
+                    if(response.data.code == 'ok') {
+                        this.textOperation = 'удален';
+                        this.operationOk = true;
+                        let index = this.reviewList.findIndex( (elem, index, arr) => elem.id === item.id);
+                        this.reviewList.splice(index, 1);
+                    } else {
+                        this.textOperation = 'Ошибка удаления';
+                        this.operationError = true;
+                    } 
+            });
         },
         showReviews(item) {
-            this.activeReview = item;
+             let data = {'status' : status};
+            reviewsData.update(item.id, data)
+                .then(response => {
+                    if(response.data.code == 'ok') {
+                        this.textOperation = 'Опубликован';
+                        this.operationOk = true;
+                    } else {
+                        this.textOperation = 'Ошибка';
+                        this.operationError = true;
+                    } 
+            });
         },
-        withdrawReview(item) {
-            this.activeReview = item;
+        withdrawReview(item, status) {
+            let data = {'status' : status};
+            reviewsData.update(item.id, data)
+                .then(response => {
+                    if(response.data.code == 'ok') {
+                        this.textOperation = 'Отозван';
+                        this.operationOk = true;
+                    } else {
+                        this.textOperation = 'Ошибка';
+                        this.operationError = true;
+                    } 
+            });
         },
         handleOk() {
             let index = this.reviewList.find( (elem, index, arr) => elem.id === this.activeReview.id);
@@ -150,6 +202,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+
+.table td, .table th {
+    white-space: normal !important;
+}
 
 </style>
