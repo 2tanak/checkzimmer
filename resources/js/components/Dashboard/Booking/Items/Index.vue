@@ -27,7 +27,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <b-button variant="info" class="float-right" @click.prevent="loadHotels">Загрузить отели</b-button>
-                    <b-button v-if="this.hotels.length" variant="success" class="mr-2" @click.prevent="importHotels">Импортировать</b-button>
+                    <b-overlay :show="importLoader" rounded opacity="0.6" spinner-small spinner-variant="danger" class="d-inline-block">
+                        <b-button v-if="this.hotels.length" variant="success" class="mr-2" @click.prevent="importHotels">Импортировать</b-button>
+                    </b-overlay>
                     <!--<b-button variant="light" @click.prevent="loadTypes">Загрузить типы </b-button>-->
                 </div>
             </div>
@@ -172,6 +174,9 @@
                 </div>
             </div>
         </div>
+
+        <b-modal id="import-success" title="Импорт объектов"><strong>Импортирование завершено</strong></b-modal>
+
     </section>
 </template>
 
@@ -261,7 +266,8 @@
                     }
                 ],
                 hotels: [],
-                loading: false
+                loading: false,
+                importLoader: false
             }
         },
         mounted() {
@@ -383,8 +389,13 @@
                 return str[type];
             },
             importHotels() {
+                this.importLoader = true;
                 let hotelsToImport = this.hotels.filter( item => item.tbi === true);
-                hotelsAPI.create({ ...hotelsToImport });
+                hotelsAPI.create({...hotelsToImport}).then(resp => {
+                    this.importLoader = false;
+                    this.$bvModal.show('import-success');
+                })
+
             }
         },
         computed: {
