@@ -13,7 +13,6 @@ class ImageService
         $imageName = time().'-'.Str::random(5).'.'.$uploadedFile->extension();
         $file = $uploadedFile->move(public_path('images/uploaded/'.date('Y/m/d')), $imageName);
         return $this->preparePublicImageUrl($file->getRealPath());
-
     }
 
     public function preparePublicImageUrl(string $url)
