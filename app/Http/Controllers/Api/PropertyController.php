@@ -28,7 +28,12 @@ class PropertyController extends Controller
 
     function index(PropertyListRequest $request)
     {
-        $objects = Property::indPaginated();
+        if (!$request->query('page')) {
+            $objects = Property::ind();
+        } else {
+            $objects = Property::indPaginated();
+        }
+
         foreach($objects as $key => $object) {
             $ratings = $object->rating->toArray();
             $count = count($object->rating) ?: 1;
