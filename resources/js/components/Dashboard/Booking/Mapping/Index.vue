@@ -17,7 +17,7 @@
                         </div>
                         <div class="row pb-4" v-for="(row, i) in mappingFeatureRows">
                             <div class="col-md-12 col-lg-6 mt-4">
-                                <b-select v-model="mappingFeatureRows[i].mapping_booking_feature_select">
+                                <b-select v-model="mappingFeatureRows[i].booking">
                                     <b-select-option value="">Ничего не выбрано</b-select-option>
                                     <b-select-option v-for="item in featureBookingList" :value="item ?  item.native_id : 0" >
                                         {{ item ? item.name : '' }}
@@ -25,7 +25,7 @@
                                 </b-select>
                             </div>
                             <div class="col-md-12 col-lg-6 mt-4">
-                                <b-select v-model="mappingFeatureRows[i].mapping_site_feature_select">
+                                <b-select v-model="mappingFeatureRows[i].site">
                                     <b-select-option value="">Ничего не выбрано</b-select-option>
                                     <b-select-option v-for="item in featuresSite" :value="item.id">{{ item.name }}</b-select-option>
                                 </b-select>
@@ -56,7 +56,7 @@
                         </div>
                         <div class="row pb-4" v-for="(row, i) in mappingHousingRows">
                             <div class="col-md-12 col-lg-6 mt-4">
-                                <b-select v-model="mappingHousingRows[i].mapping_booking_housing_select">
+                                <b-select v-model="mappingHousingRows[i].booking">
                                     <b-select-option value="">Ничего не выбрано</b-select-option>
                                     <b-select-option v-for="item in housingBooking" :value="item ? item.native_id : ''">
                                         {{ item ? item.name : '' }}
@@ -64,7 +64,7 @@
                                 </b-select>
                             </div>
                             <div class="col-md-12 col-lg-6 mt-4">
-                                <b-select v-model="mappingHousingRows[i].mapping_site_housing_select">
+                                <b-select v-model="mappingHousingRows[i].site">
                                     <b-select-option value="">Ничего не выбрано</b-select-option>
                                     <b-select-option v-for="item in housingSite" :value="item.id">
                                         {{ item.name }}
@@ -129,10 +129,10 @@ export default {
             ],
 
             mappingFeatureRows: [
-                { mapping_booking_feature_select: '', mapping_site_feature_select: '' }
+                { booking: '', site: '' }
             ],
             mappingHousingRows: [
-                { mapping_booking_housing_select: '', mapping_site_housing_select: '' }
+                { booking: '', site: '' }
             ]
         }
     },
@@ -164,14 +164,14 @@ export default {
     methods: {
         addRowFeature() {
             this.mappingFeatureRows.push({
-                mapping_booking_feature_select: '',
-                mapping_site_feature_select: ''
+                booking: '',
+                site: ''
             });
         },
         addRowHousing() {
             this.mappingHousingRows.push({
-                mapping_booking_housing_select: '',
-                mapping_site_housing_select: ''
+                booking: '',
+                site: ''
             });
         },
         save() {
@@ -187,7 +187,7 @@ export default {
     },
     computed: {
         featureBookingList() {
-            // let featuresSelected = this.mappingFeatureRows.map( item => item.mapping_booking_feature_select );
+            // let featuresSelected = this.mappingFeatureRows.map( item => item.booking );
 
             if (this.featuresBooking.root.length === 0) {
                 return [{name: '', native_id: ''}];

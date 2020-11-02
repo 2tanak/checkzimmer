@@ -57,25 +57,25 @@ class PropertyController extends Controller
         }
         return response()->json(['objects' => $objects, 'coords' => $geo_data]);
     }
-    
+
     function querySort (Request $request){
         $data = $request->input();
-        
+
         $objects = Property::orderBy($data['field'], $data['sort'])->paginate(20);
 
         return response()->json(['objects' => $objects, 'coords' => null]);
     }
-    
+
     function initMap(){
         $coords = [];
-                
+
         foreach (Property::paginate(100) as $object) {
             $coords[] = [
                 'lat' => $object->lat,
                 'lng' => $object->lng,
             ];
         }
-        
+
         return response()->json(['coords' => $coords]);
     }
 

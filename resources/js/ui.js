@@ -433,7 +433,7 @@ jQuery(window).scroll( function() {
 jQuery(window).on("load resize", function(){
     if (jQuery(window).width() <= 1040) {
         jQuery('.property-card-slider').filter('.slick-initialized').slick('unslick');
-    } else {
+    } else if (jQuery('.property-card-slider').length) {
         jQuery('.property-card-slider').slick({
             infinite: true,
             slidesToShow: 1,
