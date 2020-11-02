@@ -6,6 +6,7 @@ use App\Option;
 use Exception;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Facades\Schema;
 
 class BookingApiService
 {
@@ -32,6 +33,9 @@ class BookingApiService
      */
     private function getCredentials(): void
     {
+        if (!Schema::hasTable(app(Option::class)->getTable())) {
+            return;
+        }
         $options = Option::params(['type'=> 'system'])->pluck('value', 'key');
         if (!($options['booking_login'] ?? '') || !($options['booking_password'] ?? '') || !($options['booking_url'] ?? '')) {
             throw new Exception('Booking auth data not found');
