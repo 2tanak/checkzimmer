@@ -227,7 +227,11 @@ export default {
             return max + ' человек';
         },
         minRoomPrice() {
-            return Math.floor(Math.min( ...this.item.rooms.map( elem => elem.price ).filter( elem => elem > 0) ));
+            let prices = this.item.rooms.map( elem => elem.price ).filter( elem => elem > 0);
+            if (prices.length === 0) {
+                return 0
+            }
+            return Math.floor(Math.min( ...prices ));
         },
         getPhotos() {
             let photos = this.findOption('photos');

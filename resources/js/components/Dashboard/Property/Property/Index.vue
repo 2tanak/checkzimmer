@@ -1,6 +1,6 @@
 <template>
     <section class="header-dashboard">
-        <h1>Комнаты</h1>
+        <h1>Объекты</h1>
         <div class="row mt-4">
             <div class="col-md-6 grid-margin">
                 <div class="card">
@@ -125,7 +125,7 @@
         created() {
             properties.all()
                 .then(resp => {
-                    this.property = resp.data.data;
+                    this.property = resp.data.objects;
                 })
             types.all()
                 .then(resp => {
@@ -182,7 +182,7 @@
             },
             hotelNew() {
                 this.hotelNewData = { ...this.hotelDefault }
-            },    
+            },
             //helpers
             clearModalErrors() {
                 var errText = document.querySelectorAll('.errText');
