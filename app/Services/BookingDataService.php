@@ -380,15 +380,26 @@ class BookingDataService
         $room->save();
         return $room;
     }
-    private function mapFeatures($hotel) {
+    static function getFeaturesMap() {
         $mapFeatures = Option::where('key', 'mapping_features')->first();
+        $mapBtS = [];
         if ($mapFeatures) {
             $mapFeatures = json_decode($mapFeatures, true);
-            foreach ($hotel->features as $item) {
-
+            foreach ($mapFeatures as $item) {
+                $mapBtS[$item['booking']] = $item['site'];
             }
         }
-
-
+        return $mapBtS;
+    }
+    static function getHouseMap() {
+        $mapFeatures = Option::where('key', 'mapping_housing')->first();
+        $mapBtS = [];
+        if ($mapFeatures) {
+            $mapFeatures = json_decode($mapFeatures, true);
+            foreach ($mapFeatures as $item) {
+                $mapBtS[$item['booking']] = $item['site'];
+            }
+        }
+        return $mapBtS;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Services\BookingDataService;
 use App\Traits\noCRUD;
 use App\Traits\propertyFeatures;
 use Illuminate\Database\Eloquent\Model;
@@ -94,6 +95,29 @@ class Property extends Model
         return $this->hasMany(Rating::class, 'property_id', 'id');
     }
 
+    public function featuresMap() {
+        $features = Option::where('type', 'property')->where('parent', $this->id)->where('key', 'features')->first();
+        if (!$features) {
+            return [];
+        }
+        $mappedFeatures = [];
+        $map = BookingDataService::getFeaturesMap();
+        foreach ($features as $item) {
+            if (!isset($map[$item['native_id']])) {
+                continue;
+            }
+            $mappedFeatures[] = $map[$item['native_id']];
+        }
+        return $mappedFeatures;
+    }
+    public function hotelTypesMap() {
+        $types = Option::where('type', 'property')->where('parent', $this->id)->where('key', 'hotel_type')->first();
+        if (!$types) {
+            return [];
+        }
+        $map = BookingDataService::getHouseMap();
+        return $map[$types['native_id']] ?? false;
+    }
     public static function getTotalNumberObjects($type) {
         if ($type) {
             return self::count();

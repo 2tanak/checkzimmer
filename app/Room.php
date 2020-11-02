@@ -38,6 +38,14 @@ class Room extends Model
         }
         return 'none';
     }
+    function getPersonsText() {
+        if ($this->person == 1) {
+            return 'одноместная';
+        } elseif ($this->person == 2) {
+            return 'двухместная';
+        }
+        return 'на много мест';
+    }
     static function getBedroomType($bedrooms) {
         if (count($bedrooms) == 0) {
             return 'none';

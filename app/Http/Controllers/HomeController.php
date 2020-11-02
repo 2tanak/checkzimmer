@@ -27,7 +27,7 @@ class HomeController extends Controller
     public function index()
     {
         $options = Option::where('type', 'system')->get()->pluck('value', 'key');
-        
+
         return view('home', compact('options'));
     }
     public function dashboard() {
@@ -48,10 +48,10 @@ class HomeController extends Controller
         $hotel->views++;
         $hotel->save();
         $options = $hotel->options->toArray();
-        
+
         if (count($hotel->rating) > 0) {
-             $hotel->rate = array_reduce( $hotel->rating->toArray(), function($carry, $item) { 
-                return $carry + $item['rating']; 
+             $hotel->rate = array_reduce( $hotel->rating->toArray(), function($carry, $item) {
+                return $carry + $item['rating'];
             } ) / count($hotel->rating);
         }
 
@@ -59,11 +59,11 @@ class HomeController extends Controller
         $questions = $hotel->questions;
         $reviews = $hotel->reviews;
 
-        return view('single', compact('hotel','rooms','questions','reviews', 'paginate'));
+        return view('single', compact('hotel','rooms','questions','reviews'));
     }
     public function favorites()
     {
         return view('favorites');
     }
-    
+
 }
