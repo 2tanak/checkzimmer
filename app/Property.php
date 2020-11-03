@@ -48,7 +48,6 @@ class Property extends Model
             $this->_photoMain = array_reduce( $photos, function($current, $item) { return ($item['main_photo'] ?? false) ? $item : $current; });
             $this->_photos = array_values(array_filter($photos, function($item) { return isset($item['main_photo']) ? false : true; }));
         }
-
         return $this->_photos;
     }
 
