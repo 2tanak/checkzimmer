@@ -1362,10 +1362,6 @@ footer#main-footer ul.footer-menu li a:active {
     position: relative;
     transition-duration: .4s;
 }
-/*.property-card-slider {
-    opacity: 0;
-}*/
-
 .tooltip .tooltip-inner {
     background-color: #333646;
     opacity: 0.94;
@@ -3758,7 +3754,6 @@ label.mobile-label {
     box-shadow: 0 0 14px rgba(51, 54, 70, 0.14);
     border-radius: 12px;
     min-width: 280px;
-    min-height: 428px;
     padding: 22px 16px;
     position: relative;
 }
@@ -3837,7 +3832,6 @@ label.mobile-label {
 }
 .single-content .sidebar .number-phone {
     width: 100%;
-    height: 54px;
     border: 1px solid #6BB63F;
     border-radius: 6px;
     display: flex;
@@ -3941,6 +3935,27 @@ label.mobile-label {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 21px;
+}
+.single-content .sidebar .number-phone.not-phone {
+    text-align: center;
+    border: 0;
+    margin-bottom: 11px;
+}
+.single-content .sidebar .number-phone.not-phone .speaks {
+    width: 100%;
+    font-size: 15px;
+    line-height: 130%;
+    margin-bottom: 3px;
+    color: #545769;
+}
+.single-content .sidebar .number-phone.not-phone .language-item {
+    width: 100%;
+    font-size: 15px;
+    line-height: 130%;
+    color: #545769;
+}
+.single-content .sidebar .number-phone .language-item {
+    text-transform: uppercase;
 }
 .single-content .sidebar .address-map .address {
     width: 110px;
@@ -4846,10 +4861,7 @@ label.mobile-label {
     object-fit: cover;
 }
 .single-content .single-main-slider {
-    height: 0;
-    overflow: hidden;
-    opacity: 0;
-    margin-bottom: 0;
+    display: none;
 }
 .single-content .parameters .title.personen {
     padding: 0;
@@ -5030,6 +5042,7 @@ label.mobile-label {
     }
     .single-content .single-main-slider {
         height: 396px;
+        display: block;
     }
     .single-container {
         padding: 0;

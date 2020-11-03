@@ -37,6 +37,10 @@
                 <div class="language-item">EN, RU, DE</div>
             </div>
         </div>--}}
+        <div class="number-phone not-phone">
+            <div class="speaks">Владелец объекта говорит на:</div>
+            <div class="language-item">EN, RU, DE</div>
+        </div>
         <div class="address-map">
             <div class="address">{{$hotel->address}}<span></span> {{$hotel->zip}} {{$hotel->city}} </div>
             <div class="map-container">

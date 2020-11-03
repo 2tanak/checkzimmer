@@ -31,6 +31,10 @@
                 <div class="language-item">EN, RU, DE</div>
             </div>
         </div>
+        <div class="number-phone not-phone">
+            <div class="speaks">Владелец объекта говорит на:</div>
+            <div class="language-item">EN, RU, DE</div>
+        </div>
         <div class="address-map">
             <div class="address">DKN Immobilien <span>Anja Klepzigolf</span> Kolonnadenstr. 1 04109 Leipzig</div>
             <div class="map-container">
