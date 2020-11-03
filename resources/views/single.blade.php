@@ -10,7 +10,7 @@
                 <div class="main-block">
                     <div class="main-top-block">
                         @include('single.slider-single', ['hotel' => $hotel])
-                        @include('single.sidebar')
+                        @include('single.sidebar-modal')
                         @include('single.gallery', ['hotel' => $hotel])
 
                         <h1>{{ $hotel->name }}</h1>
@@ -30,7 +30,7 @@
             </div>
             <div class="right-part">
                 <div class="right-part-item">
-                    @include('single.sidebar-desktop')
+                    @include('single.sidebar')
                     @include('single.feedback')
                 </div>
             </div>
