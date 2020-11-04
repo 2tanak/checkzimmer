@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     @include('single.prices-appointments', ['hotel' => $hotel])
-                    @include('single.prices-appointments-modal', ['hotel' => $hotel])
+                    @include('single.prices-appointments-mobile', ['hotel' => $hotel])
                 </div>
                 @include('single.features', ['hotel' => $hotel])
                 @include('single.description', ['hotel' => $hotel, 'questions' => $questions, 'reviews' => $reviews])

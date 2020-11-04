@@ -1,5 +1,6 @@
 <div class="mobile-price-situation">
     <h2>Цены и обстановка</h2>
+    <div>
     <div class="position-collapse">
         <div class="visible-part" type="button" data-toggle="collapse" data-target="#position-collapse1" aria-expanded="false" aria-controls="position-collapse1">
             <div class="top-part">
@@ -690,6 +691,7 @@
             </div>
 
         </div>
+    </div>
     </div>
 
     <div class="bottom-text">

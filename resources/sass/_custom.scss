@@ -2963,11 +2963,11 @@ label.mobile-label {
     color: #8F98A2;
     white-space: nowrap;
 }
-.single-content .parameters .type-bed {
-    padding-left: 39px;
+.single-content .parameters .type {
+    padding-left: 34px;
 }
 .single-content .price-situation .titles .title.padding-left {
-    padding-left: 9px;
+    margin-left: -8px;
 }
 .single-content .top-bloc-collapse .top-bloc-collapse-item {
     height: 36px;
@@ -3030,20 +3030,7 @@ label.mobile-label {
     min-width: 7px;
     height: 7px;
 }
-.single-content .price-situation .shower-item-block-green,
-.single-content .price-situation .kitchen-item-block-green {
-    width: 54px;
-}
-.single-content .price-situation .shower-item-block-orange,
-.single-content .price-situation .kitchen-item-block-orange {
-    width: 97px;
-}
-.single-content .price-situation .type-bed-item-block-green {
-    width: 103px;
-}
-.single-content .price-situation .type-bed-item-block-orange {
-    width: 103px;
-}
+
 .single-content .price-situation .collapse-left-block,
 .single-content .price-situation .collapse-right-block {
     height: 36px;
@@ -3075,15 +3062,18 @@ label.mobile-label {
     width: 10px;
     z-index: 100;
 }
-.single-content .price-situation .collapse-content-line:first-of-type .name:before {
+.single-content .price-situation .collapse .name:before {
+    height: 32px;
+    top: -14px;
+    left: 38px;
+}
+.single-content .price-situation .top-bloc-collapse .collapse:nth-of-type(2) .name:before {
     height: 27px;
     top: -8px;
     left: 37px;
 }
-.single-content .price-situation .collapse-content-line:not(:first-of-type) .name:before {
-    height: 32px;
-    top: -14px;
-    left: 38px;
+.single-content .price-situation .collapse .collapse-content-line {
+    border-bottom: 1px solid #edeef0;
 }
 .single-content .price-situation .collapse-content-line .name img {
     margin-right: 5px;
@@ -3110,9 +3100,6 @@ label.mobile-label {
     line-height: 300%;
     color: #333646;
 }
-.single-content .price-situation .collapse-content-line .type-bed-item {
-    padding-left: 39px;
-}
 .single-content .price-situation .collapse-left-block {
     position: relative;
 }
@@ -3126,7 +3113,7 @@ label.mobile-label {
     background-color: #fff;
     z-index: 100;
 }
-.single-content .price-situation .bottom-text {
+.single-content .bottom-text {
     font-weight: 400;
     font-size: 13px;
     line-height: 150%;
@@ -5427,6 +5414,9 @@ label.mobile-label {
     .single-content .mobile-price-situation .position-collapse {
         border-bottom: 1px solid #e3e4e6;
     }
+    .single-content .mobile-price-situation .position-collapse:last-of-type {
+        border-bottom: 0;
+    }
     .single-content .mobile-price-situation .visible-part {
         padding: 20px 16px 0 16px;
         background: #F7F8FA;
@@ -5602,6 +5592,9 @@ label.mobile-label {
     }
     .slider-modal-overlay .big-slider .slider-item {
         height: 412px;
+    }
+    .single-content .bottom-text {
+        padding: 0 16px;
     }
 }
 @media (max-width: 680px) {
