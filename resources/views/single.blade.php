@@ -38,7 +38,14 @@
 
         <div class="fixed-bar">
             <a href="#" class="send-inquiry inquiry">Отправить запрос</a>
-            <a href="#" class="see-number-phone">Показать телефон</a>
+            <div class="see-number-phone">
+                <span class="number-phone-text">Показать телефон</span>
+                <a href="tel:+4917616573456" class="number-phone">+4917616573456</a>
+            </div>
+            <div class="not-phone">
+                <div class="speaks">Владелец объекта говорит на:</div>
+                <div class="language-item">en, de</div>
+            </div>
         </div>
 
         <div class="scroll-top">

@@ -316,7 +316,9 @@ jQuery(document).ready(function() {
         jQuery('.slider-modal-overlay').addClass('modal-show');
     });
 
-
+    jQuery('.see-number-phone').click(function () {
+       jQuery('.see-number-phone').addClass('active');
+    });
 
     jQuery('a.map-picture').bind("click", function(e){
         e.preventDefault();
@@ -391,6 +393,19 @@ jQuery(window).on('load', function() {
     }
 
     jQuery(window).scroll(function () {
+
+        var element = jQuery('#main-footer');
+        var counter = 0;
+
+        var scroll = jQuery(window).scrollTop() + jQuery(window).height();
+        var offset = element.offset().top;
+
+        if (scroll > offset && counter === 0) {
+            jQuery('.scroll-top').addClass('absolute');
+        } else {
+            jQuery('.scroll-top').removeClass('absolute');
+        }
+
         if (jQuery(this).scrollTop() > 300) {
             jQuery('.scroll-top').fadeIn();
         } else {
@@ -416,6 +431,21 @@ jQuery(window).on('load', function() {
 });
 
 jQuery(window).scroll( function() {
+
+    var element = jQuery('#main-footer');
+    let counter = 0;
+
+    var scroll = jQuery(window).scrollTop() + jQuery(window).height();
+    var offset = element.offset().top;
+
+    if (jQuery(window).width() < 991) {
+        if (scroll > offset && counter === 0) {
+            jQuery('#main-footer').addClass('margin');
+        } else {
+            jQuery('#main-footer').removeClass('margin');
+        }
+    }
+
     if (jQuery(window).scrollTop() > 300 && jQuery(window).width() <= 991 && jQuery(window).width() >= 650)
     {
         jQuery(".fixed-bar").addClass('active');
@@ -427,6 +457,7 @@ jQuery(window).scroll( function() {
     {
         jQuery(".fixed-bar").removeClass('active');
     }
+
 });
 
 jQuery(window).on("load resize", function(){
