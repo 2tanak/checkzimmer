@@ -55,11 +55,10 @@ class HomeController extends Controller
             } ) / count($hotel->rating);
         }
 
-        $rooms = $hotel->rooms;
         $questions = $hotel->questions;
         $reviews = $hotel->reviews;
 
-        return view('single', compact('hotel','rooms','questions','reviews'));
+        return view('single', compact('hotel','questions', 'reviews'));
     }
     public function favorites()
     {

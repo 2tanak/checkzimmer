@@ -62,7 +62,7 @@ class Property extends Model
 
     function languages() {
         $this->getOptions();
-        return json_decode(self::optionFind($this->_options, 'languages'), true) ?: [];
+        return explode(',', self::optionFind($this->_options, 'languages')) ?: [];
     }
 
     function features() {
@@ -116,6 +116,21 @@ class Property extends Model
         }
         $map = BookingDataService::getHouseMap();
         return $map[$types['native_id']] ?? false;
+    }
+    public function getRoomPersonsMin() {
+        return array_reduce($this->rooms->toArray(), function($carry, $item) {
+            return $item['person'] < $carry ? $item['person'] : $carry;
+        }, 999);
+    }
+    public function getRoomPersonsMax() {
+        return array_reduce($this->rooms->toArray(), function($carry, $item) {
+            return $item['person'] > $carry ? $item['person'] : $carry;
+        }, 0);
+    }
+    public function getRoomPriceMin() {
+        return array_reduce($this->rooms->toArray(), function($carry, $item) {
+            return $item['price'] < $carry && $item['price'] > 0 ? ceil($item['price']) : $carry;
+        }, 9999);
     }
     public static function getTotalNumberObjects($type) {
         if ($type) {
