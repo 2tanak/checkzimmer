@@ -246,7 +246,7 @@
                 </div>
             </div>
 
-            @foreach ($rooms as $key => $room)
+            @foreach ($hotel->rooms as $key => $room)
                 <div class="collapse show" id="position2-collapse">
                     <div class="collapse-content-line">
                         <div class="row">
@@ -259,7 +259,6 @@
                                             <img src="/svg/i-two.svg" alt="alt">
                                         @else
                                             <img src="/svg/i-multi.svg" alt="alt">
-
                                         @endif
                                         {{$room->getPersonsText()}}
                                     </div>
@@ -272,47 +271,26 @@
                                 <div class="row" style="height:100%;">
                                     <div class="type-bed-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
                                         <div class="type-bed-item-block type-bed-item-block-green">
-                                            @if ($room->bed === 'single')
-                                                <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <circle cx="3.5" cy="3.5" r="3.5" fill="#4CAF50"/>
-                                                </svg>
-                                                одноместная
-                                            @else
-                                                <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <circle cx="3.5" cy="3.5" r="3.5" fill="#F8981D"/>
-                                                </svg>
-                                                двухместная
-                                            @endif
+                                            <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="3.5" cy="3.5" r="3.5" fill="{{ $room->getBedroomLabelColor() }}"/>
+                                            </svg>
+                                            {{ $room->getBedroomTypeText() }}
                                         </div>
                                     </div>
                                     <div class="shower-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
                                         <div class="shower-item-block shower-item-block-orange">
-                                            @if ($room->shower === 'shared')
-                                                <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <circle cx="3.5" cy="3.5" r="3.5" fill="#F8981D"/>
-                                                </svg>
-                                                совместный
-                                            @else
-                                                <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <circle cx="3.5" cy="3.5" r="3.5" fill="#4CAF50"/>
-                                                </svg>
-                                                свой
-                                            @endif
+                                            <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="3.5" cy="3.5" r="3.5" fill="{{ $room->getShowerLabelColor() }}"/>
+                                            </svg>
+                                            {{ $room->getShowerTypeText() }}
                                         </div>
                                     </div>
                                     <div class="kitchen-item col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
                                         <div class="kitchen-item-block kitchen-item-block-orange">
-                                            @if ($room->kitchen === 'single' || $room->kitchen === 'kitchenette')
-                                                <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <circle cx="3.5" cy="3.5" r="3.5" fill="#4CAF50"/>
-                                                </svg>
-                                                своя
-                                            @else
-                                                <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <circle cx="3.5" cy="3.5" r="3.5" fill="#F8981D"/>
-                                                </svg>
-                                                совместная
-                                            @endif
+                                            <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="3.5" cy="3.5" r="3.5" fill="{{ $room->getKitchenLabelColor($hotel->features()) }}"/>
+                                            </svg>
+                                            {{ $room->getKitchenTypeText($hotel->features()) }}
                                         </div>
                                     </div>
                                 </div>
