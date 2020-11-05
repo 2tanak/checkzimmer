@@ -15,34 +15,32 @@ class ReviewsController extends Controller
     {
        return response()->json( Reviews::all() );
     }
+    function paginated()
+    {
+        return response()->json( Reviews::where('status', '1')->paginate(10) );
+    }
 
     function destroy($id) {
         Reviews::find($id)->delete();
-        
+
         return response()->json(['code' => 'ok']);
     }
-    
+
     function update(Request $request, $id) {
        Reviews::find($id)->update(['status' => $request->status]);
-       
+
        return response()->json(['code' => 'ok']);
     }
 
     function create(Request $request) {
         request()->validate([
-            'name'              => 'required',
-            'company'           => 'required',
-            'title'             => 'required',
-            'description'       => 'required',
+            'name' => 'required',
+            'company' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'rating' => 'required',
         ]);
-
-        $data = [
-            'name'          => $request->name,
-            'company'       => $request->company,
-            'title'         => $request->title,
-            'description'   => $request->description,
-            'property_id'   => $request->property_id,
-        ];
+        $data = $request->all();
 
         $item = new Reviews($data);
         $item->save();

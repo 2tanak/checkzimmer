@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Public from './components/Public/Index'
 import Favorites from './components/Public/Favorites'
+import Single from './components/Public/Single'
 
 require('./bootstrap');
 
@@ -40,7 +41,8 @@ const app = new Vue({
     router,
     components: {
         Public,
-        Favorites
+        Favorites,
+        Single
     },
     store
 });
@@ -186,7 +188,7 @@ jQuery(document).ready(function() {
             }
             jQuery(this).addClass('clicked');
         })
-        jQuery('.stars').val(count);
+        jQuery('[name="rating"]').val(count);
     });
 
     jQuery('.give-feedback').click(function (e) {

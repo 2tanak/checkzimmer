@@ -247,6 +247,9 @@
             </div>
 
             @foreach ($hotel->rooms as $key => $room)
+                @if ($room->price == 0)
+                    @continue
+                @endif
                 <div class="collapse show" id="position2-collapse">
                     <div class="collapse-content-line">
                         <div class="row">
@@ -264,7 +267,7 @@
                                     </div>
                                     <div class="quantity-item col-xl-2 col-lg-2 col-md-2 col-sm-2">{{$room->number}}x</div>
                                     <div class="personen-item col-xl-2 col-lg-2 col-md-2 col-sm-2 text-center">{{$room->person}}</div>
-                                    <div class="price-item col-xl-3 col-lg-3 col-md-3 col-sm-3 col-sm-3">от<span>{{ceil($room->price)}}€</span>/person</div>
+                                    <div class="price-item col-xl-3 col-lg-3 col-md-3 col-sm-3 col-sm-3">от <span>{{ceil($room->price)}}€</span>/person</div>
                                 </div>
                             </div>
                             <div class="collapse-right-block col-xl-6 col-lg-6 col-md-6 col-sm-6">
