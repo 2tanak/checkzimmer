@@ -83,11 +83,11 @@ class Property extends Model
     }
 
     function questions() {
-        return $this->hasMany(Question::class);
+        return $this->hasMany(Question::class)->where('response', '!=', '');
     }
 
     function reviews() {
-        return $this->hasMany(Reviews::class);
+        return $this->hasMany(Reviews::class)->where('status', 1);
     }
 
     function rating() {

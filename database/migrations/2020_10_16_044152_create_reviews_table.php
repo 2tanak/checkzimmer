@@ -17,11 +17,11 @@ class CreateReviewsTable extends Migration
             $table->id();
             $table->unsignedInteger('property_id');
             $table->string('name');
-            $table->string('company');
-            $table->string('title');
-            $table->integer('raiting');
+            $table->string('company')->nullable();
+            $table->string('subject');
+            $table->integer('rating');
             $table->text('description');
-            $table->integer('status')->default(1);
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

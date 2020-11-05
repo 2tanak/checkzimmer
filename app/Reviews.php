@@ -12,6 +12,6 @@ class Reviews extends Model
 
     use noCRUD;
     protected $table = 'reviews';
-    protected $fillable = ['name', 'company', 'title', 'raiting', 'description', 'status', 'property_id'];
+    protected $fillable = ['name', 'company', 'title', 'rating', 'description', 'status', 'property_id'];
     //
 }

@@ -38,10 +38,12 @@
 
         <div class="fixed-bar">
             <a href="#" class="send-inquiry inquiry">Отправить запрос</a>
-            <div class="see-number-phone">
-                <span class="number-phone-text">Показать телефон</span>
-                <a href="tel:+4917616573456" class="number-phone">+4917616573456</a>
-            </div>
+            @if ($hotel->type != 'affiliate')
+                <div class="see-number-phone">
+                    <span class="number-phone-text">Показать телефон</span>
+                    <a href="tel:+4917616573456" class="number-phone">+4917616573456</a>
+                </div>
+            @endif
             <div class="not-phone">
                 <div class="speaks">Владелец объекта говорит на:</div>
                 <div class="language-item">en, de</div>
@@ -60,6 +62,7 @@
     </div>
 
     @include('single.grecaptcha')
-    @include(('single.styles-inline'))
+    @include('single.scripts-inline')
+    @include('single.styles-inline')
 
 @endsection
