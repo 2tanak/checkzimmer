@@ -64,5 +64,9 @@ class HomeController extends Controller
     {
         return view('favorites');
     }
+    public function plans()
+    {
+        return view('plans');
+    }
 
 }
