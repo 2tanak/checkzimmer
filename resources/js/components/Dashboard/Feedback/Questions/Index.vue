@@ -68,7 +68,7 @@
 
 <script>
 import ApiRequest from '../../../API/ApiRequest';
-import Forms from '../../../Forms';
+// import Forms from '../../../Forms/Index';
 
 let QuestionsRequest = ApiRequest('questions');
 let questionsData = new QuestionsRequest;
@@ -122,7 +122,7 @@ export default {
                     } else {
                         this.textOperation = 'Ошибка';
                         this.operationError = true;
-                    } 
+                    }
             });
         },
         answerCancel() {
@@ -139,7 +139,7 @@ export default {
                     } else {
                         this.textOperation = 'Ошибка удаления';
                         this.operationError = true;
-                    } 
+                    }
             });
         },
         answerHidden() {

@@ -47,10 +47,10 @@ class GeocoderService
     {
         $address = $city . ' ' . $zip;
         $cache_data = $this->getFromCache($address);
-        
+
         return $cache_data?($cache_data->toArray()):$this->getDataFromGeocoder($address);
     }
-    
+
     /**
      * Store retrieved data
      * @param string $address

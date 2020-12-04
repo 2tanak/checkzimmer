@@ -11,7 +11,7 @@ class Feature extends Model {
 
     use noCRUD;
 
-    function feature_category() {
+    public function feature_category() {
         return $this->belongsTo(FeatureCategory::class);
     }
 }

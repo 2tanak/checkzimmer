@@ -7,27 +7,27 @@ use Illuminate\Support\Carbon;
 
 class GeocodeCacheController extends Controller
 {
-    function index() {
+    public function index() {
         return response()->json( GeocodeCache::all() );
     }
 
-    function update(Request $request, $id) {
+    public function update(Request $request, $id) {
         $geocodeCache = GeocodeCache::find($id);
-        
+
         $time = Carbon::now();
-        
+
         $geocodeCache->timestamp = $time->timestamp;
-        
+
         return $geocodeCache->update($request->input()) ? response()->json(['code' => 'ok']) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
     }
-    
-    function destroy($id) {
+
+    public function destroy($id) {
         GeocodeCache::find($id)->delete();
-        
+
         return response()->json(['code' => 'ok']);
     }
-    
-    function store() {
+
+    public function store() {
         GeocodeCache::truncate();
 
         return response()->json(['code' => 'ok']);

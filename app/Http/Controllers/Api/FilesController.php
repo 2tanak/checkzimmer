@@ -10,7 +10,6 @@ use Image;
 
 class FilesController extends Controller
 {
-
     public function addNewFile(Request $request)
     {
         request()->validate([
@@ -33,6 +32,7 @@ class FilesController extends Controller
         ], 200);
 
     }
+
     public function deleteFile(Request $request) {
         $user_id = Auth::user()->id;
         if (!$user_id) {
@@ -50,6 +50,7 @@ class FilesController extends Controller
             'url' => '',
         ], 200);
     }
+
     public function getUserFiles()
     {
         $a_files = null;

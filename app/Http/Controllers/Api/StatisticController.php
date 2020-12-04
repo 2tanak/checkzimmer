@@ -8,40 +8,40 @@ use App\User;
 
 class StatisticController extends Controller
 {
-    function index() {
+    public function index() {
         return response()->json( Statistic::all() );
     }
-    
-    function show($id) {
+
+    public function show($id) {
         $option = Statistic::find($id);
-        
+
         return response()->json( $option->pluck('value', 'key', 'id') );
     }
-    
-    function store(Request $request) {
+
+    public function store(Request $request) {
         $data = $request->input();
 
         $item = new Statistic($data);
         $item->save();
-        
+
         return $item ? response()->json(['code' => 'ok','user' => $item]) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
     }
-    
-    function update(Request $request, $id) {
+
+    public function update(Request $request, $id) {
         $roomType = Statistic::find($id);
-        
+
         return $roomType->update($request->input()) ? response()->json(['code' => 'ok']) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
     }
-    
-    function destroy($id) {
+
+    public function destroy($id) {
         Statistic::find($id)->delete();
-        
+
         return response()->json(['code' => 'ok']);
     }
-    
-    function conclusionToMain() {
+
+    public function conclusionToMain() {
         $totalNumberObjects             = Property::getTotalNumberObjects(true);
-        $totalAffiliateObjects          = Property::getTotalNumberObjects(false);  
+        $totalAffiliateObjects          = Property::getTotalNumberObjects(false);
         $totalUsersVerifiedProfiles     = User::getTotalUsersVerifiedProfiles(true);
         $totalUsersNotVerifiedProfiles  = User::getTotalUsersVerifiedProfiles(false);
         $numberObjectViewsLastMonth     = (int) Property::getNumberObjectViewsLastMonth();
@@ -63,5 +63,5 @@ class StatisticController extends Controller
             'topReferralsAndViews'          => [$topObjectsReferrals, $topObjectsViews]
         ]);
     }
-    
+
 }

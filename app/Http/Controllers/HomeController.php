@@ -30,17 +30,21 @@ class HomeController extends Controller
 
         return view('home', compact('options'));
     }
+
     public function dashboard() {
         return view('welcome');
     }
+
     public function list()
     {
         return view('list');
     }
+
     public function single(Request $request)
     {
         return view('single');
     }
+
     public function singleProperty($slug)
     {
         $hotel = Property::where('slug', $slug)->firstOrFail();
@@ -60,9 +64,9 @@ class HomeController extends Controller
 
         return view('single', compact('hotel','questions', 'reviews'));
     }
+
     public function favorites()
     {
         return view('favorites');
     }
-
 }

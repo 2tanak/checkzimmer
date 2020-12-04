@@ -41,7 +41,6 @@ class BookingApiService
             throw new Exception('Booking auth data not found');
         }
         $this->options = $options;
-        dd($options);
     }
 
     /**

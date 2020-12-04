@@ -7,17 +7,17 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-    function index() {
+    public function index() {
         return response()->json( User::all() );
     }
-    function show($id) {
+    public function show($id) {
         $option = Option::withParams($id, ['type' => Option::$optionType]);
         /*if (!$option) {
             return response()->json( [] );
         }*/
         return response()->json( $option->pluck('value', 'key', 'id') );
     }
-    function store(Request $request) {
+    public function store(Request $request) {
         request()->validate([
             'name' => 'required',
             'password' => 'required|confirmed|min:5',
@@ -30,8 +30,7 @@ class UsersController extends Controller
         return $item ? response()->json(['code' => 'ok','user' => $item]) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
     }
 
-
-    function update(Request $request, $id) {
+    public function update(Request $request, $id) {
 
         request()->validate([
             'name' => 'required',
@@ -42,7 +41,8 @@ class UsersController extends Controller
         return $user->update($request->input()) ? response()->json(['code' => 'ok']) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
 
     }
-    function destroy($id) {
+
+    public function destroy($id) {
         User::find($id)->delete();
         return response()->json(['code' => 'ok']);
     }

@@ -94,7 +94,7 @@
 
 <script>
     import ApiRequest from '../../../API/ApiRequest';
-    import Forms from '../../../Forms';
+    import Forms from '../../../Forms/Index';
 
     import propertyForm from "../../../Data/propertyForm";
 

@@ -51,46 +51,46 @@ class Property extends Model
         return $this->_photos;
     }
 
-    function photos() {
+    public function photos() {
         return $this->getPhotos();
     }
 
-    function photoMain() {
+    public function photoMain() {
         $this->getPhotos();
         return $this->_photoMain;
     }
 
-    function languages() {
+    public function languages() {
         $this->getOptions();
         return explode(',', self::optionFind($this->_options, 'languages')) ?: [];
     }
 
-    function features() {
+    public function features() {
         $this->getOptions();
         return json_decode(self::optionFind($this->_options, 'features'), true) ?: [];
     }
 
-    function options() {
+    public function options() {
         return $this->hasMany(Option::class, 'parent')->where('type', 'property');
     }
 
-    function rooms() {
+    public function rooms() {
         return $this->hasMany(Room::class);
     }
 
-    function user() {
+    public function user() {
         return $this->belongsTo(User::class);
     }
 
-    function questions() {
+    public function questions() {
         return $this->hasMany(Question::class)->where('response', '!=', '');
     }
 
-    function reviews() {
+    public function reviews() {
         return $this->hasMany(Reviews::class)->where('status', 1);
     }
 
-    function rating() {
+    public function rating() {
         return $this->hasMany(Rating::class, 'property_id', 'id');
     }
 
