@@ -143,8 +143,19 @@ class PropertyController extends Controller
     public function update(Property $property, Request $request)
     {
         $fields = $request->all();
-
         $property->fill($fields);
+        $options = $property->options()->get();
+        $updateOptionProperty = static function(array $property) use ($options){
+            $optionModel = $options->filter(function ($item) use ($property){
+                return $item->id === $property['id'];
+            })->first();
+
+            $optionModel->fill($property);
+
+            $optionModel->push();
+        };
+
+        array_map($updateOptionProperty, $fields['options']);
 
         $rooms = $property->rooms()->get();
         //TODO Вынести логику с контроллера
