@@ -68,7 +68,7 @@
                                         <div class="col-xl-2 col-lg-3 col-sm-4 mb-4" v-for="element in imageData" :key="element.id">
                                             <div class="photos-gallery-item">
                                                 <img :src="element.url_max300">
-                                                <a class="delete-photo-link" href="" v-b-modal.deletePhotoBigGallery @click.prevent="deletePhotoBigGallery">&times;</a>
+                                                <a class="delete-photo-link" href="" v-b-modal.deletePhotoBigGallery @click.prevent="deletePhotoBigGallery" @click="imgPath = element.url_original">&times;</a>
                                                 <div v-b-modal.bigPhotoModal class="blackout" @click="imgPath = element.url_original"></div>
                                             </div>
                                         </div>
@@ -111,13 +111,11 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <b-form-group label="Наименование" :label-for="'input-room-'+i+'-name'">
-<!--                                                            :value="getName(property.rooms[i].options.value)" @input="changeName(property.rooms[i], $event)"-->
                                                             <b-form-input  v-model="property.rooms[i].options[3].value" :id="'input-room-'+i+'-name'"></b-form-input>
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <b-form-group label="Описание" :label-for="'input-room-'+i+'-descr'">
-                                                <!--      :value="getDescription(property.rooms[i])"    -->
                                                             <b-form-textarea style="height:80px;" v-model="property.rooms[i].options[4].value"  :id="'input-room-'+i+'-name'"></b-form-textarea>
                                                         </b-form-group>
                                                     </div>
@@ -167,26 +165,12 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-xl-6">
-<!--                                                <div class="row photos-gallery">-->
-<!--                                                    <div class="col-md-3 mb-4" v-for="photo in getRoomPhotos(property.rooms[i])">-->
-<!--                                                        <div class="photos-gallery-item">-->
-<!--                                                            <img :src="photo.url_max300">-->
-<!--                                                            <a class="delete-photo-link" href="" v-b-modal.deletePhotoSmallGallery @click.prevent="deletePhotoSmallGallery">&times;</a>-->
-<!--                                                            <div class="blackout"></div>-->
-<!--                                                        </div>-->
-<!--                                                    </div>-->
-<!--                                                    <div class="col-md-3 mb-4 add-photo-container">-->
-<!--                                                        <input type="file" id="add-photo-room" class="inputfile">-->
-<!--                                                        <label for="add-photo"><span>&#10010;</span></label>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
+                                            <div class="col-xl-6" v-if="!room.newRoom">
                                                 <draggable class="row photos-gallery" v-model="property.rooms[i].photos" @start="drag=true" @end="drag=false">
-                                                    <!--       getRoomPhotos(property.rooms[i])       -->
                                                     <div class="col-md-3 mb-4" v-for="element in property.rooms[i].photos" :key="element.id">
                                                         <div class="photos-gallery-item">
                                                             <img :src="element.url_max300">
-                                                            <a class="delete-photo-link" href="" v-b-modal.deletePhotoBigGallery @click.prevent="deletePhotoBigGallery">&times;</a>
+                                                            <a class="delete-photo-link" href="" v-b-modal.deletePhotoSmallGallery @click="imgPath = element.url_original">&times;</a>
                                                             <div v-b-modal.bigPhotoModal class="blackout" @click="imgPath = element.url_original"></div>
                                                         </div>
                                                     </div>
@@ -258,7 +242,7 @@ export default {
             property: {},
             imageData: [],
             roomsImageData: [],
-            newRomOptions: [
+            newRoomOptions: [
                 {
                     key:"facilities",
                     parent:1,
@@ -345,7 +329,6 @@ export default {
             }
         },
         changeName(item, name){
-            console.log(item, name);
             item.options.forEach(option => option.key === 'name' ? option.value = name : '')
         },
         getFieldValue(name, item, def, json) {
@@ -372,10 +355,14 @@ export default {
             return this.getFieldValue('photos', item,'', true);
         },
         deleteHotel() {
-
         },
         deleteHotelOk() {
+            properties.delete(this.property.id)
+                .then(resp => {
+                    if(resp.data.status === 200 && resp.data.status === 'OK'){
 
+                    }
+                })
         },
         deletePhotoBigGallery() {
 
@@ -383,8 +370,14 @@ export default {
         deletePhotoSmallGallery() {
 
         },
-        deletePhotoBigGalleryOk(){},
-        deletePhotoSmallGalleryOk(){},
+        deletePhotoBigGalleryOk(){
+            this.imageData.forEach((item, index, array) => {
+                item['url_original'] === this.imgPath ? this.imageData.splice(index, 1) : '';
+            });
+        },
+        deletePhotoSmallGalleryOk(){
+
+        },
         save() {
             for(let option of this.property.options){
                 if(option.key === 'photos'){
@@ -416,7 +409,7 @@ export default {
                 kitchen:'',
                 native_id:0,
                 number:0,
-                options: this.newRomOptions,
+                options: this.newRoomOptions,
                 person:0,
                 price:0,
                 property_id: this.property.id,
