@@ -92,6 +92,11 @@
                             </div>
                         </div>
                     </div>
+                    <draggable
+                               v-model="property.rooms"
+                               @start="drag=true"
+                               @update="$forceUpdate()"
+                               @end="drag=false">
                     <div class="mb-4" v-for="(room, i) in property.rooms">
                         <div class="card" style="width:100%;">
                             <div class="card-body">
@@ -100,8 +105,9 @@
                                         <b-button class="button-collapse" v-b-toggle="'id-'+room.id"> Комната № {{ i+1 }}</b-button>
                                     </div>
                                     <div class="delete-room">
-                                        <b-button type="submit" variant="success" class="mr-2" v-if="room.newRoom" @click="saveRoom(room)">Сохранить</b-button>
-                                        <b-button variant="danger" @click="deleteRoomOk($event, room)">Удалить комнату</b-button>
+                                        <b-button v-if="room.newRoom" type="submit" variant="success" class="mr-2" @click="saveRoom(room)">Сохранить комнату</b-button>
+                                        <b-button v-if="room.newRoom" variant="danger" @click="deleteNewRoom()">Удалить комнату</b-button>
+                                        <b-button v-else variant="danger" @click="deleteRoomOk($event, room)">Удалить комнату</b-button>
                                     </div>
                                 </div>
                                 <b-collapse :id="'id-'+room.id" visible>
@@ -166,8 +172,12 @@
                                             </div>
 
                                             <div class="col-xl-6" v-if="!room.newRoom">
-                                                <draggable class="row photos-gallery" v-model="property.rooms[i].photos" @start="drag=true" @end="drag=false">
-                                                    <div class="col-md-3 mb-4" v-for="element in property.rooms[i].photos" :key="element.id">
+                                                <draggable class="row photos-gallery"
+                                                           v-model="rooms[i].photos"
+                                                           @start="drag=true"
+                                                           @update="$forceUpdate()"
+                                                           @end="drag=false">
+                                                    <div class="col-md-3 mb-4" v-for="element in rooms[i].photos" :key="element.id">
                                                         <div class="photos-gallery-item">
                                                             <img :src="element.url_max300">
                                                             <a class="delete-photo-link" href="" v-b-modal.deletePhotoSmallGallery @click="imgPath = element.url_original">&times;</a>
@@ -175,8 +185,9 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2 mb-4 add-photo-container">
-                                                        <input type="file" id="add-photo-room" class="inputfile" ref="inputfilePhotoRoom" @change="savePhotoRoom($event, property.rooms[i])" accept="image/*">
-                                                        <label for="add-photo-room"><span>&#10010;</span></label>
+<!--                                                        add-photo-room-->
+                                                        <input type="file" :id="i" class="inputfile" ref="inputfilePhotoRoom" @change="savePhotoRoom($event, rooms[i])" accept="image/*">
+                                                        <label :for="i"><span>&#10010;</span></label>
                                                     </div>
                                                 </draggable>
                                             </div>
@@ -186,17 +197,13 @@
                             </div>
                         </div>
                     </div>
+                    </draggable>
                 </form>
             </div>
         </div>
         <div class="row mb-4">
             <div class="col-md-12">
                 <b-button type="submit" variant="outline-primary" class="mr-2" @click="addRoom">Добавить комнату</b-button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <b-button type="submit" variant="success" class="mr-2" @click="save">Сохранить</b-button>
             </div>
         </div>
 
@@ -259,7 +266,7 @@ export default {
                     key:"photos",
                     parent:1,
                     type:"room",
-                    value: ''
+                    value: '[]'
                 },
                 {
                     key:"name",
@@ -276,8 +283,8 @@ export default {
             ],
             rooms:[],
             deleteRoom: {},
-            imgPath:'',
-            show: false
+            show: false,
+            imgPath:''
         }
     },
     components: {
@@ -358,9 +365,9 @@ export default {
         },
         deleteHotelOk() {
             properties.delete(this.property.id)
-                .then(resp => {
-                    if(resp.data.status === 200 && resp.data.status === 'OK'){
-
+                .then(res => {
+                    if(res.status === 200){
+                        this.$router.push({ name: 'property' });
                     }
                 })
         },
@@ -444,10 +451,13 @@ export default {
                 })
         },
         showPhoto(e, pathPhoto) {
-            //bigPhotoModal
             this.$bvModal.msgBoxConfirm('')
                 .then(value => {
                 })
+        },
+        deleteNewRoom() {
+            const pointLastElement = this.property.rooms.length - 1;
+            this.property.rooms.splice(pointLastElement, 1);
         }
     },
     computed: {

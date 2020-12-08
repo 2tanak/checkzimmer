@@ -70,6 +70,11 @@ class Property extends Model
         return json_decode(self::optionFind($this->_options, 'features'), true) ?: [];
     }
 
+//    public function features()
+//    {
+//        return $this->hasMany();
+//    }
+
     public function options() {
         return $this->hasMany(Option::class, 'parent')->where('type', 'property');
     }
