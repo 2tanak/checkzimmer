@@ -16,7 +16,8 @@ class Property extends Model
 
     protected $table = 'property';
     protected $fillable = ['user_id', 'type', 'status', 'views', 'lat', 'lng', 'name', 'city', 'zip', 'address', 'slug', 'description' ];
-    protected $with = ['options', 'user', 'rooms', 'questions', 'rating', 'questions'];
+    protected $with = ['options', 'user', 'rooms', 'questions', 'rating', 'questions', 'features'];
+    protected $fillableRelations = ['options', 'rooms', 'features'];
     private static $identifier = 'id';
     private static $children = ['options', 'user'];
 
@@ -35,6 +36,7 @@ class Property extends Model
         $features = array_column($features, 'name');
         return array_search($name, $features) !== false;
     }
+
     private function getOptions() {
         if ($this->_options == null) {
             $this->_options = $this->options->toArray();
@@ -65,15 +67,15 @@ class Property extends Model
         return explode(',', self::optionFind($this->_options, 'languages')) ?: [];
     }
 
-    public function features() {
-        $this->getOptions();
-        return json_decode(self::optionFind($this->_options, 'features'), true) ?: [];
-    }
-
-//    public function features()
-//    {
-//        return $this->hasMany();
+//    public function features() {
+//        $this->getOptions();
+//        return json_decode(self::optionFind($this->_options, 'features'), true) ?: [];
 //    }
+
+    public function features(){
+        return $this->belongsToMany(Feature::class, 'property_features',
+            'property_id', 'feature_id');
+    }
 
     public function options() {
         return $this->hasMany(Option::class, 'parent')->where('type', 'property');
@@ -153,4 +155,25 @@ class Property extends Model
         return self::orderBy('views', 'desc')->take(20)->get()->toArray();
     }
 
+    public function updateRelations(array $data)
+    {
+        //TODO вынести в трейт fillRelations
+        $this->fill($data);
+
+        foreach ($this->fillableRelations as $fillableRelationName){
+            if($relationData = $data[$fillableRelationName]){
+                $currentRelation = $this->$fillableRelationName;
+
+                array_map(static function(array $data) use ($relationData, $currentRelation){
+                    $relationModel = $currentRelation->filter(function ($item) use ($data){
+                        return $item->id === $data['id'];
+                    })->first();
+
+                    $relationModel->fill($data);
+
+                }, $relationData);
+            }
+        }
+
+    }
 }

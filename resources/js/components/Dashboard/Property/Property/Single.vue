@@ -180,7 +180,7 @@
                                                     <div class="col-md-3 mb-4" v-for="element in rooms[i].photos" :key="element.id">
                                                         <div class="photos-gallery-item">
                                                             <img :src="element.url_max300">
-                                                            <a class="delete-photo-link" href="" v-b-modal.deletePhotoSmallGallery @click="imgPath = element.url_original">&times;</a>
+                                                            <a class="delete-photo-link" href="" v-b-modal.deletePhotoSmallGallery @click.prevent="deletePhotoSmallGallery" @click="curRoom = room; imgPath = element.url_original">&times;</a>
                                                             <div v-b-modal.bigPhotoModal class="blackout" @click="imgPath = element.url_original"></div>
                                                         </div>
                                                     </div>
@@ -211,11 +211,11 @@
             <p class="text-danger">Are you sure you want to delete {{ property.name }}</p>
         </b-modal>
 
-        <b-modal id="deletePhotoBigGallery" title="Delete Hotel" @ok="deletePhotoBigGalleryOk">
+        <b-modal id="deletePhotoBigGallery" title="Delete Hotel Photo" @ok="deletePhotoBigGalleryOk">
             <p class="text-danger">Are you sure you want to delete this photo?</p>
         </b-modal>
 
-        <b-modal id="deletePhotoSmallGallery" title="Delete Hotel" @ok="deletePhotoSmallGalleryOk">
+        <b-modal id="deletePhotoSmallGallery" title="Delete Room Photo" @ok="deletePhotoSmallGalleryOk">
             <p class="text-danger">Are you sure you want to delete this photo?</p>
         </b-modal>
 
@@ -248,7 +248,6 @@ export default {
         return {
             property: {},
             imageData: [],
-            roomsImageData: [],
             newRoomOptions: [
                 {
                     key:"facilities",
@@ -284,7 +283,8 @@ export default {
             rooms:[],
             deleteRoom: {},
             show: false,
-            imgPath:''
+            imgPath:'',
+            curRoom: {},
         }
     },
     components: {
@@ -383,7 +383,9 @@ export default {
             });
         },
         deletePhotoSmallGalleryOk(){
-
+            this.curRoom.photos.forEach((item, index, array) => {
+                item['url_original'] === this.imgPath ? this.curRoom.photos.splice(index, 1) : '';
+            });
         },
         save() {
             for(let option of this.property.options){

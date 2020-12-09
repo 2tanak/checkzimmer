@@ -51,7 +51,7 @@ class StatisticController extends Controller
         $topObjectsViews                = Statistic::getTopObjectsViews();
 
         return response()->json([
-            'totalNumberObjects'            => $totalNumberObject,
+            'totalNumberObjects'            => $totalNumberObjects,
             'totalAffiliateObjects'         => $totalAffiliateObjects,
             'totalUsersVerifiedProfiles'    => $totalUsersVerifiedProfiles,
             'totalUsersNotVerifiedProfiles' => $totalUsersNotVerifiedProfiles,

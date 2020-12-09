@@ -17,10 +17,6 @@ class PropertyController extends Controller
      */
     private $service;
 
-    /**
-     * PropertyController constructor.
-     * @param GeocoderService $service
-     */
     public function __construct(GeocoderService $service)
     {
         $this->service = $service;
@@ -85,7 +81,8 @@ class PropertyController extends Controller
     }
 
     public function show($id) {
-        return response()->json(Property::findOrFail($id));
+        $property = Property::findOrFail($id);
+        return response()->json($property);
     }
 
     public function init() {
@@ -142,51 +139,18 @@ class PropertyController extends Controller
 
     public function update(Property $property, Request $request)
     {
+//        request()->validate([
+//            'rooms.*.options.*.value'      => 'required',
+//        ]);
         $fields = $request->all();
-        $property->fill($fields);
-        $options = $property->options()->get();
-        $updateOptionProperty = static function(array $property) use ($options){
-            $optionModel = $options->filter(function ($item) use ($property){
-                return $item->id === $property['id'];
-            })->first();
 
-            $optionModel->fill($property);
+        foreach ($fields['rooms'] as $roomKey => $room){
+            foreach ($room['options'] as $optionKey => $option){
+                $fields['rooms'][$roomKey]['options'][$optionKey]['value'] = $option['value'] ?? '';
+            }
+        }
 
-            $optionModel->push();
-        };
-
-        array_map($updateOptionProperty, $fields['options']);
-
-        $rooms = $property->rooms()->get();
-        //TODO Вынести логику с контроллера
-        $updateRooms = static function(array $room) use ($rooms){
-            $roomModel = $rooms->filter(function ($item) use ($room){
-                return $item->id === $room['id'];
-            })->first();
-
-            $roomModel->fill($room);
-
-            $options = $roomModel->options()->get();
-
-            $updateOptionRooms = static function(array $option) use ($options){
-
-                $optionModel = $options->filter(function ($item) use ($option){
-                    return $item->id === $option['id'];
-                })->first();
-
-                $optionModel->fill($option);
-
-                if($option['value']){
-                    $optionModel->push();
-                }
-            };
-
-            array_map($updateOptionRooms, $room['options']);
-
-            $roomModel->push();
-        };
-
-        array_map($updateRooms, $fields['rooms']);
+        $property->updateRelations($fields);
 
         $property->push();
 

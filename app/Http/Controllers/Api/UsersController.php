@@ -10,6 +10,7 @@ class UsersController extends Controller
     public function index() {
         return response()->json( User::all() );
     }
+
     public function show($id) {
         $option = Option::withParams($id, ['type' => Option::$optionType]);
         /*if (!$option) {
@@ -17,6 +18,7 @@ class UsersController extends Controller
         }*/
         return response()->json( $option->pluck('value', 'key', 'id') );
     }
+
     public function store(Request $request) {
         request()->validate([
             'name' => 'required',
@@ -24,6 +26,7 @@ class UsersController extends Controller
             'role' => 'required',
             'email' => 'required|email|unique:users'
         ]);
+
         $data = $request->input();
         $item = new User($data);
         $item->save();
@@ -31,12 +34,12 @@ class UsersController extends Controller
     }
 
     public function update(Request $request, $id) {
-
         request()->validate([
             'name' => 'required',
             'password' => 'confirmed|min:5',
             'email' => 'required|email'
         ]);
+
         $user = User::find($id);
         return $user->update($request->input()) ? response()->json(['code' => 'ok']) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
 

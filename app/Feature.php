@@ -16,8 +16,9 @@ class Feature extends Model {
         return $this->belongsTo(FeatureCategory::class);
     }
 
-    public function property()
+    public function properties()
     {
-        return $this->belongsToMany(Property::class);
+        return $this->belongsToMany(Feature::class, 'property',
+            'feature_id', 'property_id');
     }
 }
