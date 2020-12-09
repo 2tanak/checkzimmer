@@ -1,4 +1,5 @@
 <?php namespace App\Http\Controllers\Api;
+use App\Feature;
 use App\Http\Controllers\Controller;
 use App\Option;
 use App\Http\Requests\PropertyListRequest;
@@ -9,6 +10,7 @@ use App\Property;
 use Auth;
 use App\User;
 use Illuminate\Support\Str;
+use Ramsey\Collection\Collection;
 
 class PropertyController extends Controller
 {
@@ -159,8 +161,13 @@ class PropertyController extends Controller
                 $fields['rooms'][$roomKey]['options'][$optionKey]['value'] = $option['value'] ?? '';
             }
         }
-
         $property->updateRelations($fields);
+
+        $property->features()->detach();
+
+        $property->features()->attach(array_map(function ($feature){
+            return $feature['id'];
+        }, $fields['features']));
 
         $property->push();
 

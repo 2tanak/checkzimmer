@@ -203,8 +203,12 @@ class Property extends Model
                     $relationModel = $currentRelation->filter(function ($item) use ($data) {
                         return $item->id === $data['id'];
                     })->first();
-
-                    $relationModel->fill($data);
+                    if($relationModel){
+                        $relationModel->fill($data);
+                        if(method_exists($relationModel, 'updateRelations')){
+                            $relationModel->updateRelations($data);
+                        }
+                    }
 
                 }, $relationData);
             }

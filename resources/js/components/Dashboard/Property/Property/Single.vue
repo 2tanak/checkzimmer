@@ -82,6 +82,27 @@
                         </div>
                     </div>
 
+                    <div class="row mt-4 mb-4">
+                        <div class="col-md-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3>Удобства</h3>
+                                    <template v-for="feature in features">
+                                        <div class="comfort-block mt-5">
+                                            <h3>{{feature. name }}</h3>
+                                            <div class="row">
+                                                <div class="col-md-3 col-sm-4 col-6 comfort-block-item mt-2" v-for="itemFeature in feature.features">
+                                                    <img :src="itemFeature.picture" alt="alt">
+                                                    <span>{{ itemFeature.name }}</span>
+                                                    <input type="checkbox" :name="itemFeature.name" v-model="itemFeature.check"  @change="addFeatures(itemFeature)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row mb-2">
                         <div class="col-12">
@@ -180,11 +201,13 @@
                                                     <div class="col-md-3 mb-4" v-for="element in rooms[i].photos" :key="element.id">
                                                         <div class="photos-gallery-item">
                                                             <img :src="element.url_max300">
-                                                            <a class="delete-photo-link" href="" v-b-modal.deletePhotoSmallGallery @click.prevent="deletePhotoSmallGallery" @click="curRoom = room; imgPath = element.url_original">&times;</a>
+<!--                                                            @click="curRoom = room; imgPath = element.url_original-->
+<!--                                                            v-b-modal.deletePhotoSmallGallery-->
+                                                            <a class="delete-photo-link" href="" @click.prevent="deletePhotoSmallGalleryOk($event, room, element.id)">&times;</a>
                                                             <div v-b-modal.bigPhotoModal class="blackout" @click="imgPath = element.url_original"></div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2 mb-4 add-photo-container">
+                                                    <div class="col-md-3 mb-4 add-photo-container">
 <!--                                                        add-photo-room-->
                                                         <input type="file" :id="i" class="inputfile" ref="inputfilePhotoRoom" @change="savePhotoRoom($event, rooms[i])" accept="image/*">
                                                         <label :for="i"><span>&#10010;</span></label>
@@ -241,6 +264,8 @@ let RoomRequest = ApiRequest('room');
 let roomRequest = new RoomRequest;
 let ImageRequest = ApiRequest('image-upload');
 let imageRequest = new ImageRequest;
+let featureRequest = ApiRequest('features');
+let features = new featureRequest;
 
 export default {
     name: "Single",
@@ -284,7 +309,7 @@ export default {
             deleteRoom: {},
             show: false,
             imgPath:'',
-            curRoom: {},
+            features: []
         }
     },
     components: {
@@ -297,9 +322,39 @@ export default {
                 this.rooms = this.property.rooms;
                 this.property.rooms.forEach( room => room.photos = this.getRoomPhotos(room));
                 this.imageData = this.getPhotos();
+            });
+        features.all()
+            .then(res => {
+                if(res.status === 200) {
+                    const features = Object.assign([], res.data);
+                    features.forEach(item => {
+                        item.check = this.property.features.findIndex(featuresItem => featuresItem.id === item.id) !== -1;
+                    });
+                    const featuresCategoryId = features.map(item => item.feature_category_id).filter((value, index, self ) => self.indexOf(value) === index);
+                    featuresCategoryId.forEach( categoryId => {
+                        this.features.push({
+                            name: features.find(feature => feature.feature_category_id === categoryId).feature_category.name,
+                            features: this.feature_category(features, categoryId)
+                        })
+                    })
+                }
             })
     },
     methods: {
+        addFeatures(feature){
+            const indexFeatures = this.property.features.findIndex(item => item.id === feature.id);
+
+            if(indexFeatures === -1){
+                this.property.features.push(feature);
+            }
+            else {
+                this.property.features.splice(indexFeatures, 1);
+            }
+
+        },
+        feature_category(arrayFeature, feature_category_id){
+            return arrayFeature.filter(item => item.feature_category_id === feature_category_id);
+        },
         savePhotoHotel: function (event) {
             const input = event.target;
             if (input.files && input.files[0]) {
@@ -382,10 +437,14 @@ export default {
                 item['url_original'] === this.imgPath ? this.imageData.splice(index, 1) : '';
             });
         },
-        deletePhotoSmallGalleryOk(){
-            this.curRoom.photos.forEach((item, index, array) => {
-                item['url_original'] === this.imgPath ? this.curRoom.photos.splice(index, 1) : '';
-            });
+        deletePhotoSmallGalleryOk(event, room, photoId){
+            this.$bvModal.msgBoxConfirm('Are you sure you want to delete this photo?')
+                .then(value => {
+                    if(value) {
+                        room.photos.splice(photoId, 1);
+                        this.$forceUpdate();
+                    }
+                })
         },
         save() {
             for(let option of this.property.options){
@@ -403,11 +462,14 @@ export default {
             });
             properties.update(this.property.id, this.property)
                 .then(resp => {
-                    this.property = resp.data;
+                    // console.log(resp);
+                    // this.property = resp.data;
                     properties.get(this.$route.params.item)
                         .then(resp => {
                             this.property = resp.data;
+                            this.rooms = this.property.rooms;
                             this.property.rooms.forEach( room => room.photos = this.getRoomPhotos(room));
+                            this.imageData = this.getPhotos();
                         })
                 })
         },
@@ -435,6 +497,7 @@ export default {
                     properties.get(this.$route.params.item)
                         .then(resp => {
                             this.property = resp.data;
+                            this.rooms = this.property.rooms;
                             this.property.rooms.forEach( room => room.photos = this.getRoomPhotos(room));
                         })
                 })
@@ -442,14 +505,17 @@ export default {
         deleteRoomOk(e, room) {
             this.$bvModal.msgBoxConfirm('Are you sure you want to delete this room?')
                 .then(value => {
-                    roomRequest.delete(room.id)
-                        .then(resp => {
-                            properties.get(this.$route.params.item)
-                                .then(resp => {
-                                    this.property = resp.data;
-                                    this.property.rooms.forEach( room => room.photos = this.getRoomPhotos(room));
-                                })
-                        })
+                    if(value){
+                        roomRequest.delete(room.id)
+                            .then(resp => {
+                                properties.get(this.$route.params.item)
+                                    .then(resp => {
+                                        this.property = resp.data;
+                                        this.rooms = this.property.rooms;
+                                        this.property.rooms.forEach( room => room.photos = this.getRoomPhotos(room));
+                                    })
+                            })
+                    }
                 })
         },
         showPhoto(e, pathPhoto) {

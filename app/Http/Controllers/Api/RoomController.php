@@ -13,16 +13,16 @@ class RoomController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'bed'          => 'required',
-            'kitchen'      => 'required',
-            'person'       => 'required',
-            'price'        => 'required',
-            'property_id'  => 'required',
-            'room_type_id' => 'required',
-            'native_id'    => 'required',
-            'shower'       => 'required',
-            'status'       => 'required',
-            'number'       => 'required',
+//            'bed'          => 'required',
+//            'kitchen'      => 'required',
+//            'person'       => 'required',
+//            'price'        => 'required',
+//            'property_id'  => 'required',
+//            'room_type_id' => 'required',
+//            'native_id'    => 'required',
+//            'shower'       => 'required',
+//            'status'       => 'required',
+//            'number'       => 'required',
         ]);
 
         $data = [
