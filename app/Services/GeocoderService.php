@@ -59,9 +59,9 @@ class GeocoderService
     private function storeToCache(string $address, array $data): void
     {
         $this->cacheModel->upd([
-            'address' => $address,
-            'lat' => $data['lat'],
-            'lng' => $data['lng'],
+            'address'   => $address,
+            'lat'       => $data['lat'],
+            'lng'       => $data['lng'],
             'timestamp' => time()
         ], ['address' => $address]);
     }

@@ -228,114 +228,114 @@ class BookingDataService
     {
         foreach($hotels as $hotel) {
             $hotel_data = [
-                'user_id' => 1,
-                'type' => 'affiliate',
-                'status' => 'approved',
-                'views' => 0,
-                'lat' => $hotel['hotel_data']['location']['latitude'],
-                'lng' =>  $hotel['hotel_data']['location']['longitude'],
-                'name' => $hotel['hotel_data']['name'],
-                'slug' => (string) Str::uuid(),
-                'city' => $hotel['hotel_data']['city'],
-                'zip' => $hotel['hotel_data']['zip'],
+                'user_id'     => 1,
+                'type'        => 'affiliate',
+                'status'      => 'approved',
+                'views'       => 0,
+                'lat'         => $hotel['hotel_data']['location']['latitude'],
+                'lng'         => $hotel['hotel_data']['location']['longitude'],
+                'name'        => $hotel['hotel_data']['name'],
+                'slug'        => (string)Str::uuid(),
+                'city'        => $hotel['hotel_data']['city'],
+                'zip'         => $hotel['hotel_data']['zip'],
                 'description' => $hotel['hotel_data']['hotel_description'],
-                'address' => $hotel['hotel_data']['address']
+                'address'     => $hotel['hotel_data']['address']
             ];
 
             $property = $this->storeProperty($hotel_data);
 
             $this->storeOption([
                 'parent' => $property->id,
-                'type' => 'property',
-                'key' => 'hotel_type',
-                'value' => $hotel['hotel_data']['hotel_type_id']
+                'type'   => 'property',
+                'key'    => 'hotel_type',
+                'value'  => $hotel['hotel_data']['hotel_type_id']
             ]);
 
             $this->storeOption([
                 'parent' => $property->id,
-                'type' => 'property',
-                'key' => 'languages',
-                'value' => implode(',', $hotel['hotel_data']['spoken_languages'])
+                'type'   => 'property',
+                'key'    => 'languages',
+                'value'  => implode(',', $hotel['hotel_data']['spoken_languages'])
             ]);
 
             $this->storeOption([
                 'parent' => $property->id,
-                'type' => 'property',
-                'key' => 'photos',
-                'value' => json_encode($hotel['hotel_data']['hotel_photos'])
+                'type'   => 'property',
+                'key'    => 'photos',
+                'value'  => json_encode($hotel['hotel_data']['hotel_photos'])
             ]);
 
             $this->storeOption([
                 'parent' => $property->id,
-                'type' => 'property',
-                'key' => 'policies',
-                'value' => json_encode($hotel['hotel_data']['hotel_policies'])
+                'type'   => 'property',
+                'key'    => 'policies',
+                'value'  => json_encode($hotel['hotel_data']['hotel_policies'])
             ]);
 
             $this->storeOption([
                 'parent' => $property->id,
-                'type' => 'property',
-                'key' => 'features',
-                'value' => json_encode($hotel['hotel_data']['hotel_facilities'])
+                'type'   => 'property',
+                'key'    => 'features',
+                'value'  => json_encode($hotel['hotel_data']['hotel_facilities'])
             ]);
 
             $this->storeOption([
                 'parent' => $property->id,
-                'type' => 'property',
-                'key' => 'native_id',
-                'value' => $hotel['hotel_id']
+                'type'   => 'property',
+                'key'    => 'native_id',
+                'value'  => $hotel['hotel_id']
             ]);
 
             foreach ($hotel['room_data'] as $key => $room) {
 
                 $roomData = [
-                    'property_id' => $property->id,
+                    'property_id'  => $property->id,
                     'room_type_id' => 0,
-                    'number' => 1,
-                    'person' => $room['room_info']['max_persons'],
-                    'price' => $room['room_info']['min_price'],
-                    'bed' => Room::getBedroomType($room['room_info']['bedrooms'] ?? []),
-                    'shower' => Room::getShowerType($room['room_facilities']),
-                    'kitchen' => Room::getKitchenType($room['room_facilities'], $hotel['hotel_data']['hotel_facilities']),
-                    'native_id' => json_encode($room['room_id']),
-                    'status' => 'approved'
+                    'number'       => 1,
+                    'person'       => $room['room_info']['max_persons'],
+                    'price'        => $room['room_info']['min_price'],
+                    'bed'          => Room::getBedroomType($room['room_info']['bedrooms'] ?? []),
+                    'shower'       => Room::getShowerType($room['room_facilities']),
+                    'kitchen'      => Room::getKitchenType($room['room_facilities'], $hotel['hotel_data']['hotel_facilities']),
+                    'native_id'    => json_encode($room['room_id']),
+                    'status'       => 'approved'
                 ];
 
                 $new_room = $this->storeRoom($roomData);
 
                 $this->storeOption([
                     'parent' => $new_room->id,
-                    'type' => 'room',
-                    'key' => 'facilities',
-                    'value' => json_encode($room['room_facilities'])
+                    'type'   => 'room',
+                    'key'    => 'facilities',
+                    'value'  => json_encode($room['room_facilities'])
                 ]);
 
                 $this->storeOption([
                     'parent' => $new_room->id,
-                    'type' => 'room',
-                    'key' => 'native_id',
-                    'value' => json_encode($room['room_id'])
+                    'type'   => 'room',
+                    'key'    => 'native_id',
+                    'value'  => json_encode($room['room_id'])
                 ]);
 
                 $this->storeOption([
                     'parent' => $new_room->id,
-                    'type' => 'room',
-                    'key' => 'photos',
-                    'value' => json_encode($room['room_photos'])
+                    'type'   => 'room',
+                    'key'    => 'photos',
+                    'value'  => json_encode($room['room_photos'])
                 ]);
 
                 $this->storeOption([
                     'parent' => $new_room->id,
-                    'type' => 'room',
-                    'key' => 'name',
-                    'value' => $room['room_name'] ?? ''
+                    'type'   => 'room',
+                    'key'    => 'name',
+                    'value'  => $room['room_name'] ?? ''
                 ]);
 
                 $this->storeOption([
                     'parent' => $new_room->id,
-                    'type' => 'room',
-                    'key' => 'description',
-                    'value' => $room['room_description'] ?? ''
+                    'type'   => 'room',
+                    'key'    => 'description',
+                    'value'  => $room['room_description'] ?? ''
                 ]);
             }
             // Mapping properties
@@ -358,6 +358,7 @@ class BookingDataService
         $property = new Property();
         $property->fill($hotel_data);
         $property->save();
+
         return $property;
     }
 
@@ -370,6 +371,7 @@ class BookingDataService
         $option = new Option();
         $option->fill($data);
         $option->save();
+
         return $option;
     }
 
@@ -378,6 +380,7 @@ class BookingDataService
         $room = new Room();
         $room->fill($roomData);
         $room->save();
+
         return $room;
     }
     static function getFeaturesMap() {

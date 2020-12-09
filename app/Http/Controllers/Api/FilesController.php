@@ -20,20 +20,21 @@ class FilesController extends Controller
 
         $uploadedFile = $request->file('file');
 
-        $uploadedFile = Storage::putFile('public/uploads/'.$user_id.'/img', $request->file('file'));
+        $uploadedFile = Storage::putFile('public/uploads/' . $user_id . '/img', $request->file('file'));
         $uploadedFile = explode('/', $uploadedFile);
         $filename = end($uploadedFile);
 
-        $url = asset(Storage::url('uploads/'.$user_id)) . '/img/' . $filename;
+        $url = asset(Storage::url('uploads/' . $user_id)) . '/img/' . $filename;
 
         return Response::json([
             'status' => 'success',
-            'url' => $url,
+            'url'    => $url,
         ], 200);
 
     }
 
-    public function deleteFile(Request $request) {
+    public function deleteFile(Request $request)
+    {
         $user_id = Auth::user()->id;
         if (!$user_id) {
             abort(403);
@@ -42,24 +43,24 @@ class FilesController extends Controller
         $uploadedFile = explode('/', $uploadedFile);
         $uploadedFile = end($uploadedFile);
 
-        if (Storage::exists('public/uploads/'.$user_id.'/img/'.$uploadedFile)) {
-            Storage::delete('public/uploads/'.$user_id.'/img/'.$uploadedFile);
+        if (Storage::exists('public/uploads/' . $user_id . '/img/' . $uploadedFile)){
+            Storage::delete('public/uploads/' . $user_id . '/img/' . $uploadedFile);
         }
         return Response::json([
             'status' => 'success',
-            'url' => '',
+            'url'    => '',
         ], 200);
     }
 
     public function getUserFiles()
     {
         $a_files = null;
-        $files = Storage::disk('local')->allFiles('public\\uploads\\'.Auth::id().'\\img\\');
-        foreach ($files as $file) {
-            $a_files[] = '/'.str_replace('public','storage', $file);
+        $files = Storage::disk('local')->allFiles('public\\uploads\\' . Auth::id() . '\\img\\');
+        foreach ($files as $file){
+            $a_files[] = '/' . str_replace('public', 'storage', $file);
         }
-        return response()->json($a_files);
 
+        return response()->json($a_files);
     }
 
 }

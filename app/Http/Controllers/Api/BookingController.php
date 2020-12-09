@@ -35,11 +35,12 @@ class BookingController extends Controller
         $this->bookingDataService = $bookingDataService;
     }
 
-    function test(Request $request) {
+    function test(Request $request)
+    {
         $fields = $request->all();
         $client = new GuzzleHttp\Client(['base_uri' => $fields['booking_url']]);
         $response = $client->request('GET', 'hotels?hotel_ids=10004',
-            [ 'auth' => [ $fields['booking_login'], $fields['booking_password'] ] ] );
+            ['auth' => [$fields['booking_login'], $fields['booking_password']]]);
         return response($response->getBody());
     }
 
@@ -48,12 +49,15 @@ class BookingController extends Controller
      */
     public function importCities(): JsonResponse
     {
-        try {
+        try
+        {
             $count = $this->bookingDataImportService->importCitiesFromBookingApi();
-        } catch (GuzzleHttp\Exception\GuzzleException $e) {
+        }
+        catch (GuzzleHttp\Exception\GuzzleException $e)
+        {
             return response()->json(['error' => 'Something went wrong'], 500);
         }
-        return response()->json(['message' => $count.' objects imported']);
+        return response()->json(['message' => $count . ' objects imported']);
     }
 
     /**
@@ -62,24 +66,32 @@ class BookingController extends Controller
      */
     public function importFacilities(): JsonResponse
     {
-        try {
+        try
+        {
             $featuresUpdate = $this->bookingDataImportService->importFacilitiesFromBookingApi();
-        } catch (GuzzleHttp\Exception\GuzzleException $e) {
+        }
+        catch (GuzzleHttp\Exception\GuzzleException $e)
+        {
             return response()->json(['error' => 'Something went wrong'], 500);
         }
         return response()->json($featuresUpdate);
     }
 
-    function importRoomTypes() {
-        try {
+    function importRoomTypes()
+    {
+        try
+        {
             $count = $this->bookingDataImportService->importRoomTypesFromBookingApi();
-        } catch (GuzzleHttp\Exception\GuzzleException $e) {
+        }
+        catch (GuzzleHttp\Exception\GuzzleException $e)
+        {
             return response()->json(['error' => 'Something went wrong'], 500);
         }
-        return response()->json(['message' => $count.' objects imported']);
+        return response()->json(['message' => $count . ' objects imported']);
     }
 
-    function getFeatures() {
+    function getFeatures()
+    {
         $childrenFeatures = $this->bookingDataService->getChildrenFeatures();
         $rootFeatures = $this->bookingDataService->filterFeatures($childrenFeatures, 0);
         $rootedFeatures = $this->bookingDataService->getRootedFeatures($rootFeatures, $childrenFeatures);
@@ -113,7 +125,8 @@ class BookingController extends Controller
         return response()->json($shower);
     }
 
-    public function getCities() {
+    public function getCities()
+    {
         $citiesCount = $this->bookingDataService->getCitiesCount();
         return response()->json(['count' => $citiesCount]);
     }
@@ -122,12 +135,18 @@ class BookingController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    function getHotels(Request $request) {
-        try {
+    function getHotels(Request $request)
+    {
+        try
+        {
             $hotelsArray = $this->bookingDataService->getHotelsByCityAndTypeFromApi($request->city, $request->type);
-        } catch (GuzzleHttp\Exception\GuzzleException $e) {
+        }
+        catch (GuzzleHttp\Exception\GuzzleException $e)
+        {
             return response()->json(['error' => 'Something went wrong', 'message' => $e->getMessage()], 500);
-        } catch (ModelNotFoundException $e) {
+        }
+        catch (ModelNotFoundException $e)
+        {
             return response()->json(['error' => 'City not found'], 500);
         }
         return response()->json($hotelsArray);

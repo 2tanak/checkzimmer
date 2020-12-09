@@ -52,6 +52,7 @@ class BookingApiService
     private function getApiData(string $method, string $url)
     {
         $response = $this->client->request($method, $url, [ 'auth' => [ $this->options['booking_login'], $this->options['booking_password'] ] ]);
+
         return json_decode($response->getBody(), true);
     }
 
@@ -73,7 +74,6 @@ class BookingApiService
     public function getFacilities()
     {
         return $this->getApiData('GET', 'facilityTypes');
-
     }
 
     /**
@@ -134,6 +134,5 @@ class BookingApiService
         return $this->getApiData('GET','hotels?hotel_ids='.$hotel_id.'&rows=1'.
             '&extras=room_info,room_photos,room_description,room_facilities,hotel_facilities,');
     }
-
 
 }

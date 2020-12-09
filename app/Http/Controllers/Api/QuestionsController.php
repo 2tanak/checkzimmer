@@ -12,19 +12,22 @@ class QuestionsController extends Controller
         return response()->json( Question::all() );
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         Question::find($id)->delete();
 
         return response()->json(['code' => 'ok']);
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         Question::find($id)->update(['response' => $request->answer]);
 
         return response()->json(['code' => 'ok']);
     }
 
-    public function create(Request $request) {
+    public function create(Request $request)
+    {
         $data = [
             'question' => $request->question,
             'property_id' => (int) $request->property_id,
@@ -37,7 +40,8 @@ class QuestionsController extends Controller
         return redirect('/');
     }
 
-    public function paginated() {
+    public function paginated()
+    {
         return response()->json( Question::where('response', '!=', '')->paginate(50) );
     }
 }

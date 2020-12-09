@@ -39,7 +39,8 @@ class PropertyController extends Controller
         return response()->json(['objects' => $objects, 'coords' => null]);
     }
 
-    public function queryFilter(Request $request){
+    public function queryFilter(Request $request)
+    {
         $data = $request->input();
         $address = $data['address'];
         $km = $data['km'] ? $data['km']  : 10;
@@ -56,10 +57,12 @@ class PropertyController extends Controller
             $objects[$key]->rate = array_reduce( $ratings, function($carry, $item) { return $carry + $item['rating']; } ) / $count;
             $objects[$key]->geo = $geo_data;
         }
+
         return response()->json(['objects' => $objects, 'coords' => $geo_data]);
     }
 
-    public function querySort (Request $request){
+    public function querySort (Request $request)
+    {
         $data = $request->input();
 
         $objects = Property::orderBy($data['field'], $data['sort'])->paginate(20);
@@ -67,7 +70,8 @@ class PropertyController extends Controller
         return response()->json(['objects' => $objects, 'coords' => null]);
     }
 
-    public function initMap(){
+    public function initMap()
+    {
         $coords = [];
 
         foreach (Property::paginate(100) as $object) {
@@ -80,25 +84,30 @@ class PropertyController extends Controller
         return response()->json(['coords' => $coords]);
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $property = Property::findOrFail($id);
+
         return response()->json($property);
     }
 
-    public function init() {
+    public function init()
+    {
         $property = Property::orderBy('created_at')->limit(10)->get();
+
         return response()->json($property);
     }
 
-    public function queryProperty(Request $request) {
+    public function queryProperty(Request $request)
+    {
         $fields = $request->all();
         $property = Property::whereIn('id', $fields['id'])->get();
 
         return response()->json($property);
     }
 
-    public function destroy(Property $property) {
-
+    public function destroy(Property $property)
+    {
         foreach ($property->rooms as $room) {
             Option::where(['parent' => $room->id, 'type' => 'room'])->delete();
         }
@@ -108,7 +117,8 @@ class PropertyController extends Controller
         return response()->json(['code' => 'ok']);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         request()->validate([
             'name'      => 'required',
             'address'   => 'required',

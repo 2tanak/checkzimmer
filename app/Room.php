@@ -16,52 +16,60 @@ class Room extends Model
     protected $fillableRelations = ['options'];
     protected $with = ['options'];
 
-    static function hasFeature($name, $room_facilities) {
+    static function hasFeature($name, $room_facilities)
+    {
         $facilities = array_column($room_facilities, 'name');
+
         return array_search($name, $facilities) !== false;
     }
 
-    static function getKitchenType($room_facilities, $hotel_facilities) {
-        if (self::hasFeature('Kitchenette', $room_facilities)) {
+    static function getKitchenType($room_facilities, $hotel_facilities)
+    {
+        if (self::hasFeature('Kitchenette', $room_facilities)){
             return 'kitchenette';
         }
-        if (Property::hasFeature('Shared kitchen', $hotel_facilities)) {
+        if (Property::hasFeature('Shared kitchen', $hotel_facilities)){
             return 'shared';
         }
-        if (self::hasFeature('Kitchen', $room_facilities)) {
+        if (self::hasFeature('Kitchen', $room_facilities)){
             return 'single';
         }
         return 'none';
     }
 
-    static function getShowerType($room_facilities) {
-        if (self::hasFeature('Shared bathroom', $room_facilities)) {
+    static function getShowerType($room_facilities)
+    {
+        if (self::hasFeature('Shared bathroom', $room_facilities)){
             return 'shared';
         }
-        if (self::hasFeature('Shower', $room_facilities) || self::hasFeature('Private bathroom', $room_facilities)) {
+        if (self::hasFeature('Shower', $room_facilities) || self::hasFeature('Private bathroom', $room_facilities)){
             return 'single';
         }
         return 'none';
     }
 
-    static function getBedroomType($bedrooms) {
-        if (count($bedrooms) == 0) {
+    static function getBedroomType($bedrooms)
+    {
+        if (count($bedrooms) == 0){
             return 'none';
         }
-        foreach ($bedrooms as $bedroom) {
-            if (strpos($bedroom['description'], 'double') !== false) {
+        foreach ($bedrooms as $bedroom){
+            if (strpos($bedroom['description'], 'double') !== false){
                 return 'double';
             }
         }
         return 'single';
     }
 
-    public function options() {
+    public function options()
+    {
         return $this->hasMany(Option::class, 'parent')->where('type', 'room');
     }
 
-    public function getKitchenTypeText() {
-        switch ($this->kitchen) {
+    public function getKitchenTypeText()
+    {
+        switch ($this->kitchen)
+        {
             case 'kitchenette':
             case 'single':
                 return 'своя';
@@ -72,9 +80,10 @@ class Room extends Model
         }
     }
 
-    public function getKitchenLabelColor() {
+    public function getKitchenLabelColor()
+    {
         $type = $this->kitchen;
-        if ($type == 'kitchenette' || $type == 'single') {
+        if ($type == 'kitchenette' || $type == 'single'){
             return self::PRIVATE_COLOR;
         } elseif ($type == 'shared') {
             return self::SHARED_COLOR;
@@ -82,8 +91,10 @@ class Room extends Model
         return self::NONE_COLOR;
     }
 
-    public function getShowerTypeText() {
-        switch ($this->shower) {
+    public function getShowerTypeText()
+    {
+        switch ($this->shower)
+        {
             case 'single':
                 return 'свой';
             case 'shared':
@@ -92,8 +103,10 @@ class Room extends Model
         return 'none';
     }
 
-    public function getShowerLabelColor() {
-        switch ($this->shower) {
+    public function getShowerLabelColor()
+    {
+        switch ($this->shower)
+        {
             case 'single':
                 return self::PRIVATE_COLOR;
             case 'shared':
@@ -102,8 +115,10 @@ class Room extends Model
         return self::NONE_COLOR;
     }
 
-    public function getBedroomTypeText() {
-        switch ($this->bed) {
+    public function getBedroomTypeText()
+    {
+        switch ($this->bed)
+        {
             case 'single':
                 return 'одноместная';
             case 'double':
@@ -112,8 +127,10 @@ class Room extends Model
         return 'неизвестно';
     }
 
-    public function getBedroomLabelColor() {
-        switch ($this->bed) {
+    public function getBedroomLabelColor()
+    {
+        switch ($this->bed)
+        {
             case 'single':
                 return self::PRIVATE_COLOR;
             case 'double':
@@ -122,10 +139,11 @@ class Room extends Model
         return self::NONE_COLOR;
     }
 
-    public function getPersonsText() {
-        if ($this->person == 1) {
+    public function getPersonsText()
+    {
+        if ($this->person == 1){
             return 'одноместная';
-        } elseif ($this->person == 2) {
+        } elseif ($this->person == 2){
             return 'двухместная';
         }
         return 'на много мест';
@@ -136,13 +154,14 @@ class Room extends Model
         parent::fill($attributes); // TODO: Change the autogenerated stub
 
         //TODO вынести в трейт fillRelations
-        foreach ($this->fillableRelations as $fillableRelationName){
-            if(array_key_exists($fillableRelationName, $attributes)){
+        foreach ($this->fillableRelations as $fillableRelationName)
+        {
+            if (array_key_exists($fillableRelationName, $attributes)){
                 $relationData = $attributes[$fillableRelationName];
                 $currentRelation = $this->$fillableRelationName;
 
-                array_map(static function(array $data) use ($currentRelation){
-                    $relationModel = $currentRelation->filter(function ($item) use ($data){
+                array_map(static function (array $data) use ($currentRelation) {
+                    $relationModel = $currentRelation->filter(function ($item) use ($data) {
                         return $item->id === $data['id'];
                     })->first();
 
