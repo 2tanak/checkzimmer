@@ -201,14 +201,11 @@
                                                     <div class="col-md-3 mb-4" v-for="element in rooms[i].photos" :key="element.id">
                                                         <div class="photos-gallery-item">
                                                             <img :src="element.url_max300">
-<!--                                                            @click="curRoom = room; imgPath = element.url_original-->
-<!--                                                            v-b-modal.deletePhotoSmallGallery-->
                                                             <a class="delete-photo-link" href="" @click.prevent="deletePhotoSmallGalleryOk($event, room, element.id)">&times;</a>
                                                             <div v-b-modal.bigPhotoModal class="blackout" @click="imgPath = element.url_original"></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 mb-4 add-photo-container">
-<!--                                                        add-photo-room-->
                                                         <input type="file" :id="i" class="inputfile" ref="inputfilePhotoRoom" @change="savePhotoRoom($event, rooms[i])" accept="image/*">
                                                         <label :for="i"><span>&#10010;</span></label>
                                                     </div>
@@ -240,10 +237,6 @@
 
         <b-modal id="deletePhotoSmallGallery" title="Delete Room Photo" @ok="deletePhotoSmallGalleryOk">
             <p class="text-danger">Are you sure you want to delete this photo?</p>
-        </b-modal>
-
-        <b-modal v-model="show" ref="deleteRoom" title="Delete Room" data-date="deleteRoom">
-<!--            <p class="text-danger">Are you sure you want to delete this room?</p>-->
         </b-modal>
 
         <b-modal id="bigPhotoModal" data-date="imgPath" size="xl" title="Picture">
@@ -372,7 +365,10 @@ export default {
                 }
             }
         },
-        savePhotoRoom: function(event, room ) {
+        savePhotoRoom: function(event, room) {
+            if(!room.photos){
+                room.photos = [];
+            }
             const input = event.target;
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
@@ -462,8 +458,6 @@ export default {
             });
             properties.update(this.property.id, this.property)
                 .then(resp => {
-                    // console.log(resp);
-                    // this.property = resp.data;
                     properties.get(this.$route.params.item)
                         .then(resp => {
                             this.property = resp.data;
@@ -516,11 +510,6 @@ export default {
                                     })
                             })
                     }
-                })
-        },
-        showPhoto(e, pathPhoto) {
-            this.$bvModal.msgBoxConfirm('')
-                .then(value => {
                 })
         },
         deleteNewRoom() {

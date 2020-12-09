@@ -146,6 +146,16 @@ class PropertyController extends Controller
         $item = new Property($data);
         $item->save();
 
+        $optionsData = [
+            'key'    => 'photos',
+            'parent' => $item->id,
+            'type'   => 'property',
+            'value'  => '[]',
+        ];
+        $item->options()->create($optionsData);
+
+        $item->save();
+
         return $item ? response()->json(['code' => 'ok','user' => $item]) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
     }
 
