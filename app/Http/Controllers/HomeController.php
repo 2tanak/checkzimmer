@@ -49,7 +49,7 @@ class HomeController extends Controller
     public function singleProperty($slug)
     {
         $hotel = Property::where('slug', $slug)->firstOrFail();
-        //dd($hotel->photos());
+
         $hotel->views++;
         $hotel->save();
         $options = $hotel->options->toArray();
@@ -67,4 +67,9 @@ class HomeController extends Controller
     {
         return view('favorites');
     }
+    public function plans()
+    {
+        return view('plans');
+    }
+
 }

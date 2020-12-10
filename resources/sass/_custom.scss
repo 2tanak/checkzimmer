@@ -625,9 +625,6 @@ header .head-search img {
     right: -39px;
     content: none;
 }
-footer#main-footer.margin {
-    margin-bottom: 76px;
-}
 footer#main-footer {
     border-top: 1px solid #dadadf;
     background-color: #ffffff;
@@ -647,6 +644,9 @@ footer#main-footer a.footer-logo {
     display: flex;
     align-items: center;
     margin-right: 262px;
+}
+footer#main-footer svg.logo-mobile {
+    display: none;
 }
 footer#main-footer img.footer-logo-img {
     width: 30px;
@@ -2081,6 +2081,12 @@ label.mobile-label {
     header a.whatsapp-number {
         display: none;
     }
+    footer#main-footer svg.logo-mobile {
+        display: block;
+    }
+    footer#main-footer svg.logo-desctope {
+        display: none;
+    }
     .property-list .property-list-subhead .property-list-subhead-gallery {
         display: none;
     }
@@ -2479,9 +2485,6 @@ label.mobile-label {
     footer#main-footer ul.footer-menu li:first-of-type {
         margin-bottom: 5px;
     }
-    footer#main-footer.margin {
-        margin-bottom: 68px;
-    }
     .list-content .sample-block {
         flex-wrap: wrap;
         background-color: #e7e7e7;
@@ -2682,9 +2685,6 @@ label.mobile-label {
     }
     .property.not-map .property-card .distance .desctop-span {
         display: none;
-    }
-    footer#main-footer.margin {
-        margin-bottom: 60px;
     }
 }
 
@@ -5450,11 +5450,6 @@ label.mobile-label {
         display: flex;
     }
 }
-@media (min-width: 991px) {
-    footer#main-footer.margin {
-        margin-bottom: 0;
-    }
-}
 @media (max-width: 720px) {
     .single-header-content a.head-logo {
         margin-right: 15px;
@@ -5998,3 +5993,606 @@ label.mobile-label {
 }
 
 /*---end-single---*/
+
+/*---plans---*/
+
+.plans-section {
+    position: relative;
+}
+.plans-section:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1101px;
+    background-image: url("/img/plans-bg.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.plans-container {
+    width: 100%;
+    max-width: 1240px;
+    margin: auto;
+    padding: 0 30px;
+}
+.plans-section .plans-content {
+    padding: 100px 0;
+}
+.plans-section h1 {
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 130%;
+    text-align: center;
+    color: #333646;
+}
+.plans-section .subtitle {
+    margin: 0 auto 34px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 150%;
+    text-align: center;
+    color: #545769;
+    width: 100%;
+    max-width: 728px;
+}
+.plans-section .questions-block {
+    background: #FCFCFF;
+    box-shadow: 0 0 14px rgba(51, 54, 70, 0.14);
+    border-radius: 12px;
+    position: relative;
+    width: 100%;
+    max-width: 1120px;
+    margin: auto;
+}
+.plans-section .questions-block:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    background: #FFFFFF;
+    box-shadow: 0 4px 30px rgba(51, 54, 70, 0.16);
+    border-radius: 14px;
+    z-index: -1;
+    width: 100%;
+    max-width: 1060px;
+    height: 110px;
+}
+.plans-section .questions-content {
+    padding: 100px 170px;
+}
+.plans-section .questions-block .title {
+    margin-bottom: 41px;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 130%;
+    text-align: center;
+    color: #333646;
+}
+.plans-section .questions-item {
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border-bottom: 1px solid #E8E8ED;
+}
+.plans-section .questions-item:first-of-type {
+    border-top: 0;
+    padding-top: 0;
+}
+.plans-section .collapse-button {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 150%;
+    color: #333646;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    transition: all 0.2s;
+}
+.plans-section .collapse-button:hover {
+    color: #3b8b3e;
+}
+.plans-section .collapse-button .point {
+    min-width: 6px;
+    max-width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #333646;
+    transition: all 0.2s;
+    margin-right: 12px;
+    margin-top: 11px;
+}
+.plans-section .collapse-button:hover .point {
+    background-color: #3b8b3e;
+}
+.plans-section .collapse-button .plus-minus {
+    min-width: 30px;
+    max-width: 30px;
+    height: 30px;
+    border: 1px solid #C5C5C7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    background-color: #f2f2f2;
+    transition: all 0.2s;
+    margin-left: 15px;
+}
+.plans-section .collapse-button:hover .plus-minus {
+    background-color: transparent;
+}
+.plans-section .collapse-button .plus-minus:after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 12px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+    background-color: #545769;
+    border-radius: 1px;
+    transition: all 0.2s;
+}
+.plans-section .collapse-button .plus-minus:before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 12px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #545769;
+    border-radius: 1px;
+    transition: all 0.2s;
+}
+.plans-section .collapse-button:hover .plus-minus:after {
+    background: #3b8b3e;
+}
+.plans-section .collapse-button:hover .plus-minus:before {
+    background: #3b8b3e;
+}
+.plans-section .collapse-button[aria-expanded="true"] {
+    color: #545769;
+}
+.plans-section .collapse-button[aria-expanded="true"] .point {
+    background: #545769;
+}
+.plans-section .collapse-button[aria-expanded="true"]:hover {
+    color: #545769;
+}
+.plans-section .collapse-button[aria-expanded="true"] .plus-minus {
+    background: #fff0db;
+    border: 1px solid #fff0db;
+}
+.plans-section .collapse-button[aria-expanded="true"] .plus-minus:before {
+    transform: translate(-50%, -50%) rotate(90deg);
+    background: #df9d3c;
+}
+.plans-section .collapse-button[aria-expanded="true"] .plus-minus:after {
+    background: #df9d3c;
+}
+.plans-section .collapse-button[aria-expanded="true"]:hover .plus-minus:before {
+    transform: translate(-50%, -50%) rotate(90deg);
+    background: #df9d3c;
+}
+.plans-section .collapse-button[aria-expanded="true"]:hover .plus-minus:after {
+    background: #df9d3c;
+}
+.plans-section .collapse-content {
+    padding-left: 18px;
+}
+.plans-section .collapse-content p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 160%;
+    color: #545769;
+    margin-top: 1rem;
+}
+.plans-section .collapse-content p:first-of-type {
+    padding-top: 9px;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.plans-section .collapse-content p:last-of-type {
+    margin-bottom: 0;
+}
+.plans-section .questions-block-item {
+    margin-bottom: 39px;
+}
+.plans-section .communication-manager {
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    max-width: 403px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 160%;
+    color: #545769;
+}
+.plans-section .communication-manager a.communication-manager {
+    background: #FFFFFF;
+    border: 1px solid #6BB63F;
+    box-sizing: border-box;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 240px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 100%;
+    color: #3B8B3E;
+    transition: all 0.2s;
+    margin-top: 17px;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(29, 29, 36, 0.16);
+}
+.plans-section .communication-manager a.communication-manager:hover {
+    color: #ffffff;
+    background-color: #6BB63F;
+}
+.plans-section .price-block {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 100px;
+}
+.plans-section .price-block-item {
+    width: 100%;
+    max-width: 295px;
+    border-radius: 12px;
+    position: relative;
+}
+.plans-section .price-block-item:first-of-type:after {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    top: 0;
+    right: 0;
+    background: #CFCFD4;
+}
+.plans-section .price-block-item:last-of-type:after {
+    content: none;
+}
+.plans-section .price-block-item .price-block-head {
+    padding: 33px 30px 17px 30px;
+    margin-bottom: 17px;
+}
+.plans-section .price-block-item:last-of-type {
+    border-right: 0;
+}
+.plans-section .price-block-item .price-block-body {
+    padding: 0 30px 36px 30px;
+}
+.plans-section .price-block-item .name-tariff {
+    padding: 4px 10px;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 130%;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+    background: #8A8B91;
+    border-radius: 100px;
+    margin-bottom: 25px;
+    display: inline-block;
+}
+.plans-section .price-block-item .price-item {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+.plans-section .price-block-item .max-price {
+    font-weight: 600;
+    font-size: 38px;
+    line-height: 85%;
+    letter-spacing: -0.04em;
+    color: #333646;
+    position: relative;
+    margin-right: 10px;
+}
+.plans-section .price-block-item .max-price span {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    font-size: 18px;
+    line-height: 130%;
+}
+.plans-section .price-block-item .month {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: #333646;
+}
+.plans-section .price-block-item .description {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 160%;
+    color: #545769;
+}
+.plans-section .price-block-item .advantages {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.plans-section .price-block-item .advantages li {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 140%;
+    color: #333646;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+}
+.plans-section .price-block-item .advantages li:last-of-type {
+    margin-bottom: 0;
+}
+.plans-section .price-block-item .advantages svg {
+    display: block;
+    margin-right: 8px;
+    min-width: 18px;
+    max-width: 18px;
+    height: 18px;
+}
+.plans-section .price-block-item .advantages .not-available {
+    color: #B5B7C1;
+}
+.plans-section .price-block-item.popular {
+    background: #FFFFFF;
+}
+.plans-section .price-block-item.popular:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 4px solid #6BB63F;
+    border-radius: 12px;
+    pointer-events: none;
+}
+.plans-section .price-block-item.popular:after {
+    content: none;
+}
+.plans-section .price-block-item.popular .price-block-head {
+    background: #E7F5F0;
+    border-radius: 12px 12px 0 0;
+}
+.plans-section .price-block-item.popular .name-tariff {
+    background: #6BB63F;
+}
+.plans-section .price-block-item a.choose-plan {
+    background: #F8F9FB;
+    border: 1px solid #6BB63F;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(29, 29, 36, 0.16);
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 100%;
+    color: #3B8B3E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 12px;
+    width: 100%;
+    height: 48px;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+.plans-section .price-block-item a.choose-plan:hover {
+    background: #6BB63F;
+    border: 1px solid #6BB63F;
+    box-shadow: 0 4px 10px rgba(107, 182, 63, 0.16);
+    border-radius: 6px;
+    color: #F8F9FB;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+}
+.plans-section .price-block-item.popular a.choose-plan {
+    background: #6BB63F;
+    box-shadow: 0 4px 10px rgba(107, 182, 63, 0.4);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+    color: #FFFFFF;
+}
+.plans-section .price-block-item.popular:hover a.choose-plan {
+    background: #6BB63F;
+    box-shadow: 0 4px 10px rgba(107, 182, 63, 0.4);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+    color: #FFFFFF;
+}
+.plans-section .price-block-item .footnote {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 130%;
+    color: #545769;
+}
+.plans-section .price-block-item.popular .advantages svg circle {
+    fill: #6BB63F;
+}
+
+
+@media (max-width: 991px) {
+    .plans-section h1 {
+        font-size: 24px;
+        line-height: 120%;
+    }
+    .plans-section .subtitle {
+        font-size: 14px;
+        line-height: 130%;
+        max-width: 500px;
+        margin: 0 auto 28px;
+    }
+    .plans-section .plans-content {
+        padding: 34px 0 40px 0;
+    }
+    .plans-section .questions-content {
+        padding: 40px 16px;
+    }
+    .plans-section .questions-block {
+        border-radius: 0;
+    }
+    .plans-section .questions-block .title {
+        font-size: 24px;
+        line-height: 120%;
+    }
+    .plans-section .questions-block-item {
+        margin-bottom: 29px;
+    }
+    .plans-section .price-block {
+        margin-bottom: 60px;
+    }
+    .plans-container {
+        padding: 0 16px;
+    }
+    .plans-section .price-block-item .advantages li {
+        align-items: flex-start;
+    }
+    .plans-section .price-block-item .name-tariff {
+        margin-bottom: 15px;
+    }
+    .plans-section .price-block-item .price-item {
+        margin-bottom: 10px;
+    }
+    .plans-section .price-block-item .description {
+        font-weight: 400;
+        font-size: 15px;
+    }
+    .plans-section .price-block-item .price-block-head {
+        padding: 26px 14px 13px 14px;
+        margin-bottom: 13px;
+    }
+    .plans-section .price-block-item .price-block-body {
+        padding: 0 14px 36px 14px;
+    }
+    .plans-section .price-block-item a.choose-plan {
+        margin-top: 26px;
+    }
+    .plans-section .price-block-item .max-price {
+        margin-right: 7px;
+    }
+    .plans-section:after {
+        content: none;
+    }
+}
+@media (max-width: 750px) {
+    .plans-section .price-block {
+        flex-wrap: wrap;
+    }
+}
+@media (max-width: 640px) {
+    .plans-section .price-block-item .price-block-head {
+        padding: 26px 20px 13px 20px;
+    }
+    .plans-section .price-block-item .price-block-body {
+        padding: 0 20px 26px 20px;
+    }
+    .plans-section .price-block-item {
+        width: 50%;
+        max-width: none;
+    }
+}
+@media (max-width: 575px) {
+    .plans-container {
+        padding: 0 20px;
+    }
+    .plans-section h1 {
+        font-size: 22px;
+        margin-bottom: 18px;
+    }
+    .plans-section .subtitle {
+        margin: 0 auto 38px;
+        line-height: 140%;
+    }
+    .plans-section .questions-content {
+        padding: 34px 16px 40px 16px;
+    }
+    .plans-section .questions-block .title {
+        font-size: 22px;
+        margin-bottom: 37px;
+    }
+    .plans-section .questions-block:after {
+        max-width: 420px;
+    }
+    .plans-section .collapse-button {
+        font-size: 17px;
+    }
+    .plans-section .collapse-content p {
+        font-size: 15px;
+    }
+    .plans-section .questions-block-item {
+        margin-bottom: 24px;
+    }
+    .plans-section .communication-manager {
+        max-width: none;
+    }
+    .plans-section .communication-manager a.communication-manager {
+        max-width: none;
+    }
+    .plans-section .price-block {
+        margin-bottom: 40px;
+    }
+}
+@media (max-width: 440px) {
+    .plans-section .price-block-item {
+        width: 100%;
+    }
+    .plans-section .price-block-item:first-of-type:after {
+        width: 100%;
+        height: 1px;
+        bottom: 0;
+        top: auto;
+        right: auto;
+        left: 0;
+    }
+    .plans-section .price-block-item:last-of-type:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        bottom: 0;
+        top: auto;
+        right: auto;
+        left: 0;
+        background: #CFCFD4;
+    }
+    .plans-container {
+        padding: 0 16px;
+    }
+    .plans-section .price-block-item .price-block-head {
+        padding: 0 26px 13px 26px;
+    }
+    .plans-section .price-block-item:first-of-type {
+        margin-bottom: 26px;
+    }
+    .plans-section .price-block-item .description {
+        line-height: 140%;
+    }
+    .plans-section .price-block-item.popular .price-block-head {
+        padding-top: 22px;
+    }
+    .plans-section .price-block-item.popular {
+        margin-bottom: 26px;
+    }
+}
+@media (max-width: 320px) {
+    .plans-section .subtitle {
+        margin: 0 auto 48px;
+    }
+    .plans-section .plans-content {
+        padding: 40px 0;
+    }
+    .plans-section .questions-block:after {
+        max-width: 260px;
+    }
+}
+
+/*---end-plans---*/

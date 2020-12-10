@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -15,7 +16,6 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
     <!-- Styles -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -24,7 +24,7 @@
 <div id="app" class="property-list">
     <header>
         <div class="container">
-            <div class="header-content single-header-content">
+            <div class="header-content">
                 <div class="mobile-button">
                     <input type="checkbox" id="checkbox-item" class="checkbox visuallyHidden">
                     <label for="checkbox-item" class="hamburger-label">
@@ -59,10 +59,6 @@
                         </defs>
                     </svg>
                 </a>
-                <div class="head-search">
-                    <img src="/svg/i-search-input.svg" alt="alt">
-                    <input type="search" placeholder="Введите город почтовый индекс или регион">
-                </div>
                 <div class="main-menu">
                     <ul>
                         <li>
@@ -73,14 +69,29 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/plans">
-                                <img class="normal" src="/svg/i-rent-header.svg" alt="Аренда Жилья">
-                                <img class="hover" src="/svg/i-rent-hover.svg" alt="Аренда Жилья">
-                                Сдать жилье
+                             <a href="/plans">
+                                 <img class="normal" src="/svg/i-rent-header.svg" alt="Аренда Жилья">
+                                 <img class="hover" src="/svg/i-rent-hover.svg" alt="Аренда Жилья">
+                                 Сдать жилье
+                             </a>
+                         </li>
+                        <li>
+                            <a class="personal-area-link" href="#">
+                                <img class="normal" src="/svg/i-account-header.svg" alt="Аренда Жилья">
+                                <img class="hover" src="/svg/i-account-hover.svg" alt="Аренда Жилья">
+                                Личный Кабинет
                             </a>
                         </li>
                     </ul>
                 </div>
+                <a class="whatsapp-number" href="tel:{{ str_replace(' ', '', $options['website_phone'] ?? '') }}">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M27.36 4.59867C24.32 1.66 20.32 0 16.06 0C3.83333 0 -3.844 13.2467 2.26133 23.784L0 32L8.44667 29.7973C12.1267 31.7853 15.1413 31.6093 16.068 31.7267C30.2453 31.7267 37.3027 14.5747 27.34 4.65067L27.36 4.59867Z" fill="#E8E9EB"/>
+                        <path d="M16.0892 29.0011L16.0812 28.9998H16.0598C11.8172 28.9998 9.10651 26.9905 8.83984 26.8745L3.83984 28.1745L5.17984 23.3145L4.86118 22.8145C3.54118 20.7131 2.83984 18.2931 2.83984 15.8011C2.83984 4.07713 17.1665 -1.78554 25.4572 6.50113C33.7278 14.7011 27.9212 29.0011 16.0892 29.0011Z" fill="#4CAF50"/>
+                        <path d="M23.3429 19.0759L23.3309 19.1759C22.9295 18.9759 20.9749 18.0199 20.6109 17.8879C19.7935 17.5852 20.0242 17.8399 18.4549 19.6372C18.2215 19.8972 17.9895 19.9172 17.5935 19.7372C17.1935 19.5372 15.9095 19.1172 14.3895 17.7572C13.2055 16.6972 12.4109 15.3972 12.1762 14.9972C11.7855 14.3226 12.6029 14.2266 13.3469 12.8186C13.4802 12.5386 13.4122 12.3186 13.3135 12.1199C13.2135 11.9199 12.4175 9.9599 12.0842 9.17857C11.7642 8.3999 11.4349 8.49857 11.1882 8.49857C10.4202 8.4319 9.85885 8.44257 9.36418 8.95723C7.21218 11.3226 7.75485 13.7626 9.59618 16.3572C13.2149 21.0932 15.1429 21.9652 18.6682 23.1759C19.6202 23.4786 20.4882 23.4359 21.1749 23.3372C21.9402 23.2159 23.5309 22.3759 23.8629 21.4359C24.2029 20.4959 24.2029 19.7159 24.1029 19.5359C24.0042 19.3559 23.7429 19.2559 23.3429 19.0759Z" fill="#FAFAFA"/>
+                    </svg>
+                    {{ $options['website_phone'] ?? '' }}
+                </a>
                 <a href="#" class="mobile-accaunt personal-area-link"><img src="/svg/i-account-mobile.svg" alt="mobile-accaunt"></a>
             </div>
         </div>
@@ -104,9 +115,9 @@
                     </a>
                 </li>
             </ul>
-            <a class="whatsapp-number" href="tel:+49 341 1234 2223">
+            <a class="whatsapp-number" href="tel:{{ str_replace(' ', '', $options['website_phone'] ?? '') }}">
                 <img src="/svg/whatsapp-mobile.svg" alt="Whatsapp">
-                +49 341 1234 2223
+                {{ $options['website_phone'] ?? '' }}
             </a>
         </div>
 
@@ -115,6 +126,82 @@
     <main class="py-4">
         @yield('content')
     </main>
+
+    <div class="modal-overlay">
+
+        <div class="modal-block modal-login show">
+            <div class="modal-content-item">
+                <div class="modal-close">
+                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0956 2.0934C10.369 1.82004 10.369 1.37682 10.0956 1.10345C9.82227 0.830087 9.37906 0.830087 9.10569 1.10345L5.49959 4.70956L1.89389 1.10387C1.62053 0.830501 1.17731 0.830501 0.903944 1.10387C0.630577 1.37724 0.630577 1.82045 0.903944 2.09382L4.50964 5.69951L0.903253 9.30589C0.629887 9.57926 0.629886 10.0225 0.903253 10.2958C1.17662 10.5692 1.61984 10.5692 1.8932 10.2958L5.49959 6.68946L9.10638 10.2963C9.37975 10.5696 9.82297 10.5696 10.0963 10.2963C10.3697 10.0229 10.3697 9.57967 10.0963 9.30631L6.48954 5.69951L10.0956 2.0934Z" fill="#545769"/>
+                    </svg>
+                </div>
+                <div class="title">Войти</div>
+                <form class="modal-form login">
+                    <div class="text input-block">
+                        <div class="input-block-item">
+                            <input id="mail-phone" type="text">
+                            <label for="mail-phone">Email или номер телефона</label>
+                        </div>
+                        <div class="error-text">Вы не указали Email</div>
+                    </div>
+                    <div class="password input-block">
+                        <div class="input-block-item">
+                            <input id="password" type="password">
+                            <label for="password">Пароль</label>
+                            <a class="forgot-password desctop-link" href="#">Забыли пароль?</a>
+                            <a class="forgot-password mobile-link" href="#">Забыли?</a>
+                        </div>
+                        <div class="error-text">Вы не указали пароль</div>
+                    </div>
+                    <a class="entry login-link" href="#">Войти</a>
+                </form>
+                <div class="or">Или</div>
+                <a class="facebook-entry" href="#">
+                    <img class="standart" src="/svg/i-facebook-cube.svg" alt="Facebook Icon">
+                    <img class="hover" src="/svg/i-facebook-cube-hover.svg" alt="Facebook Icon">
+                    Войти через Facebook
+                </a>
+                <div class="new">Новый пользователь? <a href="#">Регистрация</a></div>
+            </div>
+        </div>
+
+        <div class="modal-block modal-forgot-password">
+            <div class="modal-content-item">
+                <div class="modal-close">
+                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0956 2.0934C10.369 1.82004 10.369 1.37682 10.0956 1.10345C9.82227 0.830087 9.37906 0.830087 9.10569 1.10345L5.49959 4.70956L1.89389 1.10387C1.62053 0.830501 1.17731 0.830501 0.903944 1.10387C0.630577 1.37724 0.630577 1.82045 0.903944 2.09382L4.50964 5.69951L0.903253 9.30589C0.629887 9.57926 0.629886 10.0225 0.903253 10.2958C1.17662 10.5692 1.61984 10.5692 1.8932 10.2958L5.49959 6.68946L9.10638 10.2963C9.37975 10.5696 9.82297 10.5696 10.0963 10.2963C10.3697 10.0229 10.3697 9.57967 10.0963 9.30631L6.48954 5.69951L10.0956 2.0934Z" fill="#545769"/>
+                    </svg>
+                </div>
+                <div class="title">Восстановление пароля</div>
+                <form>
+                    <div class="email input-block">
+                        <div class="input-block-item">
+                            <input id="mail" type="mail">
+                            <label for="mail">Укажите ваш email</label>
+                        </div>
+                        <div class="error-text">Вы не указали Email</div>
+                    </div>
+                    <a class="entry forgot-password-link" href="#">Сбросить пароль</a>
+                    <div class="new">Помните свой пароль? <a href="#" class="remember-login ">Войти</a></div>
+                </form>
+            </div>
+        </div>
+
+        <div class="modal-block modal-success">
+            <div class="modal-content-item">
+                <div class="modal-close">
+                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0956 2.0934C10.369 1.82004 10.369 1.37682 10.0956 1.10345C9.82227 0.830087 9.37906 0.830087 9.10569 1.10345L5.49959 4.70956L1.89389 1.10387C1.62053 0.830501 1.17731 0.830501 0.903944 1.10387C0.630577 1.37724 0.630577 1.82045 0.903944 2.09382L4.50964 5.69951L0.903253 9.30589C0.629887 9.57926 0.629886 10.0225 0.903253 10.2958C1.17662 10.5692 1.61984 10.5692 1.8932 10.2958L5.49959 6.68946L9.10638 10.2963C9.37975 10.5696 9.82297 10.5696 10.0963 10.2963C10.3697 10.0229 10.3697 9.57967 10.0963 9.30631L6.48954 5.69951L10.0956 2.0934Z" fill="#545769"/>
+                    </svg>
+                </div>
+                <img src="/svg/i-success-big.svg" alt="Success Icon">
+                <div class="title">Спасибо!</div>
+                <div class="description">На указанный вами email была отправленна инструкция по восстановлению пароля</div>
+            </div>
+        </div>
+
+    </div>
 
 </div>
 
@@ -148,144 +235,16 @@
                 <li><a href="#">Impressum</a></li>
             </ul>
             <div class="copyright">
-                Copyright 2020 Immobilien.de LLC All rights reserved.
+                {{ $options['copyright'] ?? '' }}
             </div>
         </div>
     </div>
-
-
-
-    <div class="modal-overlay inquiry-modal-overlay">
-        <div class="inquiry-modal">
-            <div class="modal-close">
-                <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0956 2.0934C10.369 1.82004 10.369 1.37682 10.0956 1.10345C9.82227 0.830087 9.37906 0.830087 9.10569 1.10345L5.49959 4.70956L1.89389 1.10387C1.62053 0.830501 1.17731 0.830501 0.903944 1.10387C0.630577 1.37724 0.630577 1.82045 0.903944 2.09382L4.50964 5.69951L0.903253 9.30589C0.629887 9.57926 0.629886 10.0225 0.903253 10.2958C1.17662 10.5692 1.61984 10.5692 1.8932 10.2958L5.49959 6.68946L9.10638 10.2963C9.37975 10.5696 9.82297 10.5696 10.0963 10.2963C10.3697 10.0229 10.3697 9.57967 10.0963 9.30631L6.48954 5.69951L10.0956 2.0934Z" fill="#545769"/>
-                </svg>
-            </div>
-            <div class="title">Отправить запрос</div>
-            <form>
-                <div class="input-block-item">
-                    <input id="company" type="text">
-                    <label for="company">Название компании</label>
-                </div>
-                <div class="input-block-item">
-                    <input id="name" type="text">
-                    <label for="name">Имя и Фамилия*</label>
-                </div>
-                <div class="input-block-item">
-                    <input id="email" type="email">
-                    <label for="email">Email*</label>
-                </div>
-                <div class="input-block-item">
-                    <input id="telephone" type="tel">
-                    <label for="telephone">Номер телефона*</label>
-                </div>
-                <div class="data-block">
-                    <input id="arrival-date" data-provide="datepicker" readonly>
-                    <label for="arrival-date">Дата заезда</label>
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13 0H14V2H16C16.5523 2 17 2.44772 17 3V6V7V17C17 17.5523 16.5523 18 16 18H2C1.44772 18 1 17.5523 1 17V7V6V3C1 2.44772 1.44772 2 2 2H4V0H5V2H13V0ZM5 3H4H2V6H16V3H14H13H5ZM16 17H2V7H16V17ZM10 12H14V13H10V12ZM14 10H10V11H14V10ZM4 12H8V13H4V12ZM8 10H4V11H8V10Z" fill="#7A8793"/>
-                    </svg>
-                </div>
-                <div class="data-block">
-                    <input id="date-departure" data-provide="datepicker" readonly>
-                    <label for="date-departure">Дата выезда</label>
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13 0H14V2H16C16.5523 2 17 2.44772 17 3V6V7V17C17 17.5523 16.5523 18 16 18H2C1.44772 18 1 17.5523 1 17V7V6V3C1 2.44772 1.44772 2 2 2H4V0H5V2H13V0ZM5 3H4H2V6H16V3H14H13H5ZM16 17H2V7H16V17ZM10 12H14V13H10V12ZM14 10H10V11H14V10ZM4 12H8V13H4V12ZM8 10H4V11H8V10Z" fill="#7A8793"/>
-                    </svg>
-                </div>
-                <div class="select-block">
-                    <select id="number-persons">
-                        <option>1 человек</option>
-                        <option>2 человека</option>
-                        <option>3 человека</option>
-                        <option>4 человека</option>
-                        <option>5 человек</option>
-                        <option>6 человек</option>
-                    </select>
-                    <label for="number-persons">Количество человек</label>
-                </div>
-                <div class="select-block">
-                    <select id="type">
-                        <option>квартира целиком</option>
-                        <option>дом</option>
-                        <option>комната</option>
-                        <option>гараж</option>
-                    </select>
-                    <label for="number-persons">Тип жилья</label>
-                </div>
-                <div class="text-area-block">
-                    <textarea placeholder="Сообщение собственнику"></textarea>
-                </div>
-                <div class="checkbox-block checkbox-middle">
-                    <input id="email-checkbox" class="checkbox" type="checkbox">
-                    <label for="email-checkbox">Отправьте мне копию на email</label>
-                </div>
-                <div class="checkbox-block checkbox-top">
-                    <input id="consent-checkbox" class="checkbox" type="checkbox">
-                    <label for="consent-checkbox">Я даю согласие на обработку моих данных, как описано в <a href="#">заявлении о согласии</a> от Checkzimmer.</label>
-                </div>
-                <a class="send-request" href="#">Отправить запрос</a>
-            </form>
-        </div>
-    </div>
-
-    <div class="modal-overlay slider-modal-overlay">
-        <div class="modal-close">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M23.2514 24.0004C23.0614 24.0004 22.8714 23.9304 22.7214 23.7804L12.0014 13.0604L1.28141 23.7804C0.991406 24.0704 0.511406 24.0704 0.221406 23.7804C-0.0685937 23.4904 -0.0685937 23.0104 0.221406 22.7204L10.9414 12.0004L0.221406 1.28043C-0.0685937 0.99043 -0.0685937 0.51043 0.221406 0.22043C0.511406 -0.0695703 0.991406 -0.0695703 1.28141 0.22043L12.0014 10.9404L22.7214 0.22043C23.0114 -0.0695703 23.4914 -0.0695703 23.7814 0.22043C24.0714 0.51043 24.0714 0.99043 23.7814 1.28043L13.0614 12.0004L23.7814 22.7204C24.0714 23.0104 24.0714 23.4904 23.7814 23.7804C23.6314 23.9304 23.4414 24.0004 23.2514 24.0004Z" fill="white"/>
-            </svg>
-        </div>
-        <div class="slider-block">
-            <div class="big-slider">
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-            </div>
-            <div class="small-slider">
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture2.png" alt="alt"></div>
-                <div class="slider-item"><img src="/img/property-picture.png" alt="alt"></div>
-            </div>
-            <div class="name-slide-number">
-                <div class="number">1/20</div>
-                <div class="dash">-</div>
-                <div class="name">Balkon</div>
-            </div>
-        </div>
-    </div>
-
-
 </footer>
 
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
 <script src="{{ asset('js/ui.js') }}" defer></script>
-<script src="{{ asset('js/select2.full.js') }}" defer></script>
 <script src="{{ asset('js/slick.min.js') }}" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" defer></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        jQuery('#arrival-date, #date-departure').datepicker({
-            autoclose: true
-        });
-    });
-</script>
+<script src="{{ asset('js/select2.full.js') }}" defer></script>
 
 
 </body>
