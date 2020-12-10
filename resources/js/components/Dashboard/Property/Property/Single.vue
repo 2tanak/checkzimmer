@@ -72,11 +72,12 @@
                                                 <div v-b-modal.bigPhotoModal class="blackout" @click="imgPath = element.url_original"></div>
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mb-4 add-photo-container">
-                                            <input type="file" id="add-photo" class="inputfile" ref="inputfile" @change="savePhotoHotel" accept="image/*">
-                                            <label for="add-photo"><span>&#10010;</span></label>
-                                        </div>
+
                                     </draggable>
+                                    <div class="col-md-2 mb-4 add-photo-container">
+                                        <input type="file" id="add-photo" class="inputfile" ref="inputfile" @change="savePhotoHotel" accept="image/*">
+                                        <label for="add-photo"><span>&#10010;</span></label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -315,23 +316,30 @@ export default {
                 this.rooms = this.property.rooms;
                 this.property.rooms.forEach( room => room.photos = this.getRoomPhotos(room));
                 this.imageData = this.getPhotos();
-            });
-        features.all()
-            .then(res => {
-                if(res.status === 200) {
-                    const features = Object.assign([], res.data);
-                    features.forEach(item => {
-                        item.check = this.property.features.findIndex(featuresItem => featuresItem.id === item.id) !== -1;
-                    });
-                    const featuresCategoryId = features.map(item => item.feature_category_id).filter((value, index, self ) => self.indexOf(value) === index);
-                    featuresCategoryId.forEach( categoryId => {
-                        this.features.push({
-                            name: features.find(feature => feature.feature_category_id === categoryId).feature_category.name,
-                            features: this.feature_category(features, categoryId)
-                        })
+                this.property.rooms.forEach(item => {
+                    item.options[3] = item.options[3] || '';
+                    item.options[4] = item.options[4] || '';
+                    return item;
+                });
+
+                features.all()
+                    .then(res => {
+                        if(res.status === 200) {
+                            const features = Object.assign([], res.data);
+                            features.forEach(item => {
+                                item.check = this.property ? this.property.features.findIndex(featuresItem => featuresItem.id === item.id) !== -1 : false;
+                            });
+                            const featuresCategoryId = features.map(item => item.feature_category_id).filter((value, index, self ) => self.indexOf(value) === index);
+                            featuresCategoryId.forEach( categoryId => {
+                                this.features.push({
+                                    name: features.find(feature => feature.feature_category_id === categoryId).feature_category.name,
+                                    features: this.feature_category(features, categoryId)
+                                })
+                            })
+                        }
                     })
-                }
-            })
+            });
+
     },
     methods: {
         addFeatures(feature){

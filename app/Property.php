@@ -77,7 +77,8 @@ class Property extends Model
     public function languages()
     {
         $this->getOptions();
-        return explode(',', self::optionFind($this->_options, 'languages')) ?: [];
+        $langs = self::optionFind($this->_options, 'languages');
+        return  $langs ? explode(',', $langs): ['ru', 'en', 'de'];
     }
 
 //    public function features() {
@@ -138,6 +139,23 @@ class Property extends Model
         return $mappedFeatures;
     }
 
+    public function featureCategories() {
+        $cats = [];
+        foreach($this->features as $feature) {
+            $exists = array_search($feature->feature_category['id'], array_column($cats, 'id'));
+            if (!$exists) {
+                $cats[] = $feature->feature_category;
+            }
+        }
+        return $cats;
+    }
+
+    public function featuresByCat($featureCategoryId) {
+        return array_filter($this->features->toArray(), function($item) use ($featureCategoryId) {
+            return $item['feature_category']['id'] == $featureCategoryId;
+        });
+    }
+
     public function hotelTypesMap()
     {
         $types = Option::where('type', 'property')->where('parent', $this->id)->where('key', 'hotel_type')->first();
@@ -147,6 +165,13 @@ class Property extends Model
         $map = BookingDataService::getHouseMap();
 
         return $map[$types['native_id']] ?? false;
+    }
+
+    public function getTotalRooms()
+    {
+        return array_reduce($this->rooms->toArray(), function ($carry, $item) {
+            return $item['number'] + $carry;
+        }, 0);
     }
 
     public function getRoomPersonsMin()

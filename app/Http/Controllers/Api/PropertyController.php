@@ -137,7 +137,7 @@ class PropertyController extends Controller
             'city'      => $request->city,
             'user_id'   => User::ADMIN,
             'views'     => 0,
-            'type'      => Property::AFFILIATE,
+            'type'      => Property::GENERAL,
             'status'    => Property::APPROVED,
             'lat'       => $geo_data['lat'],
             'lng'       => $geo_data['lng'],

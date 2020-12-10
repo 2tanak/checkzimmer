@@ -9,6 +9,7 @@ class Feature extends Model
     private static $identifier = 'id';
     private static $children = ['feature_category'];
     protected $fillable = ['feature_category_id', 'picture', 'name'];
+    protected $with = ['feature_category'];
 
     use noCRUD;
 

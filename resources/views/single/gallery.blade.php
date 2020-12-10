@@ -69,8 +69,8 @@
     </div>
 @elseif (count($hotel->photos()) == 2):
     <div class="single-gallery option-four">
-        <div class="big-photo"><a class="open-gallery" href="#"><img src="{{ $hotel->photoMain()['url_original'] }}" alt="alt"></a></div>
-        <div class="big-photo"><a class="open-gallery" href="#"><img src="{{ $hotel->photoMain()['url_original'] }}" alt="alt"></a></div>
+        <div class="big-photo"><a class="open-gallery" href="#"><img src="{{ $hotel->photos()[0]['url_max300'] }}" alt="alt"></a></div>
+        <div class="big-photo"><a class="open-gallery" href="#"><img src="{{ $hotel->photos()[1]['url_max300'] }}" alt="alt"></a></div>
     </div>
 @else:
 <div class="single-gallery option-one">

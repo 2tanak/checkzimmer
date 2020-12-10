@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\FeatureCategory;
 use App\Option;
 use App\Property;
 use Illuminate\Http\Request;
@@ -48,20 +49,17 @@ class HomeController extends Controller
     public function singleProperty($slug)
     {
         $hotel = Property::where('slug', $slug)->firstOrFail();
-
+        //dd($hotel->photos());
         $hotel->views++;
         $hotel->save();
         $options = $hotel->options->toArray();
-
         if (count($hotel->rating) > 0) {
              $hotel->rate = array_reduce( $hotel->rating->toArray(), function($carry, $item) {
                 return $carry + $item['rating'];
             } ) / count($hotel->rating);
         }
-
         $questions = $hotel->questions;
         $reviews = $hotel->reviews;
-
         return view('single', compact('hotel','questions', 'reviews'));
     }
 

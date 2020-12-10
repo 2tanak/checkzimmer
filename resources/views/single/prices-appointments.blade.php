@@ -215,9 +215,9 @@
                                 <img src="/svg/i-room-filled.svg" alt="house">
                                 квартира
                             </div>
-                            <div class="quantity-item col-xl-2 col-lg-2 col-md-2 col-sm-2">1x</div>
-                            <div class="personen-item col-xl-2 col-lg-2 col-md-2 col-sm-2">5</div>
-                            <div class="price-item col-xl-3 col-lg-3 col-md-3 col-sm-3">от<span>25€</span>/person</div>
+                            <div class="quantity-item col-xl-2 col-lg-2 col-md-2 col-sm-2">{{ $hotel->getTotalRooms() }}x</div>
+                            <div class="personen-item col-xl-2 col-lg-2 col-md-2 col-sm-2">{{ $hotel->getRoomPersonsMax() }}</div>
+                            <div class="price-item col-xl-3 col-lg-3 col-md-3 col-sm-3">от<span>{{ $hotel->getRoomPriceMin() }}€</span>/person</div>
                         </div>
                     </div>
                 </div>
