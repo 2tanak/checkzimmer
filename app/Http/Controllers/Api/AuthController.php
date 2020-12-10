@@ -21,20 +21,22 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except' => ['login']]);
     }
 
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         $creds = $request->all();
 
-        if (! $token = JWTAuth::attempt($creds)) {
+        if (!$token = JWTAuth::attempt($creds)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
         return $this->respondWithToken($token);
     }
+
     /**
-    * Get the authenticated User.
-    *
-    * @return \Illuminate\Http\JsonResponse
-    */
+     * Get the authenticated User.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function me()
     {
         return response()->json(auth()->user());
@@ -61,10 +63,11 @@ class AuthController extends Controller
     {
         return $this->respondWithToken(auth()->refresh());
     }
+
     /**
      * Get the token array structure.
      *
-     * @param  string $token
+     * @param string $token
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -73,9 +76,9 @@ class AuthController extends Controller
         $user = Auth::user();
         return response()->json([
             'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
-            'role' => $user->role
+            'token_type'   => 'bearer',
+            'expires_in'   => auth()->factory()->getTTL() * 60,
+            'role'         => $user->role
         ])->header('Authorization', $token);
     }
 }

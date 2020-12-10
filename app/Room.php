@@ -2,54 +2,176 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Option;
+use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
-    //
+    const PRIVATE_COLOR = '#4CAF50';
+    const SHARED_COLOR = '#F8981D';
+    const NONE_COLOR = '#DDDDDD';
+
     protected $table = 'rooms';
-    protected $fillable = ['property_id', 'room_type_id', 'number', 'person', 'price', 'bed', 'shower', 'kitchen', 'status'];
+    protected $fillable = ['property_id', 'room_type_id', 'number', 'person', 'price', 'bed', 'shower', 'kitchen', 'status', 'native_id'];
+    protected $fillableRelations = ['options'];
     protected $with = ['options'];
 
-    static function hasFeature($name, $room_facilities) {
+    static function hasFeature($name, $room_facilities)
+    {
         $facilities = array_column($room_facilities, 'name');
-        return array_search($name, $facilities) !== false;
 
+        return array_search($name, $facilities) !== false;
     }
-    static function getKitchenType($room_facilities, $hotel_facilities) {
-        if (self::hasFeature('Kitchenette', $room_facilities)) {
+
+    static function getKitchenType($room_facilities, $hotel_facilities)
+    {
+        if (self::hasFeature('Kitchenette', $room_facilities)){
             return 'kitchenette';
         }
-        if (Property::hasFeature('Shared kitchen', $hotel_facilities)) {
+        if (Property::hasFeature('Shared kitchen', $hotel_facilities)){
             return 'shared';
         }
-        if (self::hasFeature('Kitchen', $room_facilities)) {
+        if (self::hasFeature('Kitchen', $room_facilities)){
             return 'single';
         }
         return 'none';
     }
-    static function getShowerType($room_facilities) {
-        if (self::hasFeature('Shared bathroom', $room_facilities)) {
+
+    static function getShowerType($room_facilities)
+    {
+        if (self::hasFeature('Shared bathroom', $room_facilities)){
             return 'shared';
         }
-        if (self::hasFeature('Shower', $room_facilities) || self::hasFeature('Private bathroom', $room_facilities)) {
+        if (self::hasFeature('Shower', $room_facilities) || self::hasFeature('Private bathroom', $room_facilities)){
             return 'single';
         }
         return 'none';
     }
-    static function getBedroomType($bedrooms) {
-        if (count($bedrooms) == 0) {
+
+    static function getBedroomType($bedrooms)
+    {
+        if (count($bedrooms) == 0){
             return 'none';
         }
-        foreach ($bedrooms as $bedroom) {
-            if (strpos($bedroom['description'], 'double') !== false) {
+        foreach ($bedrooms as $bedroom){
+            if (strpos($bedroom['description'], 'double') !== false){
                 return 'double';
             }
         }
         return 'single';
     }
-    function options() {
+
+    public function options()
+    {
         return $this->hasMany(Option::class, 'parent')->where('type', 'room');
+    }
+
+    public function getKitchenTypeText()
+    {
+        switch ($this->kitchen)
+        {
+            case 'kitchenette':
+            case 'single':
+                return 'своя';
+            case 'shared':
+                return 'совместная';
+            default:
+                return 'none';
+        }
+    }
+
+    public function getKitchenLabelColor()
+    {
+        $type = $this->kitchen;
+        if ($type == 'kitchenette' || $type == 'single'){
+            return self::PRIVATE_COLOR;
+        } elseif ($type == 'shared') {
+            return self::SHARED_COLOR;
+        }
+        return self::NONE_COLOR;
+    }
+
+    public function getShowerTypeText()
+    {
+        switch ($this->shower)
+        {
+            case 'single':
+                return 'свой';
+            case 'shared':
+                return 'совместный';
+        }
+        return 'none';
+    }
+
+    public function getShowerLabelColor()
+    {
+        switch ($this->shower)
+        {
+            case 'single':
+                return self::PRIVATE_COLOR;
+            case 'shared':
+                return self::SHARED_COLOR;
+        }
+        return self::NONE_COLOR;
+    }
+
+    public function getBedroomTypeText()
+    {
+        switch ($this->bed)
+        {
+            case 'single':
+                return 'одноместная';
+            case 'double':
+                return 'двухместная';
+        }
+        return 'неизвестно';
+    }
+
+    public function getBedroomLabelColor()
+    {
+        switch ($this->bed)
+        {
+            case 'single':
+                return self::PRIVATE_COLOR;
+            case 'double':
+                return self::SHARED_COLOR;
+        }
+        return self::NONE_COLOR;
+    }
+
+    public function getPersonsText()
+    {
+        if ($this->person == 1){
+            return 'одноместная';
+        } elseif ($this->person == 2){
+            return 'двухместная';
+        }
+        return 'на много мест';
+    }
+
+    public function updateRelations(array $data)
+    {
+        //TODO вынести в трейт fillRelations
+        $this->fill($data);
+
+        foreach ($this->fillableRelations as $fillableRelationName)
+        {
+            if ($relationData = $data[$fillableRelationName]){
+                $currentRelation = $this->$fillableRelationName;
+
+                array_map(static function (array $data) use ($relationData, $currentRelation) {
+                    $relationModel = $currentRelation->filter(function ($item) use ($data) {
+                        return $item->id === $data['id'];
+                    })->first();
+                    if($relationModel){
+                        $relationModel->fill($data);
+                        if(method_exists($relationModel, 'updateRelations')){
+                            $relationModel->updateRelations($data);
+                        }
+                    }
+
+                }, $relationData);
+            }
+        }
     }
 }

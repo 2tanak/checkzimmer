@@ -37,10 +37,10 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <b-button type="submit" variant="success" class="mr-2">Сохранить</b-button>
-                <b-button variant="light">Отмена</b-button>
+                <b-button type="submit" variant="success" class="mr-2" @click="save">Сохранить</b-button>
             </div>
         </div>
+        <b-modal id="save-success">Данные успешно сохранены</b-modal>
     </section>
 </template>
 
@@ -49,28 +49,33 @@
     let OptionsRequest = ApiRequest('options')
     let options = new OptionsRequest;
 
+    let optionsDefault = {
+        website_phone: '',
+        motto_header: '',
+        motto_subtitle: ''
+    };
+
     export default {
         name: "Index",
         data() {
             return {
-                options: {
-                    website_phone: '',
-                    motto_header: '',
-                    motto_subtitle: ''
-                },
+                options: { ...optionsDefault },
                 loading: true
             }
         },
         mounted() {
-            options.get('bytype/options')
+            options.get('bytype/system')
                 .then(resp => {
-                    this.options = resp.data;
+                    for (let key in optionsDefault) {
+                        this.options[key] = resp.data[key] || ''
+                    }
+
                     this.loading = false;
                 });
         },
         methods: {
             save() {
-                options.update('copyright', this.options.copyright)
+                options.update('system', this.options)
                     .then( () => {
                         this.$bvModal.show('save-success');
                     })

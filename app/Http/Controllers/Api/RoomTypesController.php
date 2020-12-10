@@ -6,24 +6,42 @@ use Illuminate\Http\Request;
 
 class RoomTypesController extends Controller
 {
-    function index() {
+    public function index() {
         return response()->json( RoomType::all() );
     }
-    function show($id) {
+
+    public function show($id) {
         $option = RoomType::withParams($id, ['type' => Option::$optionType]);
-        /*if (!$option) {
-            return response()->json( [] );
-        }*/
+
         return response()->json( $option->pluck('value', 'key', 'id') );
     }
-    function store(Request $request) {
-        return response()->json([]);
-    }
-    function update(Request $request, $id) {
 
-        return response()->json([]);
+    public function store(Request $request) {
+        request()->validate([
+            'name'      => 'required'
+        ]);
+
+        $data = $request->input();
+
+        $item = new RoomType($data);
+        $item->save();
+
+        return $item ? response()->json(['code' => 'ok','user' => $item]) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
     }
-    function delete($id) {
+
+    public function update(Request $request, $id) {
+        request()->validate([
+            'name' => 'required',
+        ]);
+
+        $roomType = RoomType::find($id);
+
+        return $roomType->update($request->input()) ? response()->json(['code' => 'ok']) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
+    }
+
+    public function destroy($id) {
+        RoomType::find($id)->delete();
+
         return response()->json(['code' => 'ok']);
     }
 }

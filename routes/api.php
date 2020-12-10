@@ -20,11 +20,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('api')->namespace('Api')->group(function () {
 
+    Route::post('/image-upload', 'ImageUploadController@imageUploadPost');
     Route::resource('options', 'OptionsController');
     Route::resource('users', 'UsersController');
     Route::resource('features', 'FeaturesController');
     Route::resource('room-types', 'RoomTypesController');
-    Route::resource('property', 'PropertyController');
+    Route::apiResource('room', 'RoomController');
+    Route::apiResource('property', 'PropertyController');
+    Route::resource('geocode-cache', 'GeocodeCacheController');
+    Route::resource('questions', 'QuestionsController');
+    Route::resource('reviews', 'ReviewsController');
+
+    Route::post('property/query', 'PropertyController@query');
+
     Route::get('options/bytype/{type}', 'OptionsController@showByType');
     Route::get('property/init', 'PropertyController@init');
 
@@ -37,8 +45,20 @@ Route::middleware('api')->namespace('Api')->group(function () {
     Route::get('/booking-cities', 'BookingController@getCities');
     Route::get('/booking-facilities', 'BookingController@getFeatures');
     Route::get('/booking-roomtypes', 'BookingController@getRoomTypes');
+    Route::get('/booking-bedtypes', 'BookingController@getBedTypes');
+    Route::get('/booking-showertypes', 'BookingController@getShowerTypes');
+    Route::get('/booking-kitchentypes', 'BookingController@getKitchenTypes');
+
     Route::post('/hotels-request/query', 'BookingController@getHotels');
     Route::post('/hotels-request', 'BookingController@saveHotels');
+
+    Route::post('/property/query', 'PropertyController@queryProperty');
+    Route::post('/property/queryFilter', 'PropertyController@queryFilter');
+    Route::post('/property/querySort', 'PropertyController@querySort');
+    Route::post('/property/initMap', 'PropertyController@initMap');
+
+    Route::get('/questions', 'QuestionsController@paginated');
+    Route::get('/reviews', 'ReviewsController@paginated');
 });
 
 

@@ -6,16 +6,16 @@
                 <div class="sample-block">
                     <div class="input-block sample-block-item">
                         <label for="text">адрес рабочего места:</label>
-                        <div class="input-container"><input id="text" type="text" placeholder="Например: 04158 Leipzig"></div>
+                        <div class="input-container"><input  v-model="search.address" id="text" type="text" placeholder="Например: 04158 Leipzig"></div>
                     </div>
                     <div class="distance-block select-block">
                         <label for="distance-select">дистанция:</label>
                         <div class="select-container">
-                            <select name="distance" id="distance-select" class="distance">
-                                <option value="1">10 км.</option>
-                                <option value="2">20 км.</option>
-                                <option value="3">30 км.</option>
-                                <option value="4">40 км.</option>
+                            <select v-model="search.km" name="distance" id="distance-select" class="distance">
+                                <option value="10">10 км.</option>
+                                <option value="20">20 км.</option>
+                                <option value="30">30 км.</option>
+                                <option value="40">40 км.</option>
                             </select>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                         <label class="desctop-label" for="number-personse">Кол-во человек:</label>
                         <label class="mobile-label" for="number-personse">Кол-во чел.:</label>
                         <div class="select-container">
-                            <select name="distance" id="number-personse" class="number-personse">
+                            <select v-model="search.people" name="distance" id="number-personse" class="number-personse">
                                 <option value="1">1 чел.</option>
                                 <option value="2">2 чел.</option>
                                 <option value="3">3 чел.</option>
@@ -41,16 +41,16 @@
                         <div class="left-block">
                             <a class="list active" href="#">Список</a>
                             <a class="map" href="#">На карте</a>
-                            <div class="result">Найдено 1240 вариантов жилья</div>
+                            <div class="result">Найдено <span class="property-found">0</span> вариантов жилья</div>
                         </div>
                         <div class="sorting">
                             <a href="#">Сортировка по умолчанию</a>
                             <div class="filter-block">
                                 <ul>
                                     <li class="check">Сортировка по умолчанию</li>
-                                    <li>От дешевых к дорогим</li>
-                                    <li>От дорогих к дешевым</li>
-                                    <li>По рейтингу</li>
+                                    <li @click.prevent="loadSort('min')">От дешевых к дорогим</li>
+                                    <li @click.prevent="loadSort('max')">От дорогих к дешевым</li>
+                                    <li @click.prevent="loadSort('rating')">По рейтингу</li>
                                 </ul>
                             </div>
                         </div>
@@ -60,12 +60,11 @@
                 <div class="property not-map">
                     <div class="container">
                         <transition name="fade" appear>
-                        <div :style="{position: 'relative', opacity: loading ? 0:1, position: loading ? 'absolute':'relative' }">
+                        <div class="property-container" :style="{position: 'relative', opacity: loading ? 0:1, position: loading ? 'absolute':'relative'}">
                             <div class="property-item">
-                                <PropertyListItem v-for="item in property" :key="'id-'+item.id" :item="item"/>
+                                <PropertyListItem v-for="item in property" :key="'id-'+item.id" :item="item" @favsUpdated="updateFavCount"/>
                             </div>
-                            <div class="property-shadow"></div>
-
+                            <div class="property-shadow" v-if="property.length"></div>
                             <div class="google-map">
                                 <div id="map"></div>
 
@@ -125,6 +124,15 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <tr v-for="room in property.rooms">
+                                                <td class="type-block filling-block">
+                                                    <img  src="svg/i-one.svg" alt="Одноместный">
+                                                    одноместный
+                                                </td>
+                                                <td class="type-block quantity-block">{{ room.number }}</td>
+                                                <td class="type-block personen-block">{{ room.person }}</td>
+                                                <td class="type-block price-block"><b>{{  minRoomPrice(item, room) }}&#8364;</b>/persone</td>
+                                            </tr>
                                             <tr>
                                                 <td class="type-block">
                                                     <img  src="svg/i-one.svg" alt="Одноместный">
@@ -174,10 +182,10 @@
                                     </table>
                                     <div class="night">
                                         <a href="#" class="favorites">
-                                            <svg class="favorites-usual" width="12" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg class="favorites-usual" width="12" height="11" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M11.6211 5.98172C12.6977 4.8747 12.6977 3.07667 11.6211 1.96965C10.5487 0.867074 8.8134 0.867074 7.74102 1.96965L7.20482 2.52096C7.09263 2.6363 6.90737 2.6363 6.79518 2.52096L6.25898 1.96965C5.1866 0.867074 3.45132 0.867074 2.37895 1.96965C1.30226 3.07667 1.30226 4.8747 2.37895 5.98172L7 10.7329L11.6211 5.98172ZM7.33139 1.57124C8.62813 0.237973 10.7339 0.237973 12.0307 1.57124C13.3231 2.90006 13.3231 5.05131 12.0307 6.38013L7.20482 11.3419C7.09263 11.4573 6.90737 11.4573 6.79518 11.3419L1.96932 6.38013C0.676895 5.05131 0.676895 2.90006 1.96932 1.57124C3.26606 0.237973 5.37187 0.237973 6.66861 1.57124L7 1.91196L7.33139 1.57124Z" fill="#333646" stroke="#333646" stroke-width="0.2"/>
                                             </svg>
-                                            <svg class="favorites-active" width="14" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg class="favorites-active" width="14" height="11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M12.1 1.5c-.6-.7-1.5-1-2.4-1-.9 0-1.8.4-2.4 1l-.3.3-.3-.3C6.1.8 5.2.5 4.3.5c-.9 0-1.8.4-2.4 1C.6 2.9.6 5.1 1.9 6.4l4.8 5c.1.1.2.1.3.1.1 0 .2 0 .3-.1l4.8-5c1.3-1.3 1.3-3.5 0-4.9z" fill="#EE483F"/>
                                             </svg>
                                         </a>
@@ -211,7 +219,7 @@
                         </div>
                         </transition>
                         <transition name="fade">
-                        <div class="load-block-content" :style="{ visibility: loading ? 'visible':'hidden' }">
+                        <div class="load-block-content" :style="{ display: loading ? 'display':'none !important' }">
                             <div class="load-block-item">
                                 <div class="load-block big-load-block">
                                     <div class="left-part images-block">
@@ -276,7 +284,10 @@
                 </div>
 
                 <transition name="fade">
-                <div class="communication" v-if="endoflist">
+                <div class="communication not-active" style="top:34px;position:relative;">
+                    <div class="load-more">
+                        <div class="btn btn-success" v-if="additional_load" @click.prevent="loadMore">Загрузить еще</div>
+                    </div>
                     <div class="description">
                         Предложения по вашему запросу закончились, увеличьте дистанцию или свяжитесь с менежером напрямую
                     </div>
@@ -302,6 +313,12 @@ import PropertyListItem from "./PropertyListItem";
 let PropertyRequest = ApiRequest('property')
 let properties = new PropertyRequest;
 
+let newSearch = {
+    address: '',
+    km: '20',
+    people: '2',
+};
+
 export default{
     name: 'app',
     components: {
@@ -311,7 +328,12 @@ export default{
         return {
             loading: true,
             endoflist: false,
-            property: []
+            property: [],
+            page: 1,
+            additional_load: true,
+            coords_load: [],
+            additional_pages: true,
+            search: {...newSearch},
         };
     },
     mounted() {
@@ -323,10 +345,18 @@ export default{
             jQuery(this).removeClass('error');
             jQuery(this).closest('.input-block').find('.error-text').removeClass('active')
         });
-        properties.all()
+
+        properties.byPage(1)
             .then( resp => {
-                that.property = resp.data;
+                that.property = resp.data.objects.data;
                 that.loading = false;
+                if (resp.data.current_page < resp.data.objects.last_page) {
+                    that.additional_pages = true;
+                } else {
+                    that.additional_pages = false;
+                }
+                that.favoritesDisplay();
+                that.foundTotal();
             })
         setTimeout(function() {
             console.log(that.$auth.user());
@@ -341,24 +371,215 @@ export default{
             e.preventDefault();
             jQuery(this).toggleClass('active');
         });
-
         function initMap() {
             if (typeof google === 'undefined' || !document.getElementById('map')) {
                 setTimeout( () => { initMap() }, 100 )
                 return;
             }
-            console.log(document.getElementById('map'));
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 51.340000, lng: 12.382000},
-                zoom: 8
+
+            let styles = [
+                {
+                    "featureType": "administrative.province",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "administrative.locality",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#a8aeb6"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "administrative.neighborhood",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#a8aeb6"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "administrative.land_parcel",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#a8aeb6"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.attraction",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.business",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.government",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.medical",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {
+                            "color": "#c2e5a7"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.place_of_worship",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.school",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.sports_complex",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#a8aeb6"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {
+                            "color": "#e1e4e6"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                        {
+                            "color": "#c4cfd6"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "labels.icon",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit.station.airport",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit.station.bus",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit.station.rail",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                }
+            ];
+            let map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 51.340654, lng: 12.375411},
+                disableDefaultUI: true,
+                zoom: 15,
+                styles: styles
             });
+            map.setOptions({styles: styles});
+
+            properties.request('initMap')
+                .then( resp => {
+                    var myTrip = resp.data.coords;
+
+                    for (var i = 0; i < myTrip.length; i++) {
+                      var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(myTrip[i].lat, myTrip[i].lng),
+                        map: map
+                      });
+                    }
+
+                    marker.setMap(map);
+            })
         }
+
         initMap();
-
-
     },
     created() {
-
+        if (this.$route.query.search) {
+            this.search.address = this.$route.query.search;
+            this.submitForm();
+        }
     },
     updated: function () {
 
@@ -396,14 +617,75 @@ export default{
         submitForm() {
             this.loading = true;
             let that = this;
-            properties.all()
+
+           properties.request('queryFilter', this.search)
                 .then( resp => {
-                    that.property = resp.data;
+                    that.property = resp.data.objects.data;
+                    that.page = resp.data.objects.current_page;
                     that.loading = false;
+                    that.foundTotal()
                 })
         },
+        loadMore() {
+            let that = this;
+            that.page = ++that.page;
+
+            properties.byPage(that.page)
+                .then( resp => {
+                    that.property = that.property.concat(resp.data.objects.data);
+                    that.loading = false;
+                    that.additional_pages = resp.data.current_page < resp.data.last_page;
+
+                    if (resp.data.objects.current_page  >= resp.data.objects.last_page - 1) {
+                        that.additional_load = false;
+                    }
+
+                    that.favoritesDisplay();
+                    that.foundTotal();
+            })
+        },
+
+        loadSort(order) {
+            let data = {};
+
+            if (order == 'min') {
+                data = {'sort' : 'desc', 'field' : 'price'};
+            } else if (order == 'max') {
+                data = {'sort' : 'asc', 'field' : 'price'};
+            } else {
+                data = {'sort' : 'desc', 'field' : 'hotel_rating'};
+            }
+
+            properties.request('querySort', data)
+                .then( resp => {
+                    this.property = resp.data.objects.data;
+                    that.favoritesDisplay();
+                    that.foundTotal();
+                })
+        },
+
+        favoritesCount() {
+            let favs = JSON.parse(localStorage.getItem("favoritesList")) || [];
+            return favs.length;
+        },
+        favoritesDisplay() {
+            jQuery('.favoritesCount').text( this.favoritesCount() )
+        },
+        updateFavCount() {
+            this.favoritesDisplay();
+        },
+        foundTotal() {
+            jQuery('.property-found').text(this.property.length);
+        },
+        minRoomPrice(property, room) {
+            if (room.price) {
+                return room.price;
+            }
+            return property.rooms.reduce( (acc, cur) => acc = Math.min(acc, cur.price) )
+        }
     }
 }
+
 </script>
 <style>
 .fade-enter-active, .fade-leave-active {

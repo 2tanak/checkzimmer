@@ -14,7 +14,14 @@
                 <div class="card">
                     <div class="card-body">
                         <h4>Типы недвижимости</h4>
-                        <b-table striped hover :items="types" :fields="fields"></b-table>
+                        <b-table striped hover responsive :busy="loading" :items="types" :fields="fields">
+                            <template v-slot:table-busy>
+                                <div class="text-center text-danger my-2">
+                                    <b-spinner class="align-middle"></b-spinner>
+                                    <strong>Loading...</strong>
+                                </div>
+                            </template>
+                        </b-table>
                     </div>
 
                 </div>
@@ -38,13 +45,20 @@
 
         <div class="row">
             <div class="col-md-12">
-                <b-button variant="info" class="float-right" @click.prevent="loadFeatures">Загрузить удобства</b-button>
-                <b-button type="submit" variant="success" class="mr-2" @click.prevent="loadCities">Загрузить города</b-button>
-                <b-button variant="light" @click.prevent="loadTypes">Загрузить типы </b-button>
+                <b-overlay :show="featuresLoader" rounded opacity="0.6" spinner-small spinner-variant="danger" class="d-inline-block float-right">
+                    <b-button variant="info" @click.prevent="loadFeatures">Загрузить удобства</b-button>
+                </b-overlay>
+                <b-overlay :show="citiesLoader" rounded opacity="0.6" spinner-small spinner-variant="danger" class="d-inline-block">
+                    <b-button type="submit" variant="success" class="mr-2" @click.prevent="loadCities">Загрузить города</b-button>
+                </b-overlay>
+                <b-overlay :show="typesLoader" rounded opacity="0.6" spinner-small spinner-variant="danger" class="d-inline-block">
+                    <b-button variant="light" @click.prevent="loadTypes">Загрузить типы </b-button>
+                </b-overlay>
             </div>
         </div>
-        <b-modal id="save-success" title="Сохранение настроек">Данные успешно сохранены</b-modal>
-        <b-modal id="connect-success" title="Проверка подключения">Подключение успешно</b-modal>
+        <b-modal id="save-success" title="Загрузка типов"><strong>Типы успешно загружены</strong></b-modal>
+        <b-modal id="connect-success" title="Загрузка городов"><strong>Города успешно загружены</strong></b-modal>
+        <b-modal id=load-features title="Загрузка удобств"><strong>Удобства успешно загружены</strong></b-modal>
         <b-modal id="connect-fail" title="Проверка подключения">Подключение не удалось, проверьте учётные данные</b-modal>
     </section>
 </template>
@@ -66,7 +80,10 @@
                 features: { root: [], rooted: [], children: []},
                 types: [],
                 fields: [ 'id', 'name', 'type' ],
-                loading: true
+                loading: true,
+                featuresLoader: false,
+                citiesLoader: false,
+                typesLoader: false
             }
         },
         mounted() {
@@ -81,6 +98,7 @@
             types.all()
                 .then(resp => {
                     this.types = resp.data;
+                    this.loading = false;
                 });
         },
         methods: {
@@ -88,19 +106,29 @@
                 types.create()
                     .then( () => {
                         this.$bvModal.show('save-success');
-                    })
+                        this.typesLoader = false;
+                    });
+                this.typesLoader = true;
             },
             loadCities() {
                 cities.create({})
                     .then( resp => {
                         this.$bvModal.show('connect-success');
+                        this.citiesLoader = false;
                     })
                     .catch(resp => {
                         this.$bvModal.show('connect-fail');
+                        this.citiesLoader = false;
                     });
+                this.citiesLoader = true;
             },
             loadFeatures() {
-                features.create({});
+                features.create({})
+                    .then( () => {
+                        this.$bvModal.show('load-features');
+                        this.featuresLoader = false;
+                    });
+                this.featuresLoader = true;
             },
             rootedFeatures(parent) {
                 console.log(this.features.rooted[parent]);

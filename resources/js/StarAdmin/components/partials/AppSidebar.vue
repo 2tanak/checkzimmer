@@ -14,9 +14,11 @@
             </div>
           </div>
         </li>
-        <li class="nav-item"><router-link class="nav-link" :to="{ name: 'dashboard' }">
-            <img class="menu-icon" src="../../assets/images/menu_icons/01.png" alt="menu icon">
-            <span class="menu-title">Dashboard</span></router-link>
+        <li class="nav-item">
+            <router-link class="nav-link" :to="{ name: 'dashboard' }">
+                <img class="menu-icon" src="../../assets/images/menu_icons/01.png" alt="menu icon">
+                <span class="menu-title">Dashboard</span>
+            </router-link>
         </li>
         <li class="nav-item">
             <router-link class="nav-link" :to="{ name: 'requests'}">
@@ -32,9 +34,9 @@
           </span>
           <b-collapse id="sample-pages">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'property' }">Property</router-link></li>
-              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'assigned-room-types' }">Assigned Rooms</router-link></li>
-              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'rooms' }">Rooms</router-link></li>
+              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'property' }">Property List</router-link></li>
+              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'assigned-room-types' }">Assigned Types</router-link></li>
+              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'rooms' }">Property Rooms</router-link></li>
             </ul>
           </b-collapse>
         </li>
@@ -76,9 +78,23 @@
              <ul class="nav flex-column sub-menu">
                <li class="nav-item"><router-link class="nav-link" :to="{ name: 'room-types' }">Room Types</router-link></li>
                <li class="nav-item"><router-link class="nav-link" :to="{ name: 'features' }">Features</router-link></li>
+                 <li class="nav-item"><router-link class="nav-link" :to="{ name: 'geocoder-cache' }">Geocoder Cache</router-link></li>
              </ul>
           </b-collapse>
         </li>
+          <li class="nav-item">
+          <span class="nav-link" v-b-toggle="'feedback'">
+            <img class="menu-icon" src="../../assets/images/menu_icons/06.png" alt="menu icon">
+            <span class="menu-title">Feedback</span>
+              <i class="fa fa-angle-down ml-auto mr-0"></i>
+          </span>
+              <b-collapse id="feedback">
+                  <ul class="nav flex-column sub-menu">
+                      <li class="nav-item"><router-link class="nav-link" :to="{ name: 'questions' }">Questions</router-link></li>
+                      <li class="nav-item"><router-link class="nav-link" :to="{ name: 'reviews' }">Reviews</router-link></li>
+                  </ul>
+              </b-collapse>
+          </li>
         <li class="nav-item"><router-link class="nav-link" :to="{ name: 'users' }"><img class="menu-icon" src="../../assets/images/menu_icons/04.png" alt="menu icon"><span class="menu-title">Users</span></router-link></li>
       </ul>
     </nav>

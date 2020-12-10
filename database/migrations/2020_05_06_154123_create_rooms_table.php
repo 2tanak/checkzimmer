@@ -19,7 +19,8 @@ class CreateRoomsTable extends Migration
             $table->unsignedInteger('room_type_id');
             $table->integer('number');
             $table->integer('person');
-            $table->float('price');
+            $table->integer('native_id');
+            $table->float('price')->nullable();
             $table->enum('bed', ['single', 'double', 'none']);
             $table->enum('shower', ['single', 'shared', 'none']);
             $table->enum('kitchen', ['single', 'shared', 'kitchenette', 'none']);

@@ -3,7 +3,9 @@
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\noCRUD;
 
-class Option extends Model {
+class Option extends Model
+{
+    protected $table = 'options';
     protected $fillable = ['parent', 'type', 'key', 'value'];
     static $optionType = 'options';
     private static $children = [];

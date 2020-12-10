@@ -1,5 +1,7 @@
 import Vue from 'vue'
-import Public from './components/Public'
+import Public from './components/Public/Index'
+import Favorites from './components/Public/Favorites'
+import Single from './components/Public/Single'
 
 require('./bootstrap');
 
@@ -38,7 +40,9 @@ const app = new Vue({
     el: '#application',
     router,
     components: {
-        Public
+        Public,
+        Favorites,
+        Single
     },
     store
 });
@@ -184,7 +188,7 @@ jQuery(document).ready(function() {
             }
             jQuery(this).addClass('clicked');
         })
-        jQuery('.stars').val(count);
+        jQuery('[name="rating"]').val(count);
     });
 
     jQuery('.give-feedback').click(function (e) {
@@ -314,12 +318,8 @@ jQuery(document).ready(function() {
         jQuery('.slider-modal-overlay').addClass('modal-show');
     });
 
-    jQuery('.single-main-slider').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        infinite: true,
-        dots: true
+    jQuery('.see-number-phone').click(function () {
+       jQuery('.see-number-phone').addClass('active');
     });
 
     jQuery('a.map-picture').bind("click", function(e){
@@ -375,15 +375,14 @@ jQuery(document).ready(function() {
         tempScrollTop = currentScrollTop;
     });
 
+
+
 });
 
 jQuery(window).on('load', function() {
-    if(jQuery(window).width() <= 1220) {
-        jQuery('body .single-main-slider').css({'opacity': 1, 'transition-duration': '0.4s'});
-    };
     if(jQuery(window).width() <= 991) {
         jQuery('.comfort .collapse').removeClass('show');
-    };
+    }
     if (jQuery(window).width() <= 680) {
         jQuery('a.inquiry').click(function (e) {
             e.preventDefault();
@@ -393,9 +392,22 @@ jQuery(window).on('load', function() {
             e.preventDefault();
             jQuery('body').removeClass('overflow');
         });
-    };
+    }
 
     jQuery(window).scroll(function () {
+
+        var element = jQuery('#main-footer');
+        var counter = 0;
+
+        var scroll = jQuery(window).scrollTop() + jQuery(window).height();
+        var offset = element.offset().top;
+
+        if (scroll > offset && counter === 0) {
+            jQuery('.scroll-top').addClass('absolute');
+        } else {
+            jQuery('.scroll-top').removeClass('absolute');
+        }
+
         if (jQuery(this).scrollTop() > 300) {
             jQuery('.scroll-top').fadeIn();
         } else {
@@ -410,9 +422,32 @@ jQuery(window).on('load', function() {
         }, 400);
     });
 
+    jQuery('.single-main-slider').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        infinite: true,
+        dots: true
+    });
+
 });
 
 jQuery(window).scroll( function() {
+
+    var element = jQuery('#main-footer');
+    let counter = 0;
+
+    var scroll = jQuery(window).scrollTop() + jQuery(window).height();
+    var offset = element.offset().top;
+
+    if (jQuery(window).width() < 991) {
+        if (scroll > offset && counter === 0) {
+            jQuery('#main-footer').addClass('margin');
+        } else {
+            jQuery('#main-footer').removeClass('margin');
+        }
+    }
+
     if (jQuery(window).scrollTop() > 300 && jQuery(window).width() <= 991 && jQuery(window).width() >= 650)
     {
         jQuery(".fixed-bar").addClass('active');
@@ -424,15 +459,14 @@ jQuery(window).scroll( function() {
     {
         jQuery(".fixed-bar").removeClass('active');
     }
+
 });
 
 jQuery(window).on("load resize", function(){
-    var width = jQuery(document).width();
-
-    if (width <= 1040) {
-        jQuery('.property-card-slider').slick('unslick');
-    } else {
-        jQuery('.property-card-slider').not('.slick-initialized').slick({
+    if (jQuery(window).width() <= 1040) {
+        jQuery('.property-card-slider').filter('.slick-initialized').slick('unslick');
+    } else if (jQuery('.property-card-slider').length) {
+        jQuery('.property-card-slider').slick({
             infinite: true,
             slidesToShow: 1,
             slidesToScroll: 1,
@@ -442,3 +476,10 @@ jQuery(window).on("load resize", function(){
     }
 });
 
+window.onload = function () {
+    jQuery('.single-load-content').addClass('hide');
+    jQuery('.single-content').removeClass('not-active');
+    setTimeout (function() {
+        jQuery('.communication').removeClass('not-active');
+    }, 1000);
+};

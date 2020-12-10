@@ -1,0 +1,55 @@
+<?php namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Option;
+use App\Http\Requests\PropertyListRequest;
+use Illuminate\Http\Request;
+use App\Reviews;
+use Auth;
+use App\User;
+use Illuminate\Support\Str;
+
+class ReviewsController extends Controller
+{
+    public function index()
+    {
+       return response()->json( Reviews::all() );
+    }
+
+    public function paginated()
+    {
+        return response()->json( Reviews::where('status', '1')->paginate(10) );
+    }
+
+    public function destroy($id)
+    {
+        Reviews::find($id)->delete();
+
+        return response()->json(['code' => 'ok']);
+    }
+
+    public function update(Request $request, $id)
+    {
+       Reviews::find($id)->update(['status' => $request->status]);
+
+       return response()->json(['code' => 'ok']);
+    }
+
+    public function create(Request $request)
+    {
+        request()->validate([
+            'name' => 'required',
+            'company' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'rating' => 'required',
+        ]);
+
+        $data = $request->all();
+
+        $item = new Reviews($data);
+        $item->save();
+
+        return redirect('/');
+    }
+}

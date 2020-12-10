@@ -32,19 +32,23 @@ import error500 from '../views/sample-pages/error-500'
 import login from '../views/sample-pages/login'
 import register from '../views/sample-pages/register'
 
-import Header from '../../components/Dashboard/Website/Header';
-import Footer from '../../components/Dashboard/Website/Footer';
-import Users from '../../components/Dashboard/Users';
-import Features from '../../components/Dashboard/Data/Features';
-import RoomTypes from '../../components/Dashboard/Data/RoomTypes';
-import Property from '../../components/Dashboard/Property/Property';
+import Requests from '../../components/Dashboard/Requests/Index';
+import Header from '../../components/Dashboard/Website/Header/Index';
+import Footer from '../../components/Dashboard/Website/Footer/Index';
+import Users from '../../components/Dashboard/Users/Index';
+import Features from '../../components/Dashboard/Data/Features/Index';
+import RoomTypes from '../../components/Dashboard/Data/RoomTypes/Index';
+import GeocoderCache from '../../components/Dashboard/Data/GeocoderCache/Index';
+import Questions from '../../components/Dashboard/Feedback/Questions/Index';
+import Reviews from '../../components/Dashboard/Feedback/Reviews/Index';
+import Property from '../../components/Dashboard/Property/Property/Index';
 import PropertySingle from '../../components/Dashboard/Property/Property/Single';
-import Rooms from '../../components/Dashboard/Property/Rooms';
-import AssignedRoomTypes from '../../components/Dashboard/Property/AssignedRoomTypes';
-import BookingItems from '../../components/Dashboard/Booking/Items';
-import BookingMapping from '../../components/Dashboard/Booking/Mapping';
-import BookingData from '../../components/Dashboard/Booking/Data';
-import BookingSettings from '../../components/Dashboard/Booking/Settings';
+import Rooms from '../../components/Dashboard/Property/Rooms/Index';
+import AssignedRoomTypes from '../../components/Dashboard/Property/AssignedRoomTypes/Index';
+import BookingItems from '../../components/Dashboard/Booking/Items/Index';
+import BookingMapping from '../../components/Dashboard/Booking/Mapping/Index';
+import BookingData from '../../components/Dashboard/Booking/Data/Index';
+import BookingSettings from '../../components/Dashboard/Booking/Settings/Index';
 
 Vue.use(Router);
 
@@ -67,7 +71,8 @@ export default new Router({
         {
             path: '/dashboard/requests',
             name: 'requests',
-            component: widgets
+            component: Requests,
+            meta: { auth: true }
         },
         {
             path: '/dashboard/property/items',
@@ -76,9 +81,15 @@ export default new Router({
             meta: { auth: true }
         },
         {
-            path: '/dashboard/property/:item',
-            name: 'property-single',
-            component: PropertySingle,
+            path: '/dashboard/booking/items',
+            name: 'booking-items',
+            component: BookingItems,
+            meta: { auth: true }
+        },
+        {
+            path: '/dashboard/property/assigned-room-types',
+            name: 'assigned-room-types',
+            component: AssignedRoomTypes,
             meta: { auth: true }
         },
         {
@@ -88,15 +99,9 @@ export default new Router({
             meta: { auth: true }
         },
         {
-            path: '/property/assigned-room-types',
-            name: 'assigned-room-types',
-            component: AssignedRoomTypes,
-            meta: { auth: true }
-        },
-        {
-            path: '/dashboard/booking/items',
-            name: 'booking-items',
-            component: BookingItems,
+            path: '/dashboard/property/:item',
+            name: 'property-single',
+            component: PropertySingle,
             meta: { auth: true }
         },
         {
@@ -151,6 +156,24 @@ export default new Router({
             path: '/dashboard/data/room-types',
             name: 'room-types',
             component: RoomTypes,
+            meta: { auth: true }
+        },
+        {
+            path: '/dashboard/data/geocoder-cache',
+            name: 'geocoder-cache',
+            component: GeocoderCache,
+            meta: { auth: true }
+        },
+        {
+            path: '/dashboard/feedback/questions',
+            name: 'questions',
+            component: Questions,
+            meta: { auth: true }
+        },
+        {
+            path: '/dashboard/data/reviews',
+            name: 'reviews',
+            component: Reviews,
             meta: { auth: true }
         },
         {

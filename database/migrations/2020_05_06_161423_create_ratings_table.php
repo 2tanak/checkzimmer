@@ -16,7 +16,11 @@ class CreateRatingsTable extends Migration
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('property_id');
-            $table->integer('rating');
+            $table->integer('rating')->default(0);
+            $table->string('name');
+            $table->string('company')->default('');
+            $table->string('subject');
+            $table->text('review');
             $table->timestamps();
         });
     }

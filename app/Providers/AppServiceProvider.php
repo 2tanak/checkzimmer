@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
+use Spatie\Geocoder\Geocoder;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(Geocoder::class, function() {
+            $client = new \GuzzleHttp\Client();
+            $geocoder = new Geocoder($client);
+            $geocoder->setApiKey(config('geocoder.key'));
+            $geocoder->setCountry(config('geocoder.country', 'US'));
+            return $geocoder;
+        });
     }
 
     /**
@@ -23,6 +31,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Schema::defaultStringLength(191);
     }
 }

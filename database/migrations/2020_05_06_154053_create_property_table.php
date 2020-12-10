@@ -19,12 +19,16 @@ class CreatePropertyTable extends Migration
             $table->enum('type', ['general', 'affiliate']);
             $table->enum('status', ['pending', 'approved', 'declined']);
             $table->unsignedInteger('views');
-            $table->float('lat');
-            $table->float('lng');
+            $table->longText('lat');
+            $table->longText('lng');
             $table->string('name');
             $table->string('city');
             $table->integer('zip');
-            $table->string('address');
+            $table->integer('price')->nullable();
+            $table->integer('hotel_rating')->nullable();
+            $table->string('address')->nullable();
+            $table->string('slug')->nullable();
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

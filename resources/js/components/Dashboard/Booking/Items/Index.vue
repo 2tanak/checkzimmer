@@ -6,12 +6,13 @@
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Город"  label-for="input-city">
-                            <b-form-input type="text" id="input-city" v-model="filter.city" placeholder="Город"></b-form-input>
+                        <b-form-group label="Город">
+                            <b-form-input type="text" v-model="filter.city" placeholder="Город"></b-form-input>
                         </b-form-group>
                     </div>
                 </div>
             </div>
+
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body constraight-list">
@@ -21,24 +22,63 @@
                     </div>
                 </div>
             </div>
-            <!--<div class="col-md-4 grid-margin">
+        </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <b-button variant="info" class="float-right" @click.prevent="loadHotels">Загрузить отели</b-button>
+                    <b-overlay :show="importLoader" rounded opacity="0.6" spinner-small spinner-variant="danger" class="d-inline-block">
+                        <b-button v-if="this.hotels.length" variant="success" class="mr-2" @click.prevent="importHotels">Импортировать</b-button>
+                    </b-overlay>
+                    <!--<b-button variant="light" @click.prevent="loadTypes">Загрузить типы </b-button>-->
+                </div>
+            </div>
+
+            <div class="row mt-4">
+
+            <div class="col-md-4 grid-margin">
                 <div class="card">
-                    <div class="card-body">
-                        <b-form-group label="Цена" label-for="input-city">
-                            <b-form-input type="range" id="input-city" v-model="filter.city" placeholder="Город"></b-form-input>
+                    <div class="card-body constraight-list">
+                        <b-form-group label="Кровать" label-for="input-hotel-type">
+                            <b-form-select v-model="filter.bed" :options="bedTypes"></b-form-select>
                         </b-form-group>
                     </div>
                 </div>
-            </div>-->
-        </div>
+            </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <b-button variant="info" class="float-right" @click.prevent="loadHotels">Загрузить отели</b-button>
-                <b-button v-if="this.hotels.length" variant="success" class="mr-2" @click.prevent="importHotels">Импортировать</b-button>
-                <!--<b-button variant="light" @click.prevent="loadTypes">Загрузить типы </b-button>-->
+            <div class="col-md-4 grid-margin">
+                <div class="card">
+                    <div class="card-body constraight-list">
+                        <b-form-group label="Душ" label-for="input-hotel-type">
+                            <b-form-select v-model="filter.shower" :options="showerTypes"></b-form-select>
+                        </b-form-group>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 grid-margin">
+                <div class="card">
+                    <div class="card-body constraight-list">
+                        <b-form-group label="Кухня" label-for="input-hotel-type">
+                            <b-form-select v-model="filter.kitchen" :options="kitchenTypes"></b-form-select>
+                        </b-form-group>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 grid-margin">
+                <div class="card">
+                    <span class="card-price_value">{{ filter.price }}</span>
+                    <div class="card-body">
+                        <b-form-group label="Цена" label-for="input-city">
+                            <b-form-input type="range" id="input-city" min="10" max="25"
+                                v-model="filter.price" placeholder="Город"></b-form-input>
+                        </b-form-group>
+                    </div>
+                </div>
             </div>
         </div>
+
         </b-overlay>
         <div class="row mt-4" v-for="(hotel, ind) in hotels">
             <div class="col-md-12 grid-margin">
@@ -46,41 +86,46 @@
                     <div class="card-body">
                         <div class="row mb-4">
                             <div class="col-md-3">
-                                <img :src="getMainHotelPhoto(hotel)" class="w-100">
+                                <div class="pictures-block">
+                                    <img :src="getMainHotelPhoto(hotel)" class="w-100">
+                                </div>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-9">
                                 <h3>{{ hotel.hotel_data.name }}</h3>
                                 <div class="">{{ hotel.hotel_data.address }}</div>
                                 <div class="">
                                 </div>
-                            </div>
-                            <div class="col-md-2">
-                                <small class="mb-4 d-block"><strong>Состояние:</strong>
-                                <b-form-checkbox v-if="hotel.imported === null" :id="'checkbox-hotel-'+hotel.hotel_id"
-                                    v-model="hotels[ind].tbi"
-                                    :name="'checkbox-hotel-' + hotel.hotel_id"
-                                    value="true"
-                                    unchecked-value="false">
-                                    Импортировать
-                                </b-form-checkbox>
-                                <span v-else>Импортировано</span>
-                                </small>
-                                <b-button v-b-toggle="'collapse-rooms-'+hotel.hotel_id" variant="info">Показать комнаты</b-button>
-                                <b-button v-b-toggle="'collapse-hotel-'+hotel.hotel_id" size="sm">Удобства отеля</b-button>
+                                <div class="state-block mt-3">
+                                    <small class="d-block mb-3"><strong>Состояние:</strong>
+                                        <b-form-checkbox v-if="hotel.imported === null" :id="'checkbox-hotel-'+hotel.hotel_id"
+                                                         v-model="hotels[ind].tbi"
+                                                         :name="'checkbox-hotel-' + hotel.hotel_id"
+                                                         value="true"
+                                                         unchecked-value="false">
+                                            Импортировать
+                                        </b-form-checkbox>
+                                        <span v-else>Импортировано</span>
+                                    </small>
+                                    <div class="collapse-button">
+                                        <b-button class="mr-4" v-b-toggle="'collapse-rooms-'+hotel.hotel_id" variant="info">Показать комнаты</b-button>
+                                        <b-button v-b-toggle="'collapse-hotel-'+hotel.hotel_id" size="sm">Удобства отеля</b-button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="mb-4">
-
+                        <div>
                             <b-collapse :id="'collapse-hotel-'+hotel.hotel_id" class="mt-2">
                                 <b-card>
+                                    <h3 class="mb-4">Удобства</h3>
                                     <b-list-group>
                                         <b-list-group-item v-for="feature in hotel.hotel_data.hotel_facilities">{{ feature.name }}</b-list-group-item>
                                     </b-list-group>
+                                    <b-button class="mt-4" v-b-toggle="'collapse-hotel-'+hotel.hotel_id" size="sm">Свернуть</b-button>
                                 </b-card>
-                                <b-button v-b-toggle="'collapse-hotel-'+hotel.hotel_id" size="sm">Свернуть</b-button>
                             </b-collapse>
                         </div>
                         <b-collapse :id="'collapse-rooms-'+hotel.hotel_id">
+                            <h3 class="mb-4">Комнаты</h3>
                         <div class="row">
                             <div v-for="room in hotel.room_data" class="col-md-12 mb-2">
                                 <div class="d-flex room-item mb-3">
@@ -111,7 +156,7 @@
                                             <div class="w-25">
                                                 <div class="mr-4">
                                                     <img src="/svg/i-own-kitchen.svg">
-                                                    <small>{{ typeKitchenStr(room.room_facilities) }}</small>
+                                                    <small>{{ typeKitchenStr(hotel, room.room_facilities) }}</small>
                                                 </div>
                                                 <div class="mr-4">
                                                     <img src="/svg/i-own-shower.svg">
@@ -123,12 +168,15 @@
                                 </div>
                             </div>
                         </div>
-
+                            <b-button v-b-toggle="'collapse-rooms-'+hotel.hotel_id" size="sm">Свернуть</b-button>
                         </b-collapse>
                     </div>
                 </div>
             </div>
         </div>
+
+        <b-modal id="import-success" title="Импорт объектов"><strong>Импортирование завершено</strong></b-modal>
+
     </section>
 </template>
 
@@ -136,8 +184,15 @@
     import ApiRequest from '../../../API/ApiRequest';
     let HotelsRequest = ApiRequest('hotels-request');
     let TypesRequest = ApiRequest('booking-roomtypes');
+    let BedRequest = ApiRequest('booking-bedtypes');
+    let ShowerRequest = ApiRequest('booking-showertypes');
+    let KitchenRequest = ApiRequest('booking-kitchentypes');
+
     let types = new TypesRequest;
     let hotelsAPI = new HotelsRequest;
+    let bed = new BedRequest;
+    let shower = new ShowerRequest;
+    let kitchen = new KitchenRequest;
 
     export default {
         name: "Index",
@@ -145,11 +200,74 @@
             return {
                 filter: {
                     city: 'Leipzig',
-                    type: ''
+                    type: '',
+                    shower: 'all',
+                    kitchen: 'all',
+                    bed: 'single',
+                    price: 10
                 },
                 types: [],
+                bedTypes: [
+                    {
+                        value: 'all',
+                        text: 'Все типы'
+                    },
+                    {
+                        value: 'single',
+                        text:  'Одиночная кровать'
+                    },
+                    {
+                        value: 'single+',
+                        text:  'Одиночная кровать + варианты'
+                    },
+                    {
+                        value: 'double',
+                        text:  'Двойная кровать'
+                    },
+                ],
+                showerTypes: [
+                    {
+                        value: 'all',
+                        text: 'Все типы'
+                    },
+                    {
+                        value: 'shared',
+                        text: 'Раздельный душ'
+                    },
+                    {
+                        value: 'private',
+                        text: 'Свой душ'
+                    },
+                    {
+                        value: 'none',
+                        text: 'Без душа'
+                    }
+                ],
+                kitchenTypes: [
+                    {
+                        value: 'all',
+                        text: 'Все типы'
+                    },
+                    {
+                        value: 'kitchenette',
+                        text: 'Кухонька'
+                    },
+                    {
+                        value: 'private kitchen',
+                        text: 'Своя кухня'
+                    },
+                    {
+                        value: 'shared kitchen',
+                        text: 'Совместная кухня'
+                    },
+                    {
+                        value: 'none',
+                        text: 'Без кухни'
+                    }
+                ],
                 hotels: [],
-                loading: false
+                loading: false,
+                importLoader: false
             }
         },
         mounted() {
@@ -157,19 +275,32 @@
                 .then(resp => {
                     this.types = resp.data;
                 });
+            bed.all()
+                .then(resp => {
+                    this.bed = resp.data;
+                });
+            shower.all()
+                .then(resp => {
+                    this.shower = resp.data;
+                });
+            kitchen.all()
+                .then(resp => {
+                    this.kitchen = resp.data;
+                });
         },
         methods: {
             loadHotels() {
                 this.loading = true;
-                hotelsAPI.query(this.filter)
-                    .then(resp => {
-                        this.hotels = resp.data;
-                        for(let i in this.hotels) {
-                            this.hotels[i].tbi = this.hotels[i].imported === null;
-                        }
-                        this.loading = false;
-                    })
+
+                hotelsAPI.query(this.filter).then(resp => {
+                    this.hotels = resp.data;
+
+                    this.hotels.map((item, index) => this.hotels[index].tbi = this.hotels[index].imported === null);
+
+                    this.loading = false;
+                });
             },
+
             getMainHotelPhoto(hotel) {
                 for (let i in hotel.hotel_data.hotel_photos) {
                     if (hotel.hotel_data.hotel_photos[i].main_photo) {
@@ -213,21 +344,33 @@
                     default: return 'не указано';
                 }
             },
-            typeKitchen(roomFacilities) {
+            findOption(item, name) {
+                if (!item.options) {
+                    return false;
+                }
+                return item.options.find( elem => elem.key === name);
+            },
+            typeKitchen(item, roomFacilities) {
+                let rawOptions = this.findOption(item, 'features')
+                if (rawOptions === false) {
+                    return 'none';
+                }
+                let features = JSON.parse(rawOptions.value)
+                if (features.some(item => item.name === 'Shared kitchen')) {
+                    return 'shared kitchen'
+                }
                 if (roomFacilities.some(item => item.name === 'Kitchenette')) {
                     return 'kitchenette';
                 }
                 if (roomFacilities.some(item => item.name === 'Kitchen')) {
                     return 'private kitchen'
                 }
-                if (roomFacilities.some(item => item.name === 'Shared kitchen')) {
-                    return 'shared kitchen'
-                }
+
                 return 'none';
             },
-            typeKitchenStr(roomFaclities) {
+            typeKitchenStr(item, roomFaclities) {
                 let str = { 'none': 'Без кухни', ' kitchen kitchen': 'Совместная кухня', 'private kitchen': 'Личная кухня', 'kitchenette': 'Мини-кухня' };
-                let type = this.typeKitchen(roomFaclities);
+                let type = this.typeKitchen(item, roomFaclities);
                 return str[type];
             },
             typeShower(roomFacilities) {
@@ -246,19 +389,59 @@
                 return str[type];
             },
             importHotels() {
+                this.importLoader = true;
                 let hotelsToImport = this.hotels.filter( item => item.tbi === true);
-                //console.log(hotelsToImport);
-                hotelsAPI.create({ ...hotelsToImport});
+                hotelsAPI.create({...hotelsToImport}).then(resp => {
+                    this.importLoader = false;
+                    this.$bvModal.show('import-success');
+                })
+
             }
         },
         computed: {
             getTypes() {
-                let types = [];
-                for (let i in this.types) {
-                    types.push( { value: this.types[i].native_id, text: this.types[i].name } )
-                }
-                return types;
+                return this.types.map((item) => ({
+                    value: item.native_id,
+                    text:  item.name
+                }));
             },
+            getBed() {
+                return this.bed.map((item) => ({
+                    value: item.type,
+                    text: item.name
+                }));
+            },
+            getShower() {
+                return this.shower.map((item) => ({
+                    value: item.type,
+                    text: item.name
+                }));
+            },
+            getKitchen() {
+                return this.kitchen.map((item) => ({
+                    value: item.type,
+                    text: item.name
+                }));
+            },
+            filteredItems() {
+                return this.hotels.filter( item =>
+                    (
+                        filter.shower === 'all' ||
+                        item.room_data.some( child => this.typeShower(child.room_facilities) === filter.shower )
+                    ) &&
+                    (
+                        filter.kitchen === 'all' ||
+                        item.room_data.some( child => this.typeKitchen(item, child.room_facilities) === filter.kitchen )
+                    ) &&
+                    (
+                        filter.bed === 'all' ||
+                        item.room_data.some( child =>
+                            this.typeBed(child.room_facilities) === filter.bed && filter.bed !== 'single+' ||
+                            this.typeBed(child.room_facilities) !== 'double' && filter.bed === 'single+'
+                        )
+                    )
+                );
+            }
         },
 
     }
@@ -278,6 +461,23 @@
     .room-item .room-photo {
         height: 60px;
         width: 60px;
+        object-fit: cover;
+    }
+    .state-block {
+        display: flex;
+        flex-direction: column;
+    }
+    .collapse-button {
+        display: flex;
+        align-items: center;
+    }
+    .pictures-block {
+        width: 100%;
+        height: 255px;
+    }
+    .pictures-block img {
+        width: 100%;
+        height: 100%;
         object-fit: cover;
     }
 </style>
