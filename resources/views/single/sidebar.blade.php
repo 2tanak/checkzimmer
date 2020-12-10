@@ -37,7 +37,7 @@
                 <div class="message">Сообщите что вы с сайта Immbilien.de</div>
                 <div class="language">
                     <div class="speaks">Говорит на:</div>
-                    <div class="language-item">{{ implode(', ', $hotel->languages) }}</div>
+                    <div class="language-item">{{ implode(', ', $hotel->languages()) }}</div>
                 </div>
             </div>
         @endif

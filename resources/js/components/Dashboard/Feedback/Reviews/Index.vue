@@ -102,7 +102,7 @@
 
 <script>
 import ApiRequest from '../../../API/ApiRequest';
-import Forms from '../../../Forms';
+// import Forms from '../../../Forms';
 
 let ReviewsRequest = ApiRequest('reviews');
 let reviewsData = new ReviewsRequest;
@@ -157,7 +157,7 @@ export default {
                     } else {
                         this.textOperation = 'Ошибка удаления';
                         this.operationError = true;
-                    } 
+                    }
             });
         },
         showReviews(item) {
@@ -170,7 +170,7 @@ export default {
                     } else {
                         this.textOperation = 'Ошибка';
                         this.operationError = true;
-                    } 
+                    }
             });
         },
         withdrawReview(item, status) {
@@ -183,7 +183,7 @@ export default {
                     } else {
                         this.textOperation = 'Ошибка';
                         this.operationError = true;
-                    } 
+                    }
             });
         },
         handleOk() {

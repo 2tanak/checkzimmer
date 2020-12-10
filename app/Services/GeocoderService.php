@@ -47,10 +47,10 @@ class GeocoderService
     {
         $address = $city . ' ' . $zip;
         $cache_data = $this->getFromCache($address);
-        
+
         return $cache_data?($cache_data->toArray()):$this->getDataFromGeocoder($address);
     }
-    
+
     /**
      * Store retrieved data
      * @param string $address
@@ -59,9 +59,9 @@ class GeocoderService
     private function storeToCache(string $address, array $data): void
     {
         $this->cacheModel->upd([
-            'address' => $address,
-            'lat' => $data['lat'],
-            'lng' => $data['lng'],
+            'address'   => $address,
+            'lat'       => $data['lat'],
+            'lng'       => $data['lng'],
             'timestamp' => time()
         ], ['address' => $address]);
     }

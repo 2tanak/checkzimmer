@@ -11,28 +11,32 @@ use Illuminate\Support\Str;
 
 class ReviewsController extends Controller
 {
-    function index()
+    public function index()
     {
        return response()->json( Reviews::all() );
     }
-    function paginated()
+
+    public function paginated()
     {
         return response()->json( Reviews::where('status', '1')->paginate(10) );
     }
 
-    function destroy($id) {
+    public function destroy($id)
+    {
         Reviews::find($id)->delete();
 
         return response()->json(['code' => 'ok']);
     }
 
-    function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
        Reviews::find($id)->update(['status' => $request->status]);
 
        return response()->json(['code' => 'ok']);
     }
 
-    function create(Request $request) {
+    public function create(Request $request)
+    {
         request()->validate([
             'name' => 'required',
             'company' => 'required',
@@ -40,6 +44,7 @@ class ReviewsController extends Controller
             'description' => 'required',
             'rating' => 'required',
         ]);
+
         $data = $request->all();
 
         $item = new Reviews($data);

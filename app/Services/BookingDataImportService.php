@@ -58,23 +58,25 @@ class BookingDataImportService
         set_time_limit(0);
 
         $i = 0;
-        do {
+        do
+        {
             $citiesUpdate = [];
             $json = $this->bookingApiService->getCities($i, 1000);
 
-            foreach ($json['result'] as $item) {
+            foreach ($json['result'] as $item){
                 $citiesUpdate[] = [
-                    'name' => $item['name'],
-                    'native_id' => $item['city_id'],
+                    'name'          => $item['name'],
+                    'native_id'     => $item['city_id'],
                     'hotels_number' => $item['nr_hotels']
                 ];
             }
 
-            $i+=1000;
+            $i += 1000;
             $this->bookingCity->insert($citiesUpdate);
-        } while(count($json['result']) == 1000);
+        }
+        while (count($json['result']) == 1000);
 
-        return (count($json['result']) != 1000) ? $i-1000+count($json['result']) : $i-1000;
+        return (count($json['result']) != 1000) ? $i - 1000 + count($json['result']) : $i - 1000;
     }
 
     /**
@@ -140,9 +142,9 @@ class BookingDataImportService
 
         foreach ($json['result'] as $item) {
             $featuresUpdate[] = [
-                'name' => $item['name'],
-                'parent' => ($type == 'general') ? 0 : $item['facility_type_id'],
-                'type' => $type,
+                'name'      => $item['name'],
+                'parent'    => ($type == 'general') ? 0 : $item['facility_type_id'],
+                'type'      => $type,
                 'native_id' => $item['facility_type_id'],
             ];
         }
@@ -198,9 +200,9 @@ class BookingDataImportService
 
         foreach ($json['result'] as $item) {
             $typesUpdate[] = [
-                'name' => $item['name'],
-                'type' => $type,
-                'native_id' => $item[$type.'_type_id'],
+                'name'      => $item['name'],
+                'type'      => $type,
+                'native_id' => $item[$type . '_type_id'],
             ];
         }
         return $typesUpdate;

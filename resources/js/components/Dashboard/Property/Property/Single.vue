@@ -3,7 +3,10 @@
         <h1 style="font-size:26px;">Редактирование отеля</h1>
         <div class="delete-hotel-container">
             <h2 style="margin-bottom:0;">{{ property.name }}</h2>
-            <b-button v-b-modal.deleteHotelModal variant="danger" @click="deleteHotel">Удалить отель</b-button>
+            <div>
+                <b-button v-b-modal.deleteHotelModal variant="danger" @click="deleteHotel">Удалить отель</b-button>
+                <b-button type="submit" variant="success" class="mr-2 " @click="save">Сохранить</b-button>
+            </div>
         </div>
         <div class="row mt-4">
             <div class="col-md-12 grid-margin">
@@ -13,7 +16,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <b-form-group label="Название отеля" label-for="input-hotel-name">
-                                        <b-form-input :value="property.name" id="input-hotel-name"></b-form-input>
+                                        <b-form-input v-model="property.name" id="input-hotel-name"></b-form-input>
                                     </b-form-group>
                                 </div>
                             </div>
@@ -27,27 +30,27 @@
                                     <div class="row mt-4 mb-4">
                                         <div class="col-md-3">
                                             <b-form-group label="Широта" label-for="input-hotel-lat">
-                                                <b-form-input :value="property.lat" id="input-hotel-lat"></b-form-input>
+                                                <b-form-input v-model="property.lat" id="input-hotel-lat"></b-form-input>
                                             </b-form-group>
                                         </div>
                                         <div class="col-md-3">
                                             <b-form-group label="Долгота" label-for="input-hotel-lng">
-                                                <b-form-input :value="property.lng" id="input-hotel-lng"></b-form-input>
+                                                <b-form-input v-model="property.lng" id="input-hotel-lng"></b-form-input>
                                             </b-form-group>
                                         </div>
                                         <div class="col-md-3">
                                             <b-form-group label="Город" label-for="input-hotel-city">
-                                                <b-form-input :value="property.city" id="input-hotel-city"></b-form-input>
+                                                <b-form-input v-model="property.city" id="input-hotel-city"></b-form-input>
                                             </b-form-group>
                                         </div>
                                         <div class="col-md-3">
                                             <b-form-group label="Почтовый индекс" label-for="input-hotel-lng">
-                                                <b-form-input :value="property.zip" id="input-hotel-lng"></b-form-input>
+                                                <b-form-input v-model="property.zip" id="input-hotel-lng"></b-form-input>
                                             </b-form-group>
                                         </div>
                                         <div class="col-md-12">
                                             <b-form-group label="Адрес" label-for="input-hotel-address">
-                                                <b-form-input :value="property.address" id="input-hotel-address"></b-form-input>
+                                                <b-form-input v-model="property.address" id="input-hotel-address"></b-form-input>
                                             </b-form-group>
                                         </div>
                                     </div>
@@ -61,24 +64,46 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h4>Фото</h4>
-                                    <div class="row mt-4 photos-gallery">
-                                        <div class="col-xl-2 col-lg-3 col-sm-4 mb-4" v-for="photo in hotelPhotos">
+                                    <draggable class="row mt-4 photos-gallery" v-model="imageData" @start="drag=true" @end="drag=false">
+                                        <div class="col-xl-2 col-lg-3 col-sm-4 mb-4" v-for="element in imageData" :key="element.id">
                                             <div class="photos-gallery-item">
-                                                <img :src="photo.url_max300">
-                                                <a class="delete-photo-link" href="" v-b-modal.deletePhotoBigGallery @click.prevent="deletePhotoBigGallery">&times;</a>
-                                                <div v-b-modal.bigPhotoModal class="blackout"></div>
+                                                <img :src="element.url_max300">
+                                                <a class="delete-photo-link" href="" v-b-modal.deletePhotoBigGallery @click.prevent="deletePhotoBigGallery" @click="imgPath = element.url_original">&times;</a>
+                                                <div v-b-modal.bigPhotoModal class="blackout" @click="imgPath = element.url_original"></div>
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mb-4 add-photo-container">
-                                            <input type="file" id="add-photo" class="inputfile">
-                                            <label for="add-photo"><span>&#10010;</span></label>
-                                        </div>
+
+                                    </draggable>
+                                    <div class="col-md-2 mb-4 add-photo-container">
+                                        <input type="file" id="add-photo" class="inputfile" ref="inputfile" @change="savePhotoHotel" accept="image/*">
+                                        <label for="add-photo"><span>&#10010;</span></label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <div class="row mt-4 mb-4">
+                        <div class="col-md-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3>Удобства</h3>
+                                    <template v-for="feature in features">
+                                        <div class="comfort-block mt-5">
+                                            <h3>{{feature. name }}</h3>
+                                            <div class="row">
+                                                <div class="col-md-3 col-sm-4 col-6 comfort-block-item mt-2" v-for="itemFeature in feature.features">
+                                                    <img :src="itemFeature.picture" alt="alt">
+                                                    <span>{{ itemFeature.name }}</span>
+                                                    <input type="checkbox" :name="itemFeature.name" v-model="itemFeature.check"  @change="addFeatures(itemFeature)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row mb-2">
                         <div class="col-12">
@@ -89,15 +114,22 @@
                             </div>
                         </div>
                     </div>
+                    <draggable
+                               v-model="property.rooms"
+                               @start="drag=true"
+                               @update="$forceUpdate()"
+                               @end="drag=false">
                     <div class="mb-4" v-for="(room, i) in property.rooms">
                         <div class="card" style="width:100%;">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-10">
+                                <div class="row justify-content-sm-between">
+                                    <div>
                                         <b-button class="button-collapse" v-b-toggle="'id-'+room.id"> Комната № {{ i+1 }}</b-button>
                                     </div>
-                                    <div class="col-2" style="text-align:right;">
-                                        <b-button variant="danger" v-b-modal.deleteRoom>Удалить комнату</b-button>
+                                    <div class="delete-room">
+                                        <b-button v-if="room.newRoom" type="submit" variant="success" class="mr-2" @click="saveRoom(room)">Сохранить комнату</b-button>
+                                        <b-button v-if="room.newRoom" variant="danger" @click="deleteNewRoom()">Удалить комнату</b-button>
+                                        <b-button v-else variant="danger" @click="deleteRoomOk($event, room)">Удалить комнату</b-button>
                                     </div>
                                 </div>
                                 <b-collapse :id="'id-'+room.id" visible>
@@ -107,32 +139,32 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <b-form-group label="Наименование" :label-for="'input-room-'+i+'-name'">
-                                                            <b-form-input :value="getName(property.rooms[i])" :id="'input-room-'+i+'-name'"></b-form-input>
+                                                            <b-form-input  v-model="property.rooms[i].options[3].value" :id="'input-room-'+i+'-name'"></b-form-input>
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <b-form-group label="Описание" :label-for="'input-room-'+i+'-descr'">
-                                                            <b-form-textarea style="height:80px;" :value="getDescription(property.rooms[i])" :id="'input-room-'+i+'-name'"></b-form-textarea>
+                                                            <b-form-textarea style="height:80px;" v-model="property.rooms[i].options[4].value"  :id="'input-room-'+i+'-name'"></b-form-textarea>
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <b-form-group label="Количество номеров" :label-for="'input-room-'+i+'-number'">
-                                                            <b-form-input :value="property.rooms[i].number" :id="'input-room-'+i+'-name'"></b-form-input>
+                                                            <b-form-input v-model="room.number" :id="'input-room-'+i+'-name'"></b-form-input>
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <b-form-group label="Количество человек" :label-for="'input-room-'+i+'-person'">
-                                                            <b-form-input :value="property.rooms[i].person" :id="'input-room-'+i+'-person'"></b-form-input>
+                                                            <b-form-input v-model="room.person" :id="'input-room-'+i+'-person'"></b-form-input>
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <b-form-group label="Стоимость, от" :label-for="'input-room-'+i+'-price'">
-                                                            <b-form-input :value="property.rooms[i].price" :id="'input-room-'+i+'-price'"></b-form-input>
+                                                            <b-form-input v-model="room.price" :id="'input-room-'+i+'-price'"></b-form-input>
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <b-form-group label="Душ" :label-for="'input-room-'+i+'-shower'">
-                                                            <b-select v-model="property.rooms[i].shower">
+                                                            <b-select v-model="room.shower">
                                                                 <b-select-option value="single">Свой</b-select-option>
                                                                 <b-select-option value="shared">Совместный</b-select-option>
                                                                 <b-select-option value="none">Отсутствует</b-select-option>
@@ -141,7 +173,7 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                         <b-form-group label="Кровать" :label-for="'input-room-'+i+'-shower'">
-                                                            <b-select v-model="property.rooms[i].bed">
+                                                            <b-select v-model="room.bed">
                                                                 <b-select-option value="single">Одноместная</b-select-option>
                                                                 <b-select-option value="double">Двухместная</b-select-option>
                                                                 <b-select-option value="none">Отсутствует</b-select-option>
@@ -150,7 +182,7 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                         <b-form-group label="Кухня" :label-for="'input-room-'+i+'-shower'">
-                                                            <b-select v-model="property.rooms[i].kitchen">
+                                                            <b-select v-model="room.kitchen">
                                                                 <b-select-option value="single">Своя</b-select-option>
                                                                 <b-select-option value="shared">Совместная</b-select-option>
                                                                 <b-select-option value="kitchenette">Кухонька</b-select-option>
@@ -161,20 +193,24 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-xl-6">
-                                                <div class="row photos-gallery">
-                                                    <div class="col-md-3 mb-4" v-for="photo in getRoomPhotos(property.rooms[i])">
+                                            <div class="col-xl-6" v-if="!room.newRoom">
+                                                <draggable class="row photos-gallery"
+                                                           v-model="rooms[i].photos"
+                                                           @start="drag=true"
+                                                           @update="$forceUpdate()"
+                                                           @end="drag=false">
+                                                    <div class="col-md-3 mb-4" v-for="element in rooms[i].photos" :key="element.id">
                                                         <div class="photos-gallery-item">
-                                                            <img :src="photo.url_max300">
-                                                            <a class="delete-photo-link" href="" v-b-modal.deletePhotoSmallGallery @click.prevent="deletePhotoSmallGallery">&times;</a>
-                                                            <div class="blackout"></div>
+                                                            <img :src="element.url_max300">
+                                                            <a class="delete-photo-link" href="" @click.prevent="deletePhotoSmallGalleryOk($event, room, element.id)">&times;</a>
+                                                            <div v-b-modal.bigPhotoModal class="blackout" @click="imgPath = element.url_original"></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 mb-4 add-photo-container">
-                                                        <input type="file" id="add-photo-room" class="inputfile">
-                                                        <label for="add-photo"><span>&#10010;</span></label>
+                                                        <input type="file" :id="i" class="inputfile" ref="inputfilePhotoRoom" @change="savePhotoRoom($event, rooms[i])" accept="image/*">
+                                                        <label :for="i"><span>&#10010;</span></label>
                                                     </div>
-                                                </div>
+                                                </draggable>
                                             </div>
                                         </div>
                                     </div>
@@ -182,6 +218,7 @@
                             </div>
                         </div>
                     </div>
+                    </draggable>
                 </form>
             </div>
         </div>
@@ -190,60 +227,182 @@
                 <b-button type="submit" variant="outline-primary" class="mr-2" @click="addRoom">Добавить комнату</b-button>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <b-button type="submit" variant="success" class="mr-2" @click="save">Сохранить</b-button>
-            </div>
-        </div>
 
         <b-modal id="deleteHotelModal" title="Delete Hotel" @ok="deleteHotelOk">
             <p class="text-danger">Are you sure you want to delete {{ property.name }}</p>
         </b-modal>
 
-        <b-modal id="deletePhotoBigGallery" title="Delete Hotel" @ok="deletePhotoBigGalleryOk">
+        <b-modal id="deletePhotoBigGallery" title="Delete Hotel Photo" @ok="deletePhotoBigGalleryOk">
             <p class="text-danger">Are you sure you want to delete this photo?</p>
         </b-modal>
 
-        <b-modal id="deletePhotoSmallGallery" title="Delete Hotel" @ok="deletePhotoSmallGalleryOk">
+        <b-modal id="deletePhotoSmallGallery" title="Delete Room Photo" @ok="deletePhotoSmallGalleryOk">
             <p class="text-danger">Are you sure you want to delete this photo?</p>
         </b-modal>
 
-        <b-modal id="deleteRoom" title="Delete Room" @ok="deleteRoomOk">
-            <p class="text-danger">Are you sure you want to delete this room?</p>
+        <b-modal id="bigPhotoModal" data-date="imgPath" size="xl" title="Picture">
+            <img :src="imgPath" class="full-width">
         </b-modal>
-
-        <b-modal id="bigPhotoModal" size="xl" title="Picture"></b-modal>
 
     </section>
 </template>
 
 <script>
 import ApiRequest from '../../../API/ApiRequest';
-let PropertyRequest = ApiRequest('property')
+import draggable from 'vuedraggable';
+let PropertyRequest = ApiRequest('property');
 let properties = new PropertyRequest;
 let TypesRequest = ApiRequest('booking-roomtypes');
 let types = new TypesRequest;
+let RoomRequest = ApiRequest('room');
+let roomRequest = new RoomRequest;
+let ImageRequest = ApiRequest('image-upload');
+let imageRequest = new ImageRequest;
+let featureRequest = ApiRequest('features');
+let features = new featureRequest;
 
 export default {
     name: "Single",
     data() {
         return {
-            property: {}
+            property: {},
+            imageData: [],
+            newRoomOptions: [
+                {
+                    key:"facilities",
+                    parent:1,
+                    type:"room",
+                    value:"[{\"room_facility_type_id\":4,\"name\":\"Shower\"},{\"room_facility_type_id\":8,\"name\":\"TV\"},{\"name\":\"Hairdryer\",\"room_facility_type_id\":12},{\"room_facility_type_id\":27,\"name\":\"Free toiletries\"},{\"room_facility_type_id\":31,\"name\":\"Toilet\"},{\"room_facility_type_id\":38,\"name\":\"Private bathroom\"},{\"name\":\"Heating\",\"room_facility_type_id\":40},{\"name\":\"Satellite channels\",\"room_facility_type_id\":44},{\"name\":\"Flat-screen TV\",\"room_facility_type_id\":75},{\"name\":\"Hardwood or parquet floors\",\"room_facility_type_id\":82},{\"name\":\"Wardrobe or closet\",\"room_facility_type_id\":95},{\"room_facility_type_id\":125,\"name\":\"Linen\"},{\"room_facility_type_id\":141,\"name\":\"Toilet paper\"},{\"room_facility_type_id\":170,\"name\":\"Trash cans\"},{\"room_facility_type_id\":177,\"name\":\"Shampoo\"},{\"name\":\"Body soap\",\"room_facility_type_id\":179},{\"name\":\"Socket near the bed\",\"room_facility_type_id\":184},{\"room_facility_type_id\":187,\"name\":\"Non-feather pillow\"},{\"room_facility_type_id\":201,\"name\":\"Smoke alarm\"},{\"room_facility_type_id\":204,\"name\":\"Key card access\"},{\"room_facility_type_id\":205,\"name\":\"Reading light\"},{\"room_facility_type_id\":208,\"name\":\"Window\"}]",
+                },
+                {
+                    key:"native_id",
+                    parent:1,
+                    type:"room",
+                    value:'1',
+                },
+                {
+                    key:"photos",
+                    parent:1,
+                    type:"room",
+                    value: '[]'
+                },
+                {
+                    key:"name",
+                    parent:1,
+                    type:"room",
+                    value: '',
+                },
+                {
+                    key:"descriptions",
+                    parent:1,
+                    type:"room",
+                    value: '',
+                }
+            ],
+            rooms:[],
+            deleteRoom: {},
+            show: false,
+            imgPath:'',
+            features: []
         }
+    },
+    components: {
+        draggable,
     },
     created() {
         properties.get(this.$route.params.item)
             .then(resp => {
                 this.property = resp.data;
-            })
+                this.rooms = this.property.rooms;
+                this.property.rooms.forEach( room => room.photos = this.getRoomPhotos(room));
+                this.imageData = this.getPhotos();
+                this.property.rooms.forEach(item => {
+                    item.options[3] = item.options[3] || '';
+                    item.options[4] = item.options[4] || '';
+                    return item;
+                });
+
+                features.all()
+                    .then(res => {
+                        if(res.status === 200) {
+                            const features = Object.assign([], res.data);
+                            features.forEach(item => {
+                                item.check = this.property ? this.property.features.findIndex(featuresItem => featuresItem.id === item.id) !== -1 : false;
+                            });
+                            const featuresCategoryId = features.map(item => item.feature_category_id).filter((value, index, self ) => self.indexOf(value) === index);
+                            featuresCategoryId.forEach( categoryId => {
+                                this.features.push({
+                                    name: features.find(feature => feature.feature_category_id === categoryId).feature_category.name,
+                                    features: this.feature_category(features, categoryId)
+                                })
+                            })
+                        }
+                    })
+            });
+
     },
     methods: {
+        addFeatures(feature){
+            const indexFeatures = this.property.features.findIndex(item => item.id === feature.id);
+
+            if(indexFeatures === -1){
+                this.property.features.push(feature);
+            }
+            else {
+                this.property.features.splice(indexFeatures, 1);
+            }
+
+        },
+        feature_category(arrayFeature, feature_category_id){
+            return arrayFeature.filter(item => item.feature_category_id === feature_category_id);
+        },
+        savePhotoHotel: function (event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.readAsDataURL(input.files[0]);
+                reader.onload = (e) => {
+                    imageRequest.create({"image": e.target.result})
+                    .then(res => {
+                        this.imageData.push({
+                            url_max300: res.data.image,
+                            url_original: res.data.image,
+                            url_square60: res.data.image
+                        });
+                    })
+                }
+            }
+        },
+        savePhotoRoom: function(event, room) {
+            if(!room.photos){
+                room.photos = [];
+            }
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.readAsDataURL(input.files[0]);
+                reader.onload = (e) => {
+                    imageRequest.create({"image": e.target.result})
+                        .then(res => {
+                            room.photos.push({
+                                url_max300: res.data.image,
+                                url_original: res.data.image,
+                                url_square60: res.data.image
+                            });
+                            this.$forceUpdate();
+                        })
+                }
+            }
+        },
+        changeName(item, name){
+            item.options.forEach(option => option.key === 'name' ? option.value = name : '')
+        },
         getFieldValue(name, item, def, json) {
             if (!item || !item.options) {
                 return def;
             }
             for (let i in item.options) {
-                if (item.options[i].key === name) {
+                if (item.options[i].key === name && item.options[i].value) {
                     return json ? JSON.parse(item.options[i].value) : item.options[i].value;
                 }
             }
@@ -262,10 +421,14 @@ export default {
             return this.getFieldValue('photos', item,'', true);
         },
         deleteHotel() {
-
         },
         deleteHotelOk() {
-
+            properties.delete(this.property.id)
+                .then(res => {
+                    if(res.status === 200){
+                        this.$router.push({ name: 'property' });
+                    }
+                })
         },
         deletePhotoBigGallery() {
 
@@ -273,20 +436,93 @@ export default {
         deletePhotoSmallGallery() {
 
         },
+        deletePhotoBigGalleryOk(){
+            this.imageData.forEach((item, index, array) => {
+                item['url_original'] === this.imgPath ? this.imageData.splice(index, 1) : '';
+            });
+        },
+        deletePhotoSmallGalleryOk(event, room, photoId){
+            this.$bvModal.msgBoxConfirm('Are you sure you want to delete this photo?')
+                .then(value => {
+                    if(value) {
+                        room.photos.splice(photoId, 1);
+                        this.$forceUpdate();
+                    }
+                })
+        },
         save() {
-
+            for(let option of this.property.options){
+                if(option.key === 'photos'){
+                    option.value = JSON.stringify(this.imageData);
+                }
+            }
+            this.property.rooms.forEach(room => {
+                for(let option of room.options){
+                    if(option.key === 'photos'){
+                        option.value = JSON.stringify(room.photos);
+                    }
+                }
+                delete room.photos;
+            });
+            properties.update(this.property.id, this.property)
+                .then(resp => {
+                    properties.get(this.$route.params.item)
+                        .then(resp => {
+                            this.property = resp.data;
+                            this.rooms = this.property.rooms;
+                            this.property.rooms.forEach( room => room.photos = this.getRoomPhotos(room));
+                            this.imageData = this.getPhotos();
+                        })
+                })
         },
         addRoom() {
-
+            this.property.rooms.push({
+                id: '',
+                bed:'',
+                kitchen:'',
+                native_id:0,
+                number:0,
+                options: this.newRoomOptions,
+                person:0,
+                price:0,
+                property_id: this.property.id,
+                room_type_id: 0,
+                shower:"",
+                status:"approved",
+                newRoom: true
+            })
         },
-        deletePhotoBigGalleryOk() {
-
+        saveRoom(newRoom){
+            delete newRoom.newRoom;
+            roomRequest.create(newRoom)
+                .then(resp => {
+                    properties.get(this.$route.params.item)
+                        .then(resp => {
+                            this.property = resp.data;
+                            this.rooms = this.property.rooms;
+                            this.property.rooms.forEach( room => room.photos = this.getRoomPhotos(room));
+                        })
+                })
         },
-        deletePhotoSmallGalleryOk() {
-
+        deleteRoomOk(e, room) {
+            this.$bvModal.msgBoxConfirm('Are you sure you want to delete this room?')
+                .then(value => {
+                    if(value){
+                        roomRequest.delete(room.id)
+                            .then(resp => {
+                                properties.get(this.$route.params.item)
+                                    .then(resp => {
+                                        this.property = resp.data;
+                                        this.rooms = this.property.rooms;
+                                        this.property.rooms.forEach( room => room.photos = this.getRoomPhotos(room));
+                                    })
+                            })
+                    }
+                })
         },
-        deleteRoomOk() {
-
+        deleteNewRoom() {
+            const pointLastElement = this.property.rooms.length - 1;
+            this.property.rooms.splice(pointLastElement, 1);
         }
     },
     computed: {
@@ -388,5 +624,17 @@ export default {
     }
     .button-collapse:focus {
         box-shadow: none !important;
+    }
+    .delete-room {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .full-width {
+        max-width: 100vh;
+        width: 100%;
+        height: 59vh;
+        object-fit: cover;
+        margin: 0 auto;
+        display: block;
     }
 </style>

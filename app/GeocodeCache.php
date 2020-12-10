@@ -29,10 +29,10 @@ class GeocodeCache extends Model
     public function toArray()
     {
         return [
-            'id'        => $this->id, 
-            'lat'       => $this->lat, 
-            'lng'       => $this->lng, 
-            'address'   => $this->address, 
+            'id'        => $this->id,
+            'lat'       => $this->lat,
+            'lng'       => $this->lng,
+            'address'   => $this->address,
             'timestamp' => Carbon::parse($this->timestamp)->format('Y m d H:m:s')
         ];
     }

@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
-    
+
     public const ADMIN = 1;
 
     /**
@@ -44,6 +44,7 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->getKey();
     }
+
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.
      *
@@ -53,12 +54,13 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-    
-    public static function getTotalUsersVerifiedProfiles($type) {
-        if (!$type) {
-            return self::whereNotNull('email_verified_at')->count();  
+
+    public static function getTotalUsersVerifiedProfiles($type)
+    {
+        if (!$type){
+            return self::whereNotNull('email_verified_at')->count();
         } else {
-            return self::whereNull('email_verified_at')->count();  
+            return self::whereNull('email_verified_at')->count();
         }
     }
 }

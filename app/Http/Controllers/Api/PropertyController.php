@@ -1,14 +1,16 @@
 <?php namespace App\Http\Controllers\Api;
-
+use App\Feature;
 use App\Http\Controllers\Controller;
 use App\Option;
 use App\Http\Requests\PropertyListRequest;
+use App\Room;
 use App\Services\GeocoderService;
 use Illuminate\Http\Request;
 use App\Property;
 use Auth;
 use App\User;
 use Illuminate\Support\Str;
+use Ramsey\Collection\Collection;
 
 class PropertyController extends Controller
 {
@@ -17,16 +19,12 @@ class PropertyController extends Controller
      */
     private $service;
 
-    /**
-     * PropertyController constructor.
-     * @param GeocoderService $service
-     */
     public function __construct(GeocoderService $service)
     {
         $this->service = $service;
     }
 
-    function index(PropertyListRequest $request)
+    public function index(PropertyListRequest $request)
     {
         if (!$request->query('page')) {
             $objects = Property::ind();
@@ -43,7 +41,8 @@ class PropertyController extends Controller
         return response()->json(['objects' => $objects, 'coords' => null]);
     }
 
-    function queryFilter(Request $request){
+    public function queryFilter(Request $request)
+    {
         $data = $request->input();
         $address = $data['address'];
         $km = $data['km'] ? $data['km']  : 10;
@@ -60,10 +59,12 @@ class PropertyController extends Controller
             $objects[$key]->rate = array_reduce( $ratings, function($carry, $item) { return $carry + $item['rating']; } ) / $count;
             $objects[$key]->geo = $geo_data;
         }
+
         return response()->json(['objects' => $objects, 'coords' => $geo_data]);
     }
 
-    function querySort (Request $request){
+    public function querySort (Request $request)
+    {
         $data = $request->input();
 
         $objects = Property::orderBy($data['field'], $data['sort'])->paginate(20);
@@ -71,7 +72,8 @@ class PropertyController extends Controller
         return response()->json(['objects' => $objects, 'coords' => null]);
     }
 
-    function initMap(){
+    public function initMap()
+    {
         $coords = [];
 
         foreach (Property::paginate(100) as $object) {
@@ -84,24 +86,30 @@ class PropertyController extends Controller
         return response()->json(['coords' => $coords]);
     }
 
-    function show($id) {
-        return response()->json(Property::findOrFail($id));
-    }
+    public function show($id)
+    {
+        $property = Property::findOrFail($id);
 
-    function init() {
-        $property = Property::orderBy('created_at')->limit(10)->get();
         return response()->json($property);
     }
 
-    function queryProperty(Request $request) {
+    public function init()
+    {
+        $property = Property::orderBy('created_at')->limit(10)->get();
+
+        return response()->json($property);
+    }
+
+    public function queryProperty(Request $request)
+    {
         $fields = $request->all();
         $property = Property::whereIn('id', $fields['id'])->get();
 
         return response()->json($property);
     }
 
-    function destroy(Property $property) {
-
+    public function destroy(Property $property)
+    {
         foreach ($property->rooms as $room) {
             Option::where(['parent' => $room->id, 'type' => 'room'])->delete();
         }
@@ -111,7 +119,8 @@ class PropertyController extends Controller
         return response()->json(['code' => 'ok']);
     }
 
-    function store(Request $request) {
+    public function store(Request $request)
+    {
         request()->validate([
             'name'      => 'required',
             'address'   => 'required',
@@ -128,7 +137,7 @@ class PropertyController extends Controller
             'city'      => $request->city,
             'user_id'   => User::ADMIN,
             'views'     => 0,
-            'type'      => Property::AFFILIATE,
+            'type'      => Property::GENERAL,
             'status'    => Property::APPROVED,
             'lat'       => $geo_data['lat'],
             'lng'       => $geo_data['lng'],
@@ -137,6 +146,41 @@ class PropertyController extends Controller
         $item = new Property($data);
         $item->save();
 
+        $optionsData = [
+            'key'    => 'photos',
+            'parent' => $item->id,
+            'type'   => 'property',
+            'value'  => '[]',
+        ];
+        $item->options()->create($optionsData);
+
+        $item->save();
+
         return $item ? response()->json(['code' => 'ok','user' => $item]) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
+    }
+
+    public function update(Property $property, Request $request)
+    {
+//        request()->validate([
+//            'rooms.*.options.*.value'      => 'required',
+//        ]);
+        $fields = $request->all();
+
+        foreach ($fields['rooms'] as $roomKey => $room){
+            foreach ($room['options'] as $optionKey => $option){
+                $fields['rooms'][$roomKey]['options'][$optionKey]['value'] = $option['value'] ?? '';
+            }
+        }
+        $property->updateRelations($fields);
+
+        $property->features()->detach();
+
+        $property->features()->attach(array_map(function ($feature){
+            return $feature['id'];
+        }, $fields['features']));
+
+        $property->push();
+
+        return $property ? response()->json(['code' => 'ok']) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
     }
 }

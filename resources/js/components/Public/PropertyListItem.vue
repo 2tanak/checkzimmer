@@ -158,6 +158,9 @@ export default {
             }
         },
         typeKitchen(roomFacilities) {
+            if (!this.findOption('features')) {
+                return false;
+            }
             let features = JSON.parse(this.findOption('features').value)
             if (features.some(item => item.name === 'Shared kitchen')) {
                 return 'shared kitchen'
@@ -250,14 +253,23 @@ export default {
             return favoritesObject.includes(id);
         },
         hasWiFi() {
+            if (!this.findOption('features')) {
+                return false;
+            }
             let features = JSON.parse(this.findOption('features').value);
             return features.some( itm => itm.name === 'WiFi' );
         },
         hasLaundry() {
+            if (!this.findOption('features')) {
+                return false;
+            }
             let features = JSON.parse(this.findOption('features').value);
             return features.some( itm => itm.name === 'Laundry' );
         },
         hasTV() {
+            if (!this.findOption('features')) {
+                return false;
+            }
             return this.item.rooms.some( room => {
                 let features = JSON.parse(this.findOptionRoom(room, 'facilities').value);
                 return features.some( feature => feature.name === 'TV')

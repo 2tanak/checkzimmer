@@ -31,9 +31,11 @@ trait noCRUD
     // Cascade
     private $cascade = [
     ];
+
     function accessible() {
         return true;
     }
+
     static function upd($fields, $selector = []) {
         $class = self::getClass();
         $id = static::$identifier ?: 'id';
@@ -57,6 +59,7 @@ trait noCRUD
             $child::update($fields[$child]);
         }
     }
+
     static function ind($paginate = 0) {
         if (!$paginate) {
             return static::with(self::$children)->get();
@@ -72,6 +75,7 @@ trait noCRUD
     static function get($id) {
         static::with(static::$children)->where(static::$identifier, $id)->get();
     }
+
     static function withParams($id, $params) {
         return static::with(static::$children)->where(function($query) use ($params) {
             foreach ($params as $key => $param) {
@@ -79,6 +83,7 @@ trait noCRUD
             }
         })->where(static::$identifier, $id)->get();
     }
+
     static function params($params) {
         return static::with(static::$children)->where(function($query) use ($params) {
             foreach ($params as $key => $param) {

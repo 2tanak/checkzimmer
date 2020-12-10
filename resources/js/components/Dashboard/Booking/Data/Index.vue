@@ -107,7 +107,7 @@
                     .then( () => {
                         this.$bvModal.show('save-success');
                         this.typesLoader = false;
-                    })
+                    });
                 this.typesLoader = true;
             },
             loadCities() {
@@ -127,7 +127,7 @@
                     .then( () => {
                         this.$bvModal.show('load-features');
                         this.featuresLoader = false;
-                    })
+                    });
                 this.featuresLoader = true;
             },
             rootedFeatures(parent) {
