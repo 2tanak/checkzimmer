@@ -266,12 +266,16 @@ jQuery(document).ready(function() {
 
     jQuery('#offer-select').select2();
 
-    jQuery(window).on('load', function() {
+    /*jQuery(window).on('load', function() {
         if (jQuery(window).width() <= 575) {
             jQuery('#number-persons, #type, #offer-select3, #distance-select, #number-personse').select2('destroy');
         } else {
             jQuery('#number-persons, #type, #offer-select3, #distance-select, #number-personse').select2();
         }
+    });*/
+
+    jQuery(window).on('load', function() {
+        jQuery('#number-persons, #type, #offer-select3, #distance-select, #number-personse').select2();
     });
 
 
