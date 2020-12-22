@@ -56,6 +56,7 @@ Route::middleware('api')->namespace('Api')->group(function () {
     Route::post('/property/queryFilter', 'PropertyController@queryFilter');
     Route::post('/property/querySort', 'PropertyController@querySort');
     Route::post('/property/initMap', 'PropertyController@initMap');
+    Route::post('/property/list', 'PropertyController@listUpdate');
 
     Route::get('/questions', 'QuestionsController@paginated');
     Route::get('/reviews', 'ReviewsController@paginated');
