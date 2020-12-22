@@ -27,7 +27,7 @@ class PropertyController extends Controller
     public function index(PropertyListRequest $request)
     {
         if (!$request->query('page')) {
-            $objects = Property::ind();
+            $objects = Property::orderBy('ord')->get();
         } else {
             $objects = Property::indPaginated();
         }
@@ -182,5 +182,17 @@ class PropertyController extends Controller
         $property->push();
 
         return $property ? response()->json(['code' => 'ok']) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
+    }
+    function listUpdate(Request $request) {
+        $data = $request->all();
+        foreach ($data as $item) {
+            $prop = Property::find($item['id']);
+            if (!$prop) {
+                continue;
+            }
+            $prop->fill($item);
+            $prop->save();
+        }
+        dd($data);
     }
 }
