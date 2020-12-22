@@ -18,6 +18,12 @@
                                     <b-form-group label="Название отеля" label-for="input-hotel-name">
                                         <b-form-input v-model="property.name" id="input-hotel-name"></b-form-input>
                                     </b-form-group>
+                                    <b-form-group label="Адрес странички" label-for="input-hotel-name">
+                                        <b-form-input v-model="property.slug" id="input-hotel-name"></b-form-input>
+                                    </b-form-group>
+                                    <b-form-group label="Порядок вывода объекта" label-for="input-hotel-name">
+                                        <b-form-input v-model="property.ord" id="input-hotel-name"></b-form-input>
+                                    </b-form-group>
                                 </div>
                             </div>
                         </div>

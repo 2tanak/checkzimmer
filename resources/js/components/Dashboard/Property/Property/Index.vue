@@ -34,30 +34,34 @@
                 <div class="card">
                     <div class="card-body">
                         <b-form-group>
-                            <b-table striped hover responsive :items="filteredHotels" :fields="fields">
-                                <template v-slot:cell(user)="data">
-                                    {{ data.item.user ? data.item.user.name : '' }}
-                                </template>
-                                <template v-slot:cell(status)="data">
-                                    <b-badge :variant="badge(data.item)">{{ data.item.status }}</b-badge>
-                                </template>
-                                <template v-slot:cell(hotelType)="data">
-                                    {{ getTypeName( getTypeId(data.item) ).name }}
-                                </template>
-                                <template v-slot:cell(name)="data">
-                                    <router-link :to="{ name: 'property-single',  params: { item: data.item.id } }">{{ data.item.name }}</router-link>
-                                </template>
-
-                                <template v-slot:cell(delete)="data">
-                                    <a style="text-decoration:none;" href="" v-b-modal.modal-object-delete @click.prevent="featureDelete(data.item)"><span style="font-size:22px;">&times;</span></a>
-                                </template>
-                                <template v-slot:table-busy>
-                                    <div class="text-center text-danger my-2">
-                                        <b-spinner class="align-middle"></b-spinner>
-                                        <strong>Loading...</strong>
-                                    </div>
-                                </template>
-                            </b-table>
+                            <b-table-simple striped hover responsive>
+                                <b-thead>
+                                    <b-th>User</b-th>
+                                    <b-th>Status</b-th>
+                                    <b-th>Name</b-th>
+                                    <b-th>Link</b-th>
+                                    <b-th>Delete</b-th>
+                                </b-thead>
+                                <draggable @start="drag=true" @end="sortEnded" v-model="property" tag="tbody">
+                                <b-tr v-for="item in filteredHotels">
+                                    <td>
+                                        {{ item.user ? item.user.name : '' }}
+                                    </td>
+                                    <td>
+                                        <b-badge :variant="badge(item)">{{ item.status }}</b-badge>
+                                    </td>
+                                    <td>
+                                        {{ getTypeName( getTypeId(item) ).name }}
+                                    </td>
+                                    <td>
+                                        <router-link :to="{ name: 'property-single',  params: { item: item.id } }">{{ item.name }}</router-link>
+                                    </td>
+                                    <td >
+                                        <a style="text-decoration:none;" href="" v-b-modal.modal-object-delete @click.prevent="featureDelete(item)"><span style="font-size:22px;">&times;</span></a>
+                                    </td>
+                                </b-tr>
+                                </draggable>
+                            </b-table-simple>
                         </b-form-group>
                     </div>
                 </div>
@@ -94,6 +98,8 @@
 
 <script>
     import ApiRequest from '../../../API/ApiRequest';
+    import draggable from 'vuedraggable';
+
     import Forms from '../../../Forms/Index';
 
     import propertyForm from "../../../Data/propertyForm";
@@ -105,7 +111,7 @@
 
     export default {
         name: "Index",
-        components: {Forms},
+        components: {Forms, draggable},
         data() {
             return {
                 role: 'admin',
@@ -133,6 +139,13 @@
                 })
         },
         methods: {
+            sortEnded() {
+                this.property.map( (item, num) => {
+                    item.ord = num;
+                    return item;
+                })
+                properties.request('list', this.property, 'post');
+            },
             badge(item) {
                 switch (item.status) {
                     case 'approved': return 'success';
