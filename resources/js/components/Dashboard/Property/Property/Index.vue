@@ -140,7 +140,7 @@
         },
         methods: {
             sortEnded() {
-                this.property.map( (item, num) => {
+                this.property = this.property.map( (item, num) => {
                     item.ord = num;
                     return item;
                 })
