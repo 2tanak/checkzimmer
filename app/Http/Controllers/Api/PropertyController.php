@@ -29,7 +29,7 @@ class PropertyController extends Controller
         if (!$request->query('page')) {
             $objects = Property::orderBy('ord')->get();
         } else {
-            $objects = Property::indPaginated();
+            $objects = Property::orderBy('ord')->paginate(30);
         }
 
         foreach($objects as $key => $object) {
