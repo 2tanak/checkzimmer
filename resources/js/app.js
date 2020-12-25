@@ -17,6 +17,7 @@ Vue.use(BootstrapVue);
 
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import 'es6-promise/auto';
 import {store} from './store';
 
 Vue.config.productionTip = false;
@@ -26,18 +27,16 @@ Vue.use(VueAxios, axios);
 
 Vue.router = router;
 
-import auth from '@websanova/vue-auth';
-import authBasic from '@websanova/vue-auth/dist/drivers/auth/bearer.min.js';
-import httpAxios from '@websanova/vue-auth/dist/drivers/http/axios.1.x.js';
-import routerVueRouter from '@websanova/vue-auth/dist/drivers/router/vue-router.2.x.esm.js';
+import auth from './auth'
 
-Vue.use(auth, {
-    auth: authBasic,
-    http: httpAxios,
-    router: routerVueRouter,
-    rolesKey: 'role',
-    authRedirect: { path: '/dashboard/login' }
-});
+auth.plugins = {
+    http: Vue.axios, // Axios
+    router: Vue.router
+};
+
+import VueAuth from '@websanova/vue-auth/dist/v2/vue-auth.esm'
+
+Vue.use(VueAuth, auth)
 
 
 window.Vue = require('vue');

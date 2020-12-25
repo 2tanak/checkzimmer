@@ -4,50 +4,64 @@ const client = axios.create({
     //  baseURL: '/api',
 });
 
+function getConfig() {
+    let token = localStorage.getItem('auth_token_default');
+    let config = {}
+    if (token) {
+        config.headers = {
+            'Authorization': 'Bearer ' + token
+        }
+    }
+    console.log(config);
+    return config;
+}
+
 export default (base) => class ApiRequest {
     constructor() {
-        console.log(base);
     }
+
     all() {
-        return client.get(`/api/${base}`);
+        let token = localStorage.getItem('token');
+
+        return client.get(`/api/${base}`, getConfig());
     }
     byPage(page) {
-        return client.get(`/api/${base}?page=${page}`);
+        return client.get(`/api/${base}?page=${page}`, getConfig());
     }
     get(id) {
-        return client.get(`/api/${base}/${id}`);
+        return client.get(`/api/${base}/${id}`, getConfig());
     }
     query(data) {
-        return client.post(`/api/${base}/query`, data);
+        return client.post(`/api/${base}/query`, data, getConfig());
     }
     request(action, data, reqType) {
         reqType = reqType || 'post';
         let url = `/api/${base}/${action}`;
         switch (reqType) {
             case 'post':
-                return client.post(url, data);
+                return client.post(url, data, getConfig());
             case 'get':
-                return client.get(url, data);
+                return client.get(url, getConfig());
             case 'put':
-                return client.put(url, data);
+                return client.put(url, data, getConfig());
             case 'delete':
-                return client.delete(url, data);
+                return client.delete(url, getConfig());
         }
     }
     update(id, data) {
-        return client.put(`/api/${base}/${id}`, data);
+        return client.put(`/api/${base}/${id}`, data, getConfig());
     }
     updateAll(data) {
-        return client.put(`/api/${base}`, data);
+        return client.put(`/api/${base}`, data, getConfig());
     }
     delete(id) {
-        return client.delete(`/api/${base}/${id}`);
+        return client.delete(`/api/${base}/${id}`, getConfig());
     }
     deleteAll() {
-        return client.post(`/api/${base}`);
+        return client.post(`/api/${base}`, getConfig());
     }
     create(data) {
-        return client.post(`/api/${base}`, data);
+        return client.post(`/api/${base}`, data, getConfig());
     }
 };
 
