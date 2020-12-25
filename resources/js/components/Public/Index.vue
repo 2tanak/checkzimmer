@@ -359,7 +359,7 @@ export default{
                 that.foundTotal();
             })
         setTimeout(function() {
-            console.log(that.$auth.user());
+            //console.log(that.$auth.user());
         }, 1000);
         jQuery('body').on('click', 'a.collapse-circle', function(e) {
             e.preventDefault();
@@ -586,6 +586,7 @@ export default{
     },
     methods: {
         login(e) {
+            console.log(this.$auth);
             e.preventDefault();
             let res = true;
             jQuery('.modal-form.login input').each(function() {

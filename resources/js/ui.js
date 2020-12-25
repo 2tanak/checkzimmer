@@ -11,26 +11,25 @@ import {store} from './store';
 import router from "./StarAdmin/router";
 
 Vue.config.productionTip = false;
-
-axios.defaults.baseURL = '/api';
-Vue.use(VueAxios, axios);
+axios.defaults.baseURL = `/api`;
 
 Vue.router = router;
 
-import auth from '@websanova/vue-auth';
-import authBasic from '@websanova/vue-auth/dist/drivers/auth/bearer.min.js';
-import httpAxios from '@websanova/vue-auth/dist/drivers/http/axios.1.x.js';
-import routerVueRouter from '@websanova/vue-auth/dist/drivers/router/vue-router.2.x.esm.js';
+Vue.use(VueAxios, axios)
 
-Vue.use(auth, {
-    auth: authBasic,
-    http: httpAxios,
-    router: routerVueRouter,
-    rolesKey: 'role',
-    authRedirect: { path: '/dashboard/login' }
-});
+import auth from './auth'
+
+auth.plugins = {
+    http: Vue.axios, // Axios
+    router: Vue.router
+};
+
+import VueAuth from '@websanova/vue-auth/dist/v2/vue-auth.esm'
+
+Vue.use(VueAuth, auth)
 
 window.Vue = require('vue');
+var jQuery = require('jquery')
 
 /*jQuery(window).on('load', function() {
     jQuery('.property-card-slider').css({'opacity': 1, 'transition-duration': '0.2s'})

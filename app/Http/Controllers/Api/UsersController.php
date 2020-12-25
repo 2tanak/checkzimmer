@@ -9,16 +9,22 @@ class UsersController extends Controller
 {
     public function index()
     {
-        return response()->json(User::all());
+        $users = User::all();
+        return response()->json(
+            [
+                'status' => 'success',
+                'users' => $users->toArray()
+            ], 200);
     }
 
     public function show($id)
     {
-        $option = Option::withParams($id, ['type' => Option::$optionType]);
-        /*if (!$option) {
-            return response()->json( [] );
-        }*/
-        return response()->json($option->pluck('value', 'key', 'id'));
+        $user = User::find($id);
+        return response()->json(
+            [
+                'status' => 'success',
+                'user' => $user->toArray()
+            ], 200);
     }
 
     public function store(Request $request)
