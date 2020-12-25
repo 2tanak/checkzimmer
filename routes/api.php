@@ -63,15 +63,18 @@ Route::middleware('api')->namespace('Api')->group(function () {
 });
 
 
-Route::group([
-    //'middleware' => 'jwt.auth',
-    'namespace' => 'Api',
-    'prefix' => 'auth'
-], function ($router) {
+Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {
+    Route::post('register', 'AuthController@register');
     Route::post('login', 'AuthController@login');
-    Route::get('user', 'AuthController@me');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
     Route::get('refresh', 'AuthController@refresh');
+    Route::group(['middleware' => 'auth:api'], function(){
+        Route::get('user', 'AuthController@user');
+        Route::post('logout', 'AuthController@logout');
+    });
+});
+
+Route::group(['middleware' => 'auth:api'], function(){
+    // Users
+    Route::get('users', 'UserController@index')->middleware('isAdmin');
+    Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
 });
