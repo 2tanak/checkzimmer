@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 });*/
 
-Route::middleware('api')->namespace('Api')->group(function () {
+Route::middleware('auth')->namespace('Api')->group(function () {
 
     Route::post('/image-upload', 'ImageUploadController@imageUploadPost');
     Route::resource('options', 'OptionsController');
@@ -60,6 +60,10 @@ Route::middleware('api')->namespace('Api')->group(function () {
 
     Route::get('/questions', 'QuestionsController@paginated');
     Route::get('/reviews', 'ReviewsController@paginated');
+
+    Route::get('users', 'UsersController@index')->middleware('isAdmin');
+    Route::get('users/{id}', 'UsersController@show')->middleware('isAdminOrSelf');
+
 });
 
 
@@ -71,10 +75,4 @@ Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {
         Route::get('user', 'AuthController@user');
         Route::post('logout', 'AuthController@logout');
     });
-});
-
-Route::group(['middleware' => 'auth:api'], function(){
-    // Users
-    Route::get('users', 'UserController@index')->middleware('isAdmin');
-    Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
 });

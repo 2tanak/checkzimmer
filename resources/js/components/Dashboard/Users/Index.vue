@@ -1,7 +1,5 @@
 <template>
     <section class="users-dashboard">
-
-
         <h1>Пользователи</h1>
         <div class="row mt-4">
             <div class="col-md-6 grid-margin">
@@ -122,6 +120,9 @@ export default {
     computed: {
         userList() {
             let userList = [];
+            if (this.users.length === 0) {
+                return userList;
+            }
             if (this.search) {
                 userList = this.users.filter(
                     item =>
@@ -132,6 +133,7 @@ export default {
                 userList = this.users;
             }
             let that = this;
+            console.log(userList, userList.sort);
             userList = userList.sort((a, b) => {
                 String(a[that.order]).localeCompare(String(b[that.order]))
             })
@@ -229,10 +231,10 @@ export default {
         }
 
     },
-    created() {
+    mounted() {
         users.all()
             .then(resp => {
-                this.users = resp.data;
+                this.users = resp.data.users;
                 this.loading = false;
             })
     }
