@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 class Authenticate extends Middleware
@@ -16,13 +17,17 @@ class Authenticate extends Middleware
     }
     protected function authenticate($request, array $guards)
     {
-        if (empty($guards)) {
+
+        /*if (empty($guards)) {
             $guards = [null];
         }
         foreach ($guards as $guard) {
             if ($this->auth->guard($guard)->check()) {
                 return $this->auth->shouldUse($guard);
             }
+        }*/
+        if (Auth::id()) {
+            return true;
         }
         return 'authentication_error';
     }
