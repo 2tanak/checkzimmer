@@ -1,11 +1,15 @@
 <template>
     <div class="property-card">
         <div class="property-card-container">
-            <div class="property-card-slider">
-                <div v-for="photo in getPhotos">
-                    <img :src="photo.url_max300" alt="Property picture">
+            <VueSlickCarousel class="property-card-slider" :arrows="false" :dots="true"
+                              :slidesToShow="1" :slidesToScroll="1"
+                              ref="carousel" :infinite="true">
+                <div v-for="photo in getPhotos" class="slider-item">
+                    <a style="display:block;" :href="'/single/'+item.slug">
+                        <img :src="photo.url_max300" alt="Property picture">
+                    </a>
                 </div>
-            </div>
+            </VueSlickCarousel>
             <div class="data">
                 <a :href="'/single/'+item.slug" class="title"><span>{{ item.name }}</span></a>
                 <div class="data-item">
@@ -22,9 +26,18 @@
                         {{ distance }}км от &nbsp; <span class="desctop-span">указанного</span> <span class="mobile-span">указ.</span> &nbsp; вами адреса
                     </div>
                     <div class="additionally">
-                        <div v-if="hasWiFi" class="wi-fi data-block-circle" data-toggle="tooltip" data-placement="top" title="wi-fi"><img src="/svg/i-wifi.svg"></div>
-                        <div v-if="hasLaundry" class="laundry data-block-circle" data-toggle="tooltip" data-placement="top" title="Laundry"><img src="/svg/i-washingmachine.svg"></div>
-                        <div v-if="hasTV" class="tv data-block-circle" data-toggle="tooltip" data-placement="top" title="TV"><img src="/svg/i-tv.svg"></div>
+                        <div v-if="hasWiFi" class="wi-fi data-block-circle" title="WiFi">
+                            <div class="tooltip-block">wifi</div>
+                            <img src="/svg/i-wifi.svg">
+                        </div>
+                        <div v-if="hasLaundry" class="laundry data-block-circle" title="Laundry">
+                            <div class="tooltip-block">стиральная машина</div>
+                            <img src="/svg/i-washingmachine.svg">
+                        </div>
+                        <div v-if="hasTV" class="tv data-block-circle" title="TV">
+                            <div class="tooltip-block">tv</div>
+                            <img src="/svg/i-tv.svg">
+                        </div>
                         <div v-if="kitchenTypeStr() !== ''" class="kitchen data-block-oval">
                             <img src="/svg/i-canteen.svg">
                             {{ kitchenTypeStr() }} кухня
@@ -99,9 +112,13 @@
 </template>
 
 <script>
+import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+import VueSlickCarousel from 'vue-slick-carousel'
+import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 export default {
     name: "PropertyListItem",
     props: [ 'item' ],
+    components: { VueSlickCarousel },
     data() {
         return {
         }
@@ -252,6 +269,7 @@ export default {
         },
         getPhotos() {
             let photos = this.findOption('photos');
+            console.log(photos);
             if (!photos) {
                 return []
             }
