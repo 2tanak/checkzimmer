@@ -95,7 +95,8 @@
                   </ul>
               </b-collapse>
           </li>
-        <li class="nav-item"><router-link class="nav-link" :to="{ name: 'users' }"><img class="menu-icon" src="../../assets/images/menu_icons/04.png" alt="menu icon"><span class="menu-title">Users</span></router-link></li>
+          <li class="nav-item"><router-link class="nav-link" :to="{ name: 'users' }"><img class="menu-icon" src="../../assets/images/menu_icons/04.png" alt="menu icon"><span class="menu-title">Users</span></router-link></li>
+          <li class="nav-item"><router-link class="nav-link" :to="{ name: 'guests' }"><img class="menu-icon" src="../../assets/images/menu_icons/04.png" alt="menu icon"><span class="menu-title">Guests</span></router-link></li>
       </ul>
     </nav>
   </section>

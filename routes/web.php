@@ -21,6 +21,7 @@ Route::get('/dashboard/{page?}/{subpage?}', 'HomeController@dashboard')->name('d
 Route::get('/list', 'HomeController@list')->name('list');
 Route::get('/single', 'HomeController@single')->name('single');
 Route::get('/single/{slug}', 'HomeController@singleProperty')->name('single');
+Route::post('/single/{slug}', 'HomeController@singlePropertyAccess')->name('single');
 Route::get('/favorites', 'HomeController@favorites')->name('favorites');
 Route::get('/plans', 'HomeController@plans')->name('plans');
 Route::get('single/question/create', 'Api\QuestionsController@create');

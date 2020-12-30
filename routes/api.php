@@ -23,6 +23,7 @@ Route::middleware('auth')->namespace('Api')->group(function () {
     Route::post('/image-upload', 'ImageUploadController@imageUploadPost');
     Route::resource('options', 'OptionsController');
     Route::resource('users', 'UsersController');
+    Route::resource('guests', 'GuestsController');
     Route::resource('features', 'FeaturesController');
     Route::resource('room-types', 'RoomTypesController');
     Route::apiResource('room', 'RoomController');

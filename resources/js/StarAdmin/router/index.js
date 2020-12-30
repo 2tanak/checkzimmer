@@ -36,6 +36,7 @@ import Requests from '../../components/Dashboard/Requests/Index';
 import Header from '../../components/Dashboard/Website/Header/Index';
 import Footer from '../../components/Dashboard/Website/Footer/Index';
 import Users from '../../components/Dashboard/Users/Index';
+import Guests from '../../components/Dashboard/Guests/Index';
 import Features from '../../components/Dashboard/Data/Features/Index';
 import RoomTypes from '../../components/Dashboard/Data/RoomTypes/Index';
 import GeocoderCache from '../../components/Dashboard/Data/GeocoderCache/Index';
@@ -144,6 +145,12 @@ export default new Router({
             path: '/dashboard/users',
             name: 'users',
             component: Users,
+            meta: { auth: true }
+        },
+        {
+            path: '/dashboard/guests',
+            name: 'guests',
+            component: Guests,
             meta: { auth: true }
         },
         {
