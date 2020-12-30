@@ -293,6 +293,7 @@
     <script src="{{ asset('js/ui.js') }}" defer></script>
     <script src="{{ asset('js/slick.min.js') }}" defer></script>
     <script src="{{ asset('js/select2.full.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 
 
 </body>

@@ -32,10 +32,6 @@ Vue.use(auth, {
 
 window.Vue = require('vue');
 
-/*jQuery(window).on('load', function() {
-    jQuery('.property-card-slider').css({'opacity': 1, 'transition-duration': '0.2s'})
-});*/
-
 const app = new Vue({
     el: '#application',
     router,
@@ -49,10 +45,6 @@ const app = new Vue({
 
 
 jQuery(document).ready(function() {
-
-    jQuery(function () {
-        jQuery('[data-toggle="tooltip"]').tooltip()
-    });
 
     jQuery('.sorting a').click(function(e) {
         e.preventDefault();
@@ -234,6 +226,14 @@ jQuery(document).ready(function() {
         jQuery(parent).find('label').addClass('active');
     });
 
+    jQuery('.inquiry-modal .data-block input').blur(function () {
+        var value = jQuery(this).val();
+        var parent = jQuery(this).closest('.data-block');
+        if (value === '') {
+            jQuery(parent).find('label').removeClass('active');
+        }
+    });
+
     jQuery('.sidebar-bottom a').click(function (e) {
         e.preventDefault();
         var parent = jQuery(this).closest('.sidebar-bottom-block');
@@ -260,22 +260,27 @@ jQuery(document).ready(function() {
         jQuery('.sidebar-small-block, .sidebar-modal-block').removeClass('active');
     });
 
+    jQuery(document).mouseup(function (e){
+        var div = jQuery(".sidebar-small-block");
+        if (!div.is(e.target)
+            && div.has(e.target).length === 0) {
+            jQuery('.sidebar-modal-block').removeClass('active');
+        }
+    });
+
+
     jQuery('.sidebar-modal-block .overlay').click(function () {
         jQuery('.sidebar-modal-block').removeClass('active');
     });
 
     jQuery('#offer-select').select2();
 
-    /*jQuery(window).on('load', function() {
+    jQuery(window).on('load', function() {
         if (jQuery(window).width() <= 575) {
             jQuery('#number-persons, #type, #offer-select3, #distance-select, #number-personse').select2('destroy');
         } else {
             jQuery('#number-persons, #type, #offer-select3, #distance-select, #number-personse').select2();
         }
-    });*/
-
-    jQuery(window).on('load', function() {
-        jQuery('#number-persons, #type, #offer-select3, #distance-select, #number-personse').select2();
     });
 
 
@@ -316,6 +321,14 @@ jQuery(document).ready(function() {
             }
         ]
     });
+
+    /*jQuery('.property-card-slider').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        dots: true,
+        infinite: true
+    });*/
 
     jQuery('a.open-gallery').click(function (e) {
         e.preventDefault();
@@ -378,8 +391,6 @@ jQuery(document).ready(function() {
         }
         tempScrollTop = currentScrollTop;
     });
-
-
 
 });
 
@@ -466,7 +477,16 @@ jQuery(window).scroll( function() {
 
 });
 
-jQuery(window).on("load resize", function(){
+
+window.onload = function () {
+    jQuery('.single-load-content').addClass('hide');
+    jQuery('.single-content').removeClass('not-active');
+    setTimeout (function() {
+        jQuery('.communication').removeClass('not-active');
+    }, 1000);
+};
+
+/*jQuery(window).on("load resize", function(){
     if (jQuery(window).width() <= 1040) {
         jQuery('.property-card-slider').filter('.slick-initialized').slick('unslick');
     } else if (jQuery('.property-card-slider').length) {
@@ -478,12 +498,4 @@ jQuery(window).on("load resize", function(){
             dots: true
         });
     }
-});
-
-window.onload = function () {
-    jQuery('.single-load-content').addClass('hide');
-    jQuery('.single-content').removeClass('not-active');
-    setTimeout (function() {
-        jQuery('.communication').removeClass('not-active');
-    }, 1000);
-};
+});*/

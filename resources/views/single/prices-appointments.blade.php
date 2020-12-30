@@ -208,9 +208,9 @@
     <div class="position">
         <div class="top-bloc-collapse" data-toggle="collapse" data-target="#position2-collapse" role="button" aria-expanded="false" aria-controls="position2-collapse">
             <div class="row">
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" style="padding-right:2px !important;">
                     <div class="top-bloc-collapse-item top-bloc-collapse-left">
-                        <div class="row">
+                        <div class="row" style="margin-right:-2px !important;">
                             <div class="name col-xl-5 col-lg-5 col-md-5 col-sm-5">
                                 <img src="/svg/i-room-filled.svg" alt="house">
                                 квартира
@@ -221,9 +221,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" style="padding-left:2px !important;">
                     <div class="top-bloc-collapse-item top-bloc-collapse-right">
-                        <div class="row" style="height:100%;">
+                        <div class="row" style="height:100%;margin-left:-2px !important;">
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center"></div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center">
                                 <div class="shower-item-block shower-item-block-green">
