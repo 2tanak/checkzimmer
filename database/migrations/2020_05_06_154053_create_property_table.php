@@ -19,6 +19,7 @@ class CreatePropertyTable extends Migration
             $table->enum('type', ['general', 'affiliate']);
             $table->enum('status', ['pending', 'approved', 'declined']);
             $table->unsignedInteger('views');
+            $table->text('access')->default('');
             $table->unsignedInteger('ord');
             $table->longText('lat');
             $table->longText('lng');
