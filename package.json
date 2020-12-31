@@ -38,6 +38,7 @@
         "readmore-js": "^2.2.1",
         "vue-axios": "^2.1.5",
         "vue-select2": "^0.2.6",
+        "vue-slick-carousel": "^1.0.6",
         "vuedraggable": "^2.24.3",
         "vuex": "^3.4.0"
     }

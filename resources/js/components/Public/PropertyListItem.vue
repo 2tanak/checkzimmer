@@ -1,7 +1,8 @@
 <template>
     <div class="property-card">
         <div class="property-card-container">
-            <VueSlickCarousel class="property-card-slider" :arrows="false" :dots="true"
+            <img v-if="getPhotos.length && !sizedForSlider" :src="getPhotos[0].url_max300">
+            <VueSlickCarousel v-if="getPhotos.length && sizedForSlider" class="property-card-slider" :arrows="false" :dots="true"
                               :slidesToShow="1" :slidesToScroll="1"
                               ref="carousel" :infinite="true">
                 <div v-for="photo in getPhotos" class="slider-item">
@@ -63,7 +64,7 @@
                     <tr v-for="room in item.rooms">
                         <td class="type-block filling-block">
                             <img :src="getPersonsPic(room.person)" :alt="getPersonsText(room.person)">
-                            <span> {{ roomName(room) }} </span>
+                            <span> {{ getRoomName(room) }} </span>
                         </td>
                         <td class="type-block quantity-block">{{ room.number }}</td>
                         <td class="type-block personen-block">{{ room.person }}</td>
@@ -121,7 +122,15 @@ export default {
     components: { VueSlickCarousel },
     data() {
         return {
+            sizedForSlider: true,
         }
+    },
+    mounted() {
+        jQuery(window).resize( () => {
+            console.log(jQuery(window).width());
+            this.sizedForSlider = jQuery(window).width() > 1040;
+
+        });
     },
     methods: {
         findOption(name) {
@@ -247,9 +256,9 @@ export default {
             }
             return types.join(' + ');
         },
-        roomName(room) {
-            let option = this.findOptionRoom(room, 'name');
-            return option ? option.value : ''
+        getRoomName(room) {
+            let name = this.findOptionRoom(room, 'name');
+            return name ? name.value : '';
         }
     },
     computed: {
