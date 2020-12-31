@@ -15,7 +15,7 @@ class Property extends Model
     use propertyFeatures;
 
     protected $table = 'property';
-    protected $fillable = ['user_id', 'type', 'status', 'views', 'lat', 'lng', 'name', 'city', 'zip', 'address', 'slug', 'description'];
+    protected $fillable = ['user_id', 'type', 'status', 'ord', 'views', 'access', 'lat', 'lng', 'name', 'city', 'zip', 'address', 'slug', 'description'];
     protected $with = ['options', 'user', 'rooms', 'questions', 'rating', 'questions', 'features'];
     protected $fillableRelations = ['options', 'rooms', 'features'];
     private static $identifier = 'id';

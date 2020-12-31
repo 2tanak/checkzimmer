@@ -18,6 +18,17 @@
                                     <b-form-group label="Название отеля" label-for="input-hotel-name">
                                         <b-form-input v-model="property.name" id="input-hotel-name"></b-form-input>
                                     </b-form-group>
+                                    <b-form-group label="Адрес странички" label-for="input-hotel-name">
+                                        <b-form-input v-model="property.slug" id="input-hotel-name"></b-form-input>
+                                    </b-form-group>
+                                    <b-form-group label="Порядок вывода объекта" label-for="input-hotel-name">
+                                        <b-form-input v-model="property.ord" id="input-hotel-name"></b-form-input>
+                                    </b-form-group>
+                                    <b-form-group label="Доступ к объекту" label-for="input-hotel-name">
+                                        <b-form-input v-model="property.access" id="input-hotel-name"></b-form-input>
+                                        <small v-if="!property.access" class="text-info">свободный доступ</small>
+                                        <small v-else class="text-danger">доступ ограничен указанными PIN-кодами. Коды можно писать через запятую</small>
+                                    </b-form-group>
                                 </div>
                             </div>
                         </div>

@@ -18,11 +18,12 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 });*/
 
-Route::middleware('api')->namespace('Api')->group(function () {
+Route::middleware('auth')->namespace('Api')->group(function () {
 
     Route::post('/image-upload', 'ImageUploadController@imageUploadPost');
     Route::resource('options', 'OptionsController');
     Route::resource('users', 'UsersController');
+    Route::resource('guests', 'GuestsController');
     Route::resource('features', 'FeaturesController');
     Route::resource('room-types', 'RoomTypesController');
     Route::apiResource('room', 'RoomController');
@@ -56,21 +57,23 @@ Route::middleware('api')->namespace('Api')->group(function () {
     Route::post('/property/queryFilter', 'PropertyController@queryFilter');
     Route::post('/property/querySort', 'PropertyController@querySort');
     Route::post('/property/initMap', 'PropertyController@initMap');
+    Route::post('/property/list', 'PropertyController@listUpdate');
 
     Route::get('/questions', 'QuestionsController@paginated');
     Route::get('/reviews', 'ReviewsController@paginated');
+
+    Route::get('users', 'UsersController@index')->middleware('isAdmin');
+    Route::get('users/{id}', 'UsersController@show')->middleware('isAdminOrSelf');
+
 });
 
 
-Route::group([
-    //'middleware' => 'jwt.auth',
-    'namespace' => 'Api',
-    'prefix' => 'auth'
-], function ($router) {
+Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {
+    Route::post('register', 'AuthController@register');
     Route::post('login', 'AuthController@login');
-    Route::get('user', 'AuthController@me');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
     Route::get('refresh', 'AuthController@refresh');
+    Route::group(['middleware' => 'auth:api'], function(){
+        Route::get('user', 'AuthController@user');
+        Route::post('logout', 'AuthController@logout');
+    });
 });

@@ -134,9 +134,15 @@ export default {
     },
     methods: {
         findOption(name) {
+            if (!this.item.options) {
+                return false;
+            }
             return this.item.options.find( elem => elem.key === name);
         },
         findOptionRoom(room, name) {
+            if (!room.options) {
+                return false;
+            }
             return room.options.find( elem => elem.key === name);
         },
         maxPeopleNum() {
@@ -212,11 +218,13 @@ export default {
         },
         kitchenTypeStr() {
             let priv = this.item.rooms.some( room => {
-                let features = JSON.parse(this.findOptionRoom(room, 'facilities').value);
+                let facilities = this.findOptionRoom(room, 'facilities');
+                let features = facilities ? JSON.parse(facilities.value) : [];
                 return ['private kitchen', 'kitchenette'].includes( this.typeKitchen(features) );
             } );
             let shared = this.item.rooms.some( room => {
-                let features = JSON.parse(this.findOptionRoom(room, 'facilities').value);
+                let facilities = this.findOptionRoom(room, 'facilities');
+                let features = facilities ? JSON.parse(facilities.value) : [];
                 return this.typeKitchen(features) === 'shared kitchen';
             } );
             let types = [];
@@ -230,11 +238,13 @@ export default {
         },
         showerStr() {
             let priv = this.item.rooms.some( room => {
-                let features = JSON.parse(this.findOptionRoom(room, 'facilities').value);
+                let facilities = this.findOptionRoom(room, 'facilities');
+                let features = facilities ? JSON.parse(facilities.value) : [];
                 return this.typeShower(features) === 'private';
             } );
             let shared = this.item.rooms.some( room => {
-                let features = JSON.parse(this.findOptionRoom(room, 'facilities').value);
+                let facilities = this.findOptionRoom(room, 'facilities');
+                let features = facilities ? JSON.parse(facilities.value) : [];
                 return this.typeShower(features) === 'shared';
             } );
             let types = [];
@@ -302,7 +312,8 @@ export default {
                 return false;
             }
             return this.item.rooms.some( room => {
-                let features = JSON.parse(this.findOptionRoom(room, 'facilities').value);
+                let facilities = this.findOptionRoom(room, 'facilities');
+                let features = facilities ? JSON.parse(facilities.value) : [];
                 return features.some( feature => feature.name === 'TV')
             })
         },
@@ -313,7 +324,7 @@ export default {
             let c_1 = Math.abs(parseFloat(this.item.geo.lng) - parseFloat(this.item.lng));
             let c_2 = Math.abs(parseFloat(this.item.geo.lat) - parseFloat(this.item.lat));
             return Math.ceil(Math.sqrt( c_1 ** 2 + c_2 ** 2 ) * 111);
-        }
+        },
     }
 }
 
