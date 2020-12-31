@@ -1,11 +1,16 @@
 <template>
     <div class="property-card">
         <div class="property-card-container">
-            <div class="property-card-slider">
-                <div v-for="photo in getPhotos">
-                    <img :src="photo.url_max300" alt="Property picture">
+            <img v-if="getPhotos.length && !sizedForSlider" :src="getPhotos[0].url_max300">
+            <VueSlickCarousel v-if="getPhotos.length && sizedForSlider" class="property-card-slider" :arrows="false" :dots="true"
+                              :slidesToShow="1" :slidesToScroll="1"
+                              ref="carousel" :infinite="true">
+                <div v-for="photo in getPhotos" class="slider-item">
+                    <a style="display:block;" :href="'/single/'+item.slug">
+                        <img :src="photo.url_max300" alt="Property picture">
+                    </a>
                 </div>
-            </div>
+            </VueSlickCarousel>
             <div class="data">
                 <a :href="'/single/'+item.slug" class="title"><span>{{ item.name }}</span></a>
                 <div class="data-item">
@@ -22,9 +27,18 @@
                         {{ distance }}км от &nbsp; <span class="desctop-span">указанного</span> <span class="mobile-span">указ.</span> &nbsp; вами адреса
                     </div>
                     <div class="additionally">
-                        <div v-if="hasWiFi" class="wi-fi data-block-circle" data-toggle="tooltip" data-placement="top" title="wi-fi"><img src="/svg/i-wifi.svg"></div>
-                        <div v-if="hasLaundry" class="laundry data-block-circle" data-toggle="tooltip" data-placement="top" title="Laundry"><img src="/svg/i-washingmachine.svg"></div>
-                        <div v-if="hasTV" class="tv data-block-circle" data-toggle="tooltip" data-placement="top" title="TV"><img src="/svg/i-tv.svg"></div>
+                        <div v-if="hasWiFi" class="wi-fi data-block-circle" title="WiFi">
+                            <div class="tooltip-block">wifi</div>
+                            <img src="/svg/i-wifi.svg">
+                        </div>
+                        <div v-if="hasLaundry" class="laundry data-block-circle" title="Laundry">
+                            <div class="tooltip-block">стиральная машина</div>
+                            <img src="/svg/i-washingmachine.svg">
+                        </div>
+                        <div v-if="hasTV" class="tv data-block-circle" title="TV">
+                            <div class="tooltip-block">tv</div>
+                            <img src="/svg/i-tv.svg">
+                        </div>
                         <div v-if="kitchenTypeStr() !== ''" class="kitchen data-block-oval">
                             <img src="/svg/i-canteen.svg">
                             {{ kitchenTypeStr() }} кухня
@@ -50,7 +64,7 @@
                     <tr v-for="room in item.rooms">
                         <td class="type-block filling-block">
                             <img :src="getPersonsPic(room.person)" :alt="getPersonsText(room.person)">
-                            <span> {{ roomName(room) }} </span>
+                            <span> {{ getRoomName(room) }} </span>
                         </td>
                         <td class="type-block quantity-block">{{ room.number }}</td>
                         <td class="type-block personen-block">{{ room.person }}</td>
@@ -99,12 +113,24 @@
 </template>
 
 <script>
+import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+import VueSlickCarousel from 'vue-slick-carousel'
+import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 export default {
     name: "PropertyListItem",
     props: [ 'item' ],
+    components: { VueSlickCarousel },
     data() {
         return {
+            sizedForSlider: true,
         }
+    },
+    mounted() {
+        jQuery(window).resize( () => {
+            console.log(jQuery(window).width());
+            this.sizedForSlider = jQuery(window).width() > 1040;
+
+        });
     },
     methods: {
         findOption(name) {
@@ -230,9 +256,9 @@ export default {
             }
             return types.join(' + ');
         },
-        roomName(room) {
-            let option = this.findOptionRoom(room, 'name');
-            return option ? option.value : ''
+        getRoomName(room) {
+            let name = this.findOptionRoom(room, 'name');
+            return name ? name.value : '';
         }
     },
     computed: {
@@ -252,6 +278,7 @@ export default {
         },
         getPhotos() {
             let photos = this.findOption('photos');
+            console.log(photos);
             if (!photos) {
                 return []
             }

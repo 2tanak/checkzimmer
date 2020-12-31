@@ -1,6 +1,6 @@
 <template>
     <section class="users-dashboard">
-        <h1>Пользователи</h1>
+        <h1>Гости сайта</h1>
         <div class="row mt-4">
             <div class="col-md-6 grid-margin">
                 <div class="card">
@@ -8,6 +8,7 @@
                         <b-form-group label="Сортировка" label-for="input-phone">
                             <b-select id="orderby" text="Сортировка по полю" class="m-md-2" v-model="order">
                                 <b-select-option value="id">Id</b-select-option>
+                                <b-select-option value="pin">PIN</b-select-option>
                                 <b-select-option value="name">Name</b-select-option>
                                 <b-select-option value="email">E-mail</b-select-option>
                             </b-select>
@@ -30,12 +31,12 @@
             <div class="col-md-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-table striped hover :busy="loading" :items="userList" :fields="userFields">
+                        <b-table striped hover :busy="loading" :items="guestList" :fields="guestFields">
                             <template v-slot:cell(edit)="data">
-                                <a href="" v-b-modal.modal-user @click.prevent="userEdit(data)">&#9998;</a>
+                                <a href="" v-b-modal.modal-user @click.prevent="guestEdit(data)">&#9998;</a>
                             </template>
                             <template v-slot:cell(delete)="data">
-                                <a href="" v-b-modal.modal-user-delete @click.prevent="userDelete(data)">&times;</a>
+                                <a href="" v-b-modal.modal-user-delete @click.prevent="guestDelete(data)">&times;</a>
                             </template>
                             <template v-slot:table-busy>
                                 <div class="text-center text-danger my-2">
@@ -51,30 +52,28 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <b-button type="submit" variant="success" class="mr-2" v-b-modal.modal-user @click="newUser">Новый
-                    пользователь
+                <b-button type="submit" variant="success" class="mr-2" v-b-modal.modal-user @click="newGuest">
+                    Новый гость
                 </b-button>
-
-                <!--<b-button variant="light">Отмена</b-button>-->
             </div>
         </div>
         <div class="row mt-5">
             <div class="col-md-12">
 
                 <b-alert dismissible v-model="operationOk" variant="success">
-                    {{ textOperation}}
+                    {{ textOperation }}
                 </b-alert>
                 <b-alert dismissible v-model="operationError" variant="danger">
-                    {{ textOperation}}
+                    {{ textOperation }}
                 </b-alert>
             </div>
         </div>
-        <b-modal id="modal-user" :title="editUser.id ? 'Редактирование пользователя' : 'Новый пользователь'" @ok.prevent="userCreate">
-            <Forms v-model="editUser" :fields="editUser" :data="data"/>
+        <b-modal id="modal-user" :title="editGuest.id ? 'Редактирование пользователя' : 'Новый пользователь'" @ok.prevent="guestCreate">
+            <Forms v-model="editGuest" :fields="editGuest" :data="data"/>
         </b-modal>
-        <b-modal id="modal-user-delete" title="Delete user" @ok.prevent="userDeleteApproved">
-            <span class="text-danger">A you sure you want to delete user <strong>{{ deleteUser.name }}</strong>
-                (<strong>{{ deleteUser.email }}</strong>)
+        <b-modal id="modal-user-delete" title="Delete guest" @ok.prevent="guestDeleteApproved">
+            <span class="text-danger">A you sure you want to delete guest with PIN #<strong>{{ deleteGuest.pin }}</strong>
+                (<strong>{{ deleteGuest.email }}</strong>)
             </span>
         </b-modal>
     </section>
@@ -82,24 +81,26 @@
 
 <script>
 import Forms from "../../Forms/Index";
-import usersTable from "../../Data/usersForm"
+import guestsTable from "../../Data/guestsForm"
 import ApiRequest from "../../API/ApiRequest";
 
-let UsersRequest = ApiRequest('users');
-let users = new UsersRequest;
+let GuestsRequest = ApiRequest('guests');
+let guests = new GuestsRequest;
 
-let newUser = {
+let newGuest = {
     id: '',
+    pin: '',
     name: '',
     email: '',
-    role: 'client',
+    reference: '',
+    active: true,
     password: ''
 };
 
 export default {
-    name: "Index",
+    name: "Guests",
     components: {Forms},
-    currentUser: {},
+    currentGuest: {},
     data() {
         return {
             order: 'name',
@@ -107,54 +108,53 @@ export default {
             operationError : false,
             search: '',
             loading: true,
-            editUser: {...newUser},
+            editGuest: {...newGuest},
             textOperation: '',
-            deleteUser: {},
-            users: [],
-            userFields: [
-                'id', 'name', 'email', 'role', 'edit', 'delete'
+            deleteGuest: {},
+            guests: [],
+            guestFields: [
+                'id', 'PIN', 'name', 'email', 'active', 'edit', 'delete'
             ],
-            data: usersTable
+            data: guestsTable
         }
     },
     computed: {
-        userList() {
-            let userList = [];
-            if (this.users.length === 0) {
-                return userList;
+        guestList() {
+            let guestList = [];
+            if (this.guests.length === 0) {
+                return guestList;
             }
             if (this.search) {
-                userList = this.users.filter(
+                guestList = this.guests.filter(
                     item =>
                         item.name.toLowerCase().includes(this.search.toLowerCase()) ||
                         item.email.toLowerCase().includes(this.search.toLowerCase())
                 );
             } else {
-                userList = this.users;
+                guestList = this.guests;
             }
             let that = this;
-            console.log(userList, userList.sort);
-            userList = userList.sort((a, b) => {
+            guestList = guestList.sort((a, b) => {
                 String(a[that.order]).localeCompare(String(b[that.order]))
             })
-            return userList;
+            return guestList;
         }
     },
     methods: {
-        newUser() {
-            this.editUser = {...newUser};
+        newGuest() {
+            this.editGuest = {...newGuest};
         },
-        userEdit(data) {
-            this.editUser = data.item;
+        guestEdit(data) {
+            this.editGuest = data.item;
         },
-        userDelete(data) {
-            this.deleteUser = data.item;
+        guestDelete(data) {
+            this.deleteGuest = data.item;
         },
-        userUpdate() {
+        guestUpdate() {
             this.clearModalErrors();
-            users.update(this.editUser.id,this.editUser).then(response => {
-                if(response.data.code == 'ok'){
-                    this.textOperation = 'Пользователь обновлен';
+            guests.update(this.editGuest.id,this.editGuest).then(response => {
+                if(response.data.code === 'ok'){
+                    this.textOperation = 'Гость обновлен';
                     this.operationOk = true
                 }else{
                     this.textOperation = 'Ошибка обновления';
@@ -167,16 +167,15 @@ export default {
                 this.generateModalErrors(error.response.data.errors);
             });
         },
-        userDeleteApproved() {
-            users.delete(this.deleteUser.id).then(response => {
-                if(response.data.code == 'ok'){
-                    this.textOperation = 'Пользователь удален';
+        guestDeleteApproved() {
+            guests.delete(this.deleteGuest.id).then(response => {
+                if(response.data.code === 'ok'){
+                    this.textOperation = 'Гость удален';
                     this.operationOk = true;
-                    var index = this.users.findIndex(n => n.id === this.deleteUser.id);
+                    var index = this.guests.findIndex(n => n.id === this.deleteGuest.id);
                     if (index !== -1) {
-                        this.users.splice(index, 1);
+                        this.guests.splice(index, 1);
                     }
-
 
                 } else{
                     this.textOperation = 'Ошибка удаления пользователя';
@@ -190,20 +189,20 @@ export default {
                 this.$bvModal.hide('modal-user-delete');
             });
         },
-        userCreate() {
+        guestCreate() {
             this.$bvToast.toast();
-            if(this.editUser.id){
-                this.userUpdate();
+            if(this.guestEdit.id){
+                this.guestUpdate();
                 return;
             }
             this.clearModalErrors();
-            users.create(this.editUser).then(response => {
-                if(response.data.code == 'ok'){
-                    this.textOperation = 'Пользователь добавлен';
+            guests.create(this.editGuest).then(response => {
+                if(response.data.code === 'ok'){
+                    this.textOperation = 'Гость добавлен';
                     this.operationOk = true;
-                    this.users.push(response.data.user);
+                    this.guests.push(response.data.guest);
                 } else{
-                    this.textOperation = 'Ошибка добавления пользователя';
+                    this.textOperation = 'Ошибка добавления гостя';
                     this.operationError = true;
                 }
                 this.$nextTick(() => {
@@ -232,18 +231,15 @@ export default {
 
     },
     mounted() {
-        users.all()
+        guests.all()
             .then(resp => {
-                this.users = resp.data.users;
+                this.guests = resp.data.guests;
                 this.loading = false;
             })
     }
 }
 </script>
 
-<style>
-    .errText{
-        color:red;
-        font-size: 12px;
-    }
+<style scoped>
+
 </style>
