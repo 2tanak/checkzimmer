@@ -17,8 +17,8 @@
                         <div class="additional-information">
                             <div class="mobile-title">Bewertungen</div>
                             @include('single.rating', ['rating' => $hotel->rate])
-                            <div class="add-time">Добавлено: в {{ date('H:i, j F Y', strtotime($hotel->created_at)) }}</div>
-                            <div class="viewed">Просмотры: {{ $hotel->views }}</div>
+                            <div class="add-time">{{ __('Added') }}: {{ __('in')}} {{ date('H:i, j F Y', strtotime($hotel->created_at)) }}</div>
+                            <div class="viewed">{{ __('Views') }}: {{ $hotel->views }}</div>
                         </div>
                     </div>
                     @include('single.prices-appointments', ['hotel' => $hotel])
@@ -37,15 +37,15 @@
         </div>
 
         <div class="fixed-bar">
-            <a href="#" class="send-inquiry inquiry">Отправить запрос</a>
+            <a href="#" class="send-inquiry inquiry">{{ __('Send request') }}</a>
             @if ($hotel->type != 'affiliate')
                 <div class="see-number-phone">
-                    <span class="number-phone-text">Показать телефон</span>
+                    <span class="number-phone-text">{{ __('Show phone') }}</span>
                     <a href="tel:+4917616573456" class="number-phone">+4917616573456</a>
                 </div>
             @endif
             <div class="not-phone">
-                <div class="speaks">Владелец объекта говорит на:</div>
+                <div class="speaks">{{ __('Object owner speaks') }}:</div>
                 <div class="language-item">en, de</div>
             </div>
         </div>

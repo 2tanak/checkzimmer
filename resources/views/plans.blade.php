@@ -5,19 +5,18 @@
     <section class="plans-section">
         <div class="plans-content">
             <div class="plans-container">
-                <h1>Our pricing plans are transparent & flexible</h1>
-                <div class="subtitle">Обратитесь к нам мы сравним для вас объекты в городе Х и подберем для вас самое
-                    оптимальное размещение!</div>
+                <h1>{{ __('Our pricing plans are transparent & flexible') }}</h1>
+                <div class="subtitle">{{ __('Contact us, we will compare the properties in the city') }} {{ __('Х') }} {{ __('for you and find the most optimal accommodation for you!') }}</div>
                 <div class="price-block">
                     <div class="price-block-item">
                         <div class="price-block-head">
-                            <div class="name-tariff">Intro</div>
+                            <div class="name-tariff">{{ __('Intro') }}</div>
                             <div class="price-item">
                                 <div class="max-price">€39 <span>*</span></div>
-                                <div class="month">/ Month</div>
+                                <div class="month">/ {{ __('Month') }}</div>
                             </div>
                             <div class="description">
-                                For most businesses that want to optimize web queries
+                                {{ __('For most businesses that want to optimize web queries') }}
                             </div>
                         </div>
                         <div class="price-block-body">
@@ -27,59 +26,59 @@
                                         <circle cx="9" cy="9" r="9" fill="#5A5A5E"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2071 6.70706L7.99995 12.9142L4.29285 9.20706L5.70706 7.79285L7.99995 10.0857L12.7928 5.29285L14.2071 6.70706Z" fill="white"/>
                                     </svg>
-                                    Own analytics platform
+                                    {{ __('Own analytics platform') }}
                                 </li>
                                 <li class="available">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="9" cy="9" r="9" fill="#5A5A5E"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2071 6.70706L7.99995 12.9142L4.29285 9.20706L5.70706 7.79285L7.99995 10.0857L12.7928 5.29285L14.2071 6.70706Z" fill="white"/>
                                     </svg>
-                                    Chat support
+                                    {{ __('Chat support') }}
                                 </li>
                                 <li class="available">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="9" cy="9" r="9" fill="#5A5A5E"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2071 6.70706L7.99995 12.9142L4.29285 9.20706L5.70706 7.79285L7.99995 10.0857L12.7928 5.29285L14.2071 6.70706Z" fill="white"/>
                                     </svg>
-                                    Unlimited options
+                                    {{ __('Unlimited options') }}
                                 </li>
                                 <li class="available">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="9" cy="9" r="9" fill="#5A5A5E"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2071 6.70706L7.99995 12.9142L4.29285 9.20706L5.70706 7.79285L7.99995 10.0857L12.7928 5.29285L14.2071 6.70706Z" fill="white"/>
                                     </svg>
-                                    Optimization
+                                    {{ __('Optimization') }}
                                 </li>
                                 <li class="not-available">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="9" cy="9" r="9" fill="#BABCC5"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8.75015 10.1644L11.293 12.7072L12.7072 11.293L10.1644 8.75015L12.7073 6.20718L11.2931 4.79297L8.75015 7.33594L6.20718 4.79297L4.79297 6.20718L7.33594 8.75015L4.79312 11.293L6.20733 12.7072L8.75015 10.1644Z" fill="white"/>
                                     </svg>
-                                    Phone support
+                                    {{ __('Phone support') }}
                                 </li>
                                 <li class="not-available">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="9" cy="9" r="9" fill="#BABCC5"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8.75015 10.1644L11.293 12.7072L12.7072 11.293L10.1644 8.75015L12.7073 6.20718L11.2931 4.79297L8.75015 7.33594L6.20718 4.79297L4.79297 6.20718L7.33594 8.75015L4.79312 11.293L6.20733 12.7072L8.75015 10.1644Z" fill="white"/>
                                     </svg>
-                                    Special aplication
+                                    {{ __('Special application') }}
                                 </li>
                             </ul>
-                            <a class="choose-plan" href="#">Choose Plan</a>
+                            <a class="choose-plan" href="#">{{ __('Choose Plan') }}</a>
                             <div class="footnote">
-                                * Обратите внимание что годовой тариф стоит 468 евро.
+                                * {{ __('Please note that the annual rate is EUR') }} 468.
                             </div>
                         </div>
                     </div>
                     <div class="price-block-item">
                         <div class="price-block-head">
-                            <div class="name-tariff">Base</div>
+                            <div class="name-tariff">{{ __('Base') }}</div>
                             <div class="price-item">
                                 <div class="max-price">€99 <span>*</span></div>
-                                <div class="month">/ Month</div>
+                                <div class="month">/ {{ __('Month') }}</div>
                             </div>
                             <div class="description">
-                                For most businesses that want to optimize web queries
+                                {{ __('For most businesses that want to optimize web queries') }}
                             </div>
                         </div>
                         <div class="price-block-body">
@@ -89,59 +88,59 @@
                                         <circle cx="9" cy="9" r="9" fill="#5A5A5E"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2071 6.70706L7.99995 12.9142L4.29285 9.20706L5.70706 7.79285L7.99995 10.0857L12.7928 5.29285L14.2071 6.70706Z" fill="white"/>
                                     </svg>
-                                    Own analytics platform
+                                    {{ __('Own analytics platform') }}
                                 </li>
                                 <li class="available">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="9" cy="9" r="9" fill="#5A5A5E"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2071 6.70706L7.99995 12.9142L4.29285 9.20706L5.70706 7.79285L7.99995 10.0857L12.7928 5.29285L14.2071 6.70706Z" fill="white"/>
                                     </svg>
-                                    Chat support
+                                    {{ __('Chat support') }}
                                 </li>
                                 <li class="available">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="9" cy="9" r="9" fill="#5A5A5E"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2071 6.70706L7.99995 12.9142L4.29285 9.20706L5.70706 7.79285L7.99995 10.0857L12.7928 5.29285L14.2071 6.70706Z" fill="white"/>
                                     </svg>
-                                    Unlimited options
+                                    {{ __('Unlimited options') }}
                                 </li>
                                 <li class="available">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="9" cy="9" r="9" fill="#5A5A5E"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2071 6.70706L7.99995 12.9142L4.29285 9.20706L5.70706 7.79285L7.99995 10.0857L12.7928 5.29285L14.2071 6.70706Z" fill="white"/>
                                     </svg>
-                                    Optimization
+                                    {{ __('Optimization') }}
                                 </li>
                                 <li class="not-available">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="9" cy="9" r="9" fill="#BABCC5"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8.75015 10.1644L11.293 12.7072L12.7072 11.293L10.1644 8.75015L12.7073 6.20718L11.2931 4.79297L8.75015 7.33594L6.20718 4.79297L4.79297 6.20718L7.33594 8.75015L4.79312 11.293L6.20733 12.7072L8.75015 10.1644Z" fill="white"/>
                                     </svg>
-                                    Phone support
+                                    {{ __('Phone support') }}
                                 </li>
                                 <li class="not-available">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="9" cy="9" r="9" fill="#BABCC5"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8.75015 10.1644L11.293 12.7072L12.7072 11.293L10.1644 8.75015L12.7073 6.20718L11.2931 4.79297L8.75015 7.33594L6.20718 4.79297L4.79297 6.20718L7.33594 8.75015L4.79312 11.293L6.20733 12.7072L8.75015 10.1644Z" fill="white"/>
                                     </svg>
-                                    Special aplication
+                                    {{ __('Special application') }}
                                 </li>
                             </ul>
-                            <a class="choose-plan" href="#">Choose Plan</a>
+                            <a class="choose-plan" href="#">{{ __('Choose Plan') }}</a>
                             <div class="footnote">
-                                * Обратите внимание что годовой тариф стоит 468 евро.
+                                * {{ __('Please note that the annual rate is EUR') }} 468.
                             </div>
                         </div>
                     </div>
                     <div class="price-block-item popular">
                         <div class="price-block-head">
-                            <div class="name-tariff">Popular</div>
+                            <div class="name-tariff">{{ __('Popular') }}</div>
                             <div class="price-item">
                                 <div class="max-price">€129 <span>*</span></div>
-                                <div class="month">/ Month</div>
+                                <div class="month">/ {{ __('Month') }}</div>
                             </div>
                             <div class="description">
-                                For most businesses that want to optimize web queries
+                                {{ __('For most businesses that want to optimize web queries') }}
                             </div>
                         </div>
                         <div class="price-block-body">
@@ -151,59 +150,59 @@
                                         <circle cx="9" cy="9" r="9" fill="#5A5A5E"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2071 6.70706L7.99995 12.9142L4.29285 9.20706L5.70706 7.79285L7.99995 10.0857L12.7928 5.29285L14.2071 6.70706Z" fill="white"/>
                                     </svg>
-                                    Own analytics platform
+                                    {{ __('Own analytics platform') }}
                                 </li>
                                 <li class="available">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="9" cy="9" r="9" fill="#5A5A5E"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2071 6.70706L7.99995 12.9142L4.29285 9.20706L5.70706 7.79285L7.99995 10.0857L12.7928 5.29285L14.2071 6.70706Z" fill="white"/>
                                     </svg>
-                                    Chat support
+                                    {{ __('Chat support') }}
                                 </li>
                                 <li class="available">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="9" cy="9" r="9" fill="#5A5A5E"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2071 6.70706L7.99995 12.9142L4.29285 9.20706L5.70706 7.79285L7.99995 10.0857L12.7928 5.29285L14.2071 6.70706Z" fill="white"/>
                                     </svg>
-                                    Unlimited options
+                                    {{ __('Unlimited options') }}
                                 </li>
                                 <li class="available">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="9" cy="9" r="9" fill="#5A5A5E"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2071 6.70706L7.99995 12.9142L4.29285 9.20706L5.70706 7.79285L7.99995 10.0857L12.7928 5.29285L14.2071 6.70706Z" fill="white"/>
                                     </svg>
-                                    Optimization
+                                    {{ __('Optimization') }}
                                 </li>
                                 <li>
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="9" cy="9" r="9" fill="#5A5A5E"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2071 6.70706L7.99995 12.9142L4.29285 9.20706L5.70706 7.79285L7.99995 10.0857L12.7928 5.29285L14.2071 6.70706Z" fill="white"/>
                                     </svg>
-                                    Phone support
+                                    {{ __('Phone support') }}
                                 </li>
                                 <li>
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="9" cy="9" r="9" fill="#5A5A5E"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2071 6.70706L7.99995 12.9142L4.29285 9.20706L5.70706 7.79285L7.99995 10.0857L12.7928 5.29285L14.2071 6.70706Z" fill="white"/>
                                     </svg>
-                                    Special aplication
+                                    {{ __('Special application') }}
                                 </li>
                             </ul>
-                            <a class="choose-plan" href="#">Choose Plan</a>
+                            <a class="choose-plan" href="#">{{ __('Choose Plan') }}</a>
                             <div class="footnote">
-                                * Обратите внимание что годовой тариф стоит 468 евро.
+                                * {{ __('Please note that the annual rate is EUR') }} 468.
                             </div>
                         </div>
                     </div>
                     <div class="price-block-item">
                         <div class="price-block-head">
-                            <div class="name-tariff">Enterprice</div>
+                            <div class="name-tariff">{{ __('Enterprice') }}</div>
                             <div class="price-item">
                                 <div class="max-price">€229 <span>*</span></div>
-                                <div class="month">/ Month</div>
+                                <div class="month">/ {{ __('Month') }}</div>
                             </div>
                             <div class="description">
-                                For most businesses that want to optimize web queries
+                                {{ __('For most businesses that want to optimize web queries') }}
                             </div>
                         </div>
                         <div class="price-block-body">
@@ -213,47 +212,47 @@
                                         <circle cx="9" cy="9" r="9" fill="#5A5A5E"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2071 6.70706L7.99995 12.9142L4.29285 9.20706L5.70706 7.79285L7.99995 10.0857L12.7928 5.29285L14.2071 6.70706Z" fill="white"/>
                                     </svg>
-                                    Own analytics platform
+                                    {{ __('Own analytics platform') }}
                                 </li>
                                 <li class="available">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="9" cy="9" r="9" fill="#5A5A5E"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2071 6.70706L7.99995 12.9142L4.29285 9.20706L5.70706 7.79285L7.99995 10.0857L12.7928 5.29285L14.2071 6.70706Z" fill="white"/>
                                     </svg>
-                                    Chat support
+                                    {{ __('Chat support') }}
                                 </li>
                                 <li class="available">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="9" cy="9" r="9" fill="#5A5A5E"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2071 6.70706L7.99995 12.9142L4.29285 9.20706L5.70706 7.79285L7.99995 10.0857L12.7928 5.29285L14.2071 6.70706Z" fill="white"/>
                                     </svg>
-                                    Unlimited options
+                                    {{ __('Unlimited options') }}
                                 </li>
                                 <li class="available">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="9" cy="9" r="9" fill="#5A5A5E"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2071 6.70706L7.99995 12.9142L4.29285 9.20706L5.70706 7.79285L7.99995 10.0857L12.7928 5.29285L14.2071 6.70706Z" fill="white"/>
                                     </svg>
-                                    Optimization
+                                    {{ __('Optimization') }}
                                 </li>
                                 <li class="not-available">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="9" cy="9" r="9" fill="#BABCC5"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8.75015 10.1644L11.293 12.7072L12.7072 11.293L10.1644 8.75015L12.7073 6.20718L11.2931 4.79297L8.75015 7.33594L6.20718 4.79297L4.79297 6.20718L7.33594 8.75015L4.79312 11.293L6.20733 12.7072L8.75015 10.1644Z" fill="white"/>
                                     </svg>
-                                    Phone support
+                                    {{ __('Phone support') }}
                                 </li>
                                 <li class="not-available">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="9" cy="9" r="9" fill="#BABCC5"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8.75015 10.1644L11.293 12.7072L12.7072 11.293L10.1644 8.75015L12.7073 6.20718L11.2931 4.79297L8.75015 7.33594L6.20718 4.79297L4.79297 6.20718L7.33594 8.75015L4.79312 11.293L6.20733 12.7072L8.75015 10.1644Z" fill="white"/>
                                     </svg>
-                                    Special aplication
+                                    {{ __('Special application') }}
                                 </li>
                             </ul>
-                            <a class="choose-plan" href="#">Choose Plan</a>
+                            <a class="choose-plan" href="#">{{ __('Choose Plan') }}</a>
                             <div class="footnote">
-                                * Обратите внимание что годовой тариф стоит 468 евро.
+                                * {{ __('Please note that the annual rate is EUR') }} 468.
                             </div>
                         </div>
                     </div>
@@ -261,7 +260,7 @@
             </div>
             <div class="questions-block">
                 <div class="questions-content">
-                    <div class="title">Freequently asked Questions</div>
+                    <div class="title">{{ __('Freequently asked Questions') }}</div>
                     <div class="questions-block-item">
                         <div class="questions-item">
                             <div class="collapse-button" data-toggle="collapse" href="#collapse-1" role="button" aria-expanded="false" aria-controls="collapse-1">
