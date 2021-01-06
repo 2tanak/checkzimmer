@@ -2,7 +2,7 @@
 
     <div class="mobile-description-content paddings-block">
         <div class="head-collapse" data-toggle="collapse" data-target="#mobile-description-content-collapse" aria-expanded="false" aria-controls="mobile-description-content-collapse">
-            <div>Описание объекта</div>
+            <div>{{ __('Description object') }}</div>
             <div class="decompose-button"></div>
         </div>
         <div class="collapse" id="mobile-description-content-collapse">
@@ -30,7 +30,7 @@
                     Perfect place for your next stay in Leipzig!
                 </div>
                 <a class="more-details" data-toggle="collapse" href="#description-collapse" role="button" aria-expanded="false" aria-controls="description-collapse">
-                    Подробнее
+                    {{ __('More details') }}
                     <img src="/svg/i-arrow-show-more.svg" alt="alt">
                 </a>
             </div>
@@ -39,7 +39,7 @@
 
     <div class="reviews-content mobile-reviews-content paddings-block">
         <div class="head-collapse" data-toggle="collapse" data-target="#mobile-reviews-content-collapse" aria-expanded="false" aria-controls="mobile-reviews-content-collapse">
-            <div>Отзывы <span>(72)</span></div>
+            <div>{{ __('Reviews') }} <span>(72)</span></div>
             <div class="decompose-button"></div>
         </div>
         <div class="collapse" id="mobile-reviews-content-collapse">
@@ -215,7 +215,7 @@
 
     <div class="questions-content mobile-questions-content paddings-block">
         <div class="head-collapse" data-toggle="collapse" data-target="#mobile-questions-content-collapse" aria-expanded="false" aria-controls="mobile-questions-content-collapse">
-            <div>Вопросы <span>{{count($questions)}}</span></div>
+            <div>{{ __('Questions') }} <span>{{count($questions)}}</span></div>
             <div class="decompose-button"></div>
         </div>
         <div class="collapse" id="mobile-questions-content-collapse">
@@ -245,7 +245,7 @@
     </div>
     <div class="mobile-map-content paddings-block click-collapse" id="map-mobile-block">
         <div class="head-collapse" data-toggle="collapse" data-target="#mobile-map-content-collapse" aria-expanded="false" aria-controls="mobile-questions-content-collapse">
-            <div>Карта</div>
+            <div>{{ __('Map') }}</div>
             <div class="decompose-button"></div>
         </div>
         <div class="collapse" id="mobile-map-content-collapse">

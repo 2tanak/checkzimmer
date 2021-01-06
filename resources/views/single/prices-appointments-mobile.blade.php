@@ -1,5 +1,5 @@
 <div class="mobile-price-situation">
-    <h2>Цены и обстановка</h2>
+    <h2>{{ __('Prices and furnishings') }}</h2>
     <div>
     <div class="position-collapse">
         <div class="visible-part" type="button" data-toggle="collapse" data-target="#position-collapse1" aria-expanded="false" aria-controls="position-collapse1">
@@ -695,7 +695,7 @@
     </div>
 
     <div class="bottom-text">
-        * Текст комментария к таблице с ценами. Предложения по вашему запросу закончились, увеличьте дистанцию или свяжитесь с менежером напрямую
+        * {{ __('The text of the comment to the table with prices. The offers on your request are over, increase the distance or contact the manager directly') }}
     </div>
 
 </div>

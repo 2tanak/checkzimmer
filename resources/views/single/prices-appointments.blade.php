@@ -2,10 +2,10 @@
     <div class="titles">
         <div class="row">
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pr-0">
-                <div class="title">Цены</div>
+                <div class="title">{{ __('Prices') }}</div>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pl-0">
-                <div class="title padding-left">Обстановка</div>
+                <div class="title padding-left">{{ __('Situation')  }}</div>
             </div>
         </div>
     </div>
@@ -13,17 +13,17 @@
         <div class="row">
             <div class="parameters-block parameters-left-block col-xl-6 col-lg-6 col-md-6 col-sm-6">
                 <div class="row">
-                    <div class="title type col-xl-5 col-lg-5 col-md-5 col-sm-5">Тип</div>
-                    <div class="title quantity col-xl-2 col-lg-2 col-md-2 col-sm-2">Кол-во</div>
-                    <div class="title personen col-xl-2 col-lg-2 col-md-2 col-sm-2 text-center">Personen</div>
-                    <div class=" title price col-xl-3 col-lg-3 col-md-3 col-sm-3">Цена</div>
+                    <div class="title type col-xl-5 col-lg-5 col-md-5 col-sm-5">{{ __('Type') }}</div>
+                    <div class="title quantity col-xl-2 col-lg-2 col-md-2 col-sm-2">{{ __('Amount') }}</div>
+                    <div class="title personen col-xl-2 col-lg-2 col-md-2 col-sm-2 text-center">{{ __('Personen') }}</div>
+                    <div class=" title price col-xl-3 col-lg-3 col-md-3 col-sm-3">{{ __('Price') }}</div>
                 </div>
             </div>
             <div class="parameters-block parameters-right-block col-xl-6 col-lg-6 col-md-6 col-sm-6">
                 <div class="row">
-                    <div class="title type-bed col-xl-4 col-lg-4 col-md-4 col-sm-4">Тип кровати</div>
-                    <div class="title shower col-xl-4 col-lg-4 col-md-4 col-sm-4">Душ</div>
-                    <div class="title kitchen col-xl-4 col-lg-4 col-md-4 col-sm-4">Кухня</div>
+                    <div class="title type-bed col-xl-4 col-lg-4 col-md-4 col-sm-4">{{ __('Bed type') }}</div>
+                    <div class="title shower col-xl-4 col-lg-4 col-md-4 col-sm-4">{{ __('Shower') }}</div>
+                    <div class="title kitchen col-xl-4 col-lg-4 col-md-4 col-sm-4">{{ __('Kitchen') }}</div>
                 </div>
             </div>
         </div>
@@ -213,7 +213,7 @@
                         <div class="row" style="margin-right:-2px !important;">
                             <div class="name col-xl-5 col-lg-5 col-md-5 col-sm-5">
                                 <img src="/svg/i-room-filled.svg" alt="house">
-                                квартира
+                                {{ __('apartment')}}
                             </div>
                             <div class="quantity-item col-xl-2 col-lg-2 col-md-2 col-sm-2">{{ $hotel->getTotalRooms() }}x</div>
                             <div class="personen-item col-xl-2 col-lg-2 col-md-2 col-sm-2">{{ $hotel->getRoomPersonsMax() }}</div>
@@ -230,7 +230,7 @@
                                     <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="3.5" cy="3.5" r="3.5" fill="#4CAF50"/>
                                     </svg>
-                                    свой
+                                    {{ __('your') }}
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex align-items-center bg">
@@ -238,7 +238,7 @@
                                     <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="3.5" cy="3.5" r="3.5" fill="#4CAF50"/>
                                     </svg>
-                                    своя
+                                    {{ __('its') }}
                                 </div>
                             </div>
                         </div>
@@ -524,6 +524,6 @@
   </div>--}}
 
     <div class="bottom-text">
-        * Текст комментария к таблице с ценами. Предложения по вашему запросу закончились, увеличьте дистанцию или свяжитесь с менежером напрямую
+        * {{ __('The text of the comment to the table with prices. The offers on your request are over, increase the distance or contact the manager directly') }}
     </div>
 </div>
