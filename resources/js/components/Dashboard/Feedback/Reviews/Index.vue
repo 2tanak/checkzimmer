@@ -1,11 +1,11 @@
 <template>
     <section class="header-dashboard">
-        <h1>Отзывы клиентов</h1>
+        <h1>{{ $t('Customer Reviews') }}</h1>
         <div class="row mt-4">
             <div class="col-md-12 grid-margin sorting-block">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Сортировка">
+                        <b-form-group :label="$t('Sorting')">
                             <b-select v-model="selected" :options="options"></b-select>
                         </b-form-group>
                     </div>
@@ -37,16 +37,18 @@
                                     {{ data.item.description }}
                                 </template>
                                 <template v-slot:cell(publish)="data">
-                                    <b-button variant="success" @click="showReviews(data.item, 1)" v-if=" data.item.status === 2 ">Опубликовать</b-button>
-                                    <b-button variant="outline-primary" @click="withdrawReview(data.item, 2)" v-else>Отозвать</b-button>
+                                    <b-button variant="success" @click="showReviews(data.item, 1)" v-if=" data.item.status === 2 ">
+                                        {{ $t('Post') }}</b-button>
+                                    <b-button variant="outline-primary" @click="withdrawReview(data.item, 2)" v-else>
+                                        {{ $t('Revoke') }}</b-button>
                                 </template>
                                 <template v-slot:cell(delete)="data">
-                                    <b-button variant="danger" @click='deleteReview(data.item)'>Удалить</b-button>
+                                    <b-button variant="danger" @click='deleteReview(data.item)'>{{ $t('Delete') }}</b-button>
                                 </template>
                                 <template v-slot:table-busy>
                                     <div class="text-center text-danger my-2">
                                         <b-spinner class="align-middle"></b-spinner>
-                                        <strong>Loading...</strong>
+                                        <strong>{{ $t('Loading') }}...</strong>
                                     </div>
                                 </template>
                             </b-table>
@@ -56,33 +58,33 @@
             </div>
         </div>
 
-        <b-modal id="reviewsModal" title="Want to publish?" @ok="handleOk">
-            <div><span class="mr-2"><strong>Created At:</strong></span> {{ activeReview.created_at }}</div>
-            <div><span class="mr-2"><strong>Rating:</strong></span> <img src="/svg/star-yellow.svg" v-for="star in activeReview.rating"></div>
-            <div><span class="mr-2"><strong>Name:</strong></span> {{ activeReview.name }}</div>
-            <div><span class="mr-2"><strong>Company:</strong></span> {{ activeReview.company }}</div>
-            <div><span class="mr-2"><strong>Title:</strong></span> {{ activeReview.title }}</div>
-            <div><span class="mr-2"><strong>Text review:</strong></span> {{ activeReview.review }}</div>
+        <b-modal id="reviewsModal" :title="$t('Want to publish')" @ok="handleOk">
+            <div><span class="mr-2"><strong>{{ $t('Created At') }}:</strong></span> {{ activeReview.created_at }}</div>
+            <div><span class="mr-2"><strong>{{ $t('Rating') }}:</strong></span> <img src="/svg/star-yellow.svg" v-for="star in activeReview.rating"></div>
+            <div><span class="mr-2"><strong>{{ $t('Name') }}:</strong></span> {{ activeReview.name }}</div>
+            <div><span class="mr-2"><strong>{{ $t('Company') }}:</strong></span> {{ activeReview.company }}</div>
+            <div><span class="mr-2"><strong>{{ $t('Title') }}:</strong></span> {{ activeReview.title }}</div>
+            <div><span class="mr-2"><strong>{{ $t('Text review') }}:</strong></span> {{ activeReview.review }}</div>
         </b-modal>
 
-        <b-modal id="deleteReviewModal" title="Delete review" @ok="handleDeleteReview">
+        <b-modal id="deleteReviewModal" :title="$t('Delete review')" @ok="handleDeleteReview">
             <p class="mb-3">A you sure you want to delete review?</p>
-            <div><span class="mr-2"><strong>Created At:</strong></span> {{ activeReview.created_at }}</div>
-            <div><span class="mr-2"><strong>Rating:</strong></span> <img src="/svg/star-yellow.svg" v-for="star in activeReview.rating"></div>
-            <div><span class="mr-2"><strong>Name:</strong></span> {{ activeReview.name }}</div>
-            <div><span class="mr-2"><strong>Company:</strong></span> {{ activeReview.company }}</div>
-            <div><span class="mr-2"><strong>Title:</strong></span> {{ activeReview.title }}</div>
-            <div><span class="mr-2"><strong>Text review:</strong></span> {{ activeReview.review }}</div>
+            <div><span class="mr-2"><strong>{{ $t('Created At') }}:</strong></span> {{ activeReview.created_at }}</div>
+            <div><span class="mr-2"><strong>{{ $t('Rating') }}:</strong></span> <img src="/svg/star-yellow.svg" v-for="star in activeReview.rating"></div>
+            <div><span class="mr-2"><strong>{{ $t('Name') }}:</strong></span> {{ activeReview.name }}</div>
+            <div><span class="mr-2"><strong>{{ $t('Company') }}:</strong></span> {{ activeReview.company }}</div>
+            <div><span class="mr-2"><strong>{{ $t('Title') }}:</strong></span> {{ activeReview.title }}</div>
+            <div><span class="mr-2"><strong>{{ $t('Text review') }}:</strong></span> {{ activeReview.review }}</div>
         </b-modal>
 
-        <b-modal id="withdrawReviewModal" title="Withdraw review" @ok="handleWithdrawReview()">
+        <b-modal id="withdrawReviewModal" :title="$t('Withdraw review')" @ok="handleWithdrawReview()">
             <p class="mb-3">A you sure you want to withdraw review?</p>
-            <div><span class="mr-2"><strong>Created At:</strong></span> {{ activeReview.created_at }}</div>
-            <div><span class="mr-2"><strong>Rating:</strong></span> <img src="/svg/star-yellow.svg" v-for="star in activeReview.rating"></div>
-            <div><span class="mr-2"><strong>Name:</strong></span> {{ activeReview.name }}</div>
-            <div><span class="mr-2"><strong>Company:</strong></span> {{ activeReview.company }}</div>
-            <div><span class="mr-2"><strong>Title:</strong></span> {{ activeReview.title }}</div>
-            <div><span class="mr-2"><strong>Text review:</strong></span> {{ activeReview.review }}</div>
+            <div><span class="mr-2"><strong>{{ $t('Created At') }}:</strong></span> {{ activeReview.created_at }}</div>
+            <div><span class="mr-2"><strong>{{ $t('Rating') }}:</strong></span> <img src="/svg/star-yellow.svg" v-for="star in activeReview.rating"></div>
+            <div><span class="mr-2"><strong>{{ $t('Name') }}:</strong></span> {{ activeReview.name }}</div>
+            <div><span class="mr-2"><strong>{{ $t('Company') }}:</strong></span> {{ activeReview.company }}</div>
+            <div><span class="mr-2"><strong>{{ $t('Title') }}:</strong></span> {{ activeReview.title }}</div>
+            <div><span class="mr-2"><strong>{{ $t('Text review') }}:</strong></span> {{ activeReview.review }}</div>
         </b-modal>
 
         <div class="row mt-5">
@@ -114,15 +116,15 @@ export default {
             loading: false,
             selected: 'a',
             options: [
-                { value: 'a', text: 'Все' },
-                { value: 'b', text: 'Опубликованные' },
-                { value: 'c', text: 'Не опубликованные' }
+                { value: 'a', text: this.$t('All') },
+                { value: 'b', text: this.$t('Published') },
+                { value: 'c', text: this.$t('Unpublished') }
             ],
             reviews: [],
             operationOk : false,
             operationError : false,
             textOperation: '',
-            fields: ['created_at', 'raiting', 'name', 'company', 'title', 'description', 'publish', 'delete'],
+            fields: [this.$t('created_at'), this.$t('raiting'), this.$t('Name'), this.$t('company'), this.$t('title'), this.$t('description'), this.$t('publish'), this.$t('Delete')],
             reviewList: [],
             activeReview: {
                 id: 0,
@@ -150,12 +152,12 @@ export default {
             reviewsData.delete(item.id)
                 .then(response => {
                     if(response.data.code == 'ok') {
-                        this.textOperation = 'удален';
+                        this.textOperation = this.$t('Delete');
                         this.operationOk = true;
                         let index = this.reviewList.findIndex( (elem, index, arr) => elem.id === item.id);
                         this.reviewList.splice(index, 1);
                     } else {
-                        this.textOperation = 'Ошибка удаления';
+                        this.textOperation = this.$t('Delete error');
                         this.operationError = true;
                     }
             });
@@ -165,10 +167,10 @@ export default {
             reviewsData.update(item.id, data)
                 .then(response => {
                     if(response.data.code == 'ok') {
-                        this.textOperation = 'Опубликован';
+                        this.textOperation = this.$t('published');
                         this.operationOk = true;
                     } else {
-                        this.textOperation = 'Ошибка';
+                        this.textOperation = this.$t('Error');
                         this.operationError = true;
                     }
             });
@@ -178,10 +180,10 @@ export default {
             reviewsData.update(item.id, data)
                 .then(response => {
                     if(response.data.code == 'ok') {
-                        this.textOperation = 'Отозван';
+                        this.textOperation = this.$t('Withdrawn');
                         this.operationOk = true;
                     } else {
-                        this.textOperation = 'Ошибка';
+                        this.textOperation = this.$t('Error');
                         this.operationError = true;
                     }
             });

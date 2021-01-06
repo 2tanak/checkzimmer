@@ -54,6 +54,18 @@ window.Vue = require('vue');
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
+import VueI18n from 'vue-i18n'
+Vue.use(VueI18n)
+
+import messagesLocaleEn from '../lang/en.json';
+
+const i18n = new VueI18n({
+    locale: 'en', // set locale
+    messages: {
+        en: messagesLocaleEn,
+    },
+})
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -66,5 +78,6 @@ const app = new Vue({
     components: {
         App
     },
-    store
+    store,
+    i18n
 });

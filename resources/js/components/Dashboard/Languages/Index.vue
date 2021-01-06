@@ -1,19 +1,19 @@
 <template>
 
     <section class="header-dashboard">
-        <h1>Выбор языка</h1>
+        <h1>{{ $t('Language selection')}}</h1>
         <div class="row mt-4">
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 grid-margin">
-                                <b-form-group label="Выбор языка" style="margin-bottom:0;">
+                                <b-form-group :label="$t('Language selection')" style="margin-bottom:0;">
                                     <b-select v-model="selected" :options="options"></b-select>
                                 </b-form-group>
                             </div>
                             <div class="col-md-12 grid-margin">
-                                <b-form-input v-model="searchLanguage" placeholder="Search"></b-form-input>
+                                <b-form-input v-model="searchLanguage" :placeholder="$t('Search')"></b-form-input>
                             </div>
                         </div>
                     </div>
@@ -22,19 +22,19 @@
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Добавить язык" style="margin-bottom:0;">
+                        <b-form-group :label="$t('Add language')" style="margin-bottom:0;">
                             <div class="row">
                                 <div class="col-md-6 grid-margin">
-                                    <b-form-input v-model="languageName" placeholder="Language name"></b-form-input>
+                                    <b-form-input v-model="languageName" :placeholder="$t('Language name')"></b-form-input>
                                 </div>
                                 <div class="col-md-6 grid-margin">
-                                    <b-form-input v-model="languageCode" placeholder="Language code"></b-form-input>
+                                    <b-form-input v-model="languageCode" :placeholder="$t('Language code')"></b-form-input>
                                 </div>
                                 <div class="col-md-6 grid-margin">
-                                    <b-form-input v-model="locale" placeholder="Locale"></b-form-input>
+                                    <b-form-input v-model="locale" :placeholder="$t('Locale')"></b-form-input>
                                 </div>
                                 <div class="col-md-6 grid-margin">
-                                    <b-button variant="success" style="width:100%;">Create</b-button>
+                                    <b-button variant="success" style="width:100%;">{{ $t('Create') }}</b-button>
                                 </div>
                             </div>
                         </b-form-group>
@@ -53,7 +53,7 @@
                                     {{ data.item.original }}
                                 </template>
                                 <template v-slot:cell(translation)="data">
-                                    <b-form-input v-model="tableInput" placeholder="Translation"></b-form-input>
+                                    <b-form-input v-model="tableInput" :placeholder="$t('Translation')"></b-form-input>
                                 </template>
                             </b-table>
                         </b-form-group>
@@ -76,7 +76,7 @@ export default {
                 {value: 'b', text: 'Язык 2'},
                 {value: 'c', text: 'Язык 3'}
             ],
-            fields: ['id', 'original', 'translation'],
+            fields: [this.$t('id'), this.$t('Original'), this.$t('Translation')],
             items: [
                 { id: 1, original: 'test' },
                 { id: 2, original: 'test 2' },

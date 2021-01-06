@@ -63,7 +63,7 @@
                 <div class="head-search">
                     <form action="{{route('home.index')}}" method="GET">
                         <img src="/svg/i-search-input.svg" alt="alt">
-                        <input type="search" name="search" placeholder="Введите город почтовый индекс или регион">
+                        <input type="search" name="search" placeholder="{{ __('Enter the city, postcode or region') }}">
                     </form>
                 </div>
 

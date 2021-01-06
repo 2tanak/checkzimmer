@@ -1,12 +1,12 @@
 <template>
     <section class="header-dashboard">
-        <h1>Данные в заголовке сайта</h1>
+        <h1>{{ $t('Site header data') }}</h1>
         <div class="row mt-4">
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Номер телефона"  label-for="input-phone">
-                            <b-form-input type="text" id="input-phone" v-model="options.website_phone" placeholder="Номер телефона"></b-form-input>
+                        <b-form-group :label="$t('Phone number')"  label-for="input-phone">
+                            <b-form-input type="text" id="input-phone" v-model="options.website_phone" :placeholder="$t('Phone number')"></b-form-input>
                         </b-form-group>
                     </div>
                 </div>
@@ -14,8 +14,8 @@
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Заголовок объявления"  label-for="input-motto-header">
-                            <b-form-input type="text" id="input-motto-header" v-model="options.motto_header" placeholder="Текст"></b-form-input>
+                        <b-form-group :label="$t('Headline')"  label-for="input-motto-header">
+                            <b-form-input type="text" id="input-motto-header" v-model="options.motto_header" :placeholder="$t('Text')"></b-form-input>
                         </b-form-group>
                     </div>
                 </div>
@@ -25,8 +25,8 @@
             <div class="col-md-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Текст под заголовком"  label-for="input-motto-subtitle">
-                            <b-form-textarea type="text" id="input-motto-subtitle" placeholder="Текст"
+                        <b-form-group :label=" $t('Text under heading')"  label-for="input-motto-subtitle">
+                            <b-form-textarea type="text" id="input-motto-subtitle" :placeholder="$t('Text')"
                                              v-model="options.motto_subtitle"
                                              rows="3"
                                              max-rows="6"></b-form-textarea>
@@ -37,10 +37,10 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <b-button type="submit" variant="success" class="mr-2" @click="save">Сохранить</b-button>
+                <b-button type="submit" variant="success" class="mr-2" @click="save">{{ $t('Save') }}</b-button>
             </div>
         </div>
-        <b-modal id="save-success">Данные успешно сохранены</b-modal>
+        <b-modal id="save-success">{{ $t('Data saved successfully') }}</b-modal>
     </section>
 </template>
 

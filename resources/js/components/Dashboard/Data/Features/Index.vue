@@ -1,13 +1,13 @@
 <template>
     <section class="header-dashboard">
-        <h1>Каталог предоставляемых удобств</h1>
+        <h1>{{ $t('Catalog of provided amenities') }}</h1>
         <div class="row mt-4">
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Категория"  label-for="cats">
+                        <b-form-group :label="$t('Category')"  label-for="cats">
                             <b-select v-model="cats">
-                                <b-select-option value="">Все категории</b-select-option>
+                                <b-select-option value="">{{ $t('All categories') }}</b-select-option>
                                 <b-select-option v-for="(category, i) in catList.concat(categoriesTemp)" href="#" :value="category" :key="'cat-key-'+i">{{ category }}</b-select-option>
                             </b-select>
                         </b-form-group>
@@ -17,8 +17,8 @@
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Создать категорию" label-for="newCat">
-                            <b-form-input v-model="newCat" type="text" id="input-phone" placeholder="Название, Enter для подтверждения" @keyup="catInput"></b-form-input>
+                        <b-form-group :label="$t('Create category')" label-for="newCat">
+                            <b-form-input v-model="newCat" type="text" id="input-phone" :placeholder="$t('Name, Enter to confirm')" @keyup="catInput"></b-form-input>
                         </b-form-group>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                                 <template v-slot:table-busy>
                                     <div class="text-center text-danger my-2">
                                         <b-spinner class="align-middle"></b-spinner>
-                                        <strong>Loading...</strong>
+                                        <strong>{{ $t('Loading') }}...</strong>
                                     </div>
                                 </template>
                             </b-table>
@@ -56,15 +56,16 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <b-button type="submit" variant="success" class="mr-2" v-b-modal.modal-feature @click="featureNew">Новое удобство</b-button>
+                <b-button type="submit" variant="success" class="mr-2" v-b-modal.modal-feature @click="featureNew">
+                    {{ $t('New convenience') }}</b-button>
             </div>
         </div>
-        <b-modal id="modal-feature" :title="editFeature.id ? 'Feature edit' : 'Feature add'" @ok="featureAddOk">
+        <b-modal id="modal-feature" :title="editFeature.id ? $t('Feature edit') : $t('Feature add')" @ok="featureAddOk">
             <Forms v-model="editFeature" :fields="editFeature" :data="data"></Forms>
         </b-modal>
-        <b-modal id="modal-feature-delete" title="Feature delete" @ok="featureDeleteOk">
-            <span class="text-danger">A you sure you want to delete feature <strong>{{ deleteFeature.name}}</strong>
-                in <strong>{{ deleteFeature.feature_category ? deleteFeature.feature_category.name : ''}}</strong> category?</span>
+        <b-modal id="modal-feature-delete" :title="$t('Feature delete')" @ok="featureDeleteOk">
+            <span class="text-danger">{{ $t('A you sure you want to delete feature') }} <strong>{{ deleteFeature.name}}</strong>
+                {{ $t('in') }} <strong>{{ deleteFeature.feature_category ? deleteFeature.feature_category.name : ''}}</strong> {{ $t('category') }}?</span>
         </b-modal>
 
         <div class="row mt-5">
@@ -108,14 +109,14 @@
                 loading: true,
                 categoriesTemp: [],
                 features: [],
-                fields: ['id', 'feature_category', 'picture', 'name', 'edit', 'delete'],
+                fields: [this.$t('id'), this.$t('feature_category'), this.$t('picture'), this.$t('Name'), this.$t('Edit'), this.$t('Delete')],
                 data: featuresForm,
                 operationOk : false,
                 operationError : false,
                 textOperation: '',
                 newCat: '',
                 editFeature: '',
-                deleteFeature: '',  
+                deleteFeature: '',
             }
         },
         created() {
@@ -175,14 +176,14 @@
                 features.delete(this.deleteFeature.id)
                     .then(response => {
                         if(response.data.code == 'ok') {
-                            this.textOperation = 'удален';
+                            this.textOperation = this.$t('Delete');
                             this.operationOk = true;
                              let index = this.featureList.findIndex( (elem, index, arr) => elem.id === this.deleteFeature.id);
                              this.featureList.splice(index, 1);
                         } else {
-                            this.textOperation = 'Ошибка удаления';
+                            this.textOperation = this.$t('Delete error');
                             this.operationError = true;
-                        } 
+                        }
                 });
             },
 
@@ -191,7 +192,7 @@
 
                 this.editFeature.feature_category.name = this.editFeature.name;
                 this.editFeature.feature_category.id = this.editFeature.category;
-                
+
                 if (this.editFeature.picture.data !== undefined) {
                     this.editFeature.feature_category.picture = this.editFeature.picture.data.image;
                 } else {
@@ -205,7 +206,7 @@
                 }
 
                 this.features.push(this.editFeature);
-                
+
                 let data = {
                     'name' : this.editFeature.feature_category.name,
                     'category' : cat,
@@ -215,12 +216,12 @@
                 features.update(this.editFeature.id, data)
                     .then(response => {
                         if(response.data.code == 'ok') {
-                            this.textOperation = 'удален';
+                            this.textOperation = this.$t('Delete');
                             this.operationOk = true;
                         } else {
-                            this.textOperation = 'Ошибка удаления';
+                            this.textOperation = this.$t('Delete error');
                             this.operationError = true;
-                        } 
+                        }
                 });
             }
         },

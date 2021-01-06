@@ -2,24 +2,24 @@
     <div id="app">
         <div class="list-content favorites-content">
             <div class="container">
-                <h1>Избранное</h1>
+                <h1>{{ $t('Favorites') }}</h1>
             </div>
 
             <div class="list-content-item">
                 <div class="container">
                     <div class="sorting-block" v-if="property.length !== 0">
                         <div class="left-block">
-                            <a class="list active" href="#">Список</a>
-                            <a class="map" href="#">На карте</a>
+                            <a class="list active" href="#">{{ $t('List') }}</a>
+                            <a class="map" href="#">{{ $t('Map') }}</a>
                         </div>
                         <div class="sorting">
-                            <a href="#">Сортировка по умолчанию</a>
+                            <a href="#">{{ $t('Sort by default') }}</a>
                             <div class="filter-block">
                                 <ul>
-                                    <li class="check">Сортировка по умолчанию</li>
-                                    <li>От дешевых к дорогим</li>
-                                    <li>От дорогих к дешевым</li>
-                                    <li>По рейтингу</li>
+                                    <li class="check">{{ $t('Sort by default') }}</li>
+                                    <li>{{ $t('Cheap to expensive') }}</li>
+                                    <li>{{ $t('Expensive to cheap') }}</li>
+                                    <li>{{ $t('By rating') }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -247,10 +247,10 @@
                 <transition>
                     <div class="communication" v-if="!loading && property.length === 0">
                         <div class="description">
-                            Вы еще ничего не добавили в избранное
+                            {{ $t('You have not added anything to your favorites yet.') }}
                         </div>
                         <div class="link-block">
-                            <a href="/">Перейти на главную</a>
+                            <a href="/">{{ $t('Go to Main page') }}</a>
                             <div class="shadow-block"></div>
                         </div>
                     </div>

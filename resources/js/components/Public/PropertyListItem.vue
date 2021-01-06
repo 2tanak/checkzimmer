@@ -15,37 +15,37 @@
                 <a :href="'/single/'+item.slug" class="title"><span>{{ item.name }}</span></a>
                 <div class="data-item">
                     <div class="geolocation">
-                        <img src="/svg/i-pin.svg" alt="geo">
+                        <img src="/svg/i-pin.svg" alt="">
                         {{ item.zip }}, {{ item.city }}
                     </div>
                     <div class="humans">
-                        <img src="/svg/i-people.svg" alt="humans">
+                        <img src="/svg/i-people.svg" alt="">
                         {{  maxPeopleNumStr }}
                     </div>
                     <div class="distance" v-if="distance">
-                        <img src="/svg/i-distance.svg" alt="distance">
-                        {{ distance }}км от &nbsp; <span class="desctop-span">указанного</span> <span class="mobile-span">указ.</span> &nbsp; вами адреса
+                        <img src="/svg/i-distance.svg" alt="">
+                        {{ distance }}{{ $t('km') }} {{ $t('from') }} &nbsp; <span class="desctop-span">{{ $t('said') }}</span> <span class="mobile-span">{{ $t('said') }}.</span> &nbsp; {{ $t('your addresses') }}
                     </div>
                     <div class="additionally">
                         <div v-if="hasWiFi" class="wi-fi data-block-circle" title="WiFi">
-                            <div class="tooltip-block">wifi</div>
+                            <div class="tooltip-block">{{ $t('WiFi') }}</div>
                             <img src="/svg/i-wifi.svg">
                         </div>
                         <div v-if="hasLaundry" class="laundry data-block-circle" title="Laundry">
-                            <div class="tooltip-block">стиральная машина</div>
+                            <div class="tooltip-block">{{ $t('Washing machine') }}</div>
                             <img src="/svg/i-washingmachine.svg">
                         </div>
                         <div v-if="hasTV" class="tv data-block-circle" title="TV">
-                            <div class="tooltip-block">tv</div>
+                            <div class="tooltip-block">{{ $t('Tv') }}</div>
                             <img src="/svg/i-tv.svg">
                         </div>
                         <div v-if="kitchenTypeStr() !== ''" class="kitchen data-block-oval">
                             <img src="/svg/i-canteen.svg">
-                            {{ kitchenTypeStr() }} кухня
+                            {{ kitchenTypeStr() }} {{ $t('Kitchen') }}
                         </div>
                         <div v-if="showerStr()" class="shower data-block-oval">
                             <img src="/svg/i-shower.svg">
-                            {{  showerStr() }} душ
+                            {{  showerStr() }} {{ $t('Shower') }}
                         </div>
                     </div>
                 </div>
@@ -54,10 +54,10 @@
                 <table class="type">
                     <thead>
                     <tr>
-                        <th class="title">Тип</th>
-                        <th class="title">Кол-во</th>
-                        <th class="title">Personen</th>
-                        <th class="title">Цена</th>
+                        <th class="title">{{ $t('Type') }}</th>
+                        <th class="title">{{ $t('Num') }}</th>
+                        <th class="title">{{ $t('Personen') }}</th>
+                        <th class="title">{{ $t('Price') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -68,7 +68,7 @@
                         </td>
                         <td class="type-block quantity-block">{{ room.number }}</td>
                         <td class="type-block personen-block">{{ room.person }}</td>
-                        <td class="type-block price-block"><b>{{ getMinRoomPrice(item, room) }}&#8364;</b>/persone</td>
+                        <td class="type-block price-block"><b>{{ getMinRoomPrice(item, room) }}&#8364;</b>/{{ $t('persone') }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -83,7 +83,7 @@
                             <path d="M12.1 1.5c-.6-.7-1.5-1-2.4-1-.9 0-1.8.4-2.4 1l-.3.3-.3-.3C6.1.8 5.2.5 4.3.5c-.9 0-1.8.4-2.4 1C.6 2.9.6 5.1 1.9 6.4l4.8 5c.1.1.2.1.3.1.1 0 .2 0 .3-.1l4.8-5c1.3-1.3 1.3-3.5 0-4.9z" fill="#EE483F"/>
                         </svg>
                     </a>
-                    <div class="price"><span>от &euro;{{ minRoomPrice }}</span> ночь</div>
+                    <div class="price"><span>{{ $t('from') }} &euro;{{ minRoomPrice }}</span> {{ $t('night') }}</div>
                 </div>
                 <div class="rating">
                     <div v-if="item.rate" class="rating-number">
@@ -178,15 +178,15 @@ export default {
         },
         getPersonsText(number) {
             switch (number) {
-                case 1: return 'одноместный';
-                case 2: return 'двухместый';
-                case 3: return 'трехместный';
-                case 4: return 'четырехместный';
-                case 5: return 'пятиместный';
-                case 6: return 'шестиместный';
-                case 7: return 'семиместный';
-                case 8: return 'восьмиместный';
-                default: return 'не указано';
+                case 1: return this.$t('single');
+                case 2: return this.$t('double');
+                case 3: return this.$t('triple');
+                case 4: return this.$t('quadruple');
+                case 5: return this.$t('five-seater');
+                case 6: return this.$t('six-seater');
+                case 7: return this.$t('seven-seater');
+                case 8: return this.$t('eight-seater');
+                default: return this.$t('not specified');
             }
         },
         typeKitchen(roomFacilities) {
@@ -229,10 +229,10 @@ export default {
             } );
             let types = [];
             if (priv) {
-                types.push('своя');
+                types.push(this.$t('its'));
             }
             if (shared) {
-                types.push('общая');
+                types.push(this.$t('general'));
             }
             return types.join(' + ');
         },
@@ -249,10 +249,10 @@ export default {
             } );
             let types = [];
             if (priv) {
-                types.push('свой');
+                types.push(this.$t('private'));
             }
             if (shared) {
-                types.push('общий');
+                types.push(this.$t('shared'));
             }
             return types.join(' + ');
         },
@@ -265,9 +265,9 @@ export default {
         maxPeopleNumStr() {
             let max = this.maxPeopleNum() % 10;
             if (max >= 2 && max <= 4) {
-                return max+' человека';
+                return max + ' ' + this.$t('people');
             }
-            return max + ' человек';
+            return max + ' ' + this.$t('person');
         },
         minRoomPrice() {
             let prices = this.item.rooms.map( elem => elem.price ).filter( elem => elem > 0);

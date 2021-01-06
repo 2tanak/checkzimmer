@@ -1,11 +1,11 @@
 <template>
     <section class="header-dashboard">
-        <h1>Управления кешем геокодера</h1>
+        <h1>{{ $t('Geocoder cache management')}}</h1>
         <div class="row mt-4">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-input v-model="searchText" placeholder="Введите адрес"></b-form-input>
+                        <b-form-input v-model="searchText" :placeholder="$t('Enter the address')"></b-form-input>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                             <template v-slot:table-busy>
                                 <div class="text-center text-danger my-2">
                                     <b-spinner class="align-middle"></b-spinner>
-                                    <strong>Loading...</strong>
+                                    <strong>{{ $t('Loading') }}...</strong>
                                 </div>
                             </template>
                         </b-table>
@@ -46,7 +46,7 @@
             <div class="col-2">
                 <div class="card">
                     <div class="card-body">
-                        <b-button v-b-modal.clearСacheModal style="width:100%;" variant="success">Очистить кеш</b-button>
+                        <b-button v-b-modal.clearСacheModal style="width:100%;" variant="success">{{ $t('Clear cache') }}</b-button>
                     </div>
                 </div>
             </div>
@@ -64,8 +64,8 @@
             </div>
         </div>
 
-        <b-modal id="clearСacheModal" title="Delete cache" @ok="deleteCache">
-            <p class="text-danger">A you sure you want to clear cache?</p>
+        <b-modal id="clearСacheModal" :title="$t('Delete cache')" @ok="deleteCache">
+            <p class="text-danger">{{ $t('A you sure you want to clear cache') }}?</p>
         </b-modal>
 
     </section>
@@ -87,7 +87,7 @@ export default {
             operationError : false,
             textOperation: '',
             loading: false,
-            geocoderCacheFields: [ 'address', 'created_at', 'coordinates', 'update', 'delete'],
+            geocoderCacheFields: [ this.$t('address'), this.$t('created_at'), this.$t('coordinates'), this.$t('update'), this.$t('Delete')],
             geocoderCacheItems: []
         }
     },
@@ -102,39 +102,39 @@ export default {
             geocodeItems.delete(item.id)
                 .then(response => {
                     if(response.data.code == 'ok') {
-                        this.textOperation = 'Кеш удален';
+                        this.textOperation = this.$t('Cache deleted');
                         this.operationOk = true;
                         let index = this.geocoderCacheItems.findIndex( (elem, index, arr) => elem.id === item.id);
                         this.geocoderCacheItems.splice(index, 1);
                     } else {
-                        this.textOperation = 'Ошибка удаления';
+                        this.textOperation = this.$t('Delete error');
                         this.operationError = true;
-                    } 
+                    }
             });
         },
         geocoderCacheUpdate(item) {
             geocodeItems.update(item.id)
                 .then(response => {
                     if(response.data.code == 'ok') {
-                        this.textOperation = 'Кеш обновлен';
+                        this.textOperation = this.$t('Cache updated');
                         this.operationOk = true;
                     } else {
-                        this.textOperation = 'Ошибка обновления';
+                        this.textOperation = this.$t('Delete error');
                         this.operationError = true;
-                    } 
+                    }
             });
         },
         deleteCache() {
             geocodeItems.deleteAll()
                 .then(resp => {
                     if(response.data.code == 'ok') {
-                        this.textOperation = 'Кеш очищен';
+                        this.textOperation = this.$t('Cache is cleared');
                         this.operationOk = true;
                         this.geocoderCacheItems = [];
                     } else {
-                        this.textOperation = 'Ошибка очистки кеша';
+                        this.textOperation = this.$t('Cache clearing error');
                         this.operationError = true;
-                    } 
+                    }
             });
         }
     }

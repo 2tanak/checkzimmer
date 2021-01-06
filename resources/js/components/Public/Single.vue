@@ -2,16 +2,16 @@
     <div class="object-description object-description-desctope" id="object-description">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#description">Описание объекта</a>
+                <a class="nav-link active" data-toggle="tab" href="#description">{{ $t('Description object') }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#reviews">Отзывы<span>{{ reviews.length || 0 }}</span></a>
+                <a class="nav-link" data-toggle="tab" href="#reviews">{{ $t('Reviews') }}<span>{{ reviews.length || 0 }}</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#questions">Вопросы<span>{{ questions.length || 0 }}</span></a>
+                <a class="nav-link" data-toggle="tab" href="#questions">{{ $t('Questions') }}<span>{{ questions.length || 0 }}</span></a>
             </li>
             <li class="nav-item map-active">
-                <a class="nav-link" data-toggle="tab" href="#map-block">Карта</a>
+                <a class="nav-link" data-toggle="tab" href="#map-block">{{ $t('Map') }}</a>
             </li>
         </ul>
         <div class="tab-content">
@@ -39,14 +39,14 @@
                     Perfect place for your next stay in Leipzig!
                 </div>
                 <a class="more-details" data-toggle="collapse" href="#description-collapse" role="button" aria-expanded="false" aria-controls="description-collapse">
-                    Подробнее
+                    {{ $t('More details') }}
                     <img src="/svg/i-arrow-show-more.svg" alt="alt">
                 </a>
             </div>
             <div class="tab-pane fade reviews-content" id="reviews">
                 <div class="top-block">
                     <div class="top-block-head">
-                        <a class="give-feedback" href="#">Оставить отзыв</a>
+                        <a class="give-feedback" href="#">{{ $t('Give feedback') }}</a>
                     </div>
                     <div class="empty-block">
                         <div class="reviews-form">
@@ -54,7 +54,7 @@
                                 <img src="/svg/i-close-popup.svg" alt="alt">
                             </div>
                             <div class="rate">
-                                <div class="title">Оцените объект:</div>
+                                <div class="title">{{ $t('Rate the object') }}:</div>
                                 <div class="stars">
                                     <img src="/svg/star-gray.svg" alt="alt">
                                     <img src="/svg/star-gray.svg" alt="alt">
@@ -65,15 +65,15 @@
                             </div>
                             <form action="review/create">
                                 <div class="top-form">
-                                    <input type="text" name="name" placeholder="Ваше имя">
-                                    <input type="text" name="company" placeholder="Название компании">
+                                    <input type="text" name="name" :placeholder="$t('Your name')">
+                                    <input type="text" name="company" :placeholder="$t('Company name')">
                                     <input type="hidden" name="property_id" value="<!--$hotel->id-->">
                                     <input type="hidden" name="rating" value="">
                                     <input type="hidden" name="grecaptcha" value="">
                                 </div>
-                                <input type="text" name="title" placeholder="Заголовок отзыва">
-                                <textarea name="description" placeholder="Текст отзыва"></textarea>
-                                <input type="submit" value="Отправить">
+                                <input type="text" name="title" :placeholder="$t('Review title')">
+                                <textarea name="description" :placeholder="$t('Review text')"></textarea>
+                                <input type="submit" :value="$t('Send')">
                             </form>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                             {{ review.description }}
                         </div>
                         <a class="full" href="#">
-                            Читать полностью <img src="/svg/i-arrow-show-more.svg" alt="alt">
+                            {{ $t('Read completely') }} <img src="/svg/i-arrow-show-more.svg" alt="alt">
                         </a>
                     </div>
                 </div>
@@ -149,9 +149,9 @@
             </div>
             <div class="tab-pane fade questions-content" id="questions">
                 <form class="questions-form" action="question/create">
-                    <input type="text" placeholder="Задайте свой вопрос" name="question">
+                    <input type="text" :placeholder="$t('Ask your question')" name="question">
                     <input type="hidden" value="<!--$hotel->id-->" name="property_id">
-                    <input type="submit" value="Отправить">
+                    <input type="submit" :value="$t('Send')">
                 </form>
                 <div class="questions-received">
                     <div v-for="question in questions" class="questions-block">
