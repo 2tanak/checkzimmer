@@ -1,13 +1,13 @@
 <template>
     <section class="header-dashboard">
-        <h1>Импорт объектов Booking</h1>
+        <h1>{{ $t('Importing Booking objects') }}</h1>
         <b-overlay :show="loading" rounded="lg" opacity="0.6">
         <div class="row mt-4">
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Город">
-                            <b-form-input type="text" v-model="filter.city" placeholder="Город"></b-form-input>
+                        <b-form-group :label="$t('City')">
+                            <b-form-input type="text" v-model="filter.city" :placeholder="$t('City')"></b-form-input>
                         </b-form-group>
                     </div>
                 </div>
@@ -16,7 +16,7 @@
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body constraight-list">
-                        <b-form-group label="Тип отеля" label-for="input-hotel-type">
+                        <b-form-group :label="$t('Hotel type')" label-for="input-hotel-type">
                             <b-form-select v-model="filter.type" :options="getTypes"></b-form-select>
                         </b-form-group>
                     </div>
@@ -26,9 +26,10 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <b-button variant="info" class="float-right" @click.prevent="loadHotels">Загрузить отели</b-button>
+                    <b-button variant="info" class="float-right" @click.prevent="loadHotels">{{ $t('Load hotels') }}</b-button>
                     <b-overlay :show="importLoader" rounded opacity="0.6" spinner-small spinner-variant="danger" class="d-inline-block">
-                        <b-button v-if="this.hotels.length" variant="success" class="mr-2" @click.prevent="importHotels">Импортировать</b-button>
+                        <b-button v-if="this.hotels.length" variant="success" class="mr-2" @click.prevent="importHotels">
+                            {{ $t('Import') }}</b-button>
                     </b-overlay>
                     <!--<b-button variant="light" @click.prevent="loadTypes">Загрузить типы </b-button>-->
                 </div>
@@ -39,7 +40,7 @@
             <div class="col-md-4 grid-margin">
                 <div class="card">
                     <div class="card-body constraight-list">
-                        <b-form-group label="Кровать" label-for="input-hotel-type">
+                        <b-form-group :label="$t('Bed')" label-for="input-hotel-type">
                             <b-form-select v-model="filter.bed" :options="bedTypes"></b-form-select>
                         </b-form-group>
                     </div>
@@ -49,7 +50,7 @@
             <div class="col-md-4 grid-margin">
                 <div class="card">
                     <div class="card-body constraight-list">
-                        <b-form-group label="Душ" label-for="input-hotel-type">
+                        <b-form-group :label="$t('Shower')" label-for="input-hotel-type">
                             <b-form-select v-model="filter.shower" :options="showerTypes"></b-form-select>
                         </b-form-group>
                     </div>
@@ -59,7 +60,7 @@
             <div class="col-md-4 grid-margin">
                 <div class="card">
                     <div class="card-body constraight-list">
-                        <b-form-group label="Кухня" label-for="input-hotel-type">
+                        <b-form-group :label="$t('Kitchen')" label-for="input-hotel-type">
                             <b-form-select v-model="filter.kitchen" :options="kitchenTypes"></b-form-select>
                         </b-form-group>
                     </div>
@@ -70,9 +71,9 @@
                 <div class="card">
                     <span class="card-price_value">{{ filter.price }}</span>
                     <div class="card-body">
-                        <b-form-group label="Цена" label-for="input-city">
+                        <b-form-group :label="$t('Price')" label-for="input-city">
                             <b-form-input type="range" id="input-city" min="10" max="25"
-                                v-model="filter.price" placeholder="Город"></b-form-input>
+                                v-model="filter.price" :placeholder="$t('City')"></b-form-input>
                         </b-form-group>
                     </div>
                 </div>
@@ -96,19 +97,20 @@
                                 <div class="">
                                 </div>
                                 <div class="state-block mt-3">
-                                    <small class="d-block mb-3"><strong>Состояние:</strong>
+                                    <small class="d-block mb-3"><strong>{{ $t('Condition') }}:</strong>
                                         <b-form-checkbox v-if="hotel.imported === null" :id="'checkbox-hotel-'+hotel.hotel_id"
                                                          v-model="hotels[ind].tbi"
                                                          :name="'checkbox-hotel-' + hotel.hotel_id"
                                                          value="true"
                                                          unchecked-value="false">
-                                            Импортировать
+                                            {{ $t('Import') }}
                                         </b-form-checkbox>
-                                        <span v-else>Импортировано</span>
+                                        <span v-else>{{ $t('Imported') }}</span>
                                     </small>
                                     <div class="collapse-button">
-                                        <b-button class="mr-4" v-b-toggle="'collapse-rooms-'+hotel.hotel_id" variant="info">Показать комнаты</b-button>
-                                        <b-button v-b-toggle="'collapse-hotel-'+hotel.hotel_id" size="sm">Удобства отеля</b-button>
+                                        <b-button class="mr-4" v-b-toggle="'collapse-rooms-'+hotel.hotel_id" variant="info">
+                                            {{ $t('Show Rooms') }}</b-button>
+                                        <b-button v-b-toggle="'collapse-hotel-'+hotel.hotel_id" size="sm">{{ $t('Hotel amenities') }}</b-button>
                                     </div>
                                 </div>
                             </div>
@@ -116,16 +118,17 @@
                         <div>
                             <b-collapse :id="'collapse-hotel-'+hotel.hotel_id" class="mt-2">
                                 <b-card>
-                                    <h3 class="mb-4">Удобства</h3>
+                                    <h3 class="mb-4">{{ $t('Facilities') }}</h3>
                                     <b-list-group>
                                         <b-list-group-item v-for="feature in hotel.hotel_data.hotel_facilities">{{ feature.name }}</b-list-group-item>
                                     </b-list-group>
-                                    <b-button class="mt-4" v-b-toggle="'collapse-hotel-'+hotel.hotel_id" size="sm">Свернуть</b-button>
+                                    <b-button class="mt-4" v-b-toggle="'collapse-hotel-'+hotel.hotel_id" size="sm">
+                                        {{ $t('Collapse') }}</b-button>
                                 </b-card>
                             </b-collapse>
                         </div>
                         <b-collapse :id="'collapse-rooms-'+hotel.hotel_id">
-                            <h3 class="mb-4">Комнаты</h3>
+                            <h3 class="mb-4">{{ $t('Rooms') }}</h3>
                         <div class="row">
                             <div v-for="room in hotel.room_data" class="col-md-12 mb-2">
                                 <div class="d-flex room-item mb-3">
@@ -168,14 +171,14 @@
                                 </div>
                             </div>
                         </div>
-                            <b-button v-b-toggle="'collapse-rooms-'+hotel.hotel_id" size="sm">Свернуть</b-button>
+                            <b-button v-b-toggle="'collapse-rooms-'+hotel.hotel_id" size="sm">{{ $t('Collapse') }}</b-button>
                         </b-collapse>
                     </div>
                 </div>
             </div>
         </div>
 
-        <b-modal id="import-success" title="Импорт объектов"><strong>Импортирование завершено</strong></b-modal>
+        <b-modal id="import-success" :title="$t('Importing objects')"><strong>{{ $t('Import completed') }}</strong></b-modal>
 
     </section>
 </template>
@@ -210,59 +213,59 @@
                 bedTypes: [
                     {
                         value: 'all',
-                        text: 'Все типы'
+                        text: this.$t('All types')
                     },
                     {
                         value: 'single',
-                        text:  'Одиночная кровать'
+                        text:  this.$t('Single bed')
                     },
                     {
                         value: 'single+',
-                        text:  'Одиночная кровать + варианты'
+                        text:  this.$t('Single bed') + ' + ' + this.$t('options')
                     },
                     {
                         value: 'double',
-                        text:  'Двойная кровать'
+                        text:  this.$t('Double bed')
                     },
                 ],
                 showerTypes: [
                     {
                         value: 'all',
-                        text: 'Все типы'
+                        text: this.$t('All types')
                     },
                     {
                         value: 'shared',
-                        text: 'Раздельный душ'
+                        text: this.$t('Shared shower')
                     },
                     {
                         value: 'private',
-                        text: 'Свой душ'
+                        text: this.$t('Private shower')
                     },
                     {
                         value: 'none',
-                        text: 'Без душа'
+                        text: this.$t('None shower')
                     }
                 ],
                 kitchenTypes: [
                     {
                         value: 'all',
-                        text: 'Все типы'
+                        text: this.$t('All types')
                     },
                     {
                         value: 'kitchenette',
-                        text: 'Кухонька'
+                        text: this.$t('Kitchenette')
                     },
                     {
                         value: 'private kitchen',
-                        text: 'Своя кухня'
+                        text: this.$t('Private kitchen')
                     },
                     {
                         value: 'shared kitchen',
-                        text: 'Совместная кухня'
+                        text: this.$t('Shared kitchen')
                     },
                     {
                         value: 'none',
-                        text: 'Без кухни'
+                        text: this.$t('None kitchen')
                     }
                 ],
                 hotels: [],
@@ -333,15 +336,15 @@
             },
             getPersonsText(number) {
                 switch (number) {
-                    case 1: return 'одноместный';
-                    case 2: return 'двухместый';
-                    case 3: return 'трехместный';
-                    case 4: return 'четырехместный';
-                    case 5: return 'пятиместный';
-                    case 6: return 'шестиместный';
-                    case 7: return 'семиместный';
-                    case 8: return 'восьмиместный';
-                    default: return 'не указано';
+                    case 1: return this.$t('single');
+                    case 2: return this.$t('double');
+                    case 3: return this.$t('triple');
+                    case 4: return this.$t('quadruple');
+                    case 5: return this.$t('five-seater');
+                    case 6: return this.$t('six-seater');
+                    case 7: return this.$t('seven-seater');
+                    case 8: return this.$t('eight-seater');
+                    default: return this.$t('not specified');
                 }
             },
             findOption(item, name) {

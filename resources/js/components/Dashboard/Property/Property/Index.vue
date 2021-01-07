@@ -1,13 +1,13 @@
 <template>
     <section class="header-dashboard">
-        <h1>Объекты</h1>
+        <h1>{{ $t('Objects') }}</h1>
         <div class="row mt-4">
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Тип жилья"  label-for="input-phone">
+                        <b-form-group :label="$t('Housing type')"  label-for="input-phone">
                             <b-select v-model="type">
-                                <b-select-option href="#" value="">Не выбран</b-select-option>
+                                <b-select-option href="#" value="">{{ $t('Not chosen') }}</b-select-option>
                                 <b-select-option v-for="rootType in propertyTypes" href="#" :value="rootType.native_id">{{ rootType.name }}</b-select-option>
                             </b-select>
                         </b-form-group>
@@ -17,11 +17,11 @@
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Администрирование"  label-for="input-phone">
+                        <b-form-group :label="$t('Administration')"  label-for="input-phone">
                             <b-select v-model="role">
-                                <b-select-option href="#" value="" selected>Не выбрано</b-select-option>
-                                <b-select-option href="#" value="admin" selected>Админ</b-select-option>
-                                <b-select-option href="#" :value="-1">Все пользователи</b-select-option>
+                                <b-select-option href="#" value="" selected>{{ $t('Not chosen') }}</b-select-option>
+                                <b-select-option href="#" value="admin" selected>{{ $t('Admin') }}</b-select-option>
+                                <b-select-option href="#" :value="-1">{{ $t('All users')}}</b-select-option>
                                 <!--<b-select-option v-for="rootType in rootTypes" href="#" :value="rootType.id">{{ rootType.name }}</b-select-option>-->
                             </b-select>
                         </b-form-group>
@@ -36,11 +36,11 @@
                         <b-form-group>
                             <b-table-simple striped hover responsive>
                                 <b-thead>
-                                    <b-th>User</b-th>
-                                    <b-th>Status</b-th>
-                                    <b-th>Name</b-th>
-                                    <b-th>Link</b-th>
-                                    <b-th>Delete</b-th>
+                                    <b-th>{{ $t('User') }}</b-th>
+                                    <b-th>{{ $t('Status') }}</b-th>
+                                    <b-th>{{ $t('Name') }}</b-th>
+                                    <b-th>{{ $t('Link') }}</b-th>
+                                    <b-th>{{ $t('Delete') }}</b-th>
                                 </b-thead>
                                 <draggable @start="drag=true" @end="sortEnded" v-model="property" tag="tbody">
                                 <b-tr v-for="item in filteredHotels">
@@ -69,7 +69,8 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <b-button v-b-modal.modal-object-create type="button" variant="success" class="mr-2" @click="hotelNew">Новый объект</b-button>
+                <b-button v-b-modal.modal-object-create type="button" variant="success" class="mr-2" @click="hotelNew">
+                    {{ $t('New object') }}</b-button>
             </div>
         </div>
 
@@ -84,12 +85,12 @@
             </div>
         </div>
 
-        <b-modal id="modal-object-delete" title="Property delete" @ok="deleteOk">
-            <span class="text-danger">A you sure you want to delete hotel {{ hotelDelete.name }}?</span>
-            <span>This action can not be undone</span>
+        <b-modal id="modal-object-delete" :title="$t('Property delete')" @ok="deleteOk">
+            <span class="text-danger">{{ $t('A you sure you want to delete hotel') }} {{ hotelDelete.name }}?</span>
+            <span>{{ $t('This action can not be undone') }}</span>
         </b-modal>
 
-        <b-modal id="modal-object-create" title="New property" @ok.prevent="createProperty">
+        <b-modal id="modal-object-create" :title="$t('New property')" @ok.prevent="createProperty">
             <Forms v-model="this.hotelNewData" :fields="this.hotelNewData" :data="data" />
         </b-modal>
 
@@ -173,10 +174,10 @@
                 this.clearModalErrors();
                 properties.create(this.hotelNewData).then(response => {
                     if(response.data.code == 'ok'){
-                        this.textOperation = 'Добавлено';
+                        this.textOperation = this.$t('Added');
                         this.operationOk = true
                     }else{
-                        this.textOperation = 'Ошибка добавления';
+                        this.textOperation = this.$t('Add error');
                         this.operationError = true;
                     }
                     this.$nextTick(() => {

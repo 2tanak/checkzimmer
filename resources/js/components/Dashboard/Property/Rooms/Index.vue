@@ -1,24 +1,24 @@
 
 <template>
     <section class="header-dashboard">
-        <h1>Типы комнат</h1>
+        <h1>{{ $t('Room types') }}</h1>
         <div class="row mt-4">
             <div class="col-xl-6 grid-margin">
                 <div class="card">
                     <div class="card-body" style="min-height:135px;">
                         <div style="width:100%;" class="d-flex">
-                            <b-form-group label="Объект" label-for="input-phone" style="width:50%;" class="mr-3">
+                            <b-form-group :label="$t('Object')" label-for="input-phone" style="width:50%;" class="mr-3">
                                 <b-select v-model="selectedObject">
-                                    <b-select-option value="not_choice">Не выбран</b-select-option>
+                                    <b-select-option value="not_choice">{{ $t('Not chosen') }}</b-select-option>
                                     <!-- <b-select-option v-for="rootType in rootTypes" :value="rootType.id">{{ rootType.name }}</b-select-option> -->
                                     <b-select-option href="#" value="1">Гостиничный комплекс "У моря"</b-select-option>
                                     <b-select-option href="#" value="2">Жилой комплек "Плаза"</b-select-option>
                                     <b-select-option href="#" value="3">Многоэтажный дом</b-select-option>
                                 </b-select>
                             </b-form-group>
-                            <b-form-group label="Тип комнаты" label-for="selectedObjectItem" style="width:50%;" class="mr-3">
+                            <b-form-group :label="$t('Room type')" label-for="selectedObjectItem" style="width:50%;" class="mr-3">
                                 <b-select v-model="selectedObjectItem">
-                                    <b-select-option value="not_choice">Не выбран</b-select-option>
+                                    <b-select-option value="not_choice">{{ $t('Not chosen') }}</b-select-option>
                                     <!-- <b-select-option v-for="rootType in rootTypes" :value="rootType.id">{{ rootType.name }}</b-select-option> -->
                                     <b-select-option href="#" value="1_1">Одноместный номер</b-select-option>
                                     <b-select-option href="#" value="2_2">Двухместный номер</b-select-option>
@@ -36,15 +36,15 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex" style="width:100%;">
-                            <b-form-group label="Администрирование"  label-for="selectedUser" class="mr-3" style="width:50%;">
+                            <b-form-group :label="$t('Administration')"  label-for="selectedUser" class="mr-3" style="width:50%;">
                                 <b-select v-model="selectedUser">
-                                    <b-select-option href="#" value="admin">Админ</b-select-option>
-                                    <b-select-option href="#" value="choice">Выбор пользователя</b-select-option>
+                                    <b-select-option href="#" value="admin">{{ $t('Admin') }}</b-select-option>
+                                    <b-select-option href="#" value="choice">{{ $t('User choice') }}</b-select-option>
                                 </b-select>
                             </b-form-group>
-                            <b-form-group label="Пользователи" label-for="selectedUserItem" style="width:50%;" v-if="selectedUser === 'choice' ">
+                            <b-form-group :label="$t('Users')" label-for="selectedUserItem" style="width:50%;" v-if="selectedUser === 'choice' ">
                                 <b-select v-model="selectedUserItem">
-                                    <b-select-option href="#" value="not_choice">Не выбрано</b-select-option>
+                                    <b-select-option href="#" value="not_choice">{{ $t('Not chosen') }}</b-select-option>
                                     <b-select-option href="#" value="user_1">Пользователь 1</b-select-option>
                                     <b-select-option href="#" value="user_2">Пользователь 2</b-select-option>
                                     <b-select-option href="#" value="user_3">Пользователь 3</b-select-option>
@@ -82,7 +82,7 @@
                                 <template v-slot:table-busy>
                                     <div class="text-center text-danger my-2">
                                         <b-spinner class="align-middle"></b-spinner>
-                                        <strong>Loading...</strong>
+                                        <strong>{{ $t('Loading') }}...</strong>
                                     </div>
                                 </template>
                             </b-table>
@@ -93,17 +93,17 @@
         </div>
         <div class="row">
             <div class="col-xl-12">
-                <b-button v-b-modal.assignedModal type="submit" variant="success" class="mr-2">Добавить тип комнаты</b-button>
+                <b-button v-b-modal.assignedModal type="submit" variant="success" class="mr-2">{{ $t('Add room type') }}</b-button>
             </div>
         </div>
 
 
-        <b-modal id="assignedModal" title="Добавить тип комнаты">
+        <b-modal id="assignedModal" :title="$t('Add room type')">
             <Forms v-model="assignedAction" :fields="assignedAction" :data="data"></Forms>
         </b-modal>
         <b-modal id="assignedModalDelete" title="Feature delete">
-            <span class="text-danger">A you sure you want to delete {{ assignedAction.name }}?</span>
-            <span>This action can not be undone!</span>
+            <span class="text-danger">{{ $t('A you sure you want to delete') }} {{ assignedAction.name }}?</span>
+            <span>{ $t('This action cannot be undone') }}!</span>
         </b-modal>
 
     </section>
@@ -132,7 +132,7 @@ export default {
             selectedUser: 'admin',
             selectedUserItem: 'not_choice',
             selectedObjectItem: 'not_choice',
-            fields: ['id', 'room_type', 'picture', 'name', 'persons', 'edit', 'delete'],
+            fields: [this.$t('id'), this.$t('room_type'), this.$t('picture'), this.$t('Name'), this.$t('Persons'), this.$t('Edit'), this.$t('Delete')],
             room_types: [
                 { id: 1, room_type_id: 0, picture: '', name: 'дом (целиком)', persons: 2 },
                 { id: 6, room_type_id: 1, picture: '', name: 'многоместный', persons: 10 },

@@ -1,22 +1,22 @@
 <template>
     <form>
         <template v-for="(item, ind) in data">
-            <b-form-group :label="item.label" label-for="input-phone"
+            <b-form-group :label="$t(item.label)" label-for="input-phone"
                           v-if="['divider', 'hidden'].indexOf(item.type) === -1">
-                <b-form-input v-if="inputTypes.indexOf(item.type) !== -1" v-model="fields[ind]" :type="item.type" :id="'input-'+ind" :placeholder="item.placeholder"></b-form-input>
-                <label v-if="item.type === 'checkbox'"><input type="checkbox" v-model="fields[ind]" :id="'input-'+ind"> {{ item.placeholder }}</label>
-                <b-form-textarea v-else-if="item.type === 'textarea'" v-model="fields[ind]" :id="'input-'+ind" placeholder="copyright"></b-form-textarea>
+                <b-form-input v-if="inputTypes.indexOf(item.type) !== -1" v-model="fields[ind]" :type="item.type" :id="'input-'+ind" :placeholder="$t(item.placeholder)"></b-form-input>
+                <label v-if="item.type === 'checkbox'"><input type="checkbox" v-model="fields[ind]" :id="'input-'+ind"> {{ $t(item.placeholder) }}</label>
+                <b-form-textarea v-else-if="item.type === 'textarea'" v-model="fields[ind]" :id="'input-'+ind" :placeholder="$t('copyright')"></b-form-textarea>
                 <b-form-file
                     v-if="item.type === 'file'"
                     v-model="fileObj"
                     v-on:change="onFileChanged"
                     :state="Boolean(fields[ind])"
-                    placeholder="Choose a file or drop it here..."
-                    drop-placeholder="Drop file here..."
+                    :placeholder="$t('Choose a file or drop it here...')"
+                    :drop-placeholder="$t('Drop file here...')"
                 ></b-form-file>
                 <div class="d-flex align-items-center" style="position:relative;" v-if="item.type === 'picture'" v-model="fileObj">
                     <input type="file" id="add-photo" class="input-picture">
-                    <label for="add-photo">Choose a file or drop it here...</label>
+                    <label for="add-photo">{{ $t('Choose a file or drop it here...') }}</label>
                     <div class="preview">
                         <img src="/svg/i-fireplace.svg" alt="">
                     </div>

@@ -1,24 +1,24 @@
 <template>
     <section class="header-dashboard">
-        <h1>Маппинг объектов</h1>
+        <h1>{{ $t('Object mapping') }}</h1>
 
         <div class="row mt-5">
             <div class="col-md-12 col-lg-6 mt-4">
-                <h4>Маппинг удобств</h4>
+                <h4>{{ $t('Amenity mapping') }}</h4>
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 col-lg-6 mt-4">
-                                <strong>Типы удобств на Booking.com</strong>
+                                <strong>{{ $t('Types of amenities on') }} {{ $t('Booking') }}.{{ $t('com') }}</strong>
                             </div>
                             <div class="col-md-12 col-lg-6 mt-4">
-                                <strong>Типы удобств на сайте</strong>
+                                <strong>{{ $t('Types of facilities on the site') }}</strong>
                             </div>
                         </div>
                         <div class="row pb-4" v-for="(row, i) in mappingFeatureRows">
                             <div class="col-md-12 col-lg-6 mt-4">
                                 <b-select v-model="mappingFeatureRows[i].booking">
-                                    <b-select-option value="">Ничего не выбрано</b-select-option>
+                                    <b-select-option value="">{{ $t('Not chosen') }}</b-select-option>
                                     <b-select-option v-for="item in featureBookingList" :value="item ?  item.native_id : 0" >
                                         {{ item ? item.name : '' }}
                                     </b-select-option>
@@ -26,38 +26,38 @@
                             </div>
                             <div class="col-md-12 col-lg-6 mt-4">
                                 <b-select v-model="mappingFeatureRows[i].site">
-                                    <b-select-option value="">Ничего не выбрано</b-select-option>
+                                    <b-select-option value="">{{ $t('Not chosen') }}</b-select-option>
                                     <b-select-option v-for="item in featuresSite" :value="item.id">{{ item.name }}</b-select-option>
                                 </b-select>
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col-md-6">
-                                <p v-if="errorText" class="error-text">Вы ничего не выбрали</p>
+                                <p v-if="errorText" class="error-text">{{ $t('You have not selected anything') }}</p>
                             </div>
                             <div class="col-md-6" style="text-align:right;">
-                                <b-button @click="addRowFeature" variant="success">Добавить ряд</b-button>
+                                <b-button @click="addRowFeature" variant="success">{{ $t('Add row') }}</b-button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-12 col-lg-6 mt-4">
-                <h4>Маппинг типов жилья</h4>
+                <h4>{{ $t('Mapping of housing types') }}</h4>
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 col-lg-6 mt-4">
-                                <strong>Типы жилья на Booking.com</strong>
+                                <strong>{{ $t('Types of housing on') }} {{ $t('Booking') }}.{{ $t('com') }}</strong>
                             </div>
                             <div class="col-md-12 col-lg-6 mt-4">
-                                <strong>Типы жилья на сайте</strong>
+                                <strong>{{ $t('Types of housing on the site') }}</strong>
                             </div>
                         </div>
                         <div class="row pb-4" v-for="(row, i) in mappingHousingRows">
                             <div class="col-md-12 col-lg-6 mt-4">
                                 <b-select v-model="mappingHousingRows[i].booking">
-                                    <b-select-option value="">Ничего не выбрано</b-select-option>
+                                    <b-select-option value="">{{ $t('Not chosen') }}</b-select-option>
                                     <b-select-option v-for="item in housingBooking" :value="item ? item.native_id : ''">
                                         {{ item ? item.name : '' }}
                                     </b-select-option>
@@ -65,7 +65,7 @@
                             </div>
                             <div class="col-md-12 col-lg-6 mt-4">
                                 <b-select v-model="mappingHousingRows[i].site">
-                                    <b-select-option value="">Ничего не выбрано</b-select-option>
+                                    <b-select-option value="">{{ $t('Not chosen') }}</b-select-option>
                                     <b-select-option v-for="item in housingSite" :value="item.id">
                                         {{ item.name }}
                                     </b-select-option>
@@ -74,7 +74,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 mt-4" style="text-align:right;">
-                                <b-button @click="addRowHousing" variant="success">Добавить ряд</b-button>
+                                <b-button @click="addRowHousing" variant="success">{{ $t('Add row') }}</b-button>
                             </div>
                         </div>
                     </div>
@@ -83,10 +83,10 @@
         </div>
         <div class="row mt-4" v-if="!loading">
             <div class="col-md-12">
-                <b-button type="submit" variant="success" class="mr-2" @click.prevent="save">Сохранить</b-button>
+                <b-button type="submit" variant="success" class="mr-2" @click.prevent="save">{{ $t('Save') }}</b-button>
             </div>
         </div>
-        <b-modal id="save-success">Данные успешно сохранены</b-modal>
+        <b-modal id="save-success">{{ $t('Data saved successfully') }}</b-modal>
     </section>
 
 </template>

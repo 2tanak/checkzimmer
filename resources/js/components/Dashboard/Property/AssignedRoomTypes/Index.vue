@@ -1,13 +1,13 @@
 <template>
     <section class="header-dashboard">
-        <h1>Доступные комнаты</h1>
+        <h1>{{ $t('Available rooms') }}</h1>
         <div class="row mt-4">
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Тип жилья" label-for="input-phone">
+                        <b-form-group :label="$t('Housing type')" label-for="input-phone">
                             <b-select v-model="typePropertySelect">
-                                <b-select-option href="#" value="not_choice">Не выбран</b-select-option>
+                                <b-select-option href="#" value="not_choice">{{ $t('Not chosen') }}</b-select-option>
                                 <b-select-option v-for="rootType in rootTypes" href="#" :value="rootType.id">{{ rootType.name }}</b-select-option>
                             </b-select>
                         </b-form-group>
@@ -17,9 +17,9 @@
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Объект недвижимости" label-for="input-phone">
+                        <b-form-group :label="$t('Property object')" label-for="input-phone">
                             <b-select v-model="propertyObjectSelect">
-                                <b-select-option href="#" value="not_choice">Не выбран</b-select-option>
+                                <b-select-option href="#" value="not_choice">{{ $t('Not chosen') }}</b-select-option>
                                 <b-select-option v-for="rootType in rootTypes" href="#" :value="rootType.id">{{ rootType.name }}</b-select-option>
                             </b-select>
                         </b-form-group>
@@ -54,7 +54,7 @@
                                 <template v-slot:table-busy>
                                     <div class="text-center text-danger my-2">
                                         <b-spinner class="align-middle"></b-spinner>
-                                        <strong>Loading...</strong>
+                                        <strong>{{ $t('Loading') }}...</strong>
                                     </div>
                                 </template>
                             </b-table>
@@ -65,7 +65,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <b-button v-b-modal.modal-rooms type="submit" variant="success" class="mr-2" @click="roomsNew">Новый тип комнаты</b-button>
+                <b-button v-b-modal.modal-rooms type="submit" variant="success" class="mr-2" @click="roomsNew">{{ $t('New room type') }}</b-button>
             </div>
         </div>
 
@@ -80,13 +80,13 @@
             </div>
         </div>
 
-        <b-modal id="modal-rooms" title="Add/Edit type rooms" @ok.prevent="createRoom">
+        <b-modal id="modal-rooms" :title="$t('Add/Edit type rooms')" @ok.prevent="createRoom">
             <Forms v-model="roomTypeAction" :fields="roomTypeAction" :data="data"></Forms>
         </b-modal>
 
-        <b-modal id="modal-rooms-delete" title="Feature delete" @ok="deleteRoom">
-            <span class="text-danger">A you sure you want to delete {{ roomTypeAction.name }}?</span>
-            <span>This action cannot be undone!</span>
+        <b-modal id="modal-rooms-delete" :title="$t('Feature delete')" @ok="deleteRoom">
+            <span class="text-danger">{{ $t('A you sure you want to delete') }} {{ roomTypeAction.name }}?</span>
+            <span>{{ $t('This action cannot be undone') }}!</span>
         </b-modal>
 
     </section>
@@ -113,7 +113,7 @@ export default {
             operationOk : false,
             operationError : false,
             textOperation: '',
-            fields: [ 'id', 'room_type_id', 'picture', 'name', 'persons', 'edit', 'delete' ],
+            fields: [ this.$t('id'), this.$t('room_type_id'), this.$t('picture'), this.$t('Name'), this.$t('Persons'), this.$t('Edit'), this.$t('Delete') ],
             room_types: [
                 { id: 1, room_type_id: 0, name: 'дом (целиком)' },
                 { id: 6, room_type_id: 1,  name: 'одноместный' }
