@@ -282,6 +282,26 @@ jQuery(document).ready(function() {
         }
     });
 
+    jQuery('.selected-language').click(function (e) {
+        e.preventDefault();
+        jQuery('.list-languages').addClass('active');
+    });
+
+    jQuery(document).mouseup(function (e){
+        var div = jQuery(".list-languages");
+        if (!div.is(e.target)
+            && div.has(e.target).length === 0) {
+            jQuery('.list-languages').removeClass('active');
+        }
+    });
+
+    jQuery('.list-languages a').click(function (e) {
+        e.preventDefault();
+        var paragraph = jQuery(this).text();
+        jQuery('.selected-language a').text(paragraph);
+        jQuery('.list-languages').removeClass('active');
+    });
+
 
     jQuery('.mobile-card-button').click(function () {
         jQuery('.property-card').toggleClass('big');
