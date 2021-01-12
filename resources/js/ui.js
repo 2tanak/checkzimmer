@@ -31,6 +31,20 @@ Vue.use(VueAuth, auth)
 window.Vue = require('vue');
 var jQuery = require('jquery')
 
+import VueI18n from 'vue-i18n'
+Vue.use(VueI18n)
+
+import messagesLocaleEn from '../lang/en.json';
+import messagesLocaleDe from "../lang/de.json";
+
+const i18n = new VueI18n({
+    locale: 'de', // set locale
+    messages: {
+        en: messagesLocaleEn,
+        de: messagesLocaleDe
+    },
+})
+
 const app = new Vue({
     el: '#application',
     router,
@@ -39,7 +53,8 @@ const app = new Vue({
         Favorites,
         Single
     },
-    store
+    store,
+    i18n
 });
 
 

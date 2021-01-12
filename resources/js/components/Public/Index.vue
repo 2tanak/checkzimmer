@@ -2,36 +2,38 @@
     <div id="app">
         <div class="list-content">
             <div class="container">
-                <h1>Найди лучшее жилье для монтеров в Лейпциге!</h1>
+                <h1>{{ $t('Find the best housing for fitters in') }} {{ $t('Leipzig') }}!</h1>
                 <div class="sample-block">
                     <div class="input-block sample-block-item">
-                        <label for="text">адрес рабочего места:</label>
-                        <div class="input-container"><input  v-model="search.address" id="text" type="text" placeholder="Например: 04158 Leipzig"></div>
+                        <label for="text">{{ $t('workplace address') }}:</label>
+                        <div class="input-container">
+                            <input  v-model="search.address" id="text" type="text" :placeholder="$t('Example') + ': 04158 ' + $t('Leipzig')">
+                        </div>
                     </div>
                     <div class="distance-block select-block">
-                        <label for="distance-select">дистанция:</label>
+                        <label for="distance-select">{{ $t('distance') }}:</label>
                         <div class="select-container">
                             <select v-model="search.km" name="distance" id="distance-select" class="distance">
-                                <option value="10">10 км.</option>
-                                <option value="20">20 км.</option>
-                                <option value="30">30 км.</option>
-                                <option value="40">40 км.</option>
+                                <option value="10">10 {{ $t('km') }}.</option>
+                                <option value="20">20 {{ $t('km') }}.</option>
+                                <option value="30">30 {{ $t('km') }}.</option>
+                                <option value="40">40 {{ $t('km') }}.</option>
                             </select>
                         </div>
                     </div>
                     <div class="number-personse-block select-block">
-                        <label class="desctop-label" for="number-personse">Кол-во человек:</label>
-                        <label class="mobile-label" for="number-personse">Кол-во чел.:</label>
+                        <label class="desctop-label" for="number-personse">{{ $t('Num people') }}:</label>
+                        <label class="mobile-label" for="number-personse">{{ $t('Num ppl.') }}:</label>
                         <div class="select-container">
                             <select v-model="search.people" name="distance" id="number-personse" class="number-personse">
-                                <option value="1">1 чел.</option>
-                                <option value="2">2 чел.</option>
-                                <option value="3">3 чел.</option>
-                                <option value="4">4 чел.</option>
+                                <option value="1">1 {{ $t('ppl') }}.</option>
+                                <option value="2">2 {{ $t('ppl') }}.</option>
+                                <option value="3">3 {{ $t('ppl') }}.</option>
+                                <option value="4">4 {{ $t('ppl') }}.</option>
                             </select>
                         </div>
                     </div>
-                    <a class="find-housing" href="#" @click.prevent="submitForm">Найти жильё</a>
+                    <a class="find-housing" href="#" @click.prevent="submitForm">{{ $t('Find housing') }}</a>
                 </div>
             </div>
 
@@ -39,18 +41,18 @@
                 <div class="container">
                     <div class="sorting-block">
                         <div class="left-block">
-                            <a class="list active" href="#">Список</a>
-                            <a class="map" href="#">На карте</a>
-                            <div class="result">Найдено <span class="property-found">0</span> вариантов жилья</div>
+                            <a class="list active" href="#">{{ $t('List') }}</a>
+                            <a class="map" href="#">{{ $t('Map') }}</a>
+                            <div class="result">{{ $t('Found') }} <span class="property-found">0</span> {{ $t('housing options') }}</div>
                         </div>
                         <div class="sorting">
-                            <a href="#">Сортировка по умолчанию</a>
+                            <a href="#">{{ $t('Sort by default') }}</a>
                             <div class="filter-block">
                                 <ul>
-                                    <li class="check">Сортировка по умолчанию</li>
-                                    <li @click.prevent="loadSort('min')">От дешевых к дорогим</li>
-                                    <li @click.prevent="loadSort('max')">От дорогих к дешевым</li>
-                                    <li @click.prevent="loadSort('rating')">По рейтингу</li>
+                                    <li class="check">{{ $t('Sort by default') }}</li>
+                                    <li @click.prevent="loadSort('min')">{{ $t('Cheap to expensive') }}</li>
+                                    <li @click.prevent="loadSort('max')">       </li>
+                                    <li @click.prevent="loadSort('rating')">{{ $t('By rating') }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -286,13 +288,13 @@
                 <transition name="fade">
                 <div class="communication not-active" style="top:34px;position:relative;">
                     <div class="load-more">
-                        <div class="btn btn-success" v-if="additional_load" @click.prevent="loadMore">Загрузить еще</div>
+                        <div class="btn btn-success" v-if="additional_load" @click.prevent="loadMore">{{ $t('Load more') }}</div>
                     </div>
                     <div class="description">
-                        Предложения по вашему запросу закончились, увеличьте дистанцию или свяжитесь с менежером напрямую
+                        {{ $t('The offers on your request are over, increase the distance or contact the manager directly') }}
                     </div>
                     <div class="link-block">
-                        <a href="#">Связаться с менеджером</a>
+                        <a href="#">{{ $t('Contact manager') }}</a>
                         <div class="shadow-block"></div>
                     </div>
                 </div>

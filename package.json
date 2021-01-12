@@ -10,6 +10,7 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
+        "@kazupon/vue-i18n-loader": "^0.5.0",
         "axios": "^0.19.2",
         "bootstrap": "^4.0.0",
         "bootstrap-vue": "^2.13.0",
@@ -37,6 +38,7 @@
         "npm": "^6.14.7",
         "readmore-js": "^2.2.1",
         "vue-axios": "^2.1.5",
+        "vue-i18n": "^8.22.2",
         "vue-select2": "^0.2.6",
         "vue-slick-carousel": "^1.0.6",
         "vuedraggable": "^2.24.3",
