@@ -135,6 +135,10 @@
               class="navbar-toggler navbar-toggler-right align-self-center" type="button" @click="collapedMobileSidebar()">
         <span class="mdi mdi-menu"></span>
       </button>
+        <b-dropdown text="Ru" class="languages-block">
+            <b-dropdown-item href="#">Ru</b-dropdown-item>
+            <b-dropdown-item href="#">En</b-dropdown-item>
+        </b-dropdown>
     </div>
   </b-navbar>
 </template>

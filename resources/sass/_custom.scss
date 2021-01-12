@@ -691,6 +691,64 @@ footer#main-footer ul.footer-menu li a:active {
     color: #777A86;
     transition: all 0.4s ease;
 }
+.languages-block {
+    position: relative;
+}
+.languages-block .list-languages {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    transition: all 0.2s;
+    position: absolute;
+    background-color: #fff;
+    overflow: auto;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+    min-width: 160px;
+    left: 0;
+}
+.languages-block a {
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+    color: #545769;
+    display: block;
+}
+.languages-block .selected-language {
+    min-width: 40px;
+    max-width: 40px;
+    height: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #7A8793;
+    border-radius: 6px;
+}
+.languages-block .list-languages.active {
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+}
+.languages-block .list-languages a {
+    padding: 6px 10px;
+    margin: 0 8px 0 8px;
+}
+.languages-block .list-languages a:last-of-type {
+    margin-bottom: 13px;
+}
+.languages-block .list-languages a:first-of-type {
+    margin-top: 13px;
+}
+.languages-block .list-languages a:hover {
+    background-color: #f1f1f1;
+}
+.languages-block.languages-block-mobile {
+    display: none;
+}
+.single-header-content .languages-block-desctope {
+    margin-left: 38px;
+}
 
 
 .list-content {
@@ -2501,6 +2559,13 @@ label.mobile-label {
     .mobile-button {
         display: block;
     }
+    .languages-block.languages-block-desctope {
+        display: none;
+    }
+    .languages-block.languages-block-mobile {
+        display: block;
+        margin-top: 24px;
+    }
 }
 @media (max-width: 575px) {
     .property-list .property-list-subhead a.whatsapp-link-number {
@@ -2646,8 +2711,7 @@ label.mobile-label {
         padding: 51px 16px 45px 16px;
         border-radius: 0;
         height: 100%;
-        border-radius: 0;
-        height: 100%;
+        width: 100%;
     }
     .modal-block .modal-close {
         width: 31px;
@@ -2741,6 +2805,11 @@ label.mobile-label {
         padding-left: 14px;
         padding-top: 10px;
     }
+    .property-card img {
+        width: 96px;
+        height: 138px;
+        border-radius: 4px;
+    }
 }
 @media (max-width: 420px) {
     .property.not-map .property-card .distance .mobile-span {
@@ -2748,6 +2817,9 @@ label.mobile-label {
     }
     .property.not-map .property-card .distance .desctop-span {
         display: none;
+    }
+    .property-card img {
+        width: 82px;
     }
 }
 
