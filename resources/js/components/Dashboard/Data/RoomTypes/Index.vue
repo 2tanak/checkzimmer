@@ -1,13 +1,13 @@
 <template>
     <section class="header-dashboard">
-            <h1>Каталог типов комнат</h1>
+            <h1>{{ $t('Room type catalog') }}</h1>
         <div class="row mt-4">
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Типы жилья"  label-for="types">
+                        <b-form-group :label="$t('Housing types')"  label-for="types">
                             <b-select v-model="types">
-                                <b-select-option href="#" :value="0">Все типы</b-select-option>
+                                <b-select-option href="#" :value="0">{{ $t('All types') }}</b-select-option>
                                 <b-select-option v-for="rootType in rootTypes" :value="rootType.id">{{ rootType.name }}</b-select-option>
                             </b-select>
                         </b-form-group>
@@ -17,8 +17,8 @@
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Создать категорию" label-for="input-phone">
-                            <b-form-input type="text" id="input-phone" placeholder="Название, Enter для подтверждения" ></b-form-input>
+                        <b-form-group :label="$t('Create category')" label-for="input-phone">
+                            <b-form-input type="text" id="input-phone" :placeholder="$t('Name, Enter to confirm')" ></b-form-input>
                         </b-form-group>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                                 <template v-slot:table-busy>
                                     <div class="text-center text-danger my-2">
                                         <b-spinner class="align-middle"></b-spinner>
-                                        <strong>Loading...</strong>
+                                        <strong>{{ $t('Loading') }}...</strong>
                                     </div>
                                 </template>
                             </b-table>
@@ -62,14 +62,14 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <b-button type="submit" variant="success" class="mr-2" v-b-modal.modal-room-type>Новый тип комнаты</b-button>
+                <b-button type="submit" variant="success" class="mr-2" v-b-modal.modal-room-type>{{ $t('New room type') }}</b-button>
             </div>
         </div>
-        <b-modal id="modal-room-type" title="Room Type add/edit">
+        <b-modal id="modal-room-type" :title="$t('Room Type add/edit')">
             <Forms v-model="roomTypesAction" :fields="roomTypesAction" :data="data"></Forms>
         </b-modal>
-        <b-modal id="modal-room-type-delete" title="Room type delete?" @ok='roomTypeDeleteOk'>
-            <span class="text-danger">A you sure you want to delete <strong>{{ roomTypesAction.name }}</strong>?</span>
+        <b-modal id="modal-room-type-delete" :title="$t('Room type delete')" @ok='roomTypeDeleteOk'>
+            <span class="text-danger">{{ $t('A you sure you want to delete') }} <strong>{{ roomTypesAction.name }}</strong>?</span>
         </b-modal>
     </section>
 </template>
@@ -99,7 +99,7 @@
                     { id: 16, room_type_id: 0, picture: '', name: 'квартира', persons: 2 },
                     { id: 31, room_type_id: 16, picture: '', name: 'двухместная', persons: 2 },
                 ],
-                fields: ['id', 'room_type', 'picture', 'name', 'persons', 'edit', 'delete'],
+                fields: [this.$t('id'), this.$t('room_type'), this.$t('picture'), this.$t('Name'), this.$t('Persons'), this.$t('Edit'), this.$t('Delete')],
                 data: roomTypesForm,
                 roomTypesAction: { name: ''}
             }

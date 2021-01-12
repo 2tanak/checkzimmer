@@ -19,6 +19,25 @@
     display: flex;
     align-items: center;
 }
+.languages-block {
+    border: 1px solid #ffffff !important;
+}
+.languages-block .dropdown-toggle {
+    background-color: #04befe !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+    text-transform: uppercase;
+}
+.languages-block ul.dropdown-menu a {
+    text-transform: uppercase;
+}
+.languages-block ul.dropdown-menu {
+    left: auto;
+    right: 0;
+    min-width: 75px;
+}
+
+
 @media (max-width: 991px) {
     .head-logo .logo-desctope {
         display: none;

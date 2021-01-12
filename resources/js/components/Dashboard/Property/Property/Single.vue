@@ -1,11 +1,11 @@
 <template>
     <section class="header-dashboard">
-        <h1 style="font-size:26px;">Редактирование отеля</h1>
+        <h1 style="font-size:26px;">{{ $t('Hotel editing') }}</h1>
         <div class="delete-hotel-container">
             <h2 style="margin-bottom:0;">{{ property.name }}</h2>
             <div>
-                <b-button v-b-modal.deleteHotelModal variant="danger" @click="deleteHotel">Удалить отель</b-button>
-                <b-button type="submit" variant="success" class="mr-2 " @click="save">Сохранить</b-button>
+                <b-button v-b-modal.deleteHotelModal variant="danger" @click="deleteHotel">{{ $t('Delete hotel') }}</b-button>
+                <b-button type="submit" variant="success" class="mr-2 " @click="save">{{ $t('Save') }}</b-button>
             </div>
         </div>
         <div class="row mt-4">
@@ -15,19 +15,19 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <b-form-group label="Название отеля" label-for="input-hotel-name">
+                                    <b-form-group :label="$t('Name hotel')" label-for="input-hotel-name">
                                         <b-form-input v-model="property.name" id="input-hotel-name"></b-form-input>
                                     </b-form-group>
-                                    <b-form-group label="Адрес странички" label-for="input-hotel-name">
+                                    <b-form-group :label="$t('Page address')" label-for="input-hotel-name">
                                         <b-form-input v-model="property.slug" id="input-hotel-name"></b-form-input>
                                     </b-form-group>
-                                    <b-form-group label="Порядок вывода объекта" label-for="input-hotel-name">
+                                    <b-form-group :label="$t('Object display order')" label-for="input-hotel-name">
                                         <b-form-input v-model="property.ord" id="input-hotel-name"></b-form-input>
                                     </b-form-group>
-                                    <b-form-group label="Доступ к объекту" label-for="input-hotel-name">
+                                    <b-form-group :label="$t('Object access')" label-for="input-hotel-name">
                                         <b-form-input v-model="property.access" id="input-hotel-name"></b-form-input>
-                                        <small v-if="!property.access" class="text-info">свободный доступ</small>
-                                        <small v-else class="text-danger">доступ ограничен указанными PIN-кодами. Коды можно писать через запятую</small>
+                                        <small v-if="!property.access" class="text-info">{{ $t('Free access') }}</small>
+                                        <small v-else class="text-danger">{{ $t('access is limited by the specified PIN codes. Codes can be separated by commas') }}</small>
                                     </b-form-group>
                                 </div>
                             </div>
@@ -40,27 +40,27 @@
                                 <div class="card-body">
                                     <div class="row mt-4 mb-4">
                                         <div class="col-md-3">
-                                            <b-form-group label="Широта" label-for="input-hotel-lat">
+                                            <b-form-group :label="$t('Latitude')" label-for="input-hotel-lat">
                                                 <b-form-input v-model="property.lat" id="input-hotel-lat"></b-form-input>
                                             </b-form-group>
                                         </div>
                                         <div class="col-md-3">
-                                            <b-form-group label="Долгота" label-for="input-hotel-lng">
+                                            <b-form-group :label="$t('Longitude')" label-for="input-hotel-lng">
                                                 <b-form-input v-model="property.lng" id="input-hotel-lng"></b-form-input>
                                             </b-form-group>
                                         </div>
                                         <div class="col-md-3">
-                                            <b-form-group label="Город" label-for="input-hotel-city">
+                                            <b-form-group :label="$t('City')" label-for="input-hotel-city">
                                                 <b-form-input v-model="property.city" id="input-hotel-city"></b-form-input>
                                             </b-form-group>
                                         </div>
                                         <div class="col-md-3">
-                                            <b-form-group label="Почтовый индекс" label-for="input-hotel-lng">
+                                            <b-form-group :label="$t('Postcode')" label-for="input-hotel-lng">
                                                 <b-form-input v-model="property.zip" id="input-hotel-lng"></b-form-input>
                                             </b-form-group>
                                         </div>
                                         <div class="col-md-12">
-                                            <b-form-group label="Адрес" label-for="input-hotel-address">
+                                            <b-form-group :label="$t('Address')" label-for="input-hotel-address">
                                                 <b-form-input v-model="property.address" id="input-hotel-address"></b-form-input>
                                             </b-form-group>
                                         </div>
@@ -74,7 +74,7 @@
                         <div class="col-md-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4>Фото</h4>
+                                    <h4>{{ $t('Photo') }}</h4>
                                     <draggable class="row mt-4 photos-gallery" v-model="imageData" @start="drag=true" @end="drag=false">
                                         <div class="col-xl-2 col-lg-3 col-sm-4 mb-4" v-for="element in imageData" :key="element.id">
                                             <div class="photos-gallery-item">
@@ -98,7 +98,7 @@
                         <div class="col-md-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
-                                    <h3>Удобства</h3>
+                                    <h4>{{ $t('Facilities') }}</h4>
                                     <template v-for="feature in features">
                                         <div class="comfort-block mt-5">
                                             <h3>{{feature. name }}</h3>
@@ -120,7 +120,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 style="margin-bottom:0;">Номера</h4>
+                                    <h4 style="margin-bottom:0;">{{ $t('Rooms') }}</h4>
                                 </div>
                             </div>
                         </div>
@@ -135,12 +135,13 @@
                             <div class="card-body">
                                 <div class="row justify-content-sm-between">
                                     <div>
-                                        <b-button class="button-collapse" v-b-toggle="'id-'+room.id"> Комната № {{ i+1 }}</b-button>
+                                        <b-button class="button-collapse" v-b-toggle="'id-'+room.id"> {{ $t('Room') }} № {{ i+1 }}</b-button>
                                     </div>
                                     <div class="delete-room">
-                                        <b-button v-if="room.newRoom" type="submit" variant="success" class="mr-2" @click="saveRoom(room)">Сохранить комнату</b-button>
-                                        <b-button v-if="room.newRoom" variant="danger" @click="deleteNewRoom()">Удалить комнату</b-button>
-                                        <b-button v-else variant="danger" @click="deleteRoomOk($event, room)">Удалить комнату</b-button>
+                                        <b-button v-if="room.newRoom" type="submit" variant="success" class="mr-2" @click="saveRoom(room)">
+                                            {{ $t('Save room') }}</b-button>
+                                        <b-button v-if="room.newRoom" variant="danger" @click="deleteNewRoom()">{{ $t('Delete room') }}</b-button>
+                                        <b-button v-else variant="danger" @click="deleteRoomOk($event, room)">{{ $t('Delete room') }}</b-button>
                                     </div>
                                 </div>
                                 <b-collapse :id="'id-'+room.id" visible>
@@ -149,55 +150,55 @@
                                             <div class="col-xl-6 mb-4">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <b-form-group label="Наименование" :label-for="'input-room-'+i+'-name'">
+                                                        <b-form-group :label="$t('Name')" :label-for="'input-room-'+i+'-name'">
                                                             <b-form-input  v-model="property.rooms[i].options[3].value" :id="'input-room-'+i+'-name'"></b-form-input>
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <b-form-group label="Описание" :label-for="'input-room-'+i+'-descr'">
+                                                        <b-form-group :label="$t('Description')" :label-for="'input-room-'+i+'-descr'">
                                                             <b-form-textarea style="height:80px;" v-model="property.rooms[i].options[4].value"  :id="'input-room-'+i+'-name'"></b-form-textarea>
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <b-form-group label="Количество номеров" :label-for="'input-room-'+i+'-number'">
+                                                        <b-form-group :label="$t('Number of rooms')" :label-for="'input-room-'+i+'-number'">
                                                             <b-form-input v-model="room.number" :id="'input-room-'+i+'-name'"></b-form-input>
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <b-form-group label="Количество человек" :label-for="'input-room-'+i+'-person'">
+                                                        <b-form-group :label="$t('Number of persons')" :label-for="'input-room-'+i+'-person'">
                                                             <b-form-input v-model="room.person" :id="'input-room-'+i+'-person'"></b-form-input>
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <b-form-group label="Стоимость, от" :label-for="'input-room-'+i+'-price'">
+                                                        <b-form-group :label="$t('Cost, from')" :label-for="'input-room-'+i+'-price'">
                                                             <b-form-input v-model="room.price" :id="'input-room-'+i+'-price'"></b-form-input>
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <b-form-group label="Душ" :label-for="'input-room-'+i+'-shower'">
+                                                        <b-form-group :label="$t('Shower')" :label-for="'input-room-'+i+'-shower'">
                                                             <b-select v-model="room.shower">
-                                                                <b-select-option value="single">Свой</b-select-option>
-                                                                <b-select-option value="shared">Совместный</b-select-option>
-                                                                <b-select-option value="none">Отсутствует</b-select-option>
+                                                                <b-select-option value="single">{{ $t('Its') }}</b-select-option>
+                                                                <b-select-option value="shared">{{ $t('Joint') }}</b-select-option>
+                                                                <b-select-option value="none">{{ $t('Absent') }}</b-select-option>
                                                             </b-select>
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <b-form-group label="Кровать" :label-for="'input-room-'+i+'-shower'">
+                                                        <b-form-group :label="$t('Bed')" :label-for="'input-room-'+i+'-shower'">
                                                             <b-select v-model="room.bed">
-                                                                <b-select-option value="single">Одноместная</b-select-option>
-                                                                <b-select-option value="double">Двухместная</b-select-option>
-                                                                <b-select-option value="none">Отсутствует</b-select-option>
+                                                                <b-select-option value="single">{{ $t('Single') }}</b-select-option>
+                                                                <b-select-option value="double">{{ $t('Double')}}</b-select-option>
+                                                                <b-select-option value="none">{{ $t('Absent') }}</b-select-option>
                                                             </b-select>
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <b-form-group label="Кухня" :label-for="'input-room-'+i+'-shower'">
+                                                        <b-form-group :label="$t('Kitchen')" :label-for="'input-room-'+i+'-shower'">
                                                             <b-select v-model="room.kitchen">
-                                                                <b-select-option value="single">Своя</b-select-option>
-                                                                <b-select-option value="shared">Совместная</b-select-option>
-                                                                <b-select-option value="kitchenette">Кухонька</b-select-option>
-                                                                <b-select-option value="none">Отсутствует</b-select-option>
+                                                                <b-select-option value="single">{{ $t('Its') }}</b-select-option>
+                                                                <b-select-option value="shared">{{ $t('Joint') }}</b-select-option>
+                                                                <b-select-option value="kitchenette">{{ $t('Kitchenette') }}</b-select-option>
+                                                                <b-select-option value="none">{{ $t('Absent') }}</b-select-option>
                                                             </b-select>
                                                         </b-form-group>
                                                     </div>
@@ -235,20 +236,20 @@
         </div>
         <div class="row mb-4">
             <div class="col-md-12">
-                <b-button type="submit" variant="outline-primary" class="mr-2" @click="addRoom">Добавить комнату</b-button>
+                <b-button type="submit" variant="outline-primary" class="mr-2" @click="addRoom">{{ $t('Add room') }}</b-button>
             </div>
         </div>
 
-        <b-modal id="deleteHotelModal" title="Delete Hotel" @ok="deleteHotelOk">
-            <p class="text-danger">Are you sure you want to delete {{ property.name }}</p>
+        <b-modal id="deleteHotelModal" :title="$t('Delete Hotel')" @ok="deleteHotelOk">
+            <p class="text-danger">{{ $t('Are you sure you want to delete') }} {{ property.name }}</p>
         </b-modal>
 
-        <b-modal id="deletePhotoBigGallery" title="Delete Hotel Photo" @ok="deletePhotoBigGalleryOk">
-            <p class="text-danger">Are you sure you want to delete this photo?</p>
+        <b-modal id="deletePhotoBigGallery" :title="$t('Delete Hotel Photo')" @ok="deletePhotoBigGalleryOk">
+            <p class="text-danger">{{ $t('Are you sure you want to delete this photo') }}?</p>
         </b-modal>
 
-        <b-modal id="deletePhotoSmallGallery" title="Delete Room Photo" @ok="deletePhotoSmallGalleryOk">
-            <p class="text-danger">Are you sure you want to delete this photo?</p>
+        <b-modal id="deletePhotoSmallGallery" :title="$t('Delete Room Photo')" @ok="deletePhotoSmallGalleryOk">
+            <p class="text-danger">{{ $t('Are you sure you want to delete this photo') }}?</p>
         </b-modal>
 
         <b-modal id="bigPhotoModal" data-date="imgPath" size="xl" title="Picture">

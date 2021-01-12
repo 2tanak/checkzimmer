@@ -1,16 +1,16 @@
 <template>
     <section class="header-dashboard">
-        <h1>Данные в подвале сайта</h1>
+        <h1>{{ $t('Site footer data') }}</h1>
 
         <div class="row mt-4" v-if="loading">
-            Загрузка
+            {{ $t('Loading') }}
         </div>
         <div class="row mt-4" v-if="!loading">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Текст для Copyright" label-for="input-phone">
-                            <b-form-textarea v-model="options.copyright" type="text" id="input-copyright" placeholder="copyright"></b-form-textarea>
+                        <b-form-group :label="$t('Text for Copyright')" label-for="input-phone">
+                            <b-form-textarea v-model="options.copyright" type="text" id="input-copyright" :placeholder="$t('copyright')"></b-form-textarea>
                         </b-form-group>
                     </div>
                 </div>
@@ -18,10 +18,10 @@
         </div>
         <div class="row mt-4" v-if="!loading">
             <div class="col-md-12">
-                <b-button type="submit" variant="success" class="mr-2" @click="save">Сохранить</b-button>
+                <b-button type="submit" variant="success" class="mr-2" @click="save">{{ $t('Save') }}</b-button>
             </div>
         </div>
-        <b-modal id="save-success">Данные успешно сохранены</b-modal>
+        <b-modal id="save-success">{{ $t('Data saved successfully') }}</b-modal>
     </section>
 </template>
 

@@ -1,24 +1,24 @@
 <template>
     <section class="header-dashboard">
-        <h1>Импортируемые данные Booking.Com</h1>
+        <h1>{{ $t('Imported data') }} {{ $t('Booking') }}.{{ $t('Com') }}</h1>
         <div class="row mt-4">
             <div class="col-md-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <h4>Города</h4>
-                        Импортировано: <strong>{{ cities.count }}</strong> городов
+                        <h4>{{ $t('Cities') }}</h4>
+                        {{ $t('Import') }}: <strong>{{ cities.count }}</strong> {{ $t('cities') }}
                     </div>
                 </div>
             </div>
             <div class="col-md-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <h4>Типы недвижимости</h4>
+                        <h4>{{ $t('Property types') }}</h4>
                         <b-table striped hover responsive :busy="loading" :items="types" :fields="fields">
                             <template v-slot:table-busy>
                                 <div class="text-center text-danger my-2">
                                     <b-spinner class="align-middle"></b-spinner>
-                                    <strong>Loading...</strong>
+                                    <strong>{{ $t('Loading')}}...</strong>
                                 </div>
                             </template>
                         </b-table>
@@ -29,7 +29,7 @@
             <div class="col-md-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <h4>Удобства</h4>
+                        <h4>{{ $t('Facilities') }}</h4>
                         <b-card v-for="feature in features.root" :header="feature.id + ': ' + feature.name ">
                             <b-list-group>
                                 <b-list-group-item v-for="child in rootedFeatures(feature.id)">
@@ -46,20 +46,20 @@
         <div class="row">
             <div class="col-md-12">
                 <b-overlay :show="featuresLoader" rounded opacity="0.6" spinner-small spinner-variant="danger" class="d-inline-block float-right">
-                    <b-button variant="info" @click.prevent="loadFeatures">Загрузить удобства</b-button>
+                    <b-button variant="info" @click.prevent="loadFeatures">{{ $t('Download amenities') }}</b-button>
                 </b-overlay>
                 <b-overlay :show="citiesLoader" rounded opacity="0.6" spinner-small spinner-variant="danger" class="d-inline-block">
-                    <b-button type="submit" variant="success" class="mr-2" @click.prevent="loadCities">Загрузить города</b-button>
+                    <b-button type="submit" variant="success" class="mr-2" @click.prevent="loadCities">{{ $t('Upload cities') }}</b-button>
                 </b-overlay>
                 <b-overlay :show="typesLoader" rounded opacity="0.6" spinner-small spinner-variant="danger" class="d-inline-block">
-                    <b-button variant="light" @click.prevent="loadTypes">Загрузить типы </b-button>
+                    <b-button variant="light" @click.prevent="loadTypes">{{ $t('Load types') }}</b-button>
                 </b-overlay>
             </div>
         </div>
-        <b-modal id="save-success" title="Загрузка типов"><strong>Типы успешно загружены</strong></b-modal>
-        <b-modal id="connect-success" title="Загрузка городов"><strong>Города успешно загружены</strong></b-modal>
-        <b-modal id=load-features title="Загрузка удобств"><strong>Удобства успешно загружены</strong></b-modal>
-        <b-modal id="connect-fail" title="Проверка подключения">Подключение не удалось, проверьте учётные данные</b-modal>
+        <b-modal id="save-success" :title="$t('Loading types')"><strong>{{ $t('Types loaded successfully') }}</strong></b-modal>
+        <b-modal id="connect-success" :title="$t('Loading cities')"><strong>{{ $t('Cities loaded successfully') }}</strong></b-modal>
+        <b-modal id=load-features :title="$t('Loading amenities')"><strong>{{ $t('Amenities loaded successfully') }}</strong></b-modal>
+        <b-modal id="connect-fail" :title="$t('Checking connection')">{{ $t('Connection failed, check credentials') }}</b-modal>
     </section>
 </template>
 
@@ -79,7 +79,7 @@
                 cities: { count: 0 },
                 features: { root: [], rooted: [], children: []},
                 types: [],
-                fields: [ 'id', 'name', 'type' ],
+                fields: [ this.$t('id'), this.$t('name'), this.$t('type') ],
                 loading: true,
                 featuresLoader: false,
                 citiesLoader: false,

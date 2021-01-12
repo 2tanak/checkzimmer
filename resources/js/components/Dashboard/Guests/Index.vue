@@ -1,16 +1,16 @@
 <template>
     <section class="users-dashboard">
-        <h1>Гости сайта</h1>
+        <h1>{{ $t('Site guests')}}</h1>
         <div class="row mt-4">
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Сортировка" label-for="input-phone">
+                        <b-form-group :label="$t('Sorting')" label-for="input-phone">
                             <b-select id="orderby" text="Сортировка по полю" class="m-md-2" v-model="order">
-                                <b-select-option value="id">Id</b-select-option>
-                                <b-select-option value="pin">PIN</b-select-option>
-                                <b-select-option value="name">Name</b-select-option>
-                                <b-select-option value="email">E-mail</b-select-option>
+                                <b-select-option value="id">{{ $t('Id') }}</b-select-option>
+                                <b-select-option value="pin">{{ $t('PIN') }}</b-select-option>
+                                <b-select-option value="name">{{ $t('Name') }}</b-select-option>
+                                <b-select-option value="email">{{ $t('E-mail') }}</b-select-option>
                             </b-select>
                         </b-form-group>
                     </div>
@@ -19,9 +19,9 @@
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Поиск" label-for="input-search">
+                        <b-form-group :label="$t('Search')" label-for="input-search">
                             <b-form-input type="text" id="input-search" v-model="search"
-                                          placeholder="Текст для поиска"></b-form-input>
+                                          :placeholder="$t('Search text')"></b-form-input>
                         </b-form-group>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                             <template v-slot:table-busy>
                                 <div class="text-center text-danger my-2">
                                     <b-spinner class="align-middle"></b-spinner>
-                                    <strong>Loading...</strong>
+                                    <strong>{{ $t('Loading') }}...</strong>
                                 </div>
                             </template>
                         </b-table>
@@ -53,7 +53,7 @@
         <div class="row">
             <div class="col-md-12">
                 <b-button type="submit" variant="success" class="mr-2" v-b-modal.modal-user @click="newGuest">
-                    Новый гость
+                    {{ $t('New guest')}}
                 </b-button>
             </div>
         </div>
@@ -68,11 +68,11 @@
                 </b-alert>
             </div>
         </div>
-        <b-modal id="modal-user" :title="editGuest.id ? 'Редактирование пользователя' : 'Новый пользователь'" @ok.prevent="guestCreate">
+        <b-modal id="modal-user" :title="editGuest.id ? $t('User editing') : $t('New user')" @ok.prevent="guestCreate">
             <Forms v-model="editGuest" :fields="editGuest" :data="data"/>
         </b-modal>
         <b-modal id="modal-user-delete" title="Delete guest" @ok.prevent="guestDeleteApproved">
-            <span class="text-danger">A you sure you want to delete guest with PIN #<strong>{{ deleteGuest.pin }}</strong>
+            <span class="text-danger">{{ $t('A you sure you want to delete guest with PIN') }} #<strong>{{ deleteGuest.pin }}</strong>
                 (<strong>{{ deleteGuest.email }}</strong>)
             </span>
         </b-modal>
@@ -113,7 +113,7 @@ export default {
             deleteGuest: {},
             guests: [],
             guestFields: [
-                'id', 'PIN', 'name', 'email', 'active', 'edit', 'delete'
+                this.$t('id'), this.$t('PIN'), this.$t('Name'), this.$t('E-mail'), this.$t('Active'), this.$t('Edit'), this.$t('Delete')
             ],
             data: guestsTable
         }
@@ -154,10 +154,10 @@ export default {
             this.clearModalErrors();
             guests.update(this.editGuest.id,this.editGuest).then(response => {
                 if(response.data.code === 'ok'){
-                    this.textOperation = 'Гость обновлен';
+                    this.textOperation = this.$t('Guest updated');
                     this.operationOk = true
                 }else{
-                    this.textOperation = 'Ошибка обновления';
+                    this.textOperation = this.$t('Update error');
                     this.operationError = true;
                 }
                 this.$nextTick(() => {
@@ -170,7 +170,7 @@ export default {
         guestDeleteApproved() {
             guests.delete(this.deleteGuest.id).then(response => {
                 if(response.data.code === 'ok'){
-                    this.textOperation = 'Гость удален';
+                    this.textOperation = this.$t('Guest deleted');
                     this.operationOk = true;
                     var index = this.guests.findIndex(n => n.id === this.deleteGuest.id);
                     if (index !== -1) {
@@ -178,7 +178,7 @@ export default {
                     }
 
                 } else{
-                    this.textOperation = 'Ошибка удаления пользователя';
+                    this.textOperation = this.$t('User deletion error');
                     this.operationError = true;
                     this.operationError = true;
                 }
@@ -198,11 +198,11 @@ export default {
             this.clearModalErrors();
             guests.create(this.editGuest).then(response => {
                 if(response.data.code === 'ok'){
-                    this.textOperation = 'Гость добавлен';
+                    this.textOperation = this.$t('Guest added');
                     this.operationOk = true;
                     this.guests.push(response.data.guest);
                 } else{
-                    this.textOperation = 'Ошибка добавления гостя';
+                    this.textOperation = this.$t('Error adding guest');
                     this.operationError = true;
                 }
                 this.$nextTick(() => {

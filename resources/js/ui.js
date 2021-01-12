@@ -31,6 +31,20 @@ Vue.use(VueAuth, auth)
 window.Vue = require('vue');
 var jQuery = require('jquery')
 
+import VueI18n from 'vue-i18n'
+Vue.use(VueI18n)
+
+import messagesLocaleEn from '../lang/en.json';
+import messagesLocaleDe from "../lang/de.json";
+
+const i18n = new VueI18n({
+    locale: 'de', // set locale
+    messages: {
+        en: messagesLocaleEn,
+        de: messagesLocaleDe
+    },
+})
+
 const app = new Vue({
     el: '#application',
     router,
@@ -39,7 +53,8 @@ const app = new Vue({
         Favorites,
         Single
     },
-    store
+    store,
+    i18n
 });
 
 
@@ -267,6 +282,14 @@ jQuery(document).ready(function() {
         }
     });
 
+    jQuery(document).mouseup(function (e){
+        var div = jQuery(".sidebar-small-block");
+        if (!div.is(e.target)
+            && div.has(e.target).length === 0) {
+            jQuery('.sidebar-small-block').removeClass('active');
+        }
+    });
+
 
     jQuery('.sidebar-modal-block .overlay').click(function () {
         jQuery('.sidebar-modal-block').removeClass('active');
@@ -280,6 +303,26 @@ jQuery(document).ready(function() {
         } else {
             jQuery('#number-persons, #type, #offer-select3, #distance-select, #number-personse').select2();
         }
+    });
+
+    jQuery('.selected-language').click(function (e) {
+        e.preventDefault();
+        jQuery('.list-languages').addClass('active');
+    });
+
+    jQuery(document).mouseup(function (e){
+        var div = jQuery(".list-languages");
+        if (!div.is(e.target)
+            && div.has(e.target).length === 0) {
+            jQuery('.list-languages').removeClass('active');
+        }
+    });
+
+    jQuery('.list-languages a').click(function (e) {
+        e.preventDefault();
+        var paragraph = jQuery(this).text();
+        jQuery('.selected-language a').text(paragraph);
+        jQuery('.list-languages').removeClass('active');
     });
 
 

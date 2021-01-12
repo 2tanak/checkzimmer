@@ -1,5 +1,5 @@
 <div class="comfort">
-    <h2>Удобства</h2>
+    <h2>{{ __('Features') }}</h2>
     <div class="comfort-block">
         @foreach($hotel->featureCategories() as $featureCategory)
             <h3>{{ $featureCategory['name'] }}</h3>
@@ -14,7 +14,7 @@
         @endforeach
     </div>
     <a class="comfort-collapse-link" data-toggle="collapse" href="#comfort-collapse" role="button" aria-expanded="false" aria-controls="comfort-collapse">
-        Показать все удобства
+        {{ __('Show all amenities') }}
         <img src="/svg/i-arrow-show-more.svg" alt="alt">
     </a>
 </div>

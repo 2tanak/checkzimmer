@@ -1,12 +1,12 @@
 <template>
     <section class="header-dashboard">
-        <h1>Настройки интеграции Booking.Com</h1>
+        <h1>{{ $t('Integration settings') }} {{ $t('Booking') }}.{{ $t('Com') }}</h1>
         <div class="row mt-4">
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Логин Booking.Com"  label-for="input-login">
-                            <b-form-input type="text" id="input-login" v-model="options.booking_login" placeholder="Укажите свой логин Booking.Com"></b-form-input>
+                        <b-form-group :label="$t('Логин') + '  ' + $t('Booking') + '.' + $t('com')"  label-for="input-login">
+                            <b-form-input type="text" id="input-login" v-model="options.booking_login" :placeholder="$t('Enter your username') + '  ' + $t('Booking') + '.' + $t('com')"></b-form-input>
                         </b-form-group>
                     </div>
                 </div>
@@ -14,8 +14,8 @@
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="Пароль"  label-for="input-password">
-                            <b-form-input type="password" id="input-password" v-model="options.booking_password" placeholder="Пароль для Booking.Com"></b-form-input>
+                        <b-form-group :label="$t('Password')"  label-for="input-password">
+                            <b-form-input type="password" id="input-password" v-model="options.booking_password" :placeholder="$t('Password') + '  ' + $t('for') + '  ' + $t('Booking') + '.' + $t('com')"></b-form-input>
                         </b-form-group>
                     </div>
                 </div>
@@ -25,8 +25,8 @@
             <div class="col-md-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <b-form-group label="URL-адрес API"  label-for="input-booking_url">
-                            <b-form-textarea type="text" id="input-booking_url" placeholder="Текст"
+                        <b-form-group :label="$t('API URL')"  label-for="input-booking_url">
+                            <b-form-textarea type="text" id="input-booking_url" :placeholder="$t('Text')"
                                              v-model="options.booking_url"
                                              rows="3"
                                              max-rows="6"></b-form-textarea>
@@ -37,14 +37,14 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <b-button variant="info" class="float-right" @click.prevent="connectionTest">Протестировать</b-button>
-                <b-button type="submit" variant="success" class="mr-2" @click.prevent="save">Сохранить</b-button>
-                <b-button variant="light">Отмена</b-button>
+                <b-button variant="info" class="float-right" @click.prevent="connectionTest">{{ $t('Test') }}</b-button>
+                <b-button type="submit" variant="success" class="mr-2" @click.prevent="save">{{ $t('Save')}}</b-button>
+                <b-button variant="light">{{ $t('Cancel') }}</b-button>
             </div>
         </div>
-        <b-modal id="save-success" title="Сохранение настроек"><strong>Данные успешно сохранены</strong></b-modal>
-        <b-modal id="connect-success" title="Проверка подключения"><strong>Подключение успешно</strong></b-modal>
-        <b-modal id="connect-fail" title="Проверка подключения"><strong>Подключение не удалось, проверьте учётные данные</strong></b-modal>
+        <b-modal id="save-success" :title="$t('Saving settings')"><strong>{{ $t('Data saved successfully') }}</strong></b-modal>
+        <b-modal id="connect-success" :title="$t('Checking connection')"><strong>{{ $t('Connection successful') }}</strong></b-modal>
+        <b-modal id="connect-fail" :title="$t('Checking connection')"><strong>{{ $t('Connection failed, check credentials') }}</strong></b-modal>
     </section>
 </template>
 

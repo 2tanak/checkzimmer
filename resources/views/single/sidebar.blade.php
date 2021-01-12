@@ -3,16 +3,16 @@
         <div class="sidebar-top-block roominess">
             <img src="/svg/i-people.svg" alt="alt">
             <div class="sidebar-top-block-item roominess-item">
-                <div class="title">Вместит.:</div>
-                <div class="subtitle">{{ $hotel->getRoomPersonsMin() }} – {{ $hotel->getRoomPersonsMax() }} чел.</div>
+                <div class="title">{{ __('roomin.') }}:</div>
+                <div class="subtitle">{{ $hotel->getRoomPersonsMin() }} – {{ $hotel->getRoomPersonsMax() }} {{ __('ppl') }}.</div>
             </div>
         </div>
         @if ($hotel->type != 'affiliate')
             <div class="sidebar-top-block rental-period">
                 <img src="/svg/i-clock.svg" alt="alt">
                 <div class="sidebar-top-block-item rental-period-item">
-                    <div class="title">Мин. срок аренды:</div>
-                    <div class="subtitle">3 дня</div>
+                    <div class="title">{{ __('Min. lease term') }}:</div>
+                    <div class="subtitle">3 {{ __('days') }}</div>
                 </div>
             </div>
         @endif
@@ -20,23 +20,23 @@
 
     <div class="sidebar-middle">
         <div class="price">
-            <div class="left">от</div>
+            <div class="left">{{ __('from') }}</div>
             <div class="middle">€{{ $hotel->getRoomPriceMin() }}</div>
-            <div class="right">на человека (включая НДС)</div>
+            <div class="right">{{ __('per person (including VAT)') }}</div>
         </div>
-        <a href="#" class="inquiry">Отправить запрос</a>
+        <a href="#" class="inquiry">{{ __('Send request') }}</a>
         @if ($hotel->type == 'affiliate')
             <div class="number-phone not-phone">
-                <div class="speaks">Владелец объекта говорит на:</div>
+                <div class="speaks">{{ __('Object owner speaks') }}:</div>
                 <div class="language-item">{{ implode(', ', $hotel->languages()) }}</div>
             </div>
         @else
             <div class="number-phone">
                 <a href="tel:+4917616573456">+49 176&nbsp;<span class="num_hide">1657 3456</span></a>
-                <span class="sh_nmr">показать</span>
-                <div class="message">Сообщите что вы с сайта Immbilien.de</div>
+                <span class="sh_nmr">{{ __('show') }}</span>
+                <div class="message">{{ __('Let us know that you are from the site Check-zimmer.de') }}</div>
                 <div class="language">
-                    <div class="speaks">Говорит на:</div>
+                    <div class="speaks">{{ __('Speaks') }}:</div>
                     <div class="language-item">{{ implode(', ', $hotel->languages()) }}</div>
                 </div>
             </div>

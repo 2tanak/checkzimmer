@@ -65,6 +65,9 @@ Route::middleware('auth')->namespace('Api')->group(function () {
     Route::get('users', 'UsersController@index')->middleware('isAdmin');
     Route::get('users/{id}', 'UsersController@show')->middleware('isAdminOrSelf');
 
+    Route::get('languages', 'LanguagesController@index');
+    Route::get('languages/{id}', 'LanguagesController@get');
+    Route::put('languages/{id}', 'LanguagesController@update');
 });
 
 

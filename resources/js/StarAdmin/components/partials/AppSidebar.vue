@@ -10,93 +10,94 @@
             <div class="profile-name">
               <p class="name">{{ name }}</p>
               <p class="designation">{{ role }}</p>
-              <div class="badge badge-teal mx-auto mt-3">Online</div>
+              <div class="badge badge-teal mx-auto mt-3">{{ $t('Online') }}</div>
             </div>
           </div>
         </li>
         <li class="nav-item">
             <router-link class="nav-link" :to="{ name: 'dashboard' }">
                 <img class="menu-icon" src="../../assets/images/menu_icons/01.png" alt="menu icon">
-                <span class="menu-title">Dashboard</span>
+                <span class="menu-title">{{ $t('Dashboard') }}</span>
             </router-link>
         </li>
         <li class="nav-item">
             <router-link class="nav-link" :to="{ name: 'requests'}">
                 <img class="menu-icon" src="../../assets/images/menu_icons/02.png" alt="menu icon">
-                <span class="menu-title">Requests</span>
+                <span class="menu-title">{{ $t('Requests') }}</span>
             </router-link>
         </li>
         <li class="nav-item">
           <span class="nav-link" v-b-toggle="'sample-pages'">
             <img class="menu-icon" src="../../assets/images/menu_icons/08.png" alt="menu icon">
-              <span class="menu-title">Property</span>
+              <span class="menu-title">{{ $t('Property') }}</span>
               <i class="fa fa-angle-down ml-auto mr-0"></i>
           </span>
           <b-collapse id="sample-pages">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'property' }">Property List</router-link></li>
-              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'assigned-room-types' }">Assigned Types</router-link></li>
-              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'rooms' }">Property Rooms</router-link></li>
+              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'property' }">{{ $t('Property List') }}</router-link></li>
+              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'assigned-room-types' }">{{ $t('Assigned Types') }}</router-link></li>
+              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'rooms' }">{{ $t('Property Rooms') }}</router-link></li>
             </ul>
           </b-collapse>
         </li>
           <li class="nav-item">
           <span class="nav-link" v-b-toggle="'booking-submenu'">
             <img class="menu-icon" src="../../assets/images/menu_icons/08.png" alt="menu icon">
-              <span class="menu-title">Booking.com</span>
+              <span class="menu-title">{{ $t('Booking') }}.{{ $t('com') }}</span>
               <i class="fa fa-angle-down ml-auto mr-0"></i>
           </span>
               <b-collapse id="booking-submenu">
                   <ul class="nav flex-column sub-menu">
-                      <li class="nav-item"><router-link class="nav-link" :to="{ name: 'booking-items' }">Items</router-link></li>
-                      <li class="nav-item"><router-link class="nav-link" :to="{ name: 'booking-mapping' }">Mapping</router-link></li>
-                      <li class="nav-item"><router-link class="nav-link" :to="{ name: 'booking-data' }">Data</router-link></li>
-                      <li class="nav-item"><router-link class="nav-link" :to="{ name: 'booking-settings' }">Settings</router-link></li>
+                      <li class="nav-item"><router-link class="nav-link" :to="{ name: 'booking-items' }">{{ $t('Items') }}</router-link></li>
+                      <li class="nav-item"><router-link class="nav-link" :to="{ name: 'booking-mapping' }">{{ $t('Mapping') }}</router-link></li>
+                      <li class="nav-item"><router-link class="nav-link" :to="{ name: 'booking-data' }">{{ $t('Data') }}</router-link></li>
+                      <li class="nav-item"><router-link class="nav-link" :to="{ name: 'booking-settings' }">{{ $t('Settings') }}</router-link></li>
                   </ul>
               </b-collapse>
           </li>
         <li class="nav-item">
           <span class="nav-link" v-b-toggle="'ui-components'">
             <img class="menu-icon" src="../../assets/images/menu_icons/03.png" alt="menu icon">
-            <span class="menu-title">Website</span>
+            <span class="menu-title">{{ $t('Website') }}</span>
               <i class="fa fa-angle-down ml-auto mr-0"></i>
           </span>
           <b-collapse id="ui-components">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'website-header' }">Header</router-link></li>
-              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'website-footer' }">Footer</router-link></li>
+              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'website-header' }">{{ $t('Header') }}</router-link></li>
+              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'website-footer' }">{{ $t('Footer') }}</router-link></li>
             </ul>
           </b-collapse>
         </li>
         <li class="nav-item">
           <span class="nav-link" v-b-toggle="'utilities'">
             <img class="menu-icon" src="../../assets/images/menu_icons/06.png" alt="menu icon">
-            <span class="menu-title">Data</span>
+            <span class="menu-title">{{ $t('Data') }}</span>
               <i class="fa fa-angle-down ml-auto mr-0"></i>
           </span>
           <b-collapse id="utilities">
              <ul class="nav flex-column sub-menu">
-               <li class="nav-item"><router-link class="nav-link" :to="{ name: 'room-types' }">Room Types</router-link></li>
-               <li class="nav-item"><router-link class="nav-link" :to="{ name: 'features' }">Features</router-link></li>
-                 <li class="nav-item"><router-link class="nav-link" :to="{ name: 'geocoder-cache' }">Geocoder Cache</router-link></li>
+               <li class="nav-item"><router-link class="nav-link" :to="{ name: 'room-types' }">{{ $t('Room Types') }}</router-link></li>
+               <li class="nav-item"><router-link class="nav-link" :to="{ name: 'features' }">{{ $t('Features') }}</router-link></li>
+                 <li class="nav-item"><router-link class="nav-link" :to="{ name: 'geocoder-cache' }">{{ $t('Geocoder Cache') }}</router-link></li>
              </ul>
           </b-collapse>
         </li>
           <li class="nav-item">
           <span class="nav-link" v-b-toggle="'feedback'">
             <img class="menu-icon" src="../../assets/images/menu_icons/06.png" alt="menu icon">
-            <span class="menu-title">Feedback</span>
+            <span class="menu-title">{{ $t('Feedback') }}</span>
               <i class="fa fa-angle-down ml-auto mr-0"></i>
           </span>
               <b-collapse id="feedback">
                   <ul class="nav flex-column sub-menu">
-                      <li class="nav-item"><router-link class="nav-link" :to="{ name: 'questions' }">Questions</router-link></li>
-                      <li class="nav-item"><router-link class="nav-link" :to="{ name: 'reviews' }">Reviews</router-link></li>
+                      <li class="nav-item"><router-link class="nav-link" :to="{ name: 'questions' }">{{ $t('Questions') }}</router-link></li>
+                      <li class="nav-item"><router-link class="nav-link" :to="{ name: 'reviews' }">{{ $t('Reviews') }}</router-link></li>
                   </ul>
               </b-collapse>
           </li>
-          <li class="nav-item"><router-link class="nav-link" :to="{ name: 'users' }"><img class="menu-icon" src="../../assets/images/menu_icons/04.png" alt="menu icon"><span class="menu-title">Users</span></router-link></li>
-          <li class="nav-item"><router-link class="nav-link" :to="{ name: 'guests' }"><img class="menu-icon" src="../../assets/images/menu_icons/04.png" alt="menu icon"><span class="menu-title">Guests</span></router-link></li>
+          <li class="nav-item"><router-link class="nav-link" :to="{ name: 'users' }"><img class="menu-icon" src="../../assets/images/menu_icons/04.png" alt="menu icon"><span class="menu-title">{{ $t('Users') }}</span></router-link></li>
+          <li class="nav-item"><router-link class="nav-link" :to="{ name: 'guests' }"><img class="menu-icon" src="../../assets/images/menu_icons/04.png" alt="menu icon"><span class="menu-title">{{ $t('Guests') }}</span></router-link></li>
+          <li class="nav-item"><router-link class="nav-link" :to="{ name: 'languages' }"><img class="menu-icon" src="../../assets/images/menu_icons/04.png" alt="menu icon"><span class="menu-title">{{ $t('Languages') }}</span></router-link></li>
       </ul>
     </nav>
   </section>
