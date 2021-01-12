@@ -140,7 +140,7 @@
 
         </header>
 
-        @if(!request()->get('search'))
+        @if(!request()->get('search') && false )
             <div class="property-list-subhead">
                 <div class="container">
                     <div class="title">{{ $options['motto_header'] ?? '' }}</div>

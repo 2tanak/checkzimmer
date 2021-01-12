@@ -307,7 +307,8 @@ jQuery(document).ready(function() {
 
     jQuery('.selected-language').click(function (e) {
         e.preventDefault();
-        jQuery('.list-languages').addClass('active');
+        jQuery('.list-languages').toggleClass('active');
+        jQuery('.selected-language').toggleClass('active');
     });
 
     jQuery(document).mouseup(function (e){
@@ -315,6 +316,7 @@ jQuery(document).ready(function() {
         if (!div.is(e.target)
             && div.has(e.target).length === 0) {
             jQuery('.list-languages').removeClass('active');
+            jQuery('.selected-language').removeClass('active');
         }
     });
 
@@ -323,6 +325,7 @@ jQuery(document).ready(function() {
         var paragraph = jQuery(this).text();
         jQuery('.selected-language a').text(paragraph);
         jQuery('.list-languages').removeClass('active');
+        jQuery('.selected-language').removeClass('active');
     });
 
 
