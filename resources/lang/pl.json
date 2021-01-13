@@ -402,5 +402,16 @@
     "name": "name",
     "type": "type",
     "Choose a file or drop it here...": "Choose a file or drop it here...",
-    "Drop file here...": "Drop file here..."
+    "Drop file here...": "Drop file here...",
+    "Facebook": "Facebook",
+    "Twitter": "Twitter",
+    "WhatsApp": "WhatsApp",
+    "Messanger": "Messanger",
+    "Copy link": "Copy link",
+    "Reason complaint": "Reason complaint",
+    "photo": "photo",
+    "Print": "Print",
+    "Report": "Report",
+    "Sentence": "Sentence",
+    "Complaint or suggestion text": "Complaint or suggestion text"
 }

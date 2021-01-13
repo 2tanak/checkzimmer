@@ -6,6 +6,9 @@ body {
     background: #F7F8FA;
     position: relative;
 }
+body.overflow {
+    overflow: hidden;
+}
 button, [type=button], [type=reset], [type=submit] {
     -webkit-appearance: inherit !important;
 }
@@ -431,6 +434,9 @@ header .head-search {
     width: 100%;
     max-width: 614px;
     position: relative;
+}
+header .head-search.head-search-mobile {
+    display: none;
 }
 header .head-search input {
     width: 100%;
@@ -1721,7 +1727,7 @@ header a.mobile-menu-button img {
     background-color: #545769;
     display: block;
     border-radius: 1px;
-    transition: all 0.4s ease-in-out;
+    transition: all 0.2s ease-in-out;
     position: absolute;
 }
 .bar1 {
@@ -1744,7 +1750,7 @@ header a.mobile-menu-button img {
     bottom: 1px;
 }
 .hamburger-item .bar {
-    transition: all 0.4s ease-in-out, transform 0.4s ease-in-out 0.4s;
+    transition: all 0.2s ease-in-out, transform 0.2s ease-in-out 0.2s;
 }
 .hamburger-item .bar2 {
     width: 1px;
@@ -1795,13 +1801,16 @@ label.mobile-label {
 .mobile-menu {
     position: absolute;
     left: 0;
-    top: 64px;
+    top: 68px;
     background-color: #f7f8fa;
     width: 0;
     overflow: hidden;
-    height: calc(100vh - 64px);
+    height: calc(100vh - 68px);
     z-index: 10000;
     transition: all .2s;
+}
+.mobile-menu .mobile-menu-content {
+    padding: 28px 16px;
 }
 .list-content .google-map .fullscreen-button {
     position: absolute;
@@ -2543,6 +2552,13 @@ label.mobile-label {
     }
 }
 @media (max-width: 650px) {
+    header .head-search.head-search-desctope {
+        display: none;
+    }
+    header .head-search.head-search-mobile {
+        display: block;
+        margin-bottom: 30px;
+    }
     header .main-menu {
         display: none;
     }
@@ -2553,7 +2569,6 @@ label.mobile-label {
         display: block;
     }
     header .mobile-menu.active {
-        padding: 24px 16px;
         width: 100%;
     }
     .mobile-button {
@@ -2565,6 +2580,9 @@ label.mobile-label {
     .languages-block.languages-block-mobile {
         display: block;
         margin-top: 24px;
+    }
+    .single-header-content .head-logo .logo-mobile {
+        display: none;
     }
 }
 @media (max-width: 575px) {
@@ -3008,7 +3026,7 @@ label.mobile-label {
     background: #FFFFFF;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.14);
     border-radius: 4px;
-    width: 55px;
+    width: 60px;
     height: 20px;
     display: flex;
     align-items: center;
@@ -5882,10 +5900,7 @@ label.mobile-label {
     }
     @media (max-width: 650px) {
         .single-header-content a.head-logo {
-            display: none;
-        }
-        header .single-header-content a.mobile-accaunt {
-            display: none;
+            margin-right: 0;
         }
         .single-header-content .mobile-button {
             margin-right: 22px;
