@@ -9,6 +9,9 @@
             <div class="left-part">
                 <div class="main-block">
                     <div class="main-top-block">
+
+                        <div class="no-photo"></div>
+
                         @include('single.slider-single', ['hotel' => $hotel])
                         @include('single.sidebar-modal')
                         @include('single.gallery', ['hotel' => $hotel])

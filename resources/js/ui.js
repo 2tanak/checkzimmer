@@ -522,17 +522,3 @@ window.onload = function () {
         jQuery('.communication').removeClass('not-active');
     }, 1000);
 };
-
-/*jQuery(window).on("load resize", function(){
-    if (jQuery(window).width() <= 1040) {
-        jQuery('.property-card-slider').filter('.slick-initialized').slick('unslick');
-    } else if (jQuery('.property-card-slider').length) {
-        jQuery('.property-card-slider').slick({
-            infinite: true,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false,
-            dots: true
-        });
-    }
-});*/
