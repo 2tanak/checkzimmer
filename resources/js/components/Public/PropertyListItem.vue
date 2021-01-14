@@ -146,6 +146,9 @@ export default {
             return room.options.find( elem => elem.key === name);
         },
         maxPeopleNum() {
+            if (!this.item.rooms.some( elem => elem.person > 0 )) {
+                return 'n/a';
+            }
             return Math.max( ...this.item.rooms.map( elem => elem.person ) )
         },
         addToFavorites() {
@@ -263,7 +266,11 @@ export default {
     },
     computed: {
         maxPeopleNumStr() {
-            let max = this.maxPeopleNum() % 10;
+            let max = this.maxPeopleNum();
+            if (max === 'n/a') {
+                return max;
+            }
+            max = max % 10;
             if (max >= 2 && max <= 4) {
                 return max + ' ' + this.$t('people');
             }

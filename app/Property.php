@@ -32,6 +32,8 @@ class Property extends Model
     public const GENERAL = 'general';
     public const AFFILIATE = 'affiliate';
 
+    protected $price_min = null;
+
     static function hasFeature($name, $features)
     {
         $features = array_column($features, 'name');
@@ -190,9 +192,16 @@ class Property extends Model
 
     public function getRoomPriceMin()
     {
-        return array_reduce($this->rooms->toArray(), function ($carry, $item) {
+        if ($this->price_min) {
+            return $this->price_min;
+        }
+        $price = array_reduce($this->rooms->toArray(), function ($carry, $item) {
             return $item['price'] < $carry && $item['price'] > 0 ? ceil($item['price']) : $carry;
         }, 9999);
+        if ($price == 9999) {
+            $price = 0;
+        }
+        return $price;
     }
 
     public static function getTotalNumberObjects($type)

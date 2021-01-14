@@ -21,7 +21,9 @@
     <div class="sidebar-middle">
         <div class="price">
             <div class="left">{{ __('from') }}</div>
-            <div class="middle">€{{ $hotel->getRoomPriceMin() }}</div>
+            <div class="middle">
+                {{ $hotel->getRoomPriceMin() != 0 ? '€'.$hotel->getRoomPriceMin() : 'n/a' }}
+            </div>
             <div class="right">{{ __('per person (including VAT)') }}</div>
         </div>
         <a href="#" class="inquiry">{{ __('Send request') }}</a>

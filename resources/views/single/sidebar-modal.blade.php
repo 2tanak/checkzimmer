@@ -4,7 +4,13 @@
             <img src="/svg/i-people.svg" alt="alt">
             <div class="sidebar-top-block-item roominess-item">
                 <div class="title">{{ __('roomin.') }}:</div>
-                <div class="subtitle">{{ $hotel->getRoomPersonsMin() }} – {{ $hotel->getRoomPersonsMax() }} чел.</div>
+                <div class="subtitle">
+                    @if ($hotel->getRoomPriceMin() != 0)
+                        {{ '€'.$hotel->getRoomPriceMin() }} – {{ $hotel->getRoomPersonsMax() }} чел.
+                    @else
+                        n/a
+                    @endif
+                </div>
             </div>
         </div>
         @if ($hotel->type != 'affiliate')
@@ -20,7 +26,9 @@
     <div class="sidebar-middle">
         <div class="price">
             <div class="left">{{ __('from') }}</div>
-            <div class="middle">€{{ $hotel->getRoomPriceMin() }}</div>
+            <div class="middle">
+                {{ $hotel->getRoomPriceMin() != 0 ? '€'.$hotel->getRoomPriceMin() : 'n/a' }}
+            </div>
             <div class="right">{{ __('per person (including VAT)') }}</div>
         </div>
         <a href="#" class="inquiry">{{ __('Send request') }}</a>
