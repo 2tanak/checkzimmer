@@ -105,6 +105,8 @@
             </div>
 
             <div class="mobile-menu">
+                <div class="mobile-menu-content">
+
                 <ul>
                     <li>
                         <a href="/favorites">
@@ -135,6 +137,7 @@
                         <a href="#">Rus</a>
                         <a href="#">En</a>
                     </div>
+                </div>
                 </div>
             </div>
 
@@ -193,7 +196,7 @@
             @yield('content')
         </main>
 
-        <div class="modal-overlay">
+        <div class="modal-overlay modal-login-item">
 
             <div class="modal-block modal-login show">
                 <div class="modal-content-item">

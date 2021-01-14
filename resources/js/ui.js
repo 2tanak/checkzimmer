@@ -112,7 +112,7 @@ jQuery(document).ready(function() {
 
     jQuery('.personal-area-link').click(function (e) {
         e.preventDefault();
-        jQuery('.modal-overlay').addClass('modal-show');
+        jQuery('.modal-overlay.modal-login-item').addClass('modal-show');
     });
 
     jQuery('a.forgot-password').click(function (e) {
@@ -366,14 +366,6 @@ jQuery(document).ready(function() {
             }
         ]
     });
-
-    /*jQuery('.property-card-slider').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        dots: true,
-        infinite: true
-    });*/
 
     jQuery('a.open-gallery').click(function (e) {
         e.preventDefault();

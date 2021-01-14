@@ -84,7 +84,6 @@
                         </li>
                     </ul>
                 </div>
-                <a href="#" class="mobile-accaunt personal-area-link"><img src="/svg/i-account-mobile.svg" alt="mobile-accaunt"></a>
                 <div class="languages-block languages-block-desctope">
                     <div class="selected-language">
                         <a href="#">Rus</a>
@@ -98,6 +97,7 @@
         </div>
 
         <div class="mobile-menu">
+            <div class="mobile-menu-content">
             <ul>
                 <li>
                     <a href="/favorites">
@@ -128,6 +128,7 @@
                     <a href="#">Rus</a>
                     <a href="#">En</a>
                 </div>
+            </div>
             </div>
         </div>
 
