@@ -50,8 +50,8 @@
                             <div class="filter-block">
                                 <ul>
                                     <li class="check">{{ $t('Sort by default') }}</li>
-                                    <li @click.prevent="loadSort('min')">{{ $t('Cheap to expensive') }}</li>
-                                    <li @click.prevent="loadSort('max')">       </li>
+                                    <li @click.prevent="loadSort('min')">{{ $t('Price low to high') }}</li>
+                                    <li @click.prevent="loadSort('max')">{{ $t('Price high to low') }}</li>
                                     <li @click.prevent="loadSort('rating')">{{ $t('By rating') }}</li>
                                 </ul>
                             </div>
