@@ -21,19 +21,19 @@
         </style>
     </head>
     <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
+        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0 error-content-block">
             <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
-                <div class="mb-4">
+                <div class="mb-4 error-logo-block">
                     <div class="px-4 text-lg text-gray-500 tracking-wider">
                         @include('partials.logo')
                     </div>
                 </div>
-                <div class="flex items-center pt-8 sm:justify-start sm:pt-0 mt-4">
-                    <div class="px-4 text-lg text-gray-500 border-r border-gray-400 tracking-wider">
+                <div class="flex items-center pt-8 sm:justify-start sm:pt-0 mt-4" style="display:flex;justify-content:center;margin-bottom:20px;margin-top:0;padding-top:0;">
+                    <div class="px-4 text-lg text-black-500 border-r border-gray-400 tracking-wider" style="border-color: rgba(0,0,0,var(--border-opacity));">
                         @yield('code')
                     </div>
 
-                    <div class="ml-4 text-lg text-gray-500 uppercase tracking-wider">
+                    <div class="ml-4 text-lg text-black-500 uppercase tracking-wider">
                         @yield('message')
                     </div>
                 </div>
