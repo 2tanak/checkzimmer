@@ -143,10 +143,10 @@ class Property extends Model
 
     public function featureCategories() {
         $cats = [];
-        foreach($this->features as $feature) {
-            $exists = array_search($feature->feature_category['id'], array_column($cats, 'id'));
-            if (!$exists) {
-                $cats[] = $feature->feature_category;
+        foreach($this->features->toArray() as $feature) {
+            $exists = array_search($feature['feature_category']['id'], array_column($cats, 'id'));
+            if ($exists === false) {
+                $cats[] = $feature['feature_category'];
             }
         }
         return $cats;
