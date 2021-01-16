@@ -26,6 +26,7 @@ Route::middleware('auth')->namespace('Api')->group(function () {
     Route::resource('guests', 'GuestsController');
     Route::resource('features', 'FeaturesController');
     Route::resource('room-types', 'RoomTypesController');
+    Route::resource('domains', 'DomainController');
     Route::apiResource('room', 'RoomController');
     Route::apiResource('property', 'PropertyController');
     Route::resource('geocode-cache', 'GeocodeCacheController');

@@ -28,13 +28,14 @@ import forms from '../views/forms/forms'
 
 // Sample Pages
 import error404 from '../views/sample-pages/error-404'
-import error500 from '../views/sample-pages/error-500'
 import login from '../views/sample-pages/login'
 import register from '../views/sample-pages/register'
 
 import Requests from '../../components/Dashboard/Requests/Index';
 import Header from '../../components/Dashboard/Website/Header/Index';
 import Footer from '../../components/Dashboard/Website/Footer/Index';
+import Domains from '../../components/Dashboard/Website/Domains/Index';
+import DomainSingle from '../../components/Dashboard/Website/Domains/Single';
 import Users from '../../components/Dashboard/Users/Index';
 import Guests from '../../components/Dashboard/Guests/Index';
 import Languages from '../../components/Dashboard/Languages/Index';
@@ -143,6 +144,18 @@ export default new Router({
             meta: { auth: true }
         },
         {
+            path: '/dashboard/website/domains',
+            name: 'website-domains',
+            component: Domains,
+            meta: { auth: true }
+        },
+        {
+            path: '/dashboard/website/domains/:domain',
+            name: 'website-domains-single',
+            component: DomainSingle,
+            meta: { auth: true }
+        },
+        {
             path: '/dashboard/users',
             name: 'users',
             component: Users,
@@ -194,11 +207,6 @@ export default new Router({
             path: '/404',
             name: 'error-404',
             component: error404
-        },
-        {
-            path: '/500',
-            name: 'error-500',
-            component: error500
         },
         {
             path: '/dashboard/login',
