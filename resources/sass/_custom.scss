@@ -2915,7 +2915,6 @@ label.mobile-label {
     margin-bottom: 19px;
     background: #eaeaea;
     border-radius: 6px;
-    display: none;
 }
 .single-content .main-block {
     width: 100%;
@@ -5370,6 +5369,7 @@ label.mobile-label {
         box-shadow: 0 0 14px rgba(51, 54, 70, 0.14);
         height: auto;
         display: flex;
+        flex-direction: row-reverse;
     }
     .single-content .single-main-slider .slick-list {
         border-radius: 6px;
