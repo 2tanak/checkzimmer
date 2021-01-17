@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\User;
+use Cookie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -33,7 +34,8 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if ($token = $this->guard()->attempt($credentials)) {
-            return response()->json(['status' => 'success'], 200)->header('Authorization', $token);
+            return response()->json(['status' => 'success'], 200)->header('Authorization', $token)
+                ->withCookie(cookie('authDone', true));
         }
         return response()->json(['error' => 'login_error'], 401);
     }
@@ -41,10 +43,11 @@ class AuthController extends Controller
     public function logout()
     {
         $this->guard()->logout();
+        $cookie = Cookie::forget('authDone');
         return response()->json([
             'status' => 'success',
             'msg' => 'Logged out Successfully.'
-        ], 200);
+        ], 200)->withCookie($cookie);
     }
 
     public function user(Request $request)

@@ -3639,13 +3639,9 @@ label.mobile-label {
     font-size: 15px;
     line-height: 100%;
     text-decoration: none;
-    opacity: 1;
-    transition-duration: 0.4s;
 }
 .single-content .object-description .reviews-content a.give-feedback.hide {
-    transition-duration: 0.4s;
-    opacity: 0;
-    pointer-events: none;
+    display: none;
 }
 .single-content .object-description .reviews-content a.give-feedback:hover {
     transition-duration: 0.4s;
@@ -3653,12 +3649,10 @@ label.mobile-label {
     background-color: #6bb63f;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
 }
-.single-content .object-description .reviews-block {
-    margin-top: 22px;
-}
 .single-content .object-description .reviews-block-item {
     padding-bottom: 20px;
     margin-bottom: 20px;
+    margin-top: 22px;
     border-bottom: 1px solid #e3e4e6;
 }
 .single-content .object-description .reviews-head {
@@ -3956,7 +3950,6 @@ label.mobile-label {
 }
 .single-content .object-description .empty-block.active {
     width: 100%;
-    margin-top: 20px;
     margin-bottom: 8px;
     height: 331px;
 }
@@ -5387,6 +5380,9 @@ label.mobile-label {
     .single-content .price-situation .collapse-content-line:not(:first-of-type) .name:before {
         left: 21px;
     }
+    .single-content .price-situation .top-bloc-collapse .collapse:nth-of-type(2) .name:before {
+        left: 20px;
+    }
     .single-content .price-situation .collapse-content-line:first-of-type .name:before {
         left: 20px;
     }
@@ -5676,13 +5672,13 @@ label.mobile-label {
     }
 }
 @media (max-width: 850px) {
+    .single-content .top-bloc-collapse .price-item {
+        line-height: 18px;
+    }
     .single-content .top-bloc-collapse .price-item span {
         display: inline-block;
     }
     .single-content .price-situation .collapse-content-line .price-item {
-        line-height: 18px;
-    }
-    .single-content .top-bloc-collapse .price-item {
         line-height: 18px;
     }
 }
