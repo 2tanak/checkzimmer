@@ -7,13 +7,13 @@
                               :slidesToShow="1" :slidesToScroll="1"
                               ref="carousel" :infinite="true">
                 <div v-for="photo in getPhotos" class="slider-item">
-                    <a style="display:block;" :href="'/single/'+item.slug">
+                    <a style="display:block;" :href="'/'+$i18n.locale+'/single/'+item.slug">
                         <img :src="photo.url_max300" alt="Property picture">
                     </a>
                 </div>
             </VueSlickCarousel>
             <div class="data">
-                <a :href="'/single/'+item.slug" class="title"><span>{{ item.name }}</span></a>
+                <a :href="'/'+$i18n.locale+'/single/'+item.slug" class="title"><span>{{ item.name }}</span></a>
                 <div class="data-item">
                     <div class="geolocation">
                         <img src="/svg/i-pin.svg" alt="">

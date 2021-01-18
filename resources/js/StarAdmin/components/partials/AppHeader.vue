@@ -135,17 +135,34 @@
               class="navbar-toggler navbar-toggler-right align-self-center" type="button" @click="collapedMobileSidebar()">
         <span class="mdi mdi-menu"></span>
       </button>
-        <b-dropdown text="Ru" class="languages-block">
-            <b-dropdown-item href="#">Ru</b-dropdown-item>
-            <b-dropdown-item href="#">En</b-dropdown-item>
+        <b-dropdown :text="language_active" class="languages-block">
+            <b-dropdown-item v-for="language in langList" href="#" @click.prevent="langSwitch(language)">{{ language }}</b-dropdown-item>
         </b-dropdown>
     </div>
   </b-navbar>
 </template>
 
 <script lang="js">
+import ApiRequest from "../../../components/API/ApiRequest";
+
+let LanguageRequest = ApiRequest('languages');
+let languages = new LanguageRequest;
+
 export default {
     name: 'app-header',
+    data() {
+        return {
+            languages: [],
+            language_active: ''
+        }
+    },
+    mounted() {
+        languages.all()
+            .then(resp => {
+                this.languages = resp.data;
+                this.language_active = this.$i18n.locale;
+            })
+    },
     methods: {
         collapedMobileSidebar() {
             document.querySelector('.sidebar').classList.toggle('active')
@@ -155,7 +172,17 @@ export default {
                 makeRequest: true,
                 redirect: {name: 'login'},
             })
+        },
+        langSwitch(lang) {
+            this.language_active = lang;
+            localStorage.setItem('lang', lang);
+            document.location.reload();
         }
+    },
+    computed: {
+        langList() {
+            return this.languages.map( item => item.split('.')[0] );
+        },
     }
 }
 </script>
