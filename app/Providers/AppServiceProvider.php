@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use League\Flysystem\Adapter\Local;
 use Spatie\Geocoder\Geocoder;
+use App\Services\LocaleHelper;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
             $geocoder->setApiKey(config('geocoder.key'));
             $geocoder->setCountry(config('geocoder.country', 'US'));
             return $geocoder;
+        });
+        $this->app->singleton('locale', function ($app) {
+            return new  LocaleHelper;
         });
     }
 

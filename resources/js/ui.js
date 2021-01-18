@@ -37,8 +37,10 @@ Vue.use(VueI18n)
 import messagesLocaleEn from '../lang/en.json';
 import messagesLocaleDe from "../lang/de.json";
 
+const locale = document.location.pathname.split('/')[1];
+
 const i18n = new VueI18n({
-    locale: 'de', // set locale
+    locale: locale, // set locale
     messages: {
         en: messagesLocaleEn,
         de: messagesLocaleDe
@@ -320,13 +322,13 @@ jQuery(document).ready(function() {
         }
     });
 
-    jQuery('.list-languages a').click(function (e) {
+    /*jQuery('.list-languages a').click(function (e) {
         e.preventDefault();
         var paragraph = jQuery(this).text();
         jQuery('.selected-language a').text(paragraph);
         jQuery('.list-languages').removeClass('active');
         jQuery('.selected-language').removeClass('active');
-    });
+    });*/
 
 
     jQuery('.mobile-card-button').click(function () {
@@ -522,17 +524,3 @@ window.onload = function () {
         jQuery('.communication').removeClass('not-active');
     }, 1000);
 };
-
-/*jQuery(window).on("load resize", function(){
-    if (jQuery(window).width() <= 1040) {
-        jQuery('.property-card-slider').filter('.slick-initialized').slick('unslick');
-    } else if (jQuery('.property-card-slider').length) {
-        jQuery('.property-card-slider').slick({
-            infinite: true,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false,
-            dots: true
-        });
-    }
-});*/

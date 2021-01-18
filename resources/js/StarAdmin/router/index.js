@@ -36,6 +36,7 @@ import Header from '../../components/Dashboard/Website/Header/Index';
 import Footer from '../../components/Dashboard/Website/Footer/Index';
 import Domains from '../../components/Dashboard/Website/Domains/Index';
 import DomainSingle from '../../components/Dashboard/Website/Domains/Single';
+import Settings from '../../components/Dashboard/Website/Settings/Index';
 import Users from '../../components/Dashboard/Users/Index';
 import Guests from '../../components/Dashboard/Guests/Index';
 import Languages from '../../components/Dashboard/Languages/Index';
@@ -141,6 +142,12 @@ export default new Router({
             path: '/dashboard/website/footer',
             name: 'website-footer',
             component: Footer,
+            meta: { auth: true }
+        },
+        {
+            path: '/dashboard/website/settings',
+            name: 'website-settings',
+            component: Settings,
             meta: { auth: true }
         },
         {

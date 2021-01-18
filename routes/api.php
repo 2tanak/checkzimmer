@@ -28,7 +28,6 @@ Route::middleware('auth')->namespace('Api')->group(function () {
     Route::resource('room-types', 'RoomTypesController');
     Route::resource('domains', 'DomainController');
     Route::apiResource('room', 'RoomController');
-    Route::apiResource('property', 'PropertyController');
     Route::resource('geocode-cache', 'GeocodeCacheController');
     Route::resource('questions', 'QuestionsController');
     Route::resource('reviews', 'ReviewsController');
@@ -54,12 +53,6 @@ Route::middleware('auth')->namespace('Api')->group(function () {
     Route::post('/hotels-request/query', 'BookingController@getHotels');
     Route::post('/hotels-request', 'BookingController@saveHotels');
 
-    Route::post('/property/query', 'PropertyController@queryProperty');
-    Route::post('/property/queryFilter', 'PropertyController@queryFilter');
-    Route::post('/property/querySort', 'PropertyController@querySort');
-    Route::post('/property/initMap', 'PropertyController@initMap');
-    Route::post('/property/list', 'PropertyController@listUpdate');
-
     Route::get('/questions', 'QuestionsController@paginated');
     Route::get('/reviews', 'ReviewsController@paginated');
 
@@ -71,10 +64,18 @@ Route::middleware('auth')->namespace('Api')->group(function () {
     Route::put('languages/{id}', 'LanguagesController@update');
 });
 
+Route::group(['namespace' => 'Api'], function() {
+    Route::apiResource('property', 'PropertyController');
+    Route::post('/property/query', 'PropertyController@queryProperty');
+    Route::post('/property/queryFilter', 'PropertyController@queryFilter');
+    Route::post('/property/querySort', 'PropertyController@querySort');
+    Route::post('/property/initMap', 'PropertyController@initMap');
+    Route::post('/property/list', 'PropertyController@listUpdate');
+});
 
 Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {
     Route::post('register', 'AuthController@register');
-    Route::post('login', 'AuthController@login');
+    Route::post('login', 'AuthController@login')->name('api-login');
     Route::get('refresh', 'AuthController@refresh');
     Route::group(['middleware' => 'auth:api'], function(){
         Route::get('user', 'AuthController@user');
