@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOptionsTable extends Migration
+class CreateDomainsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('options', function (Blueprint $table) {
+        Schema::create('domains', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('parent');
-            $table->enum('type', ['property', 'options', 'system', 'room', 'city', 'room_type', 'feature', 'domain']);
-            $table->string('key');
-            $table->longText('value');
+            $table->string('subdomain')->unique();
+            $table->string('city');
+            $table->string('active');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateOptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('options');
+        Schema::dropIfExists('domains');
     }
 }
