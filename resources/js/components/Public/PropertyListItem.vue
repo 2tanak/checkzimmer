@@ -1,6 +1,7 @@
 <template>
     <div class="property-card">
         <div class="property-card-container">
+            <div class="no-photo" v-if="NoPhoto"></div>
             <img v-if="getPhotos.length && !sizedForSlider" :src="getPhotos[0].url_max300">
             <VueSlickCarousel v-if="getPhotos.length && sizedForSlider" class="property-card-slider" :arrows="false" :dots="true"
                               :slidesToShow="1" :slidesToScroll="1"
@@ -123,6 +124,7 @@ export default {
     data() {
         return {
             sizedForSlider: true,
+            NoPhoto: false
         }
     },
     mounted() {
