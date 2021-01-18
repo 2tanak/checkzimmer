@@ -2,7 +2,7 @@
     <div id="app">
         <div class="list-content">
             <div class="container">
-                <h1>{{ $t('Find the best housing for fitters in') }} {{ $t('Leipzig') }}!</h1>
+
                 <div class="sample-block">
                     <div class="input-block sample-block-item">
                         <label for="text">{{ $t('workplace address') }}:</label>

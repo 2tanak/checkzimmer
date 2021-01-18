@@ -10,10 +10,13 @@
                 <div class="card">
                     <div class="card-body">
                         <b-form-group :label="$t('Homepage SEO Title')" label-for="input-seo-title">
-                            <b-form-input class="form-control" type="text" v-model="options.general_seo_title" />
+                            <b-form-input class="form-control" type="text" v-model="options.seo_title" />
                         </b-form-group>
                         <b-form-group :label="$t('Homepage SEO Description')" label-for="input-seo-title">
-                            <b-form-input class="form-control" type="text" v-model="options.general_seo_descr" />
+                            <b-form-input class="form-control" type="text" v-model="options.seo_description" />
+                        </b-form-group>
+                        <b-form-group :label="$t('Homepage tagline')" label-for="input-seo-title">
+                            <b-form-input class="form-control" type="text" v-model="options.tagline" />
                         </b-form-group>
                         <b-form-group :label="$t('Maintenance mode')" label-for="input-maintenance">
                             <label class="mt-2">
@@ -50,8 +53,9 @@ export default {
         return {
             options: {
                 maintenance: false,
-                general_seo_title: '',
-                general_seo_descr: '',
+                seo_title: '',
+                seo_description: '',
+                tagline: ''
             },
             loading: true
         }

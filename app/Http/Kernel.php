@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'isAdminOrSelf' => \App\Http\Middleware\CheckIsAdminOrSelf::class,
         'isMaintenance' => \App\Http\Middleware\CheckIfMaintenance::class,
         'checkLocale' => \App\Http\Middleware\CheckLocale::class,
+        'checkSubdomain' => \App\Http\Middleware\SubdomainControl::class,
     ];
 }

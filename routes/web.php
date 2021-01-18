@@ -17,7 +17,7 @@ foreach (app('locale')->getLanguagesAvailable() as $lang) {
     Route::group(
         [
             'prefix' => $lang,
-            'middleware' => ['isMaintenance', 'checkLocale']
+            'middleware' => ['isMaintenance', 'checkLocale', 'checkSubdomain']
         ],
         function() use ($lang) {
             Auth::routes();
@@ -38,5 +38,7 @@ Route::group([
         'middleware' => ['isMaintenance']
     ], function() {
         Route::get('/dashboard', 'HomeController@dashboard')->name('home');
-        Route::get('/dashboard/{page?}/{subpage?}', 'HomeController@dashboard')->name('dashboard-page');
+        Route::get('/dashboard/{page?}/{subpage?}/{subsubpage?}', 'HomeController@dashboard')->name('dashboard-page');
     });
+
+Route::get('/', 'HomeController@redirect');

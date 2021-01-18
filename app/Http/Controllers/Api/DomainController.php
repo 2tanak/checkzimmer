@@ -91,10 +91,12 @@ class DomainController extends Controller
         $option = Option::where('type', 'domain')->where('parent', $domain->id)->where('key', 'latlng')->first();
         $seo_title = Option::where('type', 'domain')->where('parent', $domain->id)->where('key', 'seo_title')->first();
         $seo_descr = Option::where('type', 'domain')->where('parent', $domain->id)->where('key', 'seo_description')->first();
+        $tagline = Option::where('type', 'domain')->where('parent', $domain->id)->where('key', 'tagline')->first();
         $domain->geo = $option;
         $domain->options = [
-            'seo_title' => $seo_title->value,
-            'seo_description' => $seo_descr->value,
+            'seo_title' => $seo_title->value ?? '',
+            'seo_description' => $seo_descr->value ?? '',
+            'tagline' => $tagline->value ?? '',
         ];
         return response()->json($domain);
     }
@@ -164,6 +166,15 @@ class DomainController extends Controller
             'parent' => $domain->id,
             'type' => 'domain',
             'value' => $data['options']['seo_description'],
+        ];
+        $option->fill($optionsData);
+        $option->save();
+
+        $optionsData = [
+            'key' => 'tagline',
+            'parent' => $domain->id,
+            'type' => 'domain',
+            'value' => $data['options']['tagline'],
         ];
         $option->fill($optionsData);
         $option->save();
