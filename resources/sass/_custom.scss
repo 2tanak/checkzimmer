@@ -788,17 +788,16 @@ footer#main-footer ul.footer-menu li a:active {
 
 .list-content {
     background: #F7F8FA;
-    padding-top: 32px;
     padding-bottom: 114px;
 }
-.list-content h1 {
+h1.list-title {
     font-weight: 600;
     font-size: 28px;
     line-height: 130%;
     text-align: center;
     color: #333646;
     margin-bottom: 22px;
-    margin-top: 0;
+    margin-top: 32px;
 }
 .list-content .sample-block {
     margin-bottom: 40px;
@@ -2324,13 +2323,13 @@ label.mobile-label {
         display: none;
     }
     .list-content {
-        padding-top: 29px;
         padding-bottom: 59px;
     }
-    .list-content h1 {
+    h1.list-title {
         font-size: 24px;
         line-height: 120%;
         margin-bottom: 20px;
+        margin-top: 29px;
     }
     .list-content .sorting-block .result {
         font-size: 14px;
@@ -2825,7 +2824,7 @@ label.mobile-label {
     .list-content .property.show-map .property-card .favorites {
         display: none;
     }
-    .list-content h1 {
+    h1.list-title {
         font-size: 22px;
     }
     .modal-block .or:before {
