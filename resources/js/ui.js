@@ -37,8 +37,10 @@ Vue.use(VueI18n)
 import messagesLocaleEn from '../lang/en.json';
 import messagesLocaleDe from "../lang/de.json";
 
+const locale = document.location.pathname.split('/')[1];
+
 const i18n = new VueI18n({
-    locale: 'de', // set locale
+    locale: locale, // set locale
     messages: {
         en: messagesLocaleEn,
         de: messagesLocaleDe
@@ -320,13 +322,13 @@ jQuery(document).ready(function() {
         }
     });
 
-    jQuery('.list-languages a').click(function (e) {
+    /*jQuery('.list-languages a').click(function (e) {
         e.preventDefault();
         var paragraph = jQuery(this).text();
         jQuery('.selected-language a').text(paragraph);
         jQuery('.list-languages').removeClass('active');
         jQuery('.selected-language').removeClass('active');
-    });
+    });*/
 
 
     jQuery('.mobile-card-button').click(function () {

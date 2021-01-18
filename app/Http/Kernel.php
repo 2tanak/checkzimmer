@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'isAdmin' => \App\Http\Middleware\CheckIsAdmin::class,
         'isAdminOrSelf' => \App\Http\Middleware\CheckIsAdminOrSelf::class,
         'isMaintenance' => \App\Http\Middleware\CheckIfMaintenance::class,
+        'checkLocale' => \App\Http\Middleware\CheckLocale::class,
     ];
 }

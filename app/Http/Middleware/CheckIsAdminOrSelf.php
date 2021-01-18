@@ -8,8 +8,7 @@ class CheckIsAdminOrSelf
     public function handle($request, Closure $next)
     {
         $requestedUserId = $request->route()->parameter('id');
-        if(
-            Auth::user()->role === 2 ||
+        if (Auth::user()->role === 'admin' ||
             Auth::user()->id == $requestedUserId
         ) {
             return $next($request);
