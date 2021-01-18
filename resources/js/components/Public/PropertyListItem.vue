@@ -1,18 +1,19 @@
 <template>
     <div class="property-card">
         <div class="property-card-container">
+            <div class="no-photo" v-if="NoPhoto"></div>
             <img v-if="getPhotos.length && !sizedForSlider" :src="getPhotos[0].url_max300">
             <VueSlickCarousel v-if="getPhotos.length && sizedForSlider" class="property-card-slider" :arrows="false" :dots="true"
                               :slidesToShow="1" :slidesToScroll="1"
                               ref="carousel" :infinite="true">
                 <div v-for="photo in getPhotos" class="slider-item">
-                    <a style="display:block;" :href="'/single/'+item.slug">
+                    <a style="display:block;" :href="'/'+$i18n.locale+'/single/'+item.slug">
                         <img :src="photo.url_max300" alt="Property picture">
                     </a>
                 </div>
             </VueSlickCarousel>
             <div class="data">
-                <a :href="'/single/'+item.slug" class="title"><span>{{ item.name }}</span></a>
+                <a :href="'/'+$i18n.locale+'/single/'+item.slug" class="title"><span>{{ item.name }}</span></a>
                 <div class="data-item">
                     <div class="geolocation">
                         <img src="/svg/i-pin.svg" alt="">
@@ -123,6 +124,7 @@ export default {
     data() {
         return {
             sizedForSlider: true,
+            NoPhoto: false
         }
     },
     mounted() {

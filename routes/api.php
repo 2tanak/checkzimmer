@@ -74,7 +74,7 @@ Route::group(['namespace' => 'Api'], function() {
 
 Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {
     Route::post('register', 'AuthController@register');
-    Route::post('login', 'AuthController@login');
+    Route::post('login', 'AuthController@login')->name('api-login');
     Route::get('refresh', 'AuthController@refresh');
     Route::group(['middleware' => 'auth:api'], function(){
         Route::get('user', 'AuthController@user');

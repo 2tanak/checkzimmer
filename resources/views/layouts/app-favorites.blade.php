@@ -82,15 +82,7 @@
                     </ul>
                 </div>
                 <a href="#" class="mobile-accaunt personal-area-link"><img src="/svg/i-account-mobile.svg" alt="mobile-accaunt"></a>
-                <div class="languages-block languages-block-desctope">
-                    <div class="selected-language">
-                        <a href="#">Rus</a>
-                    </div>
-                    <div class="list-languages">
-                        <a href="#">Rus</a>
-                        <a href="#">En</a>
-                    </div>
-                </div>
+                @include('partials.lang-switch')
             </div>
         </div>
 

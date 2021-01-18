@@ -59,12 +59,18 @@ Vue.use(VueI18n)
 
 import messagesLocaleEn from '../lang/en.json';
 import messagesLocaleDe from '../lang/de.json';
+import messagesLocaleRu from '../lang/ru.json';
+import messagesLocalePl from '../lang/pl.json';
+
+const lang = localStorage.getItem('lang') || 'de'
 
 const i18n = new VueI18n({
-    locale: 'de', // set locale
+    locale: lang, // set locale
     messages: {
         en: messagesLocaleEn,
-        de: messagesLocaleDe
+        de: messagesLocaleDe,
+        ru: messagesLocaleRu,
+        pl: messagesLocalePl,
     },
 })
 
