@@ -3,7 +3,7 @@
 @section('content')
 
     @include('css.loader-main')
-
+    <h1 class="list-title">{{ __($domain->tagline()) }}</h1>
     <div id="application" class="init-container">
         <Public/>
     </div>

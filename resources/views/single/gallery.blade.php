@@ -8,7 +8,7 @@
                 @if ($key == 3 && count($hotel->photos()) > 5)
                     <a class="open-gallery amount-photo" href="#">
                         <img src="{{ $photo['url_max300'] }}" alt="alt">
-                        <div class="number-photos">+{{ count($hotel->photos()) - 5 }} фото</div>
+                        <div class="number-photos">+{{ count($hotel->photos()) - 5 }} {{ __('photo') }}</div>
                     </a>
                 @else
                     <a class="open-gallery" href="#" {{ $key }}><img src="{{ $photo['url_max300'] }}" alt="Фото отеля {{ $key }}"></a>
@@ -72,7 +72,9 @@
         <div class="big-photo"><a class="open-gallery" href="#"><img src="{{ $hotel->photos()[0]['url_max300'] }}" alt="alt"></a></div>
         <div class="big-photo"><a class="open-gallery" href="#"><img src="{{ $hotel->photos()[1]['url_max300'] }}" alt="alt"></a></div>
     </div>
-@else:
+@elseif (count($hotel->photos()) == 0):
+    <div class="no-photo"></div>
+@else
 <div class="single-gallery option-one">
     <div class="big-photo"><a class="open-gallery" href="#"><img src="{{ $hotel->photoMain()['url_original'] }}" alt="alt"></a></div>
 </div>
