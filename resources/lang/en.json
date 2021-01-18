@@ -111,8 +111,8 @@
     "Found": "Found",
     "housing options": "housing options",
     "Sort by default": "Sort by default",
-    "Price low to high": "Price low to high",
-    "Price high to low": "Price high to low",
+    "Cheap to expensive": "Cheap to expensive",
+    "Expensive to cheap": "Expensive to cheap",
     "By rating": "By rating",
     "Load more": "Load more",
     "The offers on your request are over, increase the distance or contact the manager directly": "The offers on your request are over, increase the distance or contact the manager directly",
@@ -402,16 +402,5 @@
     "name": "name",
     "type": "type",
     "Choose a file or drop it here...": "Choose a file or drop it here...",
-    "Drop file here...": "Drop file here...",
-    "Facebook": "Facebook",
-    "Twitter": "Twitter",
-    "WhatsApp": "WhatsApp",
-    "Messanger": "Messanger",
-    "Copy link": "Copy link",
-    "Reason complaint": "Reason complaint",
-    "photo": "photo",
-    "Print": "Print",
-    "Report": "Report",
-    "Sentence": "Sentence",
-    "Complaint or suggestion text": "Complaint or suggestion text"
+    "Drop file here...": "Drop file here..."
 }

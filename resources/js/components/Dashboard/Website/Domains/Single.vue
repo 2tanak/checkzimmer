@@ -10,6 +10,9 @@
         <b-form-group :label="$t('Home page SEO description')">
             <b-form-input v-model="domain.options.seo_description" />
         </b-form-group>
+        <b-form-group :label="$t('Home page tagline')">
+            <b-form-input v-model="domain.options.tagline" />
+        </b-form-group>
         <b-button variant="success" @click.prevent="save">{{ $t('Save') }}</b-button>
     </section>
 </template>
@@ -33,7 +36,8 @@ export default {
                 city: '',
                 active: true,
                 seo_title: '',
-                seo_description: ''
+                seo_description: '',
+                tagline: ''
             },
             domainFields: domainsForm,
         }
