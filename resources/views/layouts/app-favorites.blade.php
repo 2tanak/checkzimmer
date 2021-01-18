@@ -69,7 +69,7 @@
                             <a href="/favorites">
                                 <img class="normal" src="/svg/i-favourites-header.svg" alt="Favourites">
                                 <img class="hover" src="/svg/i-favourites-hover.svg" alt="Favourites">
-                                {{ __('Favorites') }} (<span class="favoritesCount"></span>)
+                                {{ __('Favorites') }} (<span class="favoritesCount">0</span>)
                             </a>
                         </li>
                         <li>
@@ -93,7 +93,7 @@
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15.1614 9.97563C16.597 8.4996 16.597 6.10223 15.1614 4.6262C13.7316 3.1561 11.4179 3.1561 9.98803 4.6262L9.27309 5.36128C9.12351 5.51507 8.87649 5.51507 8.72691 5.36128L8.01197 4.6262C6.58214 3.1561 4.26843 3.1561 2.8386 4.6262C1.40301 6.10223 1.40301 8.4996 2.8386 9.97563L9 16.3106L15.1614 9.97563ZM9.44185 4.09498C11.1708 2.3173 13.9786 2.3173 15.7076 4.09498C17.4308 5.86675 17.4308 8.73508 15.7076 10.5068L9.27309 17.1226C9.12351 17.2764 8.87649 17.2764 8.72691 17.1226L2.29242 10.5068C0.569193 8.73508 0.569193 5.86675 2.29242 4.09498C4.02141 2.3173 6.82916 2.3173 8.55815 4.09498L9 4.54928L9.44185 4.09498Z" fill="#7A8793" stroke="#7A8793" stroke-width="0.2"/>
                         </svg>
-                        {{ __('Favorites') }} (<span class="favoritesCount"></span>)
+                        {{ __('Favorites') }} (<span class="favoritesCount">0</span>)
                     </a>
                 </li>
                 <li>
@@ -240,7 +240,7 @@
         </div>
     </div>
 
-    <div class="modal-overlay slider-modal-overlay">
+    {{--<div class="modal-overlay slider-modal-overlay">
         <div class="modal-close">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M23.2514 24.0004C23.0614 24.0004 22.8714 23.9304 22.7214 23.7804L12.0014 13.0604L1.28141 23.7804C0.991406 24.0704 0.511406 24.0704 0.221406 23.7804C-0.0685937 23.4904 -0.0685937 23.0104 0.221406 22.7204L10.9414 12.0004L0.221406 1.28043C-0.0685937 0.99043 -0.0685937 0.51043 0.221406 0.22043C0.511406 -0.0695703 0.991406 -0.0695703 1.28141 0.22043L12.0014 10.9404L22.7214 0.22043C23.0114 -0.0695703 23.4914 -0.0695703 23.7814 0.22043C24.0714 0.51043 24.0714 0.99043 23.7814 1.28043L13.0614 12.0004L23.7814 22.7204C24.0714 23.0104 24.0714 23.4904 23.7814 23.7804C23.6314 23.9304 23.4414 24.0004 23.2514 24.0004Z" fill="white"/>
@@ -261,7 +261,7 @@
                 <div class="number">1/{{count($hotel->photos())}}</div>
             </div>
         </div>
-    </div>
+    </div>--}}
 
 
 </footer>

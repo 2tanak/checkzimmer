@@ -74,7 +74,7 @@
     </div>
 @elseif (count($hotel->photos()) == 0):
     <div class="no-photo"></div>
-@else:
+@else
 <div class="single-gallery option-one">
     <div class="big-photo"><a class="open-gallery" href="#"><img src="{{ $hotel->photoMain()['url_original'] }}" alt="alt"></a></div>
 </div>
