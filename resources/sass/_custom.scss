@@ -1837,7 +1837,7 @@ label.mobile-label {
 .mobile-menu {
     position: absolute;
     left: 0;
-    top: 68px;
+    top: 64px;
     background-color: #f7f8fa;
     width: 0;
     overflow: hidden;
@@ -2713,6 +2713,9 @@ label.mobile-label {
         overflow: hidden;
         text-overflow: ellipsis;
         font-size: 15px;
+    }
+    .property-card a.title:hover span {
+        border-bottom: 0;
     }
     .property-card-slider {
         min-width: 96px;
@@ -6226,6 +6229,22 @@ label.mobile-label {
         }
         .single-content .object-description .empty-block form {
             margin-top: 20px;
+        }
+        .offer .offer-select {
+            height: auto;
+            border: 0;
+        }
+        .offer .offer-select select {
+            height: 42px;
+            font-size: 14px;
+            border: 1px solid #E3E4E5;
+        }
+        .offer label {
+            font-size: 14px;
+            position: static;
+        }
+        .single-content .sidebar .address-map .map-container:hover:before {
+            pointer-events: none;
         }
     }
     @media (max-width: 420px) {
