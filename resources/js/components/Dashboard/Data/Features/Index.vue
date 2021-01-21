@@ -109,7 +109,7 @@
                 loading: true,
                 categoriesTemp: [],
                 features: [],
-                fields: [this.$t('id'), this.$t('feature_category'), this.$t('picture'), this.$t('Name'), this.$t('Edit'), this.$t('Delete')],
+                fields: [this.$t('id'), this.$t('feature_category'), this.$t('picture'), this.$t('name'), this.$t('Edit'), this.$t('Delete')],
                 data: featuresForm,
                 operationOk : false,
                 operationError : false,
@@ -176,10 +176,10 @@
                 features.delete(this.deleteFeature.id)
                     .then(response => {
                         if(response.data.code == 'ok') {
-                            this.textOperation = this.$t('Delete');
+                            this.textOperation = this.$t('Delete OK');
                             this.operationOk = true;
-                             let index = this.featureList.findIndex( (elem, index, arr) => elem.id === this.deleteFeature.id);
-                             this.featureList.splice(index, 1);
+                            let index = this.features.findIndex( (elem, index, arr) => elem.id === this.deleteFeature.id);
+                            this.features.splice(index, 1);
                         } else {
                             this.textOperation = this.$t('Delete error');
                             this.operationError = true;
@@ -199,13 +199,17 @@
                     this.editFeature.feature_category.picture = this.editFeature.picture;
                 }
 
-                if (this.editFeature.category > 0) {
+                cat = this.data.category.options[this.editFeature.category];
+                cat = this.features.find( item => {
+                    console.log(item.feature_category, cat);
+                    return item.feature_category && item.feature_category.name === cat }
+                    );
+                cat = cat.feature_category_id;
+                /*if (this.editFeature.category > 0) {
                     cat = this.editFeature.category;
                 } else {
                     cat = this.editFeature.feature_category_id;
-                }
-
-                this.features.push(this.editFeature);
+                }*/
 
                 let data = {
                     'name' : this.editFeature.feature_category.name,
@@ -215,11 +219,12 @@
 
                 features.update(this.editFeature.id, data)
                     .then(response => {
-                        if(response.data.code == 'ok') {
-                            this.textOperation = this.$t('Delete');
+                        if(response.data.code === 'ok') {
+                            this.textOperation = this.$t('Feature added');
                             this.operationOk = true;
+                            this.features.push(response.data.feature);
                         } else {
-                            this.textOperation = this.$t('Delete error');
+                            this.textOperation = this.$t('Feature adding error');
                             this.operationError = true;
                         }
                 });
