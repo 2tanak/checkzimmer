@@ -62,7 +62,7 @@ class Property extends Model
                 return isset($item['main_photo']) ? false : true;
             }));
             if (!$this->_photoMain) {
-                $this->_photoMain = $this->_photos[0];
+                $this->_photoMain = $this->_photos[0] ?? '';
                 unset($this->_photos[0]);
             }
         }
