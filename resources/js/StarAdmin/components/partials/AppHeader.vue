@@ -181,6 +181,10 @@ export default {
     },
     computed: {
         langList() {
+            if (!this.languages) {
+                return []
+            }
+            console.log(this.languages);
             return this.languages.map( item => item.split('.')[0] );
         },
     }

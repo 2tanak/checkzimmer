@@ -2,10 +2,10 @@
 
 @section('title', __('Not Found'))
 @section('code', '404')
-@section('message', $message)
+@section('message', $message ?? __('Page not found'))
 
 @section('form')
-    <a href="https://check-zimmer.de/de">{{ __('Return to the main domain') }}</a>
+    <a href="{{ env('APP_URL', '//check-zimmer.de') }}">{{ __('Return to the main domain') }}</a>
 @endsection
 
 <style>

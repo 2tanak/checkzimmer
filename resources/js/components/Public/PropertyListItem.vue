@@ -1,7 +1,7 @@
 <template>
     <div class="property-card">
         <div class="property-card-container">
-            <div class="no-photo" v-if="NoPhoto"></div>
+            <div class="no-photo" v-if="noPhotos"></div>
             <a href="":href="'/'+$i18n.locale+'/single/'+item.slug">
                 <img v-if="getPhotos.length && !sizedForSlider" :src="getPhotos[0].url_max300">
             </a>
@@ -294,6 +294,9 @@ export default {
                 return []
             }
             return JSON.parse(photos.value).slice(0, 5);
+        },
+        noPhotos() {
+            return this.getPhotos.length === 0;
         },
         getRooms() {
             return this.item.rooms;

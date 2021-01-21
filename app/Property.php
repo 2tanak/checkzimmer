@@ -61,6 +61,10 @@ class Property extends Model
             $this->_photos = array_values(array_filter($photos, function ($item) {
                 return isset($item['main_photo']) ? false : true;
             }));
+            if (!$this->_photoMain) {
+                $this->_photoMain = $this->_photos[0];
+                unset($this->_photos[0]);
+            }
         }
         return $this->_photos;
     }
