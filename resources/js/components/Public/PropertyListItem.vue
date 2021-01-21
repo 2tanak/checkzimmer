@@ -2,7 +2,9 @@
     <div class="property-card">
         <div class="property-card-container">
             <div class="no-photo" v-if="NoPhoto"></div>
-            <img v-if="getPhotos.length && !sizedForSlider" :src="getPhotos[0].url_max300">
+            <a href="":href="'/'+$i18n.locale+'/single/'+item.slug">
+                <img v-if="getPhotos.length && !sizedForSlider" :src="getPhotos[0].url_max300">
+            </a>
             <VueSlickCarousel v-if="getPhotos.length && sizedForSlider" class="property-card-slider" :arrows="false" :dots="true"
                               :slidesToShow="1" :slidesToScroll="1"
                               ref="carousel" :infinite="true">

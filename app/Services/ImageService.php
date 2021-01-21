@@ -14,7 +14,7 @@ class ImageService
     {
         $imageName = time().'-'.Str::random(5).'.'.$uploadedFile->extension();
         $file = $uploadedFile->move(public_path('images/uploaded/'.date('Y/m/d')), $imageName);
-        return $this->preparePublicImageUrl($file->getRealPath());
+        return str_replace('\\', '/', str_replace('/public', '', $this->preparePublicImageUrl($file->getRealPath())));
     }
 
     public function storeImageBase64(string $base64)

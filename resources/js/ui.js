@@ -390,17 +390,13 @@ jQuery(document).ready(function() {
         jQuery('.map-active a').addClass('active');
     });
 
-    jQuery('a.map-mobile-picture').bind("click", function(e){
+    jQuery('a.map-picture.map-mobile-picture').bind("click", function(e){
         e.preventDefault();
         var anchor = jQuery(this);
         jQuery('html, body').stop().animate({
             scrollTop: jQuery(anchor.attr('href')).offset().top
         }, 650);
-        jQuery('#mobile-map-content-collapse').addClass('show');
-    });
-
-    jQuery('.map-mobile-picture').click(function(e) {
-        e.preventDefault();
+        jQuery('.mobile-map-content .collapse').addClass('show');
         jQuery('.click-collapse').find('.head-collapse').attr("aria-expanded", true).removeClass('collapsed');
     });
 

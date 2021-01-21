@@ -27,17 +27,19 @@ class FeaturesController extends Controller
     {
         $data = [
             'feature_category_id' => $request->category,
-            'picture'             => $request->image,
-            'name'                => $request->name
+            'picture' => $request->image,
+            'name' => $request->name,
+            'ord' => 0
         ];
+        $data['ord'] = 0;
 
-        if (!empty(Feature::find($id)->first())) {
-            Feature::find($id)->update($data);
+        if (!empty(Feature::find($id))) {
+            $feature = Feature::find($id)->update($data);
         } else {
-            Feature::create($data);
+            $feature = Feature::create($data);
         }
 
-        return response()->json(['code' => 'ok']);
+        return response()->json(['code' => 'ok', 'feature' => $feature]);
     }
 
     public function destroy($id)
