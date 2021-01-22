@@ -1,7 +1,13 @@
 <template>
     <div class="property-card">
         <div class="property-card-container">
-            <div class="no-photo" v-if="noPhotos"></div>
+            <div class="no-photo" v-if="noPhotos">
+                <div class="no-photo-small">
+                    <svg width="24" height="11" viewBox="0 0 24 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 3L0 11H24L17 0L11 8L6 3Z" fill="#EDEDEF"/>
+                    </svg>
+                </div>
+            </div>
             <a href="":href="'/'+$i18n.locale+'/single/'+item.slug">
                 <img v-if="getPhotos.length && !sizedForSlider" :src="getPhotos[0].url_max300">
             </a>
