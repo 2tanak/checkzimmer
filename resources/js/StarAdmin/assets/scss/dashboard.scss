@@ -46,9 +46,10 @@
         display: block;
     }
     .navbar .navbar-brand-wrapper {
-        width: 185px;
+        width: auto;
+        min-width: 255px;
     }
     .navbar .navbar-menu-wrapper {
-        width: calc(100% - 185px);
+        width: auto;
     }
 }
