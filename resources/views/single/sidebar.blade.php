@@ -1,6 +1,6 @@
 <div class="sidebar desctop-sidebar">
     <div class="sidebar-top">
-        <div class="sidebar-top-block roominess">
+        <?php /*> <div class="sidebar-top-block roominess">
             <img src="/svg/i-people.svg" alt="alt">
             <div class="sidebar-top-block-item roominess-item">
                 <div class="title">{{ __('roomin.') }}:</div>
@@ -16,6 +16,7 @@
                 </div>
             </div>
         @endif
+            */ ?>
     </div>
 
     <div class="sidebar-middle">
