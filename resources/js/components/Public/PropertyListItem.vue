@@ -1,17 +1,17 @@
 <template>
     <div class="property-card">
         <div class="property-card-container">
-            <div style="position:relative;">
+            <div style="position:relative;" class="no-photo-block">
                 <div class="no-photo" v-if="noPhotos"></div>
                 <div class="superhost-icon">Суперхозяин</div>
             </div>
-            <div style="position:relative;">
+            <div style="position:relative;" v-if="getPhotos.length && !sizedForSlider">
                 <a href="":href="'/'+$i18n.locale+'/single/'+item.slug" class="img-link">
                     <img v-if="getPhotos.length && !sizedForSlider" :src="getPhotos[0].url_max300">
                 </a>
                 <div class="superhost-icon">Суперхозяин</div>
             </div>
-            <div style="position:relative;">
+            <div style="position:relative;" v-if="getPhotos.length && sizedForSlider">
                 <VueSlickCarousel v-if="getPhotos.length && sizedForSlider" class="property-card-slider" :arrows="false" :dots="true"
                                   :slidesToShow="1" :slidesToScroll="1"
                                   ref="carousel" :infinite="true">

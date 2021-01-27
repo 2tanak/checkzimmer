@@ -4285,16 +4285,29 @@ label.mobile-label {
     box-shadow: 0 0 14px rgba(51, 54, 70, 0.14);
     border-radius: 12px;
     min-width: 280px;
-    padding: 22px 16px;
+    padding: 16px 16px 22px 16px;
     position: relative;
 }
 .single-content .sidebar .sidebar-top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding-bottom: 19px;
-    margin-bottom: 12px;
+    justify-content: center;
+    margin-bottom: 15px;
     border-bottom: 1px solid #e3e4e6;
+    padding-bottom: 16px;
+}
+.single-content .sidebar .sidebar-top .free-now {
+    display: flex;
+    align-items: center;
+}
+.single-content .sidebar .sidebar-top .free-now svg {
+    margin-right: 5px;
+}
+.single-content .sidebar .sidebar-top .free-now span {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    color: #333646;
 }
 .single-content .sidebar .sidebar-top-block {
     display: flex;
@@ -4464,8 +4477,7 @@ label.mobile-label {
 .single-content .sidebar .address-map {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 21px;
+    margin-bottom: 27px;
 }
 .single-content .sidebar .number-phone.not-phone {
     text-align: center;
@@ -4494,6 +4506,8 @@ label.mobile-label {
     font-size: 13px;
     line-height: 140%;
     color: #333646;
+    order: 2;
+    margin-left: 12px;
 }
 .single-content .sidebar .address-map .address span {
     font-weight: 600;
@@ -4522,14 +4536,15 @@ label.mobile-label {
     position: relative;
     border: 1px solid #e1e3e8;
     border-radius: 6px;
+    order: 1;
 }
 .single-content .sidebar .address-map .map-container:before {
     border: 3px solid #EDEEF0;
     border-radius: 6px;
     z-index: 1;
     position: absolute;
-    width: 108px;
-    height: 94px;
+    width: 47px;
+    height: 47px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -5631,6 +5646,7 @@ label.mobile-label {
     .single-content .no-photo {
         height: 396px;
         margin-bottom: 0;
+        order: 1;
     }
     .single-content .single-main-slider {
         height: 396px;
@@ -5673,6 +5689,10 @@ label.mobile-label {
         min-height: 396px;
         min-width: 248px;
         margin-left: 15px;
+        order: 2;
+    }
+    .single-content .sidebar .address-map {
+        margin-bottom: 21px;
     }
     .single-content .slick-dotted.slick-slider {
         margin-bottom: 0;
@@ -5686,7 +5706,9 @@ label.mobile-label {
         box-shadow: 0 0 14px rgba(51, 54, 70, 0.14);
         height: auto;
         display: flex;
-        flex-direction: row-reverse;
+    }
+    .single-content .sidebar .address-map a.map-mobile-picture {
+        display: block;
     }
     .single-content .single-main-slider .slick-list {
         border-radius: 6px;
