@@ -287,13 +287,20 @@
 
                 <transition name="fade">
                 <div class="communication not-active" style="top:34px;position:relative;">
-                    <div class="load-more">
-                        <div class="btn btn-success" v-if="additional_load" @click.prevent="loadMore">{{ $t('Load more') }}</div>
+                    <div class="load-more" v-if="additional_load">
+                        <div class="btn btn-success" @click.prevent="loadMore">{{ $t('Load more') }}</div>
                     </div>
-                    <div class="description">
+                    <div class="description" v-if="!additional_load && !endoflist">
+                        {{ $t('The offers on your request are over, but you can check surrounding places within chosen distance') }}
+                    </div>
+                    <div class="description" v-if="!additional_load && endoflist">
                         {{ $t('The offers on your request are over, increase the distance or contact the manager directly') }}
                     </div>
-                    <div class="link-block">
+                    <div class="link-block" v-if="!additional_load && !endoflist">
+                        <a href="#" @click.prevent="loadMore">{{ $t('Load surrounding places') }}</a>
+                        <div class="shadow-block"></div>
+                    </div>
+                    <div class="link-block" v-if="!additional_load && endoflist">
                         <a href="#">{{ $t('Contact manager') }}</a>
                         <div class="shadow-block"></div>
                     </div>
@@ -632,15 +639,22 @@ export default{
         loadMore() {
             let that = this;
             that.page = ++that.page;
-
-            properties.byPage(that.page)
+            let params = {};
+            if (!this.additional_load) {
+                params.nocity = 1
+            }
+            properties.byPage(that.page, params)
                 .then( resp => {
                     that.property = that.property.concat(resp.data.objects.data);
                     that.loading = false;
                     that.additional_pages = resp.data.current_page < resp.data.last_page;
 
                     if (resp.data.objects.current_page  >= resp.data.objects.last_page - 1) {
+                        if (that.additional_load == false) {
+                            that.endoflist = true;
+                        }
                         that.additional_load = false;
+                        that.page = 0;
                     }
 
                     that.favoritesDisplay();
