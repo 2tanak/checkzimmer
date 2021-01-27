@@ -25,8 +25,17 @@ export default (base) => class ApiRequest {
 
         return client.get(`/api/${base}`, getConfig());
     }
-    byPage(page) {
-        return client.get(`/api/${base}?page=${page}`, getConfig());
+    byPage(page, params) {
+        params = params || {};
+        let query = [];
+        for (let key in params) {
+            query.push(key + '=' + params[key])
+        }
+        query = query.join('&');
+        if (query !== '') {
+            query = '&' + query;
+        }
+        return client.get(`/api/${base}?page=${page}${query}`, getConfig());
     }
     get(id) {
         return client.get(`/api/${base}/${id}`, getConfig());

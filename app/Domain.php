@@ -17,4 +17,22 @@ class Domain extends Model {
         }
         return '';
     }
+    function geo() {
+        foreach ($this->options->toArray() as $option) {
+            if ($option['key'] == 'latlng') {
+                return json_decode($option['value'], true);
+            }
+        }
+        return '';
+    }
+    static function getSubdomain() {
+        $url = url()->current();
+        if ($url == env('APP_URL', false)) {
+            return false;
+        }
+        $url = explode('//', $url);
+        $url = explode('.', $url[1]);
+
+        return self::where('subdomain', $url[0])->first();
+    }
 }
