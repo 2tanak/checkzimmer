@@ -1982,9 +1982,6 @@ label.mobile-label {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.load-more {
-    margin-bottom: 34px;
-}
 .load-more .btn {
     background: #6bb63f;
     border-color: #6bb63f;
@@ -2702,6 +2699,22 @@ label.mobile-label {
     .list-content .sample-block .distance-block.select-block .select2-selection__rendered {
         padding: 23px 13px 13px 13px;
     }
+    .list-content .sample-block .select-block .select-container {
+        position: relative;
+        background-color: #ffffff;
+    }
+    .list-content .sample-block .select-block .select-container:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 17px;
+        background-image: url('/svg/i-arrow-dropdown-input.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 10px;
+        height: 8px;
+    }
     .list-content .select-container {
         border-left: 4px solid #e7e7e7;
     }
@@ -2872,20 +2885,15 @@ label.mobile-label {
         border: 0;
         height: 58px;
         background: rgba(255,255,255,1);
+        -webkit-appearance: none;
+        padding-left: 17px;
+        padding-top: 10px;
     }
     .list-content .sample-block input {
         padding: 23px 16px 13px 16px;
     }
     .list-content .sample-block label {
         left: 20px;
-    }
-    .list-content .sample-block .distance-block select {
-        padding-left: 12px;
-        padding-top: 10px;
-    }
-    .list-content .sample-block .number-personse-block select {
-        padding-left: 14px;
-        padding-top: 10px;
     }
     .property-card img {
         width: 96px;
