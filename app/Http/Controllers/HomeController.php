@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain;
 use App\FeatureCategory;
 use App\Option;
 use App\Property;
@@ -29,8 +30,18 @@ class HomeController extends Controller
     public function index()
     {
         $options = Option::where('type', 'system')->get()->pluck('value', 'key');
+        $subdomain = Domain::getSubdomain();
+        $seoTite = '';
+        $seoDescr = '';
+        if ($subdomain) {
+            $seoTitle = $subdomain->seoTitle();
+            $seoDescription = $subdomain->seoDescription();
+        } else {
+            $seoTitle = $options['seo_title'];
+            $seoDescription = $options['seo_description'];
+        }
 
-        return view('home', compact('options'));
+        return view('home', compact('options', 'seoTitle', 'seoDescription'));
     }
 
     public function dashboard() {

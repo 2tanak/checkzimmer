@@ -9,21 +9,25 @@ class Domain extends Model {
     function options() {
         return $this->hasMany(Option::class, 'parent')->where('type', 'domain');
     }
-    function tagline() {
+    private function getOption($name) {
         foreach ($this->options->toArray() as $option) {
-            if ($option['key'] == 'tagline') {
+            if ($option['key'] == $name) {
                 return $option['value'];
             }
         }
         return '';
     }
+    function tagline() {
+        return $this->getOption('tagline');
+    }
     function geo() {
-        foreach ($this->options->toArray() as $option) {
-            if ($option['key'] == 'latlng') {
-                return json_decode($option['value'], true);
-            }
-        }
-        return '';
+        return $this->getOption('latlng');
+    }
+    function seoTitle() {
+        return $this->getOption('seo_title');
+    }
+    function seoDescription() {
+        return $this->getOption('seo_description');
     }
     static function getSubdomain() {
         $url = url()->current();
