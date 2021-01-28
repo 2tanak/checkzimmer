@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ $seoTitle ?? config('app.name', 'Laravel') }}</title>
-    <meta name="description" content="{{ $seoDescription }}">
+    <meta name="description" content="{{ $seoDescription ?? '' }}">
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Inter:400,500,600,700&display=swap&subset=cyrillic" rel="stylesheet">
