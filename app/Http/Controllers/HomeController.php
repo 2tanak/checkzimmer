@@ -37,14 +37,8 @@ class HomeController extends Controller
             $seoTitle = $subdomain->seoTitle();
             $seoDescription = $subdomain->seoDescription();
         } else {
-            foreach ($options as $option) {
-                if ($option['key'] == 'seo_title') {
-                    $seoTitle = $option['value'];
-                }
-                if ($option['key'] == 'seo_description') {
-                    $seoDescription = $option['value'];
-                }
-            }
+            $seoTitle = $options['seo_title'];
+            $seoDescription = $options['seo_description'];
         }
 
         return view('home', compact('options', 'seoTitle', 'seoDescription'));
