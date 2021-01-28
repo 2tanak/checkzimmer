@@ -66,7 +66,7 @@ class Property extends Model
                 unset($this->_photos[0]);
             }
         }
-        return $this->_photos;
+        return array_values($this->_photos);
     }
 
     public function photos()
