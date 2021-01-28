@@ -67,12 +67,12 @@
             </svg>
         </a>
     </div>
-@elseif (count($hotel->photos()) == 2):
+@elseif (count($hotel->photos()) == 2)
     <div class="single-gallery option-four">
         <div class="big-photo"><a class="open-gallery" href="#"><img src="{{ $hotel->photos()[0]['url_max300'] }}" alt="alt"></a></div>
         <div class="big-photo"><a class="open-gallery" href="#"><img src="{{ $hotel->photos()[1]['url_max300'] }}" alt="alt"></a></div>
     </div>
-@elseif (count($hotel->photos()) == 0):
+@elseif (count($hotel->photos()) == 0)
     <div class="no-photo">
         <div class="no-photo-small">
             <svg width="48" height="22" viewBox="0 0 48 22" fill="none" xmlns="http://www.w3.org/2000/svg">
