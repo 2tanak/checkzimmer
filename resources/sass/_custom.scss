@@ -1225,8 +1225,24 @@ h1.list-title {
     min-width: 156px;
     max-width: 156px;
     height: 156px;
-    border-radius: 4.625px;
-    background: #eaeaea;
+    border-radius: 6px;
+    background: #ededef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.property-card .no-photo .no-photo-small {
+    min-width: 32px;
+    max-width: 32px;
+    height: 32px;
+    background: #D8D8D8;
+    border-radius: 2px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.property-card .no-photo .no-photo-small svg {
+    margin-bottom: 5px;
 }
 .favorites {
     width: 26px;
@@ -2880,6 +2896,20 @@ label.mobile-label {
         max-width: 96px;
         height: 138px;
     }
+    .property-card .no-photo .no-photo-small {
+        min-width: 26px;
+        max-width: 26px;
+        height: 26px;
+        background: #D8D8D8;
+        border-radius: 2px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+    }
+    .property-card .no-photo .no-photo-small svg {
+        width: 20px;
+        height: 9px;
+    }
 }
 @media (max-width: 420px) {
     .property.not-map .property-card .distance .mobile-span {
@@ -2918,6 +2948,22 @@ label.mobile-label {
     margin-bottom: 19px;
     background: #eaeaea;
     border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.single-content .no-photo .no-photo-small {
+    min-width: 62px;
+    max-width: 62px;
+    height: 62px;
+    background: #D8D8D8;
+    border-radius: 2px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.single-content .no-photo .no-photo-small svg {
+    margin-bottom: 10px;
 }
 .single-content .main-block {
     width: 100%;

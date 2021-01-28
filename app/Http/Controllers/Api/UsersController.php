@@ -2,6 +2,7 @@
 
 use App\User;
 use Auth;
+use Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -37,21 +38,28 @@ class UsersController extends Controller
         ]);
 
         $data = $request->input();
+        $data['password'] = Hash::make($data['password']);
         $item = new User($data);
         $item->save();
-        return $item ? response()->json(['code' => 'ok', 'user' => $item]) : response()->json(['code' => 'error', 'message' => 'Ошибка сохранения']);
+        return $item ? response()->json(['code' => 'ok', 'user' => $item]) : response()->json(['code' => 'error', 'message' => __('Saving error')]);
     }
 
     public function update(Request $request, $id)
     {
         request()->validate([
             'name'     => 'required',
-            'password' => 'confirmed|min:5',
             'email'    => 'required|email'
         ]);
+        $data = $request->all();
         $user = User::find($id);
 
-        return $user->update($request->input()) ? response()->json(['code' => 'ok']) : response()->json(['code' => 'error', 'message' => 'Ошибка сохранения']);
+        if ($data['password']) {
+            $data['password'] = Hash::make($data['password']);
+        } else {
+            $data['password'] = $user->password;
+        }
+
+        return $user->update($data) ? response()->json(['code' => 'ok']) : response()->json(['code' => 'error', 'message' => __('Saving error')]);
     }
 
     public function destroy($id)

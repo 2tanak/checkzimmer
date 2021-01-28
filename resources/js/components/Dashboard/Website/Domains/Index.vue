@@ -34,7 +34,7 @@
                                             {{ domain.city }}
                                         </td>
                                         <td>
-                                            <a :href="'https://' + domain.subdomain + '.check-zimmer.de'" target="_blank">
+                                            <a :href="'http://' + domain.subdomain + '.check-zimmer.de'" target="_blank">
                                                 {{ domain.subdomain }}.check-zimmer.de
                                             </a>
                                         </td>

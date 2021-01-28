@@ -1,4 +1,5 @@
 <?php namespace App\Http\Controllers\Api;
+use App\Domain;
 use App\Feature;
 use App\Http\Controllers\Controller;
 use App\Option;
@@ -26,10 +27,27 @@ class PropertyController extends Controller
 
     public function index(PropertyListRequest $request)
     {
-        if (!$request->query('page')) {
-            $objects = Property::orderBy('ord')->get();
+        $subdomain = Domain::getSubdomain();
+
+        $paginate = $request->query('page');
+        $noCity = $request->query('nocity');
+
+        $objects = Property::orderBy('ord');
+
+        if ($subdomain) {
+            $relate = $noCity ? '!=' : '=';
+            $geo_data = $subdomain->geo();
+            $objects->where('city', $relate, $subdomain->city);
+            if ($noCity) {
+                $objects->where(Property::raw('abs('.$geo_data['lat'].' - lat) * 111'), '<', 60)
+                    ->where(Property::raw('abs('.$geo_data['lng'].' - lng) * 111'), '<', 60);
+            }
+        }
+
+        if (!$paginate) {
+            $objects = $objects->get();
         } else {
-            $objects = Property::orderBy('ord')->paginate(30);
+            $objects = $objects->paginate(30);
         }
 
         foreach($objects as $key => $object) {
@@ -44,6 +62,11 @@ class PropertyController extends Controller
     public function queryFilter(Request $request)
     {
         $data = $request->input();
+        $subdomain = Domain::getSubdomain();
+
+        $paginate = $request->query('page');
+        $noCity = $request->query('nocity');
+
         $address = $data['address'];
         $km = $data['km'] ? $data['km']  : 10;
         $people = $data['people'];
@@ -51,7 +74,14 @@ class PropertyController extends Controller
         $geo_data = $this->service->getCoords($address);
 
         $objects = Property::where(Property::raw('abs('.$geo_data['lat'].' - lat) * 111'), '<', $km)
-            ->where(Property::raw('abs('.$geo_data['lng'].' - lng) * 111'), '<', $km)->paginate(20);
+            ->where(Property::raw('abs('.$geo_data['lng'].' - lng) * 111'), '<', $km);
+
+        if ($subdomain) {
+            $relate = $noCity ? '!=' : '=';
+            $objects->where('city', $relate, $subdomain->city);
+        }
+
+        $objects = $objects->paginate(20);
 
         foreach($objects as $key => $object) {
             $ratings = $object->rating->toArray();
@@ -127,7 +157,7 @@ class PropertyController extends Controller
             'zip'       => 'required',
         ]);
 
-        $geo_data = $this->service->getCoords($request->address);
+        $geo_data = $this->service->getCoords($request->city . ' ' . $request->address);
 
         $data = [
             'name'      => $request->name,
@@ -166,6 +196,11 @@ class PropertyController extends Controller
 //            'rooms.*.options.*.value'      => 'required',
 //        ]);
         $fields = $request->all();
+
+        $geo_data = $this->service->getCoords($fields['city'] . ' ' . $fields['address']);
+
+        $fields['lat'] = $geo_data['lat'];
+        $fields['lng'] = $geo_data['lng'];
 
         foreach ($fields['rooms'] as $roomKey => $room){
             foreach ($room['options'] as $optionKey => $option){

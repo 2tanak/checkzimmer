@@ -113,7 +113,7 @@ export default {
             deleteGuest: {},
             guests: [],
             guestFields: [
-                this.$t('id'), this.$t('PIN'), this.$t('Name'), this.$t('E-mail'), this.$t('Active'), this.$t('Edit'), this.$t('Delete')
+                this.$t('id'), this.$t('pin'), this.$t('name'), this.$t('email'), this.$t('active'), this.$t('Edit'), this.$t('Delete')
             ],
             data: guestsTable
         }

@@ -112,7 +112,7 @@ export default {
             deleteUser: {},
             users: [],
             userFields: [
-                this.$t('id'), this.$t('Name'), this.$t('E-mail'), this.$t('Role'), this.$t('Edit'), this.$t('Delete')
+                this.$t('id'), this.$t('name'), this.$t('email'), this.$t('role'), this.$t('edit'), this.$t('delete')
             ],
             data: usersTable
         }
