@@ -6929,3 +6929,42 @@ label.mobile-label {
 }
 
 /*---end-plans---*/
+
+/*---pin---*/
+
+.single-content.pin-content {
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 165px);
+}
+.single-content.pin-content .left-part {
+    margin-right: 0;
+}
+.single-content.pin-content .main-block.pin-block {
+    padding: 20px;
+    margin-bottom: 0;
+}
+
+@media (max-width: 1211px) {
+    .single-content.pin-content {
+        padding-bottom: 0;
+    }
+    .single-content.pin-content .left-part {
+        width: auto;
+    }
+    .single-content.pin-content .main-top-block.pin-block-item {
+        margin-bottom: 0;
+        padding: 20px;
+        display: block;
+    }
+    .single-content.pin-content h1 {
+        display: block;
+    }
+}
+@media (max-width: 575px) {
+    .single-content.pin-content {
+        height: calc(100vh - 253px);
+    }
+}
+
+/*---end-pin---*/
