@@ -5,10 +5,10 @@
     @include('css.loader-single')
 
     <div class="container single-container">
-        <div class="single-content not-active">
+        <div class="single-content not-active pin-content">
             <div class="left-part">
-                <div class="main-block">
-                    <div class="main-top-block">
+                <div class="main-block pin-block">
+                    <div class="main-top-block pin-block-item">
                         <h1>{{ __('Object access denied') }}</h1>
                         {{ __('Please enter a PIN for access') }}
                         <form method="post" action="">
@@ -20,7 +20,7 @@
                                 <span class="text-danger">{{ __('Wrong PIN was entered') }}</span>
                             @endif
                             <input type="submit"
-                                   style="background: #6BB63F;border: none; border-radius: 6px;width: 100%;height: 54px; display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 16px; line-height: 100%; color: #FFFFFF; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16); text-decoration: none; margin-bottom: 16px;"
+                                   style="background: #6BB63F;border: none; border-radius: 6px;width: 100%;height: 54px; display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 16px; line-height: 100%; color: #FFFFFF; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16); text-decoration: none;"
                                 value="{{ __('Login') }}" />
                         </form>
                     </div>
