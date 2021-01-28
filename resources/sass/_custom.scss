@@ -5352,6 +5352,7 @@ label.mobile-label {
         min-height: 396px;
         min-width: 248px;
         margin-left: 15px;
+        order: 2;
     }
     .single-content .slick-dotted.slick-slider {
         margin-bottom: 0;
@@ -5365,7 +5366,9 @@ label.mobile-label {
         box-shadow: 0 0 14px rgba(51, 54, 70, 0.14);
         height: auto;
         display: flex;
-        flex-direction: row-reverse;
+    }
+    .single-content .sidebar .address-map a.map-mobile-picture {
+        display: block;
     }
     .single-content .single-main-slider .slick-list {
         border-radius: 6px;
