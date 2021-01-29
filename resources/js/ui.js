@@ -360,7 +360,6 @@ jQuery(document).ready(function() {
         infinite: true,
         asNavFor: '.big-slider',
         focusOnSelect: true,
-        centerMode: true,
         responsive: [
             {
                 breakpoint: 1212,

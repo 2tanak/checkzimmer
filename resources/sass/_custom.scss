@@ -3273,9 +3273,6 @@ label.mobile-label {
 .single-content .parameters .type {
     padding-left: 34px;
 }
-.single-content .price-situation .titles .title.padding-left {
-    margin-left: -8px;
-}
 .single-content .top-bloc-collapse .top-bloc-collapse-item {
     height: 36px;
     background-color: #f7f8fa;
@@ -5065,7 +5062,6 @@ label.mobile-label {
     cursor: pointer;
 }
 .slider-modal-overlay .small-slider {
-    width: 100%;
     height: 60px;
     margin-top: 24px;
     margin-bottom: 21px;
@@ -5106,11 +5102,6 @@ label.mobile-label {
 }
 .slider-modal-overlay .name-slide-number .dash {
     margin: 0 5px;
-}
-.slider-modal-overlay .small-slider .slick-track {
-    margin: auto;
-    display: flex;
-    justify-content: center;
 }
 .slider-modal-overlay .small-slider .slick-list {
     position: relative;
