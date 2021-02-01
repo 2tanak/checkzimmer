@@ -263,7 +263,7 @@
                                         @else
                                             <img src="/svg/i-multi.svg" alt="alt">
                                         @endif
-                                        {{$room->getPersonsText()}}
+                                        <span>{{$room->getName()}}</span>
                                     </div>
                                     <div class="quantity-item col-xl-2 col-lg-2 col-md-2 col-sm-2">{{$room->number}}x</div>
                                     <div class="personen-item col-xl-2 col-lg-2 col-md-2 col-sm-2 text-center">{{$room->person}}</div>

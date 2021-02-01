@@ -360,7 +360,6 @@ jQuery(document).ready(function() {
         infinite: true,
         asNavFor: '.big-slider',
         focusOnSelect: true,
-        centerMode: true,
         responsive: [
             {
                 breakpoint: 1212,
@@ -472,13 +471,15 @@ jQuery(window).on('load', function() {
         }, 400);
     });
 
-    jQuery('.single-main-slider').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        infinite: true,
-        dots: true
-    });
+    if (jQuery('.main-top-block .no-photo').length === 0) {
+        jQuery('.single-main-slider').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            infinite: true,
+            dots: true
+        });
+    }
 
 });
 
