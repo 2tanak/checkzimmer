@@ -5,8 +5,8 @@
             <div class="sidebar-top-block-item roominess-item">
                 <div class="title">{{ __('roomin.') }}:</div>
                 <div class="subtitle">
-                    @if ($hotel->getRoomPriceMin() != 0)
-                        {{ '€'.$hotel->getRoomPriceMin() }} – {{ $hotel->getRoomPersonsMax() }} чел.
+                    @if ($hotel->getRoomPersonsMin() != 0)
+                        {{ '€'.$hotel->getRoomPersonsMin() }} – {{ $hotel->getRoomPersonsMax() }} чел.
                     @else
                         n/a
                     @endif
