@@ -2700,6 +2700,21 @@ label.mobile-label {
         border-radius: 6px;
         border-bottom: 2px solid #e7e7e7;
     }
+    .list-content .sample-block .select-block .select-container {
+        position: relative;
+    }
+    .list-content .sample-block .select-block .select-container:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 17px;
+        background-image: url('/svg/i-arrow-dropdown-input.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 10px;
+        height: 8px;
+    }
     .list-content .sample-block .number-personse-block.select-block .select2-selection__rendered {
         padding: 23px 13px 13px 15px;
     }
