@@ -1172,7 +1172,7 @@ h1.list-title {
     padding-right: 20px;
 }
 .property-card .type th.title:first-of-type {
-    padding-left: 20px;
+    padding-left: 24px;
 }
 .property-card .type .type-block  {
     font-weight: 400;
@@ -1181,6 +1181,9 @@ h1.list-title {
     color: #333646;
     white-space: nowrap;
     text-align: center;
+}
+.property-card .type .type-block.price-block {
+    text-align: left;
 }
 .property-card .type .type-block:first-of-type {
     text-align: left;
@@ -2454,12 +2457,16 @@ label.mobile-label {
     }
 }
 @media (max-width: 767px) {
-    .property-card .table-container {
-        width: 388px;
-        overflow-x: auto;
-    }
-    .property-card .data {
+    .property-card .type {
         width: auto;
+    }
+    .property-card .type .type-block.filling-block {
+        max-width: none;
+        min-width: auto;
+        overflow: visible;
+    }
+    .property-card .table-container {
+        min-width: 300px;
     }
 }
 @media (max-width: 720px) {
@@ -3249,9 +3256,6 @@ label.mobile-label {
 }
 .single-content .parameters .type {
     padding-left: 34px;
-}
-.single-content .price-situation .titles .title.padding-left {
-    margin-left: -8px;
 }
 .single-content .top-bloc-collapse .top-bloc-collapse-item {
     height: 36px;
@@ -5042,7 +5046,6 @@ label.mobile-label {
     cursor: pointer;
 }
 .slider-modal-overlay .small-slider {
-    width: 100%;
     height: 60px;
     margin-top: 24px;
     margin-bottom: 21px;
@@ -5083,11 +5086,6 @@ label.mobile-label {
 }
 .slider-modal-overlay .name-slide-number .dash {
     margin: 0 5px;
-}
-.slider-modal-overlay .small-slider .slick-track {
-    margin: auto;
-    display: flex;
-    justify-content: center;
 }
 .slider-modal-overlay .small-slider .slick-list {
     position: relative;
