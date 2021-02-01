@@ -12,7 +12,6 @@ function getConfig() {
             'Authorization': 'Bearer ' + token
         }
     }
-    console.log(config);
     return config;
 }
 
