@@ -136,10 +136,8 @@ export default {
         }
     },
     mounted() {
-        jQuery(window).resize( () => {
-            console.log(jQuery(window).width());
+        jQuery(document).ready( () => {
             this.sizedForSlider = jQuery(window).width() > 1040;
-
         });
     },
     methods: {
