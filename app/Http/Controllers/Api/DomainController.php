@@ -144,7 +144,7 @@ class DomainController extends Controller
             $geoOption = new Option($optionsData);
             $geoOption->save();
         }
-        $option = Option::where('type', 'domain')->where('parent', $id)->where('key', 'seo_title')->first();
+        $option = Option::where('type', 'domain')->where('parent', $domain->id)->where('key', 'seo_title')->first();
         if (!$option) {
             $option = new Option();
         }
@@ -156,8 +156,7 @@ class DomainController extends Controller
         ];
         $option->fill($optionsData);
         $option->save();
-
-        $option = Option::where('type', 'domain')->where('parent', $id)->where('key', 'seo_description')->first();
+        $option = Option::where('type', 'domain')->where('parent', $domain->id)->where('key', 'seo_description')->first();
         if (!$option) {
             $option = new Option();
         }
@@ -170,6 +169,10 @@ class DomainController extends Controller
         $option->fill($optionsData);
         $option->save();
 
+        $option = Option::where('type', 'domain')->where('parent', $domain->id)->where('key', 'tagline')->first();
+        if (!$option) {
+            $option = new Option();
+        }
         $optionsData = [
             'key' => 'tagline',
             'parent' => $domain->id,
