@@ -48,6 +48,9 @@ class Property extends Model
         }
     }
 
+    public function getName() {
+
+    }
     private function getPhotos()
     {
         $this->getOptions();
@@ -190,7 +193,7 @@ class Property extends Model
     public function getRoomPersonsMax()
     {
         return array_reduce($this->rooms->toArray(), function ($carry, $item) {
-            return $item['person'] > $carry ? $item['person'] : $carry;
+            return $carry + ($item['price'] > 0 ? $item['number'] * $item['person'] : 0);
         }, 0);
     }
 
