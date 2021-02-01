@@ -884,6 +884,7 @@ h1.list-title {
     border-right: 4px solid #e7e7e7;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
     transition: all 0.4s ease;
+    text-align: center;
 }
 .list-content .sample-block a.find-housing:hover,
 .list-content .sample-block a.find-housing:active {
@@ -2692,6 +2693,21 @@ label.mobile-label {
         border-top: 2px solid #e7e7e7;
         border-radius: 6px;
         border-bottom: 2px solid #e7e7e7;
+    }
+    .list-content .sample-block .select-block .select-container {
+        position: relative;
+    }
+    .list-content .sample-block .select-block .select-container:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 17px;
+        background-image: url('/svg/i-arrow-dropdown-input.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 10px;
+        height: 8px;
     }
     .list-content .sample-block .number-personse-block.select-block .select2-selection__rendered {
         padding: 23px 13px 13px 15px;
