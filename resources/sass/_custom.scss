@@ -3282,8 +3282,9 @@ label.mobile-label {
 .single-content .top-bloc-collapse .name {
     font-weight: 700;
     font-size: 12px;
-    line-height: 300%;
     color: #333646;
+    display: flex;
+    align-items: center;
 }
 .single-content .top-bloc-collapse .name img {
     margin-right: 7px;
@@ -3306,8 +3307,9 @@ label.mobile-label {
 .single-content .top-bloc-collapse .price-item {
     font-weight: 500;
     font-size: 10px;
-    line-height: 300%;
     color: #333646;
+    display: flex;
+    align-items: center;
 }
 .single-content .price-situation .price-item span {
     font-weight: 700;
@@ -3348,12 +3350,17 @@ label.mobile-label {
 .single-content .price-situation .collapse-content-line .name {
     font-weight: 500;
     font-size: 12px;
-    line-height: 300%;
     color: #333646;
     display: flex;
     align-items: center;
     padding-left: 51px;
     position: relative;
+    padding-right: 0;
+}
+.single-content .price-situation .collapse-content-line .name span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .single-content .price-situation .collapse-content-line .name:before {
     background-image: url("/svg/stroke.svg");
