@@ -149,6 +149,11 @@ class Room extends Model
         return 'на много мест';
     }
 
+    public function getName () {
+        return array_reduce($this->options->toArray(), function($carry, $item) {
+            return $item['key'] == 'name' ? $item['value'] : $carry;
+        }, '');
+    }
     public function updateRelations(array $data)
     {
         //TODO вынести в трейт fillRelations
