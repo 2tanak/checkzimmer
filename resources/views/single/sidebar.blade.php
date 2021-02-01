@@ -4,7 +4,11 @@
             <img src="/svg/i-people.svg" alt="alt">
             <div class="sidebar-top-block-item roominess-item">
                 <div class="title">{{ __('roomin.') }}:</div>
-                <div class="subtitle">{{ $hotel->getRoomPersonsMin() }} – {{ $hotel->getRoomPersonsMax() }} {{ __('ppl') }}.</div>
+                @if ($hotel->getRoomPersonsMin() == 0)
+                    <div class="subtitle">{{ __('n/a') }}</div>
+                @else
+                    <div class="subtitle">{{ $hotel->getRoomPersonsMin() }} – {{ $hotel->getRoomPersonsMax() }} {{ __('ppl') }}.</div>
+                @endif
             </div>
         </div>
         @if ($hotel->type != 'affiliate')
