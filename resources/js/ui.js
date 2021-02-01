@@ -472,13 +472,15 @@ jQuery(window).on('load', function() {
         }, 400);
     });
 
-    jQuery('.single-main-slider').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        infinite: true,
-        dots: true
-    });
+    if (jQuery('.main-top-block .no-photo').length === 0) {
+        jQuery('.single-main-slider').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            infinite: true,
+            dots: true
+        });
+    }
 
 });
 
