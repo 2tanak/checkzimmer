@@ -91,7 +91,7 @@ export default {
             search: '',
             timer: null,
             loading: true,
-            fields: [this.$t('id'), this.$t('Original'), this.$t('Translation')],
+            fields: [this.$t('id'), this.$t('original'), this.$t('translation')],
         }
     },
     mounted() {
