@@ -94,8 +94,6 @@
     "Shower": "Shower",
     "Kitchen": "Kitchen",
     "Apartment": "apartment",
-    "Your": "your",
-    "its": "its",
     "The text of the comment to the table with prices. The offers on your request are over, increase the distance or contact the manager directly": "The text of the comment to the table with prices. The offers on your request are over, increase the distance or contact the manager directly",
     "Prices and furnishings": "Prices and furnishings",
     "Find the best housing for fitters in": "Find the best housing for fitters in",
@@ -329,6 +327,7 @@
     "Cost, from": "Cost, from",
     "Bed": "Bed",
     "Joint": "Joint",
+    "joint": "joint",
     "Absent": "Absent",
     "Single": "Single",
     "Double": "Double",
@@ -402,5 +401,9 @@
     "name": "name",
     "type": "type",
     "Choose a file or drop it here...": "Choose a file or drop it here...",
-    "Drop file here...": "Drop file here..."
+    "Drop file here...": "Drop file here...",
+    "of": "of",
+    "none": "none",
+    "many places": "many places",
+    "unknown": "unknown"
 }

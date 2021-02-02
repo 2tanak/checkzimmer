@@ -4163,20 +4163,26 @@ label.mobile-label {
     width: 149px;
     padding-bottom: 10px;
 }
-.single-content .sidebar .number-phone span.sh_nmr {
+.single-content .sidebar .number-phone .sh_nmr {
     position: absolute;
     z-index: 100;
     top: 50%;
     transform: translateY(-50%);
-    right: 13px;
+    right: 0;
     font-weight: 500;
     font-size: 12px;
     line-height: 100%;
     color: #3B8B3E;
     cursor: pointer;
-    transition-duration: .4s;
+    transition-duration: 0.4s;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 13px;
 }
-.single-content .sidebar .number-phone:hover span.sh_nmr {
+.single-content .sidebar .number-phone:hover .sh_nmr {
     color: #333646;
     transition-duration: .4s;
 }
@@ -5074,6 +5080,11 @@ label.mobile-label {
     margin-top: 24px;
     margin-bottom: 21px;
     position: relative;
+}
+.slider-modal-overlay .small-slider.transform .slick-track {
+    transform: translate3d(0px, 0px, 0px) !important;
+    display: flex;
+    justify-content: center;
 }
 .slider-modal-overlay .small-slider .slider-item {
     width: 86px !important;
