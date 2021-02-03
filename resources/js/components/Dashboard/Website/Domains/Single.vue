@@ -1,6 +1,6 @@
 <template>
     <section>
-        <router-link :to="{name: 'website-domains'}">{{ $t('All Domains') }}</router-link>
+        <router-link :to="{name: 'website-domains'}" class="all-domains">{{ $t('All Domains') }}</router-link>
         <h1>{{ $t('Edit domain')}} {{domain.subdomain }}</h1>
         <Forms v-model="domain" :fields="domain" :data="domainFields" />
         <hr>

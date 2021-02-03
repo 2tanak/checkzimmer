@@ -67,10 +67,11 @@
     "Wrong PIN was entered": "Wrong PIN was entered",
     "Please enter a PIN for access": "Please enter a PIN for access",
     "Min. lease term": "Min. lease term",
-    "Days": "days",
+    "Days": "Days",
+    "days": "days",
     "From": "from",
-    "Per person (including VAT)": "per person (including VAT)",
-    "Show": "show",
+    "per person (including VAT)": "per person (including VAT)",
+    "show": "show",
     "Speaks": "Speaks",
     "Share": "Share",
     "Send": "Send",
@@ -405,5 +406,11 @@
     "of": "of",
     "none": "none",
     "many places": "many places",
-    "unknown": "unknown"
+    "unknown": "unknown",
+    "Sentence": "Sentence",
+    "Complaint or suggestion text": "Complaint or suggestion text",
+    "Reason complaint": "Reason complaint",
+    "Report": "Report",
+    "Print": "Print",
+    "roomin.": "roomin."
 }
