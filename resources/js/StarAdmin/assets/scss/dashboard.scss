@@ -36,6 +36,22 @@
     right: 0;
     min-width: 75px;
 }
+a.all-domains {
+    background-color: #17a2b8;
+    border: 1px solid #17a2b8;
+    transition: all 0.2s;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0.56rem 1.375rem;
+    border-radius: 0.1875rem;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+a.all-domains:hover {
+    transition: all 0.2s;
+    background-color: #ffffff;
+    color: #17a2b8;
+}
 
 
 @media (max-width: 991px) {

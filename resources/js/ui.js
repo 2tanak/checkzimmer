@@ -286,10 +286,10 @@ jQuery(document).ready(function() {
     });
 
     jQuery(document).mouseup(function (e){
-        var div = jQuery(".sidebar-small-block");
+        var div = jQuery(".quality");
         if (!div.is(e.target)
             && div.has(e.target).length === 0) {
-            jQuery('.sidebar-small-block').removeClass('active');
+            jQuery('.quality').removeClass('active');
         }
     });
 
