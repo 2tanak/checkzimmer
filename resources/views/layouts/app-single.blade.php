@@ -55,7 +55,7 @@
                             <a href="{{ route(app('locale')->routeApply('favorites')) }}">
                                 <img class="normal" src="/svg/i-favourites-header.svg" alt="Favourites">
                                 <img class="hover" src="/svg/i-favourites-hover.svg" alt="Favourites">
-                                {{ __('Favorites') }} (<span class="favoritesCount"></span>)
+                                {{ __('Favorites') }} (<span class="favoritesCount">0</span>)
                             </a>
                         </li><li>
                             <a href="{{ route(app('locale')->routeApply('plans')) }}">

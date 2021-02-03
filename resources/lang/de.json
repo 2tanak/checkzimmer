@@ -66,9 +66,10 @@
     "Please enter a PIN for access":"Bitte geben Sie den Pin ein",
     "Min. lease term":"Min. Miet-Dauer",
     "Days":"Tage",
+    "days":"tage",
     "From":"ab",
-    "Per person (including VAT)":"pro Person (inkl. MwSt)",
-    "Show":"Anzeigen",
+    "per person (including VAT)": "pro person (inkl. MwSt)",
+    "show":"anzeigen",
     "Speaks":"Spricht",
     "Share":"Teilen",
     "Send":"Senden",
@@ -400,5 +401,11 @@
     "of": "ab",
     "none": "nein",
     "many places": "viele Orte",
-    "unknown": "unbekannt"
+    "unknown": "unbekannt",
+    "Sentence": "Satz",
+    "Complaint or suggestion text": "Beschwerde oder Vorschlagstext",
+    "Reason complaint": "Grundbeschwerde",
+    "Report": "Bericht",
+    "Print": "Drucken",
+    "roomin.": "geräum."
 }
