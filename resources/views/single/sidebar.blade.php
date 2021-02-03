@@ -39,7 +39,9 @@
         @else
             <div class="number-phone">
                 <a href="tel:+4917616573456">+49 176&nbsp;<span class="num_hide">1657 3456</span></a>
-                <span class="sh_nmr">{{ __('show') }}</span>
+                <div class="sh_nmr">
+                    <span>{{ __('show') }}</span>
+                </div>
                 <div class="message">{{ __('Let us know that you are from the site Check-zimmer.de') }}</div>
                 <div class="language">
                     <div class="speaks">{{ __('Speaks') }}:</div>
@@ -48,7 +50,10 @@
             </div>
         @endif
         <div class="address-map">
-            <div class="address">{{$hotel->address}}<span></span> {{$hotel->zip}} {{$hotel->city}} </div>
+            <div class="address">
+                <div>{{$hotel->address}}</div>
+                <div style="white-space: nowrap;">{{$hotel->zip}} {{$hotel->city}}</div>
+            </div>
             <div class="map-container">
                 <a class="map-picture" href="#object-description">
                     <svg width="102" height="88" fill="none" xmlns="http://www.w3.org/2000/svg">

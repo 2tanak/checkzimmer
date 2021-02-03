@@ -223,6 +223,7 @@ jQuery(document).ready(function() {
         jQuery('.sh_nmr').textToggle(".num_hide","ХХХХ ХХХX").click();
         jQuery('.sh_nmr').click(function () {
             jQuery('.sidebar .number-phone').addClass('gray');
+            jQuery('.sh_nmr').css('display', 'none');
         });
     });
 
@@ -346,11 +347,10 @@ jQuery(document).ready(function() {
         prevArrow: '<img class="prev-arrow" src="/svg/i-previous-lightbox.svg">',
         nextArrow: '<img class="next-arrow" src="/svg/i-next-lightbox.svg">',
         fade: true,
-        asNavFor: '.small-slider',
-        cssEase: 'ease-in',
         slidesToShow: 1,
         slidesToScroll: 1,
         infinite: true,
+        asNavFor: '.small-slider'
     });
 
     jQuery('.small-slider').slick({
@@ -358,8 +358,9 @@ jQuery(document).ready(function() {
         slidesToScroll: 1,
         arrows: false,
         infinite: true,
-        asNavFor: '.big-slider',
         focusOnSelect: true,
+        asNavFor: '.big-slider',
+        centerMode: true,
         responsive: [
             {
                 breakpoint: 1212,
@@ -479,6 +480,12 @@ jQuery(window).on('load', function() {
             infinite: true,
             dots: true
         });
+    }
+
+    if(jQuery('.small-slider .slider-item').length <= 10) {
+        jQuery('.small-slider').addClass('transform');
+    } else {
+        jQuery('.small-slider').removeClass('transform');
     }
 
 });
