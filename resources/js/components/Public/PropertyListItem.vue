@@ -154,7 +154,6 @@ export default {
             return room.options.find( elem => elem.key === name);
         },
         sumPeopleNum() {
-            console.log(this.item.rooms.reduce((sum, n) => sum + n.person, 0));
             if (!this.item.rooms.some( elem => elem.person > 0 )) {
                 return 'n/a';
             }
