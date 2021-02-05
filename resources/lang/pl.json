@@ -65,7 +65,7 @@
     "Show phone": "Show phone",
     "Object owner speaks": "Object owner speaks",
     "Wrong PIN was entered": "Wrong PIN was entered",
-    "Please enter a PIN for access": "Please enter a PIN for access",
+    "Please enter a (PIN) for access": "Please enter a (PIN) for access",
     "Min. lease term": "Min. lease term",
     "Days": "Days",
     "days": "days",
@@ -412,5 +412,6 @@
     "Reason complaint": "Reason complaint",
     "Report": "Report",
     "Print": "Print",
-    "roomin.": "roomin."
+    "roomin.": "roomin.",
+    "Back": "Back"
 }

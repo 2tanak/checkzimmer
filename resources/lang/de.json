@@ -63,7 +63,7 @@
     "Show phone":"Telefon anzeigen",
     "Object owner speaks":"Der Eigent\u00fcmer spricht",
     "Wrong PIN was entered":"Falscher Pin wurde eingegeben",
-    "Please enter a PIN for access":"Bitte geben Sie den Pin ein",
+    "Please enter a (PIN) for access":"Bitte geben Sie den (Pin) ein",
     "Min. lease term":"Min. Miet-Dauer",
     "Days":"Tage",
     "days":"tage",
@@ -407,5 +407,6 @@
     "Reason complaint": "Grundbeschwerde",
     "Report": "Bericht",
     "Print": "Drucken",
-    "roomin.": "geräum."
+    "roomin.": "geräum.",
+    "Back": "Zurück"
 }
