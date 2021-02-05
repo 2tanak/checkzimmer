@@ -101,7 +101,7 @@
                                     <h4>{{ $t('Facilities') }}</h4>
                                     <template v-for="feature in features">
                                         <div class="comfort-block mt-5">
-                                            <h3>{{feature. name }}</h3>
+                                            <h3>{{feature.name }}</h3>
                                             <div class="row">
                                                 <div class="col-md-3 col-sm-4 col-6 comfort-block-item mt-2" v-for="itemFeature in feature.features">
                                                     <img :src="itemFeature.picture" alt="alt">
