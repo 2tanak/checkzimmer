@@ -1,6 +1,6 @@
 <template>
     <section>
-        <router-link :to="{name: 'website-domains'}">{{ $t('All Domains') }}</router-link>
+        <router-link :to="{name: 'website-domains'}" class="all-domains">{{ $t('All Domains') }}</router-link>
         <h1>{{ $t('Edit domain')}} {{domain.subdomain }}</h1>
         <Forms v-model="domain" :fields="domain" :data="domainFields" />
         <hr>
@@ -35,9 +35,11 @@ export default {
                 subdomain: '',
                 city: '',
                 active: true,
-                seo_title: '',
-                seo_description: '',
-                tagline: ''
+                options: {
+                    seo_title: '',
+                    seo_description: '',
+                    tagline: ''
+                }
             },
             domainFields: domainsForm,
         }
@@ -45,13 +47,21 @@ export default {
     mounted() {
         subdomains.get(this.$route.params.domain)
             .then(resp => {
-                this.domain = resp.data;
+                delete resp.data.geo;
+                this.domain.subdomain = resp.data.subdomain;
+                this.domain.city = resp.data.city;
+                this.domain.options.seo_title = resp.data.options.seo_title;
+                this.domain.options.seo_description = resp.data.options.seo_description;
+                this.domain.options.tagline = resp.data.options.tagline;
             })
     },
     methods: {
         save() {
+            console.log(this.domain);
             subdomains.update(this.$route.params.domain, this.domain)
                 .then(resp => {
+                    console.log('***');
+                    console.log(this.domain);
                     if (this.domain.subdomain !== this.$route.params.domain) {
                         this.$router.push( {name: 'website-domains-single', params: {domain: this.domain.subdomain}} )
                     }
