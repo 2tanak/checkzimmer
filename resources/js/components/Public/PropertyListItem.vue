@@ -157,7 +157,7 @@ export default {
             if (!this.item.rooms.some( elem => elem.person > 0 )) {
                 return 'n/a';
             }
-            return this.item.rooms.reduce((sum, elem) => sum + elem.person, 0)
+            return this.item.rooms.reduce((sum, elem) => sum + elem.person * elem.number, 0)
         },
         addToFavorites() {
             let id = this.item.id;
