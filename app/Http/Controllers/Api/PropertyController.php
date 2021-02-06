@@ -119,7 +119,6 @@ class PropertyController extends Controller
     public function show($id)
     {
         $property = Property::findOrFail($id);
-
         return response()->json($property);
     }
 
@@ -196,6 +195,21 @@ class PropertyController extends Controller
 //            'rooms.*.options.*.value'      => 'required',
 //        ]);
         $fields = $request->all();
+
+        $option = Option::where('parent', $fields['id'])->where('key', 'hide_address')->first();
+        if ($option==null) {
+            $optionsData = [
+                'key' => 'hide_address',
+                'parent' => $fields['id'],
+                'type' => 'property',
+                'value' => $fields['hideAdress'],
+            ];
+            $option = new Option($optionsData);
+            $option->save();
+        }else{
+            $option->value = ($fields['hideAdress']==false)?"false":$fields['hideAdress'];
+            $option->save();
+        }
 
         $geo_data = $this->service->getCoords($fields['city'] . ' ' . $fields['address']);
 

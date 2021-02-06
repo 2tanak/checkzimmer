@@ -30,7 +30,7 @@
                                         <small v-if="!property.access" class="text-info">{{ $t('Free access') }}</small>
                                         <small v-else class="text-danger">{{ $t('access is limited by the specified PIN codes. Codes can be separated by commas') }}</small>
                                     </b-form-group>
-                                    <b-form-checkbox v-model="hideAdress" value="Hide address">{{ $t('Hide address') }}</b-form-checkbox>
+                                    <b-form-checkbox v-model="hideAdress" value="true">{{ $t('Hide address') }}</b-form-checkbox>
                                 </div>
                             </div>
                         </div>
@@ -334,12 +334,12 @@ export default {
                 this.rooms = this.property.rooms;
                 this.property.rooms.forEach( room => room.photos = this.getRoomPhotos(room));
                 this.imageData = this.getPhotos();
+                this.hideAdress = this.getHideAddressStatus(this.property.options);
                 this.property.rooms.forEach(item => {
                     item.options[3] = item.options[3] || '';
                     item.options[4] = item.options[4] || '';
                     return item;
                 });
-
                 features.all()
                     .then(res => {
                         if(res.status === 200) {
@@ -435,6 +435,12 @@ export default {
         getDescription(item) {
             return this.getFieldValue('description', item,'');
         },
+        getHideAddressStatus(options){
+            let res = options.filter(it => it.key == 'hide_address');
+            if(res[0]!=undefined)
+                return res[0].value;
+            //может returt res[0] ? res[0].value;
+        },
         getRoomPhotos(item) {
             return this.getFieldValue('photos', item,'', true);
         },
@@ -482,6 +488,7 @@ export default {
                 }
                 delete room.photos;
             });
+            this.property.hideAdress = this.hideAdress;
             properties.update(this.property.id, this.property)
                 .then(resp => {
                     properties.get(this.$route.params.item)
