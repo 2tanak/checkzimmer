@@ -436,10 +436,8 @@ export default {
             return this.getFieldValue('description', item,'');
         },
         getHideAddressStatus(options){
-            let res = options.filter(it => it.key == 'hide_address');
-            if(res[0]!=undefined)
-                return res[0].value;
-            //может returt res[0] ? res[0].value;
+            if(options.filter(it => it.key == 'hide_address').length === 1)
+                return true
         },
         getRoomPhotos(item) {
             return this.getFieldValue('photos', item,'', true);

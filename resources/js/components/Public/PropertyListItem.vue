@@ -23,7 +23,7 @@
             <div class="data">
                 <a :href="'/'+$i18n.locale+'/single/'+item.slug" class="title"><span>{{ item.name }}</span></a>
                 <div class="data-item">
-                    <div class="geolocation">
+                    <div v-if="hideAdress" class="geolocation">
                         <img src="/svg/i-pin.svg" alt="">
                         {{ item.zip }}, {{ item.city }}
                     </div>
@@ -132,7 +132,8 @@ export default {
     data() {
         return {
             sizedForSlider: true,
-            NoPhoto: false
+            NoPhoto: false,
+            hideAdress: true,
         }
     },
     mounted() {
@@ -140,7 +141,14 @@ export default {
             this.sizedForSlider = jQuery(window).width() > 1040;
         });
     },
+    created() {
+        this.checkHideAdressStatus();
+    },
     methods: {
+        checkHideAdressStatus(){
+            if(this.item.options.filter(it => it.key == 'hide_address').length === 1)
+                this.hideAdress = false;
+        },
         findOption(name) {
             if (!this.item.options) {
                 return false;

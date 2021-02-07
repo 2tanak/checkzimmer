@@ -197,19 +197,19 @@ class PropertyController extends Controller
         $fields = $request->all();
 
         $option = Option::where('parent', $fields['id'])->where('key', 'hide_address')->first();
-        if ($option==null) {
+        if($fields['hideAdress'] && $option==null){
             $optionsData = [
                 'key' => 'hide_address',
                 'parent' => $fields['id'],
                 'type' => 'property',
-                'value' => $fields['hideAdress'],
+                'value' => 'true',
             ];
             $option = new Option($optionsData);
             $option->save();
-        }else{
-            $option->value = ($fields['hideAdress']==false)?"false":$fields['hideAdress'];
-            $option->save();
+        }elseif(!$fields['hideAdress'] && $option){
+            $option->delete();
         }
+
 
         $geo_data = $this->service->getCoords($fields['city'] . ' ' . $fields['address']);
 
