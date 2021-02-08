@@ -156,7 +156,6 @@ class PropertyController extends Controller
             'address'   => 'required',
             'zip'       => 'required',
         ]);
-
         $geo_data = $this->service->getCoords($request->city . ' ' . $request->address);
 
         $data = [
@@ -186,8 +185,8 @@ class PropertyController extends Controller
         $item->options()->create($optionsData);
 
         $item->save();
-
-        return $item ? response()->json(['code' => 'ok','user' => $item]) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
+        $item = Property::find($item->id);
+        return $item ? response()->json(['code' => 'ok','property' => $item]) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
     }
 
     public function update(Property $property, Request $request)
