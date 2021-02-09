@@ -463,6 +463,9 @@ export default {
                 })
         },
         save() {
+            this.imageData.forEach(function (item , i) {
+                (i===0) ? item.main_photo = true : delete item.main_photo;
+            });
             for(let option of this.property.options){
                 if(option.key === 'photos'){
                     option.value = JSON.stringify(this.imageData);
