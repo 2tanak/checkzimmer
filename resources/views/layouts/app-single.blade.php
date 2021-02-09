@@ -159,14 +159,17 @@
                 <div class="input-block-item">
                     <input id="name" type="text">
                     <label for="name">{{ __('Name and Surname') }}*</label>
+                    <div class="validation-block">{{ __('Please fill in this field') }}</div>
                 </div>
                 <div class="input-block-item">
                     <input id="email" type="email">
                     <label for="email">{{ __('Email') }}*</label>
+                    <div class="validation-block">{{ __('Please fill in this field') }}</div>
                 </div>
                 <div class="input-block-item">
                     <input id="telephone" type="tel">
                     <label for="telephone">{{ __('Phone number') }}*</label>
+                    <div class="validation-block">{{ __('Please fill in this field') }}</div>
                 </div>
                 <div class="data-block">
                     <input id="arrival-date" data-provide="datepicker" readonly>

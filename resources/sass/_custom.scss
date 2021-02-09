@@ -4685,6 +4685,11 @@ label.mobile-label {
     opacity: 1;
     visibility: visible;
 }
+.inquiry-modal .validation-block {
+    color: red;
+    font-size: 12px;
+    display: none;
+}
 .inquiry-modal .title {
     margin-bottom: 22px;
     font-weight: 600;
