@@ -34,12 +34,6 @@
         <b-form-group :label="$t('Text in the button form search')">
             <b-form-input v-model="domain.options.text_button" />
         </b-form-group>
-        <b-form-group :label="$t('Text when real estate offers in nearby locations have run out')">
-            <b-form-input v-model="domain.options.text_description" />
-        </b-form-group>
-        <b-form-group :label="$t('Text button Load surrounding places')">
-            <b-form-input v-model="domain.options.text_load_surrounding" />
-        </b-form-group>
         <b-button variant="success" @click.prevent="save">{{ $t('Save') }}</b-button>
     </section>
 </template>
@@ -69,11 +63,9 @@ export default {
                     number_phone: '',
                     placeholder: '',
                     text_button: '',
-                    text_description: '',
                     label_input: '',
                     label_distance: '',
-                    label_people: '',
-                    text_load_surrounding: ''
+                    label_people: ''
                 }
             },
             domainFields: domainsForm,
@@ -91,11 +83,9 @@ export default {
                 this.domain.options.number_phone = resp.data.options.number_phone;
                 this.domain.options.placeholder = resp.data.options.placeholder;
                 this.domain.options.text_button = resp.data.options.text_button;
-                this.domain.options.text_description = resp.data.options.text_description;
                 this.domain.options.label_distance = resp.data.options.label_distance;
                 this.domain.options.label_people = resp.data.options.label_people;
                 this.domain.options.label_input = resp.data.options.label_input;
-                this.domain.options.text_load_surrounding = resp.data.options.text_load_surrounding;
             })
     },
     methods: {
