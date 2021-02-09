@@ -35,6 +35,27 @@
                     </div>
 
                     <div class="row mt-4 mb-4">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <b-form-group :label="$t('Сustomer name')">
+                                        <b-form-input v-model="customerName"></b-form-input>
+                                    </b-form-group>
+                                    <b-form-group :label="$t('Сlients surname')">
+                                        <b-form-input v-model="clientsSurname"></b-form-input>
+                                    </b-form-group>
+                                    <b-form-group :label="$t('Number phone')">
+                                        <b-form-input v-model="numberPhone"></b-form-input>
+                                    </b-form-group>
+                                    <b-form-group :label="$t('Client email')">
+                                        <b-form-input v-model="clientEmail"></b-form-input>
+                                    </b-form-group>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4 mb-4">
                         <div class="col-md-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
