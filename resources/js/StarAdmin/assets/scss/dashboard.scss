@@ -52,6 +52,16 @@ a.all-domains:hover {
     background-color: #ffffff;
     color: #17a2b8;
 }
+.custom-control-label::before {
+    top: 0;
+}
+.checkbox-block .bv-no-focus-ring {
+    display: flex;
+    align-items: center;
+}
+.checkbox-block .custom-checkbox {
+    margin-right: 25px;
+}
 
 
 @media (max-width: 991px) {

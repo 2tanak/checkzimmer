@@ -25,7 +25,7 @@
                     </clipPath>
                 </defs>
             </svg>
-            <span>Напиcать в WhatsApp</span>
+            <span>{{ __('Write to WhatsApp') }}</span>
         </a>
         <h1 class="list-title">{{ __($domain->tagline()) }}</h1>
         <div class="container">
@@ -64,15 +64,15 @@
             <div class="checkbox-form-block">
                 <div class="checkbox-item single-rooms-checkbox">
                     <input type="checkbox" id="single-rooms" class="checkbox">
-                    <label for="single-rooms">Одноместные номера</label>
+                    <label for="single-rooms">{{ __('Single rooms') }}</label>
                 </div>
                 <div class="checkbox-item double-rooms-checkbox">
                     <input type="checkbox" id="double-rooms" class="checkbox">
-                    <label for="double-rooms">Двухместные номера</label>
+                    <label for="double-rooms">{{ __('Double rooms')}}</label>
                 </div>
                 <div class="checkbox-item multi-bed-rooms-checkbox">
                     <input type="checkbox" id="multi-bed-rooms" class="checkbox">
-                    <label for="multi-bed-rooms">Многоместные номера</label>
+                    <label for="multi-bed-rooms">{{ __('Multi-bed rooms') }}</label>
                 </div>
             </div>
         </div>
