@@ -407,5 +407,22 @@
     "Reason complaint": "Grundbeschwerde",
     "Report": "Bericht",
     "Print": "Drucken",
-    "roomin.": "geräum."
+    "roomin.": "geräum.",
+    "Number Phone": "Telefonnummer",
+    "Picture": "Bild",
+    "Choose a picture or drop it here...": "Wählen Sie ein Bild oder legen Sie es hier ab ...",
+    "Home page tagline": "Homepage-Slogan",
+    "Home page SEO description": "Startseite SEO Beschreibung",
+    "Home page SEO title": "Startseite SEO Titel",
+    "Domain active": "Domain aktiv",
+    "Subdomain is active": "Subdomain ist aktiv",
+    "Edit domain": "Domain bearbeiten",
+    "All Domains": "Alle Domänen",
+    "Placeholder in the input form search": "Platzhalter in der Eingabeformularsuche",
+    "Text in the button form search": "Text in der Schaltflächenformularsuche",
+    "Text when real estate offers in nearby locations have run out": "Text, wenn Immobilienangebote in der Nähe abgelaufen sind",
+    "Label in the input form search": "Beschriftung in der Eingabeformularsuche",
+    "Label in the select distance": "Beschriften Sie in der ausgewählten Entfernung",
+    "Label in the select num people": "Beschriften Sie in der ausgewählten Anzahl Personen",
+    "Text button Load surrounding places": "Textschaltfläche Umliegende Orte laden"
 }
