@@ -63,6 +63,8 @@
                                             <b-form-group :label="$t('Address')" label-for="input-hotel-address">
                                                 <b-form-input v-model="property.address" id="input-hotel-address"></b-form-input>
                                             </b-form-group>
+                                            <b-form-checkbox v-model="hideZip">{{ $t('Hide Zip') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="hideAddress">{{ $t('Hide Adress') }}</b-form-checkbox>
                                         </div>
                                     </div>
                                 </div>
