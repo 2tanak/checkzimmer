@@ -410,8 +410,6 @@
     "roomin.": "geräum.",
     "Bathroom": "Bathroom",
     "Other": "Andere",
-    "Outside": "Draußen"
-    "roomin.": "geräum.",
     "Number Phone": "Telefonnummer",
     "Picture": "Bild",
     "Choose a picture or drop it here...": "Wählen Sie ein Bild oder legen Sie es hier ab ...",
@@ -426,5 +424,7 @@
     "Text in the button form search": "Text in der Schaltflächenformularsuche",
     "Label in the input form search": "Beschriftung in der Eingabeformularsuche",
     "Label in the select distance": "Beschriften Sie in der ausgewählten Entfernung",
-    "Label in the select num people": "Beschriften Sie in der ausgewählten Anzahl Personen"
+    "Label in the select num people": "Beschriften Sie in der ausgewählten Anzahl Personen",
+    "Outside": "Draußen",
+    "Features translate": "Funktionen übersetzen"
 }

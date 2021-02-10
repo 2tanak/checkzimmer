@@ -415,8 +415,7 @@
     "roomin.": "roomin.",
     "Bathroom": "Bad",
     "Other": "Other",
-    "Outside": "Outside"
-    "roomin.": "roomin.",
+    "Outside": "Outside",
     "Number Phone": "Number Phone",
     "Picture": "Picture",
     "Choose a picture or drop it here...": "Choose a picture or drop it here...",
@@ -431,5 +430,6 @@
     "Text in the button form search": "Text in the button form search",
     "Label in the input form search": "Label in the input form search",
     "Label in the select distance": "Label in the select distance",
-    "Label in the select num people": "Label in the select num people"
+    "Label in the select num people": "Label in the select num people",
+    "Features translate": "Features translate"
 }
