@@ -1,6 +1,9 @@
 <template>
     <section class="header-dashboard">
-        <h1>{{ $t('Object mapping') }}</h1>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+            <h1>{{ $t('Object mapping') }}</h1>
+            <b-button style="margin-right:0 !important;" type="submit" variant="success" class="mr-2" @click.prevent="save">{{ $t('Save') }}</b-button>
+        </div>
 
         <div class="row mt-5">
             <div class="col-md-12 col-lg-6 mt-4">

@@ -92,7 +92,7 @@
     "Bed type":"Bett-Typ",
     "Shower":"Dusche",
     "Kitchen":"K\u00fcche",
-    "Apartment":"Wohnung",
+    "apartment":"Wohnung",
     "The text of the comment to the table with prices. The offers on your request are over, increase the distance or contact the manager directly":"Der Text des Kommentars zu der Preis-Tabelle. Das ausgew\u00e4hlte Angebot ist abgelaufen, erh\u00f6hen Sie die Entfernung oder kontaktieren Sie den Manager direkt.",
     "Prices and furnishings":"Preise und Einrichtung",
     "Find the best housing for fitters in":"Finden Sie die beste Monteur-Unterkunft in",
@@ -408,5 +408,7 @@
     "Report": "Bericht",
     "Print": "Drucken",
     "roomin.": "geräum.",
-    "Please fill in this field": "Bitte füllen Sie dieses Feld aus"
+    "Bathroom": "Bathroom",
+    "Other": "Andere",
+    "Outside": "Draußen"
 }
