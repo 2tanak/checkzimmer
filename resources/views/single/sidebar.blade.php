@@ -51,8 +51,10 @@
         @endif
         <div class="address-map">
             <div class="address">
-                <div>{{ $hotel->name }} {{$hotel->address}}</div>
-                <div style="white-space: nowrap;">{{$hotel->zip}} {{$hotel->city}}</div>
+                <div class="hotel-name">{{$hotel->name}}</div>
+                <div class="name-surname"></div>
+                <div class="hotel-adress">{{$hotel->address}}</div>
+                <div class="zip-city" style="white-space: nowrap;">{{$hotel->zip}} {{$hotel->city}}</div>
             </div>
             <div class="map-container">
                 <a class="map-picture" href="#object-description">
