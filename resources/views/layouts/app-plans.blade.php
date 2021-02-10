@@ -22,7 +22,7 @@
 </head>
 <body>
 <div id="app" class="property-list">
-    <header>
+    <header class="height-menu">
         <div class="container">
             <div class="header-content">
                 <div class="mobile-button">
@@ -98,6 +98,8 @@
         </div>
 
         <div class="mobile-menu">
+             <div class="mobile-menu-content">
+
             <ul>
                 <li>
                     <a href="{{ route(app('locale')->routeApply('favorites')) }}">
@@ -121,6 +123,7 @@
                 {{ $options['website_phone'] ?? '' }}
             </a>
             @include('partials.lang-switch-mobile')
+        </div>
         </div>
 
     </header>
