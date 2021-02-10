@@ -53,6 +53,14 @@
                                     <b-form-group :label="$t('Address')" label-for="input-hotel-address">
                                         <b-form-input v-model="property.address" id="input-hotel-address"></b-form-input>
                                     </b-form-group>
+                                    <b-form-group>
+                                        <b-form-checkbox id="vat"
+                                                         v-model="tax"
+                                                         name="vat"
+                                                         value="including taxes"
+                                                         unchecked-value="not including taxes">
+                                            {{ $t('Tax (VAT) is included in the price') }}</b-form-checkbox>
+                                    </b-form-group>
                                 </div>
                             </div>
                         </div>
@@ -233,6 +241,7 @@
                                                     <div class="col-md-4">
                                                         <b-form-group :label="$t('Cost, from')" :label-for="'input-room-'+i+'-price'">
                                                             <b-form-input v-model="room.price" :id="'input-room-'+i+'-price'"></b-form-input>
+                                                            <span>{{ tax }}</span>
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
@@ -371,6 +380,7 @@ export default {
             showPin: false,
             hideAdress: false,
             property: {},
+            tax: 'not including taxes',
             imageData: [],
             newRoomOptions: [
                 {
