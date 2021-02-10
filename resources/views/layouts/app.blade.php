@@ -22,7 +22,7 @@
 </head>
 <body>
     <div id="app" class="property-list">
-        <header>
+        <header class="height-menu">
             <div class="container">
                 <div class="header-content">
                     <div class="mobile-button">
@@ -66,7 +66,7 @@
                             </li>
                         </ul>
                     </div>
-                    <a class="whatsapp-number" href="tel:{{ str_replace(' ', '', $options['website_phone'] ?? '') }}">
+                    <a class="whatsapp-number" href="tel:{{ str_replace('', '', $options['website_phone'] ?? '') }}">
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M27.36 4.59867C24.32 1.66 20.32 0 16.06 0C3.83333 0 -3.844 13.2467 2.26133 23.784L0 32L8.44667 29.7973C12.1267 31.7853 15.1413 31.6093 16.068 31.7267C30.2453 31.7267 37.3027 14.5747 27.34 4.65067L27.36 4.59867Z" fill="#E8E9EB"/>
                             <path d="M16.0892 29.0011L16.0812 28.9998H16.0598C11.8172 28.9998 9.10651 26.9905 8.83984 26.8745L3.83984 28.1745L5.17984 23.3145L4.86118 22.8145C3.54118 20.7131 2.83984 18.2931 2.83984 15.8011C2.83984 4.07713 17.1665 -1.78554 25.4572 6.50113C33.7278 14.7011 27.9212 29.0011 16.0892 29.0011Z" fill="#4CAF50"/>
@@ -99,7 +99,7 @@
                             </a>
                         </li>
                     </ul>
-                    <a class="whatsapp-number" href="tel:{{ str_replace(' ', '', $options['website_phone'] ?? '') }}">
+                    <a class="whatsapp-number" href="tel:{{ str_replace('', '', $options['website_phone'] ?? '') }}">
                         <img src="/svg/whatsapp-mobile.svg" alt="Whatsapp">
                         {{ $options['website_phone'] ?? '' }}
                     </a>
@@ -185,7 +185,7 @@
                                 <input id="password" type="password">
                                 <label for="password">{{ __('Password') }}</label>
                                 <a class="forgot-password desctop-link" href="#">{{ __('Forgot password?') }}</a>
-                                <a class="forgot-password mobile-link" href="#">{{ __('Forgot?') }}</a>
+                                <a class="forgot-password mobile-link" href="#">{{ __('Forgot') }}?</a>
                             </div>
                             <div class="error-text">{{ __('You did not enter a password') }}</div>
                         </div>
@@ -197,7 +197,7 @@
                         <img class="hover" src="/svg/i-facebook-cube-hover.svg" alt="Facebook Icon">
                         {{ __('Login with Facebook') }}
                     </a>
-                    <div class="new">{{ __('New user?') }} <a href="#">{{ __('Registration') }}</a></div>
+                    <div class="new">{{ __('New user') }}? <a href="#">{{ __('Registration') }}</a></div>
                 </div>
             </div>
 
@@ -231,7 +231,7 @@
                         </svg>
                     </div>
                     <img src="/svg/i-success-big.svg" alt="Success Icon">
-                    <div class="title">{{ __('Thank you!') }}</div>
+                    <div class="title">{{ __('Thank you') }}!</div>
                     <div class="description">{{ __('Password recovery instructions have been sent to your email address') }}</div>
                 </div>
             </div>
