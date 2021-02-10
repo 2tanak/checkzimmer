@@ -24,11 +24,13 @@
                                     <b-form-group :label="$t('Object display order')" label-for="input-hotel-name">
                                         <b-form-input v-model="property.ord" id="input-hotel-name"></b-form-input>
                                     </b-form-group>
-                                    <b-form-group :label="$t('Object access')" label-for="input-hotel-name">
+                                    <b-form-checkbox v-model="showPin" style="margin-bottom:16px;" value="Closed access">{{ $t('Closed access') }}</b-form-checkbox>
+                                    <b-form-group :label="$t('Object access')" label-for="input-hotel-name" v-if="showPin">
                                         <b-form-input v-model="property.access" id="input-hotel-name"></b-form-input>
                                         <small v-if="!property.access" class="text-info">{{ $t('Free access') }}</small>
                                         <small v-else class="text-danger">{{ $t('access is limited by the specified PIN codes. Codes can be separated by commas') }}</small>
                                     </b-form-group>
+                                    <b-form-checkbox v-model="hideAdress" value="Hide address">{{ $t('Hide address') }}</b-form-checkbox>
                                 </div>
                             </div>
                         </div>
@@ -252,6 +254,8 @@
             <p class="text-danger">{{ $t('Are you sure you want to delete this photo') }}?</p>
         </b-modal>
 
+        <b-modal id="hotel-saved">{{ $t('Hotel saved successfully') }}</b-modal>
+
         <b-modal id="bigPhotoModal" data-date="imgPath" size="xl" title="Picture">
             <img :src="imgPath" class="full-width">
         </b-modal>
@@ -277,6 +281,8 @@ export default {
     name: "Single",
     data() {
         return {
+            showPin: false,
+            hideAdress: false,
             property: {},
             imageData: [],
             newRoomOptions: [
@@ -485,6 +491,9 @@ export default {
                             this.property.rooms.forEach( room => room.photos = this.getRoomPhotos(room));
                             this.imageData = this.getPhotos();
                         })
+                })
+                .then( () => {
+                    this.$bvModal.show('hotel-saved');
                 })
         },
         addRoom() {
