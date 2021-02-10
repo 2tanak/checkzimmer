@@ -68,7 +68,7 @@
         @endif
         <div class="address-map">
             <div class="address">
-                <div>{{$hotel->address}}</div>
+                <div>{{ $hotel->name }} {{$hotel->address}}</div>
                 <div style="white-space: nowrap;">{{$hotel->zip}} {{$hotel->city}}</div>
             </div>
             <div class="map-container">

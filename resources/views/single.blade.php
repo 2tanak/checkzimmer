@@ -54,7 +54,7 @@
             @endif
             <div class="not-phone">
                 <div class="speaks">{{ __('Object owner speaks') }}:</div>
-                <div class="language-item">en, de</div>
+                <div class="language-item">{{ implode(', ', $hotel->languages()) }}</div>
             </div>
         </div>
 

@@ -420,14 +420,21 @@ jQuery(document).ready(function() {
             jQuery('body').addClass('fixed-header');
             if ( tempScrollTop > currentScrollTop ) {
                 jQuery('header').addClass('show');
+                jQuery('header').addClass('height-menu');
             } else {
                 jQuery('header').removeClass('show');
+                jQuery('header').removeClass('height-menu');
             }
         } else {
             jQuery('body').removeClass('fixed-header');
             jQuery('header').removeClass('show');
+            jQuery('header').addClass('height-menu');
         }
         tempScrollTop = currentScrollTop;
+    });
+
+    jQuery('.single-content .favorites').click(function () {
+        jQuery('.single-content .favorites').toggleClass('active');
     });
 
 });

@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+      <!--  <div class="row">
             <div class="col-md-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
@@ -34,7 +34,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="row">
             <div class="col-md-12">
                 <b-button type="submit" variant="success" class="mr-2" @click="save">{{ $t('Save') }}</b-button>
