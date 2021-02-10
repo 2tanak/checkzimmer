@@ -4,7 +4,11 @@
             <img src="/svg/i-people.svg" alt="alt">
             <div class="sidebar-top-block-item roominess-item">
                 <div class="title">{{ __('roomin.') }}:</div>
-                <div class="subtitle">{{ $hotel->getRoomPersonsMin() }} – {{ $hotel->getRoomPersonsMax() }} {{ __('ppl') }}.</div>
+                @if ($hotel->getRoomPersonsMin() == 0)
+                    <div class="subtitle">{{ __('n/a') }}</div>
+                @else
+                    <div class="subtitle">{{ $hotel->getRoomPersonsMin() }} – {{ $hotel->getRoomPersonsMax() }} {{ __('ppl') }}.</div>
+                @endif
             </div>
         </div>
         @if ($hotel->type != 'affiliate')
@@ -35,7 +39,9 @@
         @else
             <div class="number-phone">
                 <a href="tel:+4917616573456">+49 176&nbsp;<span class="num_hide">1657 3456</span></a>
-                <span class="sh_nmr">{{ __('show') }}</span>
+                <div class="sh_nmr">
+                    <span>{{ __('show') }}</span>
+                </div>
                 <div class="message">{{ __('Let us know that you are from the site Check-zimmer.de') }}</div>
                 <div class="language">
                     <div class="speaks">{{ __('Speaks') }}:</div>
@@ -44,7 +50,12 @@
             </div>
         @endif
         <div class="address-map">
-            <div class="address">{{$hotel->address}}<span></span> {{$hotel->zip}} {{$hotel->city}} </div>
+            <div class="address">
+                <div class="hotel-name">{{$hotel->name}}</div>
+                <div class="name-surname"></div>
+                <div class="hotel-adress">{{$hotel->address}}</div>
+                <div class="zip-city" style="white-space: nowrap;">{{$hotel->zip}} {{$hotel->city}}</div>
+            </div>
             <div class="map-container">
                 <a class="map-picture" href="#object-description">
                     <svg width="102" height="88" fill="none" xmlns="http://www.w3.org/2000/svg">

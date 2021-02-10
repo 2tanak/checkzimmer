@@ -884,6 +884,7 @@ h1.list-title {
     border-right: 4px solid #e7e7e7;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
     transition: all 0.4s ease;
+    text-align: center;
 }
 .list-content .sample-block a.find-housing:hover,
 .list-content .sample-block a.find-housing:active {
@@ -1172,7 +1173,7 @@ h1.list-title {
     padding-right: 20px;
 }
 .property-card .type th.title:first-of-type {
-    padding-left: 20px;
+    padding-left: 24px;
 }
 .property-card .type .type-block  {
     font-weight: 400;
@@ -1181,6 +1182,9 @@ h1.list-title {
     color: #333646;
     white-space: nowrap;
     text-align: center;
+}
+.property-card .type .type-block.price-block {
+    text-align: left;
 }
 .property-card .type .type-block:first-of-type {
     text-align: left;
@@ -1972,8 +1976,14 @@ label.mobile-label {
 }
 .favorites-content h1 {
     margin-bottom: 40px;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 130%;
+    text-align: center;
+    color: #333646;
 }
 .favorites-content {
+   padding-top: 60px;
     min-height: calc(100vh - 165px);
 }
 .favorites-content .communication {
@@ -1981,6 +1991,9 @@ label.mobile-label {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+.list-content.favorites-content .sorting-block {
+    display: none;
 }
 .load-more .btn {
     background: #6bb63f;
@@ -2454,12 +2467,16 @@ label.mobile-label {
     }
 }
 @media (max-width: 767px) {
-    .property-card .table-container {
-        width: 388px;
-        overflow-x: auto;
-    }
-    .property-card .data {
+    .property-card .type {
         width: auto;
+    }
+    .property-card .type .type-block.filling-block {
+        max-width: none;
+        min-width: auto;
+        overflow: visible;
+    }
+    .property-card .table-container {
+        min-width: 300px;
     }
 }
 @media (max-width: 720px) {
@@ -2692,6 +2709,21 @@ label.mobile-label {
         border-top: 2px solid #e7e7e7;
         border-radius: 6px;
         border-bottom: 2px solid #e7e7e7;
+    }
+    .list-content .sample-block .select-block .select-container {
+        position: relative;
+    }
+    .list-content .sample-block .select-block .select-container:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 17px;
+        background-image: url('/svg/i-arrow-dropdown-input.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 10px;
+        height: 8px;
     }
     .list-content .sample-block .number-personse-block.select-block .select2-selection__rendered {
         padding: 23px 13px 13px 15px;
@@ -2974,8 +3006,7 @@ label.mobile-label {
     margin-bottom: 10px;
 }
 .single-content .main-block {
-    width: 100%;
-    max-width: 882px;
+    width: 882px;
     background: #FFFFFF;
     box-shadow: 0 0 14px rgba(51, 54, 70, 0.14);
     border-radius: 12px;
@@ -3250,9 +3281,6 @@ label.mobile-label {
 .single-content .parameters .type {
     padding-left: 34px;
 }
-.single-content .price-situation .titles .title.padding-left {
-    margin-left: -8px;
-}
 .single-content .top-bloc-collapse .top-bloc-collapse-item {
     height: 36px;
     background-color: #f7f8fa;
@@ -3262,8 +3290,9 @@ label.mobile-label {
 .single-content .top-bloc-collapse .name {
     font-weight: 700;
     font-size: 12px;
-    line-height: 300%;
     color: #333646;
+    display: flex;
+    align-items: center;
 }
 .single-content .top-bloc-collapse .name img {
     margin-right: 7px;
@@ -3286,8 +3315,9 @@ label.mobile-label {
 .single-content .top-bloc-collapse .price-item {
     font-weight: 500;
     font-size: 10px;
-    line-height: 300%;
     color: #333646;
+    display: flex;
+    align-items: center;
 }
 .single-content .price-situation .price-item span {
     font-weight: 700;
@@ -3328,12 +3358,17 @@ label.mobile-label {
 .single-content .price-situation .collapse-content-line .name {
     font-weight: 500;
     font-size: 12px;
-    line-height: 300%;
     color: #333646;
     display: flex;
     align-items: center;
     padding-left: 51px;
     position: relative;
+    padding-right: 0;
+}
+.single-content .price-situation .collapse-content-line .name span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .single-content .price-situation .collapse-content-line .name:before {
     background-image: url("/svg/stroke.svg");
@@ -4137,20 +4172,26 @@ label.mobile-label {
     width: 149px;
     padding-bottom: 10px;
 }
-.single-content .sidebar .number-phone span.sh_nmr {
+.single-content .sidebar .number-phone .sh_nmr {
     position: absolute;
     z-index: 100;
     top: 50%;
     transform: translateY(-50%);
-    right: 13px;
+    right: 0;
     font-weight: 500;
     font-size: 12px;
     line-height: 100%;
     color: #3B8B3E;
     cursor: pointer;
-    transition-duration: .4s;
+    transition-duration: 0.4s;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 13px;
 }
-.single-content .sidebar .number-phone:hover span.sh_nmr {
+.single-content .sidebar .number-phone:hover .sh_nmr {
     color: #333646;
     transition-duration: .4s;
 }
@@ -4407,13 +4448,11 @@ label.mobile-label {
     background: #FFFFFF;
     box-shadow: 0 0 14px rgba(51, 54, 70, 0.14);
     border-radius: 12px;
-    padding: 20px 29px 22px 29px;
-    position: absolute;
+    padding: 20px 16px 22px 16px;
     z-index: 1;
-    left: 0;
-    bottom: -154px;
     transition: all .2s;
     display: none;
+    margin-top:10px;
 }
 .quality.active {
    display: block;
@@ -4450,6 +4489,8 @@ label.mobile-label {
     color: #545769;
     text-decoration: none;
     transition-duration: .4s;
+    white-space: nowrap;
+    margin-right: 19px;
 }
 .quality a.another-time:hover {
     color: #333646;
@@ -5042,11 +5083,15 @@ label.mobile-label {
     cursor: pointer;
 }
 .slider-modal-overlay .small-slider {
-    width: 100%;
     height: 60px;
     margin-top: 24px;
     margin-bottom: 21px;
     position: relative;
+}
+.slider-modal-overlay .small-slider.transform .slick-track {
+    transform: translate3d(0px, 0px, 0px) !important;
+    display: flex;
+    justify-content: center;
 }
 .slider-modal-overlay .small-slider .slider-item {
     width: 86px !important;
@@ -5083,11 +5128,6 @@ label.mobile-label {
 }
 .slider-modal-overlay .name-slide-number .dash {
     margin: 0 5px;
-}
-.slider-modal-overlay .small-slider .slick-track {
-    margin: auto;
-    display: flex;
-    justify-content: center;
 }
 .slider-modal-overlay .small-slider .slick-list {
     position: relative;
@@ -5381,7 +5421,7 @@ label.mobile-label {
         width: 100%;
     }
     .single-content .main-block {
-        max-width: none;
+        width: 100%;
         border-radius: 0;
         background: transparent;
         box-shadow: none;

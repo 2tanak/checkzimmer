@@ -63,6 +63,41 @@
                                             <b-form-group :label="$t('Address')" label-for="input-hotel-address">
                                                 <b-form-input v-model="property.address" id="input-hotel-address"></b-form-input>
                                             </b-form-group>
+                                            <b-form-checkbox v-model="hideZip">{{ $t('Hide Zip') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="hideAddress">{{ $t('Hide Adress') }}</b-form-checkbox>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4 mb-4">
+                        <div class="col-md-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row mt-4 mb-4">
+                                        <div class="col-md-3">
+                                            <b-form-group :label="$t('Name and surname')" laber-for="input-client-name">
+                                                <b-form-input v-model="nameSurname" id="input-client-name"></b-form-input>
+                                            </b-form-group>
+                                            <b-form-checkbox v-model="hideName">{{ $t('Hide') }}</b-form-checkbox>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <b-form-group :label="$t('Number phone')" laber-for="input-phone">
+                                                <b-form-input v-model="numberPhone" id="input-phone"></b-form-input>
+                                            </b-form-group>
+                                            <b-form-checkbox v-model="hidePhone">{{ $t('Hide') }}</b-form-checkbox>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <b-form-group :label="$t('Client email')" laber-for="input-email">
+                                                <b-form-input v-model="clientEmail" id="input-email"></b-form-input>
+                                            </b-form-group>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <b-form-group :label="$t('Languages')" laber-for="input-email">
+                                                <b-form-input v-model="talking" id="input-email"></b-form-input>
+                                            </b-form-group>
                                         </div>
                                     </div>
                                 </div>

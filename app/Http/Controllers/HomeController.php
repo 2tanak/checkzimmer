@@ -37,8 +37,8 @@ class HomeController extends Controller
             $seoTitle = $subdomain->seoTitle();
             $seoDescription = $subdomain->seoDescription();
         } else {
-            $seoTitle = $options['seo_title'];
-            $seoDescription = $options['seo_description'];
+            $seoTitle = $options['seo_title'] ?? config('app.name', 'Check Zimmer');
+            $seoDescription = $options['seo_description'] ?? config('app.name', 'Check Zimmer');
         }
 
         return view('home', compact('options', 'seoTitle', 'seoDescription'));
