@@ -39,7 +39,8 @@ import DomainSingle from '../../components/Dashboard/Website/Domains/Single';
 import Settings from '../../components/Dashboard/Website/Settings/Index';
 import Users from '../../components/Dashboard/Users/Index';
 import Guests from '../../components/Dashboard/Guests/Index';
-import Languages from '../../components/Dashboard/Languages/Index';
+import Languages from '../../components/Dashboard/Translation/Languages/Index';
+import FeaturesTranslation from '../../components/Dashboard/Translation/Features/Index';
 import Features from '../../components/Dashboard/Data/Features/Index';
 import RoomTypes from '../../components/Dashboard/Data/RoomTypes/Index';
 import GeocoderCache from '../../components/Dashboard/Data/GeocoderCache/Index';
@@ -175,9 +176,15 @@ export default new Router({
             meta: { auth: true }
         },
         {
-            path: '/dashboard/languages',
+            path: '/dashboard/translation/languages',
             name: 'languages',
             component: Languages,
+            meta: { auth: true }
+        },
+        {
+            path: '/dashboard/translation/featuresTranslation',
+            name: 'featuresTranslation',
+            component: FeaturesTranslation,
             meta: { auth: true }
         },
         {

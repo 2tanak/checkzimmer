@@ -410,8 +410,6 @@
     "roomin.": "geräum.",
     "Bathroom": "Bathroom",
     "Other": "Andere",
-    "Outside": "Draußen"
-    "roomin.": "geräum.",
     "superhost": "superhost",
     "Free": "Kostenlos",
     "Real price": "Realer Preis",
@@ -419,5 +417,7 @@
     "Write to WhatsApp": "Schreiben Sie an WhatsApp",
     "Single rooms": "Einzelzimmer",
     "Double rooms": "Doppelzimmer",
-    "Multi-bed rooms": "Mehrbettzimmer"
+    "Multi-bed rooms": "Mehrbettzimmer",
+    "Outside": "Draußen",
+    "Features translate": "Funktionen übersetzen"
 }

@@ -39,6 +39,17 @@
                             <img src="/svg/i-distance.svg" alt="">
                             {{ distance }}{{ $t('km') }} {{ $t('from') }} &nbsp; <span class="desctop-span">{{ $t('said') }}</span> <span class="mobile-span">{{ $t('said') }}.</span> &nbsp; {{ $t('your addresses') }}
                         </div>
+                    <div class="geolocation">
+                        <img src="/svg/i-pin.svg" alt="">
+                        {{ item.zip }}, {{ item.city }}
+                    </div>
+                    <div class="humans">
+                        <img src="/svg/i-people.svg" alt="">
+                        {{  sumPeopleNumStr }}
+                    </div>
+                    <div class="distance" v-if="distance">
+                        <img src="/svg/i-distance.svg" alt="">
+                        {{ distance }}{{ $t('km') }} {{ $t('from') }} &nbsp; <span class="desctop-span">{{ $t('said') }}</span> <span class="mobile-span">{{ $t('said') }}.</span> &nbsp; {{ $t('your addresses') }}
                     </div>
                     <div class="additionally">
                         <div v-if="hasWiFi" class="wi-fi data-block-circle" title="WiFi">
@@ -183,11 +194,11 @@ export default {
             }
             return room.options.find( elem => elem.key === name);
         },
-        maxPeopleNum() {
+        sumPeopleNum() {
             if (!this.item.rooms.some( elem => elem.person > 0 )) {
                 return 'n/a';
             }
-            return Math.max( ...this.item.rooms.map( elem => elem.person ) )
+            return this.item.rooms.reduce((sum, elem) => sum + elem.person * elem.number, 0)
         },
         addToFavorites() {
             let id = this.item.id;
@@ -303,16 +314,17 @@ export default {
         }
     },
     computed: {
-        maxPeopleNumStr() {
-            let max = this.maxPeopleNum();
-            if (max === 'n/a') {
-                return max;
+        sumPeopleNumStr() {
+            let sum = this.sumPeopleNum(),
+                base_sum = sum;
+            if (sum === 'n/a') {
+                return sum;
             }
-            max = max % 10;
-            if (max >= 2 && max <= 4) {
-                return max + ' ' + this.$t('people');
+            sum = sum % 10;
+            if (sum >= 2 && sum <= 4) {
+                return base_sum + ' ' + this.$t('people');
             }
-            return max + ' ' + this.$t('person');
+            return base_sum + ' ' + this.$t('person');
         },
         minRoomPrice() {
             let prices = this.item.rooms.map( elem => elem.price ).filter( elem => elem > 0);
