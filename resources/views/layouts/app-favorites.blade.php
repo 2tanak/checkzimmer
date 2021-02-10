@@ -22,7 +22,7 @@
 </head>
 <body>
 <div id="app" class="property-list">
-    <header>
+    <header class="height-menu">
         <div class="container">
             <div class="header-content single-header-content">
                 <div class="mobile-button">
@@ -81,12 +81,19 @@
                         </li>
                     </ul>
                 </div>
-                <a href="#" class="mobile-accaunt personal-area-link"><img src="/svg/i-account-mobile.svg" alt="mobile-accaunt"></a>
                 @include('partials.lang-switch')
             </div>
         </div>
 
         <div class="mobile-menu">
+            <div class="mobile-menu-content">
+
+                <div class="logo-mobile-block" style="text-align:center;margin-bottom:28px;">
+                    <a href="{{ route(app('locale')->routeApply('home')) }}" style="display:inline-block;">
+                        @include('partials.logo-mobile-menu')
+                    </a>
+                </div>
+
             <ul>
                 <li>
                     <a href="{{ route(app('locale')->routeApply('favorites')) }}">
@@ -110,6 +117,7 @@
                 {{ $options['website_phone'] ?? '' }}
             </a>
             @include('partials.lang-switch-mobile')
+            </div>
         </div>
     </header>
 

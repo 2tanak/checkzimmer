@@ -24,10 +24,34 @@
                                     <b-form-group :label="$t('Object display order')" label-for="input-hotel-name">
                                         <b-form-input v-model="property.ord" id="input-hotel-name"></b-form-input>
                                     </b-form-group>
-                                    <b-form-group :label="$t('Object access')" label-for="input-hotel-name">
+                                    <b-form-checkbox v-model="showPin" style="margin-bottom:16px;" value="Closed access">{{ $t('Closed access') }}</b-form-checkbox>
+                                    <b-form-group :label="$t('Object access')" label-for="input-hotel-name" v-if="showPin">
                                         <b-form-input v-model="property.access" id="input-hotel-name"></b-form-input>
                                         <small v-if="!property.access" class="text-info">{{ $t('Free access') }}</small>
                                         <small v-else class="text-danger">{{ $t('access is limited by the specified PIN codes. Codes can be separated by commas') }}</small>
+                                    </b-form-group>
+                                    <b-form-checkbox v-model="hideAdress" value="Hide address">{{ $t('Hide address') }}</b-form-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4 mb-4">
+                        <h3>SEO</h3>
+                        <div class="col-md-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <b-form-group :label="$t('Name hotel')" label-for="input-hotel-name">
+                                        <b-form-input v-model="property.name" id="input-hotel-name"></b-form-input>
+                                    </b-form-group>
+                                    <b-form-group :label="$t('Monteurzimmer in')" label-for="input-hotel-city">
+                                        <b-form-input v-model="property.city" id="input-hotel-city"></b-form-input>
+                                    </b-form-group>
+                                    <b-form-group :label="$t('Postcode')" label-for="input-hotel-lng">
+                                        <b-form-input v-model="property.zip" id="input-hotel-lng"></b-form-input>
+                                    </b-form-group>
+                                    <b-form-group :label="$t('Address')" label-for="input-hotel-address">
+                                        <b-form-input v-model="property.address" id="input-hotel-address"></b-form-input>
                                     </b-form-group>
                                 </div>
                             </div>
@@ -101,7 +125,7 @@
                                     <h4>{{ $t('Facilities') }}</h4>
                                     <template v-for="feature in features">
                                         <div class="comfort-block mt-5">
-                                            <h3>{{feature. name }}</h3>
+                                            <h3>{{feature.name }}</h3>
                                             <div class="row">
                                                 <div class="col-md-3 col-sm-4 col-6 comfort-block-item mt-2" v-for="itemFeature in feature.features">
                                                     <img :src="itemFeature.picture" alt="alt">
@@ -254,6 +278,8 @@
             <p class="text-danger">{{ $t('Are you sure you want to delete this photo') }}?</p>
         </b-modal>
 
+        <b-modal id="hotel-saved">{{ $t('Hotel saved successfully') }}</b-modal>
+
         <b-modal id="bigPhotoModal" data-date="imgPath" size="xl" title="Picture">
             <img :src="imgPath" class="full-width">
         </b-modal>
@@ -307,6 +333,8 @@ export default {
                 { value: '9', text: 'Nine-seater' },
                 { value: '10', text: 'Ten-seater' }
             ],
+            showPin: false,
+            hideAdress: false,
             property: {},
             imageData: [],
             newRoomOptions: [
@@ -515,6 +543,9 @@ export default {
                             this.property.rooms.forEach( room => room.photos = this.getRoomPhotos(room));
                             this.imageData = this.getPhotos();
                         })
+                })
+                .then( () => {
+                    this.$bvModal.show('hotel-saved');
                 })
         },
         addRoom() {
