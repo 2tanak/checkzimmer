@@ -210,7 +210,8 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <b-form-group :label="$t('Name')" :label-for="'input-room-'+i+'-name'">
-                                                            <b-form-input  v-model="property.rooms[i].options[3].value" :id="'input-room-'+i+'-name'"></b-form-input>
+                                                            <b-form-select v-model="nameSelected" :options="nameOptions"></b-form-select>
+                                                            <!-- <b-form-input  v-model="property.rooms[i].options[3].value" :id="'input-room-'+i+'-name'"></b-form-input> -->
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-12">
@@ -224,8 +225,9 @@
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <b-form-group :label="$t('Number of persons')" :label-for="'input-room-'+i+'-person'">
-                                                            <b-form-input v-model="room.person" :id="'input-room-'+i+'-person'"></b-form-input>
+                                                        <b-form-group :label="$t('Number of capacity')" :label-for="'input-room-'+i+'-person'">
+                                                            <b-form-select v-model="capacitySelected" :options="capacityOptions"></b-form-select>
+                                                            <!--<b-form-input v-model="room.person" :id="'input-room-'+i+'-person'"></b-form-input>-->
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
@@ -338,6 +340,34 @@ export default {
     name: "Single",
     data() {
         return {
+            nameSelected: null,
+            capacitySelected: null,
+            nameOptions: [
+                { value: null, text: 'Please select an option' },
+                { value: '1', text: '1' },
+                { value: '2', text: '2' },
+                { value: '3', text: '3' },
+                { value: '4', text: '4' },
+                { value: '5', text: '5' },
+                { value: '6', text: '6' },
+                { value: '7', text: '7' },
+                { value: '8', text: '8' },
+                { value: '9', text: '9' },
+                { value: '10', text: '10' }
+            ],
+            capacityOptions: [
+                { value: null, text: 'Please select an option' },
+                { value: '1', text: 'Single room' },
+                { value: '2', text: 'Double room' },
+                { value: '3', text: 'Triple room' },
+                { value: '4', text: 'Quadruple' },
+                { value: '5', text: 'Quintuple' },
+                { value: '6', text: 'Six-seater' },
+                { value: '7', text: 'Seven-seater' },
+                { value: '8', text: 'Eight-seater' },
+                { value: '9', text: 'Nine-seater' },
+                { value: '10', text: 'Ten-seater' }
+            ],
             showPin: false,
             hideAdress: false,
             property: {},
