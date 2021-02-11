@@ -3,8 +3,9 @@
         <h1 style="font-size:26px;">{{ $t('Hotel editing') }}</h1>
         <div class="delete-hotel-container">
             <h2 style="margin-bottom:0;">{{ property.name }}</h2>
-            <div>
-                <b-button v-b-modal.deleteHotelModal variant="danger" @click="deleteHotel">{{ $t('Delete hotel') }}</b-button>
+            <div style="display:flex;align-items:center;">
+                <a class="back-link" href="/dashboard/property/items">{{ $t('Back') }}</a>
+                <b-button style="margin-right:10px;" v-b-modal.deleteHotelModal variant="danger" @click="deleteHotel">{{ $t('Delete hotel') }}</b-button>
                 <b-button type="submit" variant="success" class="mr-2 " @click="save">{{ $t('Save') }}</b-button>
             </div>
         </div>
