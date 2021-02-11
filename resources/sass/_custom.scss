@@ -688,9 +688,9 @@ footer#main-footer ul.footer-menu {
     margin-left: 0;
     margin-bottom: 0;
     list-style: none;
-    display: flex;
     align-items: center;
     margin-right: 113px;
+    display: none;
 }
 footer#main-footer ul.footer-menu li {
     margin-left: 20px;
@@ -7453,6 +7453,7 @@ header.height-menu .mobile-menu {
 .single-content.pin-content .main-block.pin-block {
     padding: 20px;
     margin-bottom: 0;
+    width: auto;
 }
 
 @media (max-width: 1211px) {
