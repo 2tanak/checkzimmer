@@ -38,7 +38,8 @@ class BookingApiService
         }
         $options = Option::params(['type'=> 'system'])->pluck('value', 'key');
         if (!($options['booking_login'] ?? '') || !($options['booking_password'] ?? '') || !($options['booking_url'] ?? '')) {
-            throw new Exception('Booking auth data not found');
+            return;
+            //throw new Exception('Booking auth data not found');
         }
         $this->options = $options;
     }
