@@ -319,7 +319,7 @@ export default {
                     phoneNumber:'',
                     hidePhone:false,
                     clientEmail:'',
-                    talking:''
+                    languages:''
                 },
             },
             imageData: [],

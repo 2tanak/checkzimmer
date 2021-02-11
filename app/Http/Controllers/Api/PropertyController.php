@@ -119,7 +119,14 @@ class PropertyController extends Controller
     public function show($id)
     {
         $property = Property::findOrFail($id);
-
+        $property->landlord = [
+            'fullName' => $property->getLandlordName(),
+            'hideName' => $property->getLandlordHideName(),
+            'phoneNumber' => $property->getLandlordPhoneNumber(),
+            'hidePhone' => $property->getLandHidePhone(),
+            'clientEmail' => $property->getLandlordName(),
+            'languages' => $property->getLandlordLanguages()
+        ];
         return response()->json($property);
     }
 
