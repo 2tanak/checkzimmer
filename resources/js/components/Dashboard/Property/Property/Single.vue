@@ -63,8 +63,8 @@
                                             <b-form-group :label="$t('Address')" label-for="input-hotel-address">
                                                 <b-form-input v-model="property.address" id="input-hotel-address"></b-form-input>
                                             </b-form-group>
-                                            <b-form-checkbox v-model="hideZip">{{ $t('Hide Zip') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="hideAddress">{{ $t('Hide Adress') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="property.hideZip">{{ $t('Hide Zip') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="property.hideAddress">{{ $t('Hide Adress') }}</b-form-checkbox>
                                         </div>
                                     </div>
                                 </div>
@@ -78,25 +78,25 @@
                                 <div class="card-body">
                                     <div class="row mt-4 mb-4">
                                         <div class="col-md-3">
-                                            <b-form-group :label="$t('Name and surname')" laber-for="input-client-name">
-                                                <b-form-input v-model="nameSurname" id="input-client-name"></b-form-input>
+                                            <b-form-group :label="$t('Landlord')" laber-for="input-client-name">
+                                                <b-form-input v-model="property.landlord.fullName" id="input-landlord-fullname"></b-form-input>
                                             </b-form-group>
-                                            <b-form-checkbox v-model="hideName">{{ $t('Hide') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="property.landlord.hideName">{{ $t('Hide') }}</b-form-checkbox>
                                         </div>
                                         <div class="col-md-3">
-                                            <b-form-group :label="$t('Number phone')" laber-for="input-phone">
-                                                <b-form-input v-model="numberPhone" id="input-phone"></b-form-input>
+                                            <b-form-group :label="$t('Phone number')" laber-for="input-phone">
+                                                <b-form-input v-model="property.landlord.phoneNumber" id="input-landlord-phone"></b-form-input>
                                             </b-form-group>
-                                            <b-form-checkbox v-model="hidePhone">{{ $t('Hide') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="property.landlord.hidePhone">{{ $t('Hide') }}</b-form-checkbox>
                                         </div>
                                         <div class="col-md-3">
                                             <b-form-group :label="$t('Client email')" laber-for="input-email">
-                                                <b-form-input v-model="clientEmail" id="input-email"></b-form-input>
+                                                <b-form-input v-model="property.landlord.clientEmail" id="input-landlord-email"></b-form-input>
                                             </b-form-group>
                                         </div>
                                         <div class="col-md-3">
                                             <b-form-group :label="$t('Languages')" laber-for="input-email">
-                                                <b-form-input v-model="talking" id="input-email"></b-form-input>
+                                                <b-form-input v-model="property.landlord.talking" id="input-landlord-talking"></b-form-input>
                                             </b-form-group>
                                         </div>
                                     </div>
@@ -312,7 +312,16 @@ export default {
     name: "Single",
     data() {
         return {
-            property: {},
+            property: {
+                landlord:{
+                    fullName: '',
+                    hideName:false,
+                    phoneNumber:'',
+                    hidePhone:false,
+                    clientEmail:'',
+                    talking:''
+                },
+            },
             imageData: [],
             newRoomOptions: [
                 {
@@ -360,6 +369,7 @@ export default {
         properties.get(this.$route.params.item)
             .then(resp => {
                 this.property = resp.data;
+                // console.log(this.property);
                 this.rooms = this.property.rooms;
                 this.property.rooms.forEach( room => room.photos = this.getRoomPhotos(room));
                 this.imageData = this.getPhotos();
@@ -511,6 +521,8 @@ export default {
                 }
                 delete room.photos;
             });
+            // this.property.landlord = this.landlord;
+            // console.log(this.property.landlord);
             properties.update(this.property.id, this.property)
                 .then(resp => {
                     properties.get(this.$route.params.item)
