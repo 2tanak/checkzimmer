@@ -431,7 +431,6 @@
     "Label in the input form search": "Label in the input form search",
     "Label in the select distance": "Label in the select distance",
     "Label in the select num people": "Label in the select num people",
-    "Features translate": "Features translate",
     "Superhost": "Superhost",
     "Free": "Free",
     "Real price": "Real price",
@@ -439,5 +438,7 @@
     "Write to WhatsApp": "Write to WhatsApp",
     "Single rooms": "Single rooms",
     "Double rooms": "Double rooms",
-    "Multi-bed rooms": "Multi-bed rooms"
+    "Multi-bed rooms": "Multi-bed rooms",
+    "Features translate": "Features translate",
+    "Please fill in this field": "Please fill in this field"
 }
