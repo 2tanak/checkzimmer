@@ -120,12 +120,12 @@ class PropertyController extends Controller
     {
         $property = Property::findOrFail($id);
         $property->landlord = [
-            'fullName' => $property->getLandlordName(),
-            'hideName' => $property->getLandlordHideName(),
-            'phoneNumber' => $property->getLandlordPhoneNumber(),
-            'hidePhone' => $property->getLandHidePhone(),
-            'clientEmail' => $property->getLandlordName(),
-            'languages' => $property->getLandlordLanguages()
+            'landlordName' => $property->getLandlordData('landlordName'),
+            'landlordHideName' => $property->getLandlordData('landlordHideName'),
+            'landlordHidePhone' => $property->getLandlordData('landlordHidePhone'),
+            'landlordPhoneNumber' => $property->getLandlordData('landlordPhoneNumber'),
+            'landlordClientEmail' => ($property->getLandlordData('landlordClientEmail') == '')?$property->user->getUserEmail() : $property->getLandlordData('landlordClientEmail'),
+            'landlordLanguages' => ($property->getLandlordData('landlordLanguages') == '')? implode(', ',$property->languages()) : $property->getLandlordData('landlordLanguages')
         ];
         return response()->json($property);
     }
@@ -214,6 +214,21 @@ class PropertyController extends Controller
                 $fields['rooms'][$roomKey]['options'][$optionKey]['value'] = $option['value'] ?? '';
             }
         }
+
+        $option = Option::where('type', 'property')->where('parent', $fields['id'])->where('key', 'landlord')->first();
+        if ($option != null) {
+            $option->value = json_encode($fields['landlord']);
+            $option->save();
+        }else{
+            $option = new Option([
+                'key' => 'landlord',
+                'parent' => $fields['id'],
+                'type' => 'property',
+                'value' =>  json_encode($fields['landlord'])
+            ]);
+            $option->save();
+        }
+
         $property->updateRelations($fields);
 
         $property->features()->detach();

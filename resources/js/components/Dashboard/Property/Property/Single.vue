@@ -79,24 +79,24 @@
                                     <div class="row mt-4 mb-4">
                                         <div class="col-md-3">
                                             <b-form-group :label="$t('Landlord')" laber-for="input-client-name">
-                                                <b-form-input v-model="property.landlord.fullName" id="input-landlord-fullname"></b-form-input>
+                                                <b-form-input v-model="property.landlord.landlordName" id="input-landlord-fullname"></b-form-input>
                                             </b-form-group>
-                                            <b-form-checkbox v-model="property.landlord.hideName">{{ $t('Hide') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="property.landlord.landlordHideName">{{ $t('Hide') }}</b-form-checkbox>
                                         </div>
                                         <div class="col-md-3">
                                             <b-form-group :label="$t('Phone number')" laber-for="input-phone">
-                                                <b-form-input v-model="property.landlord.phoneNumber" id="input-landlord-phone"></b-form-input>
+                                                <b-form-input v-model="property.landlord.landlordPhoneNumber" id="input-landlord-phone"></b-form-input>
                                             </b-form-group>
-                                            <b-form-checkbox v-model="property.landlord.hidePhone">{{ $t('Hide') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="property.landlord.landlordHidePhone">{{ $t('Hide') }}</b-form-checkbox>
                                         </div>
                                         <div class="col-md-3">
                                             <b-form-group :label="$t('Client email')" laber-for="input-email">
-                                                <b-form-input v-model="property.landlord.clientEmail" id="input-landlord-email"></b-form-input>
+                                                <b-form-input v-model="property.landlord.landlordClientEmail" id="input-landlord-email"></b-form-input>
                                             </b-form-group>
                                         </div>
                                         <div class="col-md-3">
                                             <b-form-group :label="$t('Languages')" laber-for="input-email">
-                                                <b-form-input v-model="property.landlord.talking" id="input-landlord-talking"></b-form-input>
+                                                <b-form-input v-model="property.landlord.landlordLanguages" id="input-landlord-talking"></b-form-input>
                                             </b-form-group>
                                         </div>
                                     </div>
@@ -314,12 +314,12 @@ export default {
         return {
             property: {
                 landlord:{
-                    fullName: '',
-                    hideName:false,
-                    phoneNumber:'',
-                    hidePhone:false,
-                    clientEmail:'',
-                    languages:''
+                    landlordName: '',
+                    landlordHideName:false,
+                    landlordHidePhone:false,
+                    landlordPhoneNumber:'',
+                    landlordClientEmail:'',
+                    landlordLanguages:''
                 },
             },
             imageData: [],
@@ -369,7 +369,7 @@ export default {
         properties.get(this.$route.params.item)
             .then(resp => {
                 this.property = resp.data;
-                // console.log(this.property);
+                this.landlord = this.property.landlord;
                 this.rooms = this.property.rooms;
                 this.property.rooms.forEach( room => room.photos = this.getRoomPhotos(room));
                 this.imageData = this.getPhotos();
@@ -521,8 +521,6 @@ export default {
                 }
                 delete room.photos;
             });
-            // this.property.landlord = this.landlord;
-            // console.log(this.property.landlord);
             properties.update(this.property.id, this.property)
                 .then(resp => {
                     properties.get(this.$route.params.item)

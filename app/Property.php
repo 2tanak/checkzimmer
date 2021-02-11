@@ -48,23 +48,12 @@ class Property extends Model
         }
     }
 
-    function getLandlordName() {
-        return $this->getCurrentOption('landlordName');
-    }
-    function getLandlordHideName() {
-        return $this->getCurrentOption('landlordHideName');
-    }
-    function getLandHidePhone() {
-        return $this->getCurrentOption('landlordHidePhone');
-    }
-    function getLandlordPhoneNumber() {
-        return $this->getCurrentOption('landlordPhoneNumber');
-    }
-    function getLandlordClientEmail() {
-        return $this->getCurrentOption('landlordClientEmail');
-    }
-    function getLandlordLanguages() {
-        return $this->getCurrentOption('landlordLanguages');
+    function getLandlordData($key) {
+        if($this->getCurrentOption('landlord') == '')
+            return'';
+        $landlordRow = $this->getCurrentOption('landlord');
+        $landlord = json_decode($landlordRow['value'],true);
+        return ($landlord[$key] == null)? '' : $landlord[$key];
     }
 
     function getCurrentOption($key) {

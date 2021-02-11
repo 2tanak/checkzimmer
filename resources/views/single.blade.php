@@ -39,15 +39,15 @@
 
         <div class="fixed-bar">
             <a href="#" class="send-inquiry inquiry">{{ __('Send request') }}</a>
-            @if ($hotel->type != 'affiliate')
+            @if (($hotel->getLandlordData('landlordPhoneNumber') != null) && ($hotel->getLandlordData('landlordHidePhone') != true))
                 <div class="see-number-phone">
                     <span class="number-phone-text">{{ __('Show phone') }}</span>
-                    <a href="tel:+4917616573456" class="number-phone">+4917616573456</a>
+                    <a href="tel:{{ $hotel->getLandlordData('landlordPhoneNumber') }}" class="number-phone">{{ $hotel->getLandlordData('landlordPhoneNumber') }}</a>
                 </div>
             @endif
             <div class="not-phone">
                 <div class="speaks">{{ __('Object owner speaks') }}:</div>
-                <div class="language-item">en, de</div>
+                <div class="language-item">{{ $hotel->getLandlordData('landlordLanguages') }}</div>
             </div>
         </div>
 

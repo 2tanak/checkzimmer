@@ -31,28 +31,32 @@
             <div class="right">{{ __('per person (including VAT)') }}</div>
         </div>
         <a href="#" class="inquiry">{{ __('Send request') }}</a>
-        @if ($hotel->type == 'affiliate')
+        @if (($hotel->getLandlordData('landlordPhoneNumber') == null) || ($hotel->getLandlordData('landlordHidePhone') === true))
             <div class="number-phone not-phone">
                 <div class="speaks">{{ __('Object owner speaks') }}:</div>
-                <div class="language-item">{{ implode(', ', $hotel->languages()) }}</div>
+                <div class="language-item">{{ $hotel->getLandlordData('landlordLanguages') }}</div>
             </div>
         @else
             <div class="number-phone">
-                <a href="tel:+4917616573456">+49 176&nbsp;<span class="num_hide">1657 3456</span></a>
+                <a href="tel:+{{ $hotel->getLandlordData('landlordPhoneNumber') }}">{{ $hotel->getLandlordData('landlordPhoneNumber') }}</a>
                 <div class="sh_nmr">
                     <span>{{ __('show') }}</span>
                 </div>
                 <div class="message">{{ __('Let us know that you are from the site Check-zimmer.de') }}</div>
                 <div class="language">
                     <div class="speaks">{{ __('Speaks') }}:</div>
-                    <div class="language-item">{{ implode(', ', $hotel->languages()) }}</div>
+                    <div class="language-item">>{{ $hotel->getLandlordData('landlordLanguages') }}</div>
                 </div>
             </div>
         @endif
         <div class="address-map">
             <div class="address">
                 <div class="hotel-name">{{$hotel->name}}</div>
-                <div class="name-surname"></div>
+                <div class="name-surname">
+                    @if (($hotel->getLandlordData('landlordName') != null) && ($hotel->getLandlordData('landlordHideName') != true))
+                    {{ $hotel->getLandlordData('landlordName') }}
+                    @endif
+                </div>
                 <div class="hotel-adress">{{$hotel->address}}</div>
                 <div class="zip-city" style="white-space: nowrap;">{{$hotel->zip}} {{$hotel->city}}</div>
             </div>
