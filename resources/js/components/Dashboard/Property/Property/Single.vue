@@ -31,6 +31,11 @@
                                         <small v-if="!property.access" class="text-info">{{ $t('Free access') }}</small>
                                         <small v-else class="text-danger">{{ $t('access is limited by the specified PIN codes. Codes can be separated by commas') }}</small>
                                     </b-form-group>
+                                    <b-form-group class="checkbox-block">
+                                        <b-form-checkbox>{{ $t('Superhost') }}</b-form-checkbox>
+                                        <b-form-checkbox>{{ $t('Free') }}</b-form-checkbox>
+                                        <b-form-checkbox>{{ $t('Real price') }}</b-form-checkbox>
+                                    </b-form-group>
                                     <b-form-checkbox v-model="hideAdress" value="Hide address">{{ $t('Hide address') }}</b-form-checkbox>
                                 </div>
                             </div>

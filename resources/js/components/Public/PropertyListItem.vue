@@ -1,28 +1,44 @@
 <template>
     <div class="property-card">
         <div class="property-card-container">
-            <div class="no-photo" v-if="noPhotos">
-                <div class="no-photo-small">
-                    <svg width="24" height="11" viewBox="0 0 24 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 3L0 11H24L17 0L11 8L6 3Z" fill="#EDEDEF"/>
-                    </svg>
-                </div>
+            <div style="position:relative;" class="no-photo-block">
+                <div class="no-photo" v-if="noPhotos"></div>
+                <div class="superhost-icon">{{ $t('Superhost') }}</div>
             </div>
-            <a href="":href="'/'+$i18n.locale+'/single/'+item.slug">
-                <img v-if="getPhotos.length && !sizedForSlider" :src="getPhotos[0].url_max300">
-            </a>
-            <VueSlickCarousel v-if="getPhotos.length && sizedForSlider" class="property-card-slider" :arrows="false" :dots="true"
-                              :slidesToShow="1" :slidesToScroll="1"
-                              ref="carousel" :infinite="true">
-                <div v-for="photo in getPhotos" class="slider-item">
-                    <a style="display:block;" :href="'/'+$i18n.locale+'/single/'+item.slug">
-                        <img :src="photo.url_max300" alt="Property picture">
-                    </a>
-                </div>
-            </VueSlickCarousel>
+            <div style="position:relative;" v-if="getPhotos.length && !sizedForSlider">
+                <a href="":href="'/'+$i18n.locale+'/single/'+item.slug" class="img-link">
+                    <img v-if="getPhotos.length && !sizedForSlider" :src="getPhotos[0].url_max300">
+                </a>
+                <div class="superhost-icon">{{ $t('Superhost') }}</div>
+            </div>
+            <div style="position:relative;" v-if="getPhotos.length && sizedForSlider">
+                <VueSlickCarousel v-if="getPhotos.length && sizedForSlider" class="property-card-slider" :arrows="false" :dots="true"
+                                  :slidesToShow="1" :slidesToScroll="1"
+                                  ref="carousel" :infinite="true">
+                    <div v-for="photo in getPhotos" class="slider-item">
+                        <a style="display:block;" :href="'/'+$i18n.locale+'/single/'+item.slug">
+                            <img :src="photo.url_max300" alt="Property picture">
+                        </a>
+                    </div>
+                </VueSlickCarousel>
+                <div class="superhost-icon">{{ $t('Superhost') }}</div>
+            </div>
             <div class="data">
                 <a :href="'/'+$i18n.locale+'/single/'+item.slug" class="title"><span>{{ item.name }}</span></a>
                 <div class="data-item">
+                    <div class="data-item-container">
+                        <div class="geolocation">
+                            <img src="/svg/i-pin.svg" alt="">
+                            {{ item.zip }}, {{ item.city }}
+                        </div>
+                        <div class="humans">
+                            <img src="/svg/i-people.svg" alt="">
+                            {{  maxPeopleNumStr }}
+                        </div>
+                        <div class="distance" v-if="distance">
+                            <img src="/svg/i-distance.svg" alt="">
+                            {{ distance }}{{ $t('km') }} {{ $t('from') }} &nbsp; <span class="desctop-span">{{ $t('said') }}</span> <span class="mobile-span">{{ $t('said') }}.</span> &nbsp; {{ $t('your addresses') }}
+                        </div>
                     <div class="geolocation">
                         <img src="/svg/i-pin.svg" alt="">
                         {{ item.zip }}, {{ item.city }}
@@ -81,6 +97,19 @@
                     </tr>
                     </tbody>
                 </table>
+                <div class="all-types-content tab-pane fade active" id="show-all-types">
+                    <table class="type collapse-table">
+                        <tbody>
+                            <tr></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="all-types" data-toggle="collapse" href="#show-all-types" role="button" aria-expanded="false" aria-controls="show-all-types">
+                    <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M7 1.5C6.72386 1.5 6.5 1.72386 6.5 2V6H2.5C2.22386 6 2 6.22386 2 6.5C2 6.77614 2.22386 7 2.5 7H6.5V11C6.5 11.2761 6.72386 11.5 7 11.5C7.27614 11.5 7.5 11.2761 7.5 11V7H11.5C11.7761 7 12 6.77614 12 6.5C12 6.22386 11.7761 6 11.5 6H7.5V2C7.5 1.72386 7.27614 1.5 7 1.5Z" fill="#7A8793"/>
+                    </svg>
+                    <span class="show">{{ $t('Показать все типы') }}</span>
+                </div>
             </div>
             <div class="night-rating-block">
                 <div class="night">
@@ -93,6 +122,18 @@
                         </svg>
                     </a>
                     <div class="price"><span>{{ $t('from') }} &euro;{{ minRoomPrice }}</span> {{ $t('night') }}</div>
+                    <div class="price-free">
+                        <div class="real-price">
+                            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.99502 1.00501C9.26839 1.27838 9.26839 1.7216 8.99502 1.99496L3.99502 6.99496C3.72166 7.26833 3.27844 7.26833 3.00507 6.99496L0.505074 4.49496C0.231707 4.2216 0.231707 3.77838 0.505074 3.50501C0.778441 3.23165 1.22166 3.23165 1.49502 3.50501L3.50005 5.51004L8.00507 1.00501C8.27844 0.731646 8.72166 0.731646 8.99502 1.00501Z" fill="#333646"/>
+                            </svg>
+                            <span>{{ $t('Real price') }}</span>
+                        </div>
+                        <div class="free">
+                            <div class="green-circle"></div>
+                            <span>{{ $t('Free') }}</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="rating">
                     <div v-if="item.rate" class="rating-number">

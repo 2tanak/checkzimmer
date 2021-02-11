@@ -62,6 +62,9 @@ const app = new Vue({
 
 jQuery(document).ready(function() {
 
+    jQuery('.list-content').css('display', 'block');
+    jQuery(' .load-block-content.first-load-block-content').css('display', 'none')
+
     jQuery('.sorting a').click(function(e) {
         e.preventDefault();
         jQuery('.sorting').toggleClass('up');
@@ -534,4 +537,6 @@ window.onload = function () {
     setTimeout (function() {
         jQuery('.communication').removeClass('not-active');
     }, 1000);
+
+
 };
