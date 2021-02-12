@@ -103,7 +103,7 @@ export default {
             domainFields: domainsForm,
             operationOk: '',
             operationError: '',
-            domainDelete:{},
+            domainDelete: {},
         }
     },
     mounted() {
@@ -113,7 +113,7 @@ export default {
             })
     },
     methods: {
-        deleteDomain(domain){
+        deleteDomain(domain) {
             this.domainDelete = domain;
         },
         newDomainApply() {
