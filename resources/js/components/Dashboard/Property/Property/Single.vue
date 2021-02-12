@@ -328,7 +328,6 @@ export default {
             },
             showPin: false,
             hideAdress: false,
-            property: {},
             imageData: [],
             newRoomOptions: [
                 {
@@ -376,7 +375,6 @@ export default {
         properties.get(this.$route.params.item)
             .then(resp => {
                 this.property = resp.data;
-                this.landlord = this.property.landlord;
                 this.rooms = this.property.rooms;
                 this.property.rooms.forEach( room => room.photos = this.getRoomPhotos(room));
                 this.imageData = this.getPhotos();
