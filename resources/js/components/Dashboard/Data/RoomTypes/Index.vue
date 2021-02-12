@@ -1,6 +1,9 @@
 <template>
     <section class="header-dashboard">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
             <h1>{{ $t('Room type catalog') }}</h1>
+            <b-button style="margin-right:0 !important;" type="submit" variant="success" class="mr-2" v-b-modal.modal-room-type>{{ $t('New room type') }}</b-button>
+        </div>
         <div class="row mt-4">
             <div class="col-md-6 grid-margin">
                 <div class="card">
