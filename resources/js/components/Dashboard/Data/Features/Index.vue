@@ -96,6 +96,8 @@
         id: 0,
         name: '',
         picture: '',
+        listShow: false,
+        order: 0,
         feature_category: {}
     };
 
@@ -122,6 +124,7 @@
         created() {
             features.all()
                 .then(resp => {
+                    console.log(resp.data);
                     this.features = resp.data;
                     this.loading = false;
                 })
@@ -165,7 +168,8 @@
             featureEdit(data) {
                 this.editFeature = { ...data.item };
                 this.data.category.options = this.getCategories().concat(this.categoriesTemp);
-                this.editFeature.category = this.editFeature.feature_category.name;
+                this.editFeature.listShow = this.editFeature.listShow;
+                this.editFeature.order = this.editFeature.order;
             },
 
             featureDelete(data) {
@@ -212,9 +216,11 @@
                 }*/
 
                 let data = {
-                    'name' : this.editFeature.feature_category.name,
-                    'category' : cat,
-                    'image' : this.editFeature.feature_category.picture
+                    'name': this.editFeature.feature_category.name,
+                    'category': cat,
+                    'image': this.editFeature.feature_category.picture,
+                    'listShow': this.editFeature.listShow,
+                    'order': this.editFeature.order,
                 };
 
                 features.update(this.editFeature.id, data)

@@ -4,6 +4,7 @@ namespace App;
 
 use App\Services\BookingDataService;
 use App\Traits\noCRUD;
+use App\Traits\optionsLink;
 use App\Traits\propertyFeatures;
 use Illuminate\Database\Eloquent\Model;
 use DB;
@@ -13,6 +14,7 @@ class Property extends Model
 {
     use noCRUD;
     use propertyFeatures;
+    use optionsLink;
 
     protected $table = 'property';
     protected $fillable = ['user_id', 'type', 'status', 'ord', 'views', 'access', 'lat', 'lng', 'name', 'city', 'zip', 'address', 'slug', 'description'];
@@ -38,14 +40,6 @@ class Property extends Model
     {
         $features = array_column($features, 'name');
         return array_search($name, $features) !== false;
-    }
-
-    private function getOptions()
-    {
-        if ($this->_options == null)
-        {
-            $this->_options = $this->options->toArray();
-        }
     }
 
     public function getName() {

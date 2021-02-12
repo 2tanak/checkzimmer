@@ -24,14 +24,6 @@
                 <b-select v-if="item.type === 'select'" v-model="fields[ind]">
                     <b-select-option v-for="(elem, i) in item.options" :value="i" :key="'item-'+i">{{ elem }}</b-select-option>
                 </b-select>
-                <label for="displayed-list">
-                    <input type="checkbox" id="displayed-list" v-model="displayedList">
-                 {{ $t('Displayed in the list') }}
-                </label>
-                <div style="display:flex;flex-direction:column;" v-if="displayedList">
-                    <label for="priority">{{ $t('Priority') }}</label>
-                    <input type="text" value="0" id="priority">
-                </div>
             </b-form-group>
             <hr v-else-if="item.type === 'divider'">
             <input v-else-if="item.type === 'hidden'" type="hidden" :id="'input-'+ind" v-model="fields[ind]" />
