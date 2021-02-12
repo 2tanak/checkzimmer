@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import ApiRequest from "../../API/ApiRequest";
+import ApiRequest from "../../../API/ApiRequest";
 
 let LanguageRequest = ApiRequest('languages');
 let languages = new LanguageRequest;

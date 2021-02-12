@@ -3,8 +3,9 @@
         <h1 style="font-size:26px;">{{ $t('Hotel editing') }}</h1>
         <div class="delete-hotel-container">
             <h2 style="margin-bottom:0;">{{ property.name }}</h2>
-            <div>
-                <b-button v-b-modal.deleteHotelModal variant="danger" @click="deleteHotel">{{ $t('Delete hotel') }}</b-button>
+            <div style="display:flex;align-items:center;">
+                <a class="back-link" href="/dashboard/property/items">{{ $t('Back') }}</a>
+                <b-button style="margin-right:10px;" v-b-modal.deleteHotelModal variant="danger" @click="deleteHotel">{{ $t('Delete hotel') }}</b-button>
                 <b-button type="submit" variant="success" class="mr-2 " @click="save">{{ $t('Save') }}</b-button>
             </div>
         </div>
@@ -31,6 +32,42 @@
                                         <small v-else class="text-danger">{{ $t('access is limited by the specified PIN codes. Codes can be separated by commas') }}</small>
                                     </b-form-group>
                                     <b-form-checkbox v-model="hideAdress" value="true">{{ $t('Hide address') }}</b-form-checkbox>
+                                    <b-form-group class="checkbox-block">
+                                        <b-form-checkbox>{{ $t('Superhost') }}</b-form-checkbox>
+                                        <b-form-checkbox>{{ $t('Free') }}</b-form-checkbox>
+                                        <b-form-checkbox>{{ $t('Real price') }}</b-form-checkbox>
+                                    </b-form-group>
+                                    <b-form-checkbox v-model="hideAdress" value="Hide address">{{ $t('Hide address') }}</b-form-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4 mb-4">
+                        <h3>SEO</h3>
+                        <div class="col-md-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <b-form-group :label="$t('Name hotel')" label-for="input-hotel-name">
+                                        <b-form-input v-model="property.name" id="input-hotel-name"></b-form-input>
+                                    </b-form-group>
+                                    <b-form-group :label="$t('Monteurzimmer in')" label-for="input-hotel-city">
+                                        <b-form-input v-model="property.city" id="input-hotel-city"></b-form-input>
+                                    </b-form-group>
+                                    <b-form-group :label="$t('Postcode')" label-for="input-hotel-lng">
+                                        <b-form-input v-model="property.zip" id="input-hotel-lng"></b-form-input>
+                                    </b-form-group>
+                                    <b-form-group :label="$t('Address')" label-for="input-hotel-address">
+                                        <b-form-input v-model="property.address" id="input-hotel-address"></b-form-input>
+                                    </b-form-group>
+                                    <b-form-group>
+                                        <b-form-checkbox id="vat"
+                                                         v-model="tax"
+                                                         name="vat"
+                                                         value="including taxes"
+                                                         unchecked-value="not including taxes">
+                                            {{ $t('Tax (VAT) is included in the price') }}</b-form-checkbox>
+                                    </b-form-group>
                                 </div>
                             </div>
                         </div>
@@ -138,7 +175,7 @@
                                     <h4>{{ $t('Facilities') }}</h4>
                                     <template v-for="feature in features">
                                         <div class="comfort-block mt-5">
-                                            <h3>{{feature. name }}</h3>
+                                            <h3>{{feature.name }}</h3>
                                             <div class="row">
                                                 <div class="col-md-3 col-sm-4 col-6 comfort-block-item mt-2" v-for="itemFeature in feature.features">
                                                     <img :src="itemFeature.picture" alt="alt">
@@ -188,7 +225,8 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <b-form-group :label="$t('Name')" :label-for="'input-room-'+i+'-name'">
-                                                            <b-form-input  v-model="property.rooms[i].options[3].value" :id="'input-room-'+i+'-name'"></b-form-input>
+                                                            <b-form-select v-model="nameSelected" :options="nameOptions"></b-form-select>
+                                                            <!-- <b-form-input  v-model="property.rooms[i].options[3].value" :id="'input-room-'+i+'-name'"></b-form-input> -->
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-12">
@@ -202,13 +240,15 @@
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <b-form-group :label="$t('Number of persons')" :label-for="'input-room-'+i+'-person'">
-                                                            <b-form-input v-model="room.person" :id="'input-room-'+i+'-person'"></b-form-input>
+                                                        <b-form-group :label="$t('Number of capacity')" :label-for="'input-room-'+i+'-person'">
+                                                            <b-form-select v-model="capacitySelected" :options="capacityOptions"></b-form-select>
+                                                            <!--<b-form-input v-model="room.person" :id="'input-room-'+i+'-person'"></b-form-input>-->
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <b-form-group :label="$t('Cost, from')" :label-for="'input-room-'+i+'-price'">
                                                             <b-form-input v-model="room.price" :id="'input-room-'+i+'-price'"></b-form-input>
+                                                            <span>{{ tax }}</span>
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
@@ -326,8 +366,37 @@ export default {
                     landlordLanguages:''
                 },
             },
+            nameSelected: null,
+            capacitySelected: null,
+            nameOptions: [
+                { value: null, text: 'Please select an option' },
+                { value: '1', text: '1' },
+                { value: '2', text: '2' },
+                { value: '3', text: '3' },
+                { value: '4', text: '4' },
+                { value: '5', text: '5' },
+                { value: '6', text: '6' },
+                { value: '7', text: '7' },
+                { value: '8', text: '8' },
+                { value: '9', text: '9' },
+                { value: '10', text: '10' }
+            ],
+            capacityOptions: [
+                { value: null, text: 'Please select an option' },
+                { value: '1', text: 'Single room' },
+                { value: '2', text: 'Double room' },
+                { value: '3', text: 'Triple room' },
+                { value: '4', text: 'Quadruple' },
+                { value: '5', text: 'Quintuple' },
+                { value: '6', text: 'Six-seater' },
+                { value: '7', text: 'Seven-seater' },
+                { value: '8', text: 'Eight-seater' },
+                { value: '9', text: 'Nine-seater' },
+                { value: '10', text: 'Ten-seater' }
+            ],
             showPin: false,
             hideAdress: false,
+            tax: 'not including taxes',
             imageData: [],
             newRoomOptions: [
                 {
@@ -480,7 +549,7 @@ export default {
             return this.getFieldValue('description', item,'');
         },
         getHideAddressStatus(options){
-            if(options.filter(it => it.key == 'hide_address').length === 1)
+            if(options.filter(it => it.key === 'hide_address').length === 1)
                 return true
         },
         getRoomPhotos(item) {
