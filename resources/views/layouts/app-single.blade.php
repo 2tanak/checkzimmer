@@ -153,30 +153,30 @@
             <div class="title">{{ __('Send request') }}</div>
             <form>
                 <div class="input-block-item">
-                    <input id="company" type="text">
+                    <input id="company" type="text" name="company">
                     <label for="company">{{ __('Company name') }}</label>
                 </div>
                 <div class="input-block-item">
-                    <input id="name" type="text">
+                    <input id="name" type="text" name="namesurname">
                     <label for="name">{{ __('Name and Surname') }}*</label>
                 </div>
                 <div class="input-block-item">
-                    <input id="email" type="email">
+                    <input id="email" type="email" name="email">
                     <label for="email">{{ __('Email') }}*</label>
                 </div>
                 <div class="input-block-item">
-                    <input id="telephone" type="tel">
+                    <input id="telephone" type="tel" name="phone">
                     <label for="telephone">{{ __('Phone number') }}*</label>
                 </div>
                 <div class="data-block">
-                    <input id="arrival-date" data-provide="datepicker" readonly>
+                    <input id="arrival-date" data-provide="datepicker" readonly name="arrivaldate">
                     <label for="arrival-date">{{ __('Arrival date') }}</label>
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M13 0H14V2H16C16.5523 2 17 2.44772 17 3V6V7V17C17 17.5523 16.5523 18 16 18H2C1.44772 18 1 17.5523 1 17V7V6V3C1 2.44772 1.44772 2 2 2H4V0H5V2H13V0ZM5 3H4H2V6H16V3H14H13H5ZM16 17H2V7H16V17ZM10 12H14V13H10V12ZM14 10H10V11H14V10ZM4 12H8V13H4V12ZM8 10H4V11H8V10Z" fill="#7A8793"/>
                     </svg>
                 </div>
                 <div class="data-block">
-                    <input id="date-departure" data-provide="datepicker" readonly>
+                    <input id="date-departure" data-provide="datepicker" readonly name="datedeparture">
                     <label for="date-departure">{{ __('Date departure') }}</label>
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M13 0H14V2H16C16.5523 2 17 2.44772 17 3V6V7V17C17 17.5523 16.5523 18 16 18H2C1.44772 18 1 17.5523 1 17V7V6V3C1 2.44772 1.44772 2 2 2H4V0H5V2H13V0ZM5 3H4H2V6H16V3H14H13H5ZM16 17H2V7H16V17ZM10 12H14V13H10V12ZM14 10H10V11H14V10ZM4 12H8V13H4V12ZM8 10H4V11H8V10Z" fill="#7A8793"/>
@@ -212,6 +212,9 @@
                 <div class="checkbox-block checkbox-top">
                     <input id="consent-checkbox" class="checkbox" type="checkbox">
                     <label for="consent-checkbox">{{ __('I consent to the processing of my data as described in') }} <a href="#">{{ __('statement of consent') }}</a> {{ __('from') }} Checkzimmer.</label>
+                </div>
+                <div class="recapcha-block">
+                    <input type="hidden" name="grecaptcha">
                 </div>
                 <a class="send-request" href="#">{{ __('Send request') }}</a>
             </form>
