@@ -27,10 +27,8 @@
                                     <b-form-group :label="$t('Object display order')" label-for="input-hotel-name">
                                         <b-form-input v-model="property.ord" id="input-hotel-name"></b-form-input>
                                     </b-form-group>
-                                    <b-form-group>
-                                        <b-form-checkbox v-model="showPin" value="Closed access">{{ $t('Closed access') }}</b-form-checkbox>
-                                    </b-form-group>
-                                    <b-form-group :label="$t('Object access')" label-for="input-hotel-name" v-if="showPin">
+                                    <b-form-checkbox v-model="showPin" style="margin-bottom:16px;" value="Closed access">{{ $t('Closed access') }}</b-form-checkbox>
+                                    <b-form-group :label="$t('Object access') + '(PIN)'" label-for="input-hotel-name" v-if="showPin">
                                         <b-form-input v-model="property.access" id="input-hotel-name"></b-form-input>
                                         <small v-if="!property.access" class="text-info">{{ $t('Free access') }}</small>
                                         <small v-else class="text-danger">{{ $t('access is limited by the specified PIN codes. Codes can be separated by commas') }}</small>
