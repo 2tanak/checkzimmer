@@ -65,7 +65,7 @@ class HomeController extends Controller
 
         if ($hotel->access) {
             $access = true;
-            return view('single-access', compact('system_option','options','hotel', 'access'));
+            return view('single-access', compact('system_option', 'options', 'hotel', 'access'));
         }
 
         $hotel->views++;
@@ -79,7 +79,7 @@ class HomeController extends Controller
         }
         $questions = $hotel->questions;
         $reviews = $hotel->reviews;
-        return view('single', compact('system_option','hotel','questions', 'reviews'));
+        return view('single', compact('system_option', 'hotel', 'questions', 'reviews'));
     }
     public function singlePropertyAccess(Request $request, $slug) {
         $hotel = Property::where('slug', $slug)->firstOrFail();
