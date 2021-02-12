@@ -74,6 +74,7 @@
                         </div>
                     </div>
                 </div>
+                </div>
             </div>
             <div class="table-container">
                 <table class="type">

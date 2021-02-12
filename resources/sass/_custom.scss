@@ -829,7 +829,7 @@ h1.list-title {
     background: rgba(13, 14, 18, 0.7);
 }
 .background-image-block a.write-whatsapp {
-    width: 229px;
+    min-width: 229px;
     height: 42px;
     background: #4CAF50;
     border-radius: 0 0 0 18px;
@@ -841,6 +841,7 @@ h1.list-title {
     position: absolute;
     top: 0;
     right: 0;
+    padding: 15px;
 }
 .background-image-block a.write-whatsapp span {
     font-weight: 500;

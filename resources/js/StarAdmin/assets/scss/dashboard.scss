@@ -52,9 +52,6 @@ a.all-domains:hover {
     background-color: #ffffff;
     color: #17a2b8;
 }
-.custom-control-label::before {
-    top: 0;
-}
 .checkbox-block .bv-no-focus-ring {
     display: flex;
     align-items: center;
@@ -79,6 +76,9 @@ a.back-link {
 a.back-link:hover {
     transition: all 0.2s;
     background-color: #0e8b9e;
+}
+.form-group label {
+    line-height: inherit !important;
 }
 
 
