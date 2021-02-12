@@ -196,10 +196,10 @@ class Property extends Model
         return $map[$types['native_id']] ?? false;
     }
 
-    public function getTotalRooms()
+    public function getTotalRooms($typeId = null)
     {
-        return array_reduce($this->rooms->toArray(), function ($carry, $item) {
-            return $item['number'] + $carry;
+        return array_reduce($this->rooms->toArray(), function ($carry, $item) use ($typeId) {
+            return $carry + ($typeId == null || $typeId == $item['room_type_id'] ? $item['number'] : 0);
         }, 0);
     }
 
@@ -213,10 +213,22 @@ class Property extends Model
         }, 999);
     }
 
-    public function getRoomPersonsMax()
+    public function getRoomTypes() {
+        if ($this->roomTypes == null) {
+            $roomTypes = array_column($this->rooms->toArray(), 'room_type_id');
+            $this->roomTypes = RoomType::whereIn('id', $roomTypes)->get();
+        }
+        return $this->roomTypes;
+    }
+    public function getRoomsByType($typeId) {
+        return array_filter($this->rooms->toArray(), function($item) use ($typeId) {
+            return $item['room_type_id'] == $typeId;
+        });
+    }
+    public function getRoomPersonsMax($typeId = null)
     {
-        return array_reduce($this->rooms->toArray(), function ($carry, $item) {
-            return $carry + ($item['price'] > 0 ? $item['number'] * $item['person'] : 0);
+        return array_reduce($this->rooms->toArray(), function ($carry, $item) use ($typeId) {
+            return $carry + (($typeId == null || $typeId == $item['room_type_id']) && $item['price'] > 0 ? $item['number'] * $item['person'] : 0);
         }, 0);
     }
 
@@ -226,13 +238,13 @@ class Property extends Model
             return true;
         }
     }
-    public function getRoomPriceMin()
+    public function getRoomPriceMin($typeId = null)
     {
         if ($this->price_min) {
             return $this->price_min;
         }
-        $price = array_reduce($this->rooms->toArray(), function ($carry, $item) {
-            return $item['price'] < $carry && $item['price'] > 0 ? ceil($item['price']) : $carry;
+        $price = array_reduce($this->rooms->toArray(), function ($carry, $item) use ($typeId) {
+            return ($typeId == null || $typeId == $item['room_type_id'] )&& $item['price'] < $carry && $item['price'] > 0 ? ceil($item['price']) : $carry;
         }, 9999);
         if ($price == 9999) {
             $price = 0;
