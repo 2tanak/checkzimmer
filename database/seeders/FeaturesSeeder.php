@@ -16,7 +16,7 @@ class FeaturesSeeder extends Seeder
     public function run()
     {
         $cats = [
-            'Кухня' => [
+            __('Kitchen') => [
                 [ 'picture' => '/svg/i-own-kitchen.svg', 'name' => 'Eigene kuche' ],
                 [ 'picture' => '/svg/i-shared-kitchen.svg', 'name' => 'Gemeinschaftskuche' ],
                 [ 'picture' => '/svg/i-fridge.svg', 'name' => 'Kuchlshrank' ],
@@ -24,7 +24,7 @@ class FeaturesSeeder extends Seeder
                 [ 'picture' => '/svg/i-microwave-oven.svg', 'name' => 'Mikrowelle' ],
                 [ 'picture' => '/svg/i-dishwasher.svg', 'name' => 'Spulmaschine' ],
             ],
-            'Ванная' => [
+            __('Bathroom') => [
                 [ 'picture' => '/svg/i-bath.svg', 'name' => 'Badewanne' ],
                 [ 'picture' => '/svg/i-bath.svg', 'name' => 'Gemeinschafstbad' ],
                 [ 'picture' => '/svg/i-towel.svg', 'name' => 'Handtuscher inkl.' ],
@@ -37,7 +37,7 @@ class FeaturesSeeder extends Seeder
                 [ 'picture' => '/svg/i-own-shower.svg', 'name' => 'Deinee dusche' ],
                 [ 'picture' => '/svg/i-shared-shower.svg', 'name' => 'Gemeinschaftsdusche' ],
             ],
-            'Комната' => [
+            __('Room') => [
                 [ 'picture' => '/svg/i-signlebed.svg', 'name' => 'Einzelbett' ],
                 [ 'picture' => '/svg/i-combined-bed.svg', 'name' => 'Getrente betten' ],
                 [ 'picture' => '/svg/i-extra-bed.svg', 'name' => 'Zustellbett' ],
@@ -55,7 +55,7 @@ class FeaturesSeeder extends Seeder
                 [ 'picture' => '/svg/i-fireplace.svg', 'name' => 'Kamin' ],
                 [ 'picture' => '/svg/i-computer-place.svg', 'name' => 'Platz fur computer' ],
             ],
-            'Прочее' => [
+            __('Other') => [
                 [ 'picture' => '/svg/i-dryer.svg', 'name' => 'Trockenschrank' ],
                 [ 'picture' => '/svg/i-friendly.svg', 'name' => 'Familienfreundlich' ],
                 [ 'picture' => '/svg/i-gym.svg', 'name' => 'Fitness' ],
@@ -67,7 +67,7 @@ class FeaturesSeeder extends Seeder
                 [ 'picture' => '/svg/i-smoking.svg', 'name' => 'Raucher' ],
                 [ 'picture' => '/svg/i-no-smoking.svg', 'name' => 'Nicht rauchen' ],
             ],
-            'Снаружи' => [
+            __('Outside') => [
                 [ 'picture' => '/svg/i-terrace.svg', 'name' => 'Terrace' ],
                 [ 'picture' => '/svg/i-parking.svg', 'name' => 'Offentliche parkzplatz' ],
                 [ 'picture' => '/svg/i-car-parking.svg', 'name' => 'PKW-Parkzplatz' ],

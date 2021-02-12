@@ -22,7 +22,7 @@
 </head>
 <body>
 <div id="app" class="property-list">
-    <header>
+    <header class="height-menu">
         <div class="container">
             <div class="header-content single-header-content">
                 <div class="mobile-button">
@@ -72,13 +72,18 @@
 
         <div class="mobile-menu">
             <div class="mobile-menu-content">
+                <div class="logo-mobile-block" style="text-align:center;margin-bottom:28px;">
+                    <a href="{{ route(app('locale')->routeApply('home')) }}" style="display:inline-block;">
+                        @include('partials.logo-mobile-menu')
+                    </a>
+                </div>
                 <ul>
                     <li>
                         <a href="{{ route(app('locale')->routeApply('favorites')) }}">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15.1614 9.97563C16.597 8.4996 16.597 6.10223 15.1614 4.6262C13.7316 3.1561 11.4179 3.1561 9.98803 4.6262L9.27309 5.36128C9.12351 5.51507 8.87649 5.51507 8.72691 5.36128L8.01197 4.6262C6.58214 3.1561 4.26843 3.1561 2.8386 4.6262C1.40301 6.10223 1.40301 8.4996 2.8386 9.97563L9 16.3106L15.1614 9.97563ZM9.44185 4.09498C11.1708 2.3173 13.9786 2.3173 15.7076 4.09498C17.4308 5.86675 17.4308 8.73508 15.7076 10.5068L9.27309 17.1226C9.12351 17.2764 8.87649 17.2764 8.72691 17.1226L2.29242 10.5068C0.569193 8.73508 0.569193 5.86675 2.29242 4.09498C4.02141 2.3173 6.82916 2.3173 8.55815 4.09498L9 4.54928L9.44185 4.09498Z" fill="#7A8793" stroke="#7A8793" stroke-width="0.2"/>
                             </svg>
-                            {{ __('Favorites') }} (<span class="favoritesCount"></span>)
+                            {{ __('Favorites') }} (<span class="favoritesCount">0</span>)
                         </a>
                     </li>
                     <li>
@@ -90,7 +95,7 @@
                         </a>
                     </li>
                 </ul>
-                <a class="whatsapp-number" href="tel:+49 341 1234 2223">
+                <a class="whatsapp-number" href="tel:{{ str_replace('', '', $options['website_phone'] ?? '') }}">
                     <img src="/svg/whatsapp-mobile.svg" alt="Whatsapp">
                     {{ $options['website_phone'] ?? '' }}
                 </a>
@@ -159,14 +164,17 @@
                 <div class="input-block-item">
                     <input id="name" type="text">
                     <label for="name">{{ __('Name and Surname') }}*</label>
+                    <div class="validation-block">{{ __('Please fill in this field') }}</div>
                 </div>
                 <div class="input-block-item">
                     <input id="email" type="email">
                     <label for="email">{{ __('Email') }}*</label>
+                    <div class="validation-block">{{ __('Please fill in this field') }}</div>
                 </div>
                 <div class="input-block-item">
                     <input id="telephone" type="tel">
                     <label for="telephone">{{ __('Phone number') }}*</label>
+                    <div class="validation-block">{{ __('Please fill in this field') }}</div>
                 </div>
                 <div class="data-block">
                     <input id="arrival-date" data-provide="datepicker" readonly>
