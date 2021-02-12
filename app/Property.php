@@ -48,14 +48,6 @@ class Property extends Model
         }
     }
 
-    function getLandlordData($key) {
-        if($this->getCurrentOption('landlord') == '')
-            return'';
-        $landlordRow = $this->getCurrentOption('landlord');
-        $landlord = json_decode($landlordRow['value'],true);
-        return ($landlord[$key] == null)? '' : $landlord[$key];
-    }
-
     function getCurrentOption($key) {
         if($this->_options == null) {
             $this->getOptions();

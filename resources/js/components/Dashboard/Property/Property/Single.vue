@@ -34,12 +34,12 @@
                                         <small v-else class="text-danger">{{ $t('access is limited by the specified PIN codes. Codes can be separated by commas') }}</small>
                                     </b-form-group>
                                     <b-form-group>
-                                        <b-form-checkbox v-model="hideAdress" value="true">{{ $t('Hide address') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="property.opts.hideAddress" value="true">{{ $t('Hide address') }}</b-form-checkbox>
                                     </b-form-group>
                                     <b-form-group class="checkbox-block">
-                                        <b-form-checkbox>{{ $t('Superhost') }}</b-form-checkbox>
-                                        <b-form-checkbox>{{ $t('Free') }}</b-form-checkbox>
-                                        <b-form-checkbox>{{ $t('Real price') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="property.opts.superhost">{{ $t('Superhost') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="property.opts.free">{{ $t('Free') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="property.opts.realprice">{{ $t('Real price') }}</b-form-checkbox>
                                     </b-form-group>
                                 </div>
                             </div>
@@ -65,9 +65,9 @@
                                     </b-form-group>
                                     <b-form-group>
                                         <b-form-checkbox id="vat"
-                                                         v-model="tax"
+                                                         v-model="property.opts.inclVat"
                                                          name="vat"
-                                                         value="including taxes"
+                                                         value="vat"
                                                          unchecked-value="not including taxes">
                                             {{ $t('Tax (VAT) is included in the price') }}</b-form-checkbox>
                                     </b-form-group>
@@ -110,7 +110,7 @@
                                                     <b-form-checkbox v-model="property.hideZip">{{ $t('Hide Zip') }}</b-form-checkbox>
                                                 </b-form-group>
                                                 <b-form-group>
-                                                    <b-form-checkbox v-model="property.hideAddress">{{ $t('Hide Adress') }}</b-form-checkbox>
+                                                    <b-form-checkbox v-model="property.opts.hideAddress">{{ $t('Hide Address') }}</b-form-checkbox>
                                                 </b-form-group>
                                              </div>
                                         </div>
@@ -127,28 +127,28 @@
                                     <div class="row mt-4 mb-4">
                                         <div class="col-md-3">
                                             <b-form-group :label="$t('Landlord')" laber-for="input-client-name">
-                                                <b-form-input v-model="property.landlord.landlordName" id="input-landlord-fullname"></b-form-input>
+                                                <b-form-input v-model="property.opts.landlordName" id="input-landlord-fullname"></b-form-input>
                                             </b-form-group>
                                             <b-form-group>
-                                                <b-form-checkbox v-model="property.landlord.landlordHideName">{{ $t('Hide') }}</b-form-checkbox>
+                                                <b-form-checkbox v-model="property.opts.landlordHideName">{{ $t('Hide') }}</b-form-checkbox>
                                             </b-form-group>
                                         </div>
                                         <div class="col-md-3">
                                             <b-form-group :label="$t('Phone number')" laber-for="input-phone">
-                                                <b-form-input v-model="property.landlord.landlordPhoneNumber" id="input-landlord-phone"></b-form-input>
+                                                <b-form-input v-model="property.opts.landlordPhoneNumber" id="input-landlord-phone"></b-form-input>
                                             </b-form-group>
                                             <b-form-group>
-                                                <b-form-checkbox v-model="property.landlord.landlordHidePhone">{{ $t('Hide') }}</b-form-checkbox>
+                                                <b-form-checkbox v-model="property.opts.landlordHidePhone">{{ $t('Hide') }}</b-form-checkbox>
                                             </b-form-group>
                                         </div>
                                         <div class="col-md-3">
                                             <b-form-group :label="$t('Client email')" laber-for="input-email">
-                                                <b-form-input v-model="property.landlord.landlordClientEmail" id="input-landlord-email"></b-form-input>
+                                                <b-form-input v-model="property.opts.landlordClientEmail" id="input-landlord-email"></b-form-input>
                                             </b-form-group>
                                         </div>
                                         <div class="col-md-3">
                                             <b-form-group :label="$t('Languages')" laber-for="input-email">
-                                                <b-form-input v-model="property.landlord.landlordLanguages" id="input-landlord-talking"></b-form-input>
+                                                <b-form-input v-model="property.opts.landlordLanguages" id="input-landlord-talking"></b-form-input>
                                             </b-form-group>
                                         </div>
                                     </div>
@@ -365,20 +365,27 @@ let imageRequest = new ImageRequest;
 let featureRequest = ApiRequest('features');
 let features = new featureRequest;
 
+let defOptions = {
+    landlordName: '',
+    landlordHideName: false,
+    landlordHidePhone: false,
+    landlordPhoneNumber:'',
+    landlordClientEmail:'',
+    landlordLanguages: 'de',
+    hideAddress: false,
+    seo_title: '',
+    seo_description: '',
+    superhost: '',
+    free: '',
+    realprice: '',
+}
+
+
 export default {
     name: "Single",
     data() {
         return {
-            property: {
-                landlord:{
-                    landlordName: '',
-                    landlordHideName: false,
-                    landlordHidePhone: false,
-                    landlordPhoneNumber:'',
-                    landlordClientEmail:'',
-                    landlordLanguages:''
-                },
-            },
+            property: { opts: {}},
             nameSelected: null,
             capacitySelected: null,
             nameOptions: [
@@ -408,7 +415,6 @@ export default {
                 { value: '10', text: 'Ten-seater' }
             ],
             showPin: false,
-            hideAdress: false,
             tax: 'not including taxes',
             imageData: [],
             newRoomOptions: [
@@ -457,11 +463,12 @@ export default {
     created() {
         properties.get(this.$route.params.item)
             .then(resp => {
+
                 this.property = resp.data;
                 this.rooms = this.property.rooms;
                 this.property.rooms.forEach( room => room.photos = this.getRoomPhotos(room));
                 this.imageData = this.getPhotos();
-                this.hideAdress = this.getHideAddressStatus(this.property.options);
+
                 this.property.rooms.forEach(item => {
                     item.options[3] = item.options[3] || '';
                     item.options[4] = item.options[4] || '';
@@ -566,9 +573,10 @@ export default {
         getDescription(item) {
             return this.getFieldValue('description', item,'');
         },
-        getHideAddressStatus(options){
-            if(options.filter(it => it.key === 'hide_address').length === 1)
-                return true
+        getOption(key, def){
+            def = def || false;
+            let option = this.property.options.search(item => item.key === key)
+            return option ? option.value : def;
         },
         getRoomPhotos(item) {
             return this.getFieldValue('photos', item,'', true);
@@ -620,7 +628,6 @@ export default {
                 }
                 delete room.photos;
             });
-            this.property.hideAdress = this.hideAdress;
             properties.update(this.property.id, this.property)
                 .then(resp => {
                     properties.get(this.$route.params.item)

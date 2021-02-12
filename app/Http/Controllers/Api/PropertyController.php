@@ -120,15 +120,28 @@ class PropertyController extends Controller
 
     public function show($id)
     {
-        $property = Property::findOrFail($id);
-        $property->landlord = [
-            'landlordName' => $property->getLandlordData('landlordName'),
-            'landlordHideName' => $property->getLandlordData('landlordHideName'),
-            'landlordHidePhone' => $property->getLandlordData('landlordHidePhone'),
-            'landlordPhoneNumber' => $property->getLandlordData('landlordPhoneNumber'),
-            'landlordClientEmail' => ($property->getLandlordData('landlordClientEmail') == '')?$property->user->getUserEmail() : $property->getLandlordData('landlordClientEmail'),
-            'landlordLanguages' => ($property->getLandlordData('landlordLanguages') == '')? implode(', ',$property->languages()) : $property->getLandlordData('landlordLanguages')
+        $specOptions = [
+            'landlordName' => '',
+            'landlordHideName' => false,
+            'landlordHidePhone' => false,
+            'landlordPhoneNumber' => '',
+            'landlordClientEmail' => '',
+            'landlordLanguages' => 'de',
+            'hideAddress' => false,
+            'seo_title' => '',
+            'seo_description' => '',
+            'superhost' => '',
+            'free' => '',
+            'realprice' => '',
         ];
+
+        $property = Property::findOrFail($id);
+        $options = [];
+        $opts = $property->options->toArray();
+        foreach ($specOptions as $key => $value) {
+            $options[$key] = Property::optionFind($opts, $key, $value);
+        }
+        $property->opts = $options;
         return response()->json($property);
     }
 
@@ -193,6 +206,14 @@ class PropertyController extends Controller
         ];
         $item->options()->create($optionsData);
 
+        $optionsData = [
+            'key'    => 'inclVat',
+            'parent' => $item->id,
+            'type'   => 'property',
+            'value'  => '',
+        ];
+        $item->options()->create($optionsData);
+
         $item->save();
         $item = Property::find($item->id);
         return $item ? response()->json(['code' => 'ok','property' => $item]) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
@@ -200,25 +221,7 @@ class PropertyController extends Controller
 
     public function update(Property $property, Request $request)
     {
-//        request()->validate([
-//            'rooms.*.options.*.value'      => 'required',
-//        ]);
         $fields = $request->all();
-
-        $option = Option::where('parent', $fields['id'])->where('key', 'hide_address')->first();
-        if($fields['hideAdress'] && $option==null){
-            $optionsData = [
-                'key' => 'hide_address',
-                'parent' => $fields['id'],
-                'type' => 'property',
-                'value' => 'true',
-            ];
-            $option = new Option($optionsData);
-            $option->save();
-        }elseif(!$fields['hideAdress'] && $option){
-            $option->delete();
-        }
-
 
         $geo_data = $this->service->getCoords($fields['city'] . ' ' . $fields['address']);
 
@@ -231,16 +234,16 @@ class PropertyController extends Controller
             }
         }
 
-        $option = Option::where('type', 'property')->where('parent', $fields['id'])->where('key', 'landlord')->first();
-        if ($option != null) {
-            $option->value = json_encode($fields['landlord']);
-            $option->save();
-        }else{
-            $option = new Option([
-                'key' => 'landlord',
-                'parent' => $fields['id'],
+        foreach ($fields['opts'] as $key => $data) {
+            $option = Option::where('type', 'property')->where('parent', $fields['id'])->where('key', $key)->first();
+            if (!$option) {
+                $option = new Option;
+            }
+            $option->fill([
                 'type' => 'property',
-                'value' =>  json_encode($fields['landlord'])
+                'value' => $fields['opts'][$key] ?: '',
+                'parent' => $property->id,
+                'key' => $key
             ]);
             $option->save();
         }
@@ -249,7 +252,7 @@ class PropertyController extends Controller
 
         $property->features()->detach();
 
-        $property->features()->attach(array_map(function ($feature){
+        $property->features()->attach(array_map(function ($feature) {
             return $feature['id'];
         }, $fields['features']));
 
