@@ -22,7 +22,7 @@
 </head>
 <body>
 <div id="app" class="property-list">
-    <header>
+    <header class="height-menu">
         <div class="container">
             <div class="header-content single-header-content">
                 <div class="mobile-button">
@@ -72,13 +72,18 @@
 
         <div class="mobile-menu">
             <div class="mobile-menu-content">
+                <div class="logo-mobile-block" style="text-align:center;margin-bottom:28px;">
+                    <a href="{{ route(app('locale')->routeApply('home')) }}" style="display:inline-block;">
+                        @include('partials.logo-mobile-menu')
+                    </a>
+                </div>
                 <ul>
                     <li>
                         <a href="{{ route(app('locale')->routeApply('favorites')) }}">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15.1614 9.97563C16.597 8.4996 16.597 6.10223 15.1614 4.6262C13.7316 3.1561 11.4179 3.1561 9.98803 4.6262L9.27309 5.36128C9.12351 5.51507 8.87649 5.51507 8.72691 5.36128L8.01197 4.6262C6.58214 3.1561 4.26843 3.1561 2.8386 4.6262C1.40301 6.10223 1.40301 8.4996 2.8386 9.97563L9 16.3106L15.1614 9.97563ZM9.44185 4.09498C11.1708 2.3173 13.9786 2.3173 15.7076 4.09498C17.4308 5.86675 17.4308 8.73508 15.7076 10.5068L9.27309 17.1226C9.12351 17.2764 8.87649 17.2764 8.72691 17.1226L2.29242 10.5068C0.569193 8.73508 0.569193 5.86675 2.29242 4.09498C4.02141 2.3173 6.82916 2.3173 8.55815 4.09498L9 4.54928L9.44185 4.09498Z" fill="#7A8793" stroke="#7A8793" stroke-width="0.2"/>
                             </svg>
-                            {{ __('Favorites') }} (<span class="favoritesCount"></span>)
+                            {{ __('Favorites') }} (<span class="favoritesCount">0</span>)
                         </a>
                     </li>
                     <li>
@@ -90,7 +95,7 @@
                         </a>
                     </li>
                 </ul>
-                <a class="whatsapp-number" href="tel:+49 341 1234 2223">
+                <a class="whatsapp-number" href="tel:{{ str_replace('', '', $options['website_phone'] ?? '') }}">
                     <img src="/svg/whatsapp-mobile.svg" alt="Whatsapp">
                     {{ $options['website_phone'] ?? '' }}
                 </a>
@@ -141,109 +146,9 @@
         </div>
     </div>
 
+    @include('single.inquiry-modal')
 
-
-    <div class="modal-overlay inquiry-modal-overlay">
-        <div class="inquiry-modal">
-            <div class="modal-close">
-                <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0956 2.0934C10.369 1.82004 10.369 1.37682 10.0956 1.10345C9.82227 0.830087 9.37906 0.830087 9.10569 1.10345L5.49959 4.70956L1.89389 1.10387C1.62053 0.830501 1.17731 0.830501 0.903944 1.10387C0.630577 1.37724 0.630577 1.82045 0.903944 2.09382L4.50964 5.69951L0.903253 9.30589C0.629887 9.57926 0.629886 10.0225 0.903253 10.2958C1.17662 10.5692 1.61984 10.5692 1.8932 10.2958L5.49959 6.68946L9.10638 10.2963C9.37975 10.5696 9.82297 10.5696 10.0963 10.2963C10.3697 10.0229 10.3697 9.57967 10.0963 9.30631L6.48954 5.69951L10.0956 2.0934Z" fill="#545769"/>
-                </svg>
-            </div>
-            <div class="title">{{ __('Send request') }}</div>
-            <form>
-                <div class="input-block-item">
-                    <input id="company" type="text" name="company">
-                    <label for="company">{{ __('Company name') }}</label>
-                </div>
-                <div class="input-block-item">
-                    <input id="name" type="text" name="namesurname">
-                    <label for="name">{{ __('Name and Surname') }}*</label>
-                </div>
-                <div class="input-block-item">
-                    <input id="email" type="email" name="email">
-                    <label for="email">{{ __('Email') }}*</label>
-                </div>
-                <div class="input-block-item">
-                    <input id="telephone" type="tel" name="phone">
-                    <label for="telephone">{{ __('Phone number') }}*</label>
-                </div>
-                <div class="data-block">
-                    <input id="arrival-date" data-provide="datepicker" readonly name="arrivaldate">
-                    <label for="arrival-date">{{ __('Arrival date') }}</label>
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13 0H14V2H16C16.5523 2 17 2.44772 17 3V6V7V17C17 17.5523 16.5523 18 16 18H2C1.44772 18 1 17.5523 1 17V7V6V3C1 2.44772 1.44772 2 2 2H4V0H5V2H13V0ZM5 3H4H2V6H16V3H14H13H5ZM16 17H2V7H16V17ZM10 12H14V13H10V12ZM14 10H10V11H14V10ZM4 12H8V13H4V12ZM8 10H4V11H8V10Z" fill="#7A8793"/>
-                    </svg>
-                </div>
-                <div class="data-block">
-                    <input id="date-departure" data-provide="datepicker" readonly name="datedeparture">
-                    <label for="date-departure">{{ __('Date departure') }}</label>
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13 0H14V2H16C16.5523 2 17 2.44772 17 3V6V7V17C17 17.5523 16.5523 18 16 18H2C1.44772 18 1 17.5523 1 17V7V6V3C1 2.44772 1.44772 2 2 2H4V0H5V2H13V0ZM5 3H4H2V6H16V3H14H13H5ZM16 17H2V7H16V17ZM10 12H14V13H10V12ZM14 10H10V11H14V10ZM4 12H8V13H4V12ZM8 10H4V11H8V10Z" fill="#7A8793"/>
-                    </svg>
-                </div>
-                <div class="select-block">
-                    <select id="number-persons">
-                        <option>1 {{ __('Person') }}</option>
-                        <option>2 {{ __('Persons') }}</option>
-                        <option>3 {{ __('Persons') }}</option>
-                        <option>4 {{ __('Persons') }}</option>
-                        <option>5 {{ __('Person') }}</option>
-                        <option>6 {{ __('Person') }}</option>
-                    </select>
-                    <label for="number-persons">{{ __('Number persons') }}</label>
-                </div>
-                <div class="select-block">
-                    <select id="type">
-                        <option>{{ __('Whole apartment') }}</option>
-                        <option>{{ __('House') }}</option>
-                        <option>{{ __('Room') }}</option>
-                        <option>{{ __('Garage') }}</option>
-                    </select>
-                    <label for="number-persons">{{ __('Housing type') }}</label>
-                </div>
-                <div class="text-area-block">
-                    <textarea placeholder="{{ __('Message to owner') }}"></textarea>
-                </div>
-                <div class="checkbox-block checkbox-middle">
-                    <input id="email-checkbox" class="checkbox" type="checkbox">
-                    <label for="email-checkbox">{{ __('Send me a copy by email') }}</label>
-                </div>
-                <div class="checkbox-block checkbox-top">
-                    <input id="consent-checkbox" class="checkbox" type="checkbox">
-                    <label for="consent-checkbox">{{ __('I consent to the processing of my data as described in') }} <a href="#">{{ __('statement of consent') }}</a> {{ __('from') }} Checkzimmer.</label>
-                </div>
-                <div class="recapcha-block">
-                    <input type="hidden" name="grecaptcha">
-                </div>
-                <a class="send-request" href="#">{{ __('Send request') }}</a>
-            </form>
-        </div>
-    </div>
-
-    <div class="modal-overlay slider-modal-overlay">
-        <div class="modal-close">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M23.2514 24.0004C23.0614 24.0004 22.8714 23.9304 22.7214 23.7804L12.0014 13.0604L1.28141 23.7804C0.991406 24.0704 0.511406 24.0704 0.221406 23.7804C-0.0685937 23.4904 -0.0685937 23.0104 0.221406 22.7204L10.9414 12.0004L0.221406 1.28043C-0.0685937 0.99043 -0.0685937 0.51043 0.221406 0.22043C0.511406 -0.0695703 0.991406 -0.0695703 1.28141 0.22043L12.0014 10.9404L22.7214 0.22043C23.0114 -0.0695703 23.4914 -0.0695703 23.7814 0.22043C24.0714 0.51043 24.0714 0.99043 23.7814 1.28043L13.0614 12.0004L23.7814 22.7204C24.0714 23.0104 24.0714 23.4904 23.7814 23.7804C23.6314 23.9304 23.4414 24.0004 23.2514 24.0004Z" fill="white"/>
-            </svg>
-        </div>
-        <div class="slider-block">
-            <div class="big-slider">
-                @foreach ($hotel->photos() as $key => $photo)
-                    <div class="slider-item"><img src="{{ $photo['url_original'] }}" alt="alt"></div>
-                @endforeach
-            </div>
-            <div class="small-slider">
-                @foreach ($hotel->photos() as $key => $photo)
-                    <div class="slider-item"><img src="{{ $photo['url_max300'] }}" alt="alt"></div>
-                @endforeach
-            </div>
-            <div class="name-slide-number">
-                <div class="number">1/{{count($hotel->photos())}}</div>
-            </div>
-        </div>
-    </div>
-
+    @include('single.gallery-modal')
 
 </footer>
 
