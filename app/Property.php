@@ -48,6 +48,9 @@ class Property extends Model
         }
     }
 
+    public function getName() {
+
+    }
     private function getPhotos()
     {
         $this->getOptions();
@@ -182,6 +185,9 @@ class Property extends Model
 
     public function getRoomPersonsMin()
     {
+        if (!$this->rooms->toArray()) {
+            return 0;
+        }
         return array_reduce($this->rooms->toArray(), function ($carry, $item) {
             return $item['person'] < $carry ? $item['person'] : $carry;
         }, 999);
@@ -190,10 +196,16 @@ class Property extends Model
     public function getRoomPersonsMax()
     {
         return array_reduce($this->rooms->toArray(), function ($carry, $item) {
-            return $item['person'] > $carry ? $item['person'] : $carry;
+            return $carry + ($item['price'] > 0 ? $item['number'] * $item['person'] : 0);
         }, 0);
     }
 
+    public function checkHideAdress(){
+        $hideAdress = Option::where('type', 'property')->where('parent', $this->id)->where('key', 'hide_address')->first();
+        if (!$hideAdress){
+            return true;
+        }
+    }
     public function getRoomPriceMin()
     {
         if ($this->price_min) {
