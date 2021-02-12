@@ -163,7 +163,6 @@ class PropertyController extends Controller
             'address'   => 'required',
             'zip'       => 'required',
         ]);
-
         $geo_data = $this->service->getCoords($request->city . ' ' . $request->address);
 
         $data = [
@@ -193,8 +192,8 @@ class PropertyController extends Controller
         $item->options()->create($optionsData);
 
         $item->save();
-
-        return $item ? response()->json(['code' => 'ok','user' => $item]) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
+        $item = Property::find($item->id);
+        return $item ? response()->json(['code' => 'ok','property' => $item]) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
     }
 
     public function update(Property $property, Request $request)
@@ -203,6 +202,21 @@ class PropertyController extends Controller
 //            'rooms.*.options.*.value'      => 'required',
 //        ]);
         $fields = $request->all();
+
+        $option = Option::where('parent', $fields['id'])->where('key', 'hide_address')->first();
+        if($fields['hideAdress'] && $option==null){
+            $optionsData = [
+                'key' => 'hide_address',
+                'parent' => $fields['id'],
+                'type' => 'property',
+                'value' => 'true',
+            ];
+            $option = new Option($optionsData);
+            $option->save();
+        }elseif(!$fields['hideAdress'] && $option){
+            $option->delete();
+        }
+
 
         $geo_data = $this->service->getCoords($fields['city'] . ' ' . $fields['address']);
 

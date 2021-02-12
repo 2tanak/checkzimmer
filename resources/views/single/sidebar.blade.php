@@ -49,6 +49,7 @@
                 </div>
             </div>
         @endif
+        @if ($hotel->checkHideAdress())
         <div class="address-map">
             <div class="address">
                 <div class="hotel-name">{{$hotel->name}}</div>
@@ -77,6 +78,7 @@
                 </a>
             </div>
         </div>
+        @endif
     </div>
     <div class="sidebar-bottom">
         <div class="sidebar-bottom-block sidebar-bottom-modal">

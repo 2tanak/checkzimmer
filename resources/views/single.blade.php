@@ -17,7 +17,9 @@
                         <h1>{{ $hotel->name }}</h1>
                         <div class="additional-information">
                             <div class="mobile-title">Bewertungen</div>
+                            @if($hotel->rate!=null)
                             @include('single.rating', ['rating' => $hotel->rate])
+                            @endif
                             <div class="add-time">{{ __('Added') }}: {{ __('in')}} {{ date('H:i, j F Y', strtotime($hotel->created_at)) }}</div>
                             <div class="viewed">{{ __('Views') }}: {{ $hotel->views }}</div>
                         </div>

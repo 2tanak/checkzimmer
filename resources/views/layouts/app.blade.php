@@ -270,7 +270,7 @@
                     <li><a href="#">Impressum</a></li>
                 </ul>
                 <div class="copyright">
-                    {{ $options['copyright'] ?? '' }}
+                    &copy; {{ now()->year }} {{ $options['copyright'] ?? '' }}
                 </div>
             </div>
         </div>

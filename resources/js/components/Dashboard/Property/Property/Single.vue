@@ -24,11 +24,13 @@
                                     <b-form-group :label="$t('Object display order')" label-for="input-hotel-name">
                                         <b-form-input v-model="property.ord" id="input-hotel-name"></b-form-input>
                                     </b-form-group>
-                                    <b-form-group :label="$t('Object access')" label-for="input-hotel-name">
+                                    <b-form-checkbox v-model="showPin" style="margin-bottom:16px;" value="Closed access">{{ $t('Closed access') }}</b-form-checkbox>
+                                    <b-form-group :label="$t('Object access')" label-for="input-hotel-name" v-if="showPin">
                                         <b-form-input v-model="property.access" id="input-hotel-name"></b-form-input>
                                         <small v-if="!property.access" class="text-info">{{ $t('Free access') }}</small>
                                         <small v-else class="text-danger">{{ $t('access is limited by the specified PIN codes. Codes can be separated by commas') }}</small>
                                     </b-form-group>
+                                    <b-form-checkbox v-model="hideAdress" value="true">{{ $t('Hide address') }}</b-form-checkbox>
                                 </div>
                             </div>
                         </div>
@@ -246,10 +248,10 @@
                                                            @start="drag=true"
                                                            @update="$forceUpdate()"
                                                            @end="drag=false">
-                                                    <div class="col-md-3 mb-4" v-for="element in rooms[i].photos" :key="element.id">
+                                                    <div class="col-md-3 mb-4" v-for="(element, index) in rooms[i].photos" :key="index">
                                                         <div class="photos-gallery-item">
                                                             <img :src="element.url_max300">
-                                                            <a class="delete-photo-link" href="" @click.prevent="deletePhotoSmallGalleryOk($event, room, element.id)">&times;</a>
+                                                            <a class="delete-photo-link" href="" @click.prevent="deletePhotoSmallGalleryOk($event, room, index)">&times;</a>
                                                             <div v-b-modal.bigPhotoModal class="blackout" @click="imgPath = element.url_original"></div>
                                                         </div>
                                                     </div>
@@ -287,6 +289,8 @@
             <p class="text-danger">{{ $t('Are you sure you want to delete this photo') }}?</p>
         </b-modal>
 
+        <b-modal id="hotel-saved">{{ $t('Hotel saved successfully') }}</b-modal>
+
         <b-modal id="bigPhotoModal" data-date="imgPath" size="xl" title="Picture">
             <img :src="imgPath" class="full-width">
         </b-modal>
@@ -315,13 +319,16 @@ export default {
             property: {
                 landlord:{
                     landlordName: '',
-                    landlordHideName:false,
-                    landlordHidePhone:false,
+                    landlordHideName: false,
+                    landlordHidePhone: false,
                     landlordPhoneNumber:'',
                     landlordClientEmail:'',
                     landlordLanguages:''
                 },
             },
+            showPin: false,
+            hideAdress: false,
+            property: {},
             imageData: [],
             newRoomOptions: [
                 {
@@ -373,12 +380,12 @@ export default {
                 this.rooms = this.property.rooms;
                 this.property.rooms.forEach( room => room.photos = this.getRoomPhotos(room));
                 this.imageData = this.getPhotos();
+                this.hideAdress = this.getHideAddressStatus(this.property.options);
                 this.property.rooms.forEach(item => {
                     item.options[3] = item.options[3] || '';
                     item.options[4] = item.options[4] || '';
                     return item;
                 });
-
                 features.all()
                     .then(res => {
                         if(res.status === 200) {
@@ -474,6 +481,10 @@ export default {
         getDescription(item) {
             return this.getFieldValue('description', item,'');
         },
+        getHideAddressStatus(options){
+            if(options.filter(it => it.key == 'hide_address').length === 1)
+                return true
+        },
         getRoomPhotos(item) {
             return this.getFieldValue('photos', item,'', true);
         },
@@ -508,6 +519,9 @@ export default {
                 })
         },
         save() {
+            this.imageData.forEach(function (item , i) {
+                (i===0) ? item.main_photo = true : delete item.main_photo;
+            });
             for(let option of this.property.options){
                 if(option.key === 'photos'){
                     option.value = JSON.stringify(this.imageData);
@@ -521,6 +535,7 @@ export default {
                 }
                 delete room.photos;
             });
+            this.property.hideAdress = this.hideAdress;
             properties.update(this.property.id, this.property)
                 .then(resp => {
                     properties.get(this.$route.params.item)
@@ -530,6 +545,9 @@ export default {
                             this.property.rooms.forEach( room => room.photos = this.getRoomPhotos(room));
                             this.imageData = this.getPhotos();
                         })
+                })
+                .then( () => {
+                    this.$bvModal.show('hotel-saved');
                 })
         },
         addRoom() {

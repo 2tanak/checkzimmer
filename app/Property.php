@@ -220,6 +220,12 @@ class Property extends Model
         }, 0);
     }
 
+    public function checkHideAdress(){
+        $hideAdress = Option::where('type', 'property')->where('parent', $this->id)->where('key', 'hide_address')->first();
+        if (!$hideAdress){
+            return true;
+        }
+    }
     public function getRoomPriceMin()
     {
         if ($this->price_min) {

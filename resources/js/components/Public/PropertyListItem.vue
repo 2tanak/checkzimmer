@@ -23,7 +23,7 @@
             <div class="data">
                 <a :href="'/'+$i18n.locale+'/single/'+item.slug" class="title"><span>{{ item.name }}</span></a>
                 <div class="data-item">
-                    <div class="geolocation">
+                    <div v-if="hideAdress" class="geolocation">
                         <img src="/svg/i-pin.svg" alt="">
                         {{ item.zip }}, {{ item.city }}
                     </div>
@@ -48,13 +48,23 @@
                             <div class="tooltip-block">{{ $t('Tv') }}</div>
                             <img src="/svg/i-tv.svg">
                         </div>
-                        <div v-if="kitchenTypeStr() !== ''" class="kitchen data-block-oval">
-                            <img src="/svg/i-canteen.svg">
-                            {{ kitchenTypeStr() }} {{ $t('Kitchen') }}
+                        <div v-if="getBedType" class="bed data-block-oval" title="Bed">
+                            <img v-if="getBedType === 'single'" src="/svg/i-singlebed.svg">
+                            <img v-if="getBedType === 'double'" src="/svg/i-bedroom.svg">
+                            <span class="property-title">{{ getBedType }} {{ $t('bed') }}</span>
                         </div>
-                        <div v-if="showerStr()" class="shower data-block-oval">
+                        <div v-if="getKitchenType" class="kitchen data-block-oval">
+                            <img src="/svg/i-canteen.svg">
+                            <span class="property-title" v-if="getKitchenType !== 'kitchenette'">
+                                {{ getKitchenType }} {{ $t('kitchen') }}
+                            </span>
+                            <span v-else>
+                                {{ getKitchenType }}
+                            </span>
+                        </div>
+                        <div v-if="getShowerType" class="shower data-block-oval">
                             <img src="/svg/i-shower.svg">
-                            {{  showerStr() }} {{ $t('Shower') }}
+                            {{ getShowerType }} {{ $t('shower') }}
                         </div>
                     </div>
                 </div>
@@ -132,7 +142,8 @@ export default {
     data() {
         return {
             sizedForSlider: true,
-            NoPhoto: false
+            NoPhoto: false,
+            hideAdress: true,
         }
     },
     mounted() {
@@ -140,7 +151,14 @@ export default {
             this.sizedForSlider = jQuery(window).width() > 1040;
         });
     },
+    created() {
+        this.checkHideAdressStatus();
+    },
     methods: {
+        checkHideAdressStatus(){
+            if(this.item.options.filter(it => it.key == 'hide_address').length === 1)
+                this.hideAdress = false;
+        },
         findOption(name) {
             if (!this.item.options) {
                 return false;
@@ -200,72 +218,20 @@ export default {
                 default: return this.$t('not specified');
             }
         },
-        typeKitchen(roomFacilities) {
-            if (!this.findOption('features')) {
+        getRoomOptionByType(name){
+            let resultName = name.charAt(0).toUpperCase() + name.slice(1);
+            let result =[];
+            this.item.rooms.some( room => {
+                if(room[name] != 'none') {
+                    let text = room[name].charAt(0).toUpperCase() + room[name].slice(1);
+                    if(result.indexOf(text) == -1)
+                        result.push(text);
+                }
+            } );
+            if(result.length > 0)
+                return  (result[result.length - 1] === 'Kitchenette')? result.join(' + ') : result.join(' + ') + ' ' + resultName ;
+            else
                 return false;
-            }
-            let features = JSON.parse(this.findOption('features').value)
-            if (features.some(item => item.name === 'Shared kitchen')) {
-                return 'shared kitchen'
-            }
-            if (roomFacilities.some(item => item.name === 'Kitchenette')) {
-                return 'kitchenette';
-            }
-            if (roomFacilities.some(item => item.name === 'Kitchen')) {
-                return 'private kitchen'
-            }
-
-            return 'none';
-        },
-        typeShower(roomFacilities) {
-            if (roomFacilities.some(item => item.name === 'Shared bathroom')) {
-                return 'shared';
-            }
-            if (roomFacilities.some(item => item.name === 'Shower') || roomFacilities.some(item => item.name === 'Private bathroom')) {
-                return 'private'
-            }
-
-            return 'none';
-        },
-        kitchenTypeStr() {
-            let priv = this.item.rooms.some( room => {
-                let facilities = this.findOptionRoom(room, 'facilities');
-                let features = facilities ? JSON.parse(facilities.value) : [];
-                return ['private kitchen', 'kitchenette'].includes( this.typeKitchen(features) );
-            } );
-            let shared = this.item.rooms.some( room => {
-                let facilities = this.findOptionRoom(room, 'facilities');
-                let features = facilities ? JSON.parse(facilities.value) : [];
-                return this.typeKitchen(features) === 'shared kitchen';
-            } );
-            let types = [];
-            if (priv) {
-                types.push(this.$t('its'));
-            }
-            if (shared) {
-                types.push(this.$t('general'));
-            }
-            return types.join(' + ');
-        },
-        showerStr() {
-            let priv = this.item.rooms.some( room => {
-                let facilities = this.findOptionRoom(room, 'facilities');
-                let features = facilities ? JSON.parse(facilities.value) : [];
-                return this.typeShower(features) === 'private';
-            } );
-            let shared = this.item.rooms.some( room => {
-                let facilities = this.findOptionRoom(room, 'facilities');
-                let features = facilities ? JSON.parse(facilities.value) : [];
-                return this.typeShower(features) === 'shared';
-            } );
-            let types = [];
-            if (priv) {
-                types.push(this.$t('private'));
-            }
-            if (shared) {
-                types.push(this.$t('shared'));
-            }
-            return types.join(' + ');
         },
         getRoomName(room) {
             let name = this.findOptionRoom(room, 'name');
@@ -273,6 +239,22 @@ export default {
         }
     },
     computed: {
+        getKitchenType() {
+            let personal = this.item.rooms.some( room => room['kitchen'] === 'single' );
+            let kitchenette = this.item.rooms.some( room => room['kitchen'] === 'kitchenette' );
+            let shared = this.item.rooms.some( room => room['kitchen'] === 'shared' );
+            return personal ? 'private' : ( kitchenette ? 'kitchenette' : ( shared ? 'shared' : ''));
+        },
+        getShowerType() {
+            let personal = this.item.rooms.some( room => room['shower'] === 'single' );
+            let shared = this.item.rooms.some( room => room['shower'] === 'shared' );
+            return personal ? 'private' : ( shared ? 'shared' : '');
+        },
+        getBedType() {
+            let single = this.item.rooms.some( room => room['bed'] === 'single' );
+            let double = this.item.rooms.some( room => room['bed'] === 'double' );
+            return single ? 'single' : ( double ? 'double' : '');
+        },
         sumPeopleNumStr() {
             let sum = this.sumPeopleNum(),
                 base_sum = sum;
@@ -294,7 +276,6 @@ export default {
         },
         getPhotos() {
             let photos = this.findOption('photos');
-            console.log(photos);
             if (!photos) {
                 return []
             }
