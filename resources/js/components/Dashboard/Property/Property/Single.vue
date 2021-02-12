@@ -303,8 +303,8 @@ import ApiRequest from '../../../API/ApiRequest';
 import draggable from 'vuedraggable';
 let PropertyRequest = ApiRequest('property');
 let properties = new PropertyRequest;
-let TypesRequest = ApiRequest('booking-roomtypes');
-let types = new TypesRequest;
+let RoomTypesRequest = ApiRequest('room-types');
+let roomTypes = new RoomTypesRequest;
 let RoomRequest = ApiRequest('room');
 let roomRequest = new RoomRequest;
 let ImageRequest = ApiRequest('image-upload');
@@ -365,7 +365,8 @@ export default {
             deleteRoom: {},
             show: false,
             imgPath:'',
-            features: []
+            features: [],
+            roomTypes: []
         }
     },
     components: {
@@ -399,6 +400,10 @@ export default {
                                 })
                             })
                         }
+                    });
+                roomTypes.all()
+                    .then( resp => {
+                        this.roomTypes = resp.data;
                     })
             });
 
