@@ -1333,21 +1333,15 @@ h1.list-title {
     width: 14px;
     height: 14px;
 }
-.property-card .all-types-content.fade:not(.show) {
-    height: 0;
-}
 .property-card .table-container .all-types {
-    cursor: pointer;
-    display: inline-block;
-}
-.property-card .table-container .all-types span {
     font-weight: 400;
     font-size: 12px;
     line-height: 170%;
     color: #333646;
     transition: all 0.4s;
+    text-decoration: none;
 }
-.property-card .table-container .all-types:hover span {
+.property-card .table-container .all-types:hover {
     transition: all 0.4s;
     color: #3B8B3E;
 }
@@ -1414,6 +1408,17 @@ h1.list-title {
     text-overflow: ellipsis;
     overflow: hidden;
     min-width: 155px;
+}
+.property-card .all-types-content {
+    height: 0;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.15s linear;
+}
+.property-card .all-types-content.show {
+    height: auto;
+    display: block;
+    opacity: 1;
 }
 .property-card .night {
     padding-right: 7px;
