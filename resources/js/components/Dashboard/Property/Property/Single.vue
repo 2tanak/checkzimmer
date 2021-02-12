@@ -224,8 +224,8 @@
                                             <div class="col-xl-6 mb-4">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <b-form-group :label="$t('Name')" :label-for="'input-room-'+i+'-name'">
-                                                            <b-form-select v-model="nameSelected" :options="nameOptions"></b-form-select>
+                                                        <b-form-group :label="$t('Room Type')" :label-for="'input-room-'+i+'-name'">
+                                                            <b-form-select v-model="property.rooms[i].room_type_id" :options="roomTypeOptions"></b-form-select>
                                                             <!-- <b-form-input  v-model="property.rooms[i].options[3].value" :id="'input-room-'+i+'-name'"></b-form-input> -->
                                                         </b-form-group>
                                                     </div>
@@ -240,8 +240,8 @@
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <b-form-group :label="$t('Number of capacity')" :label-for="'input-room-'+i+'-person'">
-                                                            <b-form-select v-model="capacitySelected" :options="capacityOptions"></b-form-select>
+                                                        <b-form-group :label="$t('Capacity')" :label-for="'input-room-'+i+'-person'">
+                                                            <b-form-select v-model="room.person" :options="capacityOptions"></b-form-select>
                                                             <!--<b-form-input v-model="room.person" :id="'input-room-'+i+'-person'"></b-form-input>-->
                                                         </b-form-group>
                                                     </div>
@@ -343,8 +343,8 @@ import ApiRequest from '../../../API/ApiRequest';
 import draggable from 'vuedraggable';
 let PropertyRequest = ApiRequest('property');
 let properties = new PropertyRequest;
-let TypesRequest = ApiRequest('booking-roomtypes');
-let types = new TypesRequest;
+let RoomTypesRequest = ApiRequest('room-types');
+let roomTypes = new RoomTypesRequest;
 let RoomRequest = ApiRequest('room');
 let roomRequest = new RoomRequest;
 let ImageRequest = ApiRequest('image-upload');
@@ -434,7 +434,8 @@ export default {
             deleteRoom: {},
             show: false,
             imgPath:'',
-            features: []
+            features: [],
+            roomTypes: []
         }
     },
     components: {
@@ -468,6 +469,10 @@ export default {
                                 })
                             })
                         }
+                    });
+                roomTypes.all()
+                    .then( resp => {
+                        this.roomTypes = resp.data;
                     })
             });
 
@@ -670,6 +675,9 @@ export default {
     computed: {
         hotelPhotos() {
             return this.getPhotos()
+        },
+        roomTypeOptions() {
+            return this.roomTypes.map( item => { return { value: item.id, text: item.name } })
         }
     },
 }
