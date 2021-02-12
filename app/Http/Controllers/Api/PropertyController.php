@@ -32,7 +32,9 @@ class PropertyController extends Controller
         $paginate = $request->query('page');
         $noCity = $request->query('nocity');
 
-        $objects = Property::orderBy('ord');
+        $objects = Property::orderBy('ord')->where(function ($query) {
+            $query->whereNull('access')->orWhere('access', '');
+        });
 
         if ($subdomain) {
             $relate = $noCity ? '!=' : '=';
