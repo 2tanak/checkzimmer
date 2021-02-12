@@ -41,28 +41,6 @@
                                         <b-form-checkbox>{{ $t('Free') }}</b-form-checkbox>
                                         <b-form-checkbox>{{ $t('Real price') }}</b-form-checkbox>
                                     </b-form-group>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-4 mb-4">
-                        <h3>SEO</h3>
-                        <div class="col-md-12 grid-margin">
-                            <div class="card">
-                                <div class="card-body">
-                                    <b-form-group :label="$t('Name hotel')" label-for="input-hotel-name">
-                                        <b-form-input v-model="property.name" id="input-hotel-name"></b-form-input>
-                                    </b-form-group>
-                                    <b-form-group :label="$t('Monteurzimmer in')" label-for="input-hotel-city">
-                                        <b-form-input v-model="property.city" id="input-hotel-city"></b-form-input>
-                                    </b-form-group>
-                                    <b-form-group :label="$t('Postcode')" label-for="input-hotel-lng">
-                                        <b-form-input v-model="property.zip" id="input-hotel-lng"></b-form-input>
-                                    </b-form-group>
-                                    <b-form-group :label="$t('Address')" label-for="input-hotel-address">
-                                        <b-form-input v-model="property.address" id="input-hotel-address"></b-form-input>
-                                    </b-form-group>
                                     <b-form-group>
                                         <b-form-checkbox id="vat"
                                                          v-model="tax"
@@ -70,6 +48,21 @@
                                                          value="including taxes"
                                                          unchecked-value="not including taxes">
                                             {{ $t('Tax (VAT) is included in the price') }}</b-form-checkbox>
+                                    </b-form-group>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4 mb-4">
+                        <div class="col-md-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <b-form-group :label="$t('SEO Title')" label-for="input-seo-title">
+                                        <b-form-input class="form-control" type="text" />
+                                    </b-form-group>
+                                    <b-form-group :label="$t('SEO Description')" label-for="input-seo-title">
+                                        <b-form-input class="form-control" type="text" value="%site-title% - Monteurzimmer in %city%, %postcode%, %street%, %house-number%" />
                                     </b-form-group>
                                 </div>
                             </div>
