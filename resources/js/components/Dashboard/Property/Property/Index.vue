@@ -180,7 +180,8 @@
                 properties.create(this.hotelNewData).then(response => {
                     if(response.data.code == 'ok'){
                         this.textOperation = this.$t('Added');
-                        this.operationOk = true
+                        this.operationOk = true;
+                        this.property.push(response.data.property);
                     }else{
                         this.textOperation = this.$t('Add error');
                         this.operationError = true;

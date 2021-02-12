@@ -31,6 +31,7 @@
                                         <small v-if="!property.access" class="text-info">{{ $t('Free access') }}</small>
                                         <small v-else class="text-danger">{{ $t('access is limited by the specified PIN codes. Codes can be separated by commas') }}</small>
                                     </b-form-group>
+                                    <b-form-checkbox v-model="hideAdress" value="true">{{ $t('Hide address') }}</b-form-checkbox>
                                     <b-form-group class="checkbox-block">
                                         <b-form-checkbox>{{ $t('Superhost') }}</b-form-checkbox>
                                         <b-form-checkbox>{{ $t('Free') }}</b-form-checkbox>
@@ -101,8 +102,8 @@
                                             <b-form-group :label="$t('Address')" label-for="input-hotel-address">
                                                 <b-form-input v-model="property.address" id="input-hotel-address"></b-form-input>
                                             </b-form-group>
-                                            <b-form-checkbox v-model="hideZip">{{ $t('Hide Zip') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="hideAddress">{{ $t('Hide Adress') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="property.hideZip">{{ $t('Hide Zip') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="property.hideAddress">{{ $t('Hide Adress') }}</b-form-checkbox>
                                         </div>
                                     </div>
                                 </div>
@@ -116,25 +117,25 @@
                                 <div class="card-body">
                                     <div class="row mt-4 mb-4">
                                         <div class="col-md-3">
-                                            <b-form-group :label="$t('Name and surname')" laber-for="input-client-name">
-                                                <b-form-input v-model="nameSurname" id="input-client-name"></b-form-input>
+                                            <b-form-group :label="$t('Landlord')" laber-for="input-client-name">
+                                                <b-form-input v-model="property.landlord.landlordName" id="input-landlord-fullname"></b-form-input>
                                             </b-form-group>
-                                            <b-form-checkbox v-model="hideName">{{ $t('Hide') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="property.landlord.landlordHideName">{{ $t('Hide') }}</b-form-checkbox>
                                         </div>
                                         <div class="col-md-3">
-                                            <b-form-group :label="$t('Number phone')" laber-for="input-phone">
-                                                <b-form-input v-model="numberPhone" id="input-phone"></b-form-input>
+                                            <b-form-group :label="$t('Phone number')" laber-for="input-phone">
+                                                <b-form-input v-model="property.landlord.landlordPhoneNumber" id="input-landlord-phone"></b-form-input>
                                             </b-form-group>
-                                            <b-form-checkbox v-model="hidePhone">{{ $t('Hide') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="property.landlord.landlordHidePhone">{{ $t('Hide') }}</b-form-checkbox>
                                         </div>
                                         <div class="col-md-3">
                                             <b-form-group :label="$t('Client email')" laber-for="input-email">
-                                                <b-form-input v-model="clientEmail" id="input-email"></b-form-input>
+                                                <b-form-input v-model="property.landlord.landlordClientEmail" id="input-landlord-email"></b-form-input>
                                             </b-form-group>
                                         </div>
                                         <div class="col-md-3">
                                             <b-form-group :label="$t('Languages')" laber-for="input-email">
-                                                <b-form-input v-model="talking" id="input-email"></b-form-input>
+                                                <b-form-input v-model="property.landlord.landlordLanguages" id="input-landlord-talking"></b-form-input>
                                             </b-form-group>
                                         </div>
                                     </div>
@@ -287,10 +288,10 @@
                                                            @start="drag=true"
                                                            @update="$forceUpdate()"
                                                            @end="drag=false">
-                                                    <div class="col-md-3 mb-4" v-for="element in rooms[i].photos" :key="element.id">
+                                                    <div class="col-md-3 mb-4" v-for="(element, index) in rooms[i].photos" :key="index">
                                                         <div class="photos-gallery-item">
                                                             <img :src="element.url_max300">
-                                                            <a class="delete-photo-link" href="" @click.prevent="deletePhotoSmallGalleryOk($event, room, element.id)">&times;</a>
+                                                            <a class="delete-photo-link" href="" @click.prevent="deletePhotoSmallGalleryOk($event, room, index)">&times;</a>
                                                             <div v-b-modal.bigPhotoModal class="blackout" @click="imgPath = element.url_original"></div>
                                                         </div>
                                                     </div>
@@ -355,6 +356,16 @@ export default {
     name: "Single",
     data() {
         return {
+            property: {
+                landlord:{
+                    landlordName: '',
+                    landlordHideName: false,
+                    landlordHidePhone: false,
+                    landlordPhoneNumber:'',
+                    landlordClientEmail:'',
+                    landlordLanguages:''
+                },
+            },
             nameSelected: null,
             capacitySelected: null,
             nameOptions: [
@@ -385,7 +396,6 @@ export default {
             ],
             showPin: false,
             hideAdress: false,
-            property: {},
             tax: 'not including taxes',
             imageData: [],
             newRoomOptions: [
@@ -437,12 +447,12 @@ export default {
                 this.rooms = this.property.rooms;
                 this.property.rooms.forEach( room => room.photos = this.getRoomPhotos(room));
                 this.imageData = this.getPhotos();
+                this.hideAdress = this.getHideAddressStatus(this.property.options);
                 this.property.rooms.forEach(item => {
                     item.options[3] = item.options[3] || '';
                     item.options[4] = item.options[4] || '';
                     return item;
                 });
-
                 features.all()
                     .then(res => {
                         if(res.status === 200) {
@@ -538,6 +548,10 @@ export default {
         getDescription(item) {
             return this.getFieldValue('description', item,'');
         },
+        getHideAddressStatus(options){
+            if(options.filter(it => it.key === 'hide_address').length === 1)
+                return true
+        },
         getRoomPhotos(item) {
             return this.getFieldValue('photos', item,'', true);
         },
@@ -572,6 +586,9 @@ export default {
                 })
         },
         save() {
+            this.imageData.forEach(function (item , i) {
+                (i===0) ? item.main_photo = true : delete item.main_photo;
+            });
             for(let option of this.property.options){
                 if(option.key === 'photos'){
                     option.value = JSON.stringify(this.imageData);
@@ -585,6 +602,7 @@ export default {
                 }
                 delete room.photos;
             });
+            this.property.hideAdress = this.hideAdress;
             properties.update(this.property.id, this.property)
                 .then(resp => {
                     properties.get(this.$route.params.item)

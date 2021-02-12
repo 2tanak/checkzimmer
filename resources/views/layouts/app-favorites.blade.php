@@ -157,7 +157,7 @@
                 <li><a href="#">Impressum</a></li>
             </ul>
             <div class="copyright">
-                Copyright 2020 Immobilien.de LLC All rights reserved.
+                &copy; {{ now()->year }} {{ $options['copyright'] ?? '' }}
             </div>
         </div>
     </div>

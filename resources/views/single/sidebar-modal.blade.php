@@ -49,19 +49,19 @@
             <div class="right">{{ __('per person (including VAT)') }}</div>
         </div>
         <a href="#" class="inquiry">{{ __('Send request') }}</a>
-        @if ($hotel->type == 'affiliate')
+        @if (($hotel->getLandlordData('landlordPhoneNumber') == null) || ($hotel->getLandlordData('landlordHidePhone') === true))
             <div class="number-phone not-phone">
                 <div class="speaks">{{ __('Object owner speaks') }}:</div>
-                <div class="language-item">{{ implode(', ', $hotel->languages()) }}</div>
+                <div class="language-item">{{ $hotel->getLandlordData('landlordLanguages') }}</div>
             </div>
         @else
         <div class="number-phone">
-            <a href="tel:+4917616573456">+49 176&nbsp;<span class="num_hide">1657 3456</span></a>
+            <a href="tel:+{{ $hotel->getLandlordData('landlordPhoneNumber') }}">{{ $hotel->getLandlordData('landlordPhoneNumber') }}</a>
             <span class="sh_nmr">{{ __('show') }}</span>
             <div class="message">{{ __('Let us know that you are from the site Check-zimmer.de') }}</div>
             <div class="language">
                 <div class="speaks">{{ __('Speaks') }}:</div>
-                <div class="language-item">{{ implode(', ', $hotel->languages()) }}</div>
+                <div class="language-item">{{ $hotel->getLandlordData('landlordLanguages') }}</div>
             </div>
         </div>
         @endif

@@ -17,7 +17,9 @@
                         <h1>{{ $hotel->name }}</h1>
                         <div class="additional-information">
                             <div class="mobile-title">Bewertungen</div>
-                            @include('single.rating', ['rating' => $hotel->rate])
+                            @if($hotel->rate!=null)
+                                @include('single.rating', ['rating' => $hotel->rate])
+                            @endif
                             <div class="superhost-single">
                                 <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="4" cy="10" r="3" fill="#6BB63F"/>
@@ -46,15 +48,15 @@
 
         <div class="fixed-bar">
             <a href="#" class="send-inquiry inquiry">{{ __('Send request') }}</a>
-            @if ($hotel->type != 'affiliate')
+            @if (($hotel->getLandlordData('landlordPhoneNumber') != null) && ($hotel->getLandlordData('landlordHidePhone') != true))
                 <div class="see-number-phone">
                     <span class="number-phone-text">{{ __('Show phone') }}</span>
-                    <a href="tel:+4917616573456" class="number-phone">+4917616573456</a>
+                    <a href="tel:{{ $hotel->getLandlordData('landlordPhoneNumber') }}" class="number-phone">{{ $hotel->getLandlordData('landlordPhoneNumber') }}</a>
                 </div>
             @endif
             <div class="not-phone">
                 <div class="speaks">{{ __('Object owner speaks') }}:</div>
-                <div class="language-item">{{ implode(', ', $hotel->languages()) }}</div>
+                <div class="language-item">{{ $hotel->getLandlordData('landlordLanguages') }}</div>
             </div>
         </div>
 
