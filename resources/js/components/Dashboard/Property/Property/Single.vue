@@ -211,10 +211,10 @@
                                                            @start="drag=true"
                                                            @update="$forceUpdate()"
                                                            @end="drag=false">
-                                                    <div class="col-md-3 mb-4" v-for="element in rooms[i].photos" :key="element.id">
+                                                    <div class="col-md-3 mb-4" v-for="(element, index) in rooms[i].photos" :key="index">
                                                         <div class="photos-gallery-item">
                                                             <img :src="element.url_max300">
-                                                            <a class="delete-photo-link" href="" @click.prevent="deletePhotoSmallGalleryOk($event, room, element.id)">&times;</a>
+                                                            <a class="delete-photo-link" href="" @click.prevent="deletePhotoSmallGalleryOk($event, room, index)">&times;</a>
                                                             <div v-b-modal.bigPhotoModal class="blackout" @click="imgPath = element.url_original"></div>
                                                         </div>
                                                     </div>
