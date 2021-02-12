@@ -1,12 +1,14 @@
 <template>
     <section class="header-dashboard">
-        <h1 style="font-size:26px;">{{ $t('Hotel editing') }}</h1>
+        <div style="display:flex;justify-content:space-between;margin-bottom:40px;">
+            <h1 style="font-size:26px;">{{ $t('Hotel editing') }}</h1>
+            <a class="back-link" href="/dashboard/property/items">{{ $t('Back') }}</a>
+        </div>
         <div class="delete-hotel-container">
-            <h2 style="margin-bottom:0;">{{ property.name }}</h2>
+                <h2 style="margin-bottom:0;">{{ property.name }}</h2>
             <div style="display:flex;align-items:center;">
-                <a class="back-link" href="/dashboard/property/items">{{ $t('Back') }}</a>
                 <b-button style="margin-right:10px;" v-b-modal.deleteHotelModal variant="danger" @click="deleteHotel">{{ $t('Delete hotel') }}</b-button>
-                <b-button type="submit" variant="success" class="mr-2 " @click="save">{{ $t('Save') }}</b-button>
+                <b-button style="margin-right:0 !important;" type="submit" variant="success" class="mr-2 " @click="save">{{ $t('Save') }}</b-button>
             </div>
         </div>
         <div class="row mt-4">
@@ -26,18 +28,19 @@
                                         <b-form-input v-model="property.ord" id="input-hotel-name"></b-form-input>
                                     </b-form-group>
                                     <b-form-checkbox v-model="showPin" style="margin-bottom:16px;" value="Closed access">{{ $t('Closed access') }}</b-form-checkbox>
-                                    <b-form-group :label="$t('Object access')" label-for="input-hotel-name" v-if="showPin">
+                                    <b-form-group :label="$t('Object access') + '(PIN)'" label-for="input-hotel-name" v-if="showPin">
                                         <b-form-input v-model="property.access" id="input-hotel-name"></b-form-input>
                                         <small v-if="!property.access" class="text-info">{{ $t('Free access') }}</small>
                                         <small v-else class="text-danger">{{ $t('access is limited by the specified PIN codes. Codes can be separated by commas') }}</small>
                                     </b-form-group>
-                                    <b-form-checkbox v-model="hideAdress" value="true">{{ $t('Hide address') }}</b-form-checkbox>
+                                    <b-form-group>
+                                        <b-form-checkbox v-model="hideAdress" value="true">{{ $t('Hide address') }}</b-form-checkbox>
+                                    </b-form-group>
                                     <b-form-group class="checkbox-block">
                                         <b-form-checkbox>{{ $t('Superhost') }}</b-form-checkbox>
                                         <b-form-checkbox>{{ $t('Free') }}</b-form-checkbox>
                                         <b-form-checkbox>{{ $t('Real price') }}</b-form-checkbox>
                                     </b-form-group>
-                                    <b-form-checkbox v-model="hideAdress" value="Hide address">{{ $t('Hide address') }}</b-form-checkbox>
                                 </div>
                             </div>
                         </div>
@@ -102,8 +105,14 @@
                                             <b-form-group :label="$t('Address')" label-for="input-hotel-address">
                                                 <b-form-input v-model="property.address" id="input-hotel-address"></b-form-input>
                                             </b-form-group>
-                                            <b-form-checkbox v-model="property.hideZip">{{ $t('Hide Zip') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="property.hideAddress">{{ $t('Hide Adress') }}</b-form-checkbox>
+                                            <div style="display:flex;align-items:center;">
+                                                <b-form-group style="margin-right:25px;">
+                                                    <b-form-checkbox v-model="property.hideZip">{{ $t('Hide Zip') }}</b-form-checkbox>
+                                                </b-form-group>
+                                                <b-form-group>
+                                                    <b-form-checkbox v-model="property.hideAddress">{{ $t('Hide Adress') }}</b-form-checkbox>
+                                                </b-form-group>
+                                             </div>
                                         </div>
                                     </div>
                                 </div>
@@ -120,13 +129,17 @@
                                             <b-form-group :label="$t('Landlord')" laber-for="input-client-name">
                                                 <b-form-input v-model="property.landlord.landlordName" id="input-landlord-fullname"></b-form-input>
                                             </b-form-group>
-                                            <b-form-checkbox v-model="property.landlord.landlordHideName">{{ $t('Hide') }}</b-form-checkbox>
+                                            <b-form-group>
+                                                <b-form-checkbox v-model="property.landlord.landlordHideName">{{ $t('Hide') }}</b-form-checkbox>
+                                            </b-form-group>
                                         </div>
                                         <div class="col-md-3">
                                             <b-form-group :label="$t('Phone number')" laber-for="input-phone">
                                                 <b-form-input v-model="property.landlord.landlordPhoneNumber" id="input-landlord-phone"></b-form-input>
                                             </b-form-group>
-                                            <b-form-checkbox v-model="property.landlord.landlordHidePhone">{{ $t('Hide') }}</b-form-checkbox>
+                                            <b-form-group>
+                                                <b-form-checkbox v-model="property.landlord.landlordHidePhone">{{ $t('Hide') }}</b-form-checkbox>
+                                            </b-form-group>
                                         </div>
                                         <div class="col-md-3">
                                             <b-form-group :label="$t('Client email')" laber-for="input-email">
@@ -248,7 +261,7 @@
                                                     <div class="col-md-4">
                                                         <b-form-group :label="$t('Cost, from')" :label-for="'input-room-'+i+'-price'">
                                                             <b-form-input v-model="room.price" :id="'input-room-'+i+'-price'"></b-form-input>
-                                                            <span>{{ tax }}</span>
+                                                            <span style="font-size:0.875rem;">{{ tax }}</span>
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
