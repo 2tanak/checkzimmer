@@ -214,8 +214,8 @@
                                                     <div class="col-md-4">
                                                         <b-form-group :label="$t('Shower')" :label-for="'input-room-'+i+'-shower'">
                                                             <b-select v-model="room.shower">
-                                                                <b-select-option value="single">{{ $t('Its') }}</b-select-option>
-                                                                <b-select-option value="shared">{{ $t('Joint') }}</b-select-option>
+                                                                <b-select-option value="single">{{ $t('Private') }}</b-select-option>
+                                                                <b-select-option value="shared">{{ $t('Shared') }}</b-select-option>
                                                                 <b-select-option value="none">{{ $t('Absent') }}</b-select-option>
                                                             </b-select>
                                                         </b-form-group>
@@ -232,8 +232,8 @@
                                                     <div class="col-md-4">
                                                         <b-form-group :label="$t('Kitchen')" :label-for="'input-room-'+i+'-shower'">
                                                             <b-select v-model="room.kitchen">
-                                                                <b-select-option value="single">{{ $t('Its') }}</b-select-option>
-                                                                <b-select-option value="shared">{{ $t('Joint') }}</b-select-option>
+                                                                <b-select-option value="single">{{ $t('Private') }}</b-select-option>
+                                                                <b-select-option value="shared">{{ $t('Shared') }}</b-select-option>
                                                                 <b-select-option value="kitchenette">{{ $t('Kitchenette') }}</b-select-option>
                                                                 <b-select-option value="none">{{ $t('Absent') }}</b-select-option>
                                                             </b-select>
