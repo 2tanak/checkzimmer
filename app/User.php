@@ -63,4 +63,9 @@ class User extends Authenticatable implements JWTSubject
             return self::whereNull('email_verified_at')->count();
         }
     }
+
+    public function getUserEmail()
+    {
+        return $this->email;
+    }
 }

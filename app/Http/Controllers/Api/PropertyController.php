@@ -119,6 +119,14 @@ class PropertyController extends Controller
     public function show($id)
     {
         $property = Property::findOrFail($id);
+        $property->landlord = [
+            'landlordName' => $property->getLandlordData('landlordName'),
+            'landlordHideName' => $property->getLandlordData('landlordHideName'),
+            'landlordHidePhone' => $property->getLandlordData('landlordHidePhone'),
+            'landlordPhoneNumber' => $property->getLandlordData('landlordPhoneNumber'),
+            'landlordClientEmail' => ($property->getLandlordData('landlordClientEmail') == '')?$property->user->getUserEmail() : $property->getLandlordData('landlordClientEmail'),
+            'landlordLanguages' => ($property->getLandlordData('landlordLanguages') == '')? implode(', ',$property->languages()) : $property->getLandlordData('landlordLanguages')
+        ];
         return response()->json($property);
     }
 
@@ -220,6 +228,21 @@ class PropertyController extends Controller
                 $fields['rooms'][$roomKey]['options'][$optionKey]['value'] = $option['value'] ?? '';
             }
         }
+
+        $option = Option::where('type', 'property')->where('parent', $fields['id'])->where('key', 'landlord')->first();
+        if ($option != null) {
+            $option->value = json_encode($fields['landlord']);
+            $option->save();
+        }else{
+            $option = new Option([
+                'key' => 'landlord',
+                'parent' => $fields['id'],
+                'type' => 'property',
+                'value' =>  json_encode($fields['landlord'])
+            ]);
+            $option->save();
+        }
+
         $property->updateRelations($fields);
 
         $property->features()->detach();

@@ -20,7 +20,7 @@ class Property extends Model
     protected $fillableRelations = ['options', 'rooms', 'features'];
     private static $identifier = 'id';
     private static $children = ['options', 'user'];
-
+    protected $data = [];
     protected $_options = null;
     protected $_photos = null;
     protected $_photoMain = null;
@@ -48,9 +48,29 @@ class Property extends Model
         }
     }
 
-    public function getName() {
-
+    function getLandlordData($key) {
+        if($this->getCurrentOption('landlord') == '')
+            return'';
+        $landlordRow = $this->getCurrentOption('landlord');
+        $landlord = json_decode($landlordRow['value'],true);
+        return ($landlord[$key] == null)? '' : $landlord[$key];
     }
+
+    function getCurrentOption($key) {
+        if($this->_options == null) {
+            $this->getOptions();
+        }
+        if (($this->data[$key] ?? null) === null) {
+            $index = array_search($key,array_column($this->_options,'key'));
+            if($index === false) {
+                return '';
+            }
+
+            $this->data[$key] = $this->_options[$index];
+        }
+        return ($this->data[$key] ?? '');
+    }
+
     private function getPhotos()
     {
         $this->getOptions();

@@ -65,6 +65,41 @@
                                             <b-form-group :label="$t('Address')" label-for="input-hotel-address">
                                                 <b-form-input v-model="property.address" id="input-hotel-address"></b-form-input>
                                             </b-form-group>
+                                            <b-form-checkbox v-model="property.hideZip">{{ $t('Hide Zip') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="property.hideAddress">{{ $t('Hide Adress') }}</b-form-checkbox>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4 mb-4">
+                        <div class="col-md-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row mt-4 mb-4">
+                                        <div class="col-md-3">
+                                            <b-form-group :label="$t('Landlord')" laber-for="input-client-name">
+                                                <b-form-input v-model="property.landlord.landlordName" id="input-landlord-fullname"></b-form-input>
+                                            </b-form-group>
+                                            <b-form-checkbox v-model="property.landlord.landlordHideName">{{ $t('Hide') }}</b-form-checkbox>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <b-form-group :label="$t('Phone number')" laber-for="input-phone">
+                                                <b-form-input v-model="property.landlord.landlordPhoneNumber" id="input-landlord-phone"></b-form-input>
+                                            </b-form-group>
+                                            <b-form-checkbox v-model="property.landlord.landlordHidePhone">{{ $t('Hide') }}</b-form-checkbox>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <b-form-group :label="$t('Client email')" laber-for="input-email">
+                                                <b-form-input v-model="property.landlord.landlordClientEmail" id="input-landlord-email"></b-form-input>
+                                            </b-form-group>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <b-form-group :label="$t('Languages')" laber-for="input-email">
+                                                <b-form-input v-model="property.landlord.landlordLanguages" id="input-landlord-talking"></b-form-input>
+                                            </b-form-group>
                                         </div>
                                     </div>
                                 </div>
@@ -281,9 +316,18 @@ export default {
     name: "Single",
     data() {
         return {
+            property: {
+                landlord:{
+                    landlordName: '',
+                    landlordHideName: false,
+                    landlordHidePhone: false,
+                    landlordPhoneNumber:'',
+                    landlordClientEmail:'',
+                    landlordLanguages:''
+                },
+            },
             showPin: false,
             hideAdress: false,
-            property: {},
             imageData: [],
             newRoomOptions: [
                 {
