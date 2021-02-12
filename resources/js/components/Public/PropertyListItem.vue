@@ -48,17 +48,23 @@
                             <div class="tooltip-block">{{ $t('Tv') }}</div>
                             <img src="/svg/i-tv.svg">
                         </div>
-                        <div v-if="getRoomOptionByType('bed')" class="bed data-block-oval" title="Bed">
-                            <img src="/svg/i-tv.svg">
-                            {{ getRoomOptionByType('bed') }}
+                        <div v-if="getBedType" class="bed data-block-oval" title="Bed">
+                            <img v-if="getBedType === 'single'" src="/svg/i-singlebed.svg">
+                            <img v-if="getBedType === 'double'" src="/svg/i-bedroom.svg">
+                            <span class="property-title">{{ getBedType }} {{ $t('bed') }}</span>
                         </div>
-                        <div v-if="getRoomOptionByType('kitchen') !== ''" class="kitchen data-block-oval">
+                        <div v-if="getKitchenType" class="kitchen data-block-oval">
                             <img src="/svg/i-canteen.svg">
-                            {{ getRoomOptionByType('kitchen') }}
+                            <span class="property-title" v-if="getKitchenType !== 'kitchenette'">
+                                {{ getKitchenType }} {{ $t('kitchen') }}
+                            </span>
+                            <span v-else>
+                                {{ getKitchenType }}
+                            </span>
                         </div>
-                        <div v-if="getRoomOptionByType('shower')" class="shower data-block-oval">
+                        <div v-if="getShowerType" class="shower data-block-oval">
                             <img src="/svg/i-shower.svg">
-                            {{  getRoomOptionByType('shower') }}
+                            {{ getShowerType }} {{ $t('shower') }}
                         </div>
                     </div>
                 </div>
@@ -215,7 +221,7 @@ export default {
                 }
             } );
             if(result.length > 0)
-                return  (result[result.length - 1] == 'Kitchenette')? result.join(' + ') : result.join(' + ') + ' ' + resultName ;
+                return  (result[result.length - 1] === 'Kitchenette')? result.join(' + ') : result.join(' + ') + ' ' + resultName ;
             else
                 return false;
         },
@@ -225,6 +231,22 @@ export default {
         }
     },
     computed: {
+        getKitchenType() {
+            let personal = this.item.rooms.some( room => room['kitchen'] === 'single' );
+            let kitchenette = this.item.rooms.some( room => room['kitchen'] === 'kitchenette' );
+            let shared = this.item.rooms.some( room => room['kitchen'] === 'shared' );
+            return personal ? 'private' : ( kitchenette ? 'kitchenette' : ( shared ? 'shared' : ''));
+        },
+        getShowerType() {
+            let personal = this.item.rooms.some( room => room['shower'] === 'single' );
+            let shared = this.item.rooms.some( room => room['shower'] === 'shared' );
+            return personal ? 'private' : ( shared ? 'shared' : '');
+        },
+        getBedType() {
+            let single = this.item.rooms.some( room => room['bed'] === 'single' );
+            let double = this.item.rooms.some( room => room['bed'] === 'double' );
+            return single ? 'single' : ( double ? 'double' : '');
+        },
         sumPeopleNumStr() {
             let sum = this.sumPeopleNum(),
                 base_sum = sum;
@@ -246,7 +268,6 @@ export default {
         },
         getPhotos() {
             let photos = this.findOption('photos');
-            // console.log(photos);
             if (!photos) {
                 return []
             }
