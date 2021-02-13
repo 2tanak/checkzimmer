@@ -264,8 +264,8 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         jQuery('#arrival-date, #date-departure').datepicker({
-            autoclose: true
-        });
+            format: "dd/mm/yyyy"
+        })
     });
 </script>
 

@@ -108,7 +108,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <div class="all-types-content">
+                <div class="all-types-content fade collapse active" :id="'id-' + item.id">
                     <table class="type collapse-table">
                         <tbody>
                             <tr>Вот тут должны быть ряды таблицы, если их больше 5. Если меньше, то кнопку эту скрываем
@@ -116,12 +116,12 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="all-types">
+                <a :href="'#' + 'id-' + item.id" class="all-types" aria-expanded="false" role="button" data-toggle="collapse" :aria-controls="'id-' + item.id">
                     <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M7 1.5C6.72386 1.5 6.5 1.72386 6.5 2V6H2.5C2.22386 6 2 6.22386 2 6.5C2 6.77614 2.22386 7 2.5 7H6.5V11C6.5 11.2761 6.72386 11.5 7 11.5C7.27614 11.5 7.5 11.2761 7.5 11V7H11.5C11.7761 7 12 6.77614 12 6.5C12 6.22386 11.7761 6 11.5 6H7.5V2C7.5 1.72386 7.27614 1.5 7 1.5Z" fill="#7A8793"/>
                     </svg>
                     <span>{{ $t('Показать все типы') }}</span>
-                </div>
+                </a>
             </div>
             <div class="night-rating-block">
                 <div class="night">
@@ -368,6 +368,7 @@ export default {
             let c_2 = Math.abs(parseFloat(this.item.geo.lat) - parseFloat(this.item.lat));
             return Math.ceil(Math.sqrt( c_1 ** 2 + c_2 ** 2 ) * 111);
         },
+
     }
 }
 

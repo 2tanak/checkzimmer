@@ -62,10 +62,6 @@ const app = new Vue({
 
 jQuery(document).ready(function() {
 
-    jQuery('.all-types').click(function() {
-        jQuery('.all-types-content').toggleClass('show');
-    });
-
     jQuery('.list-content').css('display', 'block');
     jQuery(' .load-block-content.first-load-block-content').css('display', 'none')
 

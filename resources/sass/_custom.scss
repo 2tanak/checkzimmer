@@ -1410,15 +1410,10 @@ h1.list-title {
     min-width: 155px;
 }
 .property-card .all-types-content {
-    height: 0;
-    display: none;
-    opacity: 0;
-    transition: opacity 0.15s linear;
+
 }
 .property-card .all-types-content.show {
-    height: auto;
-    display: block;
-    opacity: 1;
+
 }
 .property-card .night {
     padding-right: 7px;
