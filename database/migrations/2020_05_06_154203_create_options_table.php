@@ -18,7 +18,7 @@ class CreateOptionsTable extends Migration
             $table->unsignedInteger('parent');
             $table->enum('type', ['property', 'options', 'system', 'room', 'city', 'room_type', 'feature', 'domain']);
             $table->string('key');
-            $table->longText('value');
+            $table->longText('value')->nullable();
             $table->timestamps();
         });
     }

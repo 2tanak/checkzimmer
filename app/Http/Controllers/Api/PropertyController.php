@@ -133,6 +133,8 @@ class PropertyController extends Controller
             'superhost' => '',
             'free' => '',
             'realprice' => '',
+            'inclVAT' => '',
+            'hideZip' => ''
         ];
 
         $property = Property::findOrFail($id);
@@ -234,20 +236,11 @@ class PropertyController extends Controller
             }
         }
 
-        foreach ($fields['opts'] as $key => $data) {
-            $option = Option::where('type', 'property')->where('parent', $fields['id'])->where('key', $key)->first();
-            if (!$option) {
-                $option = new Option;
+        foreach($fields['options'] as $item) {
+            if (!$item['id']) {
+                $option = Option::create($item);
             }
-            $option->fill([
-                'type' => 'property',
-                'value' => $fields['opts'][$key] ?: '',
-                'parent' => $property->id,
-                'key' => $key
-            ]);
-            $option->save();
         }
-
         $property->updateRelations($fields);
 
         $property->features()->detach();
@@ -270,6 +263,5 @@ class PropertyController extends Controller
             $prop->fill($item);
             $prop->save();
         }
-        dd($data);
     }
 }
