@@ -65,7 +65,7 @@ class HomeController extends Controller
 
         if ($hotel->access) {
             $access = true;
-            return view('single-access', compact('system_option', 'options', 'hotel', 'access'));
+            return view('single-access', compact('system_option', 'hotel', 'access'));
         }
 
         $hotel->views++;

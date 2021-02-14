@@ -48,15 +48,15 @@
 
         <div class="fixed-bar">
             <a href="#" class="send-inquiry inquiry">{{ __('Send request') }}</a>
-            @if (($hotel->getLandlordData('landlordPhoneNumber') != null) && ($hotel->getLandlordData('landlordHidePhone') != true))
+            @if (($hotel->getCurrentOption('landlordPhoneNumber') != null) && ($hotel->getCurrentOption('landlordHidePhone') != true))
                 <div class="see-number-phone">
                     <span class="number-phone-text">{{ __('Show phone') }}</span>
-                    <a href="tel:{{ $hotel->getLandlordData('landlordPhoneNumber') }}" class="number-phone">{{ $hotel->getLandlordData('landlordPhoneNumber') }}</a>
+                    <a href="tel:{{ $hotel->getCurrentOption('landlordPhoneNumber') }}" class="number-phone">{{ $hotel->getCurrentOption('landlordPhoneNumber') }}</a>
                 </div>
             @endif
             <div class="not-phone">
                 <div class="speaks">{{ __('Object owner speaks') }}:</div>
-                <div class="language-item">{{ $hotel->getLandlordData('landlordLanguages') }}</div>
+                <div class="language-item">{{ $hotel->getCurrentOption('landlordLanguages') }}</div>
             </div>
         </div>
 
