@@ -22,7 +22,7 @@
 </head>
 <body>
 <div id="app" class="property-list">
-    <header>
+    <header class="height-menu">
         <div class="container">
             <div class="header-content">
                 <div class="mobile-button">
@@ -65,7 +65,7 @@
                             <a href="{{ route(app('locale')->routeApply('favorites')) }}">
                                 <img class="normal" src="/svg/i-favourites-header.svg" alt="Favourites">
                                 <img class="hover" src="/svg/i-favourites-hover.svg" alt="Favourites">
-                                {{ __('Favorites') }} (<span class="favoritesCount"></span>)
+                                {{ __('Favorites') }} (<span class="favoritesCount">0</span>)
                             </a>
                         </li>
                         <li>
@@ -98,6 +98,8 @@
         </div>
 
         <div class="mobile-menu">
+             <div class="mobile-menu-content">
+
             <ul>
                 <li>
                     <a href="{{ route(app('locale')->routeApply('favorites')) }}">
@@ -121,6 +123,7 @@
                 {{ $options['website_phone'] ?? '' }}
             </a>
             @include('partials.lang-switch-mobile')
+        </div>
         </div>
 
     </header>
@@ -237,7 +240,7 @@
                 <li><a href="#">Impressum</a></li>
             </ul>
             <div class="copyright">
-                {{ $options['copyright'] ?? '' }}
+                &copy; {{ now()->year }} {{ $options['copyright'] ?? '' }}
             </div>
         </div>
     </div>

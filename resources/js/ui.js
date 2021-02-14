@@ -62,6 +62,9 @@ const app = new Vue({
 
 jQuery(document).ready(function() {
 
+    jQuery('.list-content').css('display', 'block');
+    jQuery(' .load-block-content.first-load-block-content').css('display', 'none')
+
     jQuery('.sorting a').click(function(e) {
         e.preventDefault();
         jQuery('.sorting').toggleClass('up');
@@ -286,10 +289,10 @@ jQuery(document).ready(function() {
     });
 
     jQuery(document).mouseup(function (e){
-        var div = jQuery(".sidebar-small-block");
+        var div = jQuery(".quality");
         if (!div.is(e.target)
             && div.has(e.target).length === 0) {
-            jQuery('.sidebar-small-block').removeClass('active');
+            jQuery('.quality').removeClass('active');
         }
     });
 
@@ -417,14 +420,21 @@ jQuery(document).ready(function() {
             jQuery('body').addClass('fixed-header');
             if ( tempScrollTop > currentScrollTop ) {
                 jQuery('header').addClass('show');
+                jQuery('header').addClass('height-menu');
             } else {
                 jQuery('header').removeClass('show');
+                jQuery('header').removeClass('height-menu');
             }
         } else {
             jQuery('body').removeClass('fixed-header');
             jQuery('header').removeClass('show');
+            jQuery('header').addClass('height-menu');
         }
         tempScrollTop = currentScrollTop;
+    });
+
+    jQuery('.single-content .favorites').click(function () {
+        jQuery('.single-content .favorites').toggleClass('active');
     });
 
 });
@@ -527,4 +537,6 @@ window.onload = function () {
     setTimeout (function() {
         jQuery('.communication').removeClass('not-active');
     }, 1000);
+
+
 };

@@ -37,8 +37,8 @@ class HomeController extends Controller
             $seoTitle = $subdomain->seoTitle();
             $seoDescription = $subdomain->seoDescription();
         } else {
-            $seoTitle = $options['seo_title'] ?? config('app.name', 'Check Zimmer');
-            $seoDescription = $options['seo_description'] ?? config('app.name', 'Check Zimmer');
+            $seoTitle = $options['seo_title'] ?? env('APP_NAME', '');
+            $seoDescription = $options['seo_description'] ?? '';
         }
 
         return view('home', compact('options', 'seoTitle', 'seoDescription'));
@@ -61,10 +61,11 @@ class HomeController extends Controller
     public function singleProperty($slug)
     {
         $hotel = Property::where('slug', $slug)->firstOrFail();
+        $system_option = Option::where('type', 'system')->get()->pluck('value', 'key');
 
         if ($hotel->access) {
             $access = true;
-            return view('single-access', compact('hotel', 'access'));
+            return view('single-access', compact('system_option', 'hotel', 'access'));
         }
 
         $hotel->views++;
@@ -78,7 +79,7 @@ class HomeController extends Controller
         }
         $questions = $hotel->questions;
         $reviews = $hotel->reviews;
-        return view('single', compact('hotel','questions', 'reviews'));
+        return view('single', compact('system_option', 'hotel', 'questions', 'reviews'));
     }
     public function singlePropertyAccess(Request $request, $slug) {
         $hotel = Property::where('slug', $slug)->firstOrFail();
