@@ -134,7 +134,8 @@ class PropertyController extends Controller
             'free' => '',
             'realprice' => '',
             'inclVAT' => '',
-            'hideZip' => ''
+            'hideZip' => '',
+            'rentMin' => ''
         ];
 
         $property = Property::findOrFail($id);

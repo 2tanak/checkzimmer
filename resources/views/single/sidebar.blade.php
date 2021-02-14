@@ -1,6 +1,6 @@
 <div class="sidebar desctop-sidebar">
     <div class="sidebar-top">
-        <?php /*> <div class="sidebar-top-block roominess">
+        <div class="sidebar-top-block roominess">
             <img src="/svg/i-people.svg" alt="alt">
             <div class="sidebar-top-block-item roominess-item">
                 <div class="title">{{ __('roomin.') }}:</div>
@@ -16,12 +16,10 @@
                 <img src="/svg/i-clock.svg" alt="alt">
                 <div class="sidebar-top-block-item rental-period-item">
                     <div class="title">{{ __('Min. lease term') }}:</div>
-                    <div class="subtitle">3 {{ __('days') }}</div>
+                    <div class="subtitle">{{ $hotel->getCurrentOption('rentMin') }} {{ __('days') }}</div>
                 </div>
             </div>
         @endif
-            */ ?>
-
         <div class="free-now">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0)">
