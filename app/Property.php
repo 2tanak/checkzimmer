@@ -48,14 +48,6 @@ class Property extends Model
         }
     }
 
-    function getLandlordData($key) {
-        if($this->getCurrentOption('landlord') == '')
-            return'';
-        $landlordRow = $this->getCurrentOption('landlord');
-        $landlord = json_decode($landlordRow['value'],true);
-        return ($landlord[$key] == null)? '' : $landlord[$key];
-    }
-
     function getCurrentOption($key) {
         if($this->_options == null) {
             $this->getOptions();
@@ -68,7 +60,7 @@ class Property extends Model
 
             $this->data[$key] = $this->_options[$index];
         }
-        return ($this->data[$key] ?? '');
+        return ($this->data[$key]['value'] ?? '');
     }
 
     private function getPhotos()
@@ -280,9 +272,11 @@ class Property extends Model
         {
             if ($relationData = $data[$fillableRelationName]){
                 $currentRelation = $this->$fillableRelationName;
-
-                array_map(static function (array $data) use ($relationData, $currentRelation) {
-                    $relationModel = $currentRelation->filter(function ($item) use ($data) {
+                array_map(function ($data) use ($relationData, $currentRelation) {
+                    if ($data == null) {
+                        $data = '';
+                    }
+                    $relationModel = $currentRelation->filter(function ($item) use ($data, $relationData) {
                         return $item->id === $data['id'];
                     })->first();
                     if($relationModel){
@@ -296,5 +290,50 @@ class Property extends Model
             }
         }
 
+    }
+    public function handleTemplate($str) {
+        $address = explode(' ', $this->address);
+        $house = array_pop($address);
+        $address = implode(' ', $address);
+
+        $template = [
+            'city' => $this->city,
+            'site-title' => env('APP_NAME', 'CheckZimmer.de'),
+            'postcode' => $this->zip,
+            'street' => $address,
+            'house-number' => $house,
+        ];
+        foreach ($template as $key => $item) {
+            $str = str_replace("%$key%", $item, $str);
+        }
+        $hideZip = $this->getCurrentOption('hideZip');
+        $hideAddress = $this->getCurrentOption('hideAddress');
+        if ($hideZip) {
+            $str = preg_replace('/<hide-zip>.*?<\/hide-zip>/', '', $str);
+        } else {
+            $str = preg_replace('/<hide-zip>(.*?)<\/hide-zip>/', '$1', $str);
+        }
+
+        if ($hideAddress) {
+            $str = preg_replace('/<hide-address>.*?<\/hide-address>/', '', $str);
+        } else {
+            $str = preg_replace('/<hide-address>(.*?)<\/hide-address>/', '$1', $str);
+        }
+
+        if ($hideZip && $hideAddress) {
+            $str = preg_replace('/<hide-all>.*?<\/hide-all>/', '', $str);
+        } else {
+            $str = preg_replace('/<hide-all>.*?<\/hide-all>/', '', $str);
+        }
+        return $str;
+    }
+    public function getSEOTitle()
+    {
+        $title = $this->getCurrentOption('seo_title');
+        return $this->handleTemplate($title ?? '');
+    }
+    public function getSEODescription() {
+        $description = $this->getCurrentOption('seo_description');
+        return $this->handleTemplate($description['value'] ?? '');
     }
 }
