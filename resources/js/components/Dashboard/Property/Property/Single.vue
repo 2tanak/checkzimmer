@@ -14,8 +14,8 @@
         <div class="row mt-4">
             <div class="col-md-12 grid-margin">
                 <form>
-                    <div class="row">
-                        <div class="col-md-12">
+                    <div class="row mb-4">
+                        <div class="col-md-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
                                     <b-form-group :label="$t('Name hotel')" label-for="input-hotel-name">
@@ -27,14 +27,13 @@
                                     <b-form-group :label="$t('Object display order')" label-for="input-hotel-name">
                                         <b-form-input v-model="property.ord" id="input-hotel-name"></b-form-input>
                                     </b-form-group>
-                                    <b-form-checkbox v-model="showPin" style="margin-bottom:16px;">{{ $t('Closed access') }}</b-form-checkbox>
-                                    <b-form-group :label="$t('Object access') + '(PIN)'" label-for="input-hotel-name" v-if="showPin">
+                                    <b-form-group style="margin-bottom:0;">
+                                        <b-form-checkbox v-model="showPin" style="margin-bottom:16px;">{{ $t('Closed access') }}</b-form-checkbox>
+                                    </b-form-group>
+                                    <b-form-group :label="$t('Object access') + ' ' + '(PIN)'" label-for="input-hotel-name" v-if="showPin">
                                         <b-form-input v-model="property.access" id="input-hotel-name"></b-form-input>
                                         <small v-if="!property.access" class="text-info">{{ $t('Free access') }}</small>
                                         <small v-else class="text-danger">{{ $t('access is limited by the specified PIN codes. Codes can be separated by commas') }}</small>
-                                    </b-form-group>
-                                    <b-form-group>
-                                        <b-form-checkbox v-model="property.opts.hideAddress" value="true">{{ $t('Hide address') }}</b-form-checkbox>
                                     </b-form-group>
                                     <b-form-group class="checkbox-block">
                                         <b-form-checkbox v-model="property.opts.superhost">{{ $t('Superhost') }}</b-form-checkbox>
@@ -55,7 +54,17 @@
                         </div>
                     </div>
 
-                    <div class="row mt-4 mb-4">
+                    <div class="row mb-2">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 style="margin-bottom:0;">{{ $t('SEO') }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
                         <div class="col-md-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
@@ -151,11 +160,20 @@
                         </div>
                     </div>
 
-                    <div class="row mt-4 mb-4">
+                    <div class="row mb-2">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 style="margin-bottom:0;">{{ $t('Photo') }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
                         <div class="col-md-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4>{{ $t('Photo') }}</h4>
                                     <draggable class="row mt-4 photos-gallery" v-model="imageData" @start="drag=true" @end="drag=false">
                                         <div class="col-xl-2 col-lg-3 col-sm-4 mb-4" v-for="element in imageData" :key="element.id">
                                             <div class="photos-gallery-item">
@@ -174,11 +192,20 @@
                         </div>
                     </div>
 
-                    <div class="row mt-4 mb-4">
+                    <div class="row mb-2">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 style="margin-bottom:0;">{{ $t('Facilities') }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
                         <div class="col-md-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4>{{ $t('Facilities') }}</h4>
                                     <template v-for="feature in features">
                                         <div class="comfort-block mt-5">
                                             <h3>{{feature.name }}</h3>
