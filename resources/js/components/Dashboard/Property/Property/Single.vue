@@ -43,7 +43,9 @@
                                     <b-form-group>
                                         <b-form-checkbox id="vat"
                                                          v-model="property.opts.inclVAT"
-                                                         name="vat">
+                                                         name="vat"
+                                                         value="including taxes"
+                                                         unchecked-value="not including taxes" >
                                             {{ $t('Tax (VAT) is included in the price') }}</b-form-checkbox>
                                     </b-form-group>
                                 </div>
@@ -278,7 +280,7 @@
                                                     <div class="col-md-4">
                                                         <b-form-group :label="$t('Cost, from')" :label-for="'input-room-'+i+'-price'">
                                                             <b-form-input v-model="room.price" :id="'input-room-'+i+'-price'"></b-form-input>
-                                                            <span style="font-size:0.875rem;">{{ tax }}</span>
+                                                            <span style="font-size:0.875rem;">{{ inclVAT }}</span>
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
@@ -476,7 +478,7 @@ export default {
                 { value: '10', text: 'Ten-seater' }
             ],
             showPin: false,
-            tax: 'not including taxes',
+            inclVAT: 'not including taxes',
             imageData: [],
             newRoomOptions: [
                 {
