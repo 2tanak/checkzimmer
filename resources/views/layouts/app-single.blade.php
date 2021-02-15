@@ -78,6 +78,7 @@
                         @include('partials.logo-mobile-menu')
                     </a>
                 </div>
+                @include('partials.lang-switch-mobile')
                 <ul>
                     <li>
                         <a href="{{ route(app('locale')->routeApply('favorites')) }}">
@@ -96,11 +97,10 @@
                         </a>
                     </li>
                 </ul>
-                <a class="whatsapp-number" href="tel:{{ str_replace('', '', $options['website_phone'] ?? '') }}">
-                    <img src="/svg/whatsapp-mobile.svg" alt="Whatsapp">
+                <a class="whatsapp-number" href="tel:{{ str_replace(' ', '', $options['website_phone'] ?? '') }}">
                     {{ $options['website_phone'] ?? '' }}
+                    <span class="explanatory-text">24/7 бесплатно с мобильного</span>
                 </a>
-                @include('partials.lang-switch-mobile')
             </div>
         </div>
 
