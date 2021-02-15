@@ -1,4 +1,4 @@
-@extends('layouts.app-favorites')
+@extends('layouts.app')
 
 @section('content')
 

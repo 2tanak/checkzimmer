@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import ApiRequest from "../../API/ApiRequest";
+import ApiRequest from "../../../API/ApiRequest";
 
 let LanguageRequest = ApiRequest('languages');
 let languages = new LanguageRequest;
@@ -91,7 +91,7 @@ export default {
             search: '',
             timer: null,
             loading: true,
-            fields: [this.$t('id'), this.$t('Original'), this.$t('Translation')],
+            fields: [this.$t('id'), this.$t('original'), this.$t('translation')],
         }
     },
     mounted() {

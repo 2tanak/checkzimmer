@@ -7,7 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $hotel->getSEOTitle() }}</title>
+    <meta name="description" content="{{ $hotel->getSEODescription() }}"/>
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Inter:400,500,600,700&display=swap&subset=cyrillic" rel="stylesheet">
@@ -22,7 +23,7 @@
 </head>
 <body>
 <div id="app" class="property-list">
-    <header>
+    <header class="height-menu">
         <div class="container">
             <div class="header-content single-header-content">
                 <div class="mobile-button">
@@ -55,7 +56,7 @@
                             <a href="{{ route(app('locale')->routeApply('favorites')) }}">
                                 <img class="normal" src="/svg/i-favourites-header.svg" alt="Favourites">
                                 <img class="hover" src="/svg/i-favourites-hover.svg" alt="Favourites">
-                                {{ __('Favorites') }} (<span class="favoritesCount"></span>)
+                                {{ __('Favorites') }} (<span class="favoritesCount">0</span>)
                             </a>
                         </li><li>
                             <a href="{{ route(app('locale')->routeApply('plans')) }}">
@@ -72,37 +73,34 @@
 
         <div class="mobile-menu">
             <div class="mobile-menu-content">
-            <ul>
-                <li>
-                    <a href="/favorites">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15.1614 9.97563C16.597 8.4996 16.597 6.10223 15.1614 4.6262C13.7316 3.1561 11.4179 3.1561 9.98803 4.6262L9.27309 5.36128C9.12351 5.51507 8.87649 5.51507 8.72691 5.36128L8.01197 4.6262C6.58214 3.1561 4.26843 3.1561 2.8386 4.6262C1.40301 6.10223 1.40301 8.4996 2.8386 9.97563L9 16.3106L15.1614 9.97563ZM9.44185 4.09498C11.1708 2.3173 13.9786 2.3173 15.7076 4.09498C17.4308 5.86675 17.4308 8.73508 15.7076 10.5068L9.27309 17.1226C9.12351 17.2764 8.87649 17.2764 8.72691 17.1226L2.29242 10.5068C0.569193 8.73508 0.569193 5.86675 2.29242 4.09498C4.02141 2.3173 6.82916 2.3173 8.55815 4.09498L9 4.54928L9.44185 4.09498Z" fill="#7A8793" stroke="#7A8793" stroke-width="0.2"/>
-                        </svg>
-                        {{ __('Favorites') }} (<span class="favoritesCount"></span>)
+                <div class="logo-mobile-block" style="text-align:center;margin-bottom:28px;">
+                    <a href="{{ route(app('locale')->routeApply('home')) }}" style="display:inline-block;">
+                        @include('partials.logo-mobile-menu')
                     </a>
-                </li>
-                <li>
-                    <a href="/plans">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.6667 16.2381H13.5714C14.2026 16.2381 14.7143 15.7264 14.7143 15.0952V7.17201C14.7143 7.13056 14.7209 7.09066 14.7331 7.0533L9 1.89347L3.26686 7.0533C3.2791 7.09066 3.28572 7.13056 3.28572 7.17201V15.0952C3.28572 15.7264 3.79739 16.2381 4.42857 16.2381H6.33334V13.5714C6.33334 12.5195 7.18613 11.6667 8.2381 11.6667H9.76191C10.8139 11.6667 11.6667 12.5195 11.6667 13.5714V16.2381ZM15.4762 7.72204V15.0952C15.4762 16.1472 14.6234 17 13.5714 17H4.42857C3.3766 17 2.52381 16.1472 2.52381 15.0952V7.72204L1.6358 8.52126C1.47941 8.662 1.23854 8.64932 1.0978 8.49294C0.95705 8.33655 0.969727 8.09568 1.12611 7.95494L8.74516 1.09779C8.89003 0.967402 9.10997 0.967402 9.25484 1.09779L16.8739 7.95494C17.0303 8.09568 17.043 8.33655 16.9022 8.49294C16.7615 8.64932 16.5206 8.662 16.3642 8.52126L15.4762 7.72204ZM10.9048 13.5714C10.9048 12.9402 10.3931 12.4286 9.76191 12.4286H8.2381C7.60692 12.4286 7.09524 12.9402 7.09524 13.5714V16.2381H10.9048V13.5714Z" fill="#7A8793" stroke="#7A8793" stroke-width="0.2"/>
-                        </svg>
-                        {{ __('Rent out') }}
-                    </a>
-                </li>
-            </ul>
-            <a class="whatsapp-number" href="tel:+49 341 1234 2223">
-                <img src="/svg/whatsapp-mobile.svg" alt="Whatsapp">
-                +49 341 1234 2223
-            </a>
-            <div class="languages-block languages-block-mobile">
-                <div class="selected-language">
-                    <a href="#">Rus</a>
                 </div>
-                <div class="list-languages">
-                    <a href="#">Rus</a>
-                    <a href="#">En</a>
-                </div>
-            </div>
+                <ul>
+                    <li>
+                        <a href="{{ route(app('locale')->routeApply('favorites')) }}">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15.1614 9.97563C16.597 8.4996 16.597 6.10223 15.1614 4.6262C13.7316 3.1561 11.4179 3.1561 9.98803 4.6262L9.27309 5.36128C9.12351 5.51507 8.87649 5.51507 8.72691 5.36128L8.01197 4.6262C6.58214 3.1561 4.26843 3.1561 2.8386 4.6262C1.40301 6.10223 1.40301 8.4996 2.8386 9.97563L9 16.3106L15.1614 9.97563ZM9.44185 4.09498C11.1708 2.3173 13.9786 2.3173 15.7076 4.09498C17.4308 5.86675 17.4308 8.73508 15.7076 10.5068L9.27309 17.1226C9.12351 17.2764 8.87649 17.2764 8.72691 17.1226L2.29242 10.5068C0.569193 8.73508 0.569193 5.86675 2.29242 4.09498C4.02141 2.3173 6.82916 2.3173 8.55815 4.09498L9 4.54928L9.44185 4.09498Z" fill="#7A8793" stroke="#7A8793" stroke-width="0.2"/>
+                            </svg>
+                            {{ __('Favorites') }} (<span class="favoritesCount">0</span>)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route(app('locale')->routeApply('plans')) }}">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.6667 16.2381H13.5714C14.2026 16.2381 14.7143 15.7264 14.7143 15.0952V7.17201C14.7143 7.13056 14.7209 7.09066 14.7331 7.0533L9 1.89347L3.26686 7.0533C3.2791 7.09066 3.28572 7.13056 3.28572 7.17201V15.0952C3.28572 15.7264 3.79739 16.2381 4.42857 16.2381H6.33334V13.5714C6.33334 12.5195 7.18613 11.6667 8.2381 11.6667H9.76191C10.8139 11.6667 11.6667 12.5195 11.6667 13.5714V16.2381ZM15.4762 7.72204V15.0952C15.4762 16.1472 14.6234 17 13.5714 17H4.42857C3.3766 17 2.52381 16.1472 2.52381 15.0952V7.72204L1.6358 8.52126C1.47941 8.662 1.23854 8.64932 1.0978 8.49294C0.95705 8.33655 0.969727 8.09568 1.12611 7.95494L8.74516 1.09779C8.89003 0.967402 9.10997 0.967402 9.25484 1.09779L16.8739 7.95494C17.0303 8.09568 17.043 8.33655 16.9022 8.49294C16.7615 8.64932 16.5206 8.662 16.3642 8.52126L15.4762 7.72204ZM10.9048 13.5714C10.9048 12.9402 10.3931 12.4286 9.76191 12.4286H8.2381C7.60692 12.4286 7.09524 12.9402 7.09524 13.5714V16.2381H10.9048V13.5714Z" fill="#7A8793" stroke="#7A8793" stroke-width="0.2"/>
+                            </svg>
+                            {{ __('Rent out') }}
+                        </a>
+                    </li>
+                </ul>
+                <a class="whatsapp-number" href="tel:{{ str_replace('', '', $options['website_phone'] ?? '') }}">
+                    <img src="/svg/whatsapp-mobile.svg" alt="Whatsapp">
+                    {{ $options['website_phone'] ?? '' }}
+                </a>
+                @include('partials.lang-switch-mobile')
             </div>
         </div>
 
@@ -144,7 +142,7 @@
                 <li><a href="#">Impressum</a></li>
             </ul>
             <div class="copyright">
-                Copyright 2020 Immobilien.de LLC All rights reserved.
+                &copy; {{ now()->year }} {{ $system_option['copyright'] ?? '' }}
             </div>
         </div>
     </div>
@@ -167,14 +165,17 @@
                 <div class="input-block-item">
                     <input id="name" type="text">
                     <label for="name">{{ __('Name and Surname') }}*</label>
+                    <div class="validation-block">{{ __('Please fill in this field') }}</div>
                 </div>
                 <div class="input-block-item">
                     <input id="email" type="email">
                     <label for="email">{{ __('Email') }}*</label>
+                    <div class="validation-block">{{ __('Please fill in this field') }}</div>
                 </div>
                 <div class="input-block-item">
                     <input id="telephone" type="tel">
                     <label for="telephone">{{ __('Phone number') }}*</label>
+                    <div class="validation-block">{{ __('Please fill in this field') }}</div>
                 </div>
                 <div class="data-block">
                     <input id="arrival-date" data-provide="datepicker" readonly>
@@ -264,8 +265,8 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         jQuery('#arrival-date, #date-departure').datepicker({
-            autoclose: true
-        });
+            format: "dd/mm/yyyy"
+        })
     });
 </script>
 

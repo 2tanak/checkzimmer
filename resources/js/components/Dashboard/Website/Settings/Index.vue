@@ -24,6 +24,27 @@
                                 {{ $t('Maintenance mode enabled') }}
                             </label>
                         </b-form-group>
+                        <b-form-group :label="$t('Number Phone')">
+                            <b-form-input v-model="options.number_phone" />
+                        </b-form-group>
+                        <b-form-group :label="$t('Picture')">
+                            <b-form-file v-model="options.picture" :placeholder="$t('Choose a picture or drop it here...')"/>
+                        </b-form-group>
+                        <b-form-group :label="$t('Label in the input form search')">
+                            <b-form-input v-model="options.label_input" />
+                        </b-form-group>
+                        <b-form-group :label="$t('Placeholder in the input form search')">
+                            <b-form-input v-model="options.placeholder" />
+                        </b-form-group>
+                        <b-form-group :label="$t('Label in the select distance')">
+                            <b-form-input v-model="options.label_distance" />
+                        </b-form-group>
+                        <b-form-group :label="$t('Label in the select num people')">
+                            <b-form-input v-model="options.label_people" />
+                        </b-form-group>
+                        <b-form-group :label="$t('Text in the button form search')">
+                            <b-form-input v-model="options.text_button" />
+                        </b-form-group>
                     </div>
                 </div>
             </div>
