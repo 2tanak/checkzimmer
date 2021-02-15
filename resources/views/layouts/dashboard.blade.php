@@ -9,6 +9,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <link rel="shortcut icon" href="/favicon-admin.ico" type="image/x-icon">
+
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Inter:400,500,600,700&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}?ver={{ time() }}" rel="stylesheet">

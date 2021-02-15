@@ -62,6 +62,9 @@ const app = new Vue({
 
 jQuery(document).ready(function() {
 
+    jQuery('.list-content').css('display', 'block');
+    jQuery(' .load-block-content.first-load-block-content').css('display', 'none')
+
     jQuery('.sorting a').click(function(e) {
         e.preventDefault();
         jQuery('.sorting').toggleClass('up');
@@ -223,6 +226,7 @@ jQuery(document).ready(function() {
         jQuery('.sh_nmr').textToggle(".num_hide","ХХХХ ХХХX").click();
         jQuery('.sh_nmr').click(function () {
             jQuery('.sidebar .number-phone').addClass('gray');
+            jQuery('.sh_nmr').css('display', 'none');
         });
     });
 
@@ -285,10 +289,10 @@ jQuery(document).ready(function() {
     });
 
     jQuery(document).mouseup(function (e){
-        var div = jQuery(".sidebar-small-block");
+        var div = jQuery(".quality");
         if (!div.is(e.target)
             && div.has(e.target).length === 0) {
-            jQuery('.sidebar-small-block').removeClass('active');
+            jQuery('.quality').removeClass('active');
         }
     });
 
@@ -346,11 +350,10 @@ jQuery(document).ready(function() {
         prevArrow: '<img class="prev-arrow" src="/svg/i-previous-lightbox.svg">',
         nextArrow: '<img class="next-arrow" src="/svg/i-next-lightbox.svg">',
         fade: true,
-        asNavFor: '.small-slider',
-        cssEase: 'ease-in',
         slidesToShow: 1,
         slidesToScroll: 1,
         infinite: true,
+        asNavFor: '.small-slider'
     });
 
     jQuery('.small-slider').slick({
@@ -358,8 +361,8 @@ jQuery(document).ready(function() {
         slidesToScroll: 1,
         arrows: false,
         infinite: true,
-        asNavFor: '.big-slider',
         focusOnSelect: true,
+        asNavFor: '.big-slider',
         centerMode: true,
         responsive: [
             {
@@ -417,14 +420,21 @@ jQuery(document).ready(function() {
             jQuery('body').addClass('fixed-header');
             if ( tempScrollTop > currentScrollTop ) {
                 jQuery('header').addClass('show');
+                jQuery('header').addClass('height-menu');
             } else {
                 jQuery('header').removeClass('show');
+                jQuery('header').removeClass('height-menu');
             }
         } else {
             jQuery('body').removeClass('fixed-header');
             jQuery('header').removeClass('show');
+            jQuery('header').addClass('height-menu');
         }
         tempScrollTop = currentScrollTop;
+    });
+
+    jQuery('.single-content .favorites').click(function () {
+        jQuery('.single-content .favorites').toggleClass('active');
     });
 
 });
@@ -472,13 +482,21 @@ jQuery(window).on('load', function() {
         }, 400);
     });
 
-    jQuery('.single-main-slider').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        infinite: true,
-        dots: true
-    });
+    if (jQuery('.main-top-block .no-photo').length === 0) {
+        jQuery('.single-main-slider').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            infinite: true,
+            dots: true
+        });
+    }
+
+    if(jQuery('.small-slider .slider-item').length <= 10) {
+        jQuery('.small-slider').addClass('transform');
+    } else {
+        jQuery('.small-slider').removeClass('transform');
+    }
 
 });
 
@@ -519,4 +537,6 @@ window.onload = function () {
     setTimeout (function() {
         jQuery('.communication').removeClass('not-active');
     }, 1000);
+
+
 };

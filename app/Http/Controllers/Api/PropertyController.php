@@ -32,7 +32,9 @@ class PropertyController extends Controller
         $paginate = $request->query('page');
         $noCity = $request->query('nocity');
 
-        $objects = Property::orderBy('ord');
+        $objects = Property::orderBy('ord')->where(function ($query) {
+            $query->whereNull('access')->orWhere('access', '');
+        });
 
         if ($subdomain) {
             $relate = $noCity ? '!=' : '=';
@@ -118,8 +120,31 @@ class PropertyController extends Controller
 
     public function show($id)
     {
-        $property = Property::findOrFail($id);
+        $specOptions = [
+            'landlordName' => '',
+            'landlordHideName' => false,
+            'landlordHidePhone' => false,
+            'landlordPhoneNumber' => '',
+            'landlordClientEmail' => '',
+            'landlordLanguages' => 'de',
+            'hideAddress' => false,
+            'seo_title' => '',
+            'seo_description' => '',
+            'superhost' => '',
+            'free' => '',
+            'realprice' => '',
+            'inclVAT' => '',
+            'hideZip' => '',
+            'rentMin' => ''
+        ];
 
+        $property = Property::findOrFail($id);
+        $options = [];
+        $opts = $property->options->toArray();
+        foreach ($specOptions as $key => $value) {
+            $options[$key] = Property::optionFind($opts, $key, $value);
+        }
+        $property->opts = $options;
         return response()->json($property);
     }
 
@@ -156,7 +181,6 @@ class PropertyController extends Controller
             'address'   => 'required',
             'zip'       => 'required',
         ]);
-
         $geo_data = $this->service->getCoords($request->city . ' ' . $request->address);
 
         $data = [
@@ -185,16 +209,21 @@ class PropertyController extends Controller
         ];
         $item->options()->create($optionsData);
 
-        $item->save();
+        $optionsData = [
+            'key'    => 'inclVat',
+            'parent' => $item->id,
+            'type'   => 'property',
+            'value'  => '',
+        ];
+        $item->options()->create($optionsData);
 
-        return $item ? response()->json(['code' => 'ok','user' => $item]) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
+        $item->save();
+        $item = Property::find($item->id);
+        return $item ? response()->json(['code' => 'ok','property' => $item]) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
     }
 
     public function update(Property $property, Request $request)
     {
-//        request()->validate([
-//            'rooms.*.options.*.value'      => 'required',
-//        ]);
         $fields = $request->all();
 
         $geo_data = $this->service->getCoords($fields['city'] . ' ' . $fields['address']);
@@ -207,11 +236,17 @@ class PropertyController extends Controller
                 $fields['rooms'][$roomKey]['options'][$optionKey]['value'] = $option['value'] ?? '';
             }
         }
+
+        foreach($fields['options'] as $item) {
+            if (!$item['id']) {
+                $option = Option::create($item);
+            }
+        }
         $property->updateRelations($fields);
 
         $property->features()->detach();
 
-        $property->features()->attach(array_map(function ($feature){
+        $property->features()->attach(array_map(function ($feature) {
             return $feature['id'];
         }, $fields['features']));
 
@@ -229,6 +264,5 @@ class PropertyController extends Controller
             $prop->fill($item);
             $prop->save();
         }
-        dd($data);
     }
 }

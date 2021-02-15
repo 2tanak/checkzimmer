@@ -1,6 +1,11 @@
 <template>
     <section class="header-dashboard">
-        <h1>{{ $t('Domains') }}</h1>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+            <h1>{{ $t('Domains') }}</h1>
+            <b-button style="margin-right:0 !important;" v-b-modal.modal-object-create type="button" variant="success" class="mr-2">
+                {{ $t('New subdomain') }}
+            </b-button>
+        </div>
 
         <div class="row">
             <div class="col-md-12 grid-margin">
@@ -52,7 +57,7 @@
         <div class="row">
             <div class="col-md-12">
                 <b-button v-b-modal.modal-object-create type="button" variant="success" class="mr-2">
-                    {{ $t('New object') }}
+                    {{ $t('New subdomain') }}
                 </b-button>
             </div>
         </div>

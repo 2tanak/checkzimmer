@@ -53,7 +53,7 @@ class UsersController extends Controller
         $data = $request->all();
         $user = User::find($id);
 
-        if ($data['password']) {
+        if ($data['password'] ?? false) {
             $data['password'] = Hash::make($data['password']);
         } else {
             $data['password'] = $user->password;

@@ -10,7 +10,7 @@
                 <div class="main-block pin-block">
                     <div class="main-top-block pin-block-item">
                         <h1>{{ __('Object access denied') }}</h1>
-                        {{ __('Please enter a PIN for access') }}
+                        {{ __('Please enter a (PIN) for access') }}
                         <form method="post" action="">
                             @csrf
                             <div class="form-group">
