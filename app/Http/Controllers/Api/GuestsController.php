@@ -4,6 +4,7 @@ use App\Guest;
 use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class GuestsController extends Controller
 {
@@ -29,13 +30,18 @@ class GuestsController extends Controller
 
     public function store(Request $request)
     {
-        request()->validate([
-            'pin' => 'required',
-            'email' => 'required|email|unique:guests'
-        ]);
-
         $data = $request->input();
-        $item = new Guest($data);
+        request()->validate([
+            'pin' => ['required'],
+            'email' => ['required','email',Rule::unique('guests')->ignore($data['id'])],
+        ]);
+        if($data['id']){
+            $item = Guest::find($data['id']);
+            $item->fill($data);
+        }else{
+            $item = new Guest($data);
+        }
+
         $item->save();
         return $item ? response()->json(['code' => 'ok', 'guest' => $item]) : response()->json(['code' => 'error', 'message' => 'Ошибка сохранения']);
     }

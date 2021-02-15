@@ -48,6 +48,9 @@
                                                          unchecked-value="not including taxes" >
                                             {{ $t('Tax (VAT) is included in the price') }}</b-form-checkbox>
                                     </b-form-group>
+                                    <b-form-group :label="$t('Minimum rent')" class="rent-block">
+                                        <b-form-input v-model="property.opts.rentMin" id="input-hotel-name"></b-form-input>
+                                    </b-form-group>
                                 </div>
                             </div>
                         </div>
@@ -414,7 +417,7 @@ let defOptions = {
         type: 'bool',
     },
     seo_title: {
-        value: '%site-title% - Monteurzimmer in %city%, <hide-zip>%postcode%,</hide-zip> <hide-address>%street%, %house-number%</hide-address>',
+        value: '%site-title% - Monteurzimmer in %city%<hide-all>,</hide-all><hide-zip> %postcode%</hide-zip><hide-address> %street%, %house-number%</hide-address>',
         type: ''
     },
     seo_description: {
@@ -440,6 +443,10 @@ let defOptions = {
     hideZip: {
         value: '',
         type: 'bool'
+    },
+    rentMin: {
+        value: '3',
+        type: ''
     }
 }
 

@@ -150,23 +150,23 @@ export default {
         guestDelete(data) {
             this.deleteGuest = data.item;
         },
-        guestUpdate() {
-            this.clearModalErrors();
-            guests.update(this.editGuest.id,this.editGuest).then(response => {
-                if(response.data.code === 'ok'){
-                    this.textOperation = this.$t('Guest updated');
-                    this.operationOk = true
-                }else{
-                    this.textOperation = this.$t('Update error');
-                    this.operationError = true;
-                }
-                this.$nextTick(() => {
-                    this.$bvModal.hide('modal-user');
-                });
-            }).catch(error => {
-                this.generateModalErrors(error.response.data.errors);
-            });
-        },
+        // guestUpdate() {
+            // this.clearModalErrors();
+            // guests.update(this.editGuest.id,this.editGuest).then(response => {
+            //     if(response.data.code === 'ok'){
+            //         this.textOperation = this.$t('Guest updated');
+            //         this.operationOk = true
+            //     }else{
+            //         this.textOperation = this.$t('Update error');
+            //         this.operationError = true;
+            //     }
+            //     this.$nextTick(() => {
+            //         this.$bvModal.hide('modal-user');
+            //     });
+            // }).catch(error => {
+            //     this.generateModalErrors(error.response.data.errors);
+            // });
+        // },
         guestDeleteApproved() {
             guests.delete(this.deleteGuest.id).then(response => {
                 if(response.data.code === 'ok'){
@@ -191,17 +191,21 @@ export default {
         },
         guestCreate() {
             this.$bvToast.toast();
-            if(this.guestEdit.id){
-                this.guestUpdate();
-                return;
-            }
+            // if(this.guestEdit.id){
+            //     this.guestUpdate();
+            //     return;
+            // }
             this.clearModalErrors();
             guests.create(this.editGuest).then(response => {
                 if(response.data.code === 'ok'){
-                    this.textOperation = this.$t('Guest added');
                     this.operationOk = true;
-                    this.guests.push(response.data.guest);
-                } else{
+                    if(!this.editGuest.id) {
+                        this.guests.push(response.data.guest);
+                        this.textOperation = this.$t('Guest added');
+                    }else{
+                        this.textOperation = this.$t('Guest edited');
+                    }
+                }else{
                     this.textOperation = this.$t('Error adding guest');
                     this.operationError = true;
                 }

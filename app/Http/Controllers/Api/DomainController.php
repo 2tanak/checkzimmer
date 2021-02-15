@@ -195,6 +195,9 @@ class DomainController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $result = Domain::find($id)->delete();
+        if($result) {
+            return response()->json(['code' => 'ok']);
+        }
     }
 }
