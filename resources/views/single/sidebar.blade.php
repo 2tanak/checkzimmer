@@ -45,24 +45,30 @@
             <div class="middle">
                 {{ $hotel->getRoomPriceMin() != 0 ? '€'.$hotel->getRoomPriceMin() : 'n/a' }}
             </div>
-            <div class="right">{{ __('per person (including VAT)') }}</div>
+            <div class="right">
+                @if ($hotel->getCurrentOption('inclVAT') == '1')
+                    {{ __('per person (including VAT)') }}
+                @else
+                    {{ __('per person (excluding VAT)') }}
+                @endif
+            </div>
         </div>
         <a href="#" class="inquiry">{{ __('Send request') }}</a>
-        @if (($hotel->getLandlordData('landlordPhoneNumber') == null) || ($hotel->getLandlordData('landlordHidePhone') === true))
+        @if (($hotel->getCurrentOption('landlordPhoneNumber') == null) || ($hotel->getCurrentOption('landlordHidePhone') === true))
             <div class="number-phone not-phone">
                 <div class="speaks">{{ __('Object owner speaks') }}:</div>
                 <div class="language-item">{{ $hotel->getCurrentOption('landlordLanguages') }}</div>
             </div>
         @else
             <div class="number-phone">
-                <a href="tel:+{{ $hotel->getLandlordData('landlordPhoneNumber') }}">{{ $hotel->getLandlordData('landlordPhoneNumber') }}</a>
+                <a href="tel:+{{ $hotel->getCurrentOption('landlordPhoneNumber') }}">{{ $hotel->getCurrentOption('landlordPhoneNumber') }}</a>
                 <div class="sh_nmr">
                     <span>{{ __('show') }}</span>
                 </div>
                 <div class="message">{{ __('Let us know that you are from the site Check-zimmer.de') }}</div>
                 <div class="language">
                     <div class="speaks">{{ __('Speaks') }}:</div>
-                    <div class="language-item">>{{ $hotel->getLandlordData('landlordLanguages') }}</div>
+                    <div class="language-item">>{{ $hotel->getCurrentOption('landlordLanguages') }}</div>
                 </div>
             </div>
         @endif
@@ -71,12 +77,19 @@
             <div class="address">
                 <div class="hotel-name">{{$hotel->name}}</div>
                 <div class="name-surname">
-                    @if (($hotel->getLandlordData('landlordName') != null) && ($hotel->getLandlordData('landlordHideName') != true))
-                    {{ $hotel->getLandlordData('landlordName') }}
+                    @if (($hotel->getCurrentOption('landlordName') != null) && ($hotel->getCurrentOption('landlordHideName') != true))
+                        {{ $hotel->getCurrentOption('landlordName') }}
                     @endif
                 </div>
-                <div class="hotel-adress">{{$hotel->address}}</div>
-                <div class="zip-city" style="white-space: nowrap;">{{$hotel->zip}} {{$hotel->city}}</div>
+                @if ($hotel->getCurrentOption('hideAddress') == '0')
+                    <div class="hotel-adress">{{$hotel->address}}</div>
+                @endif
+                <div class="zip-city" style="white-space: nowrap;">
+                    @if ($hotel->getCurrentOption('hideZip') == '0')
+                        {{ $hotel->zip }} {{ $hotel->getCurrentOption('hideZip') }}--
+                    @endif
+                    {{ $hotel->city }}
+                </div>
             </div>
             <div class="map-container">
                 <a class="map-picture" href="#object-description">
