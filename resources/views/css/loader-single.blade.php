@@ -151,7 +151,7 @@
         min-width: 280px;
         max-width: 280px;
         width: 100%;
-        height: 428px;
+        height: 382px;
         padding: 16px;
     }
     .single-load-content .load-sidebar .sidebar-head {
@@ -161,14 +161,11 @@
         border-bottom: 1px solid #e3e4e6;
     }
     .single-load-content .load-sidebar .sidebar-head-item {
-        margin-bottom: 13px;
+        margin-bottom: 17px;
         background: #DEDEE2;
         border-radius: 100px;
-        width: 113px;
+        width: 100%;
         height: 15px;
-    }
-    .single-load-content .load-sidebar .sidebar-head-item:nth-of-type(odd) {
-        margin-right: 22px;
     }
     .single-load-content .load-sidebar .sidebar-footer {
         background: #DEDEE2;
@@ -178,20 +175,20 @@
         margin-top: 11px;
     }
     .single-load-content .load-sidebar .sidebar-body {
-        padding-bottom: 21px;
+        padding-bottom: 28px;
         border-bottom: 1px solid #e3e4e6;
-        margin-top: 11px;
+        margin-top: 17px;
     }
     .single-load-content .load-sidebar .sidebar-body .small-block {
         background: #DEDEE2;
         border-radius: 6px;
         margin: auto;
-        margin-bottom: 10px;
+        margin-bottom: 16px;
         width: 136px;
         height: 30px;
     }
     .single-load-content .load-sidebar .sidebar-body .big-block {
-        margin-bottom: 16px;
+        margin-bottom: 12px;
         background: #DEDEE2;
         border-radius: 6px;
         width: 100%;
@@ -201,15 +198,16 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-top: 9px;
+        margin-top: 20px;
+        flex-direction: row-reverse;
     }
     .single-load-content .load-sidebar .sidebar-body-item .address {
-        margin-right: 33px;
+        margin-left: 16px;
+        width: 100%;
     }
     .single-load-content .load-sidebar .sidebar-body-item .address-item {
         background: #DEDEE2;
         border-radius: 100px;
-        width: 113px;
         height: 15px;
         margin-bottom: 13px;
     }
@@ -222,8 +220,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 102px;
-        height: 88px;
+        min-width: 44px;
+        height: 44px;
     }
     .single-load-content .load-sidebar-mobile {
         display: none;
