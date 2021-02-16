@@ -83,11 +83,11 @@
                         {{ $hotel->getCurrentOption('landlordName') }}
                     @endif
                 </div>
-                @if ($hotel->getCurrentOption('hideAddress') == '0')
+                @if ($hotel->getCurrentOption('hideAddress') != '1')
                     <div class="hotel-adress">{{$hotel->address}}</div>
                 @endif
                 <div class="zip-city" style="white-space: nowrap;">
-                    @if ($hotel->getCurrentOption('hideZip') == '0')
+                    @if ($hotel->getCurrentOption('hideZip') != '1')
                         {{ $hotel->zip }}
                     @endif
                     {{ $hotel->city }}
