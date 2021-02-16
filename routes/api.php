@@ -33,6 +33,7 @@ Route::middleware('auth')->namespace('Api')->group(function () {
     Route::resource('reviews', 'ReviewsController');
 
     Route::post('property/query', 'PropertyController@query');
+    Route::post('features/language', 'FeaturesController@language');
 
     Route::get('options/bytype/{type}', 'OptionsController@showByType');
     Route::get('property/init', 'PropertyController@init');

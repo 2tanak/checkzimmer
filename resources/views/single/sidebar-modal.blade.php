@@ -1,4 +1,5 @@
 <div class="sidebar mobile-sidebar">
+    @if ($hotel->getCurrentOption('free') == 1)
     <div class="free-now">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0)">
@@ -13,6 +14,7 @@
         </svg>
         <span>Свободен сейчас</span>
     </div>
+    @endif
     <div class="sidebar-top">
         <div class="sidebar-top-block roominess">
             <img src="/svg/i-people.svg" alt="alt">
@@ -72,7 +74,7 @@
                 <div class="address">
                     <div class="hotel-name">{{$hotel->name}}</div>
                     <div class="name-surname">
-                        @if (($hotel->getCurrentOption('landlordName') != null) && ($hotel->getCurrentOption('landlordHideName') != true))
+                        @if (($hotel->getCurrentOption('landlordName') != null) && ($hotel->getCurrentOption('landlordHideName') != 1))
                             {{ $hotel->getCurrentOption('landlordName') }}
                         @endif
                     </div>

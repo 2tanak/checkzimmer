@@ -27,13 +27,16 @@ class PropertyController extends Controller
 
     public function index(PropertyListRequest $request)
     {
+        $user = Auth::user();
         $subdomain = Domain::getSubdomain();
 
         $paginate = $request->query('page');
         $noCity = $request->query('nocity');
 
-        $objects = Property::orderBy('ord')->where(function ($query) {
-            $query->whereNull('access')->orWhere('access', '');
+        $objects = Property::orderBy('ord')->where(function ($query) use ($user) {
+            if (!$user || $user->role != 'admin' && $user->role != 'manager') {
+                $query->whereNull('access')->orWhere('access', '');
+            }
         });
 
         if ($subdomain) {
