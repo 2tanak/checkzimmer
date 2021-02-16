@@ -2,6 +2,7 @@
 
 use App\Feature;
 use App\Http\Controllers\Controller;
+use App\Option;
 use Illuminate\Http\Request;
 
 class FeaturesController extends Controller
@@ -49,4 +50,15 @@ class FeaturesController extends Controller
         return response()->json(['code' => 'ok']);
     }
 
+    public function language(Request $request) {
+        $data = $request->all();
+        if (!$data['id']) {
+            $option = Option::create($data);
+        } else {
+            $option = Option::findOrFail($data['id']);
+            $option->fill($data);
+            $option->save();
+        }
+        return response()->json($option);
+    }
 }
