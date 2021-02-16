@@ -17,16 +17,7 @@
                         <h1>{{ $hotel->name }}</h1>
                         <div class="additional-information">
                             <div class="mobile-title">Bewertungen</div>
-                            @if($hotel->rate!=null)
-                                @include('single.rating', ['rating' => $hotel->rate])
-                            @endif
-                            <div class="superhost-single">
-                                <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="4" cy="10" r="3" fill="#6BB63F"/>
-                                    <path d="M8 0H0V3L4 6L8 3V0Z" fill="#6BB63F"/>
-                                </svg>
-                                <span>Cуперхозяин</span>
-                            </div>
+                            @include('single.rating', ['rating' => $hotel->rate])
                             <div class="add-time">{{ __('Added') }}: {{ __('in')}} {{ date('H:i, j F Y', strtotime($hotel->created_at)) }}</div>
                             <div class="viewed">{{ __('Views') }}: {{ $hotel->views }}</div>
                         </div>
@@ -48,17 +39,16 @@
 
         <div class="fixed-bar">
             <a href="#" class="send-inquiry inquiry">{{ __('Send request') }}</a>
-            @if (($hotel->getCurrentOption('landlordPhoneNumber') == null) || ($hotel->getCurrentOption('landlordHidePhone') === true))
-                <div class="not-phone">
-                    <div class="speaks">{{ __('Object owner speaks') }}:</div>
-                    <div class="language-item">{{ $hotel->getCurrentOption('landlordLanguages') }}</div>
-                </div>
-                @else
+            @if ($hotel->type != 'affiliate')
                 <div class="see-number-phone">
                     <span class="number-phone-text">{{ __('Show phone') }}</span>
-                    <a class="number-phone" href="tel:+{{ $hotel->getCurrentOption('landlordPhoneNumber') }}">{{ $hotel->getCurrentOption('landlordPhoneNumber') }}</a>
+                    <a href="tel:+4917616573456" class="number-phone">+4917616573456</a>
                 </div>
             @endif
+            <div class="not-phone">
+                <div class="speaks">{{ __('Object owner speaks') }}:</div>
+                <div class="language-item">en, de</div>
+            </div>
         </div>
 
         <div class="scroll-top">
