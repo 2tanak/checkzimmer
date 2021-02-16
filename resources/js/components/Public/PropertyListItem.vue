@@ -286,10 +286,11 @@ export default {
     computed: {
         isSuperhost() {
             let superhost = this.findOption('superhost')
+            return superhost && parseInt(superhost.value);
         },
         isHideZip() {
-            let superhost = this.findOption('hideZip');
-            return superhost && parseInt(superhost.value);
+            let hideZip = this.findOption('hideZip');
+            return hideZip && parseInt(hideZip.value);
         },
         isRealPrice() {
             let realprice = this.findOption('realprice');
