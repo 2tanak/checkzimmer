@@ -1,4 +1,4 @@
-@if (count($hotel->photos()) >= 5)
+@if (count($hotel->photos()) >= 4)
     <div class="single-gallery">
         <div class="big-photo">
             <a class="open-gallery" href="#"><img src="{{ $hotel->photoMain()['url_original'] }}" alt="alt"></a>
@@ -27,7 +27,7 @@
             </svg>
         </a>
     </div>
-@elseif (count($hotel->photos()) == 4)
+@elseif (count($hotel->photos()) == 3)
     <div class="single-gallery option-two">
         <div class="big-photo"><a class="open-gallery" href="#"><img src="{{ $hotel->photoMain()['url_original'] }}" alt="alt"></a></div>
         <div class="middle-photo">
@@ -47,7 +47,7 @@
             </svg>
         </a>
     </div>
-@elseif (count($hotel->photos()) == 3)
+@elseif (count($hotel->photos()) == 2)
     <div class="single-gallery option-three">
         <div class="big-photo"><a class="open-gallery" href="#"><img src="{{ $hotel->photoMain()['url_original'] }}" alt="alt"></a></div>
         <div class="middle-photo">
@@ -66,11 +66,6 @@
                 <path d="M12.1 1.5c-.6-.7-1.5-1-2.4-1-.9 0-1.8.4-2.4 1l-.3.3-.3-.3C6.1.8 5.2.5 4.3.5c-.9 0-1.8.4-2.4 1C.6 2.9.6 5.1 1.9 6.4l4.8 5c.1.1.2.1.3.1.1 0 .2 0 .3-.1l4.8-5c1.3-1.3 1.3-3.5 0-4.9z" fill="#EE483F"/>
             </svg>
         </a>
-    </div>
-@elseif (count($hotel->photos()) == 2)
-    <div class="single-gallery option-four">
-        <div class="big-photo"><a class="open-gallery" href="#"><img src="{{ $hotel->photos()[0]['url_max300'] }}" alt="alt"></a></div>
-        <div class="big-photo"><a class="open-gallery" href="#"><img src="{{ $hotel->photos()[1]['url_max300'] }}" alt="alt"></a></div>
     </div>
 @elseif (count($hotel->photos()) == 1 && $hotel->photoMain() != null)
     <div class="single-gallery option-four">
