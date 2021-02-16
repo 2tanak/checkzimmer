@@ -281,7 +281,12 @@ export default {
             //let name = this.findOptionRoom(room, 'name');
             let names = ['', this.$t('Single room'), this.$t('Double room'), this.$t('Triple room'), this.$t('Quadruple'), this.$t('Quintuple'), this.$t('Six-seater'), this.$t('Seven-seater'), this.$t('Eight-seater'), this.$t('Nine-seater'), this.$t('Ten-seater') ]
             return names[room.person] ? names[room.person] : 'n/a';
-        }
+        },
+        featureName(item) {
+            let la = this.language_active;
+            let translation = item.options.find( item => item.key === 'lang-' + la );
+            return translation ? translation.value : item.name;
+        },
     },
     computed: {
         isSuperhost() {
