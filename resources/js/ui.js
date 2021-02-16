@@ -247,10 +247,6 @@ jQuery(document).ready(function() {
             jQuery('.list-languages').removeClass('active');
             jQuery('.selected-language').removeClass('active');
         }
-    })
-
-    jQuery('').click(function () {
-        jQuery('.select2-container').removeClass('select2-container--open');
     });
 
 
