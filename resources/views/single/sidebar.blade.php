@@ -13,7 +13,7 @@
                 </clipPath>
             </defs>
         </svg>
-        <span>Свободен сейчас</span>
+        <span>{{ __('Free now') }}</span>
     </div>
     @endif
 

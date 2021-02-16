@@ -16,7 +16,7 @@
 
                         <h1>{{ $hotel->name }}</h1>
                         <div class="additional-information">
-                            <div class="mobile-title">Bewertungen</div>
+                            <div class="mobile-title">{{ __('Reviews') }}</div>
                             @if ($hotel->rate!=null)
                                 @include('single.rating', ['rating' => $hotel->rate])
                             @endif

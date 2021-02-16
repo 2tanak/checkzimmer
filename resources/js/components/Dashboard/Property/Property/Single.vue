@@ -47,7 +47,7 @@
                                                          >
                                             {{ $t('Tax (VAT) is included in the price') }}</b-form-checkbox>
                                     </b-form-group>
-                                    <b-form-group :label="$t('Minimum rent')" class="rent-block">
+                                    <b-form-group :label="$t('Minimum rent')" class="rent-block" style="font-size:0.875rem;">
                                         <b-form-input v-model="property.opts.rentMin" id="input-hotel-name"></b-form-input>
                                     </b-form-group>
                                 </div>
@@ -282,14 +282,13 @@
                                                     <div class="col-md-4">
                                                         <b-form-group :label="$t('Cost, from')" :label-for="'input-room-'+i+'-price'">
                                                             <b-form-input v-model="room.price" :id="'input-room-'+i+'-price'"></b-form-input>
-                                                            <span style="font-size:0.875rem;">{{ inclVAT }}</span>
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <b-form-group :label="$t('Shower')" :label-for="'input-room-'+i+'-shower'">
                                                             <b-select v-model="room.shower">
-                                                                <b-select-option value="single">{{ $t('Its') }}</b-select-option>
-                                                                <b-select-option value="shared">{{ $t('Joint') }}</b-select-option>
+                                                                <b-select-option value="single">{{ $t('Private') }}</b-select-option>
+                                                                <b-select-option value="shared">{{ $t('Shared') }}</b-select-option>
                                                                 <b-select-option value="none">{{ $t('Absent') }}</b-select-option>
                                                             </b-select>
                                                         </b-form-group>
@@ -306,8 +305,8 @@
                                                     <div class="col-md-4">
                                                         <b-form-group :label="$t('Kitchen')" :label-for="'input-room-'+i+'-shower'">
                                                             <b-select v-model="room.kitchen">
-                                                                <b-select-option value="single">{{ $t('Its') }}</b-select-option>
-                                                                <b-select-option value="shared">{{ $t('Joint') }}</b-select-option>
+                                                                <b-select-option value="single">{{ $t('Private') }}</b-select-option>
+                                                                <b-select-option value="shared">{{ $t('Shared') }}</b-select-option>
                                                                 <b-select-option value="kitchenette">{{ $t('Kitchenette') }}</b-select-option>
                                                                 <b-select-option value="none">{{ $t('Absent') }}</b-select-option>
                                                             </b-select>
@@ -347,8 +346,15 @@
         </div>
         <div class="row mb-4">
             <div class="col-md-12">
-                <b-button type="submit" variant="outline-primary" class="mr-2" @click="addRoom">{{ $t('Add room') }}</b-button>
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <b-button type="submit" variant="outline-primary" class="mr-2" @click="addRoom">{{ $t('Add room') }}</b-button>
+                    <a class="back-link" href="/dashboard/property/items">{{ $t('Back') }}</a>
+                </div>
             </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content: flex-end;">
+            <b-button style="margin-right:10px;" v-b-modal.deleteHotelModal variant="danger" @click="deleteHotel">{{ $t('Delete hotel') }}</b-button>
+            <b-button style="margin-right:0 !important;" type="submit" variant="success" class="mr-2 " @click="save">{{ $t('Save') }}</b-button>
         </div>
 
         <b-modal id="deleteHotelModal" :title="$t('Delete Hotel')" @ok="deleteHotelOk">
@@ -484,7 +490,6 @@ export default {
                 { value: '10', text: 'Ten-seater' }
             ],
             showPin: false,
-            inclVAT: 'not including taxes',
             imageData: [],
             newRoomOptions: [
                 {
