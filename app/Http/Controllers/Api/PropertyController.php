@@ -239,10 +239,13 @@ class PropertyController extends Controller
                 $fields['rooms'][$roomKey]['options'][$optionKey]['value'] = $option['value'] ?? '';
             }
         }
-
-        foreach($fields['options'] as $item) {
-            if (!$item['id']) {
-                $option = Option::create($item);
+        foreach($fields['options'] as $key => $item) {
+            if (!$item['id'] && $item['value'] != '') {
+                $option = Option::updateOrCreate($item);
+                $result[$key] = $option;
+            }elseif($item['id'] && $item['value'] == ''){
+                $option = Option::find($item['id']);
+                $option->delete();
             }
         }
         $property->updateRelations($fields);
