@@ -98,7 +98,9 @@
                     </li>
                 </ul>
                 <a class="whatsapp-number" href="tel:{{ str_replace(' ', '', $options['website_phone'] ?? '') }}">
-                    {{ $options['website_phone'] ?? '' }}
+                    @if (($hotel->getCurrentOption('landlordPhoneNumber') != null) && ($hotel->getCurrentOption('landlordHidePhone') != 1))
+                    {{ $hotel->getCurrentOption('landlordPhoneNumber') ?? '' }}
+                    @endif
                     <span class="explanatory-text">24/7 бесплатно с мобильного</span>
                 </a>
             </div>

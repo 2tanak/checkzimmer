@@ -14,7 +14,7 @@ class Room extends Model
     protected $table = 'rooms';
     protected $fillable = ['property_id', 'room_type_id', 'number', 'person', 'price', 'bed', 'shower', 'kitchen', 'status', 'native_id'];
     protected $fillableRelations = ['options'];
-    protected $with = ['options'];
+    protected $with = ['options', 'roomType'];
 
     static function hasFeature($name, $room_facilities)
     {
@@ -61,6 +61,9 @@ class Room extends Model
         return 'single';
     }
 
+    public function roomType() {
+        return $this->belongsTo(RoomType::class, 'room_type_id');
+    }
     public function options()
     {
         return $this->hasMany(Option::class, 'parent')->where('type', 'room');
