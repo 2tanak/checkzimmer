@@ -44,8 +44,7 @@
                                         <b-form-checkbox id="vat"
                                                          v-model="property.opts.inclVAT"
                                                          name="vat"
-                                                         value="including taxes"
-                                                         unchecked-value="not including taxes" >
+                                                         >
                                             {{ $t('Tax (VAT) is included in the price') }}</b-form-checkbox>
                                     </b-form-group>
                                     <b-form-group :label="$t('Minimum rent')" class="rent-block">
