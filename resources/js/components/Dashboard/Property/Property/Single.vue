@@ -43,8 +43,13 @@
                                     <b-form-group>
                                         <b-form-checkbox id="vat"
                                                          v-model="property.opts.inclVAT"
-                                                         name="vat">
+                                                         name="vat"
+                                                         value="including taxes"
+                                                         unchecked-value="not including taxes" >
                                             {{ $t('Tax (VAT) is included in the price') }}</b-form-checkbox>
+                                    </b-form-group>
+                                    <b-form-group :label="$t('Minimum rent')" class="rent-block">
+                                        <b-form-input v-model="property.opts.rentMin" id="input-hotel-name"></b-form-input>
                                     </b-form-group>
                                 </div>
                             </div>
@@ -278,7 +283,7 @@
                                                     <div class="col-md-4">
                                                         <b-form-group :label="$t('Cost, from')" :label-for="'input-room-'+i+'-price'">
                                                             <b-form-input v-model="room.price" :id="'input-room-'+i+'-price'"></b-form-input>
-                                                            <span style="font-size:0.875rem;">{{ tax }}</span>
+                                                            <span style="font-size:0.875rem;">{{ inclVAT }}</span>
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
@@ -412,7 +417,7 @@ let defOptions = {
         type: 'bool',
     },
     seo_title: {
-        value: '%site-title% - Monteurzimmer in %city%, <hide-zip>%postcode%,</hide-zip> <hide-address>%street%, %house-number%</hide-address>',
+        value: '%site-title% - Monteurzimmer in %city%<hide-all>,</hide-all><hide-zip> %postcode%</hide-zip><hide-address> %street%, %house-number%</hide-address>',
         type: ''
     },
     seo_description: {
@@ -438,6 +443,10 @@ let defOptions = {
     hideZip: {
         value: '',
         type: 'bool'
+    },
+    rentMin: {
+        value: '3',
+        type: ''
     }
 }
 
@@ -476,7 +485,7 @@ export default {
                 { value: '10', text: 'Ten-seater' }
             ],
             showPin: false,
-            tax: 'not including taxes',
+            inclVAT: 'not including taxes',
             imageData: [],
             newRoomOptions: [
                 {

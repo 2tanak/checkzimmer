@@ -11,9 +11,6 @@
                 <div class="load-sidebar load-sidebar-mobile">
                     <div class="sidebar-head">
                         <div class="sidebar-head-item recast"></div>
-                        <div class="sidebar-head-item recast"></div>
-                        <div class="sidebar-head-item recast"></div>
-                        <div class="sidebar-head-item recast"></div>
                     </div>
                     <div class="sidebar-body">
                         <div class="small-block recast"></div>
@@ -21,7 +18,6 @@
                         <div class="big-block recast"></div>
                         <div class="sidebar-body-item">
                             <div class="address">
-                                <div class="address-item recast"></div>
                                 <div class="address-item recast"></div>
                                 <div class="address-item recast"></div>
                             </div>
@@ -426,9 +422,6 @@
     <div class="load-sidebar load-sidebar-desctope">
         <div class="sidebar-head">
             <div class="sidebar-head-item recast"></div>
-            <div class="sidebar-head-item recast"></div>
-            <div class="sidebar-head-item recast"></div>
-            <div class="sidebar-head-item recast"></div>
         </div>
         <div class="sidebar-body">
             <div class="small-block recast"></div>
@@ -436,7 +429,6 @@
             <div class="big-block recast"></div>
             <div class="sidebar-body-item">
                 <div class="address">
-                    <div class="address-item recast recast"></div>
                     <div class="address-item recast recast"></div>
                     <div class="address-item recast recast"></div>
                 </div>

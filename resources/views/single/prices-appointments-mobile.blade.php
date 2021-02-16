@@ -10,18 +10,18 @@
                             {{ __('apartment')}}
                         </div>
                         <div class="price">
-                            {{ __('of')  }} <span>{{ $hotel->getRoomPriceMin() }}€</span>/{{ __('person') }}
+                            {{ __('of')  }} <span>{{ $hotel->getRoomPriceMin($roomType->id) }}€</span>/{{ __('person') }}
                         </div>
                         <div class="collapse-button"></div>
                     </div>
                     <div class="position-line">
                         <div class="position-line-title">{{ __('Amount')}}</div>
-                        <div class="position-line-details">{{ $hotel->getTotalRooms() }}x</div>
+                        <div class="position-line-details">{{ $hotel->getTotalRooms($roomType->id) }}x</div>
                         <div class="empty-block"></div>
                     </div>
                     <div class="position-line">
                         <div class="position-line-title">{{ __('person') }}</div>
-                        <div class="position-line-details">{{ $hotel->getRoomPersonsMax() }}</div>
+                        <div class="position-line-details">{{ $hotel->getRoomPersonsMax($roomType->id) }}</div>
                         <div class="empty-block"></div>
                     </div>
                 </div>
