@@ -1,5 +1,5 @@
 <template>
-    <div class="property-card">
+    <div :class="{'property-card':true, 'active' : active}" >
         <div class="property-card-container">
             <div class="no-photo" v-if="noPhotos">
                 <div class="no-photo-small">
@@ -127,7 +127,7 @@ import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 export default {
     name: "PropertyListItem",
-    props: [ 'item' ],
+    props: [ 'item', 'active' ],
     components: { VueSlickCarousel },
     data() {
         return {
@@ -273,6 +273,13 @@ export default {
         }
     },
     computed: {
+        // isActiveInMapStr() {
+        //     if (this.item.isActiveInMap !='') {
+        //         return 'active-in-map';
+        //     }else{
+        //         return '';
+        //     }
+        // },
         maxPeopleNumStr() {
             let max = this.maxPeopleNum();
             if (max === 'n/a') {

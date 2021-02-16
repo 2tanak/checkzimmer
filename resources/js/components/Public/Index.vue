@@ -29,7 +29,7 @@
                         <transition name="fade" appear>
                         <div class="property-container" :style="{position: 'relative', opacity: loading ? 0:1, position: loading ? 'absolute':'relative'}">
                             <div class="property-item">
-                                <PropertyListItem v-for="item in property" :key="'id-'+item.id" :item="item" @favsUpdated="updateFavCount"/>
+                                <PropertyListItem v-for="(item, index) in property" :key="'id-'+item.id" :item="item" :active="activeItems[index]"  @favsUpdated="updateFavCount"/>
 
                                 <div class="load-block-content first-load-block-content">
                                     <div class="load-block-item">
@@ -567,6 +567,7 @@ export default{
             coords_load: [],
             additional_pages: true,
             search: {...newSearch},
+            activeItems: [],
         };
     },
     mounted() {
@@ -582,6 +583,8 @@ export default{
         properties.byPage(1)
             .then( resp => {
                 that.property = resp.data.objects.data;
+                this.property.forEach((item,index) => this.activeItems[index] = false);
+
                 that.loading = false;
                 if (resp.data.current_page < resp.data.objects.last_page) {
                     that.additional_pages = true;
@@ -604,6 +607,7 @@ export default{
             e.preventDefault();
             jQuery(this).toggleClass('active');
         });
+
         function initMap() {
             if (typeof google === 'undefined' || !document.getElementById('map')) {
                 setTimeout( () => { initMap() }, 100 )
@@ -791,112 +795,36 @@ export default{
             });
             map.setOptions({styles: styles});
 
-
             function createInfoBlock(text1, id) {
                 var newDiv = document.createElement("div");
                 newDiv.setAttribute("id", "object_modal");
                 newDiv.setAttribute("data-id", id);
                 var contentString = '<span class="index">'+ text1 +'</span>';
                 newDiv.innerHTML = contentString;
-                newDiv.addEventListener("click", selectMapMarker);
+                newDiv.addEventListener("click", this.selectMapMarker);
                 return newDiv;
             }
-            function selectMapMarker(){
-                let $this = event.target;
-                if($($this).hasClass('index')){
-                    $this = $($this).parent();
-                }
-                 let id = $($this).attr('data-id');
 
-            }
-            // var infowindow = new google.maps.InfoWindow({
-            //     content: contentString
-            // });
-
-            class Popup extends google.maps.OverlayView {
-                constructor(position, content) {
-                    super();
-                    this.position = position;
-                    content.classList.add("popup-bubble");
-                    // This zero-height div is positioned at the bottom of the bubble.
-                    const bubbleAnchor = document.createElement("div");
-                    bubbleAnchor.classList.add("popup-bubble-anchor");
-                    bubbleAnchor.appendChild(content);
-                    // This zero-height div is positioned at the bottom of the tip.
-                    this.containerDiv = document.createElement("div");
-                    this.containerDiv.classList.add("popup-container");
-                    this.containerDiv.appendChild(bubbleAnchor);
-                    // Optionally stop clicks, etc., from bubbling up to the map.
-                    Popup.preventMapHitsAndGesturesFrom(this.containerDiv);
-                }
-                /** Called when the popup is added to the map. */
-                onAdd() {
-                    this.getPanes().floatPane.appendChild(this.containerDiv);
-                }
-                /** Called when the popup is removed from the map. */
-                onRemove() {
-                    if (this.containerDiv.parentElement) {
-                        this.containerDiv.parentElement.removeChild(this.containerDiv);
-                    }
-                }
-                /** Called each frame when the popup needs to draw itself. */
-                draw() {
-                    const divPosition = this.getProjection().fromLatLngToDivPixel(
-                        this.position
-                    );
-                    // Hide the popup when it is far out of view.
-                    const display =
-                        Math.abs(divPosition.x) < 4000 && Math.abs(divPosition.y) < 4000
-                            ? "block"
-                            : "none";
-
-                    if (display === "block") {
-                        this.containerDiv.style.left = divPosition.x + "px";
-                        this.containerDiv.style.top = divPosition.y + "px";
-                    }
-
-                    if (this.containerDiv.style.display !== display) {
-                        this.containerDiv.style.display = display;
-                    }
-                }
-                toggle() {
-                    if (this.div) {
-                        console.log(this);
-                        if (this.div.style.visibility === "hidden") {
-                            this.show();
-                        } else {
-                            this.hide();
-                        }
-                    }
-                }
-
-            }
-            var newDiv = document.createElement("div");
-            newDiv.innerHTML = "<h3>Привет5555555555555!</h3>";
-
+            // function
 
             // popup.setMap(map);
-
 
             properties.request('initMap')
                 .then( resp => {
                     var myTrip = resp.data.coords;
-                    console.log('resp.data');
-                    console.log(resp.data);
-                    console.log(resp.data.coords);
-                    console.log(createInfoBlock('one','two'));
+
                     for (var i = 0; i < myTrip.length; i++) {
                         var popup = new Popup(
                             new google.maps.LatLng(myTrip[i].lat, myTrip[i].lng),
-                            createInfoBlock(myTrip[i].name,myTrip[i].id)
+                            that.createInfoBlock(myTrip[i].name,myTrip[i].id)
                         );
                         popup.setMap(map);
 
                       // var marker = new google.maps.Marker({
-                      //   position: new google.maps.LatLng(myTrip[i].lat, myTrip[i].lng),
-                      //   map: map
+                      // position: new google.maps.LatLng(myTrip[i].lat, myTrip[i].lng),
+                      // map: map
                       // });
-                      //   infowindow.open(map, marker);
+                      // infowindow.open(map, marker);
 
                     }
                     // popup.setMap(map);
@@ -917,6 +845,36 @@ export default{
 
     },
     methods: {
+        createInfoBlock(text1, id) {
+            var newDiv = document.createElement("div");
+            newDiv.setAttribute("id", "object_modal");
+            newDiv.setAttribute("data-id", id);
+            var contentString = '<span class="index">'+ text1 +'</span>';
+            newDiv.innerHTML = contentString;
+            newDiv.addEventListener("click", this.selectMapMarker);
+            return newDiv;
+        },
+        selectMapMarker() {
+            let $this = event.target;
+            if($($this).hasClass('index')){
+                $this = $($this).parent();
+            }
+            let id = $($this).attr('data-id');
+
+            let index = this.property.findIndex(it=>it.id == id );
+            // this.property[index].isActiveInMap = true;
+
+            this.activeItems[index] = true;
+            // that.property.map((it, idx) => that.property[idx].isActiveInMap = true);
+            // that.property.map((it, idx) => (it.id == id) ? it.isActiveInMap = 'select-property-card' : it.isActiveInMap = '');
+            this.checkIsActivemap();
+            // this.submitForm();
+            console.log('id');
+            console.log(id);
+        },
+        checkIsActivemap(){
+            console.log('!!!!!!!!!!!');
+        },
         login(e) {
             console.log(this.$auth);
             e.preventDefault();
@@ -1025,7 +983,64 @@ export default{
         }
     }
 }
+class Popup extends google.maps.OverlayView {
+    constructor(position, content) {
+        super();
+        this.position = position;
+        content.classList.add("popup-bubble");
+        // This zero-height div is positioned at the bottom of the bubble.
+        const bubbleAnchor = document.createElement("div");
+        bubbleAnchor.classList.add("popup-bubble-anchor");
+        bubbleAnchor.appendChild(content);
+        // This zero-height div is positioned at the bottom of the tip.
+        this.containerDiv = document.createElement("div");
+        this.containerDiv.classList.add("popup-container");
+        this.containerDiv.appendChild(bubbleAnchor);
+        // Optionally stop clicks, etc., from bubbling up to the map.
+        Popup.preventMapHitsAndGesturesFrom(this.containerDiv);
+    }
+    /** Called when the popup is added to the map. */
+    onAdd() {
+        this.getPanes().floatPane.appendChild(this.containerDiv);
+    }
+    /** Called when the popup is removed from the map. */
+    onRemove() {
+        if (this.containerDiv.parentElement) {
+            this.containerDiv.parentElement.removeChild(this.containerDiv);
+        }
+    }
+    /** Called each frame when the popup needs to draw itself. */
+    draw() {
+        const divPosition = this.getProjection().fromLatLngToDivPixel(
+            this.position
+        );
+        // Hide the popup when it is far out of view.
+        const display =
+            Math.abs(divPosition.x) < 4000 && Math.abs(divPosition.y) < 4000
+                ? "block"
+                : "none";
 
+        if (display === "block") {
+            this.containerDiv.style.left = divPosition.x + "px";
+            this.containerDiv.style.top = divPosition.y + "px";
+        }
+
+        if (this.containerDiv.style.display !== display) {
+            this.containerDiv.style.display = display;
+        }
+    }
+    toggle() {
+        if (this.div) {
+            console.log(this);
+            if (this.div.style.visibility === "hidden") {
+                this.show();
+            } else {
+                this.hide();
+            }
+        }
+    }
+
+}
 </script>
 <style>
 .fade-enter-active, .fade-leave-active {
