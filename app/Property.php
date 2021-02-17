@@ -334,6 +334,6 @@ class Property extends Model
     }
     public function getSEODescription() {
         $description = $this->getCurrentOption('seo_description');
-        return $this->handleTemplate($description['value'] ?? '');
+        return $this->handleTemplate($description ?? '');
     }
 }
