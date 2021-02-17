@@ -62,6 +62,9 @@ const app = new Vue({
 
 jQuery(document).ready(function() {
 
+    jQuery('.list-content').css('display', 'block');
+    jQuery(' .load-block-content.first-load-block-content').css('display', 'none')
+
     jQuery('.sorting a').click(function(e) {
         e.preventDefault();
         jQuery('.sorting').toggleClass('up');
@@ -219,13 +222,33 @@ jQuery(document).ready(function() {
                 }}());
         })};
     jQuery(function() {
-        jQuery('.sh_nmr').textToggle(".sh_nmr","").click();
-        jQuery('.sh_nmr').textToggle(".num_hide","ХХХХ ХХХX").click();
+        var abc = jQuery('.number-phone a').html();
+        var lastSimbol = abc.substr(-20,4);
+        var x = 'XXXX XXXX'
+        var phoneLink = lastSimbol.concat(x);
+        jQuery('.number-phone a').html(phoneLink);
         jQuery('.sh_nmr').click(function () {
             jQuery('.sidebar .number-phone').addClass('gray');
             jQuery('.sh_nmr').css('display', 'none');
+            jQuery('.number-phone a').html(abc);
         });
     });
+
+    jQuery('.languages-block .selected-language').click(function (e) {
+        e.preventDefault();
+        jQuery(this).toggleClass('active');
+        jQuery('.list-languages').toggleClass('active');
+    });
+
+    jQuery(document).mouseup(function (e){
+        var div = jQuery(".selected-language");
+        if (!div.is(e.target)
+            && div.has(e.target).length === 0) {
+            jQuery('.list-languages').removeClass('active');
+            jQuery('.selected-language').removeClass('active');
+        }
+    });
+
 
     jQuery('.inquiry-modal .input-block-item input, .modal-block input').focus(function () {
         var parent = jQuery(this).closest('.input-block-item, .modal-block');
@@ -305,21 +328,6 @@ jQuery(document).ready(function() {
             jQuery('#number-persons, #type, #offer-select3, #distance-select, #number-personse').select2('destroy');
         } else {
             jQuery('#number-persons, #type, #offer-select3, #distance-select, #number-personse').select2();
-        }
-    });
-
-    jQuery('.selected-language').click(function (e) {
-        e.preventDefault();
-        jQuery('.list-languages').toggleClass('active');
-        jQuery('.selected-language').toggleClass('active');
-    });
-
-    jQuery(document).mouseup(function (e){
-        var div = jQuery(".list-languages");
-        if (!div.is(e.target)
-            && div.has(e.target).length === 0) {
-            jQuery('.list-languages').removeClass('active');
-            jQuery('.selected-language').removeClass('active');
         }
     });
 
@@ -417,14 +425,21 @@ jQuery(document).ready(function() {
             jQuery('body').addClass('fixed-header');
             if ( tempScrollTop > currentScrollTop ) {
                 jQuery('header').addClass('show');
+                jQuery('header').addClass('height-menu');
             } else {
                 jQuery('header').removeClass('show');
+                jQuery('header').removeClass('height-menu');
             }
         } else {
             jQuery('body').removeClass('fixed-header');
             jQuery('header').removeClass('show');
+            jQuery('header').addClass('height-menu');
         }
         tempScrollTop = currentScrollTop;
+    });
+
+    jQuery('.single-content .favorites').click(function () {
+        jQuery('.single-content .favorites').toggleClass('active');
     });
 
 });
@@ -527,4 +542,6 @@ window.onload = function () {
     setTimeout (function() {
         jQuery('.communication').removeClass('not-active');
     }, 1000);
+
+
 };

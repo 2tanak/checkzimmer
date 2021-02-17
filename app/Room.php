@@ -14,7 +14,7 @@ class Room extends Model
     protected $table = 'rooms';
     protected $fillable = ['property_id', 'room_type_id', 'number', 'person', 'price', 'bed', 'shower', 'kitchen', 'status', 'native_id'];
     protected $fillableRelations = ['options'];
-    protected $with = ['options'];
+    protected $with = ['options', 'roomType'];
 
     static function hasFeature($name, $room_facilities)
     {
@@ -60,6 +60,9 @@ class Room extends Model
         return 'single';
     }
 
+    public function roomType() {
+        return $this->belongsTo(RoomType::class, 'room_type_id');
+    }
     public function options()
     {
         return $this->hasMany(Option::class, 'parent')->where('type', 'room');
@@ -71,11 +74,11 @@ class Room extends Model
         {
             case 'kitchenette':
             case 'single':
-                return __('private');
+                return 'своя';
             case 'shared':
-                return __('shared');
+                return 'совместная';
             default:
-                return __('none');
+                return 'none';
         }
     }
 
@@ -95,11 +98,11 @@ class Room extends Model
         switch ($room['shower'])
         {
             case 'single':
-                return __('private');
+                return 'свой';
             case 'shared':
-                return __('shared');
+                return 'совместный';
         }
-        return __('none');
+        return 'none';
     }
 
     public static function getShowerLabelColor($room)
@@ -119,11 +122,11 @@ class Room extends Model
         switch ($room['bed'])
         {
             case 'single':
-                return __('single');
+                return 'одноместная';
             case 'double':
-                return __('double');
+                return 'двухместная';
         }
-        return __('unknown');
+        return 'неизвестно';
     }
 
     static public function getBedroomLabelColor($item)
@@ -141,11 +144,11 @@ class Room extends Model
     public function getPersonsText()
     {
         if ($this->person == 1){
-            return __('single');
+            return 'одноместная';
         } elseif ($this->person == 2){
-            return __('double');
+            return 'двухместная';
         }
-        return __('many places');
+        return 'на много мест';
     }
 
     public function updateRelations(array $data)

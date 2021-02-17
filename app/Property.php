@@ -20,7 +20,7 @@ class Property extends Model
     protected $fillableRelations = ['options', 'rooms', 'features'];
     private static $identifier = 'id';
     private static $children = ['options', 'user'];
-
+    protected $data = [];
     protected $_options = null;
     protected $_photos = null;
     protected $_photoMain = null;
@@ -48,9 +48,21 @@ class Property extends Model
         }
     }
 
-    public function getName() {
+    function getCurrentOption($key) {
+        if($this->_options == null) {
+            $this->getOptions();
+        }
+        if (($this->data[$key] ?? null) === null) {
+            $index = array_search($key,array_column($this->_options,'key'));
+            if($index === false) {
+                return '';
+            }
 
+            $this->data[$key] = $this->_options[$index];
+        }
+        return ($this->data[$key]['value'] ?? '');
     }
+
     private function getPhotos()
     {
         $this->getOptions();
@@ -176,10 +188,10 @@ class Property extends Model
         return $map[$types['native_id']] ?? false;
     }
 
-    public function getTotalRooms()
+    public function getTotalRooms($typeId = null)
     {
-        return array_reduce($this->rooms->toArray(), function ($carry, $item) {
-            return $item['number'] + $carry;
+        return array_reduce($this->rooms->toArray(), function ($carry, $item) use ($typeId) {
+            return $carry + ($typeId == null || $typeId == $item['room_type_id'] ? $item['number'] : 0);
         }, 0);
     }
 
@@ -193,20 +205,38 @@ class Property extends Model
         }, 999);
     }
 
-    public function getRoomPersonsMax()
+    public function getRoomTypes() {
+        if ($this->roomTypes == null) {
+            $roomTypes = array_column($this->rooms->toArray(), 'room_type_id');
+            $this->roomTypes = RoomType::whereIn('id', $roomTypes)->get();
+        }
+        return $this->roomTypes;
+    }
+    public function getRoomsByType($typeId) {
+        return array_filter($this->rooms->toArray(), function($item) use ($typeId) {
+            return $item['room_type_id'] == $typeId;
+        });
+    }
+    public function getRoomPersonsMax($typeId = null)
     {
-        return array_reduce($this->rooms->toArray(), function ($carry, $item) {
-            return $carry + ($item['price'] > 0 ? $item['number'] * $item['person'] : 0);
+        return array_reduce($this->rooms->toArray(), function ($carry, $item) use ($typeId) {
+            return $carry + (($typeId == null || $typeId == $item['room_type_id']) && $item['price'] > 0 ? $item['number'] * $item['person'] : 0);
         }, 0);
     }
 
-    public function getRoomPriceMin()
+    public function checkHideAdress(){
+        $hideAdress = Option::where('type', 'property')->where('parent', $this->id)->where('key', 'hide_address')->first();
+        if (!$hideAdress){
+            return true;
+        }
+    }
+    public function getRoomPriceMin($typeId = null)
     {
         if ($this->price_min) {
             return $this->price_min;
         }
-        $price = array_reduce($this->rooms->toArray(), function ($carry, $item) {
-            return $item['price'] < $carry && $item['price'] > 0 ? ceil($item['price']) : $carry;
+        $price = array_reduce($this->rooms->toArray(), function ($carry, $item) use ($typeId) {
+            return ($typeId == null || $typeId == $item['room_type_id'] )&& $item['price'] < $carry && $item['price'] > 0 ? ceil($item['price']) : $carry;
         }, 9999);
         if ($price == 9999) {
             $price = 0;
@@ -242,9 +272,11 @@ class Property extends Model
         {
             if ($relationData = $data[$fillableRelationName]){
                 $currentRelation = $this->$fillableRelationName;
-
-                array_map(static function (array $data) use ($relationData, $currentRelation) {
-                    $relationModel = $currentRelation->filter(function ($item) use ($data) {
+                array_map(function ($data) use ($relationData, $currentRelation) {
+                    if ($data == null) {
+                        $data = '';
+                    }
+                    $relationModel = $currentRelation->filter(function ($item) use ($data, $relationData) {
                         return $item->id === $data['id'];
                     })->first();
                     if($relationModel){
@@ -258,5 +290,50 @@ class Property extends Model
             }
         }
 
+    }
+    public function handleTemplate($str) {
+        $address = explode(' ', $this->address);
+        $house = array_pop($address);
+        $address = implode(' ', $address);
+
+        $template = [
+            'city' => $this->city,
+            'site-title' => env('APP_NAME', 'CheckZimmer.de'),
+            'postcode' => $this->zip,
+            'street' => $address,
+            'house-number' => $house,
+        ];
+        foreach ($template as $key => $item) {
+            $str = str_replace("%$key%", $item, $str);
+        }
+        $hideZip = $this->getCurrentOption('hideZip');
+        $hideAddress = $this->getCurrentOption('hideAddress');
+        if ($hideZip) {
+            $str = preg_replace('/<hide-zip>.*?<\/hide-zip>/', '', $str);
+        } else {
+            $str = preg_replace('/<hide-zip>(.*?)<\/hide-zip>/', '$1', $str);
+        }
+
+        if ($hideAddress) {
+            $str = preg_replace('/<hide-address>.*?<\/hide-address>/', '', $str);
+        } else {
+            $str = preg_replace('/<hide-address>(.*?)<\/hide-address>/', '$1', $str);
+        }
+
+        if ($hideZip && $hideAddress) {
+            $str = preg_replace('/<hide-all>.*?<\/hide-all>/', '', $str);
+        } else {
+            $str = preg_replace('/<hide-all>.*?<\/hide-all>/', '', $str);
+        }
+        return $str;
+    }
+    public function getSEOTitle()
+    {
+        $title = $this->getCurrentOption('seo_title');
+        return $this->handleTemplate($title ?? '');
+    }
+    public function getSEODescription() {
+        $description = $this->getCurrentOption('seo_description');
+        return $this->handleTemplate($description['value'] ?? '');
     }
 }

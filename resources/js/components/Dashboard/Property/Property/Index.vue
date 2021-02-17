@@ -1,6 +1,11 @@
 <template>
     <section class="header-dashboard">
-        <h1>{{ $t('Objects') }}</h1>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+            <h1>{{ $t('Objects') }}</h1>
+            <b-button v-b-modal.modal-object-create type="button" variant="success" class="mr-2" @click="hotelNew">
+                {{ $t('New object') }}
+            </b-button>
+        </div>
         <div class="row mt-4">
             <div class="col-md-6 grid-margin">
                 <div class="card">
@@ -173,9 +178,10 @@
             createProperty() {
                 this.clearModalErrors();
                 properties.create(this.hotelNewData).then(response => {
-                    if(response.data.code == 'ok'){
+                    if(response.data.code === 'ok'){
                         this.textOperation = this.$t('Added');
-                        this.operationOk = true
+                        this.operationOk = true;
+                        this.property.push(response.data.property);
                     }else{
                         this.textOperation = this.$t('Add error');
                         this.operationError = true;

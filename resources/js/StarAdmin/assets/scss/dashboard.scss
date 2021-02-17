@@ -52,6 +52,36 @@ a.all-domains:hover {
     background-color: #ffffff;
     color: #17a2b8;
 }
+.checkbox-block .bv-no-focus-ring {
+    display: flex;
+    align-items: center;
+}
+.checkbox-block .custom-checkbox {
+    margin-right: 25px;
+}
+a.back-link {
+    background-color: #17a2b8;
+    border: 1px solid #17a2b8;
+    transition: all 0.2s;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 0.1875rem;
+    height: 33px;
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+a.back-link:hover {
+    transition: all 0.2s;
+    background-color: #0e8b9e;
+}
+.form-group label {
+    line-height: inherit !important;
+}
+.custom-control-label {
+    cursor: pointer;
+}
 
 
 @media (max-width: 991px) {

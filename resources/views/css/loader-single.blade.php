@@ -23,7 +23,7 @@
     .single-load-content .images-block {
         width: 100%;
         height: 264px;
-        background: #EDEDEF;
+        background: #DEDEE2;
         border-radius: 6px;
         display: flex;
         align-items: center;
@@ -34,14 +34,14 @@
         max-width: 736px;
         width: 100%;
         height: 22px;
-        background: #EDEDED;
+        background: #DEDEE2;
         border-radius: 100px;
     }
     .single-load-content .subtitle-block {
         max-width: 505px;
         width: 100%;
         height: 15px;
-        background: #EDEDED;
+        background: #DEDEE2;
         border-radius: 100px;
     }
     .single-load-content .top-block .head-title-block {
@@ -59,7 +59,7 @@
         max-width: 423px;
         width: 100%;
         height: 15px;
-        background: #EDEDED;
+        background: #DEDEE2;
         border-radius: 100px;
         margin-bottom: 13px;
     }
@@ -80,7 +80,7 @@
     .single-load-content .middle-block .title {
         width: 98px;
         height: 15px;
-        background: #EDEDED;
+        background: #DEDEE2;
         border-radius: 100px;
         margin-bottom: 14px;
     }
@@ -94,14 +94,14 @@
     .single-load-content .circle {
         min-width: 28px;
         height: 28px;
-        background: #EDEDED;
+        background: #DEDEE2;
         border-radius: 50%;
         margin-right: 10px;
     }
     .single-load-content .line {
         width: 154px;
         height: 15px;
-        background: #EDEDED;
+        background: #DEDEE2;
         border-radius: 100px;
     }
     .single-load-content .middle-block-item {
@@ -124,13 +124,13 @@
     }
     .single-load-content .bottom-block .head-block-item {
         margin-right: 20px;
-        background: #EDEDED;
+        background: #DEDEE2;
         border-radius: 6px;
         width: 136px;
         height: 22px;
     }
     .single-load-content .bottom-block .footer-block {
-        background: #EDEDED;
+        background: #DEDEE2;
         border-radius: 6px;
         width: 136px;
         height: 30px;
@@ -140,7 +140,7 @@
         max-width: 850px;
         width: 100%;
         height: 15px;
-        background: #EDEDED;
+        background: #DEDEE2;
         border-radius: 100px;
         margin-bottom: 13px;
     }
@@ -151,7 +151,7 @@
         min-width: 280px;
         max-width: 280px;
         width: 100%;
-        height: 428px;
+        height: 382px;
         padding: 16px;
     }
     .single-load-content .load-sidebar .sidebar-head {
@@ -161,38 +161,35 @@
         border-bottom: 1px solid #e3e4e6;
     }
     .single-load-content .load-sidebar .sidebar-head-item {
-        margin-bottom: 13px;
-        background: #EDEDED;
+        margin-bottom: 17px;
+        background: #DEDEE2;
         border-radius: 100px;
-        width: 113px;
+        width: 100%;
         height: 15px;
     }
-    .single-load-content .load-sidebar .sidebar-head-item:nth-of-type(odd) {
-        margin-right: 22px;
-    }
     .single-load-content .load-sidebar .sidebar-footer {
-        background: #EDEDED;
+        background: #DEDEE2;
         border-radius: 6px;
         width: 100%;
         height: 30px;
         margin-top: 11px;
     }
     .single-load-content .load-sidebar .sidebar-body {
-        padding-bottom: 21px;
+        padding-bottom: 28px;
         border-bottom: 1px solid #e3e4e6;
-        margin-top: 11px;
+        margin-top: 17px;
     }
     .single-load-content .load-sidebar .sidebar-body .small-block {
-        background: #EDEDED;
+        background: #DEDEE2;
         border-radius: 6px;
         margin: auto;
-        margin-bottom: 10px;
+        margin-bottom: 16px;
         width: 136px;
         height: 30px;
     }
     .single-load-content .load-sidebar .sidebar-body .big-block {
-        margin-bottom: 16px;
-        background: #EDEDED;
+        margin-bottom: 12px;
+        background: #DEDEE2;
         border-radius: 6px;
         width: 100%;
         height: 54px;
@@ -201,15 +198,16 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-top: 9px;
+        margin-top: 20px;
+        flex-direction: row-reverse;
     }
     .single-load-content .load-sidebar .sidebar-body-item .address {
-        margin-right: 33px;
+        margin-left: 16px;
+        width: 100%;
     }
     .single-load-content .load-sidebar .sidebar-body-item .address-item {
-        background: #EDEDED;
+        background: #DEDEE2;
         border-radius: 100px;
-        width: 113px;
         height: 15px;
         margin-bottom: 13px;
     }
@@ -217,13 +215,13 @@
         margin-bottom: 0;
     }
     .single-load-content .load-sidebar .sidebar-body-item .map {
-        background: #EDEDEF;
+        background: #DEDEE2;
         border-radius: 6px;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 102px;
-        height: 88px;
+        min-width: 44px;
+        height: 44px;
     }
     .single-load-content .load-sidebar-mobile {
         display: none;
@@ -239,7 +237,7 @@
         margin-bottom: 0;
     }
     .single-load-content .top-block-content-mobile .block-item {
-        background: #EDEDED;
+        background: #DEDEE2;
         height: 15px;
         border-radius: 100px;
         width: 127px;
@@ -248,13 +246,13 @@
     .single-load-content .top-block-content-mobile .circle-item {
         min-width: 30px;
         height: 30px;
-        background: #EDEDED;
+        background: #DEDEE2;
         border-radius: 50%;
     }
     .single-load-content .top-block-content-mobile .title {
         width: 174px;
         height: 21px;
-        background: #EDEDED;
+        background: #DEDEE2;
         border-radius: 100px;
         margin: 0 15px 16px 15px;
     }
@@ -290,14 +288,14 @@
         width: 130px;
         height: 15px;
         border-radius: 100px;
-        background: #EDEDED;
+        background: #DEDEE2;
         margin-right: 25px;
     }
     .single-load-content .bottom-block-mobile .circle-item {
         width: 17px;
         height: 17px;
         border-radius: 50%;
-        background: #EDEDED;
+        background: #DEDEE2;
     }
 
     @media(max-width: 1210px) {
@@ -385,7 +383,7 @@
             width: 165px;
             height: 15px;
             border-radius: 100px;
-            background: #EDEDED;
+            background: #DEDEE2;
             margin-top: 32px;
         }
     }

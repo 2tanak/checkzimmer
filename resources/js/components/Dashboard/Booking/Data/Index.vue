@@ -1,6 +1,19 @@
 <template>
     <section class="header-dashboard">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
         <h1>{{ $t('Imported data') }} {{ $t('Booking') }}.{{ $t('Com') }}</h1>
+            <div style="display:flex;align-items:center;">
+                <b-overlay :show="citiesLoader" rounded opacity="0.6" spinner-small spinner-variant="danger" class="d-inline-block">
+                    <b-button type="submit" variant="success" class="mr-2" @click.prevent="loadCities">{{ $t('Upload cities') }}</b-button>
+                </b-overlay>
+                <b-overlay :show="typesLoader" rounded opacity="0.6" spinner-small spinner-variant="danger" class="d-inline-block">
+                    <b-button style="margin-right:0.5rem;" variant="light" @click.prevent="loadTypes">{{ $t('Load types') }}</b-button>
+                </b-overlay>
+                <b-overlay :show="featuresLoader" rounded opacity="0.6" spinner-small spinner-variant="danger" class="d-inline-block float-right">
+                    <b-button style="margin-right:0 !important;" variant="info" @click.prevent="loadFeatures">{{ $t('Download amenities') }}</b-button>
+                </b-overlay>
+            </div>
+        </div>
         <div class="row mt-4">
             <div class="col-md-12 grid-margin">
                 <div class="card">
