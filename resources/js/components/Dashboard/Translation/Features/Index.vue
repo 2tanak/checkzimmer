@@ -23,19 +23,19 @@
                 <div class="card">
                     <div class="card-body strings-table">
                         <b-form-group>
-                            <b-table striped hover responsive :fields="fields" :items="stringList" :busy="loading">
+                            <b-table striped hover responsive :fields="fields" :items="featuresLoaded" :busy="loading">
                                 <template v-slot:cell(id)="data">
-                                    {{ data.item.id }}
+                                    {{ data.item.data.id }}
                                 </template>
                                 <template v-slot:cell(original)="data">
-                                    {{ data.item.original }}
+                                    <img :src="data.item.data.picture" /> {{ data.item.data.name }}
                                 </template>
                                 <template v-slot:cell(translation)="data">
-                                    <b-form-input v-model="strings[data.item.original]"
-                                                  :placeholder="data.item.translation"
-                                                  style="width: 200px"
-                                                  @input="dataInput"
-                                    />
+                                    <b-form-input
+                                        v-model="strings[data.item.ind]"
+                                        :placeholder="data.item.name"
+                                        style="width: 200px"
+                                        @input="dataInput(data.item)"   />
                                 </template>
                                 <template #table-busy>
                                     <div class="text-center text-danger my-2">
@@ -58,13 +58,16 @@ import ApiRequest from "../../../API/ApiRequest";
 
 let LanguageRequest = ApiRequest('languages');
 let languages = new LanguageRequest;
+let featureRequest = ApiRequest('features');
+let features = new featureRequest;
 
 export default {
     name: "Index",
     data() {
         return {
             languages: [],
-            language_active: 0,
+            language_active: '',
+            features: [],
             strings: [],
             search: '',
             timer: null,
@@ -77,44 +80,80 @@ export default {
             .then(resp => {
                 this.languages = resp.data;
                 this.language_active = this.languages[0].split('.')[0];
-                this.langChanged();
+                features.all()
+                    .then(resp => {
+                        this.features = resp.data;
+                        this.langChanged();
+                    })
+                this.loading = false;
             })
     },
     methods: {
         searchLine() {},
-        dataInput() {
+        dataInput(item) {
             if (this.timer) {
                 clearTimeout(this.timer);
             }
+
+            let feature = this.features[item.ind];
+            let la = this.language_active;
+
+            let translation = feature.options.find( itm => itm.key === 'lang-' + la)
+            let translationIndex = feature.options.findIndex( itm => itm.key === 'lang-' + la)
+            if (translation) {
+                this.features[item.ind].options[translationIndex].value = this.strings[item.ind]
+                translation.value = this.strings[item.ind]
+            } else {
+                translation = {
+                    id: null,
+                    key: 'lang-' + la,
+                    parent: item.data.id,
+                    type: 'feature',
+                    value: this.strings[item.ind]
+                };
+                this.features[item.ind].options.push(translation)
+            }
+
             this.timer = setTimeout( () => {
-                languages.update(this.language_active, { data: this.strings });
+                features.request('language', translation, 'post');
             }, 2000)
+
         },
         langChanged() {
-            this.loading = true;
-            languages.get(this.language_active)
-                .then( respLang => {
-                    this.strings = respLang.data;
-                    this.loading = false;
-                })
+            let la = this.language_active;
+
+            this.strings = [];
+            this.features.forEach( item => {
+                let opt = item.options.find( itm => itm.key === 'lang-' + la);
+                if (opt) {
+                    this.strings.push( opt.value )
+                } else {
+                    this.strings.push( '' )
+                }
+            });
         }
+
     },
     computed: {
         langList() {
             return this.languages.map( item => item.split('.')[0] );
         },
-        stringList() {
-            let res = [];
-            let i = 0;
-            for (let key in this.strings) {
-                res.push({id: i+1, original: key, translation: this.strings[key]})
-                i++;
-            }
+        featuresLoaded() {
             let lowerSearch = this.search.toLowerCase();
-            return res.filter(
-                item =>
-                    item.original.toLowerCase().includes(lowerSearch) ||
-                    item.translation.toLowerCase().includes(lowerSearch));
+            if (!this.language_active) {
+                return []
+            }
+            return this.features.map(
+                (item, ind) => {
+                    return {
+                        ind: ind,
+                        data: item
+                    }
+                }
+            ).filter(
+                item => (this.strings[item.ind] && this.strings[item.ind].toLowerCase().includes(lowerSearch) )||
+                    item.data.name.toLowerCase().includes(lowerSearch)
+            );
         }
     }
 }

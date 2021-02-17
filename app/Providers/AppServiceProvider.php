@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
             return $geocoder;
         });
         $this->app->singleton('locale', function ($app) {
-            return new  LocaleHelper;
+            return new LocaleHelper;
         });
     }
 
