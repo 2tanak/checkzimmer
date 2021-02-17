@@ -29,7 +29,8 @@
                         <transition name="fade" appear>
                         <div class="property-container" :style="{position: 'relative', opacity: loading ? 0:1, position: loading ? 'absolute':'relative'}">
                             <div class="property-item">
-                                <PropertyListItem v-for="(item, index) in property" :key="'id-'+item.id" :item="item" :active="activeItems[index]"  @favsUpdated="updateFavCount"/>
+
+                                <PropertyListItem v-for="(item, index) in property" :key="'prop-id-'+item.id" :item="item" :active="activeItems[index]" :index="index" :ref="'listItem' + item.id" @click.native="goToMap(item, index)" @favsUpdated="updateFavCount"/>
 
                                 <div class="load-block-content first-load-block-content">
                                     <div class="load-block-item">
@@ -543,6 +544,8 @@
 import ApiRequest from "../API/ApiRequest";
 import PropertyListItem from "./PropertyListItem";
 
+import styles from '../Data/mapStyle';
+
 let PropertyRequest = ApiRequest('property')
 let properties = new PropertyRequest;
 
@@ -559,6 +562,7 @@ export default{
     },
     data() {
         return {
+            map: null,
             loading: true,
             endoflist: false,
             property: [],
@@ -579,13 +583,17 @@ export default{
             jQuery(this).removeClass('error');
             jQuery(this).closest('.input-block').find('.error-text').removeClass('active')
         });
+        jQuery(document).on('click', '.popup-container .index', (e) => {
+            this.selectMapMarker(e);
+        })
 
         properties.byPage(1)
             .then( resp => {
-                that.property = resp.data.objects.data;
+                this.property = resp.data.objects.data;
                 this.property.forEach((item,index) => this.activeItems[index] = false);
 
-                that.loading = false;
+                this.loading = false;
+
                 if (resp.data.current_page < resp.data.objects.last_page) {
                     that.additional_pages = true;
                 } else {
@@ -593,10 +601,9 @@ export default{
                 }
                 that.favoritesDisplay();
                 that.foundTotal();
+                that.initMap();
             })
-        setTimeout(function() {
-            //console.log(that.$auth.user());
-        }, 1000);
+
         jQuery('body').on('click', 'a.collapse-circle', function(e) {
             e.preventDefault();
             var parent = jQuery(this).closest('.property-card');
@@ -608,272 +615,66 @@ export default{
             jQuery(this).toggleClass('active');
         });
 
-        function initMap() {
+    },
+    methods: {
+        initMap() {
             if (typeof google === 'undefined' || !document.getElementById('map')) {
-                setTimeout( () => { initMap() }, 100 )
+                setTimeout( () => { this.initMap() }, 100 );
                 return;
             }
 
-            let styles = [
-                {
-                    "featureType": "administrative.province",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "administrative.locality",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                            "color": "#a8aeb6"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "administrative.neighborhood",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                            "color": "#a8aeb6"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "administrative.land_parcel",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                            "color": "#a8aeb6"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi.attraction",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi.business",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi.government",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi.medical",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi.park",
-                    "elementType": "geometry.fill",
-                    "stylers": [
-                        {
-                            "color": "#c2e5a7"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi.place_of_worship",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi.school",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi.sports_complex",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                            "color": "#a8aeb6"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "geometry.fill",
-                    "stylers": [
-                        {
-                            "color": "#e1e4e6"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "geometry.stroke",
-                    "stylers": [
-                        {
-                            "color": "#c4cfd6"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "labels.icon",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "transit.station.airport",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "transit.station.bus",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "transit.station.rail",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                }
-            ];
-            let map = new google.maps.Map(document.getElementById('map'), {
+            this.map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: 51.340654, lng: 12.375411},
                 disableDefaultUI: true,
                 zoom: 15,
                 styles: styles
             });
-            map.setOptions({styles: styles});
 
-            function createInfoBlock(text1, id) {
-                var newDiv = document.createElement("div");
-                newDiv.setAttribute("id", "object_modal");
-                newDiv.setAttribute("data-id", id);
-                var contentString = '<span class="index">'+ text1 +'</span>';
-                newDiv.innerHTML = contentString;
-                newDiv.addEventListener("click", this.selectMapMarker);
-                return newDiv;
-            }
-
-            // function
-
-            // popup.setMap(map);
-
-            properties.request('initMap')
-                .then( resp => {
-                    var myTrip = resp.data.coords;
-
-                    for (var i = 0; i < myTrip.length; i++) {
-                        var popup = new Popup(
-                            new google.maps.LatLng(myTrip[i].lat, myTrip[i].lng),
-                            that.createInfoBlock(myTrip[i].name,myTrip[i].id)
-                        );
-                        popup.setMap(map);
-
-                      // var marker = new google.maps.Marker({
-                      // position: new google.maps.LatLng(myTrip[i].lat, myTrip[i].lng),
-                      // map: map
-                      // });
-                      // infowindow.open(map, marker);
-
-                    }
-                    // popup.setMap(map);
-
-                    // marker.setMap(map);
+            this.map.setOptions({styles: styles});
+            this.property.forEach( item => {
+                var popup = new Popup(
+                    new google.maps.LatLng(parseFloat(item.lat), parseFloat(item.lng)),
+                    this.createInfoBlock(item.name, item.id)
+                )
+                popup.setMap(this.map);
             })
-        }
-
-        initMap();
-    },
-    created() {
-        if (this.$route.query.search) {
-            this.search.address = this.$route.query.search;
-            this.submitForm();
-        }
-    },
-    updated: function () {
-
-    },
-    methods: {
-        createInfoBlock(text1, id) {
+        },
+        goToMap(item, index) {
+            this.setActiveProperty(index);
+            this.map.setCenter({ lat: parseFloat(item.lat), lng: parseFloat(item.lng)});
+        },
+        createInfoBlock(text, id) {
             var newDiv = document.createElement("div");
             newDiv.setAttribute("id", "object_modal");
             newDiv.setAttribute("data-id", id);
-            var contentString = '<span class="index">'+ text1 +'</span>';
-            newDiv.innerHTML = contentString;
+            newDiv.innerHTML = '<span class="index">'+ text +'</span>';
             newDiv.addEventListener("click", this.selectMapMarker);
             return newDiv;
         },
-        selectMapMarker() {
-            let $this = event.target;
-            if($($this).hasClass('index')){
-                $this = $($this).parent();
+        selectMapMarker(e) {
+            let elem = e.target;
+            if (jQuery(elem).hasClass('index')){
+                elem = jQuery(elem).parent();
             }
-            let id = $($this).attr('data-id');
+            let id = parseInt(jQuery(elem).attr('data-id'));
 
-            let index = this.property.findIndex(it=>it.id == id );
-            // this.property[index].isActiveInMap = true;
+            let index = this.property.findIndex( item => item.id === id );
 
-            this.activeItems[index] = true;
-            // that.property.map((it, idx) => that.property[idx].isActiveInMap = true);
-            // that.property.map((it, idx) => (it.id == id) ? it.isActiveInMap = 'select-property-card' : it.isActiveInMap = '');
-            this.checkIsActivemap();
-            // this.submitForm();
-            console.log('id');
-            console.log(id);
+            this.setActiveProperty(index);
+            this.scrollActiveMap(id);
+
         },
-        checkIsActivemap(){
-            console.log('!!!!!!!!!!!');
+        setActiveProperty(index) {
+            this.activeItems.forEach((item, ind) => {
+                Vue.set(this.activeItems, ind, false);
+            })
+            Vue.set(this.activeItems, index, true);
+
+        },
+        scrollActiveMap(id) {
+            let elem = document.getElementById('property-'+id);
+            let rect = elem.getBoundingClientRect();
+            jQuery('html, body').animate({scrollTop: window.scrollY + rect.top - 200}, 200);
         },
         login(e) {
             console.log(this.$auth);

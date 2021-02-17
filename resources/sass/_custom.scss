@@ -1205,7 +1205,8 @@ h1.list-title {
 .property.not-map .property-card:last-of-type {
     border-radius: 0 0 12px 12px;
 }
-.property-card:hover {
+.property-card:hover,
+.property-card.active {
     background-color: #f8f8f8;
     transition: all 0.4s ease;
 }

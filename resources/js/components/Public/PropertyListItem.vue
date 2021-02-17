@@ -1,5 +1,5 @@
 <template>
-    <div :class="{'property-card':true, 'active' : active}" >
+    <div :class="{'property-card':true, 'active' : active}" :id="'property-'+item.id">
         <div class="property-card-container">
             <div style="position:relative;" class="no-photo-block">
                 <div class="no-photo" v-if="noPhotos">
