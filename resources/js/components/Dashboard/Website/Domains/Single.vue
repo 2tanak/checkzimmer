@@ -93,8 +93,6 @@ export default {
             console.log(this.domain);
             subdomains.update(this.$route.params.domain, this.domain)
                 .then(resp => {
-                    console.log('***');
-                    console.log(this.domain);
                     if (this.domain.subdomain !== this.$route.params.domain) {
                         this.$router.push( {name: 'website-domains-single', params: {domain: this.domain.subdomain}} )
                     }
