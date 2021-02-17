@@ -243,7 +243,7 @@ class PropertyController extends Controller
             if (!$item['id'] && $item['value'] != '') {
                 $option = Option::updateOrCreate($item);
                 $result[$key] = $option;
-            }elseif($item['id'] && $item['value'] == ''){
+            } elseif ($item['id'] && $item['value'] == '') {
                 $option = Option::find($item['id']);
                 $option->delete();
             }
