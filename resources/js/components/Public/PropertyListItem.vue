@@ -1,5 +1,5 @@
 <template>
-    <div class="property-card">
+    <div :class="{'property-card':true, 'active' : active}" :id="'property-'+item.id">
         <div class="property-card-container">
             <div style="position:relative;" class="no-photo-block">
                 <div class="no-photo" v-if="noPhotos">
@@ -181,7 +181,7 @@ import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 export default {
     name: "PropertyListItem",
-    props: [ 'item' ],
+    props: [ 'item', 'active' ],
     components: { VueSlickCarousel },
     data() {
         return {

@@ -54,15 +54,15 @@
         var map = new google.maps.Map(mapCanvas ,mapOptions);
         var map2 = new google.maps.Map(mapCanvas2 ,mapOptions2);
 
-        var contentString = '<div id="content">'
-        '<span class="index">{{$hotel->city}}</span>'+
+        var contentString = '<div id="content">'+
+        '<span class="index">777777777</span>'+
         '<span>&nbsp;</span>'+
-        '<span class="town">{{$hotel->zip}}</span>'+
+        '<span class="town">55555555</span>'+
         '</div>';
         var contentString2 = '<div id="content">'+
-            '<span class="index">{{$hotel->city}}</span>'+
+            '<span class="index">11111111</span>'+
             '<span>&nbsp;</span>'+
-            '<span class="town">{{$hotel->zip}}</span>'+
+            '<span class="town">22222</span>'+
             '</div>';
         var infowindow = new google.maps.InfoWindow({
             content: contentString

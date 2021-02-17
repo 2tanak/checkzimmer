@@ -23,15 +23,16 @@ class Room extends Model
         return array_search($name, $facilities) !== false;
     }
 
-    static function getKitchenType($room)
+    static function getKitchenType($room_facilities, $hotel_facilities)
     {
-        switch ($room['kitchen']) {
-            case 'kitchenette':
-                return 'kitchenette';
-            case 'shared':
-                return 'shared';
-            case 'single':
-                return 'single';
+        if (self::hasFeature('Kitchenette', $room_facilities)){
+            return 'kitchenette';
+        }
+        if (Property::hasFeature('Shared kitchen', $hotel_facilities)){
+            return 'shared';
+        }
+        if (self::hasFeature('Kitchen', $room_facilities)){
+            return 'single';
         }
         return 'none';
     }
@@ -68,23 +69,23 @@ class Room extends Model
         return $this->hasMany(Option::class, 'parent')->where('type', 'room');
     }
 
-    public static function getKitchenTypeText($room)
+    public function getKitchenTypeText()
     {
-        switch ($room['kitchen'])
+        switch ($this->kitchen)
         {
             case 'kitchenette':
             case 'single':
-                return __('private');
+                return 'своя';
             case 'shared':
-                return __('shared');
+                return 'совместная';
             default:
-                return __('none');
+                return 'none';
         }
     }
 
-    public static function getKitchenLabelColor($room)
+    public function getKitchenLabelColor()
     {
-        $type = $room['kitchen'];
+        $type = $this->kitchen;
         if ($type == 'kitchenette' || $type == 'single'){
             return self::PRIVATE_COLOR;
         } elseif ($type == 'shared') {
@@ -93,21 +94,21 @@ class Room extends Model
         return self::NONE_COLOR;
     }
 
-    public static function getShowerTypeText($room)
+    public function getShowerTypeText()
     {
-        switch ($room['shower'])
+        switch ($this->shower)
         {
             case 'single':
-                return __('private');
+                return 'свой';
             case 'shared':
-                return __('shared');
+                return 'совместный';
         }
-        return __('none');
+        return 'none';
     }
 
-    public static function getShowerLabelColor($room)
+    public function getShowerLabelColor()
     {
-        switch ($room['shower'])
+        switch ($this->shower)
         {
             case 'single':
                 return self::PRIVATE_COLOR;
@@ -117,21 +118,21 @@ class Room extends Model
         return self::NONE_COLOR;
     }
 
-    public static function getBedroomTypeText($room)
+    public function getBedroomTypeText()
     {
-        switch ($room['bed'])
+        switch ($this->bed)
         {
             case 'single':
-                return __('single');
+                return 'одноместная';
             case 'double':
-                return __('double');
+                return 'двухместная';
         }
-        return __('unknown');
+        return 'неизвестно';
     }
 
-    static public function getBedroomLabelColor($item)
+    public function getBedroomLabelColor()
     {
-        switch ($item['bed'])
+        switch ($this->bed)
         {
             case 'single':
                 return self::PRIVATE_COLOR;
@@ -144,11 +145,11 @@ class Room extends Model
     public function getPersonsText()
     {
         if ($this->person == 1){
-            return __('single');
+            return 'одноместная';
         } elseif ($this->person == 2){
-            return __('double');
+            return 'двухместная';
         }
-        return __('many places');
+        return 'на много мест';
     }
 
     public function updateRelations(array $data)
@@ -175,9 +176,5 @@ class Room extends Model
                 }, $relationData);
             }
         }
-    }
-    public static function getName ($persons) {
-        $roomNames = ['', 'Single room', 'Double room', 'Triple room', 'Quadruple', 'Quintuple', 'Six-seater', 'Seven-seater', 'Eight-seater', 'Nine-seater', 'Ten-seater' ];
-        return $roomNames[$persons] ?? 0;
     }
 }
