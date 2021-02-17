@@ -1205,7 +1205,8 @@ h1.list-title {
 .property.not-map .property-card:last-of-type {
     border-radius: 0 0 12px 12px;
 }
-.property-card:hover {
+.property-card:hover,
+.property-card.active {
     background-color: #f8f8f8;
     transition: all 0.4s ease;
 }
@@ -1224,7 +1225,7 @@ h1.list-title {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 156px;
+    min-height: 156px;
     width: 100%;
 }
 .property-card a.title {
@@ -1415,6 +1416,15 @@ h1.list-title {
     text-overflow: ellipsis;
     overflow: hidden;
     min-width: 155px;
+}
+.property-card .all-types-content .type .quantity-block {
+    width: 53px;
+}
+.property-card .all-types-content .type .personen-block {
+    width: 92px;
+}
+.property-card .type .price-block {
+    width: 84px;
 }
 .property-card .night {
     padding-right: 7px;
@@ -2770,6 +2780,18 @@ header.height-menu .mobile-menu {
     }
     .property-card .table-container {
         min-width: 300px;
+    }
+    .property-card .all-types-content .type .quantity-block {
+        width: 51px;
+    }
+    .property-card .all-types-content .type .personen-block {
+        width: 88px;
+    }
+    .property-card .type .price-block {
+        width: 84px;
+    }
+    .property-card .all-types-content .type .filling-block {
+        width: 52px;
     }
 }
 @media (max-width: 720px) {
@@ -5579,6 +5601,7 @@ header.height-menu .mobile-menu {
     font-size: 13px;
     line-height: 140%;
     color: #9B9DA6;
+    cursor: pointer;
 }
 .comfort a.comfort-collapse-link {
     font-weight: 400;
