@@ -4,7 +4,7 @@
 
     @include('css.loader-main')
     <div class="background-image-block">
-        <a href="https://web.whatsapp.com/send?phone=4934112342223" class="write-whatsapp">
+        <a href="https://web.whatsapp.com/send?phone={{ __($options['website_phone_watsapp'] ?? '' ) }}" class="write-whatsapp">
             <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0)" filter="url(#filter0_d)">
                     <path d="M17.1 2.87417C15.2 1.0375 12.7 0 10.0375 0C2.39583 0 -2.4025 8.27917 1.41333 14.865L0 20L5.27917 18.6233C7.57917 19.8658 9.46333 19.7558 10.0425 19.8292C18.9033 19.8292 23.3142 9.10917 17.0875 2.90667L17.1 2.87417Z" fill="white"/>
@@ -28,16 +28,17 @@
             <span>{{ __('Write to WhatsApp') }}</span>
         </a>
         <h1 class="list-title">{{ __($domain->tagline()) }}</h1>
+
         <div class="container">
             <div class="sample-block">
                 <div class="input-block sample-block-item">
-                    <label for="text">{{ __('workplace address') }}:</label>
+                    <label for="text">{{ __($options['label_input'] ?? '' ) }}:</label>
                     <div class="input-container">
-                        <input  v-model="search.address" id="text" type="text" placeholder="{{ __('Example') }}: 04158 {{ __('Leipzig') }}">
+                        <input  v-model="search.address" id="text" type="text" placeholder="{{  __($options['placeholder'] ?? '' ) }}">
                     </div>
                 </div>
                 <div class="distance-block select-block">
-                    <label for="distance-select">{{ __('distance') }}:</label>
+                    <label for="distance-select">{{ __($options['label_distance'] ?? '' ) }}:</label>
                     <div class="select-container">
                         <select v-model="search.km" name="distance" id="distance-select" class="distance">
                             <option value="10">10 {{ __('km') }}.</option>
@@ -48,8 +49,8 @@
                     </div>
                 </div>
                 <div class="number-personse-block select-block">
-                    <label class="desctop-label" for="number-personse">{{ __('Num people') }}:</label>
-                    <label class="mobile-label" for="number-personse">{{ __('Num ppl.') }}:</label>
+                    <label class="desctop-label" for="number-personse">{{ __($options['label_people'] ?? '' ) }}:</label>
+                    <label class="mobile-label" for="number-personse">{{ __($options['label_people'] ?? '' ) }}:</label>
                     <div class="select-container">
                         <select v-model="search.people" name="distance" id="number-personse" class="number-personse">
                             <option value="1">1 {{ __('ppl') }}.</option>
@@ -59,7 +60,7 @@
                         </select>
                     </div>
                 </div>
-                <a class="find-housing" href="#" @click.prevent="submitForm">{{ __('Find housing') }}</a>
+                <a class="find-housing" href="#" @click.prevent="submitForm">{{ __($options['text_button'] ?? '' ) }}</a>
             </div>
             <div class="checkbox-form-block">
                 <div class="checkbox-item single-rooms-checkbox">

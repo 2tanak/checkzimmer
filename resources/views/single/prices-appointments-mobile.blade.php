@@ -1,9 +1,9 @@
 <div class="mobile-price-situation">
     <h2>{{ __('Prices and furnishings') }}</h2>
     <div>
-        @foreach ($hotel->getRoomTypes() as $roomType)
+        @foreach ($hotel->getRoomTypes() as $key => $roomType)
             <div class="position-collapse">
-                <div class="visible-part" type="button" data-toggle="collapse" data-target="#position-collapse" aria-expanded="false" aria-controls="position-collapse">
+                <div class="visible-part" type="button" data-toggle="collapse" data-target="#position-collapse-{{ $key }}" aria-expanded="false" aria-controls="position-collapse">
                     <div class="top-part">
                         <div class="name">
                             <img src="/svg/i-room-filled.svg" alt="house">
@@ -26,11 +26,11 @@
                     </div>
                 </div>
                 <div>
-                    @foreach ($hotel->getRoomsByType($roomType->id) as $key => $room)
+                    @foreach ($hotel->getRoomsByType($roomType->id) as $key2 => $room)
                         @if ($room['price'] == 0)
                             @continue
                         @endif
-                        <div class="collapse position-content" id="position-collapse">
+                        <div class="collapse position-content" id="position-collapse-{{ $key2 }}">
                             {{-- <div class="bg-color">
                                  <div class="position-line">
                                      <div class="position-line-title">Душ</div>

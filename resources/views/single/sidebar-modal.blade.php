@@ -1,4 +1,5 @@
 <div class="sidebar mobile-sidebar">
+    @if ($hotel->getCurrentOption('free') == 1)
     <div class="free-now">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0)">
@@ -11,8 +12,9 @@
                 </clipPath>
             </defs>
         </svg>
-        <span>Свободен сейчас</span>
+        <span>{{ __('Free now') }}</span>
     </div>
+    @endif
     <div class="sidebar-top">
         <div class="sidebar-top-block roominess">
             <img src="/svg/i-people.svg" alt="alt">
@@ -72,22 +74,22 @@
                 <div class="address">
                     <div class="hotel-name">{{$hotel->name}}</div>
                     <div class="name-surname">
-                        @if (($hotel->getCurrentOption('landlordName') != null) && ($hotel->getCurrentOption('landlordHideName') != true))
+                        @if (($hotel->getCurrentOption('landlordName') != null) && ($hotel->getCurrentOption('landlordHideName') != 1))
                             {{ $hotel->getCurrentOption('landlordName') }}
                         @endif
                     </div>
-                    @if ($hotel->getCurrentOption('hideAddress') == '0')
+                    @if ($hotel->getCurrentOption('hideAddress') != '1')
                         <div class="hotel-adress">{{$hotel->address}}</div>
                     @endif
                     <div class="zip-city" style="white-space: nowrap;">
-                        @if ($hotel->getCurrentOption('hideZip') == '0')
+                        @if ($hotel->getCurrentOption('hideZip') != '1')
                             {{ $hotel->zip }}
                         @endif
                         {{ $hotel->city }}
                     </div>
                 </div>
             <div class="map-container">
-                <a class="map-picture map-mobile-picture" href="#map-mobile-block">
+                <a class="map-picture map-mobile-picture" href="#object-description"">
                     <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 -5.1811V-2.04882L39.1139 41L81 -6.30551C80.5285 -8.3937 78.6424 -10 76.442 -10H5.71513C3.12181 -10 1 -7.8315 1 -5.1811Z" fill="#E4EBF3"/>
                         <path d="M1 27L6 19.825L1 13V27Z" fill="#E4EBF3"/>

@@ -30,8 +30,8 @@
     </div>
 
     <div class="position">
-        @foreach ($hotel->getRoomTypes() as $roomType)
-        <div class="top-bloc-collapse" data-toggle="collapse" data-target="#position2-collapse" role="button" aria-expanded="false" aria-controls="position2-collapse">
+        @foreach ($hotel->getRoomTypes() as $key => $roomType)
+        <div class="top-bloc-collapse" data-toggle="collapse" data-target="#position2-collapse-{{ $key }}" role="button" aria-expanded="false" aria-controls="position2-collapse">
             <div class="row">
 
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6" style="padding-right:2px !important;">
@@ -74,11 +74,11 @@
                 </div>
             </div>
 
-            @foreach ($hotel->getRoomsByType($roomType->id) as $key => $room)
+            @foreach ($hotel->getRoomsByType($roomType->id) as $key2 => $room)
                 @if ($room['price'] == 0)
                     @continue
                 @endif
-                <div class="collapse show" id="position2-collapse">
+                <div class="collapse show" id="position2-collapse-{{ $key }}">
                     <div class="collapse-content-line">
                         <div class="row">
                             <div class="collapse-left-block col-xl-6 col-lg-6 col-md-6 col-sm-6">

@@ -27,13 +27,16 @@ class PropertyController extends Controller
 
     public function index(PropertyListRequest $request)
     {
+        $user = Auth::user();
         $subdomain = Domain::getSubdomain();
 
         $paginate = $request->query('page');
         $noCity = $request->query('nocity');
 
-        $objects = Property::orderBy('ord')->where(function ($query) {
-            $query->whereNull('access')->orWhere('access', '');
+        $objects = Property::orderBy('ord')->where(function ($query) use ($user) {
+            if (!$user || $user->role != 'admin' && $user->role != 'manager') {
+                $query->whereNull('access')->orWhere('access', '');
+            }
         });
 
         if ($subdomain) {
@@ -236,10 +239,13 @@ class PropertyController extends Controller
                 $fields['rooms'][$roomKey]['options'][$optionKey]['value'] = $option['value'] ?? '';
             }
         }
-
-        foreach($fields['options'] as $item) {
-            if (!$item['id']) {
-                $option = Option::create($item);
+        foreach($fields['options'] as $key => $item) {
+            if (!$item['id'] && $item['value'] != '') {
+                $option = Option::updateOrCreate($item);
+                $result[$key] = $option;
+            } elseif ($item['id'] && $item['value'] == '') {
+                $option = Option::find($item['id']);
+                $option->delete();
             }
         }
         $property->updateRelations($fields);

@@ -1205,7 +1205,8 @@ h1.list-title {
 .property.not-map .property-card:last-of-type {
     border-radius: 0 0 12px 12px;
 }
-.property-card:hover {
+.property-card:hover,
+.property-card.active {
     background-color: #f8f8f8;
     transition: all 0.4s ease;
 }
@@ -1224,8 +1225,9 @@ h1.list-title {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 156px;
+    min-height: 156px;
     width: 100%;
+    max-height: 171px;
 }
 .property-card a.title {
     margin-bottom: 9px;
@@ -1371,8 +1373,40 @@ h1.list-title {
     padding-bottom: 9px;
     padding-right: 20px;
 }
-.property-card .type th.title:first-of-type {
-    padding-left: 24px;
+.property-card .type .title:first-of-type {
+    padding-left: 19px;
+    min-width: 155px;
+    max-width: 155px;
+}
+.property-card .type .title:nth-of-type(2) {
+    min-width: 70px;
+    max-width: 70px;
+    text-align: center;
+}
+.property-card .type .title:nth-of-type(3) {
+    min-width: 86px;
+    max-width: 86px;
+    text-align: center;
+}
+.property-card .type .title:nth-of-type(4) {
+    min-width: 88px;
+    max-width: 88px;
+    text-align: left;
+}
+.property-card .type .quantity-block {
+    min-width: 70px;
+    max-width: 70px;
+    text-align: center;
+}
+.property-card .type .personen-block {
+    min-width: 86px;
+    max-width: 86px;
+    text-align: center;
+}
+.property-card .type .price-block {
+    min-width: 88px;
+    max-width: 88px;
+    text-align: left;
 }
 .property-card .type .type-block  {
     font-weight: 400;
@@ -1381,6 +1415,7 @@ h1.list-title {
     color: #333646;
     white-space: nowrap;
     text-align: center;
+    padding-bottom: 2px;
 }
 .property-card .type .type-block.price-block {
     text-align: left;
@@ -1415,6 +1450,12 @@ h1.list-title {
     text-overflow: ellipsis;
     overflow: hidden;
     min-width: 155px;
+}
+.property-card .type .heigh-tr {
+   display: none;
+}
+.property-card .type .heigh-tr.active {
+    display: table-row;
 }
 .property-card .night {
     padding-right: 7px;
@@ -1686,6 +1727,20 @@ h1.list-title {
     align-items: center;
     justify-content: space-between;
 }
+.property-card .type .thead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.property-card .type .visible-part {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.property-card .type .filling-block {
+    display: flex;
+    align-items: center;
+}
 .list-content .property.not-map .property-card.collapse-item .data a.title {
     margin-right: 46px;
     max-width: 556px;
@@ -1741,6 +1796,12 @@ h1.list-title {
 }
 .list-content .property.show-map .property-card {
     cursor: pointer;
+}
+.list-content .property.show-map .property-card.collapse-item .no-photo-block {
+    display: none;
+}
+.list-content .property.show-map .property-card.collapse-item .main-small-slider {
+    display: none;
 }
 .list-content .property.show-map .property-card .type {
     display: none;
@@ -2465,6 +2526,7 @@ header.height-menu .mobile-menu {
     }
     .property-card .type {
         margin-right: 0;
+        width: 330px;
     }
     .property-card .type .type-item span {
         display: none;
@@ -2523,8 +2585,15 @@ header.height-menu .mobile-menu {
     .property-card .type .type-block {
         text-align: left;
     }
-    .property-card .type .title:not(:last-of-type) {
+    .property-card .type .title:first-of-type {
         text-align: center;
+        padding-left: 0;
+        min-width: 70px;
+        max-width: 70px;
+    }
+    .property-card .type .type-block.filling-block {
+        max-width: 70px;
+        min-width: 70px;
     }
 }
 @media (max-width: 1020px) {
@@ -2770,6 +2839,18 @@ header.height-menu .mobile-menu {
     }
     .property-card .table-container {
         min-width: 300px;
+    }
+    .property-card .all-types-content .type .quantity-block {
+        width: 51px;
+    }
+    .property-card .all-types-content .type .personen-block {
+        width: 88px;
+    }
+    .property-card .type .price-block {
+        width: 84px;
+    }
+    .property-card .all-types-content .type .filling-block {
+        width: 52px;
     }
 }
 @media (max-width: 720px) {
@@ -5579,6 +5660,7 @@ header.height-menu .mobile-menu {
     font-size: 13px;
     line-height: 140%;
     color: #9B9DA6;
+    cursor: pointer;
 }
 .comfort a.comfort-collapse-link {
     font-weight: 400;

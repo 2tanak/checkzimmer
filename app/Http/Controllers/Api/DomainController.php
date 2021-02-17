@@ -88,16 +88,7 @@ class DomainController extends Controller
     {
         //
         $domain = Domain::where('subdomain', $id)->first();
-        $option = Option::where('type', 'domain')->where('parent', $domain->id)->where('key', 'latlng')->first();
-        $seo_title = Option::where('type', 'domain')->where('parent', $domain->id)->where('key', 'seo_title')->first();
-        $seo_descr = Option::where('type', 'domain')->where('parent', $domain->id)->where('key', 'seo_description')->first();
-        $tagline = Option::where('type', 'domain')->where('parent', $domain->id)->where('key', 'tagline')->first();
-        $domain->geo = $option;
-        $domain->options = [
-            'seo_title' => $seo_title->value ?? '',
-            'seo_description' => $seo_descr->value ?? '',
-            'tagline' => $tagline->value ?? '',
-        ];
+        $domain->options = Option::where('type', 'domain')->where('parent', $domain->id)->get()->pluck('value', 'key');
         return response()->json($domain);
     }
 
@@ -144,43 +135,20 @@ class DomainController extends Controller
             $geoOption = new Option($optionsData);
             $geoOption->save();
         }
-        $option = Option::where('type', 'domain')->where('parent', $domain->id)->where('key', 'seo_title')->first();
-        if (!$option) {
-            $option = new Option();
+        foreach ($data['options'] as $key => $value) {
+            $option = Option::where('type', 'domain')->where('parent', $domain->id)->where('key', $key)->first();
+            if (!$option) {
+                $option = new Option();
+            }
+            $optionsData = [
+                'key' => $key,
+                'parent' => $domain->id,
+                'type' => 'domain',
+                'value' => $value,
+            ];
+            $option->fill($optionsData);
+            $option->save();
         }
-        $optionsData = [
-            'key' => 'seo_title',
-            'parent' => $domain->id,
-            'type' => 'domain',
-            'value' => $data['options']['seo_title'],
-        ];
-        $option->fill($optionsData);
-        $option->save();
-        $option = Option::where('type', 'domain')->where('parent', $domain->id)->where('key', 'seo_description')->first();
-        if (!$option) {
-            $option = new Option();
-        }
-        $optionsData = [
-            'key' => 'seo_description',
-            'parent' => $domain->id,
-            'type' => 'domain',
-            'value' => $data['options']['seo_description'],
-        ];
-        $option->fill($optionsData);
-        $option->save();
-
-        $option = Option::where('type', 'domain')->where('parent', $domain->id)->where('key', 'tagline')->first();
-        if (!$option) {
-            $option = new Option();
-        }
-        $optionsData = [
-            'key' => 'tagline',
-            'parent' => $domain->id,
-            'type' => 'domain',
-            'value' => $data['options']['tagline'],
-        ];
-        $option->fill($optionsData);
-        $option->save();
 
         $domain->geo = $option;
 
