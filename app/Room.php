@@ -74,11 +74,11 @@ class Room extends Model
         {
             case 'kitchenette':
             case 'single':
-                return __('private');
+                return 'своя';
             case 'shared':
-                return __('shared');
+                return 'совместная';
             default:
-                return __('none');
+                return 'none';
         }
     }
 
@@ -98,11 +98,11 @@ class Room extends Model
         switch ($room['shower'])
         {
             case 'single':
-                return __('private');
+                return 'свой';
             case 'shared':
-                return __('shared');
+                return 'совместный';
         }
-        return __('none');
+        return 'none';
     }
 
     public static function getShowerLabelColor($room)
@@ -122,11 +122,11 @@ class Room extends Model
         switch ($room['bed'])
         {
             case 'single':
-                return __('single');
+                return 'одноместная';
             case 'double':
-                return __('double');
+                return 'двухместная';
         }
-        return __('unknown');
+        return 'неизвестно';
     }
 
     static public function getBedroomLabelColor($item)
@@ -144,11 +144,11 @@ class Room extends Model
     public function getPersonsText()
     {
         if ($this->person == 1){
-            return __('single');
+            return 'одноместная';
         } elseif ($this->person == 2){
-            return __('double');
+            return 'двухместная';
         }
-        return __('many places');
+        return 'на много мест';
     }
 
     public function updateRelations(array $data)
