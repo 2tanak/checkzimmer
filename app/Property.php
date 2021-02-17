@@ -172,8 +172,8 @@ class Property extends Model
     }
 
     public function featuresByCat($featureCategoryId) {
-        return array_filter($this->features->toArray(), function($item) use ($featureCategoryId) {
-            return $item['feature_category']['id'] == $featureCategoryId;
+        return array_filter($this->features->all(), function($item) use ($featureCategoryId) {
+            return $item->feature_category['id'] == $featureCategoryId;
         });
     }
 
@@ -334,6 +334,6 @@ class Property extends Model
     }
     public function getSEODescription() {
         $description = $this->getCurrentOption('seo_description');
-        return $this->handleTemplate($description['value'] ?? '');
+        return $this->handleTemplate($description ?? '');
     }
 }
