@@ -165,13 +165,14 @@
                 this.editFeature.feature_category.name = this.cats;
                 this.data.category.options = this.getCategories().concat(this.categoriesTemp);
                 this.editFeature.category = this.data.category.options.indexOf(this.editFeature.feature_category.name);
-                this.editFeature.category.active = 0;
             },
 
             featureEdit(data) {
                 this.editFeature = { ...data.item };
                 this.data.category.options = this.getCategories().concat(this.categoriesTemp);
                 this.editFeature.category = this.data.category.options.findIndex(item => item === this.editFeature.feature_category.name);
+                this.editFeature.inlist = this.editFeature.options.find( index => index.key === 'inlist');
+                this.editFeature.inlist = this.editFeature.inlist.value && this.editFeature.inlist.value !== '0';
             },
 
             featureDelete(data) {
