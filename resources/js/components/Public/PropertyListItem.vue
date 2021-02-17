@@ -13,7 +13,7 @@
                 </a>
                 <div v-if="isSuperhost" class="superhost-icon">{{ $t('Superhost') }}</div>
             </div>
-            <div style="position:relative;" v-if="getPhotos.length && sizedForSlider">
+            <div style="position:relative;" v-if="getPhotos.length && sizedForSlider" class="main-small-slider">
                 <VueSlickCarousel v-if="getPhotos.length && sizedForSlider" class="property-card-slider" :arrows="false" :dots="true"
                                   :slidesToShow="1" :slidesToScroll="1"
                                   ref="carousel" :infinite="true">
@@ -81,43 +81,35 @@
                 </div>
             </div>
             <div class="table-container">
-                <table class="type">
-                    <thead>
-                    <tr>
-                        <th class="title">{{ $t('Type') }}</th>
-                        <th class="title">{{ $t('Num') }}</th>
-                        <th class="title">{{ $t('Personen') }}</th>
-                        <th class="title">{{ $t('Price') }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="room in item.rooms.slice(0, 5)">
-                        <td class="type-block filling-block">
+                <div class="type">
+                    <div class="thead">
+                        <div class="title">{{ $t('Type') }}</div>
+                        <div class="title">{{ $t('Num') }}</div>
+                        <div class="title">{{ $t('Personen') }}</div>
+                        <div class="title">{{ $t('Price') }}</div>
+                    </div>
+                    <div v-for="room in item.rooms.slice(0, 5)" class="visible-part">
+                        <div class="type-block filling-block">
                             <img :src="getPersonsPic(room.person)" :alt="getPersonsText(room.person)">
                             <span> {{  room.room_type ? room.room_type.name : getRoomName(room) }} </span>
-                        </td>
-                        <td class="type-block quantity-block">{{ room.number }}</td>
-                        <td class="type-block personen-block">{{ room.person }}</td>
-                        <td class="type-block price-block"><b>{{ getMinRoomPrice(item, room) }}&#8364;</b>/{{ $t('persone') }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div class="all-types-content fade collapse active" :id="'id-' + item.id">
-                    <table class="type collapse-table">
-                        <tbody>
-                        <tr v-for="room in item.rooms.slice(5)">
-                            <td class="type-block filling-block">
-                                <img :src="getPersonsPic(room.person)" :alt="getPersonsText(room.person)">
-                                <span> {{ room.room_type ? room.room_type.name : getRoomName(room) }} </span>
-                            </td>
-                            <td class="type-block quantity-block">{{ room.number }}</td>
-                            <td class="type-block personen-block">{{ room.person }}</td>
-                            <td class="type-block price-block"><b>{{ getMinRoomPrice(item, room) }}&#8364;</b>/{{ $t('persone') }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                        </div>
+                        <div class="type-block quantity-block">{{ room.number }}</div>
+                        <div class="type-block personen-block">{{ room.person }}</div>
+                        <div class="type-block price-block"><b>{{ getMinRoomPrice(item, room) }}&#8364;</b>/{{ $t('persone') }}</div>
+                    </div>
                 </div>
-                <a v-if="item.rooms.length > 5" :href="'#' + 'id-' + item.id" class="all-types" aria-expanded="false" role="button" data-toggle="collapse" :aria-controls="'id-' + item.id">
+                <div class="type collapse fade" v-for="room in item.rooms.slice(5)" :id="'id-' + item.id">
+                    <div class="visible-part not-visible-part">
+                        <div class="type-block filling-block">
+                            <img :src="getPersonsPic(room.person)" :alt="getPersonsText(room.person)">
+                            <span> {{ room.room_type ? room.room_type.name : getRoomName(room) }} </span>
+                        </div>
+                        <div class="type-block quantity-block">{{ room.number }}</div>
+                        <div class="type-block personen-block">{{ room.person }}</div>
+                        <div class="type-block price-block"><b>{{ getMinRoomPrice(item, room) }}&#8364;</b>/{{ $t('persone') }}</div>
+                    </div>
+                </div>
+                <a v-if="item.rooms.length > 5" :href="'#' + 'id-' + item.id" class="all-types" :aria-controls="'id-' + item.id" role="button" aria-expanded="false" data-toggle="collapse">
                     <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M7 1.5C6.72386 1.5 6.5 1.72386 6.5 2V6H2.5C2.22386 6 2 6.22386 2 6.5C2 6.77614 2.22386 7 2.5 7H6.5V11C6.5 11.2761 6.72386 11.5 7 11.5C7.27614 11.5 7.5 11.2761 7.5 11V7H11.5C11.7761 7 12 6.77614 12 6.5C12 6.22386 11.7761 6 11.5 6H7.5V2C7.5 1.72386 7.27614 1.5 7 1.5Z" fill="#7A8793"/>
                     </svg>
