@@ -109,7 +109,7 @@
                 loading: true,
                 categoriesTemp: [],
                 features: [],
-                fields: [this.$t('id'), this.$t('feature_category'), this.$t('picture'), this.$t('name'), this.$t('Edit'), this.$t('Delete')],
+                fields: ['id', 'feature_category', 'picture', 'name', 'edit', 'delete'],
                 data: featuresForm,
                 operationOk : false,
                 operationError : false,
@@ -160,12 +160,13 @@
                 this.editFeature.feature_category.name = this.cats;
                 this.data.category.options = this.getCategories().concat(this.categoriesTemp);
                 this.editFeature.category = this.data.category.options.indexOf(this.editFeature.feature_category.name);
+                this.editFeature.category.active = 0;
             },
 
             featureEdit(data) {
                 this.editFeature = { ...data.item };
                 this.data.category.options = this.getCategories().concat(this.categoriesTemp);
-                this.editFeature.category = this.editFeature.feature_category.name;
+                this.editFeature.category = this.data.category.options.findIndex(item => item === this.editFeature.feature_category.name);
             },
 
             featureDelete(data) {
@@ -201,20 +202,17 @@
 
                 cat = this.data.category.options[this.editFeature.category];
                 cat = this.features.find( item => {
-                    console.log(item.feature_category, cat);
                     return item.feature_category && item.feature_category.name === cat }
                     );
+
                 cat = cat.feature_category_id;
-                /*if (this.editFeature.category > 0) {
-                    cat = this.editFeature.category;
-                } else {
-                    cat = this.editFeature.feature_category_id;
-                }*/
 
                 let data = {
                     'name' : this.editFeature.feature_category.name,
                     'category' : cat,
-                    'image' : this.editFeature.feature_category.picture
+                    'image' : this.editFeature.feature_category.picture,
+                    'ord': this.editFeature.ord,
+                    'inlist': this.editFeature.inlist
                 };
 
                 features.update(this.editFeature.id, data)
