@@ -26,7 +26,7 @@
                                     <circle cx="4" cy="10" r="3" fill="#6BB63F"/>
                                     <path d="M8 0H0V3L4 6L8 3V0Z" fill="#6BB63F"/>
                                 </svg>
-                                <span>{{ __('Superost') }}</span>
+                                <span>{{ __('Superhost') }}</span>
                             </div>
                             @endif
                             <div class="add-time">{{ __('Added') }}: {{ __('in')}} {{ date('H:i, j F Y', strtotime($hotel->created_at)) }}</div>
@@ -50,7 +50,7 @@
 
         <div class="fixed-bar">
             <a href="#" class="send-inquiry inquiry">{{ __('Send request') }}</a>
-            @if (($hotel->getCurrentOption('landlordPhoneNumber') == null) || ($hotel->getCurrentOption('landlordHidePhone') === true))
+            @if (($hotel->getCurrentOption('landlordPhoneNumber') == null) || ($hotel->getCurrentOption('landlordHidePhone') == 1))
                 <div class="not-phone">
                     <div class="speaks">{{ __('Object owner speaks') }}:</div>
                     <div class="language-item">{{ $hotel->getCurrentOption('landlordLanguages') }}</div>
