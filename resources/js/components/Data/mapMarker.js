@@ -1,6 +1,6 @@
-export default class popupInit{
-    constructor(){}
-    init(){
+export default class popupInit {
+    constructor() {}
+    init() {
         return class Popup extends google.maps.OverlayView {
             constructor(position, content) {
                 super();
