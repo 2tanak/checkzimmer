@@ -331,14 +331,6 @@ jQuery(document).ready(function() {
         }
     });
 
-    /*jQuery('.list-languages a').click(function (e) {
-        e.preventDefault();
-        var paragraph = jQuery(this).text();
-        jQuery('.selected-language a').text(paragraph);
-        jQuery('.list-languages').removeClass('active');
-        jQuery('.selected-language').removeClass('active');
-    });*/
-
 
     jQuery('.mobile-card-button').click(function () {
         jQuery('.property-card').toggleClass('big');
@@ -493,7 +485,8 @@ jQuery(window).on('load', function() {
             slidesToScroll: 1,
             arrows: false,
             infinite: true,
-            dots: true
+            dots: true,
+            centerMode: true
         });
     }
 

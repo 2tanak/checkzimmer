@@ -38,6 +38,9 @@
             <b-form-input v-model="domain.options.text_button" />
         </b-form-group>
         <b-button variant="success" @click.prevent="save">{{ $t('Save') }}</b-button>
+
+        <b-modal id="domain-save-success">{{ $t('Data saved successfully') }}</b-modal>
+
     </section>
 </template>
 
@@ -96,12 +99,12 @@ export default {
     },
     methods: {
         save() {
-            console.log(this.domain);
             subdomains.update(this.$route.params.domain, this.domain)
                 .then(resp => {
                     if (this.domain.subdomain !== this.$route.params.domain) {
                         this.$router.push( {name: 'website-domains-single', params: {domain: this.domain.subdomain}} )
                     }
+                    this.$bvModal.show('domain-save-success');
                 });
         }
     }

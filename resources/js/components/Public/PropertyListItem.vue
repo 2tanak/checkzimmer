@@ -126,7 +126,10 @@
                             <path d="M12.1 1.5c-.6-.7-1.5-1-2.4-1-.9 0-1.8.4-2.4 1l-.3.3-.3-.3C6.1.8 5.2.5 4.3.5c-.9 0-1.8.4-2.4 1C.6 2.9.6 5.1 1.9 6.4l4.8 5c.1.1.2.1.3.1.1 0 .2 0 .3-.1l4.8-5c1.3-1.3 1.3-3.5 0-4.9z" fill="#EE483F"/>
                         </svg>
                     </a>
-                    <div class="price"><span>{{ $t('from') }} &euro;{{ minRoomPrice }}</span> {{ $t('night') }}</div>
+                    <div class="price">
+                        <span class="price-span">{{ $t('from') }} &euro;{{ minRoomPrice }}</span>
+                        <span class="night-span">{{ $t('night') }}</span>
+                    </div>
                     <div class="price-free">
                         <div v-if="isRealPrice" class="real-price">
                             <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">

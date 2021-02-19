@@ -715,6 +715,7 @@ export default{
             if (jQuery(elem).hasClass('index')){
                 elem = jQuery(elem).parent();
             }
+
             let id = parseInt(jQuery(elem).attr('data-id'));
 
             let index = this.property.findIndex( item => item.id === id );
