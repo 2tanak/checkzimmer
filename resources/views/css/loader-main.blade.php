@@ -152,7 +152,7 @@
         display: block;
     }
     .show-map .load-block-content {
-        display: flex !important;
+        display: flex;
     }
     .show-map .load-block.big-load-block {
         width: 740px
