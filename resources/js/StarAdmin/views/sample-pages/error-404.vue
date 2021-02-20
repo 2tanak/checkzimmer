@@ -22,7 +22,7 @@
               </div>
               <div class="row mt-5">
                 <div class="col-12 mt-xl-2">
-                  <p class="text-white font-weight-medium text-center">Copyright &copy; 2018  All rights reserved.</p>
+                  <p class="text-white font-weight-medium text-center">&copy; {{ new Date().getFullYear() }}  All rights reserved.</p>
                 </div>
               </div>
             </div>

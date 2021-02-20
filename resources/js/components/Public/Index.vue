@@ -1,41 +1,6 @@
 <template>
     <div id="app">
         <div class="list-content">
-            <div class="container">
-
-                <div class="sample-block">
-                    <div class="input-block sample-block-item">
-                        <label for="text">{{ $t('workplace address') }}:</label>
-                        <div class="input-container">
-                            <input  v-model="search.address" id="text" type="text" :placeholder="$t('Example') + ': 04158 ' + $t('Leipzig')">
-                        </div>
-                    </div>
-                    <div class="distance-block select-block">
-                        <label for="distance-select">{{ $t('distance') }}:</label>
-                        <div class="select-container">
-                            <select v-model="search.km" name="distance" id="distance-select" class="distance">
-                                <option value="10">10 {{ $t('km') }}.</option>
-                                <option value="20">20 {{ $t('km') }}.</option>
-                                <option value="30">30 {{ $t('km') }}.</option>
-                                <option value="40">40 {{ $t('km') }}.</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="number-personse-block select-block">
-                        <label class="desctop-label" for="number-personse">{{ $t('Num people') }}:</label>
-                        <label class="mobile-label" for="number-personse">{{ $t('Num ppl.') }}:</label>
-                        <div class="select-container">
-                            <select v-model="search.people" name="distance" id="number-personse" class="number-personse">
-                                <option value="1">1 {{ $t('ppl') }}.</option>
-                                <option value="2">2 {{ $t('ppl') }}.</option>
-                                <option value="3">3 {{ $t('ppl') }}.</option>
-                                <option value="4">4 {{ $t('ppl') }}.</option>
-                            </select>
-                        </div>
-                    </div>
-                    <a class="find-housing" href="#" @click.prevent="submitForm">{{ $t('Find housing') }}</a>
-                </div>
-            </div>
 
             <div class="list-content-item">
                 <div class="container">
@@ -64,7 +29,62 @@
                         <transition name="fade" appear>
                         <div class="property-container" :style="{position: 'relative', opacity: loading ? 0:1, position: loading ? 'absolute':'relative'}">
                             <div class="property-item">
-                                <PropertyListItem v-for="item in property" :key="'id-'+item.id" :item="item" @favsUpdated="updateFavCount"/>
+
+                                <PropertyListItem v-for="(item, index) in property" :key="'prop-id-'+item.id" :item="item" :active="activeItems[index]" :index="index" :ref="'listItem' + item.id" @click.native="goToMap(item, index)" @favsUpdated="updateFavCount"/>
+
+                                <div class="load-block-content first-load-block-content">
+                                    <div class="load-block-item">
+                                        <div class="load-block big-load-block">
+                                            <div class="left-part images-block recast">
+                                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <rect width="32" height="32" rx="2" fill="#EDEDEF"></rect>
+                                                    <path d="M10 19L4 27H28L21 16L15 24L10 19Z" fill="#D8D8D8"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="load-main-block">
+                                                <div class="middle-part">
+                                                    <div class="top-block">
+                                                        <div class="middle-gray-block bg height-item margin-bottom recast"></div>
+                                                        <div class="short-gray-block bg height-item recast"></div>
+                                                    </div>
+                                                    <div class="bottom-block">
+                                                        <div class="circle-gray-block bg margin-right recast"></div>
+                                                        <div class="circle-gray-block bg margin-right recast"></div>
+                                                        <div class="circle-gray-block bg margin-right recast"></div>
+                                                        <div class="circle-gray-block bg recast"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="right-part">
+                                                    <div class="right-left">
+                                                        <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                        <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                        <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                        <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                        <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                        <div class="long-gray-block bg height-item"></div>
+                                                    </div>
+                                                    <div class="right-right">
+                                                        <div class="rectangle-content">
+                                                            <div class="rectangle-block bg recast"></div>
+                                                        </div>
+                                                        <div class="circle-content">
+                                                            <div class="circle-gray-block bg recast"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="load-all-objects">
+                                    <div class="load-all" v-if="additional_load" @click.prevent="loadMore">
+                                        <svg class="rot" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.00281 0.330903C6.77399 0.330985 6.54232 0.342716 6.30831 0.36667C6.30831 0.36667 6.30591 0.367316 6.30125 0.368581C5.36538 0.468219 4.48872 0.76195 3.71128 1.20818C3.26076 1.46771 2.842 1.77883 2.46372 2.13299C1.86113 2.6993 1.36427 3.37639 1.00525 4.13089C0.738588 4.68923 1.13859 5.33089 1.75525 5.33089C2.01615 5.33089 2.26511 5.21157 2.41632 5.00825C3.18549 3.23976 4.95037 2.00001 6.99997 2C7.22735 2 7.45068 2.01554 7.66914 2.04554M7.00281 0.330903C8.84369 0.330239 10.5001 1.08351 11.7083 2.29167L11.7207 2.27913L12.2416 1.75C12.7666 1.225 13.6666 1.6 13.6666 2.34167V5.33334C13.6666 5.48629 13.6249 5.62996 13.5522 5.75351C13.4207 5.97705 13.188 6.13473 12.9182 6.16235C12.8903 6.16521 12.862 6.16668 12.8333 6.16668H11.9398L9.84164 6.16667C9.09997 6.16667 8.7333 5.26667 9.2583 4.74167L10.5166 3.48334C9.76469 2.72443 8.78005 2.1982 7.66966 2.04561M7.01588 13.6667C7.24303 13.6664 7.47299 13.6547 7.70526 13.6309C7.70513 13.6305 7.70501 13.6301 7.70489 13.6298C8.64366 13.5309 9.523 13.2367 10.3026 12.7892C10.7529 12.5298 11.1715 12.2187 11.5497 11.8647C12.1523 11.2984 12.6493 10.6212 13.0083 9.86668C13.275 9.30834 12.875 8.66668 12.2583 8.66668C11.9974 8.66668 11.7484 8.786 11.5972 8.98932C10.8281 10.7578 9.06319 11.9976 7.01359 11.9976C6.78625 11.9976 6.56295 11.982 6.34452 11.952C5.23387 11.7996 4.24901 11.2733 3.49692 10.5142L4.75526 9.25589C5.28026 8.73089 4.91359 7.83089 4.17192 7.83089H1.18026C1.15161 7.83089 1.12329 7.83235 1.09537 7.83521C0.825604 7.86283 0.592869 8.02051 0.461363 8.24406C0.388683 8.36761 0.346924 8.51127 0.346924 8.66422V11.6559C0.346924 12.3976 1.24692 12.7726 1.77192 12.2476L2.2929 11.7184L2.30526 11.7059C2.31587 11.7165 2.32651 11.7271 2.3372 11.7376C3.54253 12.9272 5.18604 13.6673 7.01075 13.6667C7.01246 13.6667 7.01417 13.6667 7.01588 13.6667Z" fill="#7A8793"/>
+                                        </svg>
+                                        <span>{{ $t('Loading') }}...</span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="property-shadow" v-if="property.length"></div>
                             <div class="google-map">
@@ -224,200 +244,200 @@
                         <div class="load-block-content" :style="{ display: loading ? 'display':'none !important' }">
                             <div class="load-block-item">
                                 <div class="load-block big-load-block">
-                                    <div class="left-part images-block">
+                                    <div class="left-part images-block recast">
                                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect width="32" height="32" rx="2" fill="#D8D8D8"/>
-                                            <path d="M10 19L4 27H28L21 16L15 24L10 19Z" fill="#EDEDEF"/>
+                                            <rect width="32" height="32" rx="2" fill="#EDEDEF"></rect>
+                                            <path d="M10 19L4 27H28L21 16L15 24L10 19Z" fill="#D8D8D8"></path>
                                         </svg>
                                     </div>
                                     <div class="load-main-block">
                                         <div class="middle-part">
                                             <div class="top-block">
-                                                <div class="middle-gray-block bg height-item margin-bottom"></div>
-                                                <div class="short-gray-block bg height-item"></div>
+                                                <div class="middle-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="short-gray-block bg height-item recast"></div>
                                             </div>
                                             <div class="bottom-block">
-                                                <div class="circle-gray-block bg margin-right"></div>
-                                                <div class="circle-gray-block bg margin-right"></div>
-                                                <div class="circle-gray-block bg margin-right"></div>
-                                                <div class="circle-gray-block bg"></div>
+                                                <div class="circle-gray-block bg margin-right recast"></div>
+                                                <div class="circle-gray-block bg margin-right recast"></div>
+                                                <div class="circle-gray-block bg margin-right recast"></div>
+                                                <div class="circle-gray-block bg recast"></div>
                                             </div>
                                         </div>
                                         <div class="right-part">
                                             <div class="right-left">
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item recast"></div>
                                             </div>
                                             <div class="right-right">
                                                 <div class="rectangle-content">
-                                                    <div class="rectangle-block bg"></div>
+                                                    <div class="rectangle-block bg recast"></div>
                                                 </div>
                                                 <div class="circle-content">
-                                                    <div class="circle-gray-block bg"></div>
+                                                    <div class="circle-gray-block bg recast"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="load-block big-load-block">
-                                    <div class="left-part images-block">
+                                    <div class="left-part images-block recast">
                                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect width="32" height="32" rx="2" fill="#D8D8D8"/>
-                                            <path d="M10 19L4 27H28L21 16L15 24L10 19Z" fill="#EDEDEF"/>
+                                            <rect width="32" height="32" rx="2" fill="#EDEDEF"></rect>
+                                            <path d="M10 19L4 27H28L21 16L15 24L10 19Z" fill="#D8D8D8"></path>
                                         </svg>
                                     </div>
                                     <div class="load-main-block">
                                         <div class="middle-part">
                                             <div class="top-block">
-                                                <div class="middle-gray-block bg height-item margin-bottom"></div>
-                                                <div class="short-gray-block bg height-item"></div>
+                                                <div class="middle-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="short-gray-block bg height-item recast"></div>
                                             </div>
                                             <div class="bottom-block">
-                                                <div class="circle-gray-block bg margin-right"></div>
-                                                <div class="circle-gray-block bg margin-right"></div>
-                                                <div class="circle-gray-block bg margin-right"></div>
-                                                <div class="circle-gray-block bg"></div>
+                                                <div class="circle-gray-block bg margin-right recast"></div>
+                                                <div class="circle-gray-block bg margin-right recast"></div>
+                                                <div class="circle-gray-block bg margin-right recast"></div>
+                                                <div class="circle-gray-block bg recast"></div>
                                             </div>
                                         </div>
                                         <div class="right-part">
                                             <div class="right-left">
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item recast"></div>
                                             </div>
                                             <div class="right-right">
                                                 <div class="rectangle-content">
-                                                    <div class="rectangle-block bg"></div>
+                                                    <div class="rectangle-block bg recast"></div>
                                                 </div>
                                                 <div class="circle-content">
-                                                    <div class="circle-gray-block bg"></div>
+                                                    <div class="circle-gray-block bg recast"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="load-block big-load-block">
-                                    <div class="left-part images-block">
+                                    <div class="left-part images-block recast">
                                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect width="32" height="32" rx="2" fill="#D8D8D8"/>
-                                            <path d="M10 19L4 27H28L21 16L15 24L10 19Z" fill="#EDEDEF"/>
+                                            <rect width="32" height="32" rx="2" fill="#EDEDEF"></rect>
+                                            <path d="M10 19L4 27H28L21 16L15 24L10 19Z" fill="#D8D8D8"></path>
                                         </svg>
                                     </div>
                                     <div class="load-main-block">
                                         <div class="middle-part">
                                             <div class="top-block">
-                                                <div class="middle-gray-block bg height-item margin-bottom"></div>
-                                                <div class="short-gray-block bg height-item"></div>
+                                                <div class="middle-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="short-gray-block bg height-item recast"></div>
                                             </div>
                                             <div class="bottom-block">
-                                                <div class="circle-gray-block bg margin-right"></div>
-                                                <div class="circle-gray-block bg margin-right"></div>
-                                                <div class="circle-gray-block bg margin-right"></div>
-                                                <div class="circle-gray-block bg"></div>
+                                                <div class="circle-gray-block bg margin-right recast"></div>
+                                                <div class="circle-gray-block bg margin-right recast"></div>
+                                                <div class="circle-gray-block bg margin-right recast"></div>
+                                                <div class="circle-gray-block bg recast"></div>
                                             </div>
                                         </div>
                                         <div class="right-part">
                                             <div class="right-left">
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item recast"></div>
                                             </div>
                                             <div class="right-right">
                                                 <div class="rectangle-content">
-                                                    <div class="rectangle-block bg"></div>
+                                                    <div class="rectangle-block bg recast"></div>
                                                 </div>
                                                 <div class="circle-content">
-                                                    <div class="circle-gray-block bg"></div>
+                                                    <div class="circle-gray-block bg recast"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="load-block big-load-block">
-                                    <div class="left-part images-block">
+                                    <div class="left-part images-block recast">
                                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect width="32" height="32" rx="2" fill="#D8D8D8"/>
-                                            <path d="M10 19L4 27H28L21 16L15 24L10 19Z" fill="#EDEDEF"/>
+                                            <rect width="32" height="32" rx="2" fill="#EDEDEF"></rect>
+                                            <path d="M10 19L4 27H28L21 16L15 24L10 19Z" fill="#D8D8D8"></path>
                                         </svg>
                                     </div>
                                     <div class="load-main-block">
                                         <div class="middle-part">
                                             <div class="top-block">
-                                                <div class="middle-gray-block bg height-item margin-bottom"></div>
-                                                <div class="short-gray-block bg height-item"></div>
+                                                <div class="middle-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="short-gray-block bg height-item recast"></div>
                                             </div>
                                             <div class="bottom-block">
-                                                <div class="circle-gray-block bg margin-right"></div>
-                                                <div class="circle-gray-block bg margin-right"></div>
-                                                <div class="circle-gray-block bg margin-right"></div>
-                                                <div class="circle-gray-block bg"></div>
+                                                <div class="circle-gray-block bg margin-right recast"></div>
+                                                <div class="circle-gray-block bg margin-right recast"></div>
+                                                <div class="circle-gray-block bg margin-right recast"></div>
+                                                <div class="circle-gray-block bg recast"></div>
                                             </div>
                                         </div>
                                         <div class="right-part">
                                             <div class="right-left">
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item recast"></div>
                                             </div>
                                             <div class="right-right">
                                                 <div class="rectangle-content">
-                                                    <div class="rectangle-block bg"></div>
+                                                    <div class="rectangle-block bg recast"></div>
                                                 </div>
                                                 <div class="circle-content">
-                                                    <div class="circle-gray-block bg"></div>
+                                                    <div class="circle-gray-block bg recast"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="load-block big-load-block">
-                                    <div class="left-part images-block">
+                                    <div class="left-part images-block recast">
                                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect width="32" height="32" rx="2" fill="#D8D8D8"/>
-                                            <path d="M10 19L4 27H28L21 16L15 24L10 19Z" fill="#EDEDEF"/>
+                                            <rect width="32" height="32" rx="2" fill="#EDEDEF"></rect>
+                                            <path d="M10 19L4 27H28L21 16L15 24L10 19Z" fill="#D8D8D8"></path>
                                         </svg>
                                     </div>
                                     <div class="load-main-block">
                                         <div class="middle-part">
                                             <div class="top-block">
-                                                <div class="middle-gray-block bg height-item margin-bottom"></div>
-                                                <div class="short-gray-block bg height-item"></div>
+                                                <div class="middle-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="short-gray-block bg height-item recast"></div>
                                             </div>
                                             <div class="bottom-block">
-                                                <div class="circle-gray-block bg margin-right"></div>
-                                                <div class="circle-gray-block bg margin-right"></div>
-                                                <div class="circle-gray-block bg margin-right"></div>
-                                                <div class="circle-gray-block bg"></div>
+                                                <div class="circle-gray-block bg margin-right recast"></div>
+                                                <div class="circle-gray-block bg margin-right recast"></div>
+                                                <div class="circle-gray-block bg margin-right recast"></div>
+                                                <div class="circle-gray-block bg recast"></div>
                                             </div>
                                         </div>
                                         <div class="right-part">
                                             <div class="right-left">
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
                                                 <div class="long-gray-block bg height-item"></div>
                                             </div>
                                             <div class="right-right">
                                                 <div class="rectangle-content">
-                                                    <div class="rectangle-block bg"></div>
+                                                    <div class="rectangle-block bg recast"></div>
                                                 </div>
                                                 <div class="circle-content">
-                                                    <div class="circle-gray-block bg"></div>
+                                                    <div class="circle-gray-block bg recast"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -425,56 +445,56 @@
                                 </div>
 
                                 <div class="load-block small-load-block">
-                                    <div class="very-big-gray-block height-item bg"></div>
+                                    <div class="very-big-gray-block height-item bg recast"></div>
                                     <div class="very-small-block">
-                                        <div class="very-small-gray-block height-item bg"></div>
-                                        <div class="very-small-gray-block height-item bg"></div>
+                                        <div class="very-small-gray-block height-item bg recast"></div>
+                                        <div class="very-small-gray-block height-item bg recast"></div>
                                     </div>
                                     <div class="right-right">
                                         <div class="rectangle-content">
-                                            <div class="rectangle-block bg"></div>
+                                            <div class="rectangle-block bg recast"></div>
                                         </div>
                                         <div class="circle-content">
-                                            <div class="circle-gray-block bg"></div>
+                                            <div class="circle-gray-block bg recast"></div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="load-block big-load-block">
-                                    <div class="left-part images-block">
+                                    <div class="left-part images-block recast">
                                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect width="32" height="32" rx="2" fill="#D8D8D8"/>
-                                            <path d="M10 19L4 27H28L21 16L15 24L10 19Z" fill="#EDEDEF"/>
+                                            <rect width="32" height="32" rx="2" fill="#EDEDEF"></rect>
+                                            <path d="M10 19L4 27H28L21 16L15 24L10 19Z" fill="#D8D8D8"></path>
                                         </svg>
                                     </div>
                                     <div class="load-main-block">
                                         <div class="middle-part">
                                             <div class="top-block">
-                                                <div class="middle-gray-block bg height-item margin-bottom"></div>
-                                                <div class="short-gray-block bg height-item"></div>
+                                                <div class="middle-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="short-gray-block bg height-item recast"></div>
                                             </div>
                                             <div class="bottom-block">
-                                                <div class="circle-gray-block bg margin-right"></div>
-                                                <div class="circle-gray-block bg margin-right"></div>
-                                                <div class="circle-gray-block bg margin-right"></div>
-                                                <div class="circle-gray-block bg"></div>
+                                                <div class="circle-gray-block bg margin-right recast"></div>
+                                                <div class="circle-gray-block bg margin-right recast"></div>
+                                                <div class="circle-gray-block bg margin-right recast"></div>
+                                                <div class="circle-gray-block bg recast"></div>
                                             </div>
                                         </div>
                                         <div class="right-part">
                                             <div class="right-left">
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item margin-bottom"></div>
-                                                <div class="long-gray-block bg height-item"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item margin-bottom recast"></div>
+                                                <div class="long-gray-block bg height-item recast"></div>
                                             </div>
                                             <div class="right-right">
                                                 <div class="rectangle-content">
-                                                    <div class="rectangle-block bg"></div>
+                                                    <div class="rectangle-block bg recast"></div>
                                                 </div>
                                                 <div class="circle-content">
-                                                    <div class="circle-gray-block bg"></div>
+                                                    <div class="circle-gray-block bg recast "></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -490,6 +510,7 @@
 
                 <transition name="fade">
                 <div class="communication not-active" style="top:34px;position:relative;">
+                    <div class="description">
                     <div class="load-more" v-if="additional_load">
                         <div class="btn btn-success" @click.prevent="loadMore">{{ $t('Load more') }}</div>
                     </div>
@@ -508,6 +529,7 @@
                         <div class="shadow-block"></div>
                     </div>
                 </div>
+                </div>
                 </transition>
 
             </div>
@@ -522,6 +544,8 @@
 import ApiRequest from "../API/ApiRequest";
 import PropertyListItem from "./PropertyListItem";
 
+import styles from '../Data/mapStyle';
+import popupInit from '../Data/mapMarker';
 let PropertyRequest = ApiRequest('property')
 let properties = new PropertyRequest;
 
@@ -538,6 +562,7 @@ export default{
     },
     data() {
         return {
+            map: null,
             loading: true,
             endoflist: false,
             property: [],
@@ -546,6 +571,7 @@ export default{
             coords_load: [],
             additional_pages: true,
             search: {...newSearch},
+            activeItems: [],
         };
     },
     mounted() {
@@ -557,11 +583,17 @@ export default{
             jQuery(this).removeClass('error');
             jQuery(this).closest('.input-block').find('.error-text').removeClass('active')
         });
+        jQuery(document).on('click', '.popup-container .index', (e) => {
+            this.selectMapMarker(e);
+        })
 
         properties.byPage(1)
             .then( resp => {
-                that.property = resp.data.objects.data;
-                that.loading = false;
+                this.property = resp.data.objects.data;
+                this.property.forEach((item,index) => this.activeItems[index] = false);
+
+                this.loading = false;
+
                 if (resp.data.current_page < resp.data.objects.last_page) {
                     that.additional_pages = true;
                 } else {
@@ -569,10 +601,9 @@ export default{
                 }
                 that.favoritesDisplay();
                 that.foundTotal();
+                that.initMap();
             })
-        setTimeout(function() {
-            //console.log(that.$auth.user());
-        }, 1000);
+
         jQuery('body').on('click', 'a.collapse-circle', function(e) {
             e.preventDefault();
             var parent = jQuery(this).closest('.property-card');
@@ -583,220 +614,79 @@ export default{
             e.preventDefault();
             jQuery(this).toggleClass('active');
         });
-        function initMap() {
+
+    },
+    methods: {
+        initMap() {
             if (typeof google === 'undefined' || !document.getElementById('map')) {
-                setTimeout( () => { initMap() }, 100 )
+                setTimeout( () => { this.initMap() }, 100 );
                 return;
             }
 
-            let styles = [
-                {
-                    "featureType": "administrative.province",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "administrative.locality",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                            "color": "#a8aeb6"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "administrative.neighborhood",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                            "color": "#a8aeb6"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "administrative.land_parcel",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                            "color": "#a8aeb6"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi.attraction",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi.business",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi.government",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi.medical",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi.park",
-                    "elementType": "geometry.fill",
-                    "stylers": [
-                        {
-                            "color": "#c2e5a7"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi.place_of_worship",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi.school",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi.sports_complex",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                            "color": "#a8aeb6"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "geometry.fill",
-                    "stylers": [
-                        {
-                            "color": "#e1e4e6"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "geometry.stroke",
-                    "stylers": [
-                        {
-                            "color": "#c4cfd6"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "labels.icon",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "transit.station.airport",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "transit.station.bus",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "transit.station.rail",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                }
-            ];
-            let map = new google.maps.Map(document.getElementById('map'), {
+            this.map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: 51.340654, lng: 12.375411},
                 disableDefaultUI: true,
                 zoom: 15,
                 styles: styles
             });
-            map.setOptions({styles: styles});
 
-            properties.request('initMap')
-                .then( resp => {
-                    var myTrip = resp.data.coords;
+            this.map.setOptions({styles: styles});
+            this.setMapMarker();
+        },
+        setMapMarker() {
+            if (typeof google === 'undefined' || !document.getElementById('map')) {
+                setTimeout(() => {
+                    this.setMapMarker();
+                }, 100);
+            } else {
+                let popupClass = new popupInit();
+                let popupFactory = new popupClass.init();
+                this.property.forEach(item => {
+                    var popup = new popupFactory(
+                        new google.maps.LatLng(parseFloat(item.lat), parseFloat(item.lng)),
+                        this.createInfoBlock(item.name, item.id)
+                    );
+                    popup.setMap(this.map);
+                })
+            }
+        },
+        goToMap(item, index) {
+            this.setActiveProperty(index);
+            this.map.setCenter({ lat: parseFloat(item.lat), lng: parseFloat(item.lng)});
+        },
+        createInfoBlock(text, id) {
+            var newDiv = document.createElement("div");
+            newDiv.setAttribute("id", "object_modal");
+            newDiv.setAttribute("data-id", id);
+            newDiv.innerHTML = '<span class="index">'+ text +'</span>';
+            newDiv.addEventListener("click", this.selectMapMarker);
+            return newDiv;
+        },
+        selectMapMarker(e) {
+            let elem = e.target;
+            if (jQuery(elem).hasClass('index')){
+                elem = jQuery(elem).parent();
+            }
+            let id = parseInt(jQuery(elem).attr('data-id'));
 
-                    for (var i = 0; i < myTrip.length; i++) {
-                      var marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(myTrip[i].lat, myTrip[i].lng),
-                        map: map
-                      });
-                    }
+            let index = this.property.findIndex( item => item.id === id );
 
-                    marker.setMap(map);
+            this.setActiveProperty(index);
+            this.scrollActiveMap(id);
+
+        },
+        setActiveProperty(index) {
+            this.activeItems.forEach((item, ind) => {
+                Vue.set(this.activeItems, ind, false);
             })
-        }
+            Vue.set(this.activeItems, index, true);
 
-        initMap();
-    },
-    created() {
-        if (this.$route.query.search) {
-            this.search.address = this.$route.query.search;
-            this.submitForm();
-        }
-    },
-    updated: function () {
-
-    },
-    methods: {
+        },
+        scrollActiveMap(id) {
+            let elem = document.getElementById('property-'+id);
+            let rect = elem.getBoundingClientRect();
+            jQuery('html, body').animate({scrollTop: window.scrollY + rect.top - 200}, 200);
+        },
         login(e) {
             console.log(this.$auth);
             e.preventDefault();
@@ -905,7 +795,64 @@ export default{
         }
     }
 }
+class Popup extends google.maps.OverlayView {
+    constructor(position, content) {
+        super();
+        this.position = position;
+        content.classList.add("popup-bubble");
+        // This zero-height div is positioned at the bottom of the bubble.
+        const bubbleAnchor = document.createElement("div");
+        bubbleAnchor.classList.add("popup-bubble-anchor");
+        bubbleAnchor.appendChild(content);
+        // This zero-height div is positioned at the bottom of the tip.
+        this.containerDiv = document.createElement("div");
+        this.containerDiv.classList.add("popup-container");
+        this.containerDiv.appendChild(bubbleAnchor);
+        // Optionally stop clicks, etc., from bubbling up to the map.
+        Popup.preventMapHitsAndGesturesFrom(this.containerDiv);
+    }
+    /** Called when the popup is added to the map. */
+    onAdd() {
+        this.getPanes().floatPane.appendChild(this.containerDiv);
+    }
+    /** Called when the popup is removed from the map. */
+    onRemove() {
+        if (this.containerDiv.parentElement) {
+            this.containerDiv.parentElement.removeChild(this.containerDiv);
+        }
+    }
+    /** Called each frame when the popup needs to draw itself. */
+    draw() {
+        const divPosition = this.getProjection().fromLatLngToDivPixel(
+            this.position
+        );
+        // Hide the popup when it is far out of view.
+        const display =
+            Math.abs(divPosition.x) < 4000 && Math.abs(divPosition.y) < 4000
+                ? "block"
+                : "none";
 
+        if (display === "block") {
+            this.containerDiv.style.left = divPosition.x + "px";
+            this.containerDiv.style.top = divPosition.y + "px";
+        }
+
+        if (this.containerDiv.style.display !== display) {
+            this.containerDiv.style.display = display;
+        }
+    }
+    toggle() {
+        if (this.div) {
+            console.log(this);
+            if (this.div.style.visibility === "hidden") {
+                this.show();
+            } else {
+                this.hide();
+            }
+        }
+    }
+
+}
 </script>
 <style>
 .fade-enter-active, .fade-leave-active {
@@ -913,5 +860,56 @@ export default{
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
     opacity: 0;
+}
+/* The popup bubble styling. */
+.popup-bubble {
+    /* Position the bubble centred-above its parent. */
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -100%);
+    /* Style the bubble. */
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: sans-serif;
+    overflow-y: auto;
+    max-height: 60px;
+    box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
+}
+
+/* The parent of the bubble. A zero-height div at the top of the tip. */
+.popup-bubble-anchor {
+    /* Position the div a fixed distance above the tip. */
+    position: absolute;
+    width: 100%;
+    bottom: 8px;
+    left: 0;
+}
+
+/* This element draws the tip. */
+.popup-bubble-anchor::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* Center the tip horizontally. */
+    transform: translate(-50%, 0);
+    /* The tip is a https://css-tricks.com/snippets/css/css-triangle/ */
+    width: 0;
+    height: 0;
+    /* The tip is 8px high, and 12px wide. */
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid white;
+}
+
+/* JavaScript will position this div at the bottom of the popup tip. */
+.popup-container {
+    cursor: auto;
+    height: 0;
+    position: absolute;
+    /* The max width of the info window. */
+    width: 200px;
 }
 </style>

@@ -7,7 +7,7 @@
                 @foreach($hotel->featuresByCat($featureCategory['id']) as $feature)
                 <div class="col-md-3 col-sm-4 col-6 comfort-block-item">
                     <img src="{{ $feature['picture'] }}" alt="{{ $feature['name'] }}">
-                    <span>{{ $feature['name'] }}</span>
+                    <span>{{ $feature->tName() }}</span>
                 </div>
                 @endforeach
             </div>
