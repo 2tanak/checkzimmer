@@ -253,7 +253,7 @@
                 @endforeach
             </div>
             <div class="name-slide-number">
-                <div class="number">1/{{count($hotel->photos())}}</div>
+                <div class="number"><span class="current">1</span>/{{count($hotel->photos()) + 1}}</div>
             </div>
         </div>
     </div>
