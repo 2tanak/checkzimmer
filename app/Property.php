@@ -104,11 +104,6 @@ class Property extends Model
         return  $langs ? explode(',', $langs): ['ru', 'en', 'de'];
     }
 
-//    public function features() {
-//        $this->getOptions();
-//        return json_decode(self::optionFind($this->_options, 'features'), true) ?: [];
-//    }
-
     public function features()
     {
         return $this->belongsToMany(Feature::class, 'property_features',

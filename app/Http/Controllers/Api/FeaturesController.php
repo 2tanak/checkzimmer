@@ -4,14 +4,13 @@ use App\Feature;
 use App\Http\Controllers\Controller;
 use App\Option;
 use Illuminate\Http\Request;
-use App\Option;
 
 class FeaturesController extends Controller
 {
     public function index()
     {
         $features = Feature::ind();
-        foreach ($features as $key => $item){
+        foreach ($features as $key => $item) {
             $features[$key]->order = $item->getCurrentOption('order') == '' ? 0 : (int) $item->getCurrentOption('order');
             $features[$key]->listShow = $item->getCurrentOption('listShow') == '' ? false : (bool) $item->getCurrentOption('listShow');
         }
