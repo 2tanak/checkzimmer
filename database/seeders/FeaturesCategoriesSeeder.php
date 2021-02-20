@@ -14,7 +14,7 @@ class FeaturesCategoriesSeeder extends Seeder
      */
     public function run()
     {
-        $cats = ['Кухня', 'Ванная', 'Комната', 'Прочее', 'Снаружи'];
+        $cats = [__('Kitchen'), __('Bathroom'), __('Room'), __('Other'), __('Outside')];
         foreach ($cats as $i => $cat) {
             $fc = new FeatureCategory;
             $fc->fill(

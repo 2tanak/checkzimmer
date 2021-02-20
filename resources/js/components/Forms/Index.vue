@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <b-select v-if="item.type === 'select'" v-model="fields[ind]">
-                    <b-select-option v-for="(elem, i) in item.options" :value="i" :key="'item-'+i">{{ elem }}</b-select-option>
+                    <b-select-option v-for="(elem, i) in item.options" :value="i" :selected="i === item.active" :key="'item-'+i">{{ elem }}</b-select-option>
                 </b-select>
             </b-form-group>
             <hr v-else-if="item.type === 'divider'">

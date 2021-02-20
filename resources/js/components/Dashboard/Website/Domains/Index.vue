@@ -1,6 +1,11 @@
 <template>
     <section class="header-dashboard">
-        <h1>{{ $t('Domains') }}</h1>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+            <h1>{{ $t('Domains') }}</h1>
+            <b-button style="margin-right:0 !important;" v-b-modal.modal-object-create type="button" variant="success" class="mr-2">
+                {{ $t('New subdomain') }}
+            </b-button>
+        </div>
 
         <div class="row">
             <div class="col-md-12 grid-margin">
@@ -39,7 +44,7 @@
                                             </a>
                                         </td>
                                         <td >
-                                            <a href="" @click.prevent="deleteDomain(domain)">&times;</a>
+                                            <a href="" v-b-modal.modal-object-delete @click.prevent="deleteDomain(domain)">&times;</a>
                                         </td>
                                     </b-tr>
                                 </tbody>
@@ -52,7 +57,7 @@
         <div class="row">
             <div class="col-md-12">
                 <b-button v-b-modal.modal-object-create type="button" variant="success" class="mr-2">
-                    {{ $t('New object') }}
+                    {{ $t('New subdomain') }}
                 </b-button>
             </div>
         </div>
@@ -102,7 +107,8 @@ export default {
             },
             domainFields: domainsForm,
             operationOk: '',
-            operationError: ''
+            operationError: '',
+            domainDelete: {},
         }
     },
     mounted() {
@@ -112,6 +118,9 @@ export default {
             })
     },
     methods: {
+        deleteDomain(domain) {
+            this.domainDelete = domain;
+        },
         newDomainApply() {
             subdomains.create(this.newDomain).then(response => {
                 if(response.data.code === 'ok'){
@@ -130,7 +139,11 @@ export default {
             });
         },
         deleteOk(domain) {
-
+            subdomains.delete(this.domainDelete.id)
+                .then(resp => {
+                    let toDeleteIndex = this.domains.findIndex( item => item.id === this.domainDelete.id );
+                    this.domains.splice(toDeleteIndex, 1);
+                });
         },
         badge(item) {
             return item.active ? 'success' : 'danger';

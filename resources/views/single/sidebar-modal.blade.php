@@ -1,16 +1,30 @@
 <div class="sidebar mobile-sidebar">
+    @if ($hotel->getCurrentOption('free') == 1)
+    <div class="free-now">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0)">
+                <path d="M8 16C12.411 16 16 12.4113 16 8C16 7.23861 15.8937 6.48828 15.6833 5.76969C15.5796 5.41634 15.2106 5.21338 14.8563 5.31706C14.5026 5.42041 14.3003 5.79069 14.4036 6.14404C14.578 6.74105 14.6667 7.36572 14.6667 8C14.6667 11.6759 11.6759 14.6667 8 14.6667C4.32406 14.6667 1.33333 11.6759 1.33333 8C1.33333 4.32406 4.32406 1.33333 8 1.33333C9.33594 1.33333 10.6213 1.72396 11.717 2.46273C12.022 2.66862 12.4367 2.58773 12.6423 2.28271C12.848 1.97738 12.7677 1.56299 12.4624 1.35726C11.1457 0.469401 9.6027 0 8 0C3.58903 0 0 3.5887 0 8C0 12.4113 3.58903 16 8 16Z" fill="#3B8B3E"/>
+                <path d="M14.8622 1.52869L8.0002 8.39034L5.80489 6.19535C5.54447 5.9351 5.1226 5.9351 4.86218 6.19535C4.60193 6.45577 4.60193 6.87765 4.86218 7.13806L7.52885 9.80473C7.65922 9.9351 7.82947 10 8.0002 10C8.17094 10 8.34119 9.9351 8.47156 9.80473L15.8049 2.47139C16.0651 2.21098 16.0651 1.7891 15.8049 1.52869C15.5445 1.26843 15.1226 1.26843 14.8622 1.52869Z" fill="#3B8B3E"/>
+            </g>
+            <defs>
+                <clipPath id="clip0">
+                    <rect width="16" height="16" fill="white"/>
+                </clipPath>
+            </defs>
+        </svg>
+        <span>{{ __('Free now') }}</span>
+    </div>
+    @endif
     <div class="sidebar-top">
         <div class="sidebar-top-block roominess">
             <img src="/svg/i-people.svg" alt="alt">
             <div class="sidebar-top-block-item roominess-item">
                 <div class="title">{{ __('roomin.') }}:</div>
-                <div class="subtitle">
-                    @if ($hotel->getRoomPersonsMin() != 0)
-                        {{ '€'.$hotel->getRoomPersonsMin() }} – {{ $hotel->getRoomPersonsMax() }} чел.
-                    @else
-                        n/a
-                    @endif
-                </div>
+                @if ($hotel->getRoomPersonsMin() == 0)
+                    <div class="subtitle">{{ __('n/a') }}</div>
+                @else
+                    <div class="subtitle">{{ $hotel->getRoomPersonsMin() }} – {{ $hotel->getRoomPersonsMax() }} {{ __('ppl') }}.</div>
+                @endif
             </div>
         </div>
         @if ($hotel->type != 'affiliate')
@@ -22,6 +36,7 @@
                 </div>
             </div>
         @endif
+
     </div>
     <div class="sidebar-middle">
         <div class="price">
@@ -29,44 +44,68 @@
             <div class="middle">
                 {{ $hotel->getRoomPriceMin() != 0 ? '€'.$hotel->getRoomPriceMin() : 'n/a' }}
             </div>
-            <div class="right">{{ __('per person (including VAT)') }}</div>
+            <div class="right">
+                @if ($hotel->getCurrentOption('inclVAT') == '1')
+                    {{ __('per person (including VAT)') }}
+                @else
+                    {{ __('per person (excluding VAT)') }}
+                @endif
+            </div>
         </div>
         <a href="#" class="inquiry">{{ __('Send request') }}</a>
-        @if ($hotel->type == 'affiliate')
+        @if (($hotel->getCurrentOption('landlordPhoneNumber') == null) || ($hotel->getCurrentOption('landlordHidePhone') == 1))
             <div class="number-phone not-phone">
                 <div class="speaks">{{ __('Object owner speaks') }}:</div>
-                <div class="language-item">{{ implode(', ', $hotel->languages()) }}</div>
+                <div class="language-item">{{ $hotel->getCurrentOption('landlordLanguages') }}</div>
             </div>
         @else
         <div class="number-phone">
-            <a href="tel:+4917616573456">+49 176&nbsp;<span class="num_hide">1657 3456</span></a>
+            <a href="tel:+{{ $hotel->getCurrentOption('landlordPhoneNumber') }}">{{ $hotel->getCurrentOption('landlordPhoneNumber') }}</a>
             <span class="sh_nmr">{{ __('show') }}</span>
             <div class="message">{{ __('Let us know that you are from the site Check-zimmer.de') }}</div>
             <div class="language">
                 <div class="speaks">{{ __('Speaks') }}:</div>
-                <div class="language-item">{{ implode(', ', $hotel->languages()) }}</div>
+                <div class="language-item">{{ $hotel->getCurrentOption('landlordLanguages') }}</div>
             </div>
         </div>
         @endif
-        <div class="address-map">
-            <div class="address">{{$hotel->address}}<span></span> {{$hotel->zip}} {{$hotel->city}} </div>
+        @if ($hotel->checkHideAdress())
+            <div class="address-map">
+                <div class="address">
+                    <div class="hotel-name">{{$hotel->name}}</div>
+                    <div class="name-surname">
+                        @if (($hotel->getCurrentOption('landlordName') != null) && ($hotel->getCurrentOption('landlordHideName') != 1))
+                            {{ $hotel->getCurrentOption('landlordName') }}
+                        @endif
+                    </div>
+                    @if ($hotel->getCurrentOption('hideAddress') != '1')
+                        <div class="hotel-adress">{{$hotel->address}}</div>
+                    @endif
+                    <div class="zip-city" style="white-space: nowrap;">
+                        @if ($hotel->getCurrentOption('hideZip') != '1')
+                            {{ $hotel->zip }}
+                        @endif
+                        {{ $hotel->city }}
+                    </div>
+                </div>
             <div class="map-container">
-                <a class="map-picture map-mobile-picture" href="#map-mobile-block">
-                    <svg width="102" height="88" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M96 0H6C2.7 0 0 2.7 0 6v76c0 3.3 2.7 6 6 6h90c3.3 0 6-2.7 6-6V6c0-3.3-2.7-6-6-6z" fill="#fff"/>
-                        <path d="M0 6v3.9l48.5 53.6 53.3-58.9C101.2 2 98.8 0 96 0H6C2.7 0 0 2.7 0 6zM0 45.2L7 37l-7-7.8v16zM15.5 47L0 65.2V82c0 3.3 2.7 6 6 6h46.4L15.5 47z" fill="#E4EBF3"/>
-                        <path d="M24 22L45 0H6c-.6 0-1.2.1-1.8.3L24 22zM16 57L0 74.8V82c0 3.3 2.7 6 6 6h38.2L16 57z" fill="#B5F5D2"/>
-                        <path d="M54.5 69.5L70.8 88H96c3.3 0 6-2.7 6-6V15.3L54.5 69.5z" fill="#E4EBF3"/>
-                        <path d="M102 55.2V29L90.5 43 102 55.2zM102 71.8v-4.4L84.5 49.5 67 69.5 82.9 88h5.2L102 71.8z" fill="#D4DEE8"/>
-                        <rect x=".5" y=".5" width="101" height="87" rx="5.5" stroke="#E1E3E8"/>
+                <a class="map-picture map-mobile-picture" href="#object-description"">
+                    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 -5.1811V-2.04882L39.1139 41L81 -6.30551C80.5285 -8.3937 78.6424 -10 76.442 -10H5.71513C3.12181 -10 1 -7.8315 1 -5.1811Z" fill="#E4EBF3"/>
+                        <path d="M1 27L6 19.825L1 13V27Z" fill="#E4EBF3"/>
+                        <path d="M13.4237 27L1 41.6488V55.1707C1 57.8268 3.16412 60 5.80916 60H43L13.4237 27Z" fill="#E4EBF3"/>
+                        <path d="M19.5294 8L36 -10H5.41176C4.94118 -10 4.47059 -9.91818 4 -9.75455L19.5294 8Z" fill="#B5F5D2"/>
+                        <path d="M13.6697 35L1 49.3548V55.1613C1 57.8226 3.13801 60 5.75113 60H36L13.6697 35Z" fill="#B5F5D2"/>
+                        <rect x="0.5" y="0.5" width="43" height="43" rx="5.5" stroke="#E1E3E8"/>
                     </svg>
-                    <svg class="pin" width="14" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <ellipse cx="7.001" cy="7.143" rx="4.2" ry="4.286" fill="#fff"/>
-                        <path d="M.427 9.69c1.204 3.385 4.516 8.062 5.92 9.974a.81.81 0 001.305 0c1.405-1.912 4.717-6.59 5.921-9.974A7.346 7.346 0 0014 7.21C14 3.23 10.864 0 7 0S0 3.23 0 7.21c0 .878.15 1.705.427 2.48zm10.336-2.48c0 2.144-1.68 3.85-3.763 3.85-2.082 0-3.738-1.732-3.738-3.85 0-2.145 1.68-3.877 3.738-3.877 2.082.026 3.763 1.732 3.763 3.876z" fill="#6BB63F"/>
+                    <svg class="pin" width="14" height="20" viewBox="0 0 14 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="6.9998" cy="7.14283" rx="4.2" ry="4.28571" fill="white"/>
+                        <path d="M0.426523 9.68992C1.63082 13.0749 4.94265 17.7519 6.34767 19.6641C6.67384 20.1034 7.32617 20.1034 7.65233 19.6641C9.05735 17.7519 12.3692 13.0749 13.5735 9.68992C13.8495 8.91473 14 8.08786 14 7.2093C14 3.22997 10.8638 0 7 0C3.1362 0 0 3.22997 0 7.2093C0 8.08786 0.150538 8.91473 0.426523 9.68992ZM10.7634 7.2093C10.7634 9.354 9.08244 11.0594 7 11.0594C4.91756 11.0594 3.26165 9.32817 3.26165 7.2093C3.26165 5.0646 4.94265 3.33333 7 3.33333C9.08244 3.35917 10.7634 5.0646 10.7634 7.2093Z" fill="#6BB63F"/>
                     </svg>
                 </a>
             </div>
         </div>
+        @endif
     </div>
     <div class="sidebar-bottom">
         <div class="sidebar-bottom-block">

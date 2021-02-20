@@ -2,6 +2,7 @@
 
 use App\Feature;
 use App\Http\Controllers\Controller;
+use App\Option;
 use Illuminate\Http\Request;
 use App\Option;
 
@@ -35,15 +36,28 @@ class FeaturesController extends Controller
             'feature_category_id' => $request->category,
             'picture' => $request->image,
             'name' => $request->name,
-            'ord' => 0
+            'ord' => $request->ord
         ];
-        $data['ord'] = 0;
 
         if (!empty(Feature::find($id))) {
-            $feature = Feature::find($id)->update($data);
+            $feature = Feature::find($id);
         } else {
-            $feature = Feature::create($data);
+            $feature = new Feature;
         }
+        $feature->fill($data);
+        $feature->save();
+
+        $option = Option::where('key', 'inlist')->where('type', 'feature')->where('parent', $feature->id)->first();
+        if (!$option) {
+            $option = new Option;
+            $option->fill([
+                'key' => 'inlist',
+                'parent' => $feature->id,
+                'type' => 'feature'
+            ]);
+        }
+        $option->value = $request->inlist ?? '';
+        $option->save();
 
         $option = Option::where('key', 'features')->where('parent', $feature->id)->first();
         $optionsData = [
@@ -68,4 +82,15 @@ class FeaturesController extends Controller
         return response()->json(['code' => 'ok']);
     }
 
+    public function language(Request $request) {
+        $data = $request->all();
+        if (!$data['id']) {
+            $option = Option::create($data);
+        } else {
+            $option = Option::findOrFail($data['id']);
+            $option->fill($data);
+            $option->save();
+        }
+        return response()->json($option);
+    }
 }

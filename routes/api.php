@@ -33,6 +33,7 @@ Route::middleware('auth')->namespace('Api')->group(function () {
     Route::resource('reviews', 'ReviewsController');
 
     Route::post('property/query', 'PropertyController@query');
+    Route::post('features/language', 'FeaturesController@language');
 
     Route::get('options/bytype/{type}', 'OptionsController@showByType');
     Route::get('property/init', 'PropertyController@init');
@@ -59,13 +60,13 @@ Route::middleware('auth')->namespace('Api')->group(function () {
     Route::get('users', 'UsersController@index')->middleware('isAdmin');
     Route::get('users/{id}', 'UsersController@show')->middleware('isAdminOrSelf');
 
-    Route::get('languages', 'LanguagesController@index');
     Route::get('languages/{id}', 'LanguagesController@get');
     Route::put('languages/{id}', 'LanguagesController@update');
 });
 
 Route::group(['namespace' => 'Api'], function() {
     Route::apiResource('property', 'PropertyController');
+    Route::get('languages', 'LanguagesController@index');
     Route::post('/property/query', 'PropertyController@queryProperty');
     Route::post('/property/queryFilter', 'PropertyController@queryFilter');
     Route::post('/property/querySort', 'PropertyController@querySort');

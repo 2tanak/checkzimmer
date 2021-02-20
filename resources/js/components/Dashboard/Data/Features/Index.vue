@@ -1,6 +1,11 @@
 <template>
     <section class="header-dashboard">
-        <h1>{{ $t('Catalog of provided amenities') }}</h1>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+            <h1>{{ $t('Catalog of provided amenities') }}</h1>
+            <b-button style="margin-right:0 !important;" type="submit" variant="success" class="mr-2" v-b-modal.modal-feature @click="featureNew">
+                {{ $t('New convenience') }}
+            </b-button>
+        </div>
         <div class="row mt-4">
             <div class="col-md-6 grid-margin">
                 <div class="card">
@@ -111,7 +116,7 @@
                 loading: true,
                 categoriesTemp: [],
                 features: [],
-                fields: [this.$t('id'), this.$t('feature_category'), this.$t('picture'), this.$t('name'), this.$t('Edit'), this.$t('Delete')],
+                fields: ['id', 'feature_category', 'picture', 'name', 'edit', 'delete'],
                 data: featuresForm,
                 operationOk : false,
                 operationError : false,
@@ -124,7 +129,6 @@
         created() {
             features.all()
                 .then(resp => {
-                    console.log(resp.data);
                     this.features = resp.data;
                     this.loading = false;
                 })
@@ -168,8 +172,9 @@
             featureEdit(data) {
                 this.editFeature = { ...data.item };
                 this.data.category.options = this.getCategories().concat(this.categoriesTemp);
-                this.editFeature.listShow = this.editFeature.listShow;
-                this.editFeature.order = this.editFeature.order;
+                this.editFeature.category = this.data.category.options.findIndex(item => item === this.editFeature.feature_category.name);
+                this.editFeature.inlist = this.editFeature.options.find( index => index.key === 'inlist');
+                this.editFeature.inlist = this.editFeature.inlist.value && this.editFeature.inlist.value !== '0';
             },
 
             featureDelete(data) {
@@ -205,22 +210,17 @@
 
                 cat = this.data.category.options[this.editFeature.category];
                 cat = this.features.find( item => {
-                    console.log(item.feature_category, cat);
                     return item.feature_category && item.feature_category.name === cat }
                     );
+
                 cat = cat.feature_category_id;
-                /*if (this.editFeature.category > 0) {
-                    cat = this.editFeature.category;
-                } else {
-                    cat = this.editFeature.feature_category_id;
-                }*/
 
                 let data = {
-                    'name': this.editFeature.feature_category.name,
-                    'category': cat,
-                    'image': this.editFeature.feature_category.picture,
-                    'listShow': this.editFeature.listShow,
-                    'order': this.editFeature.order,
+                    'name' : this.editFeature.feature_category.name,
+                    'category' : cat,
+                    'image' : this.editFeature.feature_category.picture,
+                    'ord': this.editFeature.ord,
+                    'inlist': this.editFeature.inlist
                 };
 
                 features.update(this.editFeature.id, data)

@@ -12,10 +12,10 @@
                         <b-form-group :label="$t('Homepage SEO Title')" label-for="input-seo-title">
                             <b-form-input class="form-control" type="text" v-model="options.seo_title" />
                         </b-form-group>
-                        <b-form-group :label="$t('Homepage SEO Description')" label-for="input-seo-title">
+                        <b-form-group :label="$t('Homepage SEO Description')" label-for="input-seo-description">
                             <b-form-input class="form-control" type="text" v-model="options.seo_description" />
                         </b-form-group>
-                        <b-form-group :label="$t('Homepage tagline')" label-for="input-seo-title">
+                        <b-form-group :label="$t('Homepage tagline')" label-for="input-tagline">
                             <b-form-input class="form-control" type="text" v-model="options.tagline" />
                         </b-form-group>
                         <b-form-group :label="$t('Maintenance mode')" label-for="input-maintenance">
@@ -23,6 +23,30 @@
                                 <input type="checkbox" v-model="options.maintenance" id="input-maintenance">
                                 {{ $t('Maintenance mode enabled') }}
                             </label>
+                        </b-form-group>
+                        <b-form-group :label="$t('Number Phone')" label-for="phone">
+                            <b-form-input v-model="options.website_phone" />
+                        </b-form-group>
+                        <b-form-group :label="$t('Number Phone For Watsapp')" label-for="watsapp">
+                            <b-form-input v-model="options.website_phone_watsapp" />
+                        </b-form-group>
+                        <b-form-group :label="$t('Picture')" label-for="picture">
+                            <b-form-file v-model="options.picture" :placeholder="$t('Choose a picture or drop it here...')"/>
+                        </b-form-group>
+                        <b-form-group :label="$t('Label in the input form search')" label-for="label_input">
+                            <b-form-input v-model="options.label_input" />
+                        </b-form-group>
+                        <b-form-group :label="$t('Placeholder in the input form search')" label-for="placeholder">
+                            <b-form-input v-model="options.placeholder" />
+                        </b-form-group>
+                        <b-form-group :label="$t('Label in the select distance')" label-for="label_distance">
+                            <b-form-input v-model="options.label_distance" />
+                        </b-form-group>
+                        <b-form-group :label="$t('Label in the select num people')" label-for="label_num_people">
+                            <b-form-input v-model="options.label_people" />
+                        </b-form-group>
+                        <b-form-group :label="$t('Text in the button form search')" label-for="text_button">
+                            <b-form-input v-model="options.text_button" />
                         </b-form-group>
                     </div>
                 </div>
@@ -53,9 +77,17 @@ export default {
         return {
             options: {
                 maintenance: false,
+                picture: false,
                 seo_title: '',
                 seo_description: '',
-                tagline: ''
+                tagline: '',
+                website_phone: '',
+                website_phone_watsapp: '',
+                label_input: '',
+                placeholder: '',
+                label_distance: '',
+                label_people: '',
+                text_button: ''
             },
             loading: true
         }

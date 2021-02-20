@@ -3,6 +3,9 @@
 use App\Traits\optionsLink;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\noCRUD;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Feature extends Model
 {
@@ -15,17 +18,25 @@ class Feature extends Model
     use noCRUD;
     use optionsLink;
 
-    public function feature_category()
+    public function feature_category(): BelongsTo
     {
         return $this->belongsTo(FeatureCategory::class);
     }
 
-    public function properties()
+    public function options(): HasMany {
+        return $this->hasMany(Option::class, 'parent')->where('type', 'feature');
+    }
+    public function properties(): BelongsToMany
     {
         return $this->belongsToMany(Feature::class, 'property',
             'feature_id', 'property_id');
     }
-    public function options(){
-        return $this->hasMany(Option::class,'parent')->where('type','feature');
+    public function tName() {
+        $lang = app('locale')->getCurrentLocale();
+        $langKey = 'lang-' . $lang;
+        $translation = array_reduce($this->options->all(), function($carry, $item) use ($langKey) {
+            return $item->key == $langKey ? $item->value : $carry;
+        }, $this->name);
+        return $translation;
     }
 }

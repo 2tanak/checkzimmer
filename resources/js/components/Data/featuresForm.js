@@ -3,7 +3,8 @@ export default {
         label: 'Категория',
         placeholder: 'Please enter feature category',
         type: 'select',
-        options: []
+        options: [],
+        active: 0
     },
     name: {
         label: 'Name',
@@ -15,14 +16,14 @@ export default {
         placeholder: 'Please enter feature picture',
         type: 'file',
     },
-    listShow: {
-        label: 'Displayed in the list',
-        placeholder: 'Display feature in search results',
-        type: 'checkbox',
+    inlist: {
+        label: 'Display in list',
+        placeholder: 'Display in list',
+        type: 'checkbox'
     },
-    order: {
-        label: 'Feature display order',
-        placeholder: 'Please enter order',
-        type: 'number',
-    },
+    ord: {
+        label: 'Order in list',
+        placeholder: 'Enter item number',
+        type: 'text'
+    }
 }

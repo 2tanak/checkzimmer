@@ -1,28 +1,38 @@
 <template>
-    <div class="property-card">
+    <div :class="{'property-card':true, 'active' : active}" :id="'property-'+item.id">
         <div class="property-card-container">
-            <div class="no-photo" v-if="noPhotos">
-                <div class="no-photo-small">
-                    <svg width="24" height="11" viewBox="0 0 24 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 3L0 11H24L17 0L11 8L6 3Z" fill="#EDEDEF"/>
-                    </svg>
+            <div style="position:relative;" class="no-photo-block">
+                <div class="no-photo" v-if="noPhotos">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="2" fill="#EDEDEF"></rect> <path d="M10 19L4 27H28L21 16L15 24L10 19Z" fill="#D8D8D8"></path></svg>
                 </div>
+                <div v-if="isSuperhost" class="superhost-icon">{{ $t('Superhost') }}</div>
             </div>
-            <a href="":href="'/'+$i18n.locale+'/single/'+item.slug">
-                <img v-if="getPhotos.length && !sizedForSlider" :src="getPhotos[0].url_max300">
-            </a>
-            <VueSlickCarousel v-if="getPhotos.length && sizedForSlider" class="property-card-slider" :arrows="false" :dots="true"
-                              :slidesToShow="1" :slidesToScroll="1"
-                              ref="carousel" :infinite="true">
-                <div v-for="photo in getPhotos" class="slider-item">
-                    <a style="display:block;" :href="'/'+$i18n.locale+'/single/'+item.slug">
-                        <img :src="photo.url_max300" alt="Property picture">
-                    </a>
-                </div>
-            </VueSlickCarousel>
+            <div style="position:relative;" v-if="getPhotos.length && !sizedForSlider">
+                <a href="":href="'/'+$i18n.locale+'/single/'+item.slug" class="img-link">
+                    <img v-if="getPhotos.length && !sizedForSlider" :src="getPhotos[0].url_max300">
+                </a>
+                <div v-if="isSuperhost" class="superhost-icon">{{ $t('Superhost') }}</div>
+            </div>
+            <div style="position:relative;" v-if="getPhotos.length && sizedForSlider" class="main-small-slider">
+                <VueSlickCarousel v-if="getPhotos.length && sizedForSlider" class="property-card-slider" :arrows="false" :dots="true"
+                                  :slidesToShow="1" :slidesToScroll="1"
+                                  ref="carousel" :infinite="true">
+                    <div v-for="photo in getPhotos" class="slider-item">
+                        <a style="display:block;" :href="'/'+$i18n.locale+'/single/'+item.slug">
+                            <img :src="photo.url_max300" alt="Property picture">
+                        </a>
+                    </div>
+                </VueSlickCarousel>
+                <div v-if="isSuperhost" class="superhost-icon">{{ $t('Superhost') }}</div>
+            </div>
             <div class="data">
                 <a :href="'/'+$i18n.locale+'/single/'+item.slug" class="title"><span>{{ item.name }}</span></a>
                 <div class="data-item">
+                    <div v-if="hideAdress" class="data-item-container">
+                        <div class="distance" v-if="distance">
+                            <img src="/svg/i-distance.svg" alt="">
+                            {{ distance }}{{ $t('km') }} {{ $t('from') }} &nbsp; <span class="desctop-span">{{ $t('said') }}</span> <span class="mobile-span">{{ $t('said') }}.</span> &nbsp; {{ $t('your addresses') }}
+                        </div>
                     <div class="geolocation">
                         <img src="/svg/i-pin.svg" alt="">
                         {{ item.zip }}, {{ item.city }}
@@ -48,39 +58,63 @@
                             <div class="tooltip-block">{{ $t('Tv') }}</div>
                             <img src="/svg/i-tv.svg">
                         </div>
-                        <div v-if="kitchenTypeStr() !== ''" class="kitchen data-block-oval">
-                            <img src="/svg/i-canteen.svg">
-                            {{ kitchenTypeStr() }} {{ $t('Kitchen') }}
+                        <div v-if="getBedType" class="bed data-block-oval" title="Bed">
+                            <img v-if="getBedType === 'single'" src="/svg/i-singlebed.svg">
+                            <img v-if="getBedType === 'double'" src="/svg/i-bedroom.svg">
+                            <span class="property-title">{{ getBedType }} {{ $t('bed') }}</span>
                         </div>
-                        <div v-if="showerStr()" class="shower data-block-oval">
+                        <div v-if="getKitchenType" class="kitchen data-block-oval">
+                            <img src="/svg/i-canteen.svg">
+                            <span class="property-title" v-if="getKitchenType !== 'kitchenette'">
+                                {{ getKitchenType }} {{ $t('kitchen') }}
+                            </span>
+                            <span v-else>
+                                {{ getKitchenType }}
+                            </span>
+                        </div>
+                        <div v-if="getShowerType" class="shower data-block-oval">
                             <img src="/svg/i-shower.svg">
-                            {{  showerStr() }} {{ $t('Shower') }}
+                            {{ getShowerType }} {{ $t('shower') }}
                         </div>
                     </div>
                 </div>
+                </div>
             </div>
             <div class="table-container">
-                <table class="type">
-                    <thead>
-                    <tr>
-                        <th class="title">{{ $t('Type') }}</th>
-                        <th class="title">{{ $t('Num') }}</th>
-                        <th class="title">{{ $t('Personen') }}</th>
-                        <th class="title">{{ $t('Price') }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="room in item.rooms">
-                        <td class="type-block filling-block">
+                <div class="type">
+                    <div class="thead">
+                        <div class="title">{{ $t('Type') }}</div>
+                        <div class="title">{{ $t('Num') }}</div>
+                        <div class="title">{{ $t('Personen') }}</div>
+                        <div class="title">{{ $t('Price') }}</div>
+                    </div>
+                    <div v-for="room in item.rooms.slice(0, 5)" class="visible-part">
+                        <div class="type-block filling-block">
                             <img :src="getPersonsPic(room.person)" :alt="getPersonsText(room.person)">
-                            <span> {{ getRoomName(room) }} </span>
-                        </td>
-                        <td class="type-block quantity-block">{{ room.number }}</td>
-                        <td class="type-block personen-block">{{ room.person }}</td>
-                        <td class="type-block price-block"><b>{{ getMinRoomPrice(item, room) }}&#8364;</b>/{{ $t('persone') }}</td>
-                    </tr>
-                    </tbody>
-                </table>
+                            <span> {{  room.room_type ? room.room_type.name : getRoomName(room) }} </span>
+                        </div>
+                        <div class="type-block quantity-block">{{ room.number }}</div>
+                        <div class="type-block personen-block">{{ room.person }}</div>
+                        <div class="type-block price-block"><b>{{ getMinRoomPrice(item, room) }}&#8364;</b>/{{ $t('persone') }}</div>
+                    </div>
+                </div>
+                <div class="type collapse fade" v-for="room in item.rooms.slice(5)" :id="'id-' + item.id">
+                    <div class="visible-part not-visible-part">
+                        <div class="type-block filling-block">
+                            <img :src="getPersonsPic(room.person)" :alt="getPersonsText(room.person)">
+                            <span> {{ room.room_type ? room.room_type.name : getRoomName(room) }} </span>
+                        </div>
+                        <div class="type-block quantity-block">{{ room.number }}</div>
+                        <div class="type-block personen-block">{{ room.person }}</div>
+                        <div class="type-block price-block"><b>{{ getMinRoomPrice(item, room) }}&#8364;</b>/{{ $t('persone') }}</div>
+                    </div>
+                </div>
+                <a v-if="item.rooms.length > 5" :href="'#' + 'id-' + item.id" class="all-types" :aria-controls="'id-' + item.id" role="button" aria-expanded="false" data-toggle="collapse">
+                    <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M7 1.5C6.72386 1.5 6.5 1.72386 6.5 2V6H2.5C2.22386 6 2 6.22386 2 6.5C2 6.77614 2.22386 7 2.5 7H6.5V11C6.5 11.2761 6.72386 11.5 7 11.5C7.27614 11.5 7.5 11.2761 7.5 11V7H11.5C11.7761 7 12 6.77614 12 6.5C12 6.22386 11.7761 6 11.5 6H7.5V2C7.5 1.72386 7.27614 1.5 7 1.5Z" fill="#7A8793"/>
+                    </svg>
+                    <span>{{ $t('Show all facilities') }}</span>
+                </a>
             </div>
             <div class="night-rating-block">
                 <div class="night">
@@ -92,7 +126,22 @@
                             <path d="M12.1 1.5c-.6-.7-1.5-1-2.4-1-.9 0-1.8.4-2.4 1l-.3.3-.3-.3C6.1.8 5.2.5 4.3.5c-.9 0-1.8.4-2.4 1C.6 2.9.6 5.1 1.9 6.4l4.8 5c.1.1.2.1.3.1.1 0 .2 0 .3-.1l4.8-5c1.3-1.3 1.3-3.5 0-4.9z" fill="#EE483F"/>
                         </svg>
                     </a>
-                    <div class="price"><span>{{ $t('from') }} &euro;{{ minRoomPrice }}</span> {{ $t('night') }}</div>
+                    <div class="price">
+                        <span class="price-span">{{ $t('from') }} &euro;{{ minRoomPrice }}</span>
+                        <span class="night-span">{{ $t('night') }}</span>
+                    </div>
+                    <div class="price-free">
+                        <div v-if="isRealPrice" class="real-price">
+                            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.99502 1.00501C9.26839 1.27838 9.26839 1.7216 8.99502 1.99496L3.99502 6.99496C3.72166 7.26833 3.27844 7.26833 3.00507 6.99496L0.505074 4.49496C0.231707 4.2216 0.231707 3.77838 0.505074 3.50501C0.778441 3.23165 1.22166 3.23165 1.49502 3.50501L3.50005 5.51004L8.00507 1.00501C8.27844 0.731646 8.72166 0.731646 8.99502 1.00501Z" fill="#333646"/>
+                            </svg>
+                            <span>{{ $t('Real price') }}</span>
+                        </div>
+                        <div v-if="isFree" class="free">
+                            <div class="green-circle"></div>
+                            <span>{{ $t('Free') }}</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="rating">
                     <div v-if="item.rate" class="rating-number">
@@ -127,12 +176,13 @@ import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 export default {
     name: "PropertyListItem",
-    props: [ 'item' ],
+    props: [ 'item', 'active' ],
     components: { VueSlickCarousel },
     data() {
         return {
             sizedForSlider: true,
-            NoPhoto: false
+            NoPhoto: false,
+            hideAdress: true,
         }
     },
     mounted() {
@@ -140,7 +190,14 @@ export default {
             this.sizedForSlider = jQuery(window).width() > 1040;
         });
     },
+    created() {
+        this.checkHideAdressStatus();
+    },
     methods: {
+        checkHideAdressStatus(){
+            if(this.item.options.filter(it => it.key === 'hide_address').length === 1)
+                this.hideAdress = false;
+        },
         findOption(name) {
             if (!this.item.options) {
                 return false;
@@ -200,79 +257,65 @@ export default {
                 default: return this.$t('not specified');
             }
         },
-        typeKitchen(roomFacilities) {
-            if (!this.findOption('features')) {
+        getRoomOptionByType(name){
+            let resultName = name.charAt(0).toUpperCase() + name.slice(1);
+            let result =[];
+            this.item.rooms.some( room => {
+                if(room[name] !== 'none') {
+                    let text = room[name].charAt(0).toUpperCase() + room[name].slice(1);
+                    if(result.indexOf(text) === -1)
+                        result.push(text);
+                }
+            } );
+            if(result.length > 0)
+                return  (result[result.length - 1] === 'Kitchenette')? result.join(' + ') : result.join(' + ') + ' ' + resultName ;
+            else
                 return false;
-            }
-            let features = JSON.parse(this.findOption('features').value)
-            if (features.some(item => item.name === 'Shared kitchen')) {
-                return 'shared kitchen'
-            }
-            if (roomFacilities.some(item => item.name === 'Kitchenette')) {
-                return 'kitchenette';
-            }
-            if (roomFacilities.some(item => item.name === 'Kitchen')) {
-                return 'private kitchen'
-            }
-
-            return 'none';
-        },
-        typeShower(roomFacilities) {
-            if (roomFacilities.some(item => item.name === 'Shared bathroom')) {
-                return 'shared';
-            }
-            if (roomFacilities.some(item => item.name === 'Shower') || roomFacilities.some(item => item.name === 'Private bathroom')) {
-                return 'private'
-            }
-
-            return 'none';
-        },
-        kitchenTypeStr() {
-            let priv = this.item.rooms.some( room => {
-                let facilities = this.findOptionRoom(room, 'facilities');
-                let features = facilities ? JSON.parse(facilities.value) : [];
-                return ['private kitchen', 'kitchenette'].includes( this.typeKitchen(features) );
-            } );
-            let shared = this.item.rooms.some( room => {
-                let facilities = this.findOptionRoom(room, 'facilities');
-                let features = facilities ? JSON.parse(facilities.value) : [];
-                return this.typeKitchen(features) === 'shared kitchen';
-            } );
-            let types = [];
-            if (priv) {
-                types.push(this.$t('its'));
-            }
-            if (shared) {
-                types.push(this.$t('general'));
-            }
-            return types.join(' + ');
-        },
-        showerStr() {
-            let priv = this.item.rooms.some( room => {
-                let facilities = this.findOptionRoom(room, 'facilities');
-                let features = facilities ? JSON.parse(facilities.value) : [];
-                return this.typeShower(features) === 'private';
-            } );
-            let shared = this.item.rooms.some( room => {
-                let facilities = this.findOptionRoom(room, 'facilities');
-                let features = facilities ? JSON.parse(facilities.value) : [];
-                return this.typeShower(features) === 'shared';
-            } );
-            let types = [];
-            if (priv) {
-                types.push(this.$t('private'));
-            }
-            if (shared) {
-                types.push(this.$t('shared'));
-            }
-            return types.join(' + ');
         },
         getRoomName(room) {
-            let name = this.findOptionRoom(room, 'name');
-            return name ? name.value : '';
-        }
+            //let name = this.findOptionRoom(room, 'name');
+            let names = ['', this.$t('Single room'), this.$t('Double room'), this.$t('Triple room'), this.$t('Quadruple'), this.$t('Quintuple'), this.$t('Six-seater'), this.$t('Seven-seater'), this.$t('Eight-seater'), this.$t('Nine-seater'), this.$t('Ten-seater') ]
+            return names[room.person] ? names[room.person] : 'n/a';
+        },
+        featureName(item) {
+            let la = this.language_active;
+            let translation = item.options.find( item => item.key === 'lang-' + la );
+            return translation ? translation.value : item.name;
+        },
     },
     computed: {
+        isSuperhost() {
+            let superhost = this.findOption('superhost')
+            return superhost && parseInt(superhost.value);
+        },
+        isHideZip() {
+            let hideZip = this.findOption('hideZip');
+            return hideZip && parseInt(hideZip.value);
+        },
+        isRealPrice() {
+            let realprice = this.findOption('realprice');
+            return realprice && parseInt(realprice.value);
+        },
+        isFree() {
+            let free = this.findOption('free');
+            return free && parseInt(free.value);
+        },
+        getKitchenType() {
+            let personal = this.item.rooms.some( room => room['kitchen'] === 'single' );
+            let kitchenette = this.item.rooms.some( room => room['kitchen'] === 'kitchenette' );
+            let shared = this.item.rooms.some( room => room['kitchen'] === 'shared' );
+            return personal ? 'private' : ( kitchenette ? 'kitchenette' : ( shared ? 'shared' : ''));
+        },
+        getShowerType() {
+            let personal = this.item.rooms.some( room => room['shower'] === 'single' );
+            let shared = this.item.rooms.some( room => room['shower'] === 'shared' );
+            return personal ? 'private' : ( shared ? 'shared' : '');
+        },
+        getBedType() {
+            let single = this.item.rooms.some( room => room['bed'] === 'single' );
+            let double = this.item.rooms.some( room => room['bed'] === 'double' );
+            return single ? 'single' : ( double ? 'double' : '');
+        },
         sumPeopleNumStr() {
             let sum = this.sumPeopleNum(),
                 base_sum = sum;
@@ -294,7 +337,6 @@ export default {
         },
         getPhotos() {
             let photos = this.findOption('photos');
-            console.log(photos);
             if (!photos) {
                 return []
             }
@@ -344,6 +386,7 @@ export default {
             let c_2 = Math.abs(parseFloat(this.item.geo.lat) - parseFloat(this.item.lat));
             return Math.ceil(Math.sqrt( c_1 ** 2 + c_2 ** 2 ) * 111);
         },
+
     }
 }
 
