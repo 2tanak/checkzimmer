@@ -1,6 +1,24 @@
 <div class="sidebar desctop-sidebar">
+
+    @if ($hotel->getCurrentOption('free') == 1)
+    <div class="free-now">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0)">
+                <path d="M8 16C12.411 16 16 12.4113 16 8C16 7.23861 15.8937 6.48828 15.6833 5.76969C15.5796 5.41634 15.2106 5.21338 14.8563 5.31706C14.5026 5.42041 14.3003 5.79069 14.4036 6.14404C14.578 6.74105 14.6667 7.36572 14.6667 8C14.6667 11.6759 11.6759 14.6667 8 14.6667C4.32406 14.6667 1.33333 11.6759 1.33333 8C1.33333 4.32406 4.32406 1.33333 8 1.33333C9.33594 1.33333 10.6213 1.72396 11.717 2.46273C12.022 2.66862 12.4367 2.58773 12.6423 2.28271C12.848 1.97738 12.7677 1.56299 12.4624 1.35726C11.1457 0.469401 9.6027 0 8 0C3.58903 0 0 3.5887 0 8C0 12.4113 3.58903 16 8 16Z" fill="#3B8B3E"/>
+                <path d="M14.8622 1.52869L8.0002 8.39034L5.80489 6.19535C5.54447 5.9351 5.1226 5.9351 4.86218 6.19535C4.60193 6.45577 4.60193 6.87765 4.86218 7.13806L7.52885 9.80473C7.65922 9.9351 7.82947 10 8.0002 10C8.17094 10 8.34119 9.9351 8.47156 9.80473L15.8049 2.47139C16.0651 2.21098 16.0651 1.7891 15.8049 1.52869C15.5445 1.26843 15.1226 1.26843 14.8622 1.52869Z" fill="#3B8B3E"/>
+            </g>
+            <defs>
+                <clipPath id="clip0">
+                    <rect width="16" height="16" fill="white"/>
+                </clipPath>
+            </defs>
+        </svg>
+        <span>{{ __('Free now') }}</span>
+    </div>
+    @endif
+
     <div class="sidebar-top">
-        <?php /*> <div class="sidebar-top-block roominess">
+        <div class="sidebar-top-block roominess">
             <img src="/svg/i-people.svg" alt="alt">
             <div class="sidebar-top-block-item roominess-item">
                 <div class="title">{{ __('roomin.') }}:</div>
@@ -16,26 +34,10 @@
                 <img src="/svg/i-clock.svg" alt="alt">
                 <div class="sidebar-top-block-item rental-period-item">
                     <div class="title">{{ __('Min. lease term') }}:</div>
-                    <div class="subtitle">3 {{ __('days') }}</div>
+                    <div class="subtitle">{{ $hotel->getCurrentOption('rentMin') }} {{ __('days') }}</div>
                 </div>
             </div>
         @endif
-            */ ?>
-
-        <div class="free-now">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clip-path="url(#clip0)">
-                    <path d="M8 16C12.411 16 16 12.4113 16 8C16 7.23861 15.8937 6.48828 15.6833 5.76969C15.5796 5.41634 15.2106 5.21338 14.8563 5.31706C14.5026 5.42041 14.3003 5.79069 14.4036 6.14404C14.578 6.74105 14.6667 7.36572 14.6667 8C14.6667 11.6759 11.6759 14.6667 8 14.6667C4.32406 14.6667 1.33333 11.6759 1.33333 8C1.33333 4.32406 4.32406 1.33333 8 1.33333C9.33594 1.33333 10.6213 1.72396 11.717 2.46273C12.022 2.66862 12.4367 2.58773 12.6423 2.28271C12.848 1.97738 12.7677 1.56299 12.4624 1.35726C11.1457 0.469401 9.6027 0 8 0C3.58903 0 0 3.5887 0 8C0 12.4113 3.58903 16 8 16Z" fill="#3B8B3E"/>
-                    <path d="M14.8622 1.52869L8.0002 8.39034L5.80489 6.19535C5.54447 5.9351 5.1226 5.9351 4.86218 6.19535C4.60193 6.45577 4.60193 6.87765 4.86218 7.13806L7.52885 9.80473C7.65922 9.9351 7.82947 10 8.0002 10C8.17094 10 8.34119 9.9351 8.47156 9.80473L15.8049 2.47139C16.0651 2.21098 16.0651 1.7891 15.8049 1.52869C15.5445 1.26843 15.1226 1.26843 14.8622 1.52869Z" fill="#3B8B3E"/>
-                </g>
-                <defs>
-                    <clipPath id="clip0">
-                        <rect width="16" height="16" fill="white"/>
-                    </clipPath>
-                </defs>
-            </svg>
-            <span>Свободен сейчас</span>
-        </div>
 
     </div>
 
@@ -45,24 +47,30 @@
             <div class="middle">
                 {{ $hotel->getRoomPriceMin() != 0 ? '€'.$hotel->getRoomPriceMin() : 'n/a' }}
             </div>
-            <div class="right">{{ __('per person (including VAT)') }}</div>
+            <div class="right">
+                @if ($hotel->getCurrentOption('inclVAT') == '1')
+                    {{ __('per person (including VAT)') }}
+                @else
+                    {{ __('per person (excluding VAT)') }}
+                @endif
+            </div>
         </div>
         <a href="#" class="inquiry">{{ __('Send request') }}</a>
-        @if (($hotel->getLandlordData('landlordPhoneNumber') == null) || ($hotel->getLandlordData('landlordHidePhone') === true))
+        @if (($hotel->getCurrentOption('landlordPhoneNumber') == null) || ($hotel->getCurrentOption('landlordHidePhone') == 1))
             <div class="number-phone not-phone">
                 <div class="speaks">{{ __('Object owner speaks') }}:</div>
-                <div class="language-item">{{ $hotel->getLandlordData('landlordLanguages') }}</div>
+                <div class="language-item">{{ $hotel->getCurrentOption('landlordLanguages') }}</div>
             </div>
         @else
             <div class="number-phone">
-                <a href="tel:+{{ $hotel->getLandlordData('landlordPhoneNumber') }}">{{ $hotel->getLandlordData('landlordPhoneNumber') }}</a>
+                <a href="tel:+{{ $hotel->getCurrentOption('landlordPhoneNumber') }}">{{ $hotel->getCurrentOption('landlordPhoneNumber') }}</a>
                 <div class="sh_nmr">
                     <span>{{ __('show') }}</span>
                 </div>
                 <div class="message">{{ __('Let us know that you are from the site Check-zimmer.de') }}</div>
                 <div class="language">
                     <div class="speaks">{{ __('Speaks') }}:</div>
-                    <div class="language-item">>{{ $hotel->getLandlordData('landlordLanguages') }}</div>
+                    <div class="language-item">{{ $hotel->getCurrentOption('landlordLanguages') }}</div>
                 </div>
             </div>
         @endif
@@ -71,12 +79,19 @@
             <div class="address">
                 <div class="hotel-name">{{$hotel->name}}</div>
                 <div class="name-surname">
-                    @if (($hotel->getLandlordData('landlordName') != null) && ($hotel->getLandlordData('landlordHideName') != true))
-                    {{ $hotel->getLandlordData('landlordName') }}
+                    @if (($hotel->getCurrentOption('landlordName') != null) && ($hotel->getCurrentOption('landlordHideName') != 1))
+                        {{ $hotel->getCurrentOption('landlordName') }}
                     @endif
                 </div>
-                <div class="hotel-adress">{{$hotel->address}}</div>
-                <div class="zip-city" style="white-space: nowrap;">{{$hotel->zip}} {{$hotel->city}}</div>
+                @if ($hotel->getCurrentOption('hideAddress') != '1')
+                    <div class="hotel-adress">{{$hotel->address}}</div>
+                @endif
+                <div class="zip-city" style="white-space: nowrap;">
+                    @if ($hotel->getCurrentOption('hideZip') != '1')
+                        {{ $hotel->zip }}
+                    @endif
+                    {{ $hotel->city }}
+                </div>
             </div>
             <div class="map-container">
                 <a class="map-picture" href="#object-description">

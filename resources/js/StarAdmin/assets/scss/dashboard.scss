@@ -71,7 +71,6 @@ a.back-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 10px;
 }
 a.back-link:hover {
     transition: all 0.2s;
@@ -79,6 +78,9 @@ a.back-link:hover {
 }
 .form-group label {
     line-height: inherit !important;
+}
+.custom-control-label {
+    cursor: pointer;
 }
 
 

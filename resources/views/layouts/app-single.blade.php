@@ -7,7 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $hotel->getSEOTitle() }}</title>
+    <meta name="description" content="{{ $hotel->getSEODescription() }}"/>
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Inter:400,500,600,700&display=swap&subset=cyrillic" rel="stylesheet">
@@ -77,6 +78,7 @@
                         @include('partials.logo-mobile-menu')
                     </a>
                 </div>
+                @include('partials.lang-switch-mobile')
                 <ul>
                     <li>
                         <a href="{{ route(app('locale')->routeApply('favorites')) }}">
@@ -95,9 +97,11 @@
                         </a>
                     </li>
                 </ul>
-                <a class="whatsapp-number" href="tel:{{ str_replace('', '', $options['website_phone'] ?? '') }}">
-                    <img src="/svg/whatsapp-mobile.svg" alt="Whatsapp">
-                    {{ $options['website_phone'] ?? '' }}
+                <a class="whatsapp-number" href="tel:{{ str_replace(' ', '', $options['website_phone'] ?? '') }}">
+                    @if (($hotel->getCurrentOption('landlordPhoneNumber') != null) && ($hotel->getCurrentOption('landlordHidePhone') != 1))
+                    {{ $hotel->getCurrentOption('landlordPhoneNumber') ?? '' }}
+                    @endif
+                    <span class="explanatory-text">24/7 бесплатно с мобильного</span>
                 </a>
                 @include('partials.lang-switch-mobile')
             </div>
@@ -164,8 +168,8 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         jQuery('#arrival-date, #date-departure').datepicker({
-            autoclose: true
-        });
+            format: "dd/mm/yyyy"
+        })
     });
 </script>
 
