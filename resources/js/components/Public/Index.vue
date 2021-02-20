@@ -545,7 +545,7 @@ import ApiRequest from "../API/ApiRequest";
 import PropertyListItem from "./PropertyListItem";
 
 import styles from '../Data/mapStyle';
-
+import popupInit from '../Data/mapMarker';
 let PropertyRequest = ApiRequest('property')
 let properties = new PropertyRequest;
 
@@ -631,13 +631,24 @@ export default{
             });
 
             this.map.setOptions({styles: styles});
-            this.property.forEach( item => {
-                var popup = new Popup(
-                    new google.maps.LatLng(parseFloat(item.lat), parseFloat(item.lng)),
-                    this.createInfoBlock(item.name, item.id)
-                )
-                popup.setMap(this.map);
-            })
+            this.setMapMarker();
+        },
+        setMapMarker() {
+            if (typeof google === 'undefined' || !document.getElementById('map')) {
+                setTimeout(() => {
+                    this.setMapMarker();
+                }, 100);
+            } else {
+                let popupClass = new popupInit();
+                let popupFactory = new popupClass.init();
+                this.property.forEach(item => {
+                    var popup = new popupFactory(
+                        new google.maps.LatLng(parseFloat(item.lat), parseFloat(item.lng)),
+                        this.createInfoBlock(item.name, item.id)
+                    );
+                    popup.setMap(this.map);
+                })
+            }
         },
         goToMap(item, index) {
             this.setActiveProperty(index);
@@ -784,64 +795,6 @@ export default{
             return property.rooms.reduce( (acc, cur) => acc = Math.min(acc, cur.price) )
         }
     }
-}
-class Popup extends google.maps.OverlayView {
-    constructor(position, content) {
-        super();
-        this.position = position;
-        content.classList.add("popup-bubble");
-        // This zero-height div is positioned at the bottom of the bubble.
-        const bubbleAnchor = document.createElement("div");
-        bubbleAnchor.classList.add("popup-bubble-anchor");
-        bubbleAnchor.appendChild(content);
-        // This zero-height div is positioned at the bottom of the tip.
-        this.containerDiv = document.createElement("div");
-        this.containerDiv.classList.add("popup-container");
-        this.containerDiv.appendChild(bubbleAnchor);
-        // Optionally stop clicks, etc., from bubbling up to the map.
-        Popup.preventMapHitsAndGesturesFrom(this.containerDiv);
-    }
-    /** Called when the popup is added to the map. */
-    onAdd() {
-        this.getPanes().floatPane.appendChild(this.containerDiv);
-    }
-    /** Called when the popup is removed from the map. */
-    onRemove() {
-        if (this.containerDiv.parentElement) {
-            this.containerDiv.parentElement.removeChild(this.containerDiv);
-        }
-    }
-    /** Called each frame when the popup needs to draw itself. */
-    draw() {
-        const divPosition = this.getProjection().fromLatLngToDivPixel(
-            this.position
-        );
-        // Hide the popup when it is far out of view.
-        const display =
-            Math.abs(divPosition.x) < 4000 && Math.abs(divPosition.y) < 4000
-                ? "block"
-                : "none";
-
-        if (display === "block") {
-            this.containerDiv.style.left = divPosition.x + "px";
-            this.containerDiv.style.top = divPosition.y + "px";
-        }
-
-        if (this.containerDiv.style.display !== display) {
-            this.containerDiv.style.display = display;
-        }
-    }
-    toggle() {
-        if (this.div) {
-            console.log(this);
-            if (this.div.style.visibility === "hidden") {
-                this.show();
-            } else {
-                this.hide();
-            }
-        }
-    }
-
 }
 </script>
 <style>
