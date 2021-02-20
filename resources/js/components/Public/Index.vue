@@ -545,7 +545,7 @@ import ApiRequest from "../API/ApiRequest";
 import PropertyListItem from "./PropertyListItem";
 
 import styles from '../Data/mapStyle';
-
+import popupInit from '../Data/mapMarker';
 let PropertyRequest = ApiRequest('property')
 let properties = new PropertyRequest;
 
@@ -690,13 +690,24 @@ export default{
             });
 
             this.map.setOptions({styles: styles});
-            this.property.forEach( item => {
-                var popup = new Popup(
-                    new google.maps.LatLng(parseFloat(item.lat), parseFloat(item.lng)),
-                    this.createInfoBlock(item.name, item.id)
-                )
-                popup.setMap(this.map);
-            })
+            this.setMapMarker();
+        },
+        setMapMarker() {
+            if (typeof google === 'undefined' || !document.getElementById('map')) {
+                setTimeout(() => {
+                    this.setMapMarker();
+                }, 100);
+            } else {
+                let popupClass = new popupInit();
+                let popupFactory = new popupClass.init();
+                this.property.forEach(item => {
+                    var popup = new popupFactory(
+                        new google.maps.LatLng(parseFloat(item.lat), parseFloat(item.lng)),
+                        this.createInfoBlock(item.name, item.id)
+                    );
+                    popup.setMap(this.map);
+                })
+            }
         },
         goToMap(item, index) {
             this.setActiveProperty(index);
