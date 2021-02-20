@@ -4,6 +4,7 @@ namespace App;
 
 use App\Services\BookingDataService;
 use App\Traits\noCRUD;
+use App\Traits\optionsLink;
 use App\Traits\propertyFeatures;
 use Illuminate\Database\Eloquent\Model;
 use DB;
@@ -13,6 +14,7 @@ class Property extends Model
 {
     use noCRUD;
     use propertyFeatures;
+    use optionsLink;
 
     protected $table = 'property';
     protected $fillable = ['user_id', 'type', 'status', 'ord', 'views', 'access', 'lat', 'lng', 'name', 'city', 'zip', 'address', 'slug', 'description'];
@@ -101,11 +103,6 @@ class Property extends Model
         $langs = self::optionFind($this->_options, 'languages');
         return  $langs ? explode(',', $langs): ['ru', 'en', 'de'];
     }
-
-//    public function features() {
-//        $this->getOptions();
-//        return json_decode(self::optionFind($this->_options, 'features'), true) ?: [];
-//    }
 
     public function features()
     {

@@ -101,6 +101,8 @@
         id: 0,
         name: '',
         picture: '',
+        listShow: false,
+        order: 0,
         feature_category: {}
     };
 

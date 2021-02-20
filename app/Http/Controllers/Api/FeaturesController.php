@@ -9,7 +9,12 @@ class FeaturesController extends Controller
 {
     public function index()
     {
-        return response()->json(Feature::ind());
+        $features = Feature::ind();
+        foreach ($features as $key => $item) {
+            $features[$key]->order = $item->getCurrentOption('order') == '' ? 0 : (int) $item->getCurrentOption('order');
+            $features[$key]->listShow = $item->getCurrentOption('listShow') == '' ? false : (bool) $item->getCurrentOption('listShow');
+        }
+        return response()->json($features);
     }
 
     public function show($id)
@@ -53,6 +58,19 @@ class FeaturesController extends Controller
         $option->value = $request->inlist ?? '';
         $option->save();
 
+        $option = Option::where('key', 'features')->where('parent', $feature->id)->first();
+        $optionsData = [
+            'key' => 'features',
+            'parent' => $feature->id,
+            'type' => 'property',
+            'value' => json_encode(['listShow'=>$request->listShow, 'order'=>$request->order]),
+        ];
+        if ($option!=null) {
+            $option->update($optionsData);
+        } else {
+            $option->Option::create($optionsData);
+        }
+        $option->save();
         return response()->json(['code' => 'ok', 'feature' => $feature]);
     }
 

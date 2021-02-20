@@ -1,5 +1,6 @@
 <?php namespace App;
 
+use App\Traits\optionsLink;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\noCRUD;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,6 +16,7 @@ class Feature extends Model
     protected $with = ['feature_category', 'options'];
 
     use noCRUD;
+    use optionsLink;
 
     public function feature_category(): BelongsTo
     {
