@@ -103,7 +103,6 @@
                     @endif
                     <span class="explanatory-text">24/7 бесплатно с мобильного</span>
                 </a>
-                @include('partials.lang-switch-mobile')
             </div>
         </div>
 

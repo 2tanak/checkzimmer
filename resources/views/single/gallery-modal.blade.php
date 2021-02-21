@@ -6,17 +6,23 @@
     </div>
     <div class="slider-block">
         <div class="big-slider">
+            @if ($hotel->photoMain())
+                <div class="slider-item"><img src="{{ $hotel->photoMain()['url_original'] }}" alt="alt"></div>
+            @endif
             @foreach ($hotel->photos() as $key => $photo)
                 <div class="slider-item"><img src="{{ $photo['url_original'] }}" alt="alt"></div>
             @endforeach
         </div>
         <div class="small-slider">
+            @if ($hotel->photoMain())
+                <div class="slider-item"><img src="{{ $hotel->photoMain()['url_original'] }}" alt="alt"></div>
+            @endif
             @foreach ($hotel->photos() as $key => $photo)
                 <div class="slider-item"><img src="{{ $photo['url_max300'] }}" alt="alt"></div>
             @endforeach
         </div>
         <div class="name-slide-number">
-            <div class="number">1/{{count($hotel->photos())}}</div>
+            <div class="number"><span class="current">1</span>/{{count($hotel->photos()) + 1}}</div>
         </div>
     </div>
 </div>

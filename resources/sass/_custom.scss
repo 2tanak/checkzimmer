@@ -7648,3 +7648,31 @@ body .popup-bubble-anchor.active:after {
 }
 
 /*---end-google-map---*/
+
+/*---inquiry-form---*/
+.inquiry-modal .checkbox-block.error label {
+    color: red;
+}
+.inquiry-modal .input.error {
+    outline: 2px solid red!important;
+}
+.inquiry-modal .input-error {
+    background-color: red;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    margin-top: 10px;
+    width: 100%;
+}
+.inquiry-modal .sent-ok {
+    background-color: green;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    margin-top: 10px;
+    width: 100%;
+}
+.inquiry-modal .inactive {
+    display: none!important;
+}
+/*---end-inquiry-form---*/

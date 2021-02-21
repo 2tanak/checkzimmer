@@ -6,42 +6,45 @@
             </svg>
         </div>
         <div class="title">{{ __('Send request') }}</div>
-        <form>
+        <form class="property-inquiry-form" method="POST">
+            @csrf
+            <input type="hidden" value="{{ $hotel->id }}" name="property" />
+            <input type="hidden" value="{{ app()->getLocale() }}" name="language" />
             <div class="input-block-item">
-                <input id="company" type="text">
+                <input id="company" type="text" name="company" class="input">
                 <label for="company">{{ __('Company name') }}</label>
             </div>
             <div class="input-block-item">
-                <input id="name" type="text">
+                <input id="name" type="text" name="name" class="input" required>
                 <label for="name">{{ __('Name and Surname') }}*</label>
                 <div class="validation-block">{{ __('Please fill in this field') }}</div>
             </div>
             <div class="input-block-item">
-                <input id="email" type="email">
+                <input id="email" type="email" name="email" class="input" required>
                 <label for="email">{{ __('Email') }}*</label>
                 <div class="validation-block">{{ __('Please fill in this field') }}</div>
             </div>
             <div class="input-block-item">
-                <input id="telephone" type="tel">
+                <input id="telephone" type="tel" name="telephone" class="input" required>
                 <label for="telephone">{{ __('Phone number') }}*</label>
                 <div class="validation-block">{{ __('Please fill in this field') }}</div>
             </div>
             <div class="data-block">
-                <input id="arrival-date" data-provide="datepicker" readonly>
+                <input id="arrival-date" data-provide="datepicker" name="arrival-date" readonly class="input">
                 <label for="arrival-date">{{ __('Arrival date') }}</label>
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M13 0H14V2H16C16.5523 2 17 2.44772 17 3V6V7V17C17 17.5523 16.5523 18 16 18H2C1.44772 18 1 17.5523 1 17V7V6V3C1 2.44772 1.44772 2 2 2H4V0H5V2H13V0ZM5 3H4H2V6H16V3H14H13H5ZM16 17H2V7H16V17ZM10 12H14V13H10V12ZM14 10H10V11H14V10ZM4 12H8V13H4V12ZM8 10H4V11H8V10Z" fill="#7A8793"/>
                 </svg>
             </div>
             <div class="data-block">
-                <input id="date-departure" data-provide="datepicker" readonly>
+                <input id="date-departure" data-provide="datepicker" name="date-departure" readonly class="input">
                 <label for="date-departure">{{ __('Date departure') }}</label>
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M13 0H14V2H16C16.5523 2 17 2.44772 17 3V6V7V17C17 17.5523 16.5523 18 16 18H2C1.44772 18 1 17.5523 1 17V7V6V3C1 2.44772 1.44772 2 2 2H4V0H5V2H13V0ZM5 3H4H2V6H16V3H14H13H5ZM16 17H2V7H16V17ZM10 12H14V13H10V12ZM14 10H10V11H14V10ZM4 12H8V13H4V12ZM8 10H4V11H8V10Z" fill="#7A8793"/>
                 </svg>
             </div>
             <div class="select-block">
-                <select id="number-persons">
+                <select id="number-persons" name="number-persons" class="input">
                     <option>1 {{ __('Person') }}</option>
                     <option>2 {{ __('Persons') }}</option>
                     <option>3 {{ __('Persons') }}</option>
@@ -52,7 +55,7 @@
                 <label for="number-persons">{{ __('Number persons') }}</label>
             </div>
             <div class="select-block">
-                <select id="type">
+                <select id="type" name="type" class="input">
                     <option>{{ __('Whole apartment') }}</option>
                     <option>{{ __('House') }}</option>
                     <option>{{ __('Room') }}</option>
@@ -61,17 +64,82 @@
                 <label for="number-persons">{{ __('Housing type') }}</label>
             </div>
             <div class="text-area-block">
-                <textarea placeholder="{{ __('Message to owner') }}"></textarea>
+                <textarea placeholder="{{ __('Message to owner') }}" name="message" class="input"></textarea>
             </div>
             <div class="checkbox-block checkbox-middle">
-                <input id="email-checkbox" class="checkbox" type="checkbox">
+                <input id="email-checkbox" class="checkbox input" name="email-checkbox" type="checkbox">
                 <label for="email-checkbox">{{ __('Send me a copy by email') }}</label>
             </div>
             <div class="checkbox-block checkbox-top">
-                <input id="consent-checkbox" class="checkbox" type="checkbox">
+                <input id="consent-checkbox" class="checkbox input" name="consent-checkbox" type="checkbox" required>
                 <label for="consent-checkbox">{{ __('I consent to the processing of my data as described in') }} <a href="#">{{ __('statement of consent') }}</a> {{ __('from') }} Checkzimmer.</label>
             </div>
             <a class="send-request" href="#">{{ __('Send request') }}</a>
+            <div class="input-error inactive">{{ __('Please fill in required fields') }}</div>
+            <div class="sent-ok inactive">{{ __('The form was sent successfully') }}</div>
         </form>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function(e) {
+        jQuery('.inquiry-modal .input').on('input', function(e) {
+            jQuery(this).removeClass('error');
+            jQuery(this).closest('.checkbox-block').removeClass('error');
+            jQuery('.inquiry-modal .input-error').addClass('inactive');
+        });
+
+        jQuery('.send-request').click(function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            let errors = false;
+            jQuery('.inquiry-modal-overlay .input').each(function() {
+                let req = jQuery(this).prop('required');
+
+                if (req) {
+                    switch (jQuery(this).attr('type')) {
+                        case 'text':
+                        case 'email':
+                        case 'tel':
+                            if (jQuery(this).val() === '' ) {
+                                console.log(jQuery(this).attr('name'));
+                                jQuery(this).addClass('error');
+                                jQuery('.inquiry-modal .input-error').removeClass('inactive');
+                                errors = true;
+                            }
+                            break;
+                        case 'checkbox':
+                            if (!jQuery(this).prop('checked')) {
+                                console.log(jQuery(this).attr('name'));
+                                jQuery(this).closest('.checkbox-block').addClass('error');
+                                jQuery('.inquiry-modal .input-error').removeClass('inactive');
+                                errors = true;
+                            }
+                            break;
+                    }
+                }
+            });
+            if (!errors) {
+                jQuery.post('{{ route('inquiryForm') }}', jQuery('.property-inquiry-form').serialize(), function() {
+                    jQuery('.inquiry-modal .sent-ok').removeClass('inactive');
+                    jQuery('.inquiry-modal .input').each(function(e) {
+                        switch (jQuery(this).attr('type')) {
+                            case 'text':
+                            case 'email':
+                            case 'tel':
+                                jQuery(this).val('');
+                                break;
+                            case 'checkbox':
+                                jQuery(this).prop('checked', false);
+                                break;
+                        }
+                    });
+
+                    setTimeout(() => {
+                        jQuery('.inquiry-modal .sent-ok').addClass('inactive');
+                        //jQuery('.inquiry-modal .modal-close').trigger('click');
+                    }, 2000);
+                })
+            }
+        });
+    })
+</script>
