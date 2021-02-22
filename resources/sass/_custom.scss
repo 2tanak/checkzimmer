@@ -1273,11 +1273,12 @@ h1.list-title {
     display: flex;
     align-items: center;
     white-space: nowrap;
+    margin-bottom: 8px;
 }
 .property-card .humans img {
     width: 13px;
     height: 14px;
-    margin-right: 4px;
+    margin-right: 5px;
 }
 .property-card .distance {
     font-weight: 400;
@@ -1293,8 +1294,8 @@ h1.list-title {
     display: none;
 }
 .property-card .distance img {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 13px;
     margin-right: 4px;
 }
 .property-card .additionally {
@@ -1735,7 +1736,7 @@ h1.list-title {
     min-height: auto;
     width: 80.2%;
 }
-.list-content .property.not-map .property-card.collapse-item .data-item {
+.list-content .property.not-map .property-card.collapse-item .data-item > div:first-of-type {
     display: flex;
     align-items: center;
 }
@@ -1826,6 +1827,9 @@ h1.list-title {
 .list-content .property.show-map .property-card.collapse-item .no-photo-block {
     display: none;
 }
+.list-content .property.show-map .property-card.collapse-item .photo-container {
+    display: none;
+}
 .list-content .property.show-map .property-card.collapse-item .main-small-slider {
     display: none;
 }
@@ -1856,7 +1860,7 @@ h1.list-title {
     width: auto;
     height: auto;
 }
-.list-content .property.show-map .property-card.collapse-item .data-item {
+.list-content .property.show-map .property-card.collapse-item .data-item > div:first-of-type {
     display: flex;
     align-items: center;
     margin-top: 5px;
@@ -2871,13 +2875,8 @@ header.height-menu .mobile-menu {
     .property-card .type {
         width: auto;
     }
-    .property-card .type .type-block.filling-block {
-        max-width: none;
-        min-width: auto;
-        overflow: visible;
-    }
     .property-card .table-container {
-        min-width: 300px;
+        min-width: 315px;
     }
     .property-card .all-types-content .type .quantity-block {
         width: 51px;
