@@ -14,7 +14,7 @@
                             <a href="#">{{ $t('Sort by default') }}</a>
                             <div class="filter-block">
                                 <ul>
-                                    <li class="check">{{ $t('Sort by default') }}</li>
+                                    <li @click.prevent="loadSort('default')" class="check">{{ $t('Sort by default') }}</li>
                                     <li @click.prevent="loadSort('min')">{{ $t('Price low to high') }}</li>
                                     <li @click.prevent="loadSort('max')">{{ $t('Price high to low') }}</li>
                                     <li @click.prevent="loadSort('rating')">{{ $t('By rating') }}</li>
@@ -545,17 +545,21 @@ import ApiRequest from "../API/ApiRequest";
 import PropertyListItem from "./PropertyListItem";
 
 import styles from '../Data/mapStyle';
-
+import popupInit from '../Data/mapMarker';
 let PropertyRequest = ApiRequest('property')
 let properties = new PropertyRequest;
 
 let newSearch = {
     address: '',
-    km: '20',
+    km: '30',
     people: '2',
+    single: false,
+    double: false,
+    multi: false,
+    ord: 'def'
 };
 
-export default{
+export default {
     name: 'app',
     components: {
         PropertyListItem
@@ -576,6 +580,7 @@ export default{
     },
     mounted() {
         let that = this;
+
         jQuery('.entry.login-link').click(function(e) {
             that.login(e);
         })
@@ -585,9 +590,51 @@ export default{
         });
         jQuery(document).on('click', '.popup-container .index', (e) => {
             this.selectMapMarker(e);
+        });
+        jQuery('#number-personse').change( (e) => {
+            this.search.people = jQuery('#number-personse').val()
+        })
+        jQuery('#distance-select').change( (e) => {
+            this.search.km = jQuery('#distance-select').val()
+        })
+        jQuery('#text').on('input', (e) => {
+            this.search.address = jQuery('#text').val()
+        })
+        jQuery('#single-rooms').on('input', (e) => {
+            this.search.single = jQuery('#single-rooms').prop('checked')
+        })
+        jQuery('#double-rooms').on('input', (e) => {
+            this.search.double = jQuery('#double-rooms').prop('checked')
+        })
+        jQuery('#multi-bed-rooms').on('change', (e) => {
+            this.search.multi = jQuery('#multi-bed-rooms').prop('checked')
         })
 
-        properties.byPage(1)
+        jQuery('.find-housing').click((e) => {
+            this.submitForm();
+        });
+
+        jQuery(window).scroll((e) => {
+            if (!jQuery('.list-content .property').hasClass('show-map')) {
+                return;
+            }
+            let mapLayout = jQuery('.property-container').offset();
+            let scrollTop = jQuery(window).scrollTop();
+            let delta = scrollTop - mapLayout.top;
+            let scrollEnd = scrollTop - (mapLayout.top + jQuery('.property-container').height() - jQuery(window).height());
+            if (delta > 0 && scrollEnd <=0) {
+                jQuery('.list-content .google-map').css({ position: 'fixed', transform: 'translate3d(0, 0, 0)' })
+
+            } else if (scrollEnd > 0 ) {
+                jQuery('.list-content .google-map').css({ position: 'fixed', transform: 'translate3d(0, -'+scrollEnd+'px, 0)', 'transition-duration': '0' })
+            } else {
+                jQuery('.list-content .google-map').css({ position: 'absolute', transform: 'translate3d(0, 0, 0)' })
+            }
+
+        });
+
+        this.submitForm(true);
+        /*properties.byPage(1)
             .then( resp => {
                 this.property = resp.data.objects.data;
                 this.property.forEach((item,index) => this.activeItems[index] = false);
@@ -602,11 +649,11 @@ export default{
                 that.favoritesDisplay();
                 that.foundTotal();
                 that.initMap();
-            })
+            })*/
 
         jQuery('body').on('click', 'a.collapse-circle', function(e) {
             e.preventDefault();
-            var parent = jQuery(this).closest('.property-card');
+            let parent = jQuery(this).closest('.property-card');
             jQuery(parent).toggleClass('collapse-item');
             jQuery(this).toggleClass('active');
         });
@@ -631,17 +678,32 @@ export default{
             });
 
             this.map.setOptions({styles: styles});
-            this.property.forEach( item => {
-                var popup = new Popup(
-                    new google.maps.LatLng(parseFloat(item.lat), parseFloat(item.lng)),
-                    this.createInfoBlock(item.name, item.id)
-                )
-                popup.setMap(this.map);
-            })
+            this.setMapMarker();
+        },
+        setMapMarker() {
+            if (typeof google === 'undefined' || !document.getElementById('map')) {
+                setTimeout(() => {
+                    this.setMapMarker();
+                }, 100);
+            } else {
+                let popupClass = new popupInit();
+                let popupFactory = new popupClass.init();
+                this.property.forEach(item => {
+                    var popup = new popupFactory(
+                        new google.maps.LatLng(parseFloat(item.lat), parseFloat(item.lng)),
+                        this.createInfoBlock('&euro;' + this.minRoomPrice(item), item.id)
+                    );
+                    popup.setMap(this.map);
+                })
+            }
         },
         goToMap(item, index) {
+            console.log(jQuery('.popup-bubble[data-id="' + item.id + '"]'));
             this.setActiveProperty(index);
             this.map.setCenter({ lat: parseFloat(item.lat), lng: parseFloat(item.lng)});
+            setTimeout(() => {
+                jQuery('.popup-bubble[data-id="' + item.id + '"]').closest('.popup-bubble-anchor').addClass('active');
+            }, 10);
         },
         createInfoBlock(text, id) {
             var newDiv = document.createElement("div");
@@ -653,9 +715,10 @@ export default{
         },
         selectMapMarker(e) {
             let elem = e.target;
-            if (jQuery(elem).hasClass('index')){
+            if (jQuery(elem).hasClass('index')) {
                 elem = jQuery(elem).parent();
             }
+
             let id = parseInt(jQuery(elem).attr('data-id'));
 
             let index = this.property.findIndex( item => item.id === id );
@@ -663,8 +726,11 @@ export default{
             this.setActiveProperty(index);
             this.scrollActiveMap(id);
 
+            jQuery(elem).closest('.popup-bubble-anchor').addClass('active');
+
         },
         setActiveProperty(index) {
+            jQuery('.popup-bubble-anchor').removeClass('active');
             this.activeItems.forEach((item, ind) => {
                 Vue.set(this.activeItems, ind, false);
             })
@@ -706,7 +772,8 @@ export default{
             });
         },
 
-        submitForm() {
+        submitForm(clear) {
+            this.page = clear ? 0 : this.page + 1;
             this.loading = true;
             let that = this;
 
@@ -714,8 +781,18 @@ export default{
                 .then( resp => {
                     that.property = resp.data.objects.data;
                     that.page = resp.data.objects.current_page;
+                    that.additional_pages = resp.data.current_page < resp.data.last_page;
                     that.loading = false;
+                    if (resp.data.objects.current_page  >= resp.data.objects.last_page - 1) {
+                        if (that.additional_load == false) {
+                            that.endoflist = true;
+                        }
+                        that.additional_load = false;
+                        that.page = 0;
+                    }
                     that.foundTotal()
+                    that.favoritesDisplay();
+                    that.initMap();
                 })
         },
         loadMore() {
@@ -745,22 +822,15 @@ export default{
         },
 
         loadSort(order) {
-            let data = {};
+            this.search.ord = order;
+            this.submitForm();
 
-            if (order == 'min') {
-                data = {'sort' : 'desc', 'field' : 'price'};
-            } else if (order == 'max') {
-                data = {'sort' : 'asc', 'field' : 'price'};
-            } else {
-                data = {'sort' : 'desc', 'field' : 'hotel_rating'};
-            }
-
-            properties.request('querySort', data)
+            /*properties.request('querySort', data)
                 .then( resp => {
                     this.property = resp.data.objects.data;
                     that.favoritesDisplay();
                     that.foundTotal();
-                })
+                })*/
         },
 
         favoritesCount() {
@@ -777,70 +847,17 @@ export default{
             jQuery('.property-found').text(this.property.length);
         },
         minRoomPrice(property, room) {
-            if (room.price) {
+            if (room && room.price) {
                 return room.price;
             }
-            return property.rooms.reduce( (acc, cur) => acc = Math.min(acc, cur.price) )
-        }
-    }
-}
-class Popup extends google.maps.OverlayView {
-    constructor(position, content) {
-        super();
-        this.position = position;
-        content.classList.add("popup-bubble");
-        // This zero-height div is positioned at the bottom of the bubble.
-        const bubbleAnchor = document.createElement("div");
-        bubbleAnchor.classList.add("popup-bubble-anchor");
-        bubbleAnchor.appendChild(content);
-        // This zero-height div is positioned at the bottom of the tip.
-        this.containerDiv = document.createElement("div");
-        this.containerDiv.classList.add("popup-container");
-        this.containerDiv.appendChild(bubbleAnchor);
-        // Optionally stop clicks, etc., from bubbling up to the map.
-        Popup.preventMapHitsAndGesturesFrom(this.containerDiv);
-    }
-    /** Called when the popup is added to the map. */
-    onAdd() {
-        this.getPanes().floatPane.appendChild(this.containerDiv);
-    }
-    /** Called when the popup is removed from the map. */
-    onRemove() {
-        if (this.containerDiv.parentElement) {
-            this.containerDiv.parentElement.removeChild(this.containerDiv);
-        }
-    }
-    /** Called each frame when the popup needs to draw itself. */
-    draw() {
-        const divPosition = this.getProjection().fromLatLngToDivPixel(
-            this.position
-        );
-        // Hide the popup when it is far out of view.
-        const display =
-            Math.abs(divPosition.x) < 4000 && Math.abs(divPosition.y) < 4000
-                ? "block"
-                : "none";
-
-        if (display === "block") {
-            this.containerDiv.style.left = divPosition.x + "px";
-            this.containerDiv.style.top = divPosition.y + "px";
-        }
-
-        if (this.containerDiv.style.display !== display) {
-            this.containerDiv.style.display = display;
-        }
-    }
-    toggle() {
-        if (this.div) {
-            console.log(this);
-            if (this.div.style.visibility === "hidden") {
-                this.show();
-            } else {
-                this.hide();
+            if (property.rooms.length === 0) {
+                console.log(property.name);
+                return 0;
             }
+            console.log('ne');
+            return property.rooms.reduce( (acc, cur) => cur.price ? ( acc ? Math.min(acc, cur.price) : cur.price ) : acc, 0 )
         }
     }
-
 }
 </script>
 <style>

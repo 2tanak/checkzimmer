@@ -5,10 +5,10 @@
         </div>
         <div class="small-photo">
             @foreach ($hotel->photos() as $key => $photo)
-                @if ($key == 3 && count($hotel->photos()) > 5)
+                @if ($key == 3 && count($hotel->photos())+1 > 5)
                     <a class="open-gallery amount-photo" href="#">
                         <img src="{{ $photo['url_max300'] }}" alt="alt">
-                        <div class="number-photos">+{{ count($hotel->photos()) - 5 }} {{ __('photo') }}</div>
+                        <div class="number-photos">+{{ count($hotel->photos()) - 5 + 1 }} {{ __('photo') }}</div>
                     </a>
                 @else
                     <a class="open-gallery" href="#" {{ $key }}><img src="{{ $photo['url_max300'] }}" alt="Фото отеля {{ $key }}"></a>

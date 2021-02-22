@@ -1198,6 +1198,7 @@ h1.list-title {
 .property-card .property-card-container {
     padding: 16px;
     display: flex;
+    align-items: flex-start;
 }
 .property.not-map .property-card:first-of-type {
     border-radius: 12px 12px 0 0;
@@ -1504,17 +1505,26 @@ h1.list-title {
 .favorites.favorites-mobile {
     display: none;
 }
-.property-card .price {
-    font-weight: 400;
+.property-card .price  {
+    width: 70px;
+    margin-top: 23px;
+}
+.property-card .price-span {
+    font-weight: 700;
     font-size: 16px;
     line-height: 100%;
     text-align: center;
     color: #333646;
-    width: 70px;
-    margin-top: 23px;
+    display: block;
+    white-space: nowrap;
 }
-.property-card .price span {
-    font-weight: 700;
+.property-card .night-span {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    text-align: center;
+    color: #333646;
+    display: block;
 }
 .property-card .price-free {
     margin-top: 35px;
@@ -1523,10 +1533,13 @@ h1.list-title {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    margin-left: -1px;
+    position: relative;
 }
 .property-card .price-free .real-price svg {
-    margin-right: 4px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -13px;
 }
 .property-card .price-free .real-price span {
     font-weight: 400;
@@ -1538,13 +1551,17 @@ h1.list-title {
 .property-card .price-free .free {
     display: flex;
     align-items: center;
+    position: relative;
 }
 .property-card .price-free .free .green-circle {
     width: 6px;
     height: 6px;
     background: #6BB63F;
     border-radius: 50%;
-    margin-right: 6px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -12px;
 }
 .property-card .price-free .free span {
     font-weight: 400;
@@ -1670,6 +1687,12 @@ h1.list-title {
 .list-content .property .property-card.collapse-item .price-free {
     display: none;
 }
+.property-card.collapse-item .no-photo-block {
+    display: none;
+}
+.property-card.collapse-item .superhost-icon {
+    display: none;
+}
 .list-content .property.show-map .property-card .all-types-content {
     display: none;
 }
@@ -1695,7 +1718,7 @@ h1.list-title {
 .list-content .property.not-map .property-card.collapse-item .night .price {
     margin-top: 0;
 }
-.list-content .property.not-map .property-card.collapse-item .property-card-slider {
+.list-content .property.not-map .property-card.collapse-item .main-small-slider {
     display: none;
 }
 .list-content .property.not-map .property-card.collapse-item .geolocation {
@@ -1781,18 +1804,21 @@ h1.list-title {
     display: flex;
 }
 .list-content .google-map {
-    width: 100%;
-    max-width: 1163px;
+    width: calc(100% - 740px);
     display: none;
-    position: relative;
-    transition-duration: .4s;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    transition-duration: 0.2s;
+
 }
 .list-content .property.show-map .google-map {
     display: block;
 }
 .list-content .property.show-map .property-item {
-   min-width: 740px;
-   max-width: 740px;
+    min-width: 740px;
+    max-width: 740px;
 }
 .list-content .property.show-map .property-card {
     cursor: pointer;
@@ -2058,6 +2084,14 @@ h1.list-title {
     letter-spacing: 0.02em;
     text-transform: uppercase;
     color: #333646;
+}
+.main-top-block .superhost-icon {
+    z-index: 1;
+    left: 25px;
+    top: 25px;
+}
+.slick-list {
+    padding: 0 !important;
 }
 .list-content .collapse-block a.title {
     margin-right: 46px;
@@ -2467,7 +2501,7 @@ header.height-menu .mobile-menu {
     .property-card .price-free .real-price {
         margin-bottom: 0;
         margin-left: 0;
-        margin-right: 10px;
+        margin-right: 21px;
     }
     .property-card .night {
         flex-direction: row-reverse;
@@ -2498,6 +2532,11 @@ header.height-menu .mobile-menu {
         margin-top: 0;
         margin-right: 12px;
         width: auto;
+        display: flex;
+        align-items: center;
+    }
+    .property-card .price-span {
+        margin-right: 5px;
     }
     .property-card {
         position: relative;
@@ -7558,3 +7597,82 @@ header.height-menu .mobile-menu {
 }
 
 /*---end-pin---*/
+
+/*---google-map---*/
+
+body .popup-bubble {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    padding: 0 8px;
+    max-height: none;
+    background: #FFFFFF;
+    border: 1px solid #D7D7D7;
+    box-sizing: border-box;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    max-width: 68px;
+    min-width: 68px;
+    overflow: hidden;
+}
+body .popup-bubble-anchor::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff;
+    border-left: 1px solid #D7D7D7;
+    border-bottom: 1px solid #D7D7D7;
+    transform: translateX(-50%) rotate(-45deg);
+    border-right: 0;
+    border-top: 0;
+}
+body .popup-bubble span.index {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 100%;
+    text-align: center;
+    color: #333646;
+    display: block;
+    font-family: "Inter";
+}
+body .popup-bubble-anchor.active .popup-bubble {
+    background: #FDB64E;
+    border: 0;
+}
+body .popup-bubble-anchor.active:after {
+    background: #FDB64E;
+    border: 0;
+}
+
+/*---end-google-map---*/
+
+/*---inquiry-form---*/
+.inquiry-modal .checkbox-block.error label {
+    color: red;
+}
+.inquiry-modal .input.error {
+    outline: 2px solid red!important;
+}
+.inquiry-modal .input-error {
+    background-color: red;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    margin-top: 10px;
+    width: 100%;
+}
+.inquiry-modal .sent-ok {
+    background-color: green;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    margin-top: 10px;
+    width: 100%;
+}
+.inquiry-modal .inactive {
+    display: none!important;
+}
+/*---end-inquiry-form---*/

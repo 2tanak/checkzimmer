@@ -53,7 +53,7 @@
             </div>
         </div>
         <a href="#" class="inquiry">{{ __('Send request') }}</a>
-        @if (($hotel->getCurrentOption('landlordPhoneNumber') == null) || ($hotel->getCurrentOption('landlordHidePhone') === true))
+        @if (($hotel->getCurrentOption('landlordPhoneNumber') == null) || ($hotel->getCurrentOption('landlordHidePhone') == 1))
             <div class="number-phone not-phone">
                 <div class="speaks">{{ __('Object owner speaks') }}:</div>
                 <div class="language-item">{{ $hotel->getCurrentOption('landlordLanguages') }}</div>

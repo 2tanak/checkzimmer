@@ -34,16 +34,16 @@
                 <div class="input-block sample-block-item">
                     <label for="text">{{ __($options['label_input'] ?? '' ) }}:</label>
                     <div class="input-container">
-                        <input  v-model="search.address" id="text" type="text" placeholder="{{  __($options['placeholder'] ?? '' ) }}">
+                        <input  id="text" type="text" placeholder="{{  __($options['placeholder'] ?? '' ) }}">
                     </div>
                 </div>
                 <div class="distance-block select-block">
                     <label for="distance-select">{{ __($options['label_distance'] ?? '' ) }}:</label>
                     <div class="select-container">
-                        <select v-model="search.km" name="distance" id="distance-select" class="distance">
+                        <select name="distance" id="distance-select" class="distance">
                             <option value="10">10 {{ __('km') }}.</option>
                             <option value="20">20 {{ __('km') }}.</option>
-                            <option value="30">30 {{ __('km') }}.</option>
+                            <option value="30" selected >30 {{ __('km') }}.</option>
                             <option value="40">40 {{ __('km') }}.</option>
                         </select>
                     </div>
@@ -52,15 +52,15 @@
                     <label class="desctop-label" for="number-personse">{{ __($options['label_people'] ?? '' ) }}:</label>
                     <label class="mobile-label" for="number-personse">{{ __($options['label_people'] ?? '' ) }}:</label>
                     <div class="select-container">
-                        <select v-model="search.people" name="distance" id="number-personse" class="number-personse">
+                        <select name="distance" id="number-personse" class="number-personse">
                             <option value="1">1 {{ __('ppl') }}.</option>
-                            <option value="2">2 {{ __('ppl') }}.</option>
+                            <option value="2" selected >2 {{ __('ppl') }}.</option>
                             <option value="3">3 {{ __('ppl') }}.</option>
                             <option value="4">4 {{ __('ppl') }}.</option>
                         </select>
                     </div>
                 </div>
-                <a class="find-housing" href="#" @click.prevent="submitForm">{{ __($options['text_button'] ?? '' ) }}</a>
+                <a class="find-housing" href="#" >{{ __($options['text_button'] ?? '' ) }}</a>
             </div>
             <div class="checkbox-form-block">
                 <div class="checkbox-item single-rooms-checkbox">

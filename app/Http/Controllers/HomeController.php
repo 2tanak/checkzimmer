@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Domain;
 use App\FeatureCategory;
+use App\Notifications\InquiryHotel;
 use App\Option;
 use App\Property;
 use App\Statistic;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -123,5 +125,18 @@ class HomeController extends Controller
     }
     public function redirect() {
         return response()->redirectToRoute(app('locale')->routeApply('home'));
+    }
+    public function inquiryForm(Request $request) {
+        $data = $request->all();
+        $property = Property::findOrFail($data['property']);
+
+        $notificationEmail = env('MAIL_NOTIFICATION_ADDRESS', '');
+        if ($notificationEmail) {
+            Mail::to($notificationEmail)->send(new InquiryHotel($property, $data));
+            if ($data['email-checkbox']) {
+                Mail::to($data['email'])->send(new InquiryHotel($property, $data));
+            }
+        }
+        return response()->json(['code' => 'ok']);
     }
 }
