@@ -13,10 +13,10 @@
         <div class="humans">
             <img src="/svg/i-people.svg" alt="">
             {{ sumPeopleNumStr }}
-        </div>c
+        </div>
         <div class="distance" v-if="distance">
             <img src="/svg/i-distance.svg" alt="">
-            {{ distance }}{{ $t('km') }} {{ $t('from') }} &nbsp; <span class="desctop-span">{{ $t('said') }}</span> <span class="mobile-span">{{ $t('said') }}.</span> &nbsp; {{ $t('your addresses') }}
+            {{ distance }}{{ $t('km') }} {{ $t('from') }} &nbsp; <span class="desctop-span">{{ $t('your addresses') }}</span> <span class="mobile-span">{{ $t('your addr') }}.</span> &nbsp;
         </div>
     </div>
 </template>

@@ -110,7 +110,7 @@
         mounted() {
             roomTypes.all()
                 .then(resp => {
-                    //this.room_types = resp.data;
+                    this.room_types = resp.data;
                     this.loading = false;
                     this.data.room_type_id.options = this.getRootTypes();
                 })
