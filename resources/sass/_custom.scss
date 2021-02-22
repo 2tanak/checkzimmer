@@ -2264,7 +2264,7 @@ header.height-menu .mobile-menu {
     height: 18px;
 }
 .list-content .google-map.fullscreen {
-    position: fixed;
+    position: fixed !important;
     width: 100%;
     height: 100vh;
     top: 0;
@@ -2464,12 +2464,11 @@ header.height-menu .mobile-menu {
         max-width: none;
     }
     .list-content .google-map {
-        max-width: none;
-        height: 600px;
+        width: calc(100% - 650px);
     }
     .list-content .property.show-map .property-item {
-        min-width: auto;
-        max-width: none;
+        min-width: 650px;
+        max-width: 650px;
     }
     .list-content .property.not-map .property-card.collapse-item .data a.title {
         max-width: 450px;
@@ -2487,6 +2486,19 @@ header.height-menu .mobile-menu {
     }
 }
 @media (max-width: 1040px) {
+    .list-content .google-map {
+        height: 452px;
+        position: relative !important;
+        width: 100%;
+        transform: none !important;
+    }
+    .list-content .google-map .fullscreen-button {
+        display: flex;
+    }
+    .list-content .property.show-map .property-item {
+        min-width: auto;
+        max-width: none;
+    }
     .list-content .property.show-map .property-card .all-types-content {
         display: block;
     }
@@ -2660,6 +2672,13 @@ header.height-menu .mobile-menu {
     }
 }
 @media (max-width: 991px) {
+    .list-content .container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .list-content .sorting-block {
+        padding: 0 16px;
+    }
     header a.whatsapp-number {
         display: none;
     }
@@ -2778,12 +2797,6 @@ header.height-menu .mobile-menu {
         min-width: 89px;
         height: 28px;
         font-size: 14px;
-    }
-    .list-content .google-map {
-        height: 452px;
-    }
-    .list-content .google-map .fullscreen-button {
-        display: flex;
     }
     .background-image-block .sample-block .input-container {
         height: 62px;
@@ -3095,6 +3108,9 @@ header.height-menu .mobile-menu {
     }
 }
 @media (max-width: 575px) {
+    .list-content .property.show-map .property-card .photo-container {
+        display: none;
+    }
     .list-content .load-all-objects {
         height: 50px;
     }
@@ -3313,7 +3329,7 @@ header.height-menu .mobile-menu {
     .list-content .property.show-map .property-card .night {
         position: static;
         padding: 0;
-        justify-content: space-between;
+        justify-content: flex-end;
         margin-top: 10px;
     }
     .list-content .property.show-map .property-card .data {
