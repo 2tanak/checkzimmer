@@ -221,18 +221,6 @@ jQuery(document).ready(function() {
                     el.text(arr[c++ % arr.length]);
                 }}());
         })};
-    jQuery(function() {
-        var abc = jQuery('.number-phone a').html();
-        var lastSimbol = abc.substr(-20,4);
-        var x = 'XXXX XXXX'
-        var phoneLink = lastSimbol.concat(x);
-        jQuery('.number-phone a').html(phoneLink);
-        jQuery('.sh_nmr').click(function () {
-            jQuery('.sidebar .number-phone').addClass('gray');
-            jQuery('.sh_nmr').css('display', 'none');
-            jQuery('.number-phone a').html(abc);
-        });
-    });
 
     jQuery('.languages-block .selected-language').click(function (e) {
         e.preventDefault();
