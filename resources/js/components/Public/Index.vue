@@ -1,14 +1,13 @@
 <template>
     <div id="app">
         <div class="list-content">
-
             <div class="list-content-item">
                 <div class="container">
                     <div class="sorting-block">
                         <div class="left-block">
                             <a class="list active" href="#">{{ $t('List') }}</a>
                             <a class="map" href="#">{{ $t('Map') }}</a>
-                            <div class="result">{{ $t('Found') }} <span class="property-found">0</span> {{ $t('housing options') }}</div>
+                            <div class="result">{{ $t('Found') }} <span class="property-found">{{ property.length }}</span> {{ $t('housing options') }}</div>
                         </div>
                         <div class="sorting">
                             <a href="#">{{ $t('Sort by default') }}</a>
@@ -844,7 +843,6 @@ export default {
             this.favoritesDisplay();
         },
         foundTotal() {
-            jQuery('.property-found').text(this.property.length);
         },
         minRoomPrice(property, room) {
             if (room && room.price) {
