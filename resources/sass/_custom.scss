@@ -1805,6 +1805,9 @@ h1.list-title {
 .list-content .property .container > div {
     display: flex;
 }
+.list-content .property.show-map .container > div {
+    min-height: 100vh;
+}
 .list-content .google-map {
     width: calc(100% - 740px);
     display: none;
@@ -1812,8 +1815,6 @@ h1.list-title {
     top: 0;
     right: 0;
     height: 100vh;
-    transition-duration: 0.2s;
-
 }
 .list-content .property.show-map .google-map {
     display: block;
