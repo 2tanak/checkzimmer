@@ -226,3 +226,23 @@
         </div>
     </div>
 </div>
+
+<script>
+    let favs = JSON.parse(localStorage.getItem("favoritesList")) || [];
+    document.getElementsByClassName('favoritesCount')[0].innerHTML = favs.length;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        jQuery(function() {
+            var abc = jQuery('.number-phone a').html();
+            var lastSimbol = abc.substr(-20,4);
+            var x = 'XXXX XXXX'
+            var phoneLink = lastSimbol.concat(x);
+            jQuery('.number-phone a').html(phoneLink);
+            jQuery('.sh_nmr').click(function () {
+                jQuery('.sidebar .number-phone').addClass('gray');
+                jQuery('.sh_nmr').css('display', 'none');
+                jQuery('.number-phone a').html(abc);
+            });
+        });
+    });
+</script>
