@@ -1219,6 +1219,7 @@ h1.list-title {
     height: 156px;
     object-fit: cover;
     border-radius: 4.625px;
+    pointer-events: none;
 }
 .property-card .data {
     margin-right: 44px;
@@ -2492,9 +2493,9 @@ header.height-menu .mobile-menu {
         width: 100%;
         transform: none !important;
     }
-    .list-content .google-map .fullscreen-button {
+    /*.list-content .google-map .fullscreen-button {
         display: flex;
-    }
+    }*/
     .list-content .property.show-map .property-item {
         min-width: auto;
         max-width: none;
