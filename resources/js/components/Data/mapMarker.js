@@ -53,7 +53,6 @@ export default class popupInit {
 
             toggle() {
                 if (this.div) {
-                    console.log(this);
                     if (this.div.style.visibility === "hidden") {
                         this.show();
                     } else {
