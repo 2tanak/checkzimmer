@@ -67,12 +67,16 @@ class PropertyController extends Controller
     public function queryFilter(Request $request)
     {
         $data = $request->input();
+        $user = Auth::user();
         $subdomain = Domain::getSubdomain();
 
         $paginate = $request->query('page');
         $noCity = $request->query('nocity');
 
-        $address = $data['address'];
+        $address = $data['address'] ?
+            ($subdomain ? $subdomain->city : 'Leipzig').' '.$data['address'] :
+            ($subdomain ? $subdomain->city : 'Leipzig');
+
         $km = $data['km'] ? $data['km']  : 10;
         $people = $data['people'];
 
@@ -80,6 +84,42 @@ class PropertyController extends Controller
 
         $objects = Property::where(Property::raw('abs('.$geo_data['lat'].' - lat) * 111'), '<', $km)
             ->where(Property::raw('abs('.$geo_data['lng'].' - lng) * 111'), '<', $km);
+
+        // Set items order
+        switch ($data['ord'] ?? '') {
+            case 'min':
+                $objects->orderBy('price');
+                break;
+            case 'max':
+                $objects->orderByDesc('price');
+                break;
+            case 'rating':
+                $objects->orderByDesc('hotel_rating');
+        }
+
+        // Filter by selected properties: single rooms, double rooms, multiple beds
+        if ($data['single'] || $data['double']) {
+            $objectsPreliminary = $objects->all()->pluck('id');
+            if ($data['single']) {
+                $singleIds = Room::where('person', 1)->whereIn('property_id', $objectsPreliminary)->all();
+            } else {
+                $singleIds = [];
+            }
+            if ($data['double']) {
+                $doubleIds = Room::where('person', 2)->whereIn('property_id', $objectsPreliminary)->all();
+            } else {
+                $doubleIds = [];
+            }
+            $totalIds = array_merge($singleIds, $doubleIds);
+
+            $objects->whereIn($totalIds);
+        }
+
+        $objects = $objects->where(function ($query) use ($user) {
+            if (!$user || $user->role != 'admin' && $user->role != 'manager') {
+                $query->whereNull('access')->orWhere('access', '');
+            }
+        });
 
         if ($subdomain) {
             $relate = $noCity ? '!=' : '=';
