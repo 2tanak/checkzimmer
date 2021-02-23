@@ -132,17 +132,36 @@ class HomeController extends Controller
     public function redirect() {
         return response()->redirectToRoute(app('locale')->routeApply('home'));
     }
-    public function inquiryForm(Request $request) {
+    public function inquiryForm(Request $request)
+    {
         $data = $request->all();
-        $property = Property::findOrFail($data['property']);
+        if ($this->checkRecaptha($data['grecaptcha'])) {
+            $property = Property::findOrFail($data['property']);
 
-        $notificationEmail = env('MAIL_NOTIFICATION_ADDRESS', '');
-        if ($notificationEmail) {
-            Mail::to($notificationEmail)->send(new InquiryHotel($property, $data));
-            if ($data['email-checkbox']) {
-                Mail::to($data['email'])->send(new InquiryHotel($property, $data));
+            $notificationEmail = env('MAIL_NOTIFICATION_ADDRESS', '');
+            if ($notificationEmail) {
+                Mail::to($notificationEmail)->send(new InquiryHotel($property, $data));
+                if ($data['email-checkbox']) {
+                    Mail::to($data['email'])->send(new InquiryHotel($property, $data));
+                }
             }
+            return response()->json(['code' => 'ok']);
+        } else {
+            return response()->json(['code' => 'error']);
         }
-        return response()->json(['code' => 'ok']);
+    }
+    public function checkRecaptha($response)
+    {
+        if (isset($response)) {
+            $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+            $recaptcha_secret = '6LejY9AZAAAAAMdpXyOPSteQSPlngjVZVbF7Vb4Y';
+            $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $response);
+            $recaptcha = json_decode($recaptcha);
+            if ($recaptcha->score < 0.5) {
+                return false;
+            }
+            return true;
+        }
+        return false;
     }
 }
