@@ -53,7 +53,7 @@
             @if (($hotel->getCurrentOption('landlordPhoneNumber') == null) || ($hotel->getCurrentOption('landlordHidePhone') == 1))
                 <div class="not-phone">
                     <div class="speaks">{{ __('Object owner speaks') }}:</div>
-                    <div class="language-item">{{ $hotel->getCurrentOption('landlordLanguages') }}</div>
+                    <div class="language-item">{{ $hotel->getCurrentOption('landlordLanguages') ?: 'DE' }}</div>
                 </div>
                 @else
                 <div class="see-number-phone">
