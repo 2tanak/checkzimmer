@@ -5,10 +5,10 @@
                 <a class="nav-link active" data-toggle="tab" href="#description">{{ $t('Description object') }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#reviews">{{ $t('Reviews') }}<span>{{ reviews.length || 0 }}</span></a>
+                <a class="nav-link" data-toggle="tab" href="#reviews">{{ $t('Reviews') }} <span>{{ reviews && reviews.length ? reviews.length : 0 }}</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#questions">{{ $t('Questions') }}<span>{{ questions.length || 0 }}</span></a>
+                <a class="nav-link" data-toggle="tab" href="#questions">{{ $t('Questions') }} <span>{{ questions.length || 0 }}</span></a>
             </li>
             <li class="nav-item map-active">
                 <a class="nav-link" data-toggle="tab" href="#map-block">{{ $t('Map') }}</a>
@@ -196,8 +196,62 @@ export default {
                 this.reviews = resp.data.data;
                 this.reviews_page = resp.data.last_page;
             })
+        this.initMap();
     },
     methods: {
+        initMap() {
+            if (typeof google === 'undefined' || !document.getElementById('map')) {
+                setTimeout( () => { this.initMap() }, 100 );
+                return;
+            }
+
+            let mapCanvas = document.getElementById("map");
+            console.log(document.getElementById('map'));
+            let myCenter = new google.maps.LatLng(window.myCenter.lat, window.myCenter.lng);
+            let myTrip = window.myTrip;
+
+            let mapOptions = {
+                center: myCenter,
+                zoom: 10,
+                disableDefaultUI: true,
+                zoomControl: true,
+                zoomControlOptions: {
+                    style: google.maps.ZoomControlStyle.DEFAULT,
+                    position: google.maps.ControlPosition.TOP_RIGHT
+                },
+                mapTypeId: google.maps.MapTypeId.DESCTOPE
+            };
+            let images = '/img/point-img.png';
+            let marker = new google.maps.Marker ({
+                position: myCenter,
+                map: mapCanvas,
+                icon: images
+            });
+            let map = new google.maps.Map(mapCanvas ,mapOptions);
+
+            var contentString = '<div id="content">'+
+                '<span class="index">777777777</span>'+
+                '<span>&nbsp;</span>'+
+                '<span class="town">55555555</span>'+
+                '</div>';
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+            infowindow.open(map, marker);
+
+            var flightPath = new google.maps.Polygon({
+                path: myTrip,
+                strokeColor: "#6bb638",
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: "rgb(117, 242, 122)",
+                fillOpacity: 0.2
+            });
+
+            marker.setMap(map);
+
+            flightPath.setMap(map);
+        },
         reviewsLoad() {
             axios.get('/reviews?page='+this.reviewsCurrent)
                 .then(resp => {

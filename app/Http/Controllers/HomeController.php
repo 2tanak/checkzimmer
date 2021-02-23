@@ -31,17 +31,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $options = Option::where('type', 'system')->get()->pluck('value', 'key');
+
         $subdomain = Domain::getSubdomain();
+        $subdomain = Domain::find(1);;
         $seoTite = '';
         $seoDescr = '';
+        $options = Option::where('type', 'system')->get()->pluck('value', 'key');
+        $copy = $options['copyright'];
         if ($subdomain) {
             $seoTitle = $subdomain->seoTitle();
             $seoDescription = $subdomain->seoDescription();
+            $options = $subdomain->options()->get()->pluck('value', 'key');
         } else {
             $seoTitle = $options['seo_title'] ?? env('APP_NAME', '');
             $seoDescription = $options['seo_description'] ?? '';
+
         }
+        $options['copyright'] = $copy;
 
         return view('home', compact('options', 'seoTitle', 'seoDescription'));
     }
