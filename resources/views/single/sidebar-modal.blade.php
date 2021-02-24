@@ -89,7 +89,7 @@
                     </div>
                 </div>
             <div class="map-container">
-                <a class="map-picture map-mobile-picture" href="#object-description">
+                <a class="map-picture map-mobile-picture" href="#map-mobile-block">
                     <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 -5.1811V-2.04882L39.1139 41L81 -6.30551C80.5285 -8.3937 78.6424 -10 76.442 -10H5.71513C3.12181 -10 1 -7.8315 1 -5.1811Z" fill="#E4EBF3"/>
                         <path d="M1 27L6 19.825L1 13V27Z" fill="#E4EBF3"/>
