@@ -197,8 +197,21 @@ export default {
                 this.reviews_page = resp.data.last_page;
             })
         this.initMap();
+        this.initGrecaptcha();
     },
     methods: {
+        initGrecaptcha() {
+            if (typeof grecaptcha === 'undefined') {
+                setTimeout( () => { this.initGrecaptcha() }, 100 );
+                return;
+            }
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LejY9AZAAAAAFpdc0QzQzrqRtaaflf3PfP64qdE', {action: 'submit'}).then(function(token) {
+                    let elements = document.querySelectorAll('[name="grecaptcha"]');
+                    elements.forEach( el => el.value = token);
+                });
+            });
+        },
         initMap() {
             if (typeof google === 'undefined' || !document.getElementById('map')) {
                 setTimeout( () => { this.initMap() }, 100 );
@@ -230,9 +243,9 @@ export default {
             let map = new google.maps.Map(mapCanvas ,mapOptions);
 
             var contentString = '<div id="content">'+
-                '<span class="index">777777777</span>'+
+                '<span class="index"></span>'+
                 '<span>&nbsp;</span>'+
-                '<span class="town">55555555</span>'+
+                '<span class="town"></span>'+
                 '</div>';
             var infowindow = new google.maps.InfoWindow({
                 content: contentString

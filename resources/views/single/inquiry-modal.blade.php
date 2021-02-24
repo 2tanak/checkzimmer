@@ -74,6 +74,7 @@
                 <input id="consent-checkbox" class="checkbox input" name="consent-checkbox" type="checkbox" required>
                 <label for="consent-checkbox">{{ __('I consent to the processing of my data as described in') }} <a href="#">{{ __('statement of consent') }}</a> {{ __('from') }} Checkzimmer.</label>
             </div>
+            <input type="hidden" name="grecaptcha" value="">
             <a class="send-request" href="#">{{ __('Send request') }}</a>
             <div class="input-error inactive">{{ __('Please fill in required fields') }}</div>
             <div class="sent-ok inactive">{{ __('The form was sent successfully') }}</div>
@@ -119,25 +120,27 @@
                 }
             });
             if (!errors) {
-                jQuery.post('{{ route('inquiryForm') }}', jQuery('.property-inquiry-form').serialize(), function() {
-                    jQuery('.inquiry-modal .sent-ok').removeClass('inactive');
-                    jQuery('.inquiry-modal .input').each(function(e) {
-                        switch (jQuery(this).attr('type')) {
-                            case 'text':
-                            case 'email':
-                            case 'tel':
-                                jQuery(this).val('');
-                                break;
-                            case 'checkbox':
-                                jQuery(this).prop('checked', false);
-                                break;
-                        }
-                    });
+                jQuery.post('{{ route('inquiryForm') }}', jQuery('.property-inquiry-form').serialize(), function(response) {
+                    if(response.code == 'ok') {
+                        jQuery('.inquiry-modal .sent-ok').removeClass('inactive');
+                        jQuery('.inquiry-modal .input').each(function (e) {
+                            switch (jQuery(this).attr('type')) {
+                                case 'text':
+                                case 'email':
+                                case 'tel':
+                                    jQuery(this).val('');
+                                    break;
+                                case 'checkbox':
+                                    jQuery(this).prop('checked', false);
+                                    break;
+                            }
+                        });
 
-                    setTimeout(() => {
-                        jQuery('.inquiry-modal .sent-ok').addClass('inactive');
-                        //jQuery('.inquiry-modal .modal-close').trigger('click');
-                    }, 2000);
+                        setTimeout(() => {
+                            jQuery('.inquiry-modal .sent-ok').addClass('inactive');
+                            //jQuery('.inquiry-modal .modal-close').trigger('click');
+                        }, 2000);
+                    }
                 })
             }
         });
