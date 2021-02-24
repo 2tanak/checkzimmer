@@ -378,7 +378,7 @@ jQuery(document).ready(function() {
         jQuery('.map-active a').addClass('active');
     });
 
-    jQuery('a.map-picture.map-mobile-picture').bind("click", function(e){
+    jQuery('a.map-mobile-picture').bind("click", function(e){
         e.preventDefault();
         var anchor = jQuery(this);
         jQuery('html, body').stop().animate({
