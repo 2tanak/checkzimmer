@@ -233,9 +233,9 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         jQuery(function() {
-            var abc = jQuery('.number-phone a').html();
+            var abc = jQuery('.number-phone a').text();
             var lastSimbol = abc.substr(-20,4);
-            var x = 'XXXX XXXX'
+            var x = 'XXXXXXXX';
             var phoneLink = lastSimbol.concat(x);
             jQuery('.number-phone a').html(phoneLink);
             jQuery('.sh_nmr').click(function () {
