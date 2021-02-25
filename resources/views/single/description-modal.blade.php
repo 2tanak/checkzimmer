@@ -7,16 +7,8 @@
         </div>
         <div class="collapse" id="mobile-description-content-collapse">
             <div class="description-content">
-                Absolutely brand new, amazing studio unit (part of 3 unit complex) located in prime central Leipzig,
-                one block from Ristrasse Street. Surrounded by embassies, restaurants, cafes this makes for
-                amazing location. The apartment is totally equipped with everything including king sized bed,
-                LCD TV with Smart TV, fully equipped kitchen, balcony, Air Conditioner, High Speed Wi Fi,
-                washing machine, shower cabin and much more. Perfect place for your next stay in Leipzig!
-                Absolutely brand new, amazing studio unit (part of 3 unit complex) located in prime central
-                Leipzig, one block from Ristrasse Street. Surrounded by embassies, restaurants, cafes this
-                makes for amazing location. The apartment is totally equipped with everything including king
-                sized bed, LCD TV with Smart TV, fully equipped kitchen, balcony, Air Conditioner, High Speed
-                Wi Fi, washing machine, shower cabin and much more. Perfect place for your next stay in Leipzig!
+                {{ $hotel['description'] }}
+                @if (false)
                 <div class="collapse collapse-content" id="description-collapse">
                     Absolutely brand new, amazing studio unit (part of 3 unit complex) located in prime central Leipzig,
                     one block from Ristrasse Street. Surrounded by embassies, restaurants, cafes this makes for amazing
@@ -33,6 +25,7 @@
                     {{ __('More details') }}
                     <img src="/svg/i-arrow-show-more.svg" alt="alt">
                 </a>
+                @endif
             </div>
         </div>
     </div>
@@ -264,7 +257,7 @@
         }
 
         let mapCanvas = document.getElementById("map-mobile");
-        console.log(mapCanvas);
+
         let myCenter = new google.maps.LatLng(window.myCenter2.lat, window.myCenter2.lng);
         let myTrip = window.myTrip2;
         let mapOptions = {

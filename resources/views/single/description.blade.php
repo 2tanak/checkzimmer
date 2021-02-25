@@ -1,6 +1,3 @@
-<div class="description">
-    {{ $hotel['description'] }}
-</div>
 <div id="application">
     <Single/>
 </div>
@@ -10,5 +7,6 @@
     window.myTrip = [{lat:{{$hotel->lat}}, lng:{{$hotel->lng}}}];
     window.myTrip2 = [{lat:{{$hotel->lat}}, lng:{{$hotel->lng}}}];
     window.hotel = {id: {{$hotel->id}}};
+    window.hotel_price = {{$hotel->price}};
 </script>
 

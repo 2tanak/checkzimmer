@@ -243,7 +243,7 @@ export default {
             }
 
             let mapCanvas = document.getElementById("map");
-            console.log(document.getElementById('map'));
+
             let myCenter = new google.maps.LatLng(window.myCenter.lat, window.myCenter.lng);
             let myTrip = window.myTrip;
 
@@ -267,7 +267,7 @@ export default {
             let map = new google.maps.Map(mapCanvas ,mapOptions);
 
             var contentString = '<div id="content">'+
-                '<span class="index"></span>'+
+                '<span class="index"><strong>&euro;' + window.hotel_price + '</strong></span>'+
                 '<span>&nbsp;</span>'+
                 '<span class="town"></span>'+
                 '</div>';
