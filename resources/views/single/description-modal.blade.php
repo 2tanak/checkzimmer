@@ -278,9 +278,9 @@
         });
         let map = new google.maps.Map(mapCanvas ,mapOptions);
         let contentString = '<div id="content">'+
-            '<span class="index">11111111</span>'+
+            '<span class="index">4103</span>'+
             '<span>&nbsp;</span>'+
-            '<span class="town">22222</span>'+
+            '<span class="town">Leipzig</span>'+
             '</div>';
         let infowindow = new google.maps.InfoWindow({
             content: contentString

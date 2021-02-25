@@ -75,6 +75,77 @@
     </div>
 
     @include('single.scripts-inline')
-    @include('single.styles-inline')
+
+    <style>
+        @media print {
+            body {
+                padding: 0 !important;
+                min-width: auto !important;
+            }
+            .single-gallery {
+                display: none !important;
+            }
+            .sidebar-bottom {
+                display: none !important;
+            }
+            .single-load-content {
+                display: none !important;
+            }
+            header {
+                display: none !important;
+                height: 0 !important;
+            }
+            footer {
+                display: none !important;
+            }
+            .single-main-slider {
+                display: none !important;
+            }
+            .single-content .favorites {
+                display: none !important;
+            }
+            .single-content .sidebar {
+                width: 300px !important;
+                margin: 0 auto !important;
+            }
+            .single-content .sidebar a.inquiry {
+                display: none !important;
+            }
+            .single-content {
+                padding-top: 0 !important;
+            }
+            h1 {
+                color: black !important;
+                font-size: 2.25rem !important;
+                margin-bottom: 0.5rem !important;
+                font-weight: 500 !important;
+                line-height: 1.2 !important;
+                display: block !important;
+            }
+            .additional-information {
+                display: none !important;
+            }
+            .superhost-icon {
+                display: none !important;
+            }
+            .main-top-block {
+                display: block !important;
+            }
+            .single-content .bottom-text {
+                font-size: 1rem !important;
+                color: black !important;
+            }
+            .single-content .object-description .description-content {
+                font-size: 1rem !important;
+                color: black !important;
+            }
+            .single-content .object-description .description-content a.more-details {
+                display: none !important;
+            }
+            .comfort a.comfort-collapse-link {
+                display: none !important;
+            }
+        }
+    </style>
 
 @endsection
