@@ -188,7 +188,7 @@ export default {
                 this.reviews = resp.data.data;
                 this.reviews_page = resp.data.last_page;
             })
-        this.description = jQuery('.description').html();
+        this.description = jQuery('.description-content').text();
         this.initMap();
         this.initGrecaptcha();
     },
