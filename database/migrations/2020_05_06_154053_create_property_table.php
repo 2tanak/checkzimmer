@@ -26,8 +26,8 @@ class CreatePropertyTable extends Migration
             $table->string('name');
             $table->string('city');
             $table->string('zip');
-            $table->integer('price')->nullable();
-            $table->integer('hotel_rating')->nullable();
+            $table->float('price')->nullable();
+            $table->float('hotel_rating')->nullable();
             $table->string('address')->nullable();
             $table->string('slug')->nullable();
             $table->longText('description')->nullable();
