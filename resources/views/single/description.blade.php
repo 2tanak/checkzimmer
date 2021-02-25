@@ -1,3 +1,6 @@
+<div class="description">
+    {{ $hotel['description'] }}
+</div>
 <div id="application">
     <Single/>
 </div>

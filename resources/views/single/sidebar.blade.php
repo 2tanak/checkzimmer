@@ -228,11 +228,11 @@
 </div>
 
 <script>
-    let favs = JSON.parse(localStorage.getItem("favoritesList")) || [];
-    document.getElementsByClassName('favoritesCount')[0].innerHTML = favs.length;
-
     document.addEventListener('DOMContentLoaded', function() {
         jQuery(function() {
+            let favs = JSON.parse(localStorage.getItem("favoritesList")) || [];
+            document.getElementsByClassName('favoritesCount')[0].innerHTML = favs.length;
+
             var abc = jQuery('.number-phone a').html();
             var lastSimbol = abc.substr(-20,4);
             var x = 'XXXX XXXX'
