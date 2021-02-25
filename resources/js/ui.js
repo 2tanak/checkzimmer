@@ -263,7 +263,6 @@ jQuery(document).ready(function() {
     });
 
     jQuery('.sidebar-bottom a').click(function (e) {
-        e.preventDefault();
         var parent = jQuery(this).closest('.sidebar-bottom-block');
         jQuery('.sidebar-modal-block').removeClass('active');
         jQuery(parent).find('.sidebar-modal-block').addClass('active');
@@ -285,15 +284,7 @@ jQuery(document).ready(function() {
     });
 
     jQuery('.close-block').click(function () {
-        jQuery('.sidebar-small-block, .sidebar-modal-block').removeClass('active');
-    });
-
-    jQuery(document).mouseup(function (e){
-        var div = jQuery(".sidebar-small-block");
-        if (!div.is(e.target)
-            && div.has(e.target).length === 0) {
-            jQuery('.sidebar-modal-block').removeClass('active');
-        }
+        jQuery('.sidebar-modal-block').removeClass('active');
     });
 
     jQuery(document).mouseup(function (e){
@@ -301,6 +292,14 @@ jQuery(document).ready(function() {
         if (!div.is(e.target)
             && div.has(e.target).length === 0) {
             jQuery('.quality').removeClass('active');
+        }
+    });
+
+    jQuery(document).click(function (e) {
+        if (jQuery(e.target).closest('.sidebar-small-block').length === 0 &&
+            jQuery(e.target).closest('.select2-container').length === 0  &&
+            jQuery('.sidebar-small-block').hasClass('active')) {
+            jQuery('.sidebar-modal-block').removeClass('active');
         }
     });
 

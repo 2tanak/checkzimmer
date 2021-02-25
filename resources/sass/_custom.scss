@@ -4876,6 +4876,7 @@ header.height-menu .mobile-menu {
     display: flex;
     align-items: center;
     text-decoration: none;
+    cursor: pointer;
 }
 .single-content .sidebar .sidebar-bottom-block > a:hover span {
     border-bottom: 1px solid #d0d2dd;
@@ -5153,6 +5154,7 @@ header.height-menu .mobile-menu {
     line-height: 100%;
     color: #333646;
     outline: none;
+    resize: none;
 }
 .offer .textarea-block textarea:focus {
     border-color: #c0c1c2;
