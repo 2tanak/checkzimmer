@@ -28,8 +28,8 @@
                         <transition name="fade" appear>
                         <div class="property-container" :style="{position: 'relative', opacity: loading ? 0:1, position: loading ? 'absolute':'relative'}">
                             <div class="property-item">
-
-                                <PropertyListItem v-for="(item, index) in property" :key="'prop-id-'+item.id" :item="item" :active="activeItems[index]" :index="index" :ref="'listItem' + item.id" @click.native="goToMap(item, index)" @favsUpdated="updateFavCount"/>
+`
+                                <PropertyListItem v-for="(item, index) in property" :key="'prop-id-'+index+'-'+item.id" :item="item" :active="activeItems[index]" :index="index" :ref="'listItem' + item.id" @click.native="goToMap(item, index)" @favsUpdated="updateFavCount"/>
 
                                 <div class="load-block-content first-load-block-content">
                                     <div class="load-block-item">
@@ -567,9 +567,11 @@ export default {
         return {
             map: null,
             loading: true,
+            loadingData: false,
             endoflist: false,
             property: [],
             page: 1,
+            nocity: 0,
             additional_load: true,
             coords_load: [],
             additional_pages: true,
@@ -614,22 +616,7 @@ export default {
         });
 
         jQuery(window).scroll((e) => {
-            if (!jQuery('.list-content .property').hasClass('show-map')) {
-                return;
-            }
-            let mapLayout = jQuery('.property-container').offset();
-            let scrollTop = jQuery(window).scrollTop();
-            let delta = scrollTop - mapLayout.top;
-            let scrollEnd = scrollTop - (mapLayout.top + jQuery('.property-container').height() - jQuery(window).height());
-            if (delta > 0 && scrollEnd <=0) {
-                jQuery('.list-content .google-map').css({ position: 'fixed', transform: 'translate3d(0, 0, 0)' })
-
-            } else if (scrollEnd > 0 ) {
-                jQuery('.list-content .google-map').css({ position: 'fixed', transform: 'translate3d(0, -'+scrollEnd+'px, 0)', 'transition-duration': '0' })
-            } else {
-                jQuery('.list-content .google-map').css({ position: 'absolute', transform: 'translate3d(0, 0, 0)' })
-            }
-
+            this.mapScrolling()
         });
 
         this.submitForm(true);
@@ -660,9 +647,42 @@ export default {
             e.preventDefault();
             jQuery(this).toggleClass('active');
         });
-
+        jQuery(window).scroll( () => {
+            this.lazySearch()
+        })
     },
     methods: {
+        lazySearch() {
+            if (this.loadingData) {
+                return;
+            }
+            let screenTop = jQuery(window).scrollTop();
+            let screenHeight = jQuery(window).height();
+            let itemTop = jQuery('.property-container').offset().top;
+            let itemHeight = jQuery('.property-container').height();
+
+            if (screenTop + screenHeight + 200 > itemTop + itemHeight && !this.endoflist) {
+                this.submitForm();
+            }
+        },
+        mapScrolling() {
+            if (!jQuery('.list-content .property').hasClass('show-map')) {
+                return;
+            }
+            let mapLayout = jQuery('.property-container').offset();
+            let scrollTop = jQuery(window).scrollTop();
+            let delta = scrollTop - mapLayout.top;
+            let scrollEnd = scrollTop - (mapLayout.top + jQuery('.property-container').height() - jQuery(window).height());
+            if (delta > 0 && scrollEnd <=0) {
+                jQuery('.list-content .google-map').css({ position: 'fixed', transform: 'translate3d(0, 0, 0)' })
+
+            } else if (scrollEnd > 0 ) {
+                jQuery('.list-content .google-map').css({ position: 'fixed', transform: 'translate3d(0, -'+scrollEnd+'px, 0)', 'transition-duration': '0' })
+            } else {
+                jQuery('.list-content .google-map').css({ position: 'absolute', transform: 'translate3d(0, 0, 0)' })
+            }
+
+        },
         initMap() {
             if (typeof google === 'undefined' || !document.getElementById('map')) {
                 setTimeout( () => { this.initMap() }, 100 );
@@ -772,22 +792,35 @@ export default {
         },
 
         submitForm(clear) {
-            this.page = clear ? 0 : this.page + 1;
-            this.loading = true;
+            console.log(clear)
+            clear = clear || false
+
+            if (clear) {
+                this.page = 1;
+                this.nocity = 0;
+                this.additional_load = true;
+                this.endoflist = false;
+            } else {
+                this.page += 1;
+            }
+
+            this.loadingData = true;
             let that = this;
 
-           properties.request('queryFilter', this.search)
+           properties.request('queryFilter', this.search, 'post', { page: this.page, nocity: this.nocity })
                 .then( resp => {
-                    that.property = resp.data.objects.data;
+                    that.property = that.property.concat(resp.data.objects.data);
                     that.page = resp.data.objects.current_page;
                     that.additional_pages = resp.data.current_page < resp.data.last_page;
+                    that.loadingData = false;
                     that.loading = false;
                     if (resp.data.objects.current_page  >= resp.data.objects.last_page - 1) {
-                        if (that.additional_load == false) {
+                        if (that.additional_load === false) {
                             that.endoflist = true;
                         }
                         that.additional_load = false;
                         that.page = 0;
+                        that.nocity = 1;
                     }
                     that.foundTotal()
                     that.favoritesDisplay();
@@ -822,7 +855,7 @@ export default {
 
         loadSort(order) {
             this.search.ord = order;
-            this.submitForm();
+            this.submitForm(true);
 
             /*properties.request('querySort', data)
                 .then( resp => {
