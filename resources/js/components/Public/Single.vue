@@ -63,16 +63,15 @@
                                     <img src="/svg/star-gray.svg" alt="alt">
                                 </div>
                             </div>
-                            <form action="review/create">
+                            <form @submit.prevent="addReviews">
                                 <div class="top-form">
-                                    <input type="text" name="name" :placeholder="$t('Your name')">
-                                    <input type="text" name="company" :placeholder="$t('Company name')">
-                                    <input type="hidden" name="property_id" value="<!--$hotel->id-->">
-                                    <input type="hidden" name="rating" value="">
+                                    <input type="text" v-model="reviewsForm.name" :placeholder="$t('Your name')">
+                                    <input type="text" v-model="reviewsForm.company" :placeholder="$t('Company name')">
+                                    <input type="hidden" name="rating" value="0">
                                     <input type="hidden" name="grecaptcha" value="">
                                 </div>
-                                <input type="text" name="title" :placeholder="$t('Review title')">
-                                <textarea name="description" :placeholder="$t('Review text')"></textarea>
+                                <input type="text" v-model="reviewsForm.title" :placeholder="$t('Review title')">
+                                <textarea v-model="reviewsForm.description" :placeholder="$t('Review text')"></textarea>
                                 <input type="submit" :value="$t('Send')">
                             </form>
                         </div>
@@ -148,9 +147,8 @@
                 </div>
             </div>
             <div class="tab-pane fade questions-content" id="questions">
-                <form class="questions-form" action="question/create">
-                    <input type="text" :placeholder="$t('Ask your question')" name="question">
-                    <input type="hidden" value="<!--$hotel->id-->" name="property_id">
+                <form class="questions-form" @submit.prevent="addQuestion">
+                    <input type="text" v-model="questionsForm.text" :placeholder="$t('Ask your question')" name="question">
                     <input type="submit" :value="$t('Send')">
                 </form>
                 <div class="questions-received">
@@ -180,6 +178,8 @@ export default {
     name: "Single",
     data() {
         return {
+            reviewsForm: [],
+            questionsForm: [],
             questions: [],
             reviews: [],
             reviewsPages: 1,
@@ -200,6 +200,37 @@ export default {
         this.initGrecaptcha();
     },
     methods: {
+        addQuestion() {
+            let reviewFormData = {
+                    'question' : this.questionsForm.text,
+                    'property_id' : window.hotel.id,
+                };
+            axios.post('/question/create',reviewFormData)
+                .then(resp => {
+
+                }).catch(error => {
+
+                });
+        },
+        addReviews() {
+            let captcha = document.querySelectorAll('.reviews-form input[name="grecaptcha"]')[0].value,
+                rating = document.querySelectorAll('.reviews-form input[name="rating"]')[0].value,
+                reviewFormData = {
+                    'name' : this.reviewsForm.name,
+                    'company' : this.reviewsForm.company,
+                    'property_id' : window.hotel.id,
+                    'rating': rating,
+                    'title': this.reviewsForm.title,
+                    'description': this.reviewsForm.description,
+                    'grecaptcha': captcha,
+                };
+            axios.post('/reviews/create',reviewFormData)
+                .then(resp => {
+
+                }).catch(error => {
+
+                });
+        },
         initGrecaptcha() {
             if (typeof grecaptcha === 'undefined') {
                 setTimeout( () => { this.initGrecaptcha() }, 100 );
