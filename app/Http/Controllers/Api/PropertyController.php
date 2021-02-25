@@ -124,9 +124,8 @@ class PropertyController extends Controller
                 $multiIds = [];
             }
             $totalIds = array_merge($totalIds, $singleIds, $doubleIds, $multiIds);
-
-            $objects->whereIn('id', $totalIds);
         }
+        $objects->whereIn('id', $totalIds);
 
         $objects = $objects->where(function ($query) use ($user) {
             if (!$user || $user->role != 'admin' && $user->role != 'manager') {
@@ -137,6 +136,8 @@ class PropertyController extends Controller
         if ($subdomain) {
             $relate = $noCity ? '!=' : '=';
             $objects->where('city', $relate, $subdomain->city);
+        } elseif ($noCity) {
+            $objects->where('city', '!=', 'Leipzig');
         }
 
         $objects = $objects->paginate(20);
