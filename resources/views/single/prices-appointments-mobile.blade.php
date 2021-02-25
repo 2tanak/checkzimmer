@@ -3,7 +3,7 @@
     <div>
         @foreach ($hotel->getRoomTypes() as $key => $roomType)
             <div class="position-collapse">
-                <div class="visible-part" type="button" data-toggle="collapse" data-target="#position-collapse-{{ $key }}" aria-expanded="false" aria-controls="position-collapse">
+                <div class="visible-part" type="button" data-toggle="collapse" data-target="#position-collapse-{{ $key }}" aria-expanded="false" aria-controls="position-collapse-{{ $key }}">
                     <div class="top-part">
                         <div class="name">
                             <img src="/svg/i-room-filled.svg" alt="house">
@@ -30,7 +30,7 @@
                         @if ($room['price'] == 0)
                             @continue
                         @endif
-                        <div class="collapse position-content" id="position-collapse-{{ $key2 }}">
+                        <div class="collapse position-content" id="position-collapse-{{ $key }}">
                             {{-- <div class="bg-color">
                                  <div class="position-line">
                                      <div class="position-line-title">Душ</div>
