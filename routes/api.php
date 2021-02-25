@@ -56,6 +56,8 @@ Route::middleware('auth')->namespace('Api')->group(function () {
 
     Route::get('/questions', 'QuestionsController@paginated');
     Route::get('/reviews', 'ReviewsController@paginated');
+    Route::post('/question/create', 'QuestionsController@create');
+    Route::post('/reviews/create', 'ReviewsController@create');
 
     Route::get('users', 'UsersController@index')->middleware('isAdmin');
     Route::get('users/{id}', 'UsersController@show')->middleware('isAdminOrSelf');

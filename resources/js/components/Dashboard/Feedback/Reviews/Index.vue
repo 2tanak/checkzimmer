@@ -141,7 +141,7 @@ export default {
     created() {
         reviewsData.all()
             .then(resp => {
-                this.reviewList = resp.data;
+                this.reviewList = resp.data.data;
             })
     },
     mounted() {

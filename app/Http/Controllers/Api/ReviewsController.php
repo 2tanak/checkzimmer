@@ -37,6 +37,7 @@ class ReviewsController extends Controller
 
     public function create(Request $request)
     {
+        $data = $request->all();
         request()->validate([
             'name' => 'required',
             'company' => 'required',
@@ -44,12 +45,29 @@ class ReviewsController extends Controller
             'description' => 'required',
             'rating' => 'required',
         ]);
+        if ($this->checkRecaptha($data['grecaptcha'])) {
+            $item = new Reviews($data);
+            $item->save();
 
-        $data = $request->all();
+            return response()->json(['code' => 'ok','review' => $item]);
+        } else {
+            return response()->json(['code' => 'error']);
+        }
+    }
 
-        $item = new Reviews($data);
-        $item->save();
+    public function checkRecaptha($response)
+    {
+        if (isset($response)) {
+            $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+            $recaptcha_secret = env('GOOGLE_RECAPTHCA3_SECRET');
+            $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $response);
+            $recaptcha = json_decode($recaptcha);
 
-        return redirect('/');
+            if (!isset($recaptcha->score) || $recaptcha->score < 0.5) {
+                return false;
+            }
+            return true;
+        }
+        return false;
     }
 }

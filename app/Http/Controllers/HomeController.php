@@ -154,7 +154,7 @@ class HomeController extends Controller
     {
         if (isset($response)) {
             $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-            $recaptcha_secret = '6LejY9AZAAAAAMdpXyOPSteQSPlngjVZVbF7Vb4Y';
+            $recaptcha_secret = env('GOOGLE_RECAPTHCA3_SECRET');
             $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $response);
             $recaptcha = json_decode($recaptcha);
             if ($recaptcha->score < 0.5) {
