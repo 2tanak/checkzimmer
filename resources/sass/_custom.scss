@@ -4068,12 +4068,12 @@ header.height-menu .mobile-menu {
 .single-content .object-description-desctope .questions-content {
     margin-top: 20px;
 }
-.single-content .object-description .questions-form {
+.single-content .questions-form {
     margin-bottom: 30px;
     display: flex;
     align-items: center;
 }
-.single-content .object-description .questions-form input[type="text"] {
+.single-content .questions-form input[type="text"] {
     background: #FFFFFF;
     border: 1px solid #E3E4E5;
     border-radius: 6px;
@@ -4088,19 +4088,19 @@ header.height-menu .mobile-menu {
     color: #545769;
     outline: none;
 }
-.single-content .object-description .questions-form input[type="text"]::-webkit-input-placeholder {
+.single-content .questions-form input[type="text"]::-webkit-input-placeholder {
     color: #8F98A2;
 }
-.single-content .object-description .questions-form input[type="text"]::-moz-placeholder {
+.single-content .questions-form input[type="text"]::-moz-placeholder {
     color: #8F98A2;
 }
-.single-content .object-description .questions-form input[type="text"]:-moz-placeholder {
+.single-content .questions-form input[type="text"]:-moz-placeholder {
     color: #8F98A2;
 }
-.single-content .object-description .questions-form input[type="text"]:-ms-input-placeholder {
+.single-content .questions-form input[type="text"]:-ms-input-placeholder {
     color: #8F98A2;
 }
-.single-content .object-description .questions-form input[type="submit"] {
+.single-content .questions-form input[type="submit"] {
     width: 128px;
     height: 44px;
     display: flex;
@@ -4118,7 +4118,7 @@ header.height-menu .mobile-menu {
     transition-duration: 0.4s;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
 }
-.single-content .object-description .questions-form input[type="submit"]:hover {
+.single-content .questions-form input[type="submit"]:hover {
     background-color: #60A338;
     transition-duration: 0.4s;
 }
@@ -4246,7 +4246,7 @@ header.height-menu .mobile-menu {
     line-height: 100%;
     text-decoration: none;
 }
-.single-content .object-description .reviews-content a.give-feedback.hide {
+.single-content .reviews-content a.give-feedback.hide {
     display: none;
 }
 .single-content .object-description .reviews-content a.give-feedback:hover {
@@ -4435,7 +4435,7 @@ header.height-menu .mobile-menu {
     transition-duration: 0.4s;
     padding-bottom: 2px;
 }
-.single-content .object-description .reviews-form {
+.single-content .reviews-form {
     width: 100%;
     height: 331px;
     background: #F7F8FA;
@@ -4443,40 +4443,40 @@ header.height-menu .mobile-menu {
     border-radius: 12px;
     padding: 22px 16px;
 }
-.single-content .object-description .reviews-form .rate {
+.single-content .reviews-form .rate {
     display: flex;
     align-items: center;
     margin-bottom: 18px;
 }
-.single-content .object-description .reviews-form .rate .stars {
+.single-content .reviews-form .rate .stars {
     display: flex;
     align-items: center;
 }
-.single-content .object-description .reviews-form .rate .title {
+.single-content .reviews-form .rate .title {
     font-weight: 500;
     font-size: 15px;
     line-height: 130%;
     color: #333646;
     margin-right: 12px;
 }
-.single-content .object-description .reviews-form .rate .stars img {
+.single-content .reviews-form .rate .stars img {
     margin-right: 6px;
     cursor: pointer;
     width: 18px;
     height: 18px;
 }
-.single-content .object-description .reviews-form .top-form {
+.single-content .reviews-form .top-form {
     display: flex;
     justify-content: space-between;
 }
-.single-content .object-description .reviews-form .top-form input {
+.single-content .reviews-form .top-form input {
     width: 100%;
     max-width: 402px;
 }
-.single-content .object-description .reviews-form .top-form input:first-of-type {
+.single-content .reviews-form .top-form input:first-of-type {
     margin-right: 14px;
 }
-.single-content .object-description .reviews-form input[type="text"] {
+.single-content .reviews-form input[type="text"] {
     background: #FFFFFF;
     border: 1px solid #E3E4E5;
     border-radius: 6px;
@@ -4490,7 +4490,7 @@ header.height-menu .mobile-menu {
     padding: 0 16px;
     margin-bottom: 14px;
 }
-.single-content .object-description .reviews-form textarea {
+.single-content .reviews-form textarea {
     width: 100%;
     background: #FFFFFF;
     border: 1px solid #E3E4E5;
@@ -4504,23 +4504,23 @@ header.height-menu .mobile-menu {
     padding: 19px 16px;
     margin-bottom: 14px;
 }
-.single-content .object-description .reviews-form input::-webkit-input-placeholder,
-.single-content .object-description .reviews-form textarea::-webkit-input-placeholder {
+.single-content .reviews-form input::-webkit-input-placeholder,
+.single-content .reviews-form textarea::-webkit-input-placeholder {
     color: #8F98A2;
 }
-.single-content .object-description .reviews-form input::-moz-placeholder,
-.single-content .object-description .reviews-form textarea::-moz-placeholder {
+.single-content .reviews-form input::-moz-placeholder,
+.single-content .reviews-form textarea::-moz-placeholder {
     color: #8F98A2;
 }
-.single-content .object-description .reviews-form input:-moz-placeholder,
-.single-content .object-description .reviews-form textarea:-moz-placeholder {
+.single-content .reviews-form input:-moz-placeholder,
+.single-content .reviews-form textarea:-moz-placeholder {
     color: #8F98A2;
 }
-.single-content .object-description .reviews-form input:-ms-input-placeholder,
-.single-content .object-description .reviews-form textarea:-ms-input-placeholder {
+.single-content .reviews-form input:-ms-input-placeholder,
+.single-content .reviews-form textarea:-ms-input-placeholder {
     color: #8F98A2;
 }
-.single-content .object-description .reviews-form input[type="submit"] {
+.single-content .reviews-form input[type="submit"] {
     background-color: #6BB63F;
     color: #fff;
     border-radius: 6px;
@@ -4535,26 +4535,26 @@ header.height-menu .mobile-menu {
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
     border: 0;
 }
-.single-content .object-description .reviews-form input[type="submit"]:hover {
+.single-content .reviews-form input[type="submit"]:hover {
     background-color: #60A338;
     transition-duration: 0.4s;
 }
-.single-content .object-description .empty-block {
+.single-content .empty-block {
     height: 0;
     position: relative;
     overflow: hidden;
     transition: all .2s;
 }
-.single-content .object-description .empty-block .close-form {
+.single-content .empty-block .close-form {
     position: absolute;
     top: 14px;
     right: 17px;
     cursor: pointer;
 }
-.single-content .object-description .empty-block .close-form img {
+.single-content .empty-block .close-form img {
     display: block;
 }
-.single-content .object-description .empty-block.active {
+.single-content .empty-block.active {
     width: 100%;
     margin-bottom: 8px;
     height: 331px;
@@ -4876,6 +4876,7 @@ header.height-menu .mobile-menu {
     display: flex;
     align-items: center;
     text-decoration: none;
+    cursor: pointer;
 }
 .single-content .sidebar .sidebar-bottom-block > a:hover span {
     border-bottom: 1px solid #d0d2dd;
@@ -5153,6 +5154,7 @@ header.height-menu .mobile-menu {
     line-height: 100%;
     color: #333646;
     outline: none;
+    resize: none;
 }
 .offer .textarea-block textarea:focus {
     border-color: #c0c1c2;
@@ -5750,6 +5752,33 @@ header.height-menu .mobile-menu {
     font-size: 14px;
     color: #8F98A2;
 }
+.single-content .mobile-object-description .link-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 16px 0 16px;
+}
+.single-content .mobile-object-description .link-container a.give-feedback {
+    width: 186px;
+    height: 44px;
+    border: 1px solid #6BB63F;
+    color: #3B8B3E;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 100%;
+    text-decoration: none;
+}
+.single-content .mobile-object-description .link-container a.give-feedback:hover {
+    transition-duration: 0.4s;
+    color: #fff;
+    background-color: #6bb63f;
+    text-shadow: 0 1px 0 rgb(0 0 0 / 16%);
+}
 .single-content .mobile-object-description .paddings-block {
     padding: 18px 0;
     border-bottom: 1px solid #edeef0;
@@ -5792,6 +5821,7 @@ header.height-menu .mobile-menu {
     padding: 18px 16px 0 16px;
     flex-direction: column;
     margin-bottom: 0;
+    align-items: flex-start;
 }
 .single-content .mobile-object-description .mobile-questions-content .questions-form input[type="text"] {
     margin-right: 0;
@@ -6750,10 +6780,17 @@ header.height-menu .mobile-menu {
         }
     }
     @media (max-width: 575px) {
+        .single-content .mobile-object-description .mobile-map-content .map-content {
+            height: 300px;
+            padding-top: 15px;
+        }
+        .single-content .mobile-object-description .mobile-map-content .map-content #map-mobile {
+            height: 100%;
+        }
         .single-content .object-description-desctope {
             display: none;
         }
-        .single-content .object-description .questions-form input[type="text"] {
+        .single-content .questions-form input[type="text"] {
             max-width: none;
         }
         .single-content .object-description .reviews-content .overall-rating {
@@ -6782,27 +6819,27 @@ header.height-menu .mobile-menu {
             padding-right: 15px;
             margin-top: 20px;
         }
-        .single-content .object-description .empty-block.active {
+        .single-content .empty-block.active {
             margin-top: 0;
             margin-bottom: 30px;
             height: 385px;
         }
-        .single-content .object-description .reviews-content a.give-feedback.hide {
+        .single-content .reviews-content a.give-feedback.hide {
             height: 0;
             overflow: hidden;
             border: 0;
         }
-        .single-content .object-description .reviews-form {
+        .single-content .reviews-form {
             padding: 20px 16px;
             height: auto;
         }
-        .single-content .object-description .reviews-form .top-form {
+        .single-content .reviews-form .top-form {
             flex-direction: column;
         }
-        .single-content .object-description .reviews-form .top-form input {
+        .single-content .reviews-form .top-form input {
             max-width: none;
         }
-        .single-content .object-description .reviews-form input[type=submit] {
+        .single-content .reviews-form input[type=submit] {
             max-width: none;
         }
         .single-content .object-description .reviews-head {
@@ -6841,7 +6878,7 @@ header.height-menu .mobile-menu {
             border-bottom: 0;
             padding-bottom: 0;
         }
-        .single-content .object-description .reviews-form .top-form input:first-of-type {
+        .single-content .reviews-form .top-form input:first-of-type {
             margin-right: 0;
         }
         .sidebar-modal-block .overlay {
@@ -6918,10 +6955,10 @@ header.height-menu .mobile-menu {
             height: 68px;
         }
         .fixed-bar .not-phone {
-            font-size: 10px;
             margin-left: 10px;
+            font-size: 12px;
         }
-        .single-content .object-description .empty-block form {
+        .single-content .empty-block form {
             margin-top: 20px;
         }
         .offer .offer-select {

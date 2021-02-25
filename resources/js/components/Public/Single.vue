@@ -5,10 +5,10 @@
                 <a class="nav-link active" data-toggle="tab" href="#description">{{ $t('Description object') }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#reviews">{{ $t('Reviews') }} <span>{{ reviews && reviews.length ? reviews.length : 0 }}</span></a>
+                <a class="nav-link" data-toggle="tab" href="#reviews">{{ $t('Reviews') }} <span>{{ reviews ? reviews.length : 0 }}</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#questions">{{ $t('Questions') }} <span>{{ questions.length || 0 }}</span></a>
+                <a class="nav-link" data-toggle="tab" href="#questions">{{ $t('Questions') }} <span>{{ questions ? questions.length : 0 }}</span></a>
             </li>
             <li class="nav-item map-active">
                 <a class="nav-link" data-toggle="tab" href="#map-block">{{ $t('Map') }}</a>
@@ -16,17 +16,8 @@
         </ul>
         <div class="tab-content">
             <div class="description-content tab-pane fade show active" id="description">
-                Absolutely brand new, amazing studio unit (part of 3 unit complex) located in prime central Leipzig,
-                one block from Ristrasse Street. Surrounded by embassies, restaurants, cafes this makes for
-                amazing location. The apartment is totally equipped with everything including king sized bed,
-                LCD TV with Smart TV, fully equipped kitchen, balcony, Air Conditioner, High Speed Wi Fi,
-                washing machine, shower cabin and much more. Perfect place for your next stay in Leipzig!
-                Absolutely brand new, amazing studio unit (part of 3 unit complex) located in prime central
-                Leipzig, one block from Ristrasse Street. Surrounded by embassies, restaurants, cafes this
-                makes for amazing location. The apartment is totally equipped with everything including king
-                sized bed, LCD TV with Smart TV, fully equipped kitchen, balcony, Air Conditioner, High Speed
-                Wi Fi, washing machine, shower cabin and much more. Perfect place for your next stay in Leipzig!
-                <div class="collapse collapse-content" id="description-collapse">
+                {{ description }}
+                <div v-if="false" class="collapse collapse-content" id="description-collapse">
                     Absolutely brand new, amazing studio unit (part of 3 unit complex) located in prime central Leipzig,
                     one block from Ristrasse Street. Surrounded by embassies, restaurants, cafes this makes for amazing
                     location. The apartment is totally equipped with everything including king sized bed, LCD TV with Smart TV,
@@ -38,7 +29,7 @@
                     kitchen, balcony, Air Conditioner, High Speed Wi Fi, washing machine, shower cabin and much more.
                     Perfect place for your next stay in Leipzig!
                 </div>
-                <a class="more-details" data-toggle="collapse" href="#description-collapse" role="button" aria-expanded="false" aria-controls="description-collapse">
+                <a v-if="false" class="more-details" data-toggle="collapse" href="#description-collapse" role="button" aria-expanded="false" aria-controls="description-collapse">
                     {{ $t('More details') }}
                     <img src="/svg/i-arrow-show-more.svg" alt="alt">
                 </a>
@@ -178,6 +169,7 @@ export default {
     name: "Single",
     data() {
         return {
+            description: '',
             reviewsForm: [],
             questionsForm: [],
             questions: [],
@@ -196,6 +188,7 @@ export default {
                 this.reviews = resp.data.data;
                 this.reviews_page = resp.data.last_page;
             })
+        this.description = jQuery('.description-content').text();
         this.initMap();
         this.initGrecaptcha();
     },
@@ -250,7 +243,7 @@ export default {
             }
 
             let mapCanvas = document.getElementById("map");
-            console.log(document.getElementById('map'));
+
             let myCenter = new google.maps.LatLng(window.myCenter.lat, window.myCenter.lng);
             let myTrip = window.myTrip;
 
@@ -274,7 +267,7 @@ export default {
             let map = new google.maps.Map(mapCanvas ,mapOptions);
 
             var contentString = '<div id="content">'+
-                '<span class="index"></span>'+
+                '<span class="index"><strong>&euro;' + window.hotel_price + '</strong></span>'+
                 '<span>&nbsp;</span>'+
                 '<span class="town"></span>'+
                 '</div>';

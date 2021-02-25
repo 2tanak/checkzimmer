@@ -46,6 +46,7 @@ import RoomTypes from '../../components/Dashboard/Data/RoomTypes/Index';
 import GeocoderCache from '../../components/Dashboard/Data/GeocoderCache/Index';
 import Questions from '../../components/Dashboard/Feedback/Questions/Index';
 import Reviews from '../../components/Dashboard/Feedback/Reviews/Index';
+import Request from '../../components/Dashboard/Feedback/Request/Index';
 import Property from '../../components/Dashboard/Property/Property/Index';
 import PropertySingle from '../../components/Dashboard/Property/Property/Single';
 import Rooms from '../../components/Dashboard/Property/Rooms/Index';
@@ -215,6 +216,12 @@ export default new Router({
             path: '/dashboard/data/reviews',
             name: 'reviews',
             component: Reviews,
+            meta: { auth: true }
+        },
+        {
+            path: '/dashboard/feedback/request',
+            name: 'request',
+            component: Request,
             meta: { auth: true }
         },
         {
