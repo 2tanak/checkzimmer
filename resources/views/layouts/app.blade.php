@@ -1,3 +1,4 @@
+@php use App\Property @endphp
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -69,8 +70,7 @@
                     </div>
                     <div class="language-number-phone">
                         @include('partials.lang-switch')
-                        <a class="whatsapp-number" href="tel:{{ str_replace(' ', '', $options['website_phone'] ?? '') }}">
-                            {{ $options['website_phone'] ?? '' }}
+                        <a class="whatsapp-number" href="tel:{{ $phoneNumAdmin }}">{{ $options['website_phone'] ?? '' }}
                             <span class="explanatory-text">24/7 бесплатно с мобильного</span>
                         </a>
                     </div>
@@ -99,8 +99,7 @@
                             </a>
                         </li>
                     </ul>
-                    <a class="whatsapp-number" href="tel:{{ str_replace(' ', '', $options['website_phone'] ?? '') }}">
-                        {{ $options['website_phone'] ?? '' }}
+                    <a class="whatsapp-number" href="tel:{{ $phoneNumAdmin }}">{{ $options['website_phone'] ?? '' }}
                         <span class="explanatory-text">24/7 бесплатно с мобильного</span>
                     </a>
                 </div>
@@ -145,11 +144,11 @@
                         </div>
                     </div>
                     <div class="whatsapp-link">
-                        <a class="whatsapp-link-number" href="tel:+49 341 1234 2223">
+                        <a class="whatsapp-link-number" href="tel:{{ $phoneNumAdmin }}">
                             <img src="/svg/whatsapp-big.svg" alt="Whatsapp">
                             {{ $options['website_phone'] ?? '' }}
                         </a>
-                        <a class="whatsapp-link-text" href="tel:+49 341 1234 2223">Просто напишите нам в Whatsapp</a>
+                        <a class="whatsapp-link-text" href="tel:{{ $phoneNumAdmin }}">Просто напишите нам в Whatsapp</a>
                     </div>
                     <div class="mobile-underlink-text">Нажмите на кнопку и сделайте прямой запрос по WhatsApp. Сравните цены и доступность из более 150
                         обьектов в городе Х</div>

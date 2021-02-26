@@ -32,7 +32,7 @@
 
     <div class="reviews-content mobile-reviews-content paddings-block">
         <div class="head-collapse" data-toggle="collapse" data-target="#mobile-reviews-content-collapse" aria-expanded="false" aria-controls="mobile-reviews-content-collapse">
-            <div>{{ __('Reviews') }} <span>(72)</span></div>
+            <div>{{ __('Reviews') }} <span class="rev-number">(72)</span></div>
             <div class="decompose-button"></div>
         </div>
         <div class="collapse" id="mobile-reviews-content-collapse">
