@@ -101,7 +101,7 @@ export default {
     created() {
         questionsData.all()
             .then(resp => {
-                this.questionItems = resp.data;
+                this.questionItems = resp.data.data;
             })
      },
     mounted() {

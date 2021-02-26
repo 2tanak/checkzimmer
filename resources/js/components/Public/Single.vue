@@ -5,10 +5,10 @@
                 <a class="nav-link active" data-toggle="tab" href="#description">{{ $t('Description object') }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#reviews">{{ $t('Reviews') }} <span>{{ reviews && reviews.length ? reviews.length : 0 }}</span></a>
+                <a class="nav-link" data-toggle="tab" href="#reviews">{{ $t('Reviews') }} <span>{{ reviews ? reviews.length : 0 }}</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#questions">{{ $t('Questions') }} <span>{{ questions.length || 0 }}</span></a>
+                <a class="nav-link" data-toggle="tab" href="#questions">{{ $t('Questions') }} <span>{{ questions ? questions.length : 0 }}</span></a>
             </li>
             <li class="nav-item map-active">
                 <a class="nav-link" data-toggle="tab" href="#map-block">{{ $t('Map') }}</a>
@@ -16,17 +16,8 @@
         </ul>
         <div class="tab-content">
             <div class="description-content tab-pane fade show active" id="description">
-                Absolutely brand new, amazing studio unit (part of 3 unit complex) located in prime central Leipzig,
-                one block from Ristrasse Street. Surrounded by embassies, restaurants, cafes this makes for
-                amazing location. The apartment is totally equipped with everything including king sized bed,
-                LCD TV with Smart TV, fully equipped kitchen, balcony, Air Conditioner, High Speed Wi Fi,
-                washing machine, shower cabin and much more. Perfect place for your next stay in Leipzig!
-                Absolutely brand new, amazing studio unit (part of 3 unit complex) located in prime central
-                Leipzig, one block from Ristrasse Street. Surrounded by embassies, restaurants, cafes this
-                makes for amazing location. The apartment is totally equipped with everything including king
-                sized bed, LCD TV with Smart TV, fully equipped kitchen, balcony, Air Conditioner, High Speed
-                Wi Fi, washing machine, shower cabin and much more. Perfect place for your next stay in Leipzig!
-                <div class="collapse collapse-content" id="description-collapse">
+                {{ description }}
+                <div v-if="false" class="collapse collapse-content" id="description-collapse">
                     Absolutely brand new, amazing studio unit (part of 3 unit complex) located in prime central Leipzig,
                     one block from Ristrasse Street. Surrounded by embassies, restaurants, cafes this makes for amazing
                     location. The apartment is totally equipped with everything including king sized bed, LCD TV with Smart TV,
@@ -38,7 +29,7 @@
                     kitchen, balcony, Air Conditioner, High Speed Wi Fi, washing machine, shower cabin and much more.
                     Perfect place for your next stay in Leipzig!
                 </div>
-                <a class="more-details" data-toggle="collapse" href="#description-collapse" role="button" aria-expanded="false" aria-controls="description-collapse">
+                <a v-if="false" class="more-details" data-toggle="collapse" href="#description-collapse" role="button" aria-expanded="false" aria-controls="description-collapse">
                     {{ $t('More details') }}
                     <img src="/svg/i-arrow-show-more.svg" alt="alt">
                 </a>
@@ -63,16 +54,15 @@
                                     <img src="/svg/star-gray.svg" alt="alt">
                                 </div>
                             </div>
-                            <form action="review/create">
+                            <form @submit.prevent="addReviews">
                                 <div class="top-form">
-                                    <input type="text" name="name" :placeholder="$t('Your name')">
-                                    <input type="text" name="company" :placeholder="$t('Company name')">
-                                    <input type="hidden" name="property_id" value="<!--$hotel->id-->">
-                                    <input type="hidden" name="rating" value="">
+                                    <input type="text" v-model="reviewsForm.name" :placeholder="$t('Your name')">
+                                    <input type="text" v-model="reviewsForm.company" :placeholder="$t('Company name')">
+                                    <input type="hidden" name="rating" value="0">
                                     <input type="hidden" name="grecaptcha" value="">
                                 </div>
-                                <input type="text" name="title" :placeholder="$t('Review title')">
-                                <textarea name="description" :placeholder="$t('Review text')"></textarea>
+                                <input type="text" v-model="reviewsForm.title" :placeholder="$t('Review title')">
+                                <textarea v-model="reviewsForm.description" :placeholder="$t('Review text')"></textarea>
                                 <input type="submit" :value="$t('Send')">
                             </form>
                         </div>
@@ -148,9 +138,8 @@
                 </div>
             </div>
             <div class="tab-pane fade questions-content" id="questions">
-                <form class="questions-form" action="question/create">
-                    <input type="text" :placeholder="$t('Ask your question')" name="question">
-                    <input type="hidden" value="<!--$hotel->id-->" name="property_id">
+                <form class="questions-form" @submit.prevent="addQuestion">
+                    <input type="text" v-model="questionsForm.text" :placeholder="$t('Ask your question')" name="question">
                     <input type="submit" :value="$t('Send')">
                 </form>
                 <div class="questions-received">
@@ -180,6 +169,9 @@ export default {
     name: "Single",
     data() {
         return {
+            description: '',
+            reviewsForm: [],
+            questionsForm: [],
             questions: [],
             reviews: [],
             reviewsPages: 1,
@@ -195,10 +187,56 @@ export default {
             .then(resp => {
                 this.reviews = resp.data.data;
                 this.reviews_page = resp.data.last_page;
+                jQuery('.rev-number').text('('+(this.reviews ? this.reviews.length : '0')+')');
             })
+        this.description = jQuery('.description-content').text();
         this.initMap();
+        this.initGrecaptcha();
     },
     methods: {
+        addQuestion() {
+            let reviewFormData = {
+                    'question' : this.questionsForm.text,
+                    'property_id' : window.hotel.id,
+                };
+            axios.post('/question/create',reviewFormData)
+                .then(resp => {
+
+                }).catch(error => {
+
+                });
+        },
+        addReviews() {
+            let captcha = document.querySelectorAll('.reviews-form input[name="grecaptcha"]')[0].value,
+                rating = document.querySelectorAll('.reviews-form input[name="rating"]')[0].value,
+                reviewFormData = {
+                    'name' : this.reviewsForm.name,
+                    'company' : this.reviewsForm.company,
+                    'property_id' : window.hotel.id,
+                    'rating': rating,
+                    'title': this.reviewsForm.title,
+                    'description': this.reviewsForm.description,
+                    'grecaptcha': captcha,
+                };
+            axios.post('/reviews/create',reviewFormData)
+                .then(resp => {
+
+                }).catch(error => {
+
+                });
+        },
+        initGrecaptcha() {
+            if (typeof grecaptcha === 'undefined') {
+                setTimeout( () => { this.initGrecaptcha() }, 100 );
+                return;
+            }
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LejY9AZAAAAAFpdc0QzQzrqRtaaflf3PfP64qdE', {action: 'submit'}).then(function(token) {
+                    let elements = document.querySelectorAll('[name="grecaptcha"]');
+                    elements.forEach( el => el.value = token);
+                });
+            });
+        },
         initMap() {
             if (typeof google === 'undefined' || !document.getElementById('map')) {
                 setTimeout( () => { this.initMap() }, 100 );
@@ -206,7 +244,7 @@ export default {
             }
 
             let mapCanvas = document.getElementById("map");
-            console.log(document.getElementById('map'));
+
             let myCenter = new google.maps.LatLng(window.myCenter.lat, window.myCenter.lng);
             let myTrip = window.myTrip;
 
@@ -230,9 +268,9 @@ export default {
             let map = new google.maps.Map(mapCanvas ,mapOptions);
 
             var contentString = '<div id="content">'+
-                '<span class="index">4103</span>'+
+                '<span class="index"><strong>&euro;' + window.hotel_price + '</strong></span>'+
                 '<span>&nbsp;</span>'+
-                '<span class="town">Leipzig</span>'+
+                '<span class="town"></span>'+
                 '</div>';
             var infowindow = new google.maps.InfoWindow({
                 content: contentString

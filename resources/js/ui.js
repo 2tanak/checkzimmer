@@ -363,6 +363,8 @@ jQuery(document).ready(function() {
 
     jQuery('.see-number-phone').click(function () {
        jQuery('.see-number-phone').addClass('active');
+        jQuery('.phone-hide').html(atob(window.phonenumStr));
+        jQuery('.phone-hide').attr('href', 'tel:' + atob(window.phonenum));
     });
 
     jQuery('a.map-picture').bind("click", function(e){

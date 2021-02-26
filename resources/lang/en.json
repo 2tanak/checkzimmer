@@ -459,5 +459,22 @@
     "Hide": "Hide",
     "Capacity": "Capacity",
     "Room Type": "Room Type",
-    "Number Phone For Watsapp": "Number Phone For Watsapp"
+    "Number Phone For Watsapp": "Number Phone For Watsapp",
+    "Ten-seater": "Ten-seater",
+    "Nine-seater": "Nine-seater",
+    "Eight-seater": "Eight-seater",
+    "Seven-seater": "Seven-seater",
+    "Six-seater": "Six-seater",
+    "Quintuple": "Quintuple",
+    "Quadruple": "Quadruple",
+    "Triple room": "Triple room",
+    "Double room": "Double room",
+    "Single room": "Single room",
+    "your addresses": "your addresses",
+    "shower": "shower",
+    "kitchen": "kitchen",
+    "Price low to high": "Price low to high",
+    "Price high to low": "Price high to low",
+    "Load surrounding places": "Load surrounding places",
+    "The offers on your request are over, but you can check surrounding places within chosen distance": "The offers on your request are over, but you can check surrounding places within chosen distance"
 }

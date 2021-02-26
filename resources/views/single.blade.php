@@ -11,7 +11,7 @@
                     <div class="main-top-block">
 
                         @include('single.slider-single', ['hotel' => $hotel])
-                        @include('single.sidebar-modal')
+                        @include('single.sidebar-modal', ['phoneHide' => $phoneHide])
                         @include('single.gallery', ['hotel' => $hotel])
 
                         <h1>{{ $hotel->name }}</h1>
@@ -58,7 +58,7 @@
                 @else
                 <div class="see-number-phone">
                     <span class="number-phone-text">{{ __('Show phone') }}</span>
-                    <a class="number-phone" href="tel:+{{ $hotel->getCurrentOption('landlordPhoneNumber') }}">{{ $hotel->getCurrentOption('landlordPhoneNumber') }}</a>
+                    <a class="number-phone phone-hide" href="tel:">{{ $phoneHide }}</a>
                 </div>
             @endif
         </div>
@@ -74,7 +74,6 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChFeaunpThR-Lo4t-SMP3n7s-fDBs67hU&callback=initMap" async defer></script>
     </div>
 
-    @include('single.grecaptcha')
     @include('single.scripts-inline')
 
     <style>

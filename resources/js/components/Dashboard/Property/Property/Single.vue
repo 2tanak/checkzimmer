@@ -130,7 +130,7 @@
                                 <div class="card-body">
                                     <div class="row mt-4 mb-4">
                                         <div class="col-md-3">
-                                            <b-form-group :label="$t('Landlord')" laber-for="input-client-name">
+                                            <b-form-group :label="$t('Landlord')" label-for="input-landlord-fullname">
                                                 <b-form-input v-model="property.opts.landlordName" id="input-landlord-fullname"></b-form-input>
                                             </b-form-group>
                                             <b-form-group>
@@ -138,7 +138,7 @@
                                             </b-form-group>
                                         </div>
                                         <div class="col-md-3">
-                                            <b-form-group :label="$t('Phone number')" laber-for="input-phone">
+                                            <b-form-group :label="$t('Phone number')" label-for="input-phone">
                                                 <b-form-input v-model="property.opts.landlordPhoneNumber" id="input-landlord-phone"></b-form-input>
                                             </b-form-group>
                                             <b-form-group>
@@ -146,16 +146,30 @@
                                             </b-form-group>
                                         </div>
                                         <div class="col-md-3">
-                                            <b-form-group :label="$t('Client email')" laber-for="input-email">
+                                            <b-form-group :label="$t('Client email')" label-for="input-email">
                                                 <b-form-input v-model="property.opts.landlordClientEmail" id="input-landlord-email"></b-form-input>
                                             </b-form-group>
                                         </div>
                                         <div class="col-md-3">
-                                            <b-form-group :label="$t('Languages')" laber-for="input-email">
+                                            <b-form-group :label="$t('Languages')" label-for="input-email">
                                                 <b-form-input v-model="property.opts.landlordLanguages" id="input-landlord-talking"></b-form-input>
                                             </b-form-group>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <input type="hidden" v-model="property.price">
+
+                                    <b-form-group :label="$t('Property description')" label-for="input-property-description">
+                                        <b-textarea v-model="property.description" class="form-control" id="input-property-description" type="text" />
+                                    </b-form-group>
                                 </div>
                             </div>
                         </div>
@@ -733,6 +747,8 @@ export default {
                     });
                 }
             }
+            this.property.price = this.minRoomPrice;
+
             properties.update(this.property.id, this.property)
                 .then(resp => {
                     /*properties.get(this.$route.params.item)
@@ -804,6 +820,11 @@ export default {
         },
         roomTypeOptions() {
             return this.roomTypes.map( item => { return { value: item.id, text: item.name } })
+        },
+        minRoomPrice() {
+
+            console.log(this.property.rooms);
+            return this.property.rooms.reduce( (carry, item) => carry ? (item.price ? Math.min(item.price, carry) : carry) : item.price, 0 );
         }
     },
 }

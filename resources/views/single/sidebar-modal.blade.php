@@ -60,7 +60,7 @@
             </div>
         @else
         <div class="number-phone">
-            <a href="tel:+{{ $hotel->getCurrentOption('landlordPhoneNumber') }}">{{ $hotel->getCurrentOption('landlordPhoneNumber') }}</a>
+            <a href="tel:" class="phone-landlord phone-hide">{{ $phoneHide }}</a>
             <span class="sh_nmr">{{ __('show') }}</span>
             <div class="message">{{ __('Let us know that you are from the site Check-zimmer.de') }}</div>
             <div class="language">
@@ -249,22 +249,8 @@
 </div>
 
 <script>
-    let favs = JSON.parse(localStorage.getItem("favoritesList")) || [];
-    document.getElementsByClassName('favoritesCount')[0].innerHTML = favs.length;
 
     document.addEventListener('DOMContentLoaded', function() {
-        jQuery(function() {
-            var abc = jQuery('.number-phone a').html();
-            var lastSimbol = abc.substr(-20,4);
-            var x = 'XXXX XXXX'
-            var phoneLink = lastSimbol.concat(x);
-            jQuery('.number-phone a').html(phoneLink);
-            jQuery('.sh_nmr').click(function () {
-                jQuery('.sidebar .number-phone').addClass('gray');
-                jQuery('.sh_nmr').css('display', 'none');
-                jQuery('.number-phone a').html(abc);
-            });
-        });
     });
 
 </script>

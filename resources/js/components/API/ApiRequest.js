@@ -15,6 +15,15 @@ function getConfig() {
     return config;
 }
 
+function queryBuild(params) {
+    let query = [];
+    for (let key in params) {
+        query.push(key + '=' + params[key])
+    }
+    query = query.join('&');
+    return query;
+}
+
 export default (base) => class ApiRequest {
     constructor() {
     }
@@ -26,11 +35,7 @@ export default (base) => class ApiRequest {
     }
     byPage(page, params) {
         params = params || {};
-        let query = [];
-        for (let key in params) {
-            query.push(key + '=' + params[key])
-        }
-        query = query.join('&');
+        let query = queryBuild(params);
         if (query !== '') {
             query = '&' + query;
         }
@@ -42,8 +47,13 @@ export default (base) => class ApiRequest {
     query(data) {
         return client.post(`/api/${base}/query`, data, getConfig());
     }
-    request(action, data, reqType) {
+    request(action, data, reqType, params) {
         reqType = reqType || 'post';
+        params = params || {};
+        let query = queryBuild(params);
+        if (query !== '') {
+            action += '?' + query;
+        }
         let url = `/api/${base}/${action}`;
         switch (reqType) {
             case 'post':

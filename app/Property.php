@@ -17,7 +17,7 @@ class Property extends Model
     use optionsLink;
 
     protected $table = 'property';
-    protected $fillable = ['user_id', 'type', 'status', 'ord', 'views', 'access', 'lat', 'lng', 'name', 'city', 'zip', 'address', 'slug', 'description'];
+    protected $fillable = ['user_id', 'type', 'status', 'ord', 'views', 'access', 'lat', 'lng', 'name', 'city', 'zip', 'address', 'slug', 'description', 'price'];
     protected $with = ['options', 'user', 'rooms', 'questions', 'rating', 'questions', 'features'];
     protected $fillableRelations = ['options', 'rooms', 'features'];
     private static $identifier = 'id';
@@ -332,5 +332,13 @@ class Property extends Model
     public function getSEODescription() {
         $description = $this->getCurrentOption('seo_description');
         return $this->handleTemplate($description ?? '');
+    }
+    static function phoneFormat($phone): string {
+        if (!$phone) {
+            return '';
+        }
+        $phone = preg_replace('/[^0-9]/', '', $phone);
+        $phone = '+'.$phone;
+        return $phone;
     }
 }
