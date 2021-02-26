@@ -63,7 +63,7 @@
             </div>
         @else
             <div class="number-phone">
-                <a href="tel:+{{ $hotel->getCurrentOption('landlordPhoneNumber') }}">{{ $hotel->getCurrentOption('landlordPhoneNumber') }}</a>
+                <a href="tel:" class="phone-hide">{{ $phoneHide }}</a>
                 <div class="sh_nmr">
                     <span>{{ __('show') }}</span>
                 </div>
@@ -262,18 +262,11 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        jQuery(function() {
-            var abc = jQuery('.number-phone a').text();
-            var lastSimbol = abc.substr(-20,4);
-            var x = 'XXXXXXXX';
-            var phoneLink = lastSimbol.concat(x);
-            jQuery('.number-phone a').html(phoneLink);
-            jQuery('.sh_nmr').click(function () {
-                jQuery('.sidebar .number-phone').addClass('gray');
-                jQuery('.sh_nmr').css('display', 'none');
-                jQuery('.number-phone a').html(abc);
-            });
+        jQuery('.sh_nmr').click(function () {
+            jQuery('.sidebar .number-phone').addClass('gray');
+            jQuery('.sh_nmr').css('display', 'none');
+            jQuery('.phone-hide').html(atob(window.phonenumStr));
+            jQuery('.phone-hide').attr('href', 'tel:' + atob(window.phonenum));
         });
-
     });
 </script>

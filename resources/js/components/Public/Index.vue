@@ -792,7 +792,6 @@ export default {
         },
 
         submitForm(clear) {
-            console.log(clear)
             clear = clear || false
 
             if (clear) {

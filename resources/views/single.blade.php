@@ -11,7 +11,7 @@
                     <div class="main-top-block">
 
                         @include('single.slider-single', ['hotel' => $hotel])
-                        @include('single.sidebar-modal')
+                        @include('single.sidebar-modal', ['phoneHide' => $phoneHide])
                         @include('single.gallery', ['hotel' => $hotel])
 
                         <h1>{{ $hotel->name }}</h1>
@@ -58,7 +58,7 @@
                 @else
                 <div class="see-number-phone">
                     <span class="number-phone-text">{{ __('Show phone') }}</span>
-                    <a class="number-phone" href="tel:+{{ $hotel->getCurrentOption('landlordPhoneNumber') }}">{{ $hotel->getCurrentOption('landlordPhoneNumber') }}</a>
+                    <a class="number-phone phone-hide" href="tel:">{{ $phoneHide }}</a>
                 </div>
             @endif
         </div>

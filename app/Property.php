@@ -333,4 +333,12 @@ class Property extends Model
         $description = $this->getCurrentOption('seo_description');
         return $this->handleTemplate($description ?? '');
     }
+    static function phoneFormat($phone): string {
+        if (!$phone) {
+            return '';
+        }
+        $phone = preg_replace('/[^0-9]/', '', $phone);
+        $phone = '+'.$phone;
+        return $phone;
+    }
 }
