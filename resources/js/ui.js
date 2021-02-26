@@ -221,18 +221,6 @@ jQuery(document).ready(function() {
                     el.text(arr[c++ % arr.length]);
                 }}());
         })};
-    jQuery(function() {
-        var abc = jQuery('.number-phone a').html();
-        var lastSimbol = abc.substr(-20,4);
-        var x = 'XXXX XXXX'
-        var phoneLink = lastSimbol.concat(x);
-        jQuery('.number-phone a').html(phoneLink);
-        jQuery('.sh_nmr').click(function () {
-            jQuery('.sidebar .number-phone').addClass('gray');
-            jQuery('.sh_nmr').css('display', 'none');
-            jQuery('.number-phone a').html(abc);
-        });
-    });
 
     jQuery('.languages-block .selected-language').click(function (e) {
         e.preventDefault();
@@ -275,7 +263,6 @@ jQuery(document).ready(function() {
     });
 
     jQuery('.sidebar-bottom a').click(function (e) {
-        e.preventDefault();
         var parent = jQuery(this).closest('.sidebar-bottom-block');
         jQuery('.sidebar-modal-block').removeClass('active');
         jQuery(parent).find('.sidebar-modal-block').addClass('active');
@@ -297,15 +284,7 @@ jQuery(document).ready(function() {
     });
 
     jQuery('.close-block').click(function () {
-        jQuery('.sidebar-small-block, .sidebar-modal-block').removeClass('active');
-    });
-
-    jQuery(document).mouseup(function (e){
-        var div = jQuery(".sidebar-small-block");
-        if (!div.is(e.target)
-            && div.has(e.target).length === 0) {
-            jQuery('.sidebar-modal-block').removeClass('active');
-        }
+        jQuery('.sidebar-modal-block').removeClass('active');
     });
 
     jQuery(document).mouseup(function (e){
@@ -313,6 +292,14 @@ jQuery(document).ready(function() {
         if (!div.is(e.target)
             && div.has(e.target).length === 0) {
             jQuery('.quality').removeClass('active');
+        }
+    });
+
+    jQuery(document).click(function (e) {
+        if (jQuery(e.target).closest('.sidebar-small-block').length === 0 &&
+            jQuery(e.target).closest('.select2-container').length === 0  &&
+            jQuery('.sidebar-small-block').hasClass('active')) {
+            jQuery('.sidebar-modal-block').removeClass('active');
         }
     });
 
@@ -376,6 +363,8 @@ jQuery(document).ready(function() {
 
     jQuery('.see-number-phone').click(function () {
        jQuery('.see-number-phone').addClass('active');
+        jQuery('.phone-hide').html(atob(window.phonenumStr));
+        jQuery('.phone-hide').attr('href', 'tel:' + atob(window.phonenum));
     });
 
     jQuery('a.map-picture').bind("click", function(e){
@@ -390,7 +379,7 @@ jQuery(document).ready(function() {
         jQuery('.map-active a').addClass('active');
     });
 
-    jQuery('a.map-picture.map-mobile-picture').bind("click", function(e){
+    jQuery('a.map-mobile-picture').bind("click", function(e){
         e.preventDefault();
         var anchor = jQuery(this);
         jQuery('html, body').stop().animate({

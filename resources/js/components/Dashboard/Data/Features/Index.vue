@@ -199,7 +199,6 @@
             featureAddOk() {
                 let cat = 0;
 
-                this.editFeature.feature_category.name = this.editFeature.name;
                 this.editFeature.feature_category.id = this.editFeature.category;
 
                 if (this.editFeature.picture.data !== undefined) {
@@ -212,12 +211,19 @@
                 cat = this.features.find( item => {
                     return item.feature_category && item.feature_category.name === cat }
                     );
+                this.editFeature.feature_category.id = cat.feature_category_id;
+                this.editFeature.feature_category.name = cat.feature_category.name;
 
-                cat = cat.feature_category_id;
+                let index = this.features.findIndex( item => item.id === this.editFeature.id );
+                if (index !== -1) {
+                    this.features[index].feature_category = { ...cat.feature_category }
+                    this.features[index].feature_category_id = cat.feature_category.id;
+                    this.features[index].name = this.editFeature.name;
+                }
 
                 let data = {
-                    'name' : this.editFeature.feature_category.name,
-                    'category' : cat,
+                    'name' : this.editFeature.name,
+                    'category' : this.editFeature.feature_category.id,
                     'image' : this.editFeature.feature_category.picture,
                     'ord': this.editFeature.ord,
                     'inlist': this.editFeature.inlist

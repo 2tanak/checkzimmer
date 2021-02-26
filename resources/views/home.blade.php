@@ -41,9 +41,9 @@
                     <label for="distance-select">{{ __($options['label_distance'] ?? '' ) }}:</label>
                     <div class="select-container">
                         <select name="distance" id="distance-select" class="distance">
-                            <option value="10">10 {{ __('km') }}.</option>
+                            <option value="10" selected>10 {{ __('km') }}.</option>
                             <option value="20">20 {{ __('km') }}.</option>
-                            <option value="30" selected >30 {{ __('km') }}.</option>
+                            <option value="30">30 {{ __('km') }}.</option>
                             <option value="40">40 {{ __('km') }}.</option>
                         </select>
                     </div>
@@ -53,10 +53,27 @@
                     <label class="mobile-label" for="number-personse">{{ __($options['label_people'] ?? '' ) }}:</label>
                     <div class="select-container">
                         <select name="distance" id="number-personse" class="number-personse">
-                            <option value="1">1 {{ __('ppl') }}.</option>
-                            <option value="2" selected >2 {{ __('ppl') }}.</option>
+                            <option value="1" selected>1 {{ __('ppl') }}.</option>
+                            <option value="2">2 {{ __('ppl') }}.</option>
                             <option value="3">3 {{ __('ppl') }}.</option>
                             <option value="4">4 {{ __('ppl') }}.</option>
+                            <option value="5">5 {{ __('ppl') }}.</option>
+                            <option value="6">6 {{ __('ppl') }}.</option>
+                            <option value="7">7 {{ __('ppl') }}.</option>
+                            <option value="8">8 {{ __('ppl') }}.</option>
+                            <option value="9">9 {{ __('ppl') }}.</option>
+                            <option value="10">10 {{ __('ppl') }}.</option>
+                            <option value="11">11 {{ __('ppl') }}.</option>
+                            <option value="12">12 {{ __('ppl') }}.</option>
+                            <option value="13">13 {{ __('ppl') }}.</option>
+                            <option value="14">14 {{ __('ppl') }}.</option>
+                            <option value="15">15 {{ __('ppl') }}.</option>
+                            <option value="16">16 {{ __('ppl') }}.</option>
+                            <option value="17">17 {{ __('ppl') }}.</option>
+                            <option value="18">18 {{ __('ppl') }}.</option>
+                            <option value="19">19 {{ __('ppl') }}.</option>
+                            <option value="20">20 {{ __('ppl') }}.</option>
+                            <option value="21">20+ {{ __('ppl') }}.</option>
                         </select>
                     </div>
                 </div>

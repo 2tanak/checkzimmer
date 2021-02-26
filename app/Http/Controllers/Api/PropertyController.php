@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Property;
 use Auth;
 use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Ramsey\Collection\Collection;
 
@@ -97,23 +98,34 @@ class PropertyController extends Controller
                 $objects->orderByDesc('hotel_rating');
         }
 
+        if ($people) {
+            $totalIds = Room::select(DB::raw('SUM(number * person) as people'), 'property_id')->groupBy('property_id')->having('people', '>=', $people)->pluck('property_id');
+        } else {
+            $totalIds = [];
+        }
+
         // Filter by selected properties: single rooms, double rooms, multiple beds
         if ($data['single'] || $data['double']) {
-            $objectsPreliminary = $objects->all()->pluck('id');
+            $objectsPreliminary = $objects->get()->pluck('id');
+
             if ($data['single']) {
-                $singleIds = Room::where('person', 1)->whereIn('property_id', $objectsPreliminary)->all();
+                $singleIds = Room::where('person', 1)->whereIn('property_id', $objectsPreliminary)->get()->pluck('property_id')->toArray();
             } else {
                 $singleIds = [];
             }
             if ($data['double']) {
-                $doubleIds = Room::where('person', 2)->whereIn('property_id', $objectsPreliminary)->all();
+                $doubleIds = Room::where('person', 2)->whereIn('property_id', $objectsPreliminary)->get()->pluck('property_id')->toArray();
             } else {
                 $doubleIds = [];
             }
-            $totalIds = array_merge($singleIds, $doubleIds);
-
-            $objects->whereIn($totalIds);
+            if ($data['multi']) {
+                $multiIds = Room::where('person', '>', 2)->whereIn('property_id', $objectsPreliminary)->get()->pluck('property_id')->toArray();
+            } else {
+                $multiIds = [];
+            }
+            $totalIds = array_merge($totalIds, $singleIds, $doubleIds, $multiIds);
         }
+        $objects->whereIn('id', $totalIds);
 
         $objects = $objects->where(function ($query) use ($user) {
             if (!$user || $user->role != 'admin' && $user->role != 'manager') {
@@ -124,6 +136,8 @@ class PropertyController extends Controller
         if ($subdomain) {
             $relate = $noCity ? '!=' : '=';
             $objects->where('city', $relate, $subdomain->city);
+        } elseif ($noCity) {
+            $objects->where('city', '!=', 'Leipzig');
         }
 
         $objects = $objects->paginate(20);

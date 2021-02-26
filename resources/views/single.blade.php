@@ -11,7 +11,7 @@
                     <div class="main-top-block">
 
                         @include('single.slider-single', ['hotel' => $hotel])
-                        @include('single.sidebar-modal')
+                        @include('single.sidebar-modal', ['phoneHide' => $phoneHide])
                         @include('single.gallery', ['hotel' => $hotel])
 
                         <h1>{{ $hotel->name }}</h1>
@@ -53,12 +53,12 @@
             @if (($hotel->getCurrentOption('landlordPhoneNumber') == null) || ($hotel->getCurrentOption('landlordHidePhone') == 1))
                 <div class="not-phone">
                     <div class="speaks">{{ __('Object owner speaks') }}:</div>
-                    <div class="language-item">{{ $hotel->getCurrentOption('landlordLanguages') }}</div>
+                    <div class="language-item">{{ $hotel->getCurrentOption('landlordLanguages') ?: 'DE' }}</div>
                 </div>
                 @else
                 <div class="see-number-phone">
                     <span class="number-phone-text">{{ __('Show phone') }}</span>
-                    <a class="number-phone" href="tel:+{{ $hotel->getCurrentOption('landlordPhoneNumber') }}">{{ $hotel->getCurrentOption('landlordPhoneNumber') }}</a>
+                    <a class="number-phone phone-hide" href="tel:">{{ $phoneHide }}</a>
                 </div>
             @endif
         </div>
@@ -74,8 +74,78 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChFeaunpThR-Lo4t-SMP3n7s-fDBs67hU&callback=initMap" async defer></script>
     </div>
 
-    @include('single.grecaptcha')
     @include('single.scripts-inline')
-    @include('single.styles-inline')
+
+    <style>
+        @media print {
+            body {
+                padding: 0 !important;
+                min-width: auto !important;
+            }
+            .single-gallery {
+                display: none !important;
+            }
+            .sidebar-bottom {
+                display: none !important;
+            }
+            .single-load-content {
+                display: none !important;
+            }
+            header {
+                display: none !important;
+                height: 0 !important;
+            }
+            footer {
+                display: none !important;
+            }
+            .single-main-slider {
+                display: none !important;
+            }
+            .single-content .favorites {
+                display: none !important;
+            }
+            .single-content .sidebar {
+                width: 300px !important;
+                margin: 0 auto !important;
+            }
+            .single-content .sidebar a.inquiry {
+                display: none !important;
+            }
+            .single-content {
+                padding-top: 0 !important;
+            }
+            h1 {
+                color: black !important;
+                font-size: 2.25rem !important;
+                margin-bottom: 0.5rem !important;
+                font-weight: 500 !important;
+                line-height: 1.2 !important;
+                display: block !important;
+            }
+            .additional-information {
+                display: none !important;
+            }
+            .superhost-icon {
+                display: none !important;
+            }
+            .main-top-block {
+                display: block !important;
+            }
+            .single-content .bottom-text {
+                font-size: 1rem !important;
+                color: black !important;
+            }
+            .single-content .object-description .description-content {
+                font-size: 1rem !important;
+                color: black !important;
+            }
+            .single-content .object-description .description-content a.more-details {
+                display: none !important;
+            }
+            .comfort a.comfort-collapse-link {
+                display: none !important;
+            }
+        }
+    </style>
 
 @endsection

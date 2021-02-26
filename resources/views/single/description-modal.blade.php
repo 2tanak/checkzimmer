@@ -7,16 +7,8 @@
         </div>
         <div class="collapse" id="mobile-description-content-collapse">
             <div class="description-content">
-                Absolutely brand new, amazing studio unit (part of 3 unit complex) located in prime central Leipzig,
-                one block from Ristrasse Street. Surrounded by embassies, restaurants, cafes this makes for
-                amazing location. The apartment is totally equipped with everything including king sized bed,
-                LCD TV with Smart TV, fully equipped kitchen, balcony, Air Conditioner, High Speed Wi Fi,
-                washing machine, shower cabin and much more. Perfect place for your next stay in Leipzig!
-                Absolutely brand new, amazing studio unit (part of 3 unit complex) located in prime central
-                Leipzig, one block from Ristrasse Street. Surrounded by embassies, restaurants, cafes this
-                makes for amazing location. The apartment is totally equipped with everything including king
-                sized bed, LCD TV with Smart TV, fully equipped kitchen, balcony, Air Conditioner, High Speed
-                Wi Fi, washing machine, shower cabin and much more. Perfect place for your next stay in Leipzig!
+                {{ $hotel['description'] }}
+                @if (false)
                 <div class="collapse collapse-content" id="description-collapse">
                     Absolutely brand new, amazing studio unit (part of 3 unit complex) located in prime central Leipzig,
                     one block from Ristrasse Street. Surrounded by embassies, restaurants, cafes this makes for amazing
@@ -33,13 +25,14 @@
                     {{ __('More details') }}
                     <img src="/svg/i-arrow-show-more.svg" alt="alt">
                 </a>
+                @endif
             </div>
         </div>
     </div>
 
     <div class="reviews-content mobile-reviews-content paddings-block">
         <div class="head-collapse" data-toggle="collapse" data-target="#mobile-reviews-content-collapse" aria-expanded="false" aria-controls="mobile-reviews-content-collapse">
-            <div>{{ __('Reviews') }} <span>(72)</span></div>
+            <div>{{ __('Reviews') }} <span class="rev-number">(72)</span></div>
             <div class="decompose-button"></div>
         </div>
         <div class="collapse" id="mobile-reviews-content-collapse">
@@ -250,42 +243,24 @@
         </div>
         <div class="collapse" id="mobile-map-content-collapse">
             <div class="map-content">
-                <div id="map"></div>
+                <div id="map-mobile"></div>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    var map, map2;
     function initMap() {
-        if (document.getElementById("map") == null) {
-            setTimeout(function() {
-                initMap()
-            }, 100)
+        if (typeof google === 'undefined' || !document.getElementById('map-mobile')) {
+            setTimeout( () => { initMap() }, 100 );
             return;
         }
-        var mapCanvas = document.getElementById("map");
-        var mapCanvas2 = document.getElementById("map-mobile");
-        var myCenter = new google.maps.LatLng({{$hotel->lat}}, {{$hotel->lng}});
-        var myCenter2 = new google.maps.LatLng({{$hotel->lat}}, {{$hotel->lng}});
 
-        var myTrip = [{lat:{{$hotel->lat}}, lng:{{$hotel->lng}}}];
+        let mapCanvas = document.getElementById("map-mobile");
 
-        var myTrip2 = [{lat:{{$hotel->lat}}, lng:{{$hotel->lng}}}];
-
-        var mapOptions = {
-            center: myCenter,
-            zoom: 10,
-            disableDefaultUI: true,
-            zoomControl: true,
-            zoomControlOptions: {
-                style: google.maps.ZoomControlStyle.DEFAULT,
-                position: google.maps.ControlPosition.TOP_RIGHT
-            },
-            mapTypeId: google.maps.MapTypeId.DESCTOPE
-        };
-        var mapOptions2 = {
+        let myCenter = new google.maps.LatLng(window.myCenter2.lat, window.myCenter2.lng);
+        let myTrip = window.myTrip2;
+        let mapOptions = {
             center: myCenter,
             zoom: 10,
             disableDefaultUI: true,
@@ -296,58 +271,31 @@
             },
             mapTypeId: google.maps.MapTypeId.MOBILE
         };
-        var images = '/img/point-img.png';
-        var marker = new google.maps.Marker ({
+        let images = '/img/point-img.png';
+        let marker = new google.maps.Marker ({
             position: myCenter,
-            map: mapCanvas,
-            icon: images
+            map: mapCanvas
         });
-        var marker2 = new google.maps.Marker ({
-            position: myCenter2,
-            map: mapCanvas2
-        });
-        var map = new google.maps.Map(mapCanvas ,mapOptions);
-        var map2 = new google.maps.Map(mapCanvas2 ,mapOptions2);
-
-        var contentString = '<div id="content">'
-        '<span class="index">{{$hotel->city}}</span>'+
-        '<span>&nbsp;</span>'+
-        '<span class="town">{{$hotel->zip}}</span>'+
-        '</div>';
-        var contentString2 = '<div id="content">'+
-            '<span class="index">{{$hotel->city}}</span>'+
+        let map = new google.maps.Map(mapCanvas ,mapOptions);
+        let contentString = '<div id="content">'+
+            '<span class="index">&euro;{{ $hotel->price }}</span>'+
             '<span>&nbsp;</span>'+
-            '<span class="town">{{$hotel->zip}}</span>'+
+            '<span class="town"></span>'+
             '</div>';
-        var infowindow = new google.maps.InfoWindow({
+        let infowindow = new google.maps.InfoWindow({
             content: contentString
         });
-        var infowindow2 = new google.maps.InfoWindow({
-            content: contentString2
-        });
         infowindow.open(map, marker);
-        infowindow2.open(map2, marker2);
-
         var flightPath = new google.maps.Polygon({
             path: myTrip,
-            strokeColor: "#6bb638",
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: "rgb(117, 242, 122)",
-            fillOpacity: 0.2
-        });
-        var flightPath2 = new google.maps.Polygon({
-            path: myTrip2,
             strokeColor: "#6bb638",
             strokeOpacity: 1,
             strokeWeight: 2,
             fillColor: "rgb(117, 242, 122)",
             fillOpacity: 0.2
         });
-
         marker.setMap(map);
-        marker2.setMap(map2);
         flightPath.setMap(map);
-        flightPath2.setMap(map2);
     }
+
 </script>
