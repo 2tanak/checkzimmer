@@ -187,6 +187,7 @@ export default {
             .then(resp => {
                 this.reviews = resp.data.data;
                 this.reviews_page = resp.data.last_page;
+                jQuery('.rev-number').text('('+(this.reviews ? this.reviews.length : '0')+')');
             })
         this.description = jQuery('.description-content').text();
         this.initMap();

@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $hotel->getSEOTitle() }}</title>
+    <title>{{ $seoTitle }}</title>
     <meta name="description" content="{{ $hotel->getSEODescription() }}"/>
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -97,12 +97,12 @@
                         </a>
                     </li>
                 </ul>
-                <a class="whatsapp-number" href="tel:{{ str_replace(' ', '', $options['website_phone'] ?? '') }}">
-                    @if (($hotel->getCurrentOption('landlordPhoneNumber') != null) && ($hotel->getCurrentOption('landlordHidePhone') != 1))
-                    {{ $hotel->getCurrentOption('landlordPhoneNumber') ?? '' }}
-                    @endif
-                    <span class="explanatory-text">24/7 бесплатно с мобильного</span>
-                </a>
+                @if ($options['website_phone'] ?? '')
+                    <a class="whatsapp-number" href="tel:{{ $phoneNumAdmin }}">
+                        {{ $options['website_phone'] ?? '' }}
+                        <span class="explanatory-text">24/7 бесплатно с мобильного</span>
+                    </a>
+                @endif
             </div>
         </div>
 
