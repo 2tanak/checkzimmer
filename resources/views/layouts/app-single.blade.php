@@ -152,7 +152,7 @@
     @include('single.inquiry-modal')
 
     @include('single.gallery-modal')
-
+    <script>(function(a,m,o,c,r,m){a[m]={id:"41373",hash:"02054bc01863d1cb9eb06492ca7868cd80bac2992311ba581ade40ec6bbe7b4b",locale:"ru",setMeta:function(p){this.params=(this.params||[]).concat([p])}};a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};var d=a.document,s=d.createElement('script');s.async=true;s.id=m+'_script';s.src='https://gso.amocrm.ru/js/button.js?1614073604';d.head&&d.head.appendChild(s)}(window,0,'amoSocialButton',0,0,'amo_social_button'));</script>
 </footer>
 
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
