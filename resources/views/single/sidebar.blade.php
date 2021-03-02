@@ -77,7 +77,7 @@
         @if ($hotel->checkHideAdress())
         <div class="address-map">
             <div class="address">
-                <div class="hotel-name">{{$hotel->name}}</div>
+                <h3 class="hotel-name">{{$hotel->name}}</h3>
                 <div class="name-surname">
                     @if (($hotel->getCurrentOption('landlordName') != null) && ($hotel->getCurrentOption('landlordHideName') != 1))
                         {{ $hotel->getCurrentOption('landlordName') }}
