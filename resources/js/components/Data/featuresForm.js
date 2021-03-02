@@ -1,6 +1,6 @@
 export default {
     category: {
-        label: 'Категория',
+        label: 'Category',
         placeholder: 'Please enter feature category',
         type: 'select',
         options: [],
