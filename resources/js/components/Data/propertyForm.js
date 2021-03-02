@@ -1,22 +1,22 @@
 export default {
     name: {
         label: 'Name',
-        placeholder: 'Please enter type name',
+        placeholder: 'Please enter name',
         type: 'text',
     },
     address: {
-        label: 'Адрес',
-        placeholder: 'Please enter room type picture',
+        label: 'Address',
+        placeholder: 'Please enter address',
         type: 'text',
     },
     city: {
-        label: 'Город',
-        placeholder: 'Please enter room type category',
+        label: 'City',
+        placeholder: 'Please enter the city',
         type: 'text',
     },
     zip: {
-        label: 'Почтовый индекс',
-        placeholder: 'Please enter room type category',
+        label: 'Zip code',
+        placeholder: 'Please enter zip code',
         type: 'text',
     }
 }
