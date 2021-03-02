@@ -41,10 +41,12 @@
                     <label for="distance-select">{{ __($options['label_distance'] ?? '' ) }}:</label>
                     <div class="select-container">
                         <select name="distance" id="distance-select" class="distance">
-                            <option value="10" selected>10 {{ __('km') }}.</option>
+                            <option value="10">10 {{ __('km') }}.</option>
                             <option value="20">20 {{ __('km') }}.</option>
-                            <option value="30">30 {{ __('km') }}.</option>
+                            <option value="30" selected>30 {{ __('km') }}.</option>
                             <option value="40">40 {{ __('km') }}.</option>
+                            <option value="50">50 {{ __('km') }}.</option>
+                            <option value="60">60 {{ __('km') }}.</option>
                         </select>
                     </div>
                 </div>
