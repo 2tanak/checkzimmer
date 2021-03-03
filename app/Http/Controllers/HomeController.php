@@ -63,6 +63,7 @@ class HomeController extends Controller
         $seoTitle = $data['title'];
         $seoDescription = $data['description'];
         $options = $data['options'];
+        $date = $hotel->locDate();
 
         $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
         $phoneNumLandlord = Property::phoneFormat($hotel->getCurrentOption('landlordPhoneNumber'));
@@ -70,7 +71,7 @@ class HomeController extends Controller
 
         if ($hotel->access) {
             $access = true;
-            return view('single-access', compact('option', 'hotel', 'access', 'phoneNumAdmin', 'phoneNumLandlord', 'seoTitle', 'seoDescription', 'phoneHide'));
+            return view('single-access', compact('options', 'hotel', 'access', 'phoneNumAdmin', 'phoneNumLandlord', 'seoTitle', 'seoDescription', 'phoneHide', 'date'));
         }
 
         $hotel->views++;
@@ -89,6 +90,16 @@ class HomeController extends Controller
     }
     public function singlePropertyAccess(Request $request, $slug) {
         $hotel = Property::where('slug', $slug)->firstOrFail();
+        $data = WebsiteData::getOptions();
+        $seoTitle = $data['title'];
+        $seoDescription = $data['description'];
+        $options = $data['options'];
+
+        $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
+        $phoneNumLandlord = Property::phoneFormat($hotel->getCurrentOption('landlordPhoneNumber'));
+        $phoneHide = substr($phoneNumLandlord, 0, 3) . 'X XXXXXXX';
+        $date = $hotel->locDate();
+
         $fields = $request->all();
         if ($hotel->access) {
             $pins = explode(',', $hotel->access);
@@ -116,16 +127,33 @@ class HomeController extends Controller
         $questions = $hotel->questions;
         $reviews = $hotel->reviews;
 
-        return view('single', compact('hotel','questions', 'reviews'));
+        return view('single', compact('options', 'hotel', 'questions', 'reviews', 'phoneNumAdmin', 'phoneNumLandlord', 'seoTitle', 'seoDescription', 'phoneHide', 'date'));
     }
 
     public function favorites()
     {
-        return view('favorites');
+        $data = WebsiteData::getOptions();
+        $seoTitle = $data['title'];
+        $seoDescription = $data['description'];
+        $options = $data['options'];
+
+        $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
+
+        return view('favorites', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
     }
     public function plans()
     {
-        return view('plans');
+        $data = WebsiteData::getOptions();
+        $seoTitle = $data['title'];
+        $seoDescription = $data['description'];
+        $options = $data['options'];
+
+        $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
+        return view('plans', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
+    }
+    public function city()
+    {
+        return view('city');
     }
     public function redirect() {
         return response()->redirectToRoute(app('locale')->routeApply('home'));

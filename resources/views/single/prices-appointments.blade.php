@@ -39,7 +39,7 @@
                         <div class="row" style="margin-right:-2px !important;">
                             <div class="name col-xl-5 col-lg-5 col-md-5 col-sm-5">
                                 <img src="/svg/i-room-filled.svg" alt="house">
-                                {{ __('apartment')}}
+                                {{ $roomType->name }}
                             </div>
                             <div class="quantity-item col-xl-2 col-lg-2 col-md-2 col-sm-2">{{ $hotel->getTotalRooms($roomType->id) }}x</div>
                             <div class="personen-item col-xl-2 col-lg-2 col-md-2 col-sm-2">{{ $hotel->getRoomPersonsMax($roomType->id) }}</div>

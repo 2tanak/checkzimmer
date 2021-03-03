@@ -972,7 +972,6 @@ h1.list-title {
     top: -3px;
     left: -3px;
     border: 4px solid #333646;
-    z-index: 1;
     border-radius: 6px;
 }
 .background-image-block .checkbox-form-block .checkbox {
@@ -4799,6 +4798,13 @@ header.height-menu .mobile-menu {
     order: 2;
     margin-left: 12px;
 }
+.single-content .sidebar .address-map .address h3 {
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 140%;
+    color: #333646;
+    margin-bottom: 0;
+}
 .single-content .sidebar .address-map .address span {
     font-weight: 600;
 }
@@ -7731,3 +7737,155 @@ body .popup-bubble-anchor.active:after {
     display: none!important;
 }
 /*---end-inquiry-form---*/
+
+/*---city-page---*/
+
+.plans-section.city-section .price-block-item:after {
+    content: none;
+}
+.plans-section.city-section .price-block {
+    margin-bottom: 150px;
+}
+.plans-section.city-section .price-block {
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+.plans-section.city-section .price-block-item {
+    margin-bottom: 25px;
+    margin-right: 25px;
+    text-decoration: none;
+    max-width: 255px;
+}
+.plans-section.city-section .price-block-item .max-price {
+    font-size: 28px;
+    margin-right: 0;
+}
+.plans-section.city-section .price-block-item .price-block-head {
+    margin-bottom: 0;
+    padding: 20px;
+}
+.plans-section.city-section a.plus-city {
+    width: 255px;
+    height: 207px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 4px solid #7b7b7b;
+    text-decoration: none;
+    position: relative;
+    transition: all 0.4s;
+    margin-right: 25px;
+    border-radius: 12px;
+}
+.plans-section.city-section a.plus-city span.plus {
+    font-size: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 4px solid #7b7b7b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7b7b7b;
+    transition: all 0.4s;
+}
+.plans-section.city-section a.plus-city span.add {
+    color: #7b7b7b;
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    line-height: 140%;
+    font-weight: 400;
+    transition: all 0.4s;
+}
+.plans-section.city-section a.plus-city:hover {
+    border-color: #6BB63F;
+}
+.plans-section.city-section a.plus-city:hover span.plus {
+    color: #6BB63F;
+    border-color: #6BB63F;
+}
+.plans-section.city-section a.plus-city:hover span.add {
+    color: #6BB63F;
+}
+.plans-section.city-section .price-block-item:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 4px solid #CFCFD4;
+    border-radius: 12px;
+    pointer-events: none;
+}
+.plans-section.city-section .background-image-block {
+    margin-bottom: 0;
+}
+.plans-section.city-section h1.list-title {
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 130%;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 32px;
+    z-index: 1;
+}
+.plans-section.city-section .price-block-item:hover:before  {
+    border-color: #6BB63F;
+}
+.city-section .city-content {
+    padding-bottom: 1px;
+}
+.city-section .city-content .down-subtitle {
+    margin-bottom: 100px;
+}
+.plans-section.city-section .price-block {
+    align-items: inherit;
+}
+
+@media (max-width: 1200px) {
+    .plans-section.city-section .price-block-item {
+        max-width: none;
+        width: 30%;
+    }
+    .plans-section.city-section a.plus-city {
+        width: 30%;
+    }
+}
+@media (max-width: 991px) {
+    .city-section .city-content .down-subtitle {
+        margin-bottom: 60px;
+    }
+}
+@media (max-width: 820px) {
+    .plans-section.city-section .price-block-item {
+        width: 46%;
+    }
+    .plans-section.city-section a.plus-city {
+        width: 46%;
+    }
+}
+@media (max-width: 680px) {
+    .plans-section.city-section .price-block-item {
+        width: 100%;
+        margin-right: 0;
+    }
+    .plans-section.city-section a.plus-city {
+        width: 100%;
+        height: 207px;
+        margin-right: 0;
+        margin-bottom: 25px;
+    }
+    .city-section .city-content .down-subtitle {
+        margin-bottom: 40px;
+    }
+    .plans-section.city-section .price-block {
+        margin-bottom: 15px;
+    }
+}
+
+/*---end-city-page---*/

@@ -29,7 +29,7 @@
                                 <span>{{ __('Superhost') }}</span>
                             </div>
                             @endif
-                            <div class="add-time">{{ __('Added') }}: {{ __('in')}} {{ date('H:i, j F Y', strtotime($hotel->created_at)) }}</div>
+                            <div class="add-time">{{ __('Added') }}: {{ __('in')}} {{ $date }}</div>
                             <div class="viewed">{{ __('Views') }}: {{ $hotel->views }}</div>
                         </div>
                     </div>
