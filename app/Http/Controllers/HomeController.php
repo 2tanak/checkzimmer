@@ -86,7 +86,7 @@ class HomeController extends Controller
         $questions = $hotel->questions;
         $reviews = $hotel->reviews;
 
-        return view('single', compact('options', 'hotel', 'questions', 'reviews', 'phoneNumAdmin', 'phoneNumLandlord', 'seoTitle', 'seoDescription', 'phoneHide'));
+        return view('single', compact('options', 'hotel', 'questions', 'reviews', 'phoneNumAdmin', 'phoneNumLandlord', 'seoTitle', 'seoDescription', 'phoneHide', 'date'));
     }
     public function singlePropertyAccess(Request $request, $slug) {
         $hotel = Property::where('slug', $slug)->firstOrFail();
