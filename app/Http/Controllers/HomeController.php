@@ -151,6 +151,10 @@ class HomeController extends Controller
         $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
         return view('plans', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
     }
+    public function city()
+    {
+        return view('city');
+    }
     public function redirect() {
         return response()->redirectToRoute(app('locale')->routeApply('home'));
     }

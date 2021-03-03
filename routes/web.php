@@ -29,6 +29,7 @@ foreach (app('locale')->getLanguagesAvailable() as $lang) {
             Route::post('/single/{slug}', 'HomeController@singlePropertyAccess')->name("single-access-$lang");
             Route::get('/favorites', 'HomeController@favorites')->name("favorites-$lang");
             Route::get('/plans', 'HomeController@plans')->name("plans-$lang");
+            Route::get('/city', 'HomeController@city')->name("city-$lang");
             Route::get('single/question/create', 'Api\QuestionsController@create');
             Route::get('single/review/create', 'Api\ReviewsController@create');
         });
