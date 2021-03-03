@@ -133,7 +133,7 @@
                     <div class="share-block-content">
                         <div class="row">
                             <div class="col-4 share-block-item">
-                                <a onclick="Share.facebook(document.location.href,'{{ $hotel->name }}','{{ $hotel->photoMain()['url_original'] }}','{{ $hotel->description }}')">
+                                <a onclick="Share.facebook(document.location.href,'{{ $hotel->name }}','{{ $hotel->photoMain() ? $hotel->photoMain()['url_original'] : '' }}','{{ $hotel->description }}')">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M2.97521 0C1.33205 0 0 1.33205 0 2.97521V17.0248C0 18.668 1.33205 20 2.97521 20H8.9539V12.8409H6.36364V9.8794H8.9539V7.62232C8.9539 5.05466 10.477 3.63636 12.8073 3.63636C13.9235 3.63636 15.0909 3.83646 15.0909 3.83646V6.3577H13.8045C12.5373 6.3577 12.142 7.14829 12.142 7.95849V9.8794H14.9714L14.5191 12.8409H12.142V20H17.0248C18.668 20 20 18.668 20 17.0248V2.97521C20 1.33205 18.668 0 17.0248 0H2.97521Z" fill="#7A8793"/>
                                     </svg>

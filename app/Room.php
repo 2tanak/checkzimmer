@@ -161,9 +161,9 @@ class Room extends Model
             if ($relationData = $data[$fillableRelationName]){
                 $currentRelation = $this->$fillableRelationName;
 
-                array_map(static function (array $data) use ($relationData, $currentRelation) {
+                array_map(function (array $data) use ($relationData, $currentRelation) {
                     $relationModel = $currentRelation->filter(function ($item) use ($data) {
-                        return $item->id === $data['id'];
+                        return $item->id === ($data['id'] ?? 0);
                     })->first();
                     if($relationModel){
                         $relationModel->fill($data);
