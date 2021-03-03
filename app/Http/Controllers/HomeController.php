@@ -127,6 +127,10 @@ class HomeController extends Controller
     {
         return view('plans');
     }
+    public function city()
+    {
+        return view('city');
+    }
     public function redirect() {
         return response()->redirectToRoute(app('locale')->routeApply('home'));
     }
