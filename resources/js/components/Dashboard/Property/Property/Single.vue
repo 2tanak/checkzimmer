@@ -829,7 +829,7 @@ export default {
             return this.getPhotos()
         },
         roomTypeOptions() {
-            return this.roomTypes.map( item => { return { value: item.id, text: item.name } })
+            return this.roomTypes.filter( item => item.room_type_id === 0).map( item => { return { value: item.id, text: item.name } })
         },
         minRoomPrice() {
 
