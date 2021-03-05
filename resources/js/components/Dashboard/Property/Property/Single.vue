@@ -226,9 +226,9 @@
                                             <h3>{{feature.name }}</h3>
                                             <div class="row">
                                                 <div class="col-md-3 col-sm-4 col-6 comfort-block-item mt-2" v-for="itemFeature in feature.features">
+                                                    <input type="checkbox" :id="itemFeature.id" :name="itemFeature.name" v-model="itemFeature.check"  @change="addFeatures(itemFeature)">
                                                     <img :src="itemFeature.picture" alt="alt">
-                                                    <span>{{ itemFeature.name }}</span>
-                                                    <input type="checkbox" :name="itemFeature.name" v-model="itemFeature.check"  @change="addFeatures(itemFeature)">
+                                                    <label :for="itemFeature.id">{{ itemFeature.name }}</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -260,7 +260,7 @@
                                         <b-button class="button-collapse" v-b-toggle="'id-'+room.id"> {{ $t('Room') }} № {{ i+1 }}</b-button>
                                     </div>
                                     <div class="delete-room">
-                                        <b-button v-if="room.newRoom" type="submit" variant="success" class="mr-2" @click="saveRoom(room)">
+                                        <b-button v-if="room.newRoom" type="submit" variant="success" class="mr-2" @click.prevent="saveRoom(room)">
                                             {{ $t('Save room') }}</b-button>
                                         <b-button v-if="room.newRoom" variant="danger" @click="deleteNewRoom()">{{ $t('Delete room') }}</b-button>
                                         <b-button v-else variant="danger" @click="deleteRoomOk($event, room)">{{ $t('Delete room') }}</b-button>
