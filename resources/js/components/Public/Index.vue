@@ -814,7 +814,7 @@ export default {
                     that.additional_pages = resp.data.current_page < resp.data.last_page;
                     that.loadingData = false;
                     that.loading = false;
-                    if (resp.data.objects.current_page  >= resp.data.objects.last_page - 1) {
+                    if (resp.data.objects.current_page  >= resp.data.objects.last_page) {
                         if (that.additional_load === false) {
                             that.endoflist = true;
                         }
