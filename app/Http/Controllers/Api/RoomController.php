@@ -28,7 +28,7 @@ class RoomController extends Controller
         $data = [
             'bed'          => $request->bed,
             'kitchen'      => $request->kitchen,
-            'person'       => $request->number,
+            'person'       => $request->person,
             'price'        => $request->price,
             'property_id'  => $request->property_id,
             'room_type_id' => $request->room_type_id,
