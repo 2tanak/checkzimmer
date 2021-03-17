@@ -9,7 +9,7 @@ class CheckLocale
 {
     public function handle($request, Closure $next)
     {
-        $defaultLocale = app('locale')->getCurrentLocale();
+        $defaultLocale = app('locale')->getDefaultLocale();
         $currentLocale = $request->segment(1);
         $locales = app('locale')->getLanguagesAvailable();
         if (!in_array($currentLocale, $locales)){

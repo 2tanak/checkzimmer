@@ -16,7 +16,7 @@ class LocaleHelper {
         }, $files);
         return $files;
     }
-    public function getCurrentLocale() {
+    public function getDefaultLocale() {
         return env('APP_DEFAULT_LOCALE');
     }
 
@@ -30,7 +30,7 @@ class LocaleHelper {
             unset($fullPath[0]);
         }
 
-        $defaultLocale = $this->getCurrentLocale();
+        $defaultLocale = $this->getDefaultLocale();
 
         $fullPath = array_diff($fullPath, array(''));
 

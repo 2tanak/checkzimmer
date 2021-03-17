@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 $locales = app('locale')->getLanguagesAvailable();
-$defaultLocale = app('locale')->getCurrentLocale();
+$defaultLocale = app('locale')->getDefaultLocale();
 foreach ($locales as $locale) {
     $prefix = $locale != $defaultLocale ? $locale : null;
     Route::group(
