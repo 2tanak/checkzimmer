@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use Illuminate\Http\Request;
 
 class LocaleHelper {
     public function getLanguagesAvailable() {
@@ -18,12 +17,30 @@ class LocaleHelper {
         return $files;
     }
     public function getCurrentLocale() {
-        return 'de';
+        return env('APP_DEFAULT_LOCALE');
     }
-    public function getLocaleUrl($lang) {
-        $url = explode('/', url()->current());
-        $url[3] = $lang;
-        return implode('/', $url);
+
+    public function getLocaleUrl($locale)
+    {
+        $path = \Request::path();
+        $fullPath = explode('/', $path);
+        $locales = $this->getLanguagesAvailable();
+
+        if(in_array($fullPath[0],$locales)){
+            unset($fullPath[0]);
+        }
+
+        $defaultLocale = $this->getCurrentLocale();
+
+        $fullPath = array_diff($fullPath, array(''));
+
+        if($locale != $defaultLocale){
+            $fullPath = array_merge(array($locale), $fullPath);
+        }
+
+        $fullPath = array_merge(array(env("APP_URL")), $fullPath);
+
+        return implode('/', $fullPath);
     }
     public function routeApply($route) {
         return $route."-".app()->getLocale();
