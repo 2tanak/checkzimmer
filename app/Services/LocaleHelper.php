@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services;
+use Request;
 
 
 class LocaleHelper {
@@ -22,7 +23,7 @@ class LocaleHelper {
 
     public function getLocaleUrl($locale)
     {
-        $path = \Request::path();
+        $path = Request::path();
         $fullPath = explode('/', $path);
         $locales = $this->getLanguagesAvailable();
 
