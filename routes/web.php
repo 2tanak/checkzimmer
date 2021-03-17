@@ -13,13 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-foreach (app('locale')->getLanguagesAvailable() as $lang) {
+
+$languages = app('locale')->getLanguagesAvailable();
+foreach ($languages as $lang) {
+    $defaultLocale = config('app.locale');
+    $prefix = $lang != $defaultLocale ? $lang : null;
     Route::group(
         [
-            'prefix' => $lang,
+            'prefix' => $prefix,
             'middleware' => ['isMaintenance', 'checkLocale', 'checkSubdomain']
         ],
-        function() use ($lang) {
+        function () use ($lang) {
+            $defaultLocale = config('app.locale');
+            $lang = $lang ?? $defaultLocale;
             Auth::routes();
 
             Route::get('/', 'HomeController@index')->name("home-$lang");
@@ -36,10 +42,8 @@ foreach (app('locale')->getLanguagesAvailable() as $lang) {
     Route::post('/inquiryForm', 'HomeController@inquiryForm')->name('inquiryForm');
 }
 Route::group([
-        'middleware' => ['isMaintenance']
-    ], function() {
-        Route::get('/dashboard', 'HomeController@dashboard')->name('home');
-        Route::get('/dashboard/{page?}/{subpage?}/{subsubpage?}', 'HomeController@dashboard')->name('dashboard-page');
-    });
-
-Route::get('/', 'HomeController@redirect');
+    'middleware' => ['isMaintenance']
+], function () {
+    Route::get('/dashboard', 'HomeController@dashboard')->name('home');
+    Route::get('/dashboard/{page?}/{subpage?}/{subsubpage?}', 'HomeController@dashboard')->name('dashboard-page');
+});
