@@ -26,7 +26,7 @@ class LocaleHelper {
         $fullPath = explode('/', $path);
         $locales = $this->getLanguagesAvailable();
 
-        if(in_array($fullPath[0],$locales)){
+        if (in_array($fullPath[0], $locales)) {
             unset($fullPath[0]);
         }
 
@@ -34,7 +34,7 @@ class LocaleHelper {
 
         $fullPath = array_diff($fullPath, array(''));
 
-        if($locale != $defaultLocale){
+        if ($locale != $defaultLocale) {
             $fullPath = array_merge(array($locale), $fullPath);
         }
 

@@ -12,7 +12,7 @@ class CheckLocale
         $defaultLocale = app('locale')->getDefaultLocale();
         $currentLocale = $request->segment(1);
         $locales = app('locale')->getLanguagesAvailable();
-        if (!in_array($currentLocale, $locales)){
+        if (!in_array($currentLocale, $locales)) {
             $currentLocale = $defaultLocale;
         }
         App::setLocale($currentLocale);
