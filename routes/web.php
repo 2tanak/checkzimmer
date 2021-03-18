@@ -32,8 +32,8 @@ foreach (app('locale')->getLanguagesAvailable() as $lang) {
             Route::get('/city', 'HomeController@city')->name("city-$lang");
             Route::get('single/question/create', 'Api\QuestionsController@create');
             Route::get('single/review/create', 'Api\ReviewsController@create');
+            Route::post('/inquiryForm', 'HomeController@inquiryForm')->name("inquiryForm-$lang");
         });
-    Route::post('/inquiryForm', 'HomeController@inquiryForm')->name('inquiryForm');
 }
 Route::group([
         'middleware' => ['isMaintenance']
