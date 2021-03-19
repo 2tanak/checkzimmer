@@ -9,6 +9,7 @@ use App\Option;
 use App\Property;
 use App\Services\WebsiteData;
 use App\Statistic;
+use App\Http\Requests\InquiryFormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Mail;
@@ -158,7 +159,7 @@ class HomeController extends Controller
     public function redirect() {
         return response()->redirectToRoute(app('locale')->routeApply('home'));
     }
-    public function inquiryForm(Request $request)
+    public function inquiryForm(InquiryFormRequest $request)
     {
         $data = $request->all();
         if ($this->checkRecaptha($data['grecaptcha'])) {
