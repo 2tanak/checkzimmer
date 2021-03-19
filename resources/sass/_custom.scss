@@ -7889,3 +7889,3009 @@ body .popup-bubble-anchor.active:after {
 }
 
 /*---end-city-page---*/
+
+/*---register---*/
+
+.steps-section .steps-content {
+    display: flex;
+    align-items: center;
+    padding: 30px 0;
+}
+.steps-section .steps-container {
+    width: 100%;
+    max-width: 1212px;
+    padding: 0 16px;
+    margin: auto;
+}
+.steps-section .steps-item-block {
+    display: flex;
+    align-items: center;
+    margin-right: 45px;
+}
+.steps-section .steps-item-block:last-of-type {
+    margin-right: 0;
+}
+.steps-section .number-step {
+    background: #B5B7C1;
+    min-width: 44px;
+    max-width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Roboto";
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 26px;
+    color: #FFFFFF;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+    margin-right: 16px;
+    border-radius: 50%;
+    position: relative;
+}
+.steps-section .name-step {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 130%;
+    color: #B5B7C1;
+}
+.steps-section .step-check {
+    display: none;
+    position: absolute;
+    top: -7px;
+    right: -6px;
+}
+.steps-section .steps-item-block.in-work .number-step {
+    background: #6BB63F;
+    position: relative;
+}
+.steps-section .steps-item-block.in-work .number-step:before {
+    min-width: 62px;
+    max-width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    opacity: 0.4;
+    border: 2px solid #6BB63F;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.steps-section .steps-item-block.in-work .name-step {
+    color: #3B8B3E;
+}
+.steps-section .steps-item-block.completed .number-step {
+    background: #545769;
+}
+.steps-section .steps-item-block.completed .name-step {
+    color: #333646;
+}
+.steps-section .steps-item-block.completed .step-check {
+    display: block;
+}
+.steps-section .dots {
+    display: none;
+    align-items: center;
+    width: 148px;
+    margin: 0 22px;
+}
+.steps-section .dots .dots-item {
+    width: 4px;
+    height: 4px;
+    background: #DCDEEB;
+    border-radius: 50%;
+    margin: 2px;
+}
+.steps-section .dots .dots-item:first-of-type {
+    margin-left: 0;
+}
+.steps-section .dots .dots-item:last-of-type {
+    margin-right: 0;
+}
+.registration-section .billing-address-container {
+    display: flex;
+    align-items: flex-start;
+    padding: 0 16px;
+    width: 100%;
+    max-width: 1212px;
+    margin: 0 auto;
+}
+.registration-section .object-data-container {
+    display: flex;
+    align-items: flex-start;
+    padding: 0 16px;
+    width: 100%;
+    max-width: 1232px;
+    margin: 0 auto;
+}
+.registration-section .main-registration-content {
+    margin-right: 20px;
+    width: 100%;
+}
+.registration-section .billing-address-section {
+    background: #FFFFFF;
+    box-shadow: 0 0 14px rgba(51, 54, 70, 0.14);
+    border-radius: 12px;
+    padding: 30px 16px;
+    margin-bottom: 20px;
+    max-width: 780px;
+    width: 100%;
+    position: relative;
+}
+.registration-section .billing-address-section:after {
+    position: absolute;
+    content: "";
+    max-width: 720px;
+    width: 100%;
+    height: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    background: #FFFFFF;
+    box-shadow: 0 4px 30px rgba(51, 54, 70, 0.16);
+    border-radius: 14px;
+    z-index: -1;
+}
+.registration-section .title {
+    margin-bottom: 16px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 130%;
+    color: #333646;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.registration-section .title a {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    color: #3B8B3E;
+    text-decoration: none;
+}
+.registration-section .type-company {
+    margin-bottom: 30px;
+}
+.registration-section .type-company span {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: #545769;
+}
+.registration-section .type-company-links {
+    display: flex;
+    align-items: center;
+    margin-top: 12px;
+}
+.registration-section .type-company-links a {
+    max-width: 374px;
+    width: 100%;
+    height: 44px;
+    background: #FFFFFF;
+    border: 1px solid #6BB63F;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    color: #3B8B3E;
+    transition: all 0.2s;
+}
+.registration-section .type-company-links a.private-person {
+    border-radius: 6px 0 0 6px;
+    border-right: 0;
+}
+.registration-section .type-company-links a.entity {
+    border-radius: 0 6px 6px 0;
+}
+.registration-section .type-company-links a.active {
+    color: #FFFFFF;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+    background: #6BB63F;
+    border-color: #6BB63F;
+}
+.registration-section form label {
+    margin-bottom: 16px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: #545769;
+}
+.registration-section form input[type="text"],
+.registration-section form input[type="email"],
+.registration-section form input[type="tel"] {
+    width: 100%;
+    height: 54px;
+    background: #F3F3F3;
+    border-radius: 6px;
+    border: 0;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 100%;
+    color: #333646;
+    padding: 0 13px;
+    outline: none;
+}
+.registration-section form input[type="text"]:focus,
+.registration-section form input[type="email"]:focus,
+.registration-section form input[type="tel"]:focus {
+    background: #FFFFFF;
+    border: 1px solid #C0C1C2;
+    border-radius: 6px;
+    box-shadow: 0 0 0 4px rgb(243 243 243 / 90%);
+}
+.registration-section form .forms-line {
+    display: flex;
+    align-items: flex-start;
+}
+.registration-section form .forms-line:not(:last-of-type) {
+    margin-bottom: 30px;
+}
+.registration-section .billing-address-section form .forms-line:last-of-type {
+    margin-bottom: 10px;
+}
+.registration-section form .company-name {
+    width: 100%;
+    max-width: 596px;
+    margin-right: 20px;
+}
+.registration-section form .steuer {
+    width: 100%;
+    max-width: 132px;
+}
+.registration-section form input::-webkit-input-placeholder {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 100%;
+    color: #8F98A2;
+}
+.registration-section form input::-moz-placeholder {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 100%;
+    color: #8F98A2;
+}
+.registration-section form input:-moz-placeholder {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 100%;
+    color: #8F98A2;
+}
+.registration-section form input:-ms-input-placeholder {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 100%;
+    color: #8F98A2;
+}
+.registration-section form .name-block {
+    width: 100%;
+    max-width: 288px;
+    margin-right: 20px;
+    position: relative;
+}
+.registration-section form .surname-block {
+    width: 100%;
+    max-width: 288px;
+    position: relative;
+}
+.registration-section form .greeting {
+    width: 100%;
+    max-width: 132px;
+    margin-right: 20px;
+}
+.registration-section form .select2 {
+    width: 100%;
+    height: 52px;
+    background: #F3F3F3;
+    border-radius: 6px;
+}
+.registration-section form .select2-container--default .select2-selection--single {
+    background: #F3F3F3;
+    border-radius: 6px;
+}
+.registration-section form .select2-container--default .select2-selection--single .select2-selection__rendered {
+    padding-left: 13px;
+    padding-right: 13px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 54px;
+    color: #333646;
+}
+.select2-results__option span.select-span {
+    position: relative;
+    padding: 0 16px;
+}
+.select2-results__option span.select-span img {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+}
+.select2-results__option[aria-selected="false"] span.select-span img {
+    display: none;
+}
+.select2-results__option[aria-selected="true"] span.select-span img {
+    display: inline-block;
+}
+.registration-section form .select2-container--open .select2-selection--single {
+    background: #ffffff;
+    border: 1px solid #C0C1C2;
+    border-radius: 6px !important;
+    box-shadow: 0 0 0 4px rgb(243 243 243 / 90%);
+}
+.registration-section form .select2-container--default .select2-selection--single .select2-selection__arrow {
+    right: 13px;
+}
+.registration-section form .street-block {
+    width: 100%;
+    max-width: 596px;
+    margin-right: 20px;
+    position: relative;
+}
+.registration-section form .house-number-block {
+    width: 100%;
+    max-width: 132px;
+    position: relative;
+}
+.registration-section form .zip-block {
+    width: 100%;
+    max-width: 132px;
+    margin-right: 20px;
+    position: relative;
+}
+.registration-section form .city-block {
+    width: 100%;
+    max-width: 288px;
+    margin-right: 20px;
+    position: relative;
+}
+.registration-section form .country-block {
+    width: 100%;
+    max-width: 288px;
+}
+.registration-section .checkbox-line label {
+    cursor: pointer;
+    margin: 0;
+    display: block;
+    padding-left: 30px;
+    position: relative;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: #545769;
+}
+.registration-section .checkbox-line input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+}
+.registration-section .checkbox-line label::before {
+    content: "";
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    border: 2px solid #d9d9d9;
+    left: 0;
+    border-radius: 4px;
+    transition: all 0.2s;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.registration-section .checkbox-line label::after {
+    position: absolute;
+    display: inline-block;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(-45deg);
+    left: 5px;
+    top: 5px;
+    height: 6px;
+    width: 10px;
+    transition: all 0.2s;
+}
+.registration-section input[type=checkbox]:checked + label::before {
+    background-color: #6BB63F;
+    border-color: #6BB63F;
+}
+.registration-section input[type=checkbox]:checked + label::after {
+    content: "";
+}
+.registration-section form .legal-address-line {
+    margin-bottom: 15px;
+}
+.registration-section form .checkbox-line {
+    display: flex;
+    align-items: center;
+}
+.registration-section .company-line {
+    transition: all 0.2s;
+}
+.registration-section .company-line.not-show {
+    height: 0;
+    margin-bottom: 0 !important;
+    opacity: 0;
+    visibility: hidden;
+}
+.registration-section .company-line.steuer-show .company-name {
+    width: 0;
+    max-width: none;
+    margin-right: 0;
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+.registration-section .company-line.steuer-show .steuer {
+    max-width: none;
+}
+.registration-section .add-id {
+    height: 0;
+    margin-top: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s;
+}
+.registration-section .add-id.show {
+    opacity: 1;
+    visibility: visible;
+    margin-top: 30px;
+    height: auto;
+}
+.registration-section .add-id a {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: #3B8B3E;
+    text-decoration: none;
+}
+.registration-section .add-id a svg {
+    display: block;
+    margin-right: 6px;
+}
+.registration-sidebar .your-tariff {
+    background: #FFFFFF;
+    border: 4px solid #6BB63F;
+    border-radius: 12px;
+    max-width: 380px;
+    width: 100%;
+    height: 255px;
+    padding: 30px 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+.registration-sidebar .your-tariff:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -4px;
+    z-index: -1;
+    background: #FFFFFF;
+    opacity: 0.5;
+    box-shadow: 0 8px 30px rgba(107, 182, 63, 0.4);
+    border-radius: 6px;
+    width: 348px;
+    height: 38px;
+}
+.registration-sidebar .your-tariff .your-tariff-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 17px;
+}
+.registration-sidebar .your-tariff .your-tariff-top a {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    color: #3B8B3E;
+    text-decoration: none;
+}
+.registration-sidebar .your-tariff .sidebar-title {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 130%;
+    color: #333646;
+    margin-right: 15px;
+}
+.registration-sidebar .your-tariff .tariff {
+    margin-bottom: 23px;
+    background: #6BB63F;
+    border-radius: 100px;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 130%;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+    width: 74px;
+    height: 22px;
+}
+.registration-sidebar .your-tariff .tariff.tariff-desctope {
+    display: flex;
+}
+.registration-sidebar .your-tariff .tariff.tariff-mobile {
+    display: none;
+}
+.registration-sidebar .your-tariff .price {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 18px;
+}
+.registration-sidebar .your-tariff .price .price-item {
+    font-weight: 600;
+    font-size: 38px;
+    line-height: 32px;
+    letter-spacing: -0.04em;
+    color: #333646;
+    position: relative;
+    margin-right: 10px;
+}
+.registration-sidebar .your-tariff .price .price-item span {
+    font-size: 18px;
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    line-height: 18px;
+}
+.registration-sidebar .your-tariff .price .month {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: #333646;
+}
+.registration-sidebar .your-tariff .description {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 160%;
+    color: #545769;
+}
+.registration-sidebar .try {
+    width: 380px;
+    height: 261px;
+    background-image: url("/img/img.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.registration-sidebar .try:before {
+    content: "";
+    position: absolute;
+    background: #0B95F1;
+    opacity: 0.12;
+    width: 165px;
+    height: 400px;
+    top: 50%;
+    right: 109px;
+    transform: translateY(-50%) rotate(25deg);
+    pointer-events: none;
+    z-index: 1;
+}
+.registration-sidebar .try:after {
+    content: "";
+    position: absolute;
+    opacity: 0.13;
+    width: 120px;
+    height: 170px;
+    border-radius: 12px;
+    background: #0B95F1;
+    top: 50%;
+    right: 56px;
+    pointer-events: none;
+    -webkit-transform: translateY(-50%) skew(-25deg);
+    -moz-transform: translateY(-50%) skew(-25deg);
+    -o-transform: translateY(-50%) skew(-25deg);
+}
+.registration-sidebar .guarantee {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 150%;
+    text-align: center;
+    color: #FFFFFF;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+    margin-bottom: 16px;
+}
+.registration-sidebar .guarantee span {
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+}
+.registration-sidebar .choice {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 150%;
+    text-align: center;
+    color: #FFFFFF;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+}
+#select2-country-select-results {
+    padding: 12px 6px;
+}
+#select2-greeting-select-results {
+    padding: 12px 6px;
+}
+#select2-country-select-results li {
+    position: relative;
+    padding: 6px 24px;
+}
+#select2-greeting-select-results li {
+    position: relative;
+    padding: 6px 20px;
+}
+#select2-country-select-results li:before {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 9px;
+    background-image: url("/svg/checkmark-calendar.svg");
+    background-repeat: no-repeat;
+    width: 10px;
+    height: 7px;
+}
+#select2-greeting-select-results li:before {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 5px;
+    background-image: url("/svg/checkmark-calendar.svg");
+    background-repeat: no-repeat;
+    width: 10px;
+    height: 7px;
+}
+#select2-country-select-results li[aria-selected="true"]:before,
+#select2-greeting-select-results li[aria-selected="true"]:before {
+    content: "";
+}
+#select2-country-select-results li:hover,
+#select2-greeting-select-results li:hover {
+    background: #E7F7DF !important;
+    border-radius: 2px;
+    color: #3B8B3E;
+}
+#select2-country-select-results li[aria-selected="true"]:hover:before,
+#select2-greeting-select-results li[aria-selected="true"]:hover:before {
+    background-image: url("/svg/checkmark-calendar-green.svg");
+}
+.registration-section .contact-information-section {
+    background: #FFFFFF;
+    box-shadow: 0 0 14px rgb(51 54 70 / 14%);
+    border-radius: 12px;
+    padding: 30px 0;
+    margin-bottom: 20px;
+    max-width: 780px;
+    width: 100%;
+    position: relative;
+}
+.registration-section .contact-information-section:after {
+    position: absolute;
+    content: "";
+    max-width: 720px;
+    width: 100%;
+    height: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    background: #FFFFFF;
+    box-shadow: 0 4px 30px rgb(51 54 70 / 16%);
+    border-radius: 14px;
+    z-index: -1;
+}
+.registration-section .contact-person {
+    width: 100%;
+    padding: 0 16px;
+}
+.registration-section .contact-information-section .contact-person label {
+    display: flex;
+    align-items: center;
+}
+.registration-section .contact-information-section .contact-person label svg {
+    transition: all 0.2s;
+    border-radius: 50%;
+}
+.registration-section .contact-information-section .contact-person label svg circle {
+    transition: all 0.2s;
+}
+.registration-section .contact-information-section .contact-person label svg path {
+    transition: all 0.2s;
+}
+.registration-section .contact-information-section .checkbox-line {
+    margin-top: 10px;
+}
+.registration-section .email-address {
+    width: 100%;
+    padding: 0 16px;
+}
+.registration-section .number-phone {
+    width: 100%;
+    padding: 0 16px;
+}
+.registration-section .number-phone-item {
+    width: 100%;
+    max-width: 440px;
+    margin-right: 20px;
+}
+.registration-section .number-phone .number-phone-content {
+    display: flex;
+    align-items: flex-end;
+}
+.registration-section .number-phone a.add-phone {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: #3B8B3E;
+    display: flex;
+    align-items: center;
+    margin-bottom: 19px;
+}
+.registration-section .number-phone a.add-phone svg {
+    margin-right: 6px;
+    min-width: 10px;
+    max-width: 10px;
+}
+.registration-section .add-links a {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: #3B8B3E;
+    display: flex;
+    align-items: center;
+}
+.registration-section .add-links a:not(:last-of-type) {
+    margin-bottom: 20px;
+}
+.registration-section .add-links a svg {
+    margin-right: 6px;
+    min-width: 10px;
+    max-width: 10px;
+}
+.registration-section .add-links a.add-phone-mobile {
+    display: none;
+}
+.registration-section .number-phone.additional-phone-number {
+    padding-top: 24px;
+    position: relative;
+}
+.registration-section .number-phone.additional-phone-number:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #e3e4e6;
+}
+.registration-section .add-links {
+    padding: 0 16px;
+}
+.registration-section .additional-phone-line {
+    margin-bottom: 0 !important;
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.2s;
+}
+.registration-section .additional-phone-line.show {
+    margin-bottom: 30px !important;
+    height: auto;
+    visibility: visible;
+    opacity: 1;
+}
+.registration-section .contact-information-section .title {
+    padding: 0 16px;
+}
+.registration-section .number-phone.landline-phone-number,
+.registration-section .number-phone.fax-number,
+.registration-section .number-phone.url-address {
+    padding-top: 24px;
+    position: relative;
+}
+.registration-section .number-phone.landline-phone-number:before,
+.registration-section .number-phone.fax-number:before,
+.registration-section .number-phone.url-address:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #e3e4e6;
+}
+.registration-section .landline-phone-line,
+.registration-section .fax-line,
+.registration-section .url-line {
+    margin-bottom: 0 !important;
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.2s;
+}
+.registration-section .landline-phone-line.show,
+.registration-section .fax-line.show {
+    margin-bottom: 30px !important;
+    height: auto;
+    visibility: visible;
+    opacity: 1;
+}
+.registration-section .url-line.show {
+    height: auto;
+    visibility: visible;
+    opacity: 1;
+}
+.registration-section .contact-person label a {
+    position: relative;
+    margin-left: 7px;
+    cursor: pointer;
+}
+.registration-section .tooltip {
+    background: #333646;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 130%;
+    color: #FFFFFF;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+    width: 282px;
+    padding: 14px 12px;
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.7);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s;
+}
+.registration-section .tooltip:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) matrix(0.71, -0.7, -0.71, -0.71, 0, 0);
+    width: 24.27px;
+    height: 24.27px;
+    background: #333646;
+    border-radius: 2px;
+    z-index: -1;
+}
+.registration-section label a:hover .tooltip,
+.registration-section .subtitle a:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) scale(1);
+}
+.registration-section label a:hover svg,
+.registration-section .subtitle a:hover svg {
+    background-color: #6BB63F;
+}
+.registration-section label a:hover svg circle,
+.registration-section .subtitle a:hover svg circle {
+    stroke: #6BB63F;
+}
+.registration-section label a:hover svg path,
+.registration-section .subtitle a:hover svg path {
+    fill: #ffffff;
+}
+.registration-section .languages-speak-section {
+    background: #FFFFFF;
+    box-shadow: 0 0 14px rgb(51 54 70 / 14%);
+    border-radius: 12px;
+    padding: 30px 16px;
+    margin-bottom: 30px;
+    max-width: 780px;
+    width: 100%;
+    position: relative;
+}
+.registration-section .languages-speak-section:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FFFFFF;
+    box-shadow: 0 4px 30px rgba(51, 54, 70, 0.16);
+    border-radius: 14px;
+    max-width: 720px;
+    width: 100%;
+    height: 100px;
+    z-index: -1;
+}
+.registration-section .subtitle a {
+    position: relative;
+    margin-left: 7px;
+    cursor: pointer;
+}
+.registration-section .subtitle svg {
+    border-radius: 50%;
+    display: block;
+}
+.registration-section .languages-speak-section .subtitle {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: #545769;
+}
+.registration-section .languages-speak-section .subtitle.subtitle-mobile {
+    display: none;
+}
+.registration-section .languages-speak-item {
+    display: flex;
+    align-items: center;
+}
+.registration-section .languages-speak-item .languages-speak-block {
+    display: flex;
+    align-items: center;
+    background: #F3F3F3;
+    border-radius: 6px;
+    width: 50%;
+    height: 54px;
+    padding: 0 21px;
+    margin-right: 20px;
+    cursor: pointer;
+    position: relative;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 100%;
+    color: #333646;
+}
+.registration-section .languages-speak-item .languages-speak-block:after {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: 2px solid #6BB63F;
+    border-radius: 6px;
+}
+.registration-section .languages-speak-item .languages-speak-block:last-of-type {
+    margin-right: 0;
+}
+.registration-section .languages-speak-item .languages-speak-block img {
+    margin-right: 10px;
+}
+.registration-section .languages-speak-item .languages-speak-block.active:after {
+    content: "";
+}
+.registration-section a.save {
+    width: 100%;
+    height: 54px;
+    background: #6BB63F;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: #FFFFFF;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+    position: relative;
+}
+.registration-section a.save:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    background: #FFFFFF;
+    box-shadow: 0 4px 30px rgba(107, 182, 63, 0.6);
+    border-radius: 14px;
+    z-index: -1;
+    max-width: 720px;
+    width: 100%;
+    height: 33px;
+}
+.registration-section .languages-speak-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.registration-section .languages-speak-content:not(:last-of-type) {
+    margin-right: 16px;
+}
+.registration-section .error-text {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 100%;
+    color: #EE483F;
+    margin-top: 8px;
+    margin-bottom: 18px;
+    display: none;
+}
+.registration-section .forms-line-block.error input {
+    border: 1px solid #EE483F;
+    border-radius: 6px;
+}
+.registration-section .forms-line-block.error .error-text {
+    display: block;
+}
+.registration-section .forms-line-block {
+    position: relative;
+}
+.registration-section .object-data-section {
+    background: #FFFFFF;
+    box-shadow: 0 0 14px rgb(51 54 70 / 14%);
+    border-radius: 12px;
+    padding: 30px 16px;
+    margin-bottom: 20px;
+    max-width: 800px;
+    width: 100%;
+    position: relative;
+}
+.registration-section .object-data-section:after {
+    position: absolute;
+    content: "";
+    max-width: 720px;
+    width: 100%;
+    height: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    background: #FFFFFF;
+    box-shadow: 0 4px 30px rgb(51 54 70 / 16%);
+    border-radius: 14px;
+    z-index: -1;
+}
+.registration-section .object-data-table .table-head {
+    display: flex;
+    align-items: center;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #edeef0;
+    justify-content: space-between;
+}
+.registration-section .object-data-table .table-head-item {
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 140%;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #8F98A2;
+    white-space: nowrap;
+}
+.registration-section .object-data-table .table-head .type-head {
+    width: 145px;
+    margin-left: 31px;
+}
+.registration-section .object-data-table .table-head .quality-head {
+    width: 50px;
+}
+.registration-section .object-data-table .table-head .personen-head {
+    width: 75px;
+}
+.registration-section .object-data-table .table-head .price-head {
+    width: 90px;
+}
+.registration-section .object-data-table .table-head .links-head {
+    width: 147px;
+}
+.registration-section .object-data-table .object-data-table-line {
+    border-bottom: 1px solid #edeef0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.registration-section .object-data-table .object-data-select {
+    display: flex;
+    align-items: center;
+}
+.registration-section .object-data-table .select-type svg {
+    margin-right: 6px;
+}
+.registration-section .object-data-table .select2-container {
+    background: #F3F3F3;
+    border-radius: 6px;
+    border: 0;
+    width: 145px !important;
+    height: 29px;
+}
+.registration-section .object-data-table .select2-selection--single {
+    height: 29px;
+    background: #F3F3F3;
+    border-radius: 6px;
+}
+.registration-section .object-data-table .select2-selection__rendered {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 242%;
+    color: #333646;
+    padding-left: 14px;
+    padding-right: 14px;
+}
+.registration-section .object-data-table .object-data-table-type .select2-selection__rendered {
+    font-weight: 600;
+}
+.registration-section .object-data-table .select2-selection__arrow b {
+    display: none;
+}
+.registration-section .object-data-table .select2-selection__arrow {
+    height: 18px;
+    width: 8px;
+    right: 6px;
+}
+.registration-section .object-data-table .select2-selection__arrow:after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 18px;
+    background-image: url("/svg/select-arrow.svg");
+}
+.registration-section .object-data-table .select2-selection--single[aria-expanded=true] .select2-selection__arrow {
+    transform: translateY(-50%);
+}
+.registration-section .object-data-table .select2-selection--single[aria-expanded=true] .select2-selection__arrow:after {
+    background-image: url("/svg/select-arrow-active.svg");
+}
+#select2-select-type-item-results,
+#select2-select-type-room-results {
+    padding: 12px 6px;
+    overflow: hidden;
+}
+#select2-select-type-item-results li {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 180%;
+    color: #333646;
+    padding-left: 24px;
+    padding-right: 18px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    position: relative;
+}
+#select2-select-type-room-results li {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 180%;
+    color: #333646;
+    padding-left: 24px;
+    padding-right: 18px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    position: relative;
+}
+#select2-select-type-item-results li:hover,
+#select2-select-type-room-results li:hover {
+    background: #E7F7DF !important;
+    border-radius: 2px;
+    color: #3B8B3E;
+}
+#select2-select-type-item-results li:before,
+#select2-select-type-room-results li:before {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 9px;
+    background-image: url("/svg/checkmark-calendar.svg");
+    background-repeat: no-repeat;
+    width: 10px;
+    height: 7px;
+}
+#select2-select-type-item-results li[aria-selected="true"]:before,
+#select2-select-type-room-results li[aria-selected="true"]:before {
+    content: "";
+}
+#select2-select-type-item-results li[aria-selected="true"]:hover:before,
+#select2-select-type-room-results li[aria-selected="true"]:hover:before {
+    background-image: url("/svg/checkmark-calendar-green.svg");
+}
+.registration-section .object-data-table .select2-container--open .select2-selection--single {
+    position: relative;
+    background: #ffffff;
+}
+.registration-section .object-data-table .select2-container--open .select2-selection--single:before {
+    border: 1px solid #C0C1C2;
+    border-radius: 6px !important;
+    box-shadow: 0 0 0 4px rgb(243 243 243 / 90%);
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.registration-section .object-data-table input {
+    background: #F3F3F3;
+    border-radius: 6px;
+    padding: 0 12px;
+    border: 0;
+    outline: none;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 300%;
+    color: #333646;
+}
+.registration-section .object-data-table input:focus {
+    background: #FFFFFF;
+    border: 1px solid #C0C1C2;
+    border-radius: 6px;
+    box-shadow: 0 0 0 4px rgb(243 243 243 / 90%);
+}
+.registration-section .object-data-table .object-data-table-type input {
+    font-weight: 600;
+}
+.registration-section .object-data-table .quality-input-block input {
+    width: 50px;
+    height: 29px;
+}
+.registration-section .object-data-table-type input::-webkit-input-placeholder {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 300%;
+    color: #8F98A2;
+}
+.registration-section .object-data-table-type input::-moz-placeholder {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 300%;
+    color: #8F98A2;
+}
+.registration-section .object-data-table-type input:-moz-placeholder {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 300%;
+    color: #8F98A2;
+}
+.registration-section .object-data-table-type:-ms-input-placeholder {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 300%;
+    color: #8F98A2;
+}
+.registration-section .object-data-table .personen-input-block input {
+    width: 57px;
+    height: 29px;
+}
+.registration-section .object-data-table .price-input-block input {
+    width: 57px;
+    height: 29px;
+}
+.registration-section .object-data-table .price-input-block {
+    display: flex;
+    align-items: center;
+}
+.registration-section .object-data-table .price-input-block span.from {
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 356.5%;
+    color: #333646;
+    margin-right: 6px;
+}
+.registration-section .object-data-table .price-input-block span.dollar-sign {
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 360.5%;
+    color: #333646;
+    margin-left: 4px;
+}
+.registration-section .object-data-table .object-data-link {
+    display: flex;
+    align-items: center;
+    margin-right: 24px;
+}
+.registration-section .object-data-table .object-data-link a {
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 100%;
+    color: #333646;
+    outline: none;
+    transition: all 0.2s;
+}
+.registration-section .object-data-table .object-data-link a.duplicate {
+    margin-right: 20px;
+}
+.registration-section .object-data-table .object-data-link a.not-active {
+    pointer-events: none;
+    color: #B5B7C1;
+}
+.registration-section .object-data-table .object-data-link a.duplicate:hover {
+    color: #3B8B3E;
+}
+.registration-section .object-data-table .object-data-link a.delete:hover {
+    color: #EE483F;
+}
+.registration-section .object-data-table .select-room {
+    margin-left: 29px;
+    position: relative;
+}
+.registration-section .object-data-table .select-room svg {
+    position: absolute;
+    top: -13px;
+    left: -14px;
+}
+.registration-section .object-data-table .add-room {
+    position: relative;
+}
+.registration-section .object-data-table .unselected-object .add-room {
+    border-bottom: 0;
+}
+.registration-section .object-data-table .add-room a {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 300%;
+    color: #333646;
+    outline: none;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-left: 37px;
+    transition: all 0.2s;
+}
+.registration-section .object-data-table .add-room a svg {
+    margin-right: 5px;
+    transition: all 0.2s;
+}
+.registration-section .object-data-table .add-room > svg {
+    position: absolute;
+    left: 15px;
+    top: -14px;
+}
+.registration-section .object-data-table .add-room a:hover {
+    color: #3B8B3E;
+}
+.registration-section .object-data-table .add-room a:hover svg path {
+    fill: #3B8B3E;
+}
+.registration-section .object-data-table .object-data-table-type {
+    background: #FBFCFF;
+    border-radius: 2px;
+    padding-left: 9px;
+}
+.registration-section .object-data-table .add-object a {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 300%;
+    color: #333646;
+    outline: none;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-left: 11px;
+    transition: all 0.2s;
+}
+.registration-section .object-data-table .add-object a svg {
+    margin-right: 5px;
+    transition: all 0.2s;
+}
+.registration-section .object-data-table .add-object a:hover {
+    color: #3B8B3E;
+}
+.registration-section .object-data-table .add-object a:hover svg path {
+    fill: #3B8B3E;
+}
+.registration-section .object-data-table .unselected-object .add-room > svg {
+    top: -11px;
+}
+.registration-section .object-data-table .add-object {
+    background: #FBFCFF;
+    border-radius: 2px;
+}
+.registration-section .object-data-table .object-data-link a.duplicate.duplicate-mobile {
+    display: none;
+}
+.registration-section .object-data-table .object-data-link a.delete.delete-mobile {
+    display: none;
+}
+.registration-section .object-data-table .table-head-item-mobile {
+    display: none;
+}
+.registration-section .object-data-table .selected-object svg.mobile-line {
+    display: none;
+}
+.registration-section .furnishings-section {
+    background: #FFFFFF;
+    box-shadow: 0 0 14px rgb(51 54 70 / 14%);
+    border-radius: 12px;
+    padding: 30px 16px 0 16px;
+    margin-bottom: 20px;
+    max-width: 800px;
+    width: 100%;
+    position: relative;
+}
+.registration-section .furnishings-section:after {
+    position: absolute;
+    content: "";
+    max-width: 720px;
+    width: 100%;
+    height: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    background: #FFFFFF;
+    box-shadow: 0 4px 30px rgb(51 54 70 / 16%);
+    border-radius: 14px;
+    z-index: -1;
+}
+.registration-section .furnishings-section .furnishings-title {
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: #333646;
+}
+.registration-section .furnishings-section .furnishings-block {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 120%;
+    color: #333646;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 10px 6px;
+    position: relative;
+    transition: all 0.2s;
+    margin-bottom: 2px;
+}
+.registration-section .furnishings-section .furnishings-block:before {
+    border: 1px solid #6BB63F;
+    border-radius: 6px;
+    width: 100%;
+    height: 38px;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.registration-section .furnishings-section .furnishings-block.active:before {
+    content: "";
+}
+.registration-section .furnishings-section .furnishings-block svg {
+    display: block;
+    margin-right: 7px;
+    z-index: 1;
+    transition: all 0.2s;
+}
+.registration-section .furnishings-section .furnishings-line {
+    padding-bottom: 20px;
+}
+.registration-section .furnishings-section .furnishings-block span {
+    z-index: 1;
+}
+.registration-section .furnishings-section .furnishings-block:hover {
+    color: #3B8B3E;
+    background: #E7F4EF;
+    border-radius: 6px;
+}
+.registration-section .furnishings-section .furnishings-block:hover svg path {
+    fill: #3b8b3e;
+}
+.registration-section .furnishings-section .furnishings-block.active {
+    color: #3B8B3E;
+    border-radius: 6px;
+}
+.registration-section .furnishings-section .furnishings-block.active svg path {
+    fill: #3b8b3e;
+}
+.registration-section .furnishings-section .furnishings-title.furnishings-title-mobile {
+    display: none;
+    position: relative;
+    text-decoration: none;
+    width: 100%;
+    padding: 20px 0 20px 16px;
+}
+.registration-section .furnishings-section .furnishings-title.furnishings-title-mobile:before {
+    position: absolute;
+    content: "";
+    top: 50%;
+    transform: translateY(-50%);
+    left: 1px;
+    height: 1.4px;
+    width: 10px;
+    background: #333646;
+    border-radius: 1px;
+}
+.registration-section .furnishings-section .collapse:not(.show) {
+    display: block;
+}
+.registration-section .furnishings-section .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+.registration-section .furnishings-section .col-lg-3 {
+    padding-right: 9px;
+    padding-left: 0;
+}
+.registration-section .photos-object-section {
+    background: #FFFFFF;
+    box-shadow: 0 0 14px rgb(51 54 70 / 14%);
+    border-radius: 12px;
+    padding: 30px 0;
+    margin-bottom: 20px;
+    max-width: 800px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.registration-section .photos-object-section:after {
+    position: absolute;
+    content: "";
+    max-width: 720px;
+    width: 100%;
+    height: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    background: #FFFFFF;
+    box-shadow: 0 4px 30px rgb(51 54 70 / 16%);
+    border-radius: 14px;
+    z-index: -1;
+}
+.registration-section .photos-object-section .subtitle {
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+}
+.registration-section .photos-object-section .left-subtitle {
+    margin-right: 25px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: #545769;
+}
+.registration-section .photos-object-section .right-subtitle {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 140%;
+    color: #545769;
+}
+.registration-section .photos-object-section .input-file-block {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+.registration-section .photos-object-section .input-file-block label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: #3B8B3E;
+    background: #E7F4EF;
+    border-radius: 6px;
+    width: 100%;
+    height: 54px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+    margin-bottom: 0;
+}
+.registration-section .photos-object-section .input-file-block label:before {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(107, 182, 63, 0.3);
+    border-radius: 6px;
+    pointer-events: none;
+}
+.registration-section .photos-object-section .input-file-block label:hover:before {
+    content: "";
+}
+.registration-section .photos-object-section .input-file-block label svg {
+    display: block;
+    margin-right: 4px;
+}
+.registration-section .photos-object-section .input-file-block input[type="file"] {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    left: -99999px;
+}
+.registration-section .photos-object-section .pictures-block {
+    padding: 20px 16px;
+    border-bottom: 2px solid #E3E4E6;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.registration-section .photos-object-section .title {
+    padding: 0 16px;
+}
+.registration-section .photos-object-section .social-media-object {
+    padding: 0 16px;
+}
+.registration-section .photos-object-section .social-media-links {
+    display: flex;
+    justify-content: space-between;
+}
+.registration-section .photos-object-section .social-media-links label {
+    margin-bottom: 16px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: #545769;
+}
+.registration-section .photos-object-section .social-media-links input {
+    padding: 0 13px;
+    background: #F3F3F3;
+    border-radius: 6px;
+    width: 100%;
+    height: 54px;
+    border: 0;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 100%;
+    color: #333646;
+    outline: none;
+}
+.registration-section .photos-object-section .social-media-links input:focus {
+    background: #FFFFFF;
+    border: 1px solid #C0C1C2;
+    border-radius: 6px;
+    box-shadow: 0 0 0 4px rgb(243 243 243 / 90%);
+}
+.registration-section .photos-object-section .social-media-links input::-webkit-input-placeholder {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 100%;
+    color: #8F98A2;
+}
+.registration-section .photos-object-section .social-media-links input::-moz-placeholder {
+    color:#c0392b;
+}
+.registration-section .photos-object-section .social-media-links input:-moz-placeholder {
+    color:#c0392b;
+}
+.registration-section .photos-object-section .social-media-links input:-ms-input-placeholder {
+    color:#c0392b;
+}
+.registration-section .photos-object-section .facebook-block {
+    width: 50%;
+    margin-right: 20px;
+}
+.registration-section .photos-object-section .video-block {
+    width: 50%;
+}
+.registration-section .photos-object-section .social-media-object .title {
+    padding: 0;
+}
+.registration-section .photos-object-section .subtitle-mobile {
+    display: none;
+    margin-top: 16px;
+}
+.registration-section .photos-object-section .img-block {
+    width: 18.88%;
+    height: 92px;
+    margin-right: 1.36%;
+    margin-bottom: 1.36%;
+    position: relative;
+    border-radius: 6px;
+}
+.registration-section .photos-object-section .img-block img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+}
+.registration-section .photos-object-section .img-block:nth-of-type(5n) {
+    margin-right: 0;
+}
+.registration-section .photos-object-section .img-block:before {
+    border: 0.495536px solid rgba(0, 0, 0, 0.12);
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+}
+.registration-section .photos-object-section .img-block a.delete-img {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    text-decoration: none;
+}
+.registration-section .photos-object-section .img-block a.delete-img svg {
+    display: block;
+}
+.data-section .contact-information-section {
+    max-width: 800px;
+    margin-bottom: 30px;
+}
+.billing-section .transfer-line {
+    display: none;
+}
+.data-section .transfer-line {
+    display: block;
+    padding: 0 16px;
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+.billing-section .contact-information-section .display-request-form {
+    display: none;
+}
+.data-section .contact-information-section .display-request-form {
+    padding: 20px 16px 0 16px;
+    border-top: 2px solid #E3E4E6;
+    margin-top: 30px;
+    display: block;
+}
+.registration-section .billing-address-checking {
+    background: #FFFFFF;
+    box-shadow: 0 0 14px rgb(51 54 70 / 14%);
+    border-radius: 12px;
+    padding: 30px 16px;
+    margin-bottom: 20px;
+    max-width: 780px;
+    width: 100%;
+    position: relative;
+}
+.registration-section .billing-address-checking:after {
+    position: absolute;
+    content: "";
+    max-width: 720px;
+    width: 100%;
+    height: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    background: #FFFFFF;
+    box-shadow: 0 4px 30px rgb(51 54 70 / 16%);
+    border-radius: 14px;
+    z-index: -1;
+}
+.registration-section .billing-address-checking .address-checking-line {
+    display: flex;
+    align-items: flex-end;
+}
+.registration-section .billing-address-checking .address-checking-name {
+    margin-right: 10px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    color: #545769;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.registration-section .billing-address-checking .address-checking-total {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    color: #333646;
+    white-space: nowrap;
+    flex-basis: 285px;
+    margin-left: 10px;
+}
+.registration-section .billing-address-checking .address-checking-line:not(:last-of-type) {
+    margin-bottom: 12px;
+}
+.registration-section .billing-address-checking .dots {
+    flex-grow: 1;
+    border-bottom: 1px dotted #545769;
+    margin-bottom: 5px;
+}
+.registration-section .contact-information-checking .address-checking-block {
+    padding-bottom: 25px;
+    padding-top: 25px;
+    border-bottom: 2px solid #e3e4e6;
+}
+.registration-section .contact-information-checking .address-checking-block:first-of-type {
+    padding-top: 0;
+}
+.registration-section .contact-information-checking .address-checking-block:last-of-type {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+.registration-section .billing-address-checking.contact-information-checking {
+    padding: 30px 0;
+}
+.registration-section .contact-information-checking .address-checking-block .address-checking-line {
+    padding: 0 16px;
+}
+.registration-section .billing-address-checking.contact-information-checking .title {
+    padding: 0 16px;
+}
+.registration-section .accommodation-facility-section {
+    background: #FFFFFF;
+    box-shadow: 0 0 14px rgb(51 54 70 / 14%);
+    border-radius: 12px;
+    padding: 30px 16px 0 16px;
+    margin-bottom: 20px;
+    max-width: 780px;
+    width: 100%;
+    position: relative;
+}
+.registration-section .accommodation-facility-section:after {
+    position: absolute;
+    content: "";
+    max-width: 720px;
+    width: 100%;
+    height: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    background: #FFFFFF;
+    box-shadow: 0 4px 30px rgb(51 54 70 / 16%);
+    border-radius: 14px;
+    z-index: -1;
+}
+.registration-section .accommodation-facility-table .head-table {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 30px;
+    padding: 0 36px;
+}
+.registration-section .accommodation-facility-table .head-table div {
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 140%;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #8F98A2;
+}
+.registration-section .accommodation-facility-table .table-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.registration-section .accommodation-facility-table .table-head-line {
+    padding-left: 15px;
+    padding-right: 36px;
+    background-color: #f7f8fa;
+}
+.registration-section .accommodation-facility-table .table-body-line {
+    padding-left: 36px;
+    padding-right: 36px;
+    height: 36px;
+    border-bottom: 1px solid #edeef0;
+}
+.registration-section .accommodation-facility-table .table-body-line:last-of-type {
+    border-bottom: 0;
+}
+.registration-section .accommodation-facility-table .table-head-line div {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 300%;
+    color: #333646;
+}
+.registration-section .accommodation-facility-table .table-line div:last-of-type {
+    font-weight: 700;
+}
+.registration-section .accommodation-facility-table .table-head-line div span {
+    font-size: 10px;
+}
+.registration-section .accommodation-facility-table .table-body-line div {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 300%;
+    color: #333646;
+}
+.registration-section .accommodation-facility-table .head-table div:first-of-type {
+    width: 120px;
+}
+.registration-section .accommodation-facility-table .head-table div:nth-of-type(2) {
+    width: 45px;
+}
+.registration-section .accommodation-facility-table .head-table div:nth-of-type(3) {
+    width: 57px;
+}
+.registration-section .accommodation-facility-table .head-table div:last-of-type {
+    width: 56px;
+}
+.registration-section .accommodation-facility-table .table-line div:first-of-type {
+    width: 120px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.registration-section .accommodation-facility-table .table-line div:first-of-type img {
+    margin-right: 7px;
+}
+.registration-section .accommodation-facility-table .table-line div:nth-of-type(2) {
+    width: 45px;
+    text-align: center;
+}
+.registration-section .accommodation-facility-table .table-line div:nth-of-type(3) {
+    width: 57px;
+    text-align: center;
+}
+.registration-section .accommodation-facility-table .table-line div:last-of-type {
+    width: 56px;
+}
+.registration-section .accommodation-facility-table .table-head-line div:nth-of-type(2) {
+    margin-left: 21px;
+}
+.registration-section .accommodation-facility-table .table-line svg.line {
+    position: absolute;
+    top: -6px;
+    left: -14.5px;
+}
+.registration-section .accommodation-facility-table {
+    padding-bottom: 17px;
+}
+.data-checking-section .furnishings-section .col-lg-3 {
+    padding-right: 5px;
+}
+.data-checking-section .furnishings-section .furnishings-block {
+    pointer-events: none;
+    cursor: text;
+}
+.registration-section .photos-property-section {
+    background: #FFFFFF;
+    box-shadow: 0 0 14px rgb(51 54 70 / 14%);
+    border-radius: 12px;
+    padding: 30px 0;
+    margin-bottom: 20px;
+    max-width: 780px;
+    width: 100%;
+    position: relative;
+}
+.registration-section .photos-property-section:after {
+    position: absolute;
+    content: "";
+    max-width: 720px;
+    width: 100%;
+    height: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    background: #FFFFFF;
+    box-shadow: 0 4px 30px rgb(51 54 70 / 16%);
+    border-radius: 14px;
+    z-index: -1;
+}
+.registration-section .photo-checking-block {
+    padding-bottom: 20px;
+    border-bottom: 2px solid #E3E4E6;
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+.registration-section .photo-checking-block img {
+    width: 18.93%;
+    height: 92px;
+    margin-bottom: 10px;
+    margin-right: 1.33%;
+    border-radius: 6px;
+    border: 0.495536px solid rgba(0, 0, 0, 0.12);
+}
+.registration-section .photo-checking-block img:nth-of-type(5n) {
+    margin-right: 0;
+}
+.registration-section .photos-property-section .title {
+    padding: 0 16px;
+}
+.registration-section .social-media-checking {
+    padding-top: 20px;
+}
+.registration-section .social-media-checking .address-checking-line {
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+}
+.registration-section .social-media-checking .address-checking-line:not(:last-of-type) {
+    margin-bottom: 12px;
+}
+.registration-section .social-media-checking .address-checking-name {
+    margin-right: 10px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    color: #545769;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.registration-section .social-media-checking .address-checking-total {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    color: #333646;
+    margin-left: 10px;
+    flex-basis: 285px;
+    white-space: nowrap;
+}
+.registration-section .social-media-checking .dots {
+    flex-grow: 1;
+    border-bottom: 1px dotted #c5c5c5;
+}
+.registration-section .total-section {
+    background: #FFFFFF;
+    box-shadow: 0 0 14px rgb(51 54 70 / 14%);
+    border-radius: 12px;
+    padding: 30px 16px;
+    margin-bottom: 30px;
+    max-width: 780px;
+    width: 100%;
+    position: relative;
+}
+.registration-section .total-section:after {
+    position: absolute;
+    content: "";
+    max-width: 720px;
+    width: 100%;
+    height: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    background: #FFFFFF;
+    box-shadow: 0 4px 30px rgb(51 54 70 / 16%);
+    border-radius: 14px;
+    z-index: -1;
+}
+.registration-section .total-section .address-checking-line {
+    display: flex;
+    align-items: flex-end;
+}
+.registration-section .total-section .address-checking-line:not(:last-of-type) {
+    margin-bottom: 16px;
+}
+.registration-section .total-section .address-checking-name {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    color: #333646;
+    margin-right: 10px;
+}
+.registration-section .total-section .strong-line .address-checking-name {
+    font-weight: 500;
+}
+.registration-section .total-section .size-line .address-checking-name {
+    font-size: 16px;
+}
+.registration-section .total-section .address-checking-name span.name-tariff {
+    text-transform: uppercase;
+}
+.registration-section .total-section .address-checking-name span.price-tariff {
+    font-weight: 400;
+    color: #99a3ad;
+}
+.registration-section .total-section .address-checking-total {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    color: #000000;
+    margin-left: 10px;
+}
+.registration-section .total-section .size-line .address-checking-total {
+    font-size: 16px;
+}
+.registration-section .total-section .dots {
+    flex-grow: 1;
+    border-bottom: 1px dotted #c5c5c5;
+    margin-bottom: 2px;
+}
+.data-checking-section .familiarization {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: #545769;
+    width: 100%;
+    max-width: 740px;
+    margin: auto;
+    margin-bottom: 20px;
+    padding: 0 16px;
+}
+.data-checking-section .familiarization span {
+    color: #6BB63F;
+    border-bottom: 1px solid #6BB63F;
+    padding-bottom: 1px;
+}
+.data-checking-section .duration {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: #545769;
+    width: 100%;
+    max-width: 744px;
+    margin: auto;
+    margin-top: 20px;
+    padding: 0 16px;
+}
+.registration-section {
+    padding-bottom: 100px;
+}
+
+
+
+
+@media (max-width: 1100px) {
+    .registration-section .photos-object-section {
+        max-width: none;
+        border-radius: 0;
+    }
+    .registration-section .photos-object-section:after {
+        width: calc(100% - 32px);
+    }
+    .registration-section .furnishings-section .col-lg-3 {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+    .registration-section .languages-speak-item .languages-speak-block {
+        padding: 0;
+        justify-content: center;
+    }
+}
+@media (max-width: 1040px) {
+    .registration-section {
+        padding-bottom: 40px;
+    }
+    .registration-section .total-section {
+        max-width: none;
+        border-radius: 0;
+    }
+    .registration-section .total-section:after {
+        width: calc(100% - 32px);
+    }
+    .registration-section .photos-property-section {
+        max-width: none;
+        border-radius: 0;
+    }
+    .registration-section .photos-property-section:after {
+        width: calc(100% - 32px);
+    }
+    .registration-section .accommodation-facility-section {
+        max-width: none;
+        border-radius: 0;
+    }
+    .registration-section .accommodation-facility-section:after {
+        width: calc(100% - 32px);
+    }
+    .registration-section .billing-address-checking {
+        max-width: none;
+        border-radius: 0;
+    }
+    .registration-section .billing-address-checking:after {
+        width: calc(100% - 32px);
+    }
+    .registration-section .billing-address-container {
+        padding: 0;
+    }
+    .registration-section .object-data-container {
+        padding: 0;
+    }
+    .registration-section .furnishings-section .collapse:not(.show) {
+        display: none;
+    }
+    .registration-section .furnishings-section .furnishings-line {
+        padding-bottom: 0;
+    }
+    .registration-section .furnishings-section {
+        max-width: none;
+        border-radius: 0;
+    }
+    .registration-section .languages-speak-item .languages-speak-block {
+        padding: 0 21px;
+        justify-content: flex-start;
+    }
+    .steps-section .dots {
+        display: flex;
+    }
+    .steps-section .steps-item-block {
+        flex-direction: column;
+        position: relative;
+        margin-right: 0;
+    }
+    .steps-section .number-step {
+        margin-right: 0;
+        min-width: 40px;
+        max-width: 40px;
+        height: 40px;
+        font-size: 20px;
+        line-height: 23px;
+    }
+    .steps-section .name-step {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -52px;
+        width: 100px;
+        text-align: center;
+        font-size: 16px;
+    }
+    .steps-section .steps-content {
+        justify-content: space-between;
+        padding-bottom: 71px;
+    }
+    .steps-section .steps-item-block:first-of-type .name-step {
+        left: 0;
+        transform: none;
+        text-align: left;
+    }
+    .steps-section .steps-item-block:last-of-type .name-step {
+        right: 0;
+        left: auto;
+        transform: none;
+        text-align: right;
+    }
+    .steps-section .steps-item-block.in-work .number-step:before {
+        min-width: 56px;
+        max-width: 56px;
+        height: 56px;
+    }
+    .steps-section .step-check {
+        width: 18px;
+        height: 18px;
+    }
+    .registration-sidebar .try {
+        display: none;
+    }
+    .registration-section .billing-address-container {
+        flex-direction: column-reverse;
+    }
+    .registration-section .object-data-container {
+        flex-direction: column-reverse;
+        padding: 0;
+    }
+    .registration-sidebar {
+        width: 100%;
+    }
+    .registration-sidebar .your-tariff {
+        max-width: none;
+        padding: 30px 12px;
+        height: auto;
+        border-radius: 0;
+    }
+    .registration-sidebar .your-tariff .sidebar-title {
+        font-size: 18px;
+        margin-right: 8px;
+    }
+    .registration-sidebar .your-tariff .your-tariff-top a {
+        font-size: 13px;
+    }
+    .registration-sidebar .your-tariff .tariff.tariff-desctope {
+        display: none;
+    }
+    .registration-sidebar .your-tariff .tariff.tariff-mobile {
+        display: flex;
+        margin-bottom: 0;
+    }
+    .registration-sidebar .your-tariff .your-tariff-top {
+        margin-bottom: 15px;
+    }
+    .registration-sidebar .your-tariff .price .month {
+        font-size: 13px;
+    }
+    .registration-sidebar .your-tariff .price {
+        margin-bottom: 7px;
+    }
+    .registration-sidebar .your-tariff .description {
+        font-size: 13px;
+    }
+    .registration-section .main-registration-content {
+        margin-right: 0;
+        width: 100%;
+    }
+    .registration-section .billing-address-section {
+        max-width: none;
+        border-radius: 0;
+    }
+    .registration-section .type-company-links a {
+        max-width: none;
+    }
+    .registration-section form .company-name {
+        max-width: none;
+    }
+    .registration-section form .name-block {
+        max-width: none;
+    }
+    .registration-section form .surname-block {
+        max-width: none;
+    }
+    .registration-section form .street-block {
+        max-width: none;
+    }
+    .registration-section form .city-block {
+        max-width: none;
+    }
+    .registration-section form .country-block {
+        max-width: none;
+    }
+    .registration-section form .checkbox-line label {
+        font-size: 14px;
+    }
+    .registration-section .title {
+        font-size: 18px;
+    }
+    .registration-sidebar .your-tariff:after {
+        width: calc(100% - 32px);
+    }
+    .registration-section .registration-container {
+        padding: 0;
+    }
+    .registration-section .contact-information-section {
+        max-width: none;
+        border-radius: 0;
+    }
+    .registration-section .languages-speak-section {
+        max-width: none;
+        border-radius: 0;
+    }
+    .registration-section .languages-speak-section:after {
+        width: calc(100% - 60px);
+        max-width: none;
+    }
+    .registration-section .contact-information-section:after {
+        width: calc(100% - 32px);
+    }
+    .registration-section .billing-address-section:after {
+        width: calc(100% - 32px);
+    }
+    .registration-section a.save {
+        width: calc(100% - 32px);
+        margin: 0 auto;
+    }
+    .registration-section a.save:after {
+        width: calc(100% - 60px);
+        max-width: none;
+    }
+    .registration-section .languages-speak-content {
+        width: 100%;
+    }
+    .registration-section .object-data-section {
+        max-width: none;
+        border-radius: 0;
+    }
+    .registration-section .object-data-section:after {
+        width: calc(100% - 32px);
+    }
+    .registration-section .furnishings-section:after {
+        width: calc(100% - 32px);
+    }
+    .registration-section .furnishings-section .furnishings-title.furnishings-title-desctope {
+        display: none;
+    }
+    .registration-section .furnishings-section .furnishings-title.furnishings-title-mobile {
+        display: block;
+    }
+    .registration-section .furnishings-section .furnishings-title {
+        margin-bottom: 0;
+    }
+    .registration-section .furnishings-section .row {
+        padding-bottom: 20px;
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+    .registration-section .furnishings-section .furnishings-line {
+        border-bottom: 1px solid #edeef0;
+    }
+    .registration-section .furnishings-section .furnishings-line:first-of-type {
+        padding-top: 0;
+    }
+    .registration-section .furnishings-section .furnishings-line:last-of-type {
+        border-bottom: 0;
+    }
+
+    .registration-section .furnishings-section .furnishings-line-kitchen .margin-bottom:nth-of-type(4) .furnishings-block,
+    .registration-section .furnishings-section .furnishings-line-kitchen .margin-bottom:nth-of-type(5) .furnishings-block,
+    .registration-section .furnishings-section .furnishings-line-kitchen .margin-bottom:nth-of-type(6) .furnishings-block {
+        margin-bottom: 0;
+    }
+    .registration-section .furnishings-section .furnishings-line-bathroom .margin-bottom:nth-of-type(10) .furnishings-block,
+    .registration-section .furnishings-section .furnishings-line-bathroom .margin-bottom:nth-of-type(11) .furnishings-block {
+        margin-bottom: 0;
+    }
+    .registration-section .furnishings-section .furnishings-line-room .margin-bottom:nth-of-type(7) .furnishings-block {
+        margin-bottom: 0;
+    }
+    .registration-section .furnishings-section .furnishings-line-general .margin-bottom:nth-of-type(19) .furnishings-block,
+    .registration-section .furnishings-section .furnishings-line-general .margin-bottom:nth-of-type(20) .furnishings-block {
+        margin-bottom: 0;
+    }
+    .registration-section .furnishings-section .furnishings-line-outside .margin-bottom:nth-of-type(10) .furnishings-block {
+        margin-bottom: 0;
+    }
+    .registration-section.data-checking-section .furnishings-section .furnishings-title.furnishings-title-desctope {
+        display: block;
+    }
+    .registration-section.data-checking-section .furnishings-section .furnishings-title.furnishings-title-mobile {
+        display: none;
+    }
+    .registration-section.data-checking-section .furnishings-section .furnishings-title {
+        margin-bottom: 20px;
+    }
+    .registration-section.data-checking-section .furnishings-section .furnishings-line {
+        border-bottom: 0;
+    }
+    .registration-section .social-media-checking .address-checking-name {
+        max-width: none;
+    }
+}
+@media (max-width: 767px) {
+    .steps-section .dots {
+        width: 68px;
+    }
+    .steps-section .dots .dots-item:nth-of-type(1),
+    .steps-section .dots .dots-item:nth-of-type(2),
+    .steps-section .dots .dots-item:nth-of-type(3),
+    .steps-section .dots .dots-item:nth-of-type(4),
+    .steps-section .dots .dots-item:nth-of-type(5),
+    .steps-section .dots .dots-item:nth-of-type(6),
+    .steps-section .dots .dots-item:nth-of-type(7),
+    .steps-section .dots .dots-item:nth-of-type(8),
+    .steps-section .dots .dots-item:nth-of-type(9),
+    .steps-section .dots .dots-item:nth-of-type(10) {
+        display: none;
+    }
+    .steps-section .dots .dots-item:nth-of-type(11) {
+        margin-left: 0;
+    }
+    .registration-section .furnishings-section .furnishings-line-outside .margin-bottom:nth-of-type(9) .furnishings-block {
+        margin-bottom: 0;
+    }
+}
+@media (max-width: 760px) {
+    .registration-section .object-data-table .object-data-link a.duplicate.duplicate-desctope {
+        display: none;
+    }
+    .registration-section .object-data-table .object-data-link a.duplicate.duplicate-mobile {
+        display: block;
+    }
+    .registration-section .object-data-table .object-data-link a.delete.delete-mobile {
+        display: block;
+    }
+    .registration-section .object-data-table .object-data-link a.delete.delete-desctope {
+        display: none;
+    }
+    .registration-section .object-data-table .select-type {
+        margin-right: 10px;
+        margin-left: 7px;
+    }
+    .registration-section .object-data-table .quality-input-block {
+        margin-right: 10px;
+    }
+    .registration-section .object-data-table .personen-input-block {
+        margin-right: 10px;
+    }
+    .registration-section .object-data-table .price-input-block {
+        margin-right: 23px;
+    }
+    .registration-section .object-data-table .object-data-link {
+        margin-right: 12px;
+    }
+    .registration-section .object-data-table .select-room {
+        margin-right: 10px;
+        margin-left: 36px;
+    }
+    .registration-section .object-data-section {
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 10px;
+    }
+    .registration-section .object-data-table .object-data-link a.duplicate {
+        margin-right: 12px;
+    }
+    .registration-section .object-data-table .add-room a {
+        margin-left: 42px;
+    }
+    .registration-section .object-data-table .add-room > svg {
+        left: 22px;
+    }
+    .registration-section .object-data-table .add-object a {
+        margin-left: 18px;
+    }
+    .registration-section .object-data-table .table-head {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .registration-section .object-data-table .table-head .type-head {
+        width: 145px;
+        margin-right: 10px;
+        margin-left: 36px;
+    }
+    .registration-section .object-data-table .table-head .quality-head {
+        width: 50px;
+        margin-right: 10px;
+    }
+    .registration-section .object-data-table .table-head .personen-head {
+        width: 70px;
+        margin-right: 10px;
+    }
+    .registration-section .object-data-table .table-head .price-head {
+        width: 80px;
+        margin-right: 7px;
+    }
+    .registration-section .object-data-table .table-head .links-head {
+        width: 45px;
+        margin-right: 12px;
+    }
+    .registration-section .object-data-section .title {
+        padding: 0 16px;
+    }
+    .registration-section .photos-object-section .subtitle-desctope .right-subtitle {
+        display: none;
+    }
+    .registration-section .photos-object-section .subtitle-mobile {
+        display: block;
+    }
+    .registration-section .photos-object-section .subtitle-mobile .left-subtitle {
+        display: none;
+    }
+}
+@media (max-width: 700px) {
+    .data-checking-section .familiarization br {
+        display: none;
+    }
+}
+@media (max-width: 680px) {
+    .registration-section .languages-speak-item {
+        flex-direction: column;
+    }
+    .registration-section .languages-speak-content:not(:last-of-type) {
+        margin-right: 0;
+        margin-bottom: 16px;
+    }
+    .registration-section .languages-speak-section .subtitle.subtitle-mobile {
+        display: flex;
+    }
+    .registration-section .languages-speak-section .subtitle.subtitle-desctope {
+        display: none;
+    }
+}
+@media (max-width: 575px) {
+    .steps-section .number-step {
+        min-width: 34px;
+        max-width: 34px;
+        height: 34px;
+        font-size: 16px;
+        line-height: 19px;
+    }
+    .steps-section .steps-item-block.in-work .number-step:before {
+        min-width: 44px;
+        max-width: 44px;
+        height: 44px;
+    }
+    .steps-section .name-step {
+        font-size: 14px;
+        bottom: -47px;
+    }
+    .steps-section .dots {
+        margin: 0 17px;
+    }
+    .steps-section .name-step {
+        display: none;
+    }
+    .steps-item-block.in-work .name-step {
+        display: block;
+    }
+    .registration-section form .forms-line {
+        flex-direction: column;
+    }
+    .registration-section form .forms-line:not(:last-of-type) {
+        margin-bottom: 24px;
+    }
+    .registration-section form .company-name {
+        margin-right: 0;
+        margin-bottom: 24px;
+    }
+    .registration-section form .steuer {
+        max-width: none;
+    }
+    .registration-section form .greeting {
+        width: 100%;
+        margin-bottom: 24px;
+        margin-right: 0;
+        max-width: none;
+    }
+    .registration-section form .name-block {
+        margin-right: 0;
+        margin-bottom: 24px;
+    }
+    .registration-section form .street-block {
+        margin-right: 0;
+        margin-bottom: 24px;
+    }
+    .registration-section form .house-number-block {
+        max-width: none;
+    }
+    .registration-section form .zip-block {
+        max-width: none;
+        margin-right: 0;
+        margin-bottom: 24px;
+    }
+    .registration-section form .city-block {
+        margin-right: 0;
+        margin-bottom: 24px;
+    }
+    .registration-section .url-line.show {
+        padding-bottom: 30px !important;
+    }
+    .registration-section .add-links a {
+        margin-bottom: 20px !important;
+    }
+    .registration-section .contact-information-section {
+        display: flex;
+        flex-direction: column;
+    }
+    .registration-section .add-links a:last-of-type {
+        margin-bottom: 30px !important;
+    }
+    .registration-section .contact-information-section {
+        padding-bottom: 0;
+    }
+    .registration-section .add-links a.add-phone-mobile {
+        display: inline-block;
+    }
+    .registration-section .number-phone a.add-phone-desctope {
+        display: none;
+    }
+    .registration-section .number-phone-item {
+        max-width: none;
+        margin-right: 0;
+    }
+    .registration-section .languages-speak-item .languages-speak-block {
+        padding: 0 12px;
+    }
+    .registration-section .languages-speak-item .languages-speak-block img {
+        margin-right: 7px;
+    }
+    .registration-section .languages-speak-content:not(:last-of-type) {
+        margin-bottom: 14px;
+    }
+    .registration-section .languages-speak-item .languages-speak-block {
+        margin-right: 14px;
+    }
+    .registration-section .type-company-links a {
+        text-align: center;
+    }
+    .registration-section .furnishings-section .furnishings-line-kitchen .margin-bottom:nth-of-type(4) .furnishings-block,
+    .registration-section .furnishings-section .furnishings-line-kitchen .margin-bottom:nth-of-type(5) .furnishings-block {
+        margin-bottom: 20px;
+    }
+    .registration-section .furnishings-section .furnishings-line-bathroom .margin-bottom:nth-of-type(10) .furnishings-block {
+        margin-bottom: 20px;
+    }
+    .registration-section .furnishings-section .furnishings-line-general .margin-bottom:nth-of-type(19) .furnishings-block {
+        margin-bottom: 20px;
+    }
+    .registration-section .furnishings-section .furnishings-line-outside .margin-bottom:nth-of-type(9) .furnishings-block {
+        margin-bottom: 20px;
+    }
+    .registration-section .photos-object-section .social-media-links {
+        flex-direction: column;
+    }
+    .registration-section .photos-object-section .facebook-block {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 24px;
+    }
+    .registration-section .photos-object-section .video-block {
+        width: 100%;
+    }
+    .registration-section .photos-object-section .img-block {
+        width: 32.3%;
+    }
+    .registration-section .photos-object-section .img-block:nth-of-type(5n) {
+        margin-right: 1.36%;
+    }
+    .registration-section .photos-object-section .img-block:nth-of-type(3n) {
+        margin-right: 0;
+    }
+    .data-section .contact-information-section .display-request-form {
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+    .registration-section .billing-address-checking.contact-information-checking .address-checking-line {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 24px;
+    }
+    .registration-section .billing-address-checking.contact-information-checking .address-checking-line span {
+        display: none;
+    }
+    .registration-section .billing-address-checking.contact-information-checking .address-checking-name {
+        margin-right: 0;
+        margin-bottom: 12px;
+        overflow: visible;
+        white-space: normal;
+    }
+    .registration-section .contact-information-checking .address-checking-block {
+        padding: 0;
+        border-bottom: 0;
+    }
+    .registration-section .contact-information-checking .address-checking-block:last-of-type .address-checking-line {
+        margin-bottom: 0;
+    }
+    .registration-section.data-checking-section .furnishings-section .furnishings-line-kitchen .margin-bottom:nth-of-type(4) .furnishings-block,
+    .registration-section.data-checking-section .furnishings-section .furnishings-line-kitchen .margin-bottom:nth-of-type(5) .furnishings-block {
+        margin-bottom: 0;
+    }
+    .registration-section.data-checking-section .furnishings-section .furnishings-line-bathroom .margin-bottom:nth-of-type(10) .furnishings-block {
+        margin-bottom: 0;
+    }
+    .registration-section.data-checking-section .furnishings-section .furnishings-line-general .margin-bottom:nth-of-type(19) .furnishings-block {
+        margin-bottom: 0;
+    }
+    .registration-section.data-checking-section .furnishings-section .furnishings-line-outside .margin-bottom:nth-of-type(9) .furnishings-block {
+        margin-bottom: 0;
+    }
+    .registration-section.data-checking-section .furnishings-section .furnishings-block {
+        margin-bottom: 0;
+    }
+    .registration-section .photo-checking-block img {
+        width: 32%;
+        margin-right: 2%;
+    }
+    .registration-section .photo-checking-block img:nth-of-type(5n) {
+        margin-right: 2%;
+    }
+    .registration-section .photo-checking-block img:nth-of-type(3n) {
+        margin-right: 0;
+    }
+    .registration-section .photo-checking-block {
+        padding-bottom: 10px;
+    }
+    .registration-section .social-media-checking .address-checking-line {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 24px;
+    }
+    .registration-section .social-media-checking .address-checking-line:last-of-type {
+        margin-bottom: 0;
+    }
+    .registration-section .social-media-checking .address-checking-line span {
+        display: none;
+    }
+    .registration-section .social-media-checking .address-checking-name {
+        margin-right: 0;
+        margin-bottom: 12px;
+        overflow: visible;
+        white-space: normal;
+    }
+    .registration-section .social-media-checking .dots {
+        display: none;
+    }
+    .registration-section .social-media-checking .address-checking-total {
+        flex-basis: auto;
+    }
+    .registration-section .social-media-checking .address-checking-total {
+        margin-left: 0;
+    }
+    .registration-section .billing-address-checking .dots {
+        display: none;
+    }
+    .registration-section .billing-address-checking .address-checking-total {
+        flex-basis: auto;
+    }
+    .registration-section .billing-address-checking .address-checking-total {
+        margin-left: 0;
+    }
+    .registration-section .total-section .address-checking-line {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .registration-section .total-section .dots {
+        display: none;
+    }
+    .registration-section .total-section .address-checking-name {
+        margin-right: 0;
+        margin-bottom: 12px;
+    }
+    .registration-section .total-section .address-checking-total {
+        margin-left: 0;
+    }
+    .registration-section .total-section .address-checking-line:not(:last-of-type) {
+        margin-bottom: 24px;
+    }
+    .registration-section a.save {
+        padding: 0 16px;
+        text-align: center;
+    }
+}
+@media (max-width: 479px) {
+    .steps-section .dots .dots-item:nth-of-type(11),
+    .steps-section .dots .dots-item:nth-of-type(12),
+    .steps-section .dots .dots-item:nth-of-type(13),
+    .steps-section .dots .dots-item:nth-of-type(14),
+    .steps-section .dots .dots-item:nth-of-type(15) {
+        display: none;
+    }
+    .steps-section .dots .dots-item:nth-of-type(16) {
+        margin-left: 0;
+    }
+    .steps-section .dots {
+        margin: 0 9px;
+        width: 28px;
+    }
+    .registration-section .checkbox-line label::before {
+        top: 0;
+        transform: none;
+    }
+    .registration-section .checkbox-line label::after {
+        top: 6px;
+    }
+    .registration-section .object-data-table .table-head {
+        display: none;
+    }
+    .registration-section .object-data-table .object-data-table-line {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .registration-section .object-data-table .selected-object .object-data-table-line {
+        padding: 14px 16px 20px 16px;
+    }
+    .registration-section .object-data-table .selected-object .add-room {
+        padding: 0;
+    }
+    .registration-section .object-data-table .select-type {
+        margin-right: 0;
+        margin-left: 0;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .registration-section .object-data-table .select2-container {
+        width: 100% !important;
+    }
+    .registration-section .object-data-table input {
+        width: 100% !important;
+    }
+    .registration-section .object-data-table .quality-input-block,
+    .registration-section .object-data-table .personen-input-block {
+        margin-right: 0;
+        margin-left: 0;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-left: 34px;
+        padding-right: 11px;
+        width: 100%;
+    }
+    .registration-section .object-data-table .price-input-block {
+        margin-right: 0;
+        margin-left: 0;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-left: 34px;
+        width: 100%;
+    }
+    .registration-section .object-data-table .price-input-block input {
+        margin-left: 0;
+    }
+    .registration-section .object-data-table .object-data-link a.duplicate.duplicate-mobile {
+        display: none;
+    }
+    .registration-section .object-data-table .object-data-link a.duplicate.duplicate-desctope {
+        display: block;
+    }
+    .registration-section .object-data-table .object-data-link a.delete.delete-desctope {
+        display: block;
+    }
+    .registration-section .object-data-table .object-data-link a.delete.delete-mobile {
+        display: none;
+    }
+    .registration-section .object-data-table .object-data-link {
+        margin-right: 0;
+        margin-left: 34px;
+        margin-top: 5px;
+    }
+    .registration-section .object-data-table .object-data-link a.duplicate {
+        margin-right: 20px;
+    }
+    .registration-section .object-data-table .select-room {
+        margin-right: 0;
+        margin-left: 0;
+        width: 100%;
+        margin-bottom: 15px;
+        padding-left: 20px;
+    }
+    .registration-section .object-data-table .object-data-table-line:first-of-type {
+        border-top: 1px solid #edeef0;
+    }
+    .registration-section .object-data-table .selected-object svg.desctope-line {
+        display: none;
+    }
+    .registration-section .object-data-table .table-head-item-mobile {
+        display: block;
+    }
+    .registration-section .object-data-table .quality-head-mobile {
+        margin-right: 44px;
+    }
+    .registration-section .object-data-table .personen-head-mobile {
+        margin-right: 30px;
+    }
+    .registration-section .object-data-table .price-head-mobile {
+        margin-right: 10px;
+    }
+    .registration-section .object-data-table .object-data-table-line:last-of-type {
+        border-bottom: 0;
+    }
+    .registration-section .object-data-table .selected-object .select-room svg.mobile-line {
+       display: block;
+        position: absolute;
+        top: -208px;
+        left: 6px;
+    }
+    .registration-section .object-data-table .selected-object .add-room svg.mobile-line {
+        display: block;
+        position: absolute;
+        top: -200px;
+        left: 22px;
+    }
+    .registration-section .photos-object-section .img-block:nth-of-type(3n) {
+        margin-right: 9px;
+    }
+    .registration-section .photos-object-section .img-block:nth-of-type(2n) {
+        margin-right: 0;
+    }
+    .registration-section .photos-object-section .img-block {
+        width: 48.6%;
+        margin-right: 9px;
+        margin-bottom: 9px;
+    }
+    .registration-section .photos-object-section .img-block:nth-of-type(5n) {
+        margin-right: 9px;
+    }
+    .registration-section .billing-address-checking .address-checking-line {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .registration-section .billing-address-checking .address-checking-name {
+        margin-right: 0;
+        margin-bottom: 12px;
+    }
+    .registration-section .billing-address-checking .address-checking-name span {
+        display: none;
+    }
+    .registration-section .billing-address-checking .address-checking-line:not(:last-of-type) {
+        margin-bottom: 26px;
+    }
+    .registration-section .billing-address-checking .address-checking-total {
+        min-width: auto;
+    }
+    .registration-section .accommodation-facility-table .head-table {
+        padding: 0 10px;
+    }
+    .registration-section .accommodation-facility-table .table-head-line {
+        padding: 0 10px;
+    }
+    .registration-section .accommodation-facility-table .table-body-line {
+        padding:  0 10px;
+    }
+    .registration-section .accommodation-facility-table .table-line svg.line {
+        display: none;
+    }
+    .registration-section .accommodation-facility-table .table-head-line div:nth-of-type(2) {
+        margin-left: 0;
+    }
+}
+@media (max-width: 370px) {
+    .registration-section .photos-object-section .img-block {
+        width: 48.3%;
+    }
+    .registration-section .photo-checking-block img {
+        width: 48.3%;
+        margin-right: 3.3%;
+    }
+    .registration-section .photo-checking-block img:nth-of-type(3n) {
+        margin-right: 3.3%;
+    }
+    .registration-section .photo-checking-block img:nth-of-type(2n) {
+        margin-right: 0;
+    }
+    .registration-section .photo-checking-block img:nth-of-type(5n) {
+        margin-right: 3.3%;
+    }
+    .registration-section .photo-checking-block img:last-of-type {
+        margin-right: 0;
+    }
+}
+
+/*---end-register---*/
