@@ -1322,7 +1322,8 @@ h1.list-title {
 }
 .property-card .data-block-circle img {
     width: 14px;
-    height: 14px;
+    height: 18px;
+    object-fit: contain;
 }
 .property-card .data-block-oval {
     display: flex;
