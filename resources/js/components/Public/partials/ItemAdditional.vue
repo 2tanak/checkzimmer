@@ -68,6 +68,21 @@ export default {
             }
             return this.minRoomPrice;
         },
+        addToFavorites() {
+            let id = this.item.id;
+            let favoritesObject = JSON.parse(localStorage.getItem("favoritesList"));
+
+            if (favoritesObject === null) {
+                favoritesObject = [];
+            }
+            if (favoritesObject.indexOf(id) !== -1) {
+                favoritesObject.splice(favoritesObject.indexOf(id), 1);
+            } else {
+                favoritesObject.push(id);
+            }
+            localStorage.setItem('favoritesList', JSON.stringify(favoritesObject));
+            this.$emit('favsUpdated');
+        },
     },
     computed: {
         minRoomPrice() {
@@ -91,6 +106,7 @@ export default {
 
             return favoritesObject.includes(id);
         },
+
 
     }
 }
