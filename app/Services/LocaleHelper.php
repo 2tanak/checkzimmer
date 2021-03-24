@@ -39,7 +39,7 @@ class LocaleHelper {
             $fullPath = array_merge(array($locale), $fullPath);
         }
 
-        $fullPath = array_merge(array(env("APP_URL")), $fullPath);
+        $fullPath = array_merge(array(Request::root()), $fullPath);
 
         return implode('/', $fullPath);
     }

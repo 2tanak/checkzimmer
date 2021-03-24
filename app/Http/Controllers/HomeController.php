@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Domain;
 use App\FeatureCategory;
+use App\Http\Requests\InquiryFormRequest;
 use App\Notifications\InquiryHotel;
 use App\Option;
 use App\Property;
+use App\Services\GeocoderService;
 use App\Services\WebsiteData;
 use App\Statistic;
-use App\Http\Requests\InquiryFormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Mail;
+
 
 class HomeController extends Controller
 {
@@ -40,7 +42,12 @@ class HomeController extends Controller
 
         $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
 
-        return view('home', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
+        if (Domain::getSubdomain()) {
+            return view('home-subdomain', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
+        } else {
+            $subdomains = Domain::all();
+            return view('home', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin','subdomains'));
+        }
     }
 
     public function dashboard() {
@@ -190,5 +197,26 @@ class HomeController extends Controller
             return true;
         }
         return false;
+    }
+
+    public function getUrlForRedirectOnSubdomain(Request $request, GeocoderService $service)
+    {
+        $data = $request->all();
+        $address = $data['address'];
+        $km = $data['km'] ? $data['km'] : 10;
+
+        $geo_data = $service->getCoords($address);
+
+        $objects = Property::where(Property::raw('abs(' . $geo_data['lat'] . ' - lat) * 111'), '<', $km)
+            ->where(Property::raw('abs(' . $geo_data['lng'] . ' - lng) * 111'), '<', $km);
+        $firstElement = $objects->get()->first();
+        if ($firstElement != null) {
+            $city = $objects->get()->first()->city;
+            $subdomain = Domain::where('city', $city)->first()->subdomain;
+            if ($subdomain) {
+                return response()->json(['code' => 'ok', 'redirectUrl' => ($request->secure() ? 'https://' : 'http://') . $subdomain . '.' . $request->getHttpHost()]);
+            }
+        }
+        return response()->json(['code' => 'error']);
     }
 }
