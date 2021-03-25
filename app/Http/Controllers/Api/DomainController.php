@@ -123,7 +123,7 @@ class DomainController extends Controller
         $data = $request->all();
         $domain->fill($data);
         $domain->save();
-        $option = Option::where('type', 'domain')->where('parent', $id)->where('key', 'latlng')->first();
+        $option = Option::where('type', 'domain')->where('parent', $domain->id)->where('key', 'latlng')->first();
         if (!$option) {
             $optionsData = [
                 'key'    => 'latlng',

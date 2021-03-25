@@ -96,6 +96,9 @@ class PropertyController extends Controller
                 break;
             case 'rating':
                 $objects->orderByDesc('hotel_rating');
+                break;
+            default:
+                $objects->orderBy('ord');
         }
 
         if ($people) {
@@ -133,12 +136,8 @@ class PropertyController extends Controller
             }
         });
 
-        if ($subdomain) {
-            $relate = $noCity ? '!=' : '=';
-            $objects->where('city', $relate, $subdomain->city);
-        } elseif ($noCity) {
-            $objects->where('city', '!=', 'Leipzig');
-        }
+        $relate = $noCity ? '!=' : '=';
+        $objects->where('city', $relate, $subdomain ? $subdomain->city : 'Leipzig');
 
         $objects = $objects->paginate(20);
 
@@ -148,7 +147,6 @@ class PropertyController extends Controller
             $objects[$key]->rate = array_reduce( $ratings, function($carry, $item) { return $carry + $item['rating']; } ) / $count;
             $objects[$key]->geo = $geo_data;
         }
-
         return response()->json(['objects' => $objects, 'coords' => $geo_data]);
     }
 

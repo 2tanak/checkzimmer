@@ -341,4 +341,9 @@ class Property extends Model
         $phone = '+'.$phone;
         return $phone;
     }
+    function locDate($date = null) {
+        $date = $date ?: date('H:i, j {} Y', strtotime($this->created_at));
+        $mon = __(date('F', strtotime($this->created_at)));
+        return str_replace('{}', $mon, $date);
+    }
 }

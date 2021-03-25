@@ -10,7 +10,7 @@ export default {
         type: 'picture',
     },
     room_type_id: {
-        label: 'Категория',
+        label: 'Category',
         placeholder: 'Please enter room type category',
         type: 'options',
         options: []

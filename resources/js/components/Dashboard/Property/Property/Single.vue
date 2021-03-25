@@ -139,7 +139,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <b-form-group :label="$t('Phone number')" label-for="input-phone">
-                                                <b-form-input v-model="property.opts.landlordPhoneNumber" id="input-landlord-phone"></b-form-input>
+                                                <b-form-input v-model="property.opts.landlordPhoneNumber" id="input-landlord-phone" @keyup="phoneInput"></b-form-input>
                                             </b-form-group>
                                             <b-form-group>
                                                 <b-form-checkbox v-model="property.opts.landlordHidePhone">{{ $t('Hide') }}</b-form-checkbox>
@@ -260,7 +260,7 @@
                                         <b-button class="button-collapse" v-b-toggle="'id-'+room.id"> {{ $t('Room') }} № {{ i+1 }}</b-button>
                                     </div>
                                     <div class="delete-room">
-                                        <b-button v-if="room.newRoom" type="submit" variant="success" class="mr-2" @click="saveRoom(room)">
+                                        <b-button v-if="room.newRoom" type="submit" variant="success" class="mr-2" @click.prevent="saveRoom(room)">
                                             {{ $t('Save room') }}</b-button>
                                         <b-button v-if="room.newRoom" variant="danger" @click="deleteNewRoom()">{{ $t('Delete room') }}</b-button>
                                         <b-button v-else variant="danger" @click="deleteRoomOk($event, room)">{{ $t('Delete room') }}</b-button>
@@ -474,7 +474,7 @@ export default {
     name: "Single",
     data() {
         return {
-            property: { opts: {}},
+            property: { opts: { landlordPhoneNumber: ''}},
             nameSelected: null,
             capacitySelected: null,
             nameOptions: [
@@ -592,16 +592,26 @@ export default {
 
     },
     methods: {
+        phoneInput(ph) {
+            let start = this.property.opts.landlordPhoneNumber.substr(0, 3);
+            if (start != '+49') {
+                this.property.opts.landlordPhoneNumber = this.property.opts.landlordPhoneNumber.replace(start, '+49');
+            }
+            console.log(start);
+            console.log(this.property.opts.landlordPhoneNumber);
+        },
         initOptions() {
             for (let i in defOptions) {
                 if (!this.property.opts[i]) {
-                    this.property.opts[i] = defOptions[i].value;
+                    //this.property.opts[i] = defOptions[i].value;
+                    Vue.set(this.property.opts, i, defOptions[i].value);
                     continue;
                 }
-                this.property.opts[i] = defOptions[i].type === 'bool' ?
+                Vue.set(this.property.opts, i, defOptions[i].type === 'bool' ?
                     (this.property.opts[i] && this.property.opts[i] !== '0'? true : false)
-                    : this.property.opts[i];
+                    : this.property.opts[i]);
             }
+            Vue.set(this.property, 'opts', this.property.opts);
         },
         addFeatures(feature){
             const indexFeatures = this.property.features.findIndex(item => item.id === feature.id);
@@ -721,13 +731,13 @@ export default {
                 (i===0) ? item.main_photo = true : delete item.main_photo;
             });
             for(let option of this.property.options){
-                if(option.key === 'photos'){
+                if (option.key === 'photos'){
                     option.value = JSON.stringify(this.imageData);
                 }
             }
             this.property.rooms.forEach( room => {
                 for(let option of room.options){
-                    if(option.key === 'photos'){
+                    if (option &&option.key === 'photos'){
                         option.value = JSON.stringify(room.photos);
                     }
                 }
@@ -819,7 +829,7 @@ export default {
             return this.getPhotos()
         },
         roomTypeOptions() {
-            return this.roomTypes.map( item => { return { value: item.id, text: item.name } })
+            return this.roomTypes.filter( item => item.room_type_id === 0).map( item => { return { value: item.id, text: item.name } })
         },
         minRoomPrice() {
 
