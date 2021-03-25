@@ -32,6 +32,9 @@ foreach (app('locale')->getLanguagesAvailable() as $lang) {
             Route::get('/city', 'HomeController@city')->name("city-$lang");
             Route::get('single/question/create', 'Api\QuestionsController@create');
             Route::get('single/review/create', 'Api\ReviewsController@create');
+            Route::get('/registration', 'HomeController@registration')->name("registration-$lang");
+            Route::get('/registration2', 'HomeController@registration2')->name("registration2-$lang");
+            Route::get('/registration3', 'HomeController@registration3')->name("registration3-$lang");
         });
     Route::post('/inquiryForm', 'HomeController@inquiryForm')->name('inquiryForm');
 }
