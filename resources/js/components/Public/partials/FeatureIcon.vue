@@ -1,5 +1,5 @@
 <template>
-    <div :class="classes" :title="featureName(item)">
+    <div :class="classes">
         <div class="tooltip-block">{{ featureName(item) }}</div>
         <img :src="item.picture">
     </div>
