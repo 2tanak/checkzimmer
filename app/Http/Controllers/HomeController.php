@@ -161,7 +161,13 @@ class HomeController extends Controller
     }
     public function city()
     {
-        return view('city');
+        $data = WebsiteData::getOptions();
+        $seoTitle = $data['title'];
+        $seoDescription = $data['description'];
+        $options = $data['options'];
+
+        $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
+        return view('city', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
     }
     public function redirect() {
         return response()->redirectToRoute(app('locale')->routeApply('home'));
