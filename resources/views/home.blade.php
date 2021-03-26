@@ -36,6 +36,13 @@
                     <div class="input-container">
                         <input  id="text" type="text" placeholder="{{  __($options['placeholder'] ?? '' ) }}">
                     </div>
+
+                    <div class="result-search">
+                        <ul>
+                            <li>Результат</li>
+                        </ul>
+                    </div>
+
                 </div>
                 <div class="distance-block select-block">
                     <label for="distance-select">{{ __($options['label_distance'] ?? '' ) }}:</label>

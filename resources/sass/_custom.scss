@@ -854,6 +854,54 @@ h1.list-title {
 .background-image-block a.write-whatsapp svg {
     margin-right: 8px;
 }
+.background-image-block .result-search {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    cursor: default;
+    -webkit-user-select: none;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgb(32 33 36 / 28%);
+    border-radius: 0 0 10px 10px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    overflow: hidden;
+    z-index: 1000;
+    margin-top: -5px;
+    border: 4px solid #333646;
+    transition: all 0.2s;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.6);
+}
+.background-image-block .result-search.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+.background-image-block .result-search ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    color: #333646;
+}
+.background-image-block .result-search ul li {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.background-image-block .result-search ul li:hover {
+    color: #ffffff;
+    background: #6bb63f;
+}
 .background-image-block .sample-block {
     display: flex;
     align-items: flex-end;
@@ -871,6 +919,7 @@ h1.list-title {
 .background-image-block .sample-block .input-block {
     max-width: 780px;
     width: 100%;
+    position: relative;
 }
 .background-image-block .sample-block .input-container {
     border: 4px solid #333646;
