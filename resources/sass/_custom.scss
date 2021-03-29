@@ -1242,6 +1242,7 @@ h1.list-title {
     background-color: #ffffff;
     transition-duration: 0.4s;
     overflow: hidden;
+    width: 100%;
 }
 .property-card .property-card-container {
     padding: 16px;
@@ -10945,3 +10946,45 @@ body .popup-bubble-anchor.active:after {
 }
 
 /*---end-register---*/
+
+/*---alternative-classifieds---*/
+
+.alternative-classifieds {
+    margin-top: 44px;
+}
+.alternative-classifieds .alternative-classifieds-content {
+    background: #FFFFFF;
+    box-shadow: 0 0 14px rgba(51, 54, 70, 0.14);
+    border-radius: 12px;
+    position: relative;
+    flex-direction: column;
+}
+.alternative-classifieds .alternative-classifieds-content:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    z-index: -1;
+    background: #FFFFFF;
+    box-shadow: 0 4px 30px rgba(51, 54, 70, 0.16);
+    border-radius: 14px;
+    width: calc(100% - 60px);
+    height: 110px;
+}
+.alternative-classifieds .title-text {
+    margin-bottom: 24px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 130%;
+    color: #333646;
+}
+.alternative-classifieds .property-card {
+    background-color: transparent;
+}
+.alternative-classifieds .property-card:hover,
+.alternative-classifieds .property-card.active {
+    background-color: #f8f8f8;
+}
+
+/*---end-alternative-classifieds---*/

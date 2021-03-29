@@ -340,6 +340,18 @@ jQuery(document).ready(function() {
         asNavFor: '.small-slider'
     });
 
+    jQuery('.property-card-slider').slick({
+        arrows: false,
+        dots: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        infinite: true
+    });
+
+    if (jQuery(window).width() < 1040) {
+        jQuery('.property-card-slider').slick('unslick');
+    }
+
     jQuery('.small-slider').slick({
         slidesToShow: 10,
         slidesToScroll: 1,
