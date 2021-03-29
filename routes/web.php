@@ -38,9 +38,9 @@ foreach ($locales as $locale) {
             Route::get('single/review/create', 'Api\ReviewsController@create');
             Route::post('/inquiryForm', 'HomeController@inquiryForm')->name("inquiryForm-$locale");
             Route::post('/findSubdomainRedirect', 'HomeController@getUrlForRedirectOnSubdomain')->name("findSubdomainRedirect-$locale");
-            Route::get('/registration', 'HomeController@registration')->name("registration-$lang");
-            Route::get('/registration2', 'HomeController@registration2')->name("registration2-$lang");
-            Route::get('/registration3', 'HomeController@registration3')->name("registration3-$lang");
+            Route::get('/registration', 'HomeController@registration')->name("registration-$locale");
+            Route::get('/registration2', 'HomeController@registration2')->name("registration2-$locale");
+            Route::get('/registration3', 'HomeController@registration3')->name("registration3-$locale");
         });
 }
 Route::group([
