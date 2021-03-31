@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RoomTypesSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(OptionsSeeder::class);
+        $this->call(PostcodesSeeder::class);
     }
 }
