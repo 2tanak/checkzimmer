@@ -2,6 +2,7 @@
 
 @section('content')
 
+    @include('css.loader-main')
     <section class="plans-section city-section">
 
         <div class="background-image-block">
