@@ -431,8 +431,29 @@ jQuery(document).ready(function() {
         tempScrollTop = currentScrollTop;
     });
 
+    let id = parseInt(jQuery('.single-content .favorites').attr('id'));
+    let favoritesObject = JSON.parse(localStorage.getItem("favoritesList"));
+    if (favoritesObject === null) {
+        favoritesObject = [];
+    }
+    if (favoritesObject.indexOf(id) !== -1) {
+        jQuery('.single-content .favorites').addClass('active');
+    }
+
     jQuery('.single-content .favorites').click(function () {
         jQuery('.single-content .favorites').toggleClass('active');
+        let id = parseInt(jQuery(this).attr('id'));
+        let favoritesObject = JSON.parse(localStorage.getItem("favoritesList"));
+
+        if (favoritesObject === null) {
+            favoritesObject = [];
+        }
+        if (favoritesObject.indexOf(id) !== -1) {
+            favoritesObject.splice(favoritesObject.indexOf(id), 1);
+        } else {
+            favoritesObject.push(id);
+        }
+        localStorage.setItem('favoritesList', JSON.stringify(favoritesObject));
     });
 
 });
