@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Public from './components/Public/Index'
+import Home from './components/Public/Home'
 import Favorites from './components/Public/Favorites'
 import Single from './components/Public/Single'
 
@@ -47,13 +48,18 @@ const i18n = new VueI18n({
     },
 })
 
+if(locale == ''){
+    i18n.locale = '';
+}
+
 const app = new Vue({
     el: '#application',
     router,
     components: {
         Public,
+        Home,
         Favorites,
-        Single
+        Single,
     },
     store,
     i18n

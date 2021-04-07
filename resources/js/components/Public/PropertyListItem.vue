@@ -3,7 +3,7 @@
         <div class="property-card-container">
             <ItemPictures :item="item" />
             <div class="data">
-                <a :href="'/'+$i18n.locale+'/single/'+item.slug" class="title"><span>{{ item.name }}</span></a>
+                <a :href="$i18n.locale != '' ? '/'+$i18n.locale+'/single/'+item.slug : '/single/'+item.slug" class="title"><span>{{ item.name }}</span></a>
                 <ItemFeatures :item="item" />
             </div>
             <RoomsList :rooms="item.rooms" :item_id="item.id" />

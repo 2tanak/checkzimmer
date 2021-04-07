@@ -8,6 +8,7 @@ use App\Http\Requests\InquiryFormRequest;
 use App\Notifications\InquiryHotel;
 use App\Option;
 use App\Property;
+use App\Room;
 use App\Services\GeocoderService;
 use App\Services\WebsiteData;
 use App\Statistic;
@@ -45,7 +46,23 @@ class HomeController extends Controller
         if (Domain::getSubdomain()) {
             return view('home-subdomain', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
         } else {
-            $subdomains = Domain::all();
+            $subdomains = [];
+            foreach(Domain::all() as $domain){
+                $cityName = $domain->city;
+                $countRooms = 0;
+                foreach(property::all()->where('city',$cityName)->all() as $property){
+                    foreach (Room::all()->where('property_id',$property->id)->all() as $room){
+                        $countRooms += $room->number;
+                    }
+
+                }
+                $subdomains[] = [
+                    'city' => $cityName,
+                    'count' => $countRooms,
+                    'subdomain' => $domain->subdomain
+                ];
+            }
+
             return view('home', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin','subdomains'));
         }
     }
