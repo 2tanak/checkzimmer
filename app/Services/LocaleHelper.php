@@ -18,7 +18,7 @@ class LocaleHelper {
         return $files;
     }
     public function getDefaultLocale() {
-        return env('APP_DEFAULT_LOCALE');
+        return env('APP_DEFAULT_LOCALE', 'de');
     }
 
     public function getLocaleUrl($locale)
