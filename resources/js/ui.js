@@ -444,6 +444,8 @@ jQuery(document).ready(function() {
         } else {
             favoritesObject.push(id);
         }
+        jQuery('.favoritesCount').html(favoritesObject.length);
+
         localStorage.setItem('favoritesList', JSON.stringify(favoritesObject));
     });
 

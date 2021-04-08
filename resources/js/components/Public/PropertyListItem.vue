@@ -57,6 +57,8 @@ export default {
                 favoritesObject.push(id);
             }
             localStorage.setItem('favoritesList', JSON.stringify(favoritesObject));
+            jQuery('.favoritesCount').html(favoritesObject.length);
+
             this.$emit('favsUpdated');
         },
 
