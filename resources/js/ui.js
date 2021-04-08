@@ -40,6 +40,7 @@ import messagesLocaleDe from "../lang/de.json";
 
 const locale = document.location.pathname.split('/')[1];
 
+
 const i18n = new VueI18n({
     locale: locale, // set locale
     messages: {
@@ -47,10 +48,6 @@ const i18n = new VueI18n({
         de: messagesLocaleDe
     },
 })
-
-if(locale == ''){
-    i18n.locale = '';
-}
 
 const app = new Vue({
     el: '#application',
@@ -62,7 +59,7 @@ const app = new Vue({
         Single,
     },
     store,
-    i18n
+    i18n,
 });
 
 
