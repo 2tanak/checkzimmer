@@ -106,7 +106,7 @@
                 <div class="subtitle">{{ __('Contact us, we will compare the properties in the city') }} {{ __('Х') }} {{ __('for you and find the most') }}</div>
                 <div class="price-block">
                     @foreach($subdomains as $subdomain)
-                        <a href="{{Request::secure() ? 'https://' : 'http://'}}{{$subdomain['subdomain']}}.{{Request::getHttpHost()}}"
+                        <a href="{{$subdomain['link']}}"
                            class="price-block-item">
                             <div class="price-block-head">
                                 <div class="name-tariff">{{$subdomain['count']}} {{ __('free places') }}</div>
