@@ -34,13 +34,13 @@
                 <div class="container">
                     <div class="sample-block">
                         <div class="input-block sample-block-item">
-                            <label for="text">{{ __('workplace address') }}:</label>
+                            <label for="text">{{ __('workplace address') }}</label>
                             <div class="input-container">
                                 <input id="text" name="address" type="text" placeholder="{{ __('Example') }}: 04315 Leipzig">
                             </div>
                         </div>
                         <div class="distance-block select-block">
-                            <label for="distance-select">{{ __('distance') }}:</label>
+                            <label for="distance-select">{{ __('distance') }}</label>
                             <div class="select-container">
                                 <select name="km" id="distance-select" class="distance">
                                     <option value="10" selected>10 {{ __('km') }}.</option>
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="number-personse-block select-block">
-                            <label class="desctop-label" for="number-personse">{{ __('Num people') }}:</label>
+                            <label class="desctop-label" for="number-personse">{{ __('Num people') }}</label>
                             <div class="select-container">
                                 <select name="distance" id="number-personse" class="number-personse">
                                     <option value="1" selected>1 {{ __('ppl') }}.</option>

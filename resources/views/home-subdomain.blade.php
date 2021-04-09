@@ -32,13 +32,13 @@
         <div class="container">
             <div class="sample-block">
                 <div class="input-block sample-block-item">
-                    <label for="text">{{ __($options['label_input'] ?? '' ) }}:</label>
+                    <label for="text">{{ __($options['label_input'] ?? '' ) }}</label>
                     <div class="input-container">
                         <input  id="text" type="text" placeholder="{{  __($options['placeholder'] ?? '' ) }}">
                     </div>
                 </div>
                 <div class="distance-block select-block">
-                    <label for="distance-select">{{ __($options['label_distance'] ?? '' ) }}:</label>
+                    <label for="distance-select">{{ __($options['label_distance'] ?? '' ) }}</label>
                     <div class="select-container">
                         <select name="distance" id="distance-select" class="distance">
                             <option value="10">10 {{ __('km') }}.</option>
@@ -51,8 +51,8 @@
                     </div>
                 </div>
                 <div class="number-personse-block select-block">
-                    <label class="desctop-label" for="number-personse">{{ __($options['label_people'] ?? '' ) }}:</label>
-                    <label class="mobile-label" for="number-personse">{{ __($options['label_people'] ?? '' ) }}:</label>
+                    <label class="desctop-label" for="number-personse">{{ __($options['label_people'] ?? '' ) }}</label>
+                    <label class="mobile-label" for="number-personse">{{ __($options['label_people'] ?? '' ) }}</label>
                     <div class="select-container">
                         <select name="distance" id="number-personse" class="number-personse">
                             <option value="1" selected>1 {{ __('ppl') }}.</option>
