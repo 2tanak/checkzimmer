@@ -36,24 +36,31 @@
                         <div class="input-block sample-block-item">
                             <label for="text">{{ __('workplace address') }}</label>
                             <div class="input-container">
-                                <input id="text" name="address" type="text" placeholder="{{ __('Example') }}: 04315 Leipzig">
+                                <input id="text" name="address" type="text" autocomplete="off" placeholder="{{ __('Example') }}: 04315 Leipzig">
+                            </div>
+                            <div class="result-search">
+                                <ul>
+                                    <li>Результат</li>
+                                </ul>
                             </div>
                         </div>
                         <div class="distance-block select-block">
                             <label for="distance-select">{{ __('distance') }}</label>
                             <div class="select-container">
-                                <select name="km" id="distance-select" class="distance">
-                                    <option value="10" selected>10 {{ __('km') }}.</option>
+                                <select name="distance" id="distance-select" class="distance">
+                                    <option value="10">10 {{ __('km') }}.</option>
                                     <option value="20">20 {{ __('km') }}.</option>
-                                    <option value="30">30 {{ __('km') }}.</option>
+                                    <option value="30" selected>30 {{ __('km') }}.</option>
                                     <option value="40">40 {{ __('km') }}.</option>
+                                    <option value="50">50 {{ __('km') }}.</option>
+                                    <option value="60">60 {{ __('km') }}.</option>
                                 </select>
                             </div>
                         </div>
                         <div class="number-personse-block select-block">
                             <label class="desctop-label" for="number-personse">{{ __('Num people') }}</label>
                             <div class="select-container">
-                                <select name="distance" id="number-personse" class="number-personse">
+                                <select name="person" id="number-personse" class="number-personse">
                                     <option value="1" selected>1 {{ __('ppl') }}.</option>
                                     <option value="2">2 {{ __('ppl') }}.</option>
                                     <option value="3">3 {{ __('ppl') }}.</option>
@@ -140,17 +147,5 @@
     <div id="application">
         <Home/>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function (e) {
-            jQuery('.find-housing').click(function (e) {
-                jQuery.post('{{ route(app('locale')->routeApply('findSubdomainRedirect')) }}', jQuery('.find-subdomain-redirect').serialize(), function (response) {
-                    if (response.code == 'ok') {
-                        document.location.href = response.redirectUrl;
-                    }
-                })
-            })
-        });
-    </script>
 
 @endsection
