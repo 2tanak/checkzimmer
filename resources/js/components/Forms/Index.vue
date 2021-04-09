@@ -6,6 +6,7 @@
                 <b-form-input v-if="inputTypes.indexOf(item.type) !== -1" v-model="fields[ind]" :type="item.type" :id="'input-'+ind" :placeholder="$t(item.placeholder)"></b-form-input>
                 <label v-if="item.type === 'checkbox'"><input type="checkbox" v-model="fields[ind]" :id="'input-'+ind"> {{ $t(item.placeholder) }}</label>
                 <b-form-textarea v-else-if="item.type === 'textarea'" v-model="fields[ind]" :id="'input-'+ind" :placeholder="$t('copyright')"></b-form-textarea>
+                <summernote v-if="item.type === 'wysiwyg'" v-model="fields[ind]" :id="'input-' +ind" />
                 <b-form-file
                     v-if="item.type === 'file'"
                     v-model="fileObj"
@@ -32,9 +33,11 @@
 </template>
 
 <script>
+    import summernote from "./Summernote";
     export default {
         name: "Index",
         props: ['fields', 'data'],
+        components: {summernote},
         data() {
             return {
                 displayedList: false,
@@ -43,22 +46,21 @@
             }
         },
         methods: {
+            onFileChanged (event) {
+                let that = this;
+                this.selectedFile = event.target.files[0];
 
-        onFileChanged (event) {
-            let that = this;
-            this.selectedFile = event.target.files[0];
+                const formData = new FormData();
+                formData.append('image', this.selectedFile, this.selectedFile.name);
 
-            const formData = new FormData();
-            formData.append('image', this.selectedFile, this.selectedFile.name);
-
-            axios({
-              method: 'post',
-              url: '/image-upload',
-              data: formData
-            }).then(function (response) {
-                that.fields.picture = response;
-            });
-        },
+                axios({
+                method: 'post',
+                url: '/image-upload',
+                data: formData
+                }).then(function (response) {
+                    that.fields.picture = response;
+                });
+            },
 
         },
         computed: {

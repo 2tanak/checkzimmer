@@ -31,6 +31,7 @@ Route::middleware('auth')->namespace('Api')->group(function () {
     Route::resource('geocode-cache', 'GeocodeCacheController');
     Route::resource('questions', 'QuestionsController');
     Route::resource('reviews', 'ReviewsController');
+    Route::resource('pages', 'PageController');
 
     Route::post('property/query', 'PropertyController@query');
     Route::post('features/language', 'FeaturesController@language');
@@ -64,6 +65,7 @@ Route::middleware('auth')->namespace('Api')->group(function () {
 
     Route::get('languages/{id}', 'LanguagesController@get');
     Route::put('languages/{id}', 'LanguagesController@update');
+
 });
 
 Route::group(['namespace' => 'Api'], function() {
@@ -74,6 +76,7 @@ Route::group(['namespace' => 'Api'], function() {
     Route::post('/property/querySort', 'PropertyController@querySort');
     Route::post('/property/initMap', 'PropertyController@initMap');
     Route::post('/property/list', 'PropertyController@listUpdate');
+    Route::post('search/tooltip', 'PostcodeController@query');
 });
 
 Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {

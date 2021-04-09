@@ -32,7 +32,7 @@ class Feature extends Model
             'feature_id', 'property_id');
     }
     public function tName() {
-        $lang = app('locale')->getCurrentLocale();
+        $lang = app('locale')->getDefaultLocale();
         $langKey = 'lang-' . $lang;
         $translation = array_reduce($this->options->all(), function($carry, $item) use ($langKey) {
             return $item->key == $langKey ? $item->value : $carry;

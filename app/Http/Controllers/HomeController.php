@@ -3,15 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Domain;
-use App\FeatureCategory;
+use App\Http\Requests\InquiryFormRequest;
 use App\Notifications\InquiryHotel;
 use App\Option;
+use App\Page;
 use App\Property;
+use App\Room;
+use App\Services\GeocoderService;
 use App\Services\WebsiteData;
 use App\Statistic;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Mail;
+use Request as MainRequest;
+
+
 
 class HomeController extends Controller
 {
@@ -30,7 +35,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $data = WebsiteData::getOptions();
         $seoTitle = $data['title'];
@@ -39,7 +44,29 @@ class HomeController extends Controller
 
         $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
 
-        return view('home', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
+        if (Domain::getSubdomain()) {
+            $getData = $request->all();
+            return view('home-subdomain', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin', 'getData'));
+        } else {
+            $subdomains = [];
+            foreach (Domain::all() as $domain) {
+                $cityName = $domain->city;
+                $countRooms = 0;
+
+                foreach (Room::all()->whereIn('property_id', property::all()->where('city', $cityName)->getQueueableIds())->all() as $room) {
+                    $countRooms += $room->number;
+                }
+                $secure = MainRequest::secure() ? 'https://' : 'http://';
+                $subdomains[] = [
+                    'link' => $secure.$domain->subdomain.'.'.MainRequest::getHttpHost(),
+                    'city' => $cityName,
+                    'count' => $countRooms,
+                    'subdomain' => $domain->subdomain
+                ];
+            }
+
+            return view('home', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin','subdomains'));
+        }
     }
 
     public function dashboard() {
@@ -153,12 +180,30 @@ class HomeController extends Controller
     }
     public function city()
     {
-        return view('city');
+        $data = WebsiteData::getOptions();
+        $seoTitle = $data['title'];
+        $seoDescription = $data['description'];
+        $options = $data['options'];
+
+        $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
+        return view('city', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
+    }
+    public function registration()
+    {
+        return view('registration');
+    }
+    public function registration2()
+    {
+        return view('registration2');
+    }
+    public function registration3()
+    {
+        return view('registration3');
     }
     public function redirect() {
         return response()->redirectToRoute(app('locale')->routeApply('home'));
     }
-    public function inquiryForm(Request $request)
+    public function inquiryForm(InquiryFormRequest $request)
     {
         $data = $request->all();
         if ($this->checkRecaptha($data['grecaptcha'])) {
@@ -176,6 +221,15 @@ class HomeController extends Controller
             return response()->json(['code' => 'error']);
         }
     }
+    public function singlePage($page) {
+        $data = WebsiteData::getOptions();
+        $seoTitle = $data['title'];
+        $seoDescription = $data['description'];
+        $options = $data['options'];
+        $page = Page::where('slug', $page)->first();
+        $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
+        return view('page', compact('page', 'seoDescription', 'seoTitle', 'options', 'phoneNumAdmin'));
+    }
     public function checkRecaptha($response)
     {
         if (isset($response)) {
@@ -189,5 +243,26 @@ class HomeController extends Controller
             return true;
         }
         return false;
+    }
+
+    public function getUrlForRedirectOnSubdomain(Request $request, GeocoderService $service)
+    {
+        $data = $request->all();
+        $address = $data['address'];
+        $km = $data['km'] ? $data['km'] : 10;
+
+        $geo_data = $service->getCoords($address);
+
+        $objects = Property::where(Property::raw('abs(' . $geo_data['lat'] . ' - lat) * 111'), '<', $km)
+            ->where(Property::raw('abs(' . $geo_data['lng'] . ' - lng) * 111'), '<', $km);
+        $firstElement = $objects->get()->first();
+        if ($firstElement != null) {
+            $city = $objects->get()->first()->city;
+            $subdomain = Domain::where('city', $city)->first()->subdomain;
+            if ($subdomain) {
+                return response()->json(['code' => 'ok', 'redirectUrl' => ($request->secure() ? 'https://' : 'http://') . $subdomain . '.' . $request->getHttpHost()]);
+            }
+        }
+        return response()->json(['code' => 'error']);
     }
 }
