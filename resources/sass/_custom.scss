@@ -665,7 +665,7 @@ footer#main-footer a.footer-logo {
     text-decoration: none;
     display: flex;
     align-items: center;
-    margin-right: 262px;
+    margin-right: 65px;
 }
 footer#main-footer svg.logo-mobile {
     display: none;
@@ -689,12 +689,18 @@ footer#main-footer ul.footer-menu {
     margin-bottom: 0;
     list-style: none;
     align-items: center;
-    margin-right: 113px;
-    display: none;
+    margin-right: 65px;
+    display: flex;
 }
 footer#main-footer ul.footer-menu li {
     margin-left: 20px;
     margin-right: 20px;
+}
+footer#main-footer ul.footer-menu li:first-of-type {
+    margin-left: 0;
+}
+footer#main-footer ul.footer-menu li:last-of-type {
+    margin-right: 0;
 }
 footer#main-footer ul.footer-menu li a {
     font-weight: 400;
@@ -2484,12 +2490,6 @@ header.height-menu .mobile-menu {
     .list-content .property .property-item {
         width: 100%;
     }
-    footer#main-footer ul.footer-menu {
-        margin-right: 0;
-    }
-    footer#main-footer a.footer-logo {
-        margin-right: 148px;
-    }
 }
 @media (max-width: 1200px) {
     .list-content .property.show-map .container > div {
@@ -2513,6 +2513,12 @@ header.height-menu .mobile-menu {
     }
     .property-card .distance {
         white-space: normal;
+    }
+    footer#main-footer ul.footer-menu {
+        margin-right: 40px;
+    }
+    footer#main-footer a.footer-logo {
+        margin-right: 40px;
     }
 }
 @media (max-width: 1140px) {
@@ -2688,20 +2694,24 @@ header.height-menu .mobile-menu {
         max-width: 70px;
         min-width: 70px;
     }
-}
-@media (max-width: 1020px) {
-    footer#main-footer a.footer-logo {
-        margin-right: 0;
-    }
     footer#main-footer .footer-content {
         flex-wrap: wrap;
-        padding-top: 21px;
-        padding-bottom: 23px;
+        min-height: auto;
+        padding: 20px 0;
+    }
+    footer#main-footer a.footer-logo {
+        margin-right: 0;
+        width: 50%;
+    }
+    footer#main-footer ul.footer-menu {
+        margin-right: 0;
+        width: 50%;
+        justify-content: flex-end;
     }
     footer#main-footer .copyright {
         width: 100%;
         text-align: left;
-        margin-top: 13px;
+        margin-top: 16px;
     }
 }
 @media (max-width: 1105px) {
@@ -3165,18 +3175,19 @@ header.height-menu .mobile-menu {
         width: 100%;
     }
     footer#main-footer ul.footer-menu {
-        width: 100%;
-        margin-top: 20px;
-    }
-    footer#main-footer ul.footer-menu {
         flex-direction: column;
         align-items: flex-start;
+        width: 100%;
+        margin-top: 12px;
     }
     footer#main-footer ul.footer-menu li {
         margin-left: 0;
     }
-    footer#main-footer ul.footer-menu li:first-of-type {
-        margin-bottom: 5px;
+    footer#main-footer .copyright {
+        margin-top: 12px;
+    }
+    footer#main-footer a.footer-logo {
+        width: auto;
     }
     .background-image-block .sample-block {
         flex-wrap: wrap;
@@ -11157,3 +11168,72 @@ form.find-subdomain-redirect {
 }
 
 /*---end-ad-block---*/
+
+footer .social-block {
+    display: flex;
+    align-items: center;
+    margin-right: 65px;
+}
+footer .social-block .social-block-item {
+    border: 1px solid #E3E4E5;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    margin-right: 12px;
+    transition: all 0.2s;
+}
+footer .social-block .social-block-item:last-of-type {
+    margin-right: 0;
+}
+footer .social-block .social-block-item a {
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+footer .social-block .social-block-item a svg {
+    display: block;
+    transition: all 0.2s;
+}
+footer .social-block .social-block-item:hover {
+    background: #8E9DAB;
+    border-color: #8E9DAB;
+}
+footer .social-block .social-block-item:hover svg path.hover {
+    fill: #ffffff;
+}
+footer .social-block .social-block-item:hover svg path.not-hover {
+    fill: #8E9DAB;
+}
+
+@media (max-width: 1200px) {
+    footer .social-block {
+        margin-right: 40px;
+    }
+}
+@media (max-width: 1040px) {
+footer .social-block {
+        display: none;
+    }
+}
+
+/*---created-page---*/
+
+.single-content.created-page {
+    flex-direction: column;
+    padding-top: 40px;
+}
+.single-content.created-page h1 {
+    text-align: center;
+    width: 100%;
+    order: inherit;
+    display: block;
+}
+.single-container.created-page-container {
+    padding: 0 15px;
+}
+
+/*---end-created-page---*/
