@@ -73,18 +73,30 @@ class PropertyController extends Controller
 
         $paginate = $request->query('page');
         $noCity = $request->query('nocity');
+        $noDist = $request->query('nodist') ?? false;
 
         $address = $data['address'] ?
             ($subdomain ? $subdomain->city : 'Leipzig').' '.$data['address'] :
             ($subdomain ? $subdomain->city : 'Leipzig');
 
-        $km = $data['km'] ? $data['km']  : 10;
+        $km = $data['distance'] ? $data['distance']  : 10;
         $people = $data['people'];
 
         $geo_data = $this->service->getCoords($address);
 
-        $objects = Property::where(Property::raw('abs('.$geo_data['lat'].' - lat) * 111'), '<', $km)
-            ->where(Property::raw('abs('.$geo_data['lng'].' - lng) * 111'), '<', $km);
+        $latD = 'abs('.$geo_data['lat'].' - lat) * 111';
+        $lngD = 'abs('.$geo_data['lng'].' - lng) * 111';
+
+        if (!$noDist) {
+            $objects = Property::where(Property::raw($latD), '<', $km)
+                ->where(Property::raw($lngD), '<', $km);
+        } else {
+            $objects = Property::where(Property::raw($latD), '>', $km)
+                ->where(Property::raw($lngD), '>', $km);
+                //->where(Property::raw($latD), '<=', 60)
+                //->where(Property::raw($lngD), '<=', 60);
+        }
+
 
         // Set items order
         switch ($data['ord'] ?? '') {
@@ -190,7 +202,8 @@ class PropertyController extends Controller
             'realprice' => '',
             'inclVAT' => '',
             'hideZip' => '',
-            'rentMin' => ''
+            'rentMin' => '',
+            'info' => ''
         ];
 
         $property = Property::findOrFail($id);

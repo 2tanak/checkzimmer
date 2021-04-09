@@ -35,7 +35,7 @@ class Domain extends Model {
             return false;
         }
         $url = explode('//', $url);
-        return $url[0] . '//' . $this->subdomain . '/' . $url[1];
+        return $url[0] . '//' . $this->subdomain . '.' . $url[1];
     }
     static function getSubdomain() {
         $url = url()->current();

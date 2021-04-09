@@ -170,6 +170,10 @@
                                     <b-form-group :label="$t('Property description')" label-for="input-property-description">
                                         <b-textarea v-model="property.description" class="form-control" id="input-property-description" type="text" />
                                     </b-form-group>
+                                    <b-form-group :label="$t('Hotel info')" class="rent-block" style="font-size:0.875rem;">
+                                        <b-form-input v-model="property.opts.info" id="input-hotel-name"></b-form-input>
+                                        <small>Text under room description</small>
+                                    </b-form-group>
                                 </div>
                             </div>
                         </div>
@@ -465,6 +469,10 @@ let defOptions = {
     },
     rentMin: {
         value: '3',
+        type: ''
+    },
+    info: {
+        value: '',
         type: ''
     }
 }
