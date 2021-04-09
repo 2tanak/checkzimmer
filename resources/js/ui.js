@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Public from './components/Public/Index'
+import Home from './components/Public/Home'
 import Favorites from './components/Public/Favorites'
 import Single from './components/Public/Single'
 
@@ -39,6 +40,7 @@ import messagesLocaleDe from "../lang/de.json";
 
 const locale = document.location.pathname.split('/')[1];
 
+
 const i18n = new VueI18n({
     locale: locale, // set locale
     messages: {
@@ -52,11 +54,12 @@ const app = new Vue({
     router,
     components: {
         Public,
+        Home,
         Favorites,
-        Single
+        Single,
     },
     store,
-    i18n
+    i18n,
 });
 
 
@@ -441,6 +444,8 @@ jQuery(document).ready(function() {
         } else {
             favoritesObject.push(id);
         }
+        jQuery('.favoritesCount').html(favoritesObject.length);
+
         localStorage.setItem('favoritesList', JSON.stringify(favoritesObject));
     });
 
