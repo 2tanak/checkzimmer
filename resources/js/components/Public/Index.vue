@@ -471,7 +471,7 @@
                 <div class="alternative-classifieds" v-if="this.nodist && this.propertyAlt.length">
                     <div class="property not-map">
                     <div class="container">
-                        <div class="title-text">Alternative Anzeigen in der Umgebung</div>
+                        <span class="title-text">Alternative Anzeigen in der Umgebung</span>
                         <div class="alternative-classifieds-content">
                             <PropertyListItem v-for="(item, index) in propertyAlt" :key="'prop-id-'+index+'-'+item.id" :item="item" :active="activeItems[index]" :index="index" :ref="'listItem' + item.id" @click.native="goToMap(item, index)" @favsUpdated="updateFavCount"/>
                         </div>
