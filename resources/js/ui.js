@@ -443,7 +443,9 @@ jQuery(document).ready(function() {
         jQuery('.single-content .favorites').addClass('active');
     }
 
-    jQuery('.single-content .favorites').click(function () {
+    jQuery('.single-content .favorites').click(function (e) {
+        e.preventDefault();
+
         jQuery('.single-content .favorites').toggleClass('active');
         let id = parseInt(jQuery(this).attr('id'));
         let favoritesObject = JSON.parse(localStorage.getItem("favoritesList"));
@@ -457,7 +459,6 @@ jQuery(document).ready(function() {
             favoritesObject.push(id);
         }
         jQuery('.favoritesCount').html(favoritesObject.length);
-
         localStorage.setItem('favoritesList', JSON.stringify(favoritesObject));
     });
 
