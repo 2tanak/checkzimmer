@@ -39,7 +39,9 @@ class PageController extends Controller
     {
         //
         $data = $request->all();
-        $data['text'] = '';
+        if (!isset($data['text'])) {
+            $data['text'] = '';
+        }
         $page = Page::create($data);
         return response()->json($page);
     }
