@@ -27,7 +27,7 @@
                                     </td>
                                     <td>
                                         <router-link
-                                            :to="{ name: 'website-pages-single', params: { page: page.slug } }">
+                                            :to="{ name: 'website-pages-single', params: { page: page.id } }">
                                             {{ page.title }}
                                         </router-link>
                                     </td>

@@ -9,4 +9,9 @@ export default {
         placeholder: 'Please enter page address',
         type: 'text',
     },
+    text: {
+        label: 'Page content',
+        placeholder: 'Please enter page content',
+        type: 'textarea',
+    }
 }
