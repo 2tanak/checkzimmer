@@ -2,7 +2,6 @@
 
 @section('content')
 
-    @include('css.loader-main')
     <section class="plans-section city-section">
 
         <div class="background-image-block">
@@ -102,16 +101,17 @@
 
         <div class="plans-content city-content">
             <div class="plans-container">
+
                 <h1>{{ __('Our pricing plans are transparent & flexible') }}</h1>
                 <div class="subtitle">{{ __('Contact us, we will compare the properties in the city') }} {{ __('Х') }} {{ __('for you and find the most') }}</div>
                 <div class="price-block">
                     @foreach($subdomains as $subdomain)
-                        <a href="{{Request::secure() ? 'https://' : 'http://'}}{{$subdomain->subdomain}}.{{Request::getHttpHost()}}"
+                        <a href="{{$subdomain['link']}}"
                            class="price-block-item">
                             <div class="price-block-head">
-                                <div class="name-tariff">{{ __('100 free places') }}</div>
+                                <div class="name-tariff">{{$subdomain['count']}} {{ __('free places') }}</div>
                                 <div class="price-item">
-                                    <div class="max-price">{{$subdomain->city}}</div>
+                                    <div class="max-price">{{$subdomain['city']}}</div>
                                 </div>
                                 <div class="description">
                                     {{ __('For most businesses that want to optimize web queries') }}
@@ -136,5 +136,21 @@
             <div class="subtitle down-subtitle">{{ __('Contact us, we will compare the properties in the city') }} {{ __('Х') }} {{ __('for you and find the most optimal accommodation for you!') }}</div>
         </div>
     </section>
+
+    <div id="application">
+        <Home/>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function (e) {
+            jQuery('.find-housing').click(function (e) {
+                jQuery.post('{{ route(app('locale')->routeApply('findSubdomainRedirect')) }}', jQuery('.find-subdomain-redirect').serialize(), function (response) {
+                    if (response.code == 'ok') {
+                        document.location.href = response.redirectUrl;
+                    }
+                })
+            })
+        });
+    </script>
 
 @endsection
