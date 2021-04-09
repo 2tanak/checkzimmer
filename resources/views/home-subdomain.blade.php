@@ -34,7 +34,7 @@
                 <div class="input-block sample-block-item">
                     <label for="text">{{ __($options['label_input'] ?? '' ) }}</label>
                     <div class="input-container">
-                        <input  id="text" type="text" placeholder="{{  __($options['placeholder'] ?? '' ) }}">
+                        <input id="text" name="address" type="text" placeholder="{{  __($options['placeholder'] ?? '' ) }}">
                     </div>
 
                     <div class="result-search">
@@ -61,7 +61,7 @@
                     <label class="desctop-label" for="number-personse">{{ __($options['label_people'] ?? '' ) }}</label>
                     <label class="mobile-label" for="number-personse">{{ __($options['label_people'] ?? '' ) }}</label>
                     <div class="select-container">
-                        <select name="distance" id="number-personse" class="number-personse">
+                        <select name="person" id="number-personse" class="number-personse">
                             <option value="1" selected>1 {{ __('ppl') }}.</option>
                             <option value="2">2 {{ __('ppl') }}.</option>
                             <option value="3">3 {{ __('ppl') }}.</option>
