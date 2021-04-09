@@ -36,7 +36,7 @@
                         <div class="input-block sample-block-item">
                             <label for="text">{{ __('workplace address') }}</label>
                             <div class="input-container">
-                                <input id="text" name="address" type="text" placeholder="{{ __('Example') }}: 04315 Leipzig">
+                                <input id="text" name="address" type="text" autocomplete="off" placeholder="{{ __('Example') }}: 04315 Leipzig">
                             </div>
                             <div class="result-search">
                                 <ul>
