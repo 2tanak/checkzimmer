@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Domain;
-use App\FeatureCategory;
 use App\Http\Requests\InquiryFormRequest;
 use App\Notifications\InquiryHotel;
 use App\Option;
+use App\Page;
 use App\Property;
+use App\Room;
 use App\Services\GeocoderService;
 use App\Services\WebsiteData;
 use App\Statistic;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Mail;
+use Request as MainRequest;
+
 
 
 class HomeController extends Controller
@@ -45,7 +47,23 @@ class HomeController extends Controller
         if (Domain::getSubdomain()) {
             return view('home-subdomain', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
         } else {
-            $subdomains = Domain::all();
+            $subdomains = [];
+            foreach (Domain::all() as $domain) {
+                $cityName = $domain->city;
+                $countRooms = 0;
+
+                foreach (Room::all()->whereIn('property_id', property::all()->where('city', $cityName)->getQueueableIds())->all() as $room) {
+                    $countRooms += $room->number;
+                }
+                $secure = MainRequest::secure() ? 'https://' : 'http://';
+                $subdomains[] = [
+                    'link' => $secure.$domain->subdomain.'.'.MainRequest::getHttpHost(),
+                    'city' => $cityName,
+                    'count' => $countRooms,
+                    'subdomain' => $domain->subdomain
+                ];
+            }
+
             return view('home', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin','subdomains'));
         }
     }
@@ -201,6 +219,15 @@ class HomeController extends Controller
         } else {
             return response()->json(['code' => 'error']);
         }
+    }
+    public function singlePage($page) {
+        $data = WebsiteData::getOptions();
+        $seoTitle = $data['title'];
+        $seoDescription = $data['description'];
+        $options = $data['options'];
+        $page = Page::where('slug', $page)->first();
+        $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
+        return view('page', compact('page', 'seoDescription', 'seoTitle', 'options', 'phoneNumAdmin'));
     }
     public function checkRecaptha($response)
     {

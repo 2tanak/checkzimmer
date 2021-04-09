@@ -1087,12 +1087,13 @@ export default {
                 that.initMap();
             })*/
 
+        /*
         jQuery('body').on('click', 'a.collapse-circle', function(e) {
             e.preventDefault();
             let parent = jQuery(this).closest('.property-card');
             jQuery(parent).toggleClass('collapse-item');
             jQuery(this).toggleClass('active');
-        });
+        });*/
         jQuery('body').on('click', 'a.favorites', function(e) {
             e.preventDefault();
             jQuery(this).toggleClass('active');

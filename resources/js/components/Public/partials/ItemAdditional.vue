@@ -31,11 +31,11 @@
                 <img src="/img/i-rate.png" alt="rating">
                 {{ item.rate }}
             </div>
-            <a href="#" class="collapse-circle">
-                <svg class="minus" width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <a href="#" class="collapse-circle" @click.prevent="collapseCircle">
+                <svg v-if="status === true" class="minus" width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="12" width="2" height="12" rx="1" transform="rotate(90 12 0)" fill="#DF9D3C"/>
                 </svg>
-                <svg class="plus" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg v-else class="plus" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0)">
                         <rect x="12" y="5" width="2" height="12" rx="1" transform="rotate(90 12 5)" fill="#545769"/>
                         <rect x="5" width="2" height="12" rx="1" fill="#545769"/>
@@ -54,7 +54,7 @@
 <script>
 export default {
     name: "ItemAdditional",
-    props: ['item'],
+    props: ['item', 'status'],
     methods: {
         findOption(name) {
             if (!this.item.options) {
@@ -81,8 +81,13 @@ export default {
                 favoritesObject.push(id);
             }
             localStorage.setItem('favoritesList', JSON.stringify(favoritesObject));
+            jQuery('.favoritesCount').html(favoritesObject.length);
+
             this.$emit('favsUpdated');
         },
+        collapseCircle() {
+            this.$emit('collapse')
+        }
     },
     computed: {
         minRoomPrice() {
@@ -106,7 +111,6 @@ export default {
 
             return favoritesObject.includes(id);
         },
-
 
     }
 }
