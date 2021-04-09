@@ -34,7 +34,7 @@
                 <div class="input-block sample-block-item">
                     <label for="text">{{ __($options['label_input'] ?? '' ) }}</label>
                     <div class="input-container">
-                        <input id="text" name="address" type="text" autocomplete="off" placeholder="{{  __($options['placeholder'] ?? '' ) }}">
+                        <input id="text" name="address" type="text" autocomplete="off" placeholder="{{  __($options['placeholder'] ?? '' ) }}" value="{{ $getData['address'] ?? '' }}">
                     </div>
 
                     <div class="result-search">
@@ -48,12 +48,10 @@
                     <label for="distance-select">{{ __($options['label_distance'] ?? '' ) }}</label>
                     <div class="select-container">
                         <select name="distance" id="distance-select" class="distance">
-                            <option value="10">10 {{ __('km') }}.</option>
-                            <option value="20">20 {{ __('km') }}.</option>
-                            <option value="30" selected>30 {{ __('km') }}.</option>
-                            <option value="40">40 {{ __('km') }}.</option>
-                            <option value="50">50 {{ __('km') }}.</option>
-                            <option value="60">60 {{ __('km') }}.</option>
+                            @foreach(range(10, 60, 10) as $km)
+                                <option value="{{ $km }}"
+                                    {{ ($getData['distance'] ?? 30) == $km ? 'selected' : '' }}>{{ $km }} {{ __('km') }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -62,27 +60,9 @@
                     <label class="mobile-label" for="number-personse">{{ __($options['label_people'] ?? '' ) }}</label>
                     <div class="select-container">
                         <select name="person" id="number-personse" class="number-personse">
-                            <option value="1" selected>1 {{ __('ppl') }}.</option>
-                            <option value="2">2 {{ __('ppl') }}.</option>
-                            <option value="3">3 {{ __('ppl') }}.</option>
-                            <option value="4">4 {{ __('ppl') }}.</option>
-                            <option value="5">5 {{ __('ppl') }}.</option>
-                            <option value="6">6 {{ __('ppl') }}.</option>
-                            <option value="7">7 {{ __('ppl') }}.</option>
-                            <option value="8">8 {{ __('ppl') }}.</option>
-                            <option value="9">9 {{ __('ppl') }}.</option>
-                            <option value="10">10 {{ __('ppl') }}.</option>
-                            <option value="11">11 {{ __('ppl') }}.</option>
-                            <option value="12">12 {{ __('ppl') }}.</option>
-                            <option value="13">13 {{ __('ppl') }}.</option>
-                            <option value="14">14 {{ __('ppl') }}.</option>
-                            <option value="15">15 {{ __('ppl') }}.</option>
-                            <option value="16">16 {{ __('ppl') }}.</option>
-                            <option value="17">17 {{ __('ppl') }}.</option>
-                            <option value="18">18 {{ __('ppl') }}.</option>
-                            <option value="19">19 {{ __('ppl') }}.</option>
-                            <option value="20">20 {{ __('ppl') }}.</option>
-                            <option value="21">20+ {{ __('ppl') }}.</option>
+                            @foreach(range(1, 21, 1) as $person)
+                                <option value="{{ $person }}" {{ $person == ($getData['person'] ?? 1) ? 'selected' : '' }}>{{ $person <= 20 ? $person : '20+' }} {{ __('ppl') }}.</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

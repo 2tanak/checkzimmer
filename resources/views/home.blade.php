@@ -148,16 +148,4 @@
         <Home/>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function (e) {
-            jQuery('.find-housing').click(function (e) {
-                jQuery.post('{{ route(app('locale')->routeApply('findSubdomainRedirect')) }}', jQuery('.find-subdomain-redirect').serialize(), function (response) {
-                    if (response.code == 'ok') {
-                        document.location.href = response.redirectUrl;
-                    }
-                })
-            })
-        });
-    </script>
-
 @endsection

@@ -353,6 +353,7 @@
   </div>--}}
 
     <div class="bottom-text">
-        * {{ __('The text of the comment to the table with prices. The offers on your request are over, increase the distance or contact the manager directly') }}
+        * {{ $hotel->getCurrentOption('info') ?:
+            __('The text of the comment to the table with prices. The offers on your request are over, increase the distance or contact the manager directly') }}
     </div>
 </div>

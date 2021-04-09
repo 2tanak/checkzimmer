@@ -29,6 +29,14 @@ class Domain extends Model {
     function seoDescription() {
         return $this->getOption('seo_description');
     }
+    function url() {
+        $url = env('APP_URL', false);
+        if (!$url) {
+            return false;
+        }
+        $url = explode('//', $url);
+        return $url[0] . '//' . $this->subdomain . '.' . $url[1];
+    }
     static function getSubdomain() {
         $url = url()->current();
         if ($url == env('APP_URL', false)) {

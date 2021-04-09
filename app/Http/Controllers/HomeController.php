@@ -35,7 +35,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $data = WebsiteData::getOptions();
         $seoTitle = $data['title'];
@@ -45,7 +45,8 @@ class HomeController extends Controller
         $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
 
         if (Domain::getSubdomain()) {
-            return view('home-subdomain', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
+            $getData = $request->all();
+            return view('home-subdomain', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin', 'getData'));
         } else {
             $subdomains = [];
             foreach (Domain::all() as $domain) {

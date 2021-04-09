@@ -65,6 +65,7 @@ Route::middleware('auth')->namespace('Api')->group(function () {
 
     Route::get('languages/{id}', 'LanguagesController@get');
     Route::put('languages/{id}', 'LanguagesController@update');
+
 });
 
 Route::group(['namespace' => 'Api'], function() {
@@ -75,6 +76,7 @@ Route::group(['namespace' => 'Api'], function() {
     Route::post('/property/querySort', 'PropertyController@querySort');
     Route::post('/property/initMap', 'PropertyController@initMap');
     Route::post('/property/list', 'PropertyController@listUpdate');
+    Route::post('search/tooltip', 'PostcodeController@query');
 });
 
 Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {

@@ -31,50 +31,7 @@
                                 <div>
                                     <PropertyListItem v-for="(item, index) in property" :key="'prop-id-'+index+'-'+item.id" :item="item" :active="activeItems[index]" :index="index" :ref="'listItem' + item.id" @click.native="goToMap(item, index)" @favsUpdated="updateFavCount"/>
                                 </div>
-                                <div class="load-block-content first-load-block-content">
-                                    <div class="load-block-item">
-                                        <div class="load-block big-load-block">
-                                            <div class="left-part images-block recast">
-                                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <rect width="32" height="32" rx="2" fill="#EDEDEF"></rect>
-                                                    <path d="M10 19L4 27H28L21 16L15 24L10 19Z" fill="#D8D8D8"></path>
-                                                </svg>
-                                            </div>
-                                            <div class="load-main-block">
-                                                <div class="middle-part">
-                                                    <div class="top-block">
-                                                        <div class="middle-gray-block bg height-item margin-bottom recast"></div>
-                                                        <div class="short-gray-block bg height-item recast"></div>
-                                                    </div>
-                                                    <div class="bottom-block">
-                                                        <div class="circle-gray-block bg margin-right recast"></div>
-                                                        <div class="circle-gray-block bg margin-right recast"></div>
-                                                        <div class="circle-gray-block bg margin-right recast"></div>
-                                                        <div class="circle-gray-block bg recast"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="right-part">
-                                                    <div class="right-left">
-                                                        <div class="long-gray-block bg height-item margin-bottom recast"></div>
-                                                        <div class="long-gray-block bg height-item margin-bottom recast"></div>
-                                                        <div class="long-gray-block bg height-item margin-bottom recast"></div>
-                                                        <div class="long-gray-block bg height-item margin-bottom recast"></div>
-                                                        <div class="long-gray-block bg height-item margin-bottom recast"></div>
-                                                        <div class="long-gray-block bg height-item"></div>
-                                                    </div>
-                                                    <div class="right-right">
-                                                        <div class="rectangle-content">
-                                                            <div class="rectangle-block bg recast"></div>
-                                                        </div>
-                                                        <div class="circle-content">
-                                                            <div class="circle-gray-block bg recast"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <ItemLoading first="true" />
 
                                 <div class="load-all-objects" v-if="loadingData" @click.prevent="loadMore">
                                     <div class="load-all">
@@ -508,450 +465,15 @@
                 </div>
 
                 <div class="container">
-                    <div class="ad-block">
-                        <div class="avatar-block">
-                            <div class="avatar">
-                                <div class="img-container"><img src="/img/avatar.png" alt=""></div>
-                                <div class="name">Anna Shpitz</div>
-                            </div>
-                            <div class="rating">
-                                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0)">
-                                        <path d="M5.00026 8.1433L2.27519 9.96001C2.10395 10.0742 1.87831 9.93197 1.90742 9.72823L2.36677 6.51275L0.0700009 4.21598C-0.0687343 4.07724 0.0104586 3.83966 0.204688 3.81192L3.40556 3.35465L4.78142 0.144305C4.86388 -0.0481016 5.13665 -0.0481016 5.21911 0.144305L6.59497 3.35465L9.79584 3.81192C9.99007 3.83966 10.0693 4.07724 9.93053 4.21598L7.63376 6.51275L8.09311 9.72823C8.12221 9.93197 7.89658 10.0742 7.72534 9.96001L5.00026 8.1433Z" fill="#F5C61C"/>
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0">
-                                            <rect width="10" height="10" fill="white"/>
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0)">
-                                        <path d="M5.00026 8.1433L2.27519 9.96001C2.10395 10.0742 1.87831 9.93197 1.90742 9.72823L2.36677 6.51275L0.0700009 4.21598C-0.0687343 4.07724 0.0104586 3.83966 0.204688 3.81192L3.40556 3.35465L4.78142 0.144305C4.86388 -0.0481016 5.13665 -0.0481016 5.21911 0.144305L6.59497 3.35465L9.79584 3.81192C9.99007 3.83966 10.0693 4.07724 9.93053 4.21598L7.63376 6.51275L8.09311 9.72823C8.12221 9.93197 7.89658 10.0742 7.72534 9.96001L5.00026 8.1433Z" fill="#F5C61C"/>
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0">
-                                            <rect width="10" height="10" fill="white"/>
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0)">
-                                        <path d="M5.00026 8.1433L2.27519 9.96001C2.10395 10.0742 1.87831 9.93197 1.90742 9.72823L2.36677 6.51275L0.0700009 4.21598C-0.0687343 4.07724 0.0104586 3.83966 0.204688 3.81192L3.40556 3.35465L4.78142 0.144305C4.86388 -0.0481016 5.13665 -0.0481016 5.21911 0.144305L6.59497 3.35465L9.79584 3.81192C9.99007 3.83966 10.0693 4.07724 9.93053 4.21598L7.63376 6.51275L8.09311 9.72823C8.12221 9.93197 7.89658 10.0742 7.72534 9.96001L5.00026 8.1433Z" fill="#F5C61C"/>
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0">
-                                            <rect width="10" height="10" fill="white"/>
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0)">
-                                        <path d="M5.00026 8.1433L2.27519 9.96001C2.10395 10.0742 1.87831 9.93197 1.90742 9.72823L2.36677 6.51275L0.0700009 4.21598C-0.0687343 4.07724 0.0104586 3.83966 0.204688 3.81192L3.40556 3.35465L4.78142 0.144305C4.86388 -0.0481016 5.13665 -0.0481016 5.21911 0.144305L6.59497 3.35465L9.79584 3.81192C9.99007 3.83966 10.0693 4.07724 9.93053 4.21598L7.63376 6.51275L8.09311 9.72823C8.12221 9.93197 7.89658 10.0742 7.72534 9.96001L5.00026 8.1433Z" fill="#F5C61C"/>
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0">
-                                            <rect width="10" height="10" fill="white"/>
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0)">
-                                        <path d="M5.00026 8.1433L2.27519 9.96001C2.10395 10.0742 1.87831 9.93197 1.90742 9.72823L2.36677 6.51275L0.0700009 4.21598C-0.0687343 4.07724 0.0104586 3.83966 0.204688 3.81192L3.40556 3.35465L4.78142 0.144305C4.86388 -0.0481016 5.13665 -0.0481016 5.21911 0.144305L6.59497 3.35465L9.79584 3.81192C9.99007 3.83966 10.0693 4.07724 9.93053 4.21598L7.63376 6.51275L8.09311 9.72823C8.12221 9.93197 7.89658 10.0742 7.72534 9.96001L5.00026 8.1433Z" fill="#F5C61C"/>
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0">
-                                            <rect width="10" height="10" fill="white"/>
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="ad-content">
-                            <div class="ad-text">
-                                <div class="title">Ничего не нашли? Сложно подобрать проживание?</div>
-                                <div class="subtitle">Мы подберем для вас проживыание возле вашей стройки)</div>
-                                <div class="usual-text">Свободное размещение прямо сейчас, мы работаем 24/7</div>
-                            </div>
-                            <div class="request">
-                                <a class="request-item" href="#">Оставте заявку</a>
-                                <a href="tel:+49 341 1234 2223" class="number-phone">+49 341 1234 2223</a>
-                                <div class="text">Текст в одну строку</div>
-                            </div>
-                        </div>
-                    </div>
+                    <PromoBlock v-if="false" />
                 </div>
 
-
-                <div class="alternative-classifieds">
+                <div class="alternative-classifieds" v-if="this.nodist && this.propertyAlt.length">
                     <div class="property not-map">
                     <div class="container">
                         <div class="title-text">Alternative Anzeigen in der Umgebung</div>
                         <div class="alternative-classifieds-content">
-
-                            <div class="property-card">
-                                <div class="property-card-container">
-                                    <div class="photo-container">
-                                        <div class="no-photo-block" style="position: relative;">
-                                            <div class="no-photo">
-                                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect data-v-34e492aa="" width="32" height="32" rx="2" fill="#EDEDEF"></rect> <path data-v-34e492aa="" d="M10 19L4 27H28L21 16L15 24L10 19Z" fill="#D8D8D8"></path></svg>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="data">
-                                        <a href="#" class="title">
-                                            <span>GRONERS Leipzig</span>
-                                        </a>
-                                        <div class="data-item">
-                                            <div>
-                                                <div class="geolocation">
-                                                    <img src="/svg/i-pin.svg" alt="">
-                                                    <span>4109</span>,
-                                                    <span>Leipzig</span>
-                                                </div>
-                                                <div class="humans">
-                                                    <img src="/svg/i-people.svg" alt="">
-                                                    26 person
-                                                </div>
-                                                <div class="distance">
-                                                    <img src="/svg/i-distance.svg" alt="">
-                                                    1km ab &nbsp;
-                                                    <span class="desctop-span">your addresses</span>
-                                                    <span class="mobile-span">your addr.</span>
-                                                </div>
-                                            </div>
-                                            <div class="additionally">
-                                                <div class="shower data-block-oval">
-                                                    <img data-v-5314462e="" src="/svg/i-shower.svg">
-                                                    private shower
-                                            </div>
-                                            <div class="kitchen data-block-oval">
-                                                <img src="/svg/i-canteen.svg">
-                                                <span class="property-title">shared kitchen</span>
-                                            </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="table-container">
-                                        <div class="type">
-                                            <div class="thead">
-                                                <div class="title">Art</div>
-                                                <div class="title">Anzahl</div>
-                                                <div class="title">Personen</div>
-                                                <div class="title">Preis</div>
-                                            </div>
-                                            <div class="visible-part">
-                                                <div class="type-block filling-block">
-                                                    <img src="/svg/i-two.svg" alt="doppelt">
-                                                    <span data-v-153146e4=""> Double room </span>
-                                                </div>
-                                                <div class="type-block quantity-block">1</div>
-                                                <div class="type-block personen-block">2</div>
-                                                <div class="type-block price-block">
-                                                    <b>12€</b>/Personen
-                                                </div>
-                                            </div>
-                                            <div class="visible-part">
-                                                <div class="type-block filling-block">
-                                                    <img src="/svg/i-one.svg" alt="einzel">
-                                                    <span data-v-153146e4=""> Single room </span>
-                                                </div>
-                                                <div class="type-block quantity-block">1</div>
-                                                <div class="type-block personen-block">1</div>
-                                                <div class="type-block price-block">
-                                                    <b>12€</b>/Personen
-                                                </div>
-                                            </div>
-                                            <div class="visible-part">
-                                                <div class="type-block filling-block">
-                                                    <img src="/svg/i-one.svg" alt="einzel">
-                                                    <span> Single room </span>
-                                                </div>
-                                                <div class="type-block quantity-block">1</div>
-                                                <div class="type-block personen-block">1</div>
-                                                <div class="type-block price-block">
-                                                    <b>12€</b>/Personen
-                                                </div>
-                                            </div>
-                                            <div class="visible-part">
-                                                <div class="type-block filling-block">
-                                                    <img src="/svg/i-one.svg" alt="einzel">
-                                                    <span> Single room </span>
-                                                </div>
-                                                <div class="type-block quantity-block">1</div>
-                                                <div class="type-block personen-block">1</div>
-                                                <div class="type-block price-block">
-                                                    <b data-v-153146e4="">12€</b>/Personen
-                                                </div>
-                                            </div>
-                                            <div class="visible-part">
-                                                <div class="type-block filling-block">
-                                                    <img src="/svg/i-one.svg" alt="einzel">
-                                                    <span> Single room </span>
-                                                </div>
-                                                <div class="type-block quantity-block">1</div>
-                                                <div class="type-block personen-block">1</div>
-                                                <div class="type-block price-block">
-                                                    <b>12€</b>/Personen
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="type fade collapse" style="" id="id-666">
-                                            <div class="visible-part not-visible-part">
-                                                <div class="type-block filling-block">
-                                                    <img src="/svg/i-one.svg" alt="einzel">
-                                                    <span> Single room </span>
-                                                </div>
-                                                <div class="type-block quantity-block">1</div>
-                                                <div class="type-block personen-block">1</div>
-                                                <div class="type-block price-block">
-                                                    <b data-v-153146e4="">12€</b>/Personen
-                                                </div>
-                                            </div>
-                                            <div class="visible-part not-visible-part">
-                                                <div class="type-block filling-block">
-                                                    <img src="/svg/i-one.svg" alt="einzel">
-                                                    <span> Single room </span>
-                                                </div>
-                                                <div class="type-block quantity-block">1</div>
-                                                <div class="type-block personen-block">1</div>
-                                                <div class="type-block price-block">
-                                                    <b>12€</b>/Personen
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a data-v-153146e4="" href="#id-666" aria-controls="id-10" role="button" aria-expanded="false" data-toggle="collapse" class="all-types collapsed">
-                                            <svg data-v-153146e4="" width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path data-v-153146e4="" fill-rule="evenodd" clip-rule="evenodd" d="M7 1.5C6.72386 1.5 6.5 1.72386 6.5 2V6H2.5C2.22386 6 2 6.22386 2 6.5C2 6.77614 2.22386 7 2.5 7H6.5V11C6.5 11.2761 6.72386 11.5 7 11.5C7.27614 11.5 7.5 11.2761 7.5 11V7H11.5C11.7761 7 12 6.77614 12 6.5C12 6.22386 11.7761 6 11.5 6H7.5V2C7.5 1.72386 7.27614 1.5 7 1.5Z" fill="#7A8793"></path>
-                                            </svg>
-                                            <span data-v-153146e4="">Alle Einrichtungen anzeigen</span>
-                                        </a>
-                                    </div>
-
-                                    <div class="night-rating-block">
-                                        <div class="night">
-                                            <a href="#" class="favorites">
-                                                <svg width="12" height="11" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="favorites-usual">
-                                                    <path data-v-7d501b5c="" d="M11.6211 5.98172C12.6977 4.8747 12.6977 3.07667 11.6211 1.96965C10.5487 0.867074 8.8134 0.867074 7.74102 1.96965L7.20482 2.52096C7.09263 2.6363 6.90737 2.6363 6.79518 2.52096L6.25898 1.96965C5.1866 0.867074 3.45132 0.867074 2.37895 1.96965C1.30226 3.07667 1.30226 4.8747 2.37895 5.98172L7 10.7329L11.6211 5.98172ZM7.33139 1.57124C8.62813 0.237973 10.7339 0.237973 12.0307 1.57124C13.3231 2.90006 13.3231 5.05131 12.0307 6.38013L7.20482 11.3419C7.09263 11.4573 6.90737 11.4573 6.79518 11.3419L1.96932 6.38013C0.676895 5.05131 0.676895 2.90006 1.96932 1.57124C3.26606 0.237973 5.37187 0.237973 6.66861 1.57124L7 1.91196L7.33139 1.57124Z" fill="#333646" stroke="#333646" stroke-width="0.2"></path>
-                                                </svg>
-                                                <svg width="14" height="11" fill="none" xmlns="http://www.w3.org/2000/svg" class="favorites-active">
-                                                    <path data-v-7d501b5c="" d="M12.1 1.5c-.6-.7-1.5-1-2.4-1-.9 0-1.8.4-2.4 1l-.3.3-.3-.3C6.1.8 5.2.5 4.3.5c-.9 0-1.8.4-2.4 1C.6 2.9.6 5.1 1.9 6.4l4.8 5c.1.1.2.1.3.1.1 0 .2 0 .3-.1l4.8-5c1.3-1.3 1.3-3.5 0-4.9z" fill="#EE483F"></path>
-                                                </svg>
-                                            </a>
-                                            <div class="price">
-                                                <span class="price-span">ab €12</span>
-                                                <span class="night-span">Nacht</span>
-                                            </div>
-                                            <div class="price-free"></div>
-                                        </div>
-                                        <div class="rating">
-                                            <a href="#" class="collapse-circle">
-                                                <svg width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg" class="minus">
-                                                    <rect x="12" width="2" height="12" rx="1" transform="rotate(90 12 0)" fill="#DF9D3C"></rect>
-                                                </svg>
-                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="plus">
-                                                    <g clip-path="url(#clip0)">
-                                                        <rect x="12" y="5" width="2" height="12" rx="1" transform="rotate(90 12 5)" fill="#545769"></rect>
-                                                        <rect x="5" width="2" height="12" rx="1" fill="#545769"></rect>
-                                                    </g>
-                                                    <defs>
-                                                        <clipPath id="clip0">
-                                                            <rect width="12" height="12" fill="white"></rect>
-                                                        </clipPath>
-                                                    </defs>
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="property-card">
-                                <div class="property-card-container">
-                                    <div class="photo-container">
-                                        <div class="main-small-slider" style="position: relative;">
-                                            <div class="property-card-slider">
-                                                <img src="/img/254603095.jpg" alt="">
-                                                <img src="/img/254606753.jpg" alt="">
-                                                <img src="/img/254606775.jpg" alt="">
-                                                <img src="/img/254606895.jpg" alt="">
-                                                <img src="/img/254610021.jpg" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="data">
-                                        <a href="#" class="title">
-                                            <span>GRONERS Leipzig</span>
-                                        </a>
-                                        <div class="data-item">
-                                            <div>
-                                                <div class="geolocation">
-                                                    <img src="/svg/i-pin.svg" alt="">
-                                                    <span>4109</span>,
-                                                    <span>Leipzig</span>
-                                                </div>
-                                                <div class="humans">
-                                                    <img src="/svg/i-people.svg" alt="">
-                                                    26 person
-                                                </div>
-                                                <div class="distance">
-                                                    <img src="/svg/i-distance.svg" alt="">
-                                                    1km ab &nbsp;
-                                                    <span class="desctop-span">your addresses</span>
-                                                    <span class="mobile-span">your addr.</span>
-                                                </div>
-                                            </div>
-                                            <div class="additionally">
-                                                <div class="shower data-block-oval">
-                                                    <img data-v-5314462e="" src="/svg/i-shower.svg">
-                                                    private shower
-                                                </div>
-                                                <div class="kitchen data-block-oval">
-                                                    <img src="/svg/i-canteen.svg">
-                                                    <span class="property-title">shared kitchen</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="table-container">
-                                        <div class="type">
-                                            <div class="thead">
-                                                <div class="title">Art</div>
-                                                <div class="title">Anzahl</div>
-                                                <div class="title">Personen</div>
-                                                <div class="title">Preis</div>
-                                            </div>
-                                            <div class="visible-part">
-                                                <div class="type-block filling-block">
-                                                    <img src="/svg/i-two.svg" alt="doppelt">
-                                                    <span data-v-153146e4=""> Double room </span>
-                                                </div>
-                                                <div class="type-block quantity-block">1</div>
-                                                <div class="type-block personen-block">2</div>
-                                                <div class="type-block price-block">
-                                                    <b>12€</b>/Personen
-                                                </div>
-                                            </div>
-                                            <div class="visible-part">
-                                                <div class="type-block filling-block">
-                                                    <img src="/svg/i-one.svg" alt="einzel">
-                                                    <span data-v-153146e4=""> Single room </span>
-                                                </div>
-                                                <div class="type-block quantity-block">1</div>
-                                                <div class="type-block personen-block">1</div>
-                                                <div class="type-block price-block">
-                                                    <b>12€</b>/Personen
-                                                </div>
-                                            </div>
-                                            <div class="visible-part">
-                                                <div class="type-block filling-block">
-                                                    <img src="/svg/i-one.svg" alt="einzel">
-                                                    <span> Single room </span>
-                                                </div>
-                                                <div class="type-block quantity-block">1</div>
-                                                <div class="type-block personen-block">1</div>
-                                                <div class="type-block price-block">
-                                                    <b>12€</b>/Personen
-                                                </div>
-                                            </div>
-                                            <div class="visible-part">
-                                                <div class="type-block filling-block">
-                                                    <img src="/svg/i-one.svg" alt="einzel">
-                                                    <span> Single room </span>
-                                                </div>
-                                                <div class="type-block quantity-block">1</div>
-                                                <div class="type-block personen-block">1</div>
-                                                <div class="type-block price-block">
-                                                    <b data-v-153146e4="">12€</b>/Personen
-                                                </div>
-                                            </div>
-                                            <div class="visible-part">
-                                                <div class="type-block filling-block">
-                                                    <img src="/svg/i-one.svg" alt="einzel">
-                                                    <span> Single room </span>
-                                                </div>
-                                                <div class="type-block quantity-block">1</div>
-                                                <div class="type-block personen-block">1</div>
-                                                <div class="type-block price-block">
-                                                    <b>12€</b>/Personen
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="type fade collapse" style="" id="id-999">
-                                            <div class="visible-part not-visible-part">
-                                                <div class="type-block filling-block">
-                                                    <img src="/svg/i-one.svg" alt="einzel">
-                                                    <span> Single room </span>
-                                                </div>
-                                                <div class="type-block quantity-block">1</div>
-                                                <div class="type-block personen-block">1</div>
-                                                <div class="type-block price-block">
-                                                    <b data-v-153146e4="">12€</b>/Personen
-                                                </div>
-                                            </div>
-                                            <div class="visible-part not-visible-part">
-                                                <div class="type-block filling-block">
-                                                    <img src="/svg/i-one.svg" alt="einzel">
-                                                    <span> Single room </span>
-                                                </div>
-                                                <div class="type-block quantity-block">1</div>
-                                                <div class="type-block personen-block">1</div>
-                                                <div class="type-block price-block">
-                                                    <b>12€</b>/Personen
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a data-v-153146e4="" href="#id-999" aria-controls="id-10" role="button" aria-expanded="false" data-toggle="collapse" class="all-types collapsed">
-                                            <svg data-v-153146e4="" width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path data-v-153146e4="" fill-rule="evenodd" clip-rule="evenodd" d="M7 1.5C6.72386 1.5 6.5 1.72386 6.5 2V6H2.5C2.22386 6 2 6.22386 2 6.5C2 6.77614 2.22386 7 2.5 7H6.5V11C6.5 11.2761 6.72386 11.5 7 11.5C7.27614 11.5 7.5 11.2761 7.5 11V7H11.5C11.7761 7 12 6.77614 12 6.5C12 6.22386 11.7761 6 11.5 6H7.5V2C7.5 1.72386 7.27614 1.5 7 1.5Z" fill="#7A8793"></path>
-                                            </svg>
-                                            <span data-v-153146e4="">Alle Einrichtungen anzeigen</span>
-                                        </a>
-                                    </div>
-
-                                    <div class="night-rating-block">
-                                        <div class="night">
-                                            <a href="#" class="favorites">
-                                                <svg width="12" height="11" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="favorites-usual">
-                                                    <path data-v-7d501b5c="" d="M11.6211 5.98172C12.6977 4.8747 12.6977 3.07667 11.6211 1.96965C10.5487 0.867074 8.8134 0.867074 7.74102 1.96965L7.20482 2.52096C7.09263 2.6363 6.90737 2.6363 6.79518 2.52096L6.25898 1.96965C5.1866 0.867074 3.45132 0.867074 2.37895 1.96965C1.30226 3.07667 1.30226 4.8747 2.37895 5.98172L7 10.7329L11.6211 5.98172ZM7.33139 1.57124C8.62813 0.237973 10.7339 0.237973 12.0307 1.57124C13.3231 2.90006 13.3231 5.05131 12.0307 6.38013L7.20482 11.3419C7.09263 11.4573 6.90737 11.4573 6.79518 11.3419L1.96932 6.38013C0.676895 5.05131 0.676895 2.90006 1.96932 1.57124C3.26606 0.237973 5.37187 0.237973 6.66861 1.57124L7 1.91196L7.33139 1.57124Z" fill="#333646" stroke="#333646" stroke-width="0.2"></path>
-                                                </svg>
-                                                <svg width="14" height="11" fill="none" xmlns="http://www.w3.org/2000/svg" class="favorites-active">
-                                                    <path data-v-7d501b5c="" d="M12.1 1.5c-.6-.7-1.5-1-2.4-1-.9 0-1.8.4-2.4 1l-.3.3-.3-.3C6.1.8 5.2.5 4.3.5c-.9 0-1.8.4-2.4 1C.6 2.9.6 5.1 1.9 6.4l4.8 5c.1.1.2.1.3.1.1 0 .2 0 .3-.1l4.8-5c1.3-1.3 1.3-3.5 0-4.9z" fill="#EE483F"></path>
-                                                </svg>
-                                            </a>
-                                            <div class="price">
-                                                <span class="price-span">ab €12</span>
-                                                <span class="night-span">Nacht</span>
-                                            </div>
-                                            <div class="price-free"></div>
-                                        </div>
-                                        <div class="rating">
-                                            <a href="#" class="collapse-circle">
-                                                <svg width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg" class="minus">
-                                                    <rect x="12" width="2" height="12" rx="1" transform="rotate(90 12 0)" fill="#DF9D3C"></rect>
-                                                </svg>
-                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="plus">
-                                                    <g clip-path="url(#clip0)">
-                                                        <rect x="12" y="5" width="2" height="12" rx="1" transform="rotate(90 12 5)" fill="#545769"></rect>
-                                                        <rect x="5" width="2" height="12" rx="1" fill="#545769"></rect>
-                                                    </g>
-                                                    <defs>
-                                                        <clipPath id="clip0">
-                                                            <rect width="12" height="12" fill="white"></rect>
-                                                        </clipPath>
-                                                    </defs>
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
+                            <PropertyListItem v-for="(item, index) in propertyAlt" :key="'prop-id-'+index+'-'+item.id" :item="item" :active="activeItems[index]" :index="index" :ref="'listItem' + item.id" @click.native="goToMap(item, index)" @favsUpdated="updateFavCount"/>
                         </div>
                     </div>
                     </div>
@@ -992,16 +514,25 @@
 
 import ApiRequest from "../API/ApiRequest";
 import PropertyListItem from "./PropertyListItem";
+import ItemLoading from "./partials/ItemLoading";
 
 import styles from '../Data/mapStyle';
 import popupInit from '../Data/mapMarker';
+import PromoBlock from "./partials/PromoBlock";
 let PropertyRequest = ApiRequest('property')
 let properties = new PropertyRequest;
 
+let search = document.location.search.substr(1).split('&').map( item => item.split('=') );
+let searchLine = {};
+
+for (let i in search) {
+    searchLine[ search[i][0] ] = search[i][1]
+}
+
 let newSearch = {
-    address: '',
-    km: '30',
-    people: '2',
+    address: searchLine.address || '',
+    distance: searchLine.distance || '30',
+    people: searchLine.person || '2',
     single: false,
     double: false,
     multi: false,
@@ -1011,7 +542,9 @@ let newSearch = {
 export default {
     name: 'app',
     components: {
-        PropertyListItem
+        PromoBlock,
+        PropertyListItem,
+        ItemLoading
     },
     data() {
         return {
@@ -1020,8 +553,10 @@ export default {
             loadingData: false,
             endoflist: false,
             property: [],
+            propertyAlt: [],
             page: 1,
             nocity: 0,
+            nodist: 0,
             additional_load: true,
             coords_load: [],
             additional_pages: true,
@@ -1046,7 +581,7 @@ export default {
             this.search.people = jQuery('#number-personse').val()
         })
         jQuery('#distance-select').change( (e) => {
-            this.search.km = jQuery('#distance-select').val()
+            this.search.distance = jQuery('#distance-select').val()
         })
         jQuery('#text').on('input', (e) => {
             this.search.address = jQuery('#text').val()
@@ -1100,6 +635,20 @@ export default {
         });
         jQuery(window).scroll( () => {
             this.lazySearch()
+        })
+
+        let timer = null;
+        jQuery('[name="address"]').on('input', function (e) {
+            console.log(e.target.value);
+            if (timer) {
+                clearTtimeout(timer);
+            }
+            timer = setTimeout( () => {
+                axios.post('/api/search/tooltip', { input: e.target.value})
+                    .then( (resp) => {
+                        that.searchRes = resp.data
+                    })
+            })
         })
     },
     methods: {
@@ -1213,7 +762,6 @@ export default {
             jQuery('html, body').animate({scrollTop: window.scrollY + rect.top - 200}, 200);
         },
         login(e) {
-            console.log(this.$auth);
             e.preventDefault();
             let res = true;
             jQuery('.modal-form.login input').each(function() {
@@ -1250,7 +798,9 @@ export default {
                 this.nocity = 0;
                 this.additional_load = true;
                 this.endoflist = false;
+                this.nodist = 0;
                 this.property = [];
+                this.propertyAlt = [];
             } else {
                 this.page += 1;
             }
@@ -1258,16 +808,29 @@ export default {
             this.loadingData = true;
             let that = this;
 
-           properties.request('queryFilter', this.search, 'post', { page: this.page, nocity: this.nocity })
+            let search = { ...this.search };
+            search.distance = this.nodist ? search.distance : 60;
+
+           properties.request('queryFilter', this.search, 'post', { page: this.page, nocity: this.nocity, nodist: this.nodist})
                 .then( resp => {
-                    that.property = that.property.concat(resp.data.objects.data);
+                    if (!this.nodist) {
+                        that.property = that.property.concat(resp.data.objects.data);
+                    } else {
+                        that.propertyAlt = resp.data.objects.data;
+                    }
+
                     that.page = resp.data.objects.current_page;
                     that.additional_pages = resp.data.current_page < resp.data.last_page;
                     that.loadingData = false;
                     that.loading = false;
                     if (resp.data.objects.current_page  >= resp.data.objects.last_page) {
                         if (that.additional_load === false) {
-                            that.endoflist = true;
+                            if (this.nodist === 0 ) {
+                                that.nodist = 1;
+                            } else {
+                                that.endoflist = true;
+                            }
+
                         }
                         that.additional_load = false;
                         that.page = 0;
