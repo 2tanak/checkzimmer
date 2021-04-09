@@ -34,7 +34,7 @@
                 <div class="input-block sample-block-item">
                     <label for="text">{{ __($options['label_input'] ?? '' ) }}</label>
                     <div class="input-container">
-                        <input id="text" name="address" type="text" placeholder="{{  __($options['placeholder'] ?? '' ) }}" value="{{ $getData['address'] ?? '' }}">
+                        <input id="text" name="address" type="text" autocomplete="off" placeholder="{{  __($options['placeholder'] ?? '' ) }}" value="{{ $getData['address'] ?? '' }}">
                     </div>
 
                     <div class="result-search">
