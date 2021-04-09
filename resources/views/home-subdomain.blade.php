@@ -29,6 +29,8 @@
         </a>
         <h1 class="list-title">{{ __($domain->tagline()) }}</h1>
 
+        <form class="find-subdomain-redirect" method="POST">
+            @csrf
         <div class="container">
             <div class="sample-block">
                 <div class="input-block sample-block-item">
@@ -83,6 +85,7 @@
                 </div>
             </div>
         </div>
+        </form>
     </div>
     <div id="application" class="init-container">
 
