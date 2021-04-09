@@ -62,13 +62,13 @@ export default {
             }, 1000)
         })
         jQuery('.result-search').on('click', 'ul li', function(e) {
-            let type = jQuery(this).attr('type');
+            let type = jQuery(e.target).attr('type');
             if (!type) {
                 jQuery('.result-search').removeClass('active');
                 return;
             }
-            let domain = jQuery(this).attr('domain');
-            let value = jQuery(this).attr('value');
+            let domain = jQuery(e.target).attr('domain');
+            let value = jQuery(e.target).attr('value');
             jQuery('form input[name="address"]').val(value);
             jQuery('form input[name="address"]').attr('type', type);
             jQuery('form input[name="address"]').attr('domain', domain);

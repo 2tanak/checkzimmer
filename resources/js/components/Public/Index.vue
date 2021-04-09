@@ -605,30 +605,7 @@ export default {
         });
 
         this.submitForm(true);
-        /*properties.byPage(1)
-            .then( resp => {
-                this.property = resp.data.objects.data;
-                this.property.forEach((item,index) => this.activeItems[index] = false);
 
-                this.loading = false;
-
-                if (resp.data.current_page < resp.data.objects.last_page) {
-                    that.additional_pages = true;
-                } else {
-                    that.additional_pages = false;
-                }
-                that.favoritesDisplay();
-                that.foundTotal();
-                that.initMap();
-            })*/
-
-        /*
-        jQuery('body').on('click', 'a.collapse-circle', function(e) {
-            e.preventDefault();
-            let parent = jQuery(this).closest('.property-card');
-            jQuery(parent).toggleClass('collapse-item');
-            jQuery(this).toggleClass('active');
-        });*/
         jQuery('body').on('click', 'a.favorites', function(e) {
             e.preventDefault();
             jQuery(this).toggleClass('active');
@@ -638,17 +615,72 @@ export default {
         })
 
         let timer = null;
-        jQuery('[name="address"]').on('input', function (e) {
-            console.log(e.target.value);
+        jQuery('[name="address"]').on('focus', () => {
+            let item = jQuery('.result-search ul li:first-child');
+            if (jQuery(item).attr('type')) {
+                jQuery('.result-search').addClass('active');
+            }
+        });
+        jQuery('[name="address"]').on('input', (e) => {
+            if (e.target.value.length < 3) {
+                return;
+            }
             if (timer) {
-                clearTtimeout(timer);
+                clearTimeout(timer);
             }
             timer = setTimeout( () => {
-                axios.post('/api/search/tooltip', { input: e.target.value})
+                timer = null;
+                // ToDo: geocode address in not postcode or city
+                // ToDo: check distances for city and postcode in case ciy does not have a domain
+                axios.post('/search/tooltip', { input: e.target.value})
                     .then( (resp) => {
-                        that.searchRes = resp.data
+                        that.searchRes = resp.data;
+                        if (that.searchRes.length === 0) {
+                            jQuery('.result-search ul').html('<li>' + that.$t('No results found') + '</li>');
+                            jQuery('.result-search').addClass('active');
+                            return;
+                        }
+                        let str = [];
+                        for (let i in that.searchRes) {
+                            let value = that.searchRes[i]['type'] === 'code' ? that.searchRes[i]['code'] : '';
+                            let line = `<li type="${that.searchRes[i]['type']}" domain="${that.searchRes[i]['domain']}" value="${value}">${that.searchRes[i]['text']}</li>`;
+                            str.push(line)
+                        }
+                        jQuery('.result-search ul').html(str);
+                        jQuery('.result-search').addClass('active');
                     })
-            })
+            }, 1000)
+        })
+        jQuery('.result-search').on('click', 'ul li', (e) => {
+            let type = jQuery(e.target).attr('type');
+            console.log(type);
+            if (!type) {
+                jQuery('.result-search').removeClass('active');
+                return;
+            }
+            let domain = jQuery(e.target).attr('domain');
+            let value = jQuery(e.target).attr('value');
+
+            jQuery('form input[name="address"]').val(value);
+            jQuery('form input[name="address"]').attr('type', type);
+            jQuery('form input[name="address"]').attr('domain', domain);
+            let subdomain = domain.split('//')[1].split('.')[0];
+            let current = document.location.hostname.split('.')[0];
+            if (current !== subdomain) {
+                //console.log(domain + '/?' + jQuery('form.find-subdomain-redirect').serialize().replace(/_token=.*?&/, ''));
+                document.location = domain + '/?' + jQuery('form.find-subdomain-redirect').serialize().replace(/_token=.*?&/, '');
+            } else {
+                this.search.address = value;
+                jQuery('.result-search').removeClass('active');
+                this.submitForm(true);
+            }
+
+        })
+        jQuery('body').on('click', (e) => {
+            if (jQuery(e.target).closest('.result-search').length === 0 && jQuery(e.target).closest('form').length === 0) {
+                jQuery('.result-search').removeClass('active');
+            }
+
         })
     },
     methods: {
@@ -717,7 +749,6 @@ export default {
             }
         },
         goToMap(item, index) {
-            console.log(jQuery('.popup-bubble[data-id="' + item.id + '"]'));
             this.setActiveProperty(index);
             this.map.setCenter({ lat: parseFloat(item.lat), lng: parseFloat(item.lng)});
             setTimeout(() => {
