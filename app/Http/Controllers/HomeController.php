@@ -7,6 +7,7 @@ use App\FeatureCategory;
 use App\Http\Requests\InquiryFormRequest;
 use App\Notifications\InquiryHotel;
 use App\Option;
+use App\Page;
 use App\Property;
 use App\Services\GeocoderService;
 use App\Services\WebsiteData;
@@ -201,6 +202,15 @@ class HomeController extends Controller
         } else {
             return response()->json(['code' => 'error']);
         }
+    }
+    public function singlePage($page) {
+        $data = WebsiteData::getOptions();
+        $seoTitle = $data['title'];
+        $seoDescription = $data['description'];
+        $options = $data['options'];
+        $page = Page::where('slug', $page)->first();
+        $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
+        return view('page', compact('page', 'seoDescription', 'seoTitle', 'options', 'phoneNumAdmin'));
     }
     public function checkRecaptha($response)
     {

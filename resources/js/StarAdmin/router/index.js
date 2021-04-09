@@ -55,6 +55,8 @@ import BookingItems from '../../components/Dashboard/Booking/Items/Index';
 import BookingMapping from '../../components/Dashboard/Booking/Mapping/Index';
 import BookingData from '../../components/Dashboard/Booking/Data/Index';
 import BookingSettings from '../../components/Dashboard/Booking/Settings/Index';
+import Pages from '../../components/Dashboard/Website/Pages/Index';
+import PageSingle from '../../components/Dashboard/Website/Pages/Single';
 
 Vue.use(Router);
 
@@ -222,6 +224,18 @@ export default new Router({
             path: '/dashboard/feedback/request',
             name: 'request',
             component: Request,
+            meta: { auth: true }
+        },
+        {
+            path: '/dashboard/website/pages',
+            name: 'website-pages',
+            component: Pages,
+            meta: { auth: true }
+        },
+        {
+            path: '/dashboard/website/pages/:page',
+            name: 'website-pages-single',
+            component: PageSingle,
             meta: { auth: true }
         },
         {

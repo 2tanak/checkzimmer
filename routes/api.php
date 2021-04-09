@@ -31,6 +31,7 @@ Route::middleware('auth')->namespace('Api')->group(function () {
     Route::resource('geocode-cache', 'GeocodeCacheController');
     Route::resource('questions', 'QuestionsController');
     Route::resource('reviews', 'ReviewsController');
+    Route::resource('pages', 'PageController');
 
     Route::post('property/query', 'PropertyController@query');
     Route::post('features/language', 'FeaturesController@language');

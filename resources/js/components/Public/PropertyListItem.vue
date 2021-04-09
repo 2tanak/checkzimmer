@@ -1,5 +1,5 @@
 <template>
-    <div :class="{'property-card':true, 'active' : active}" :id="'property-'+item.id">
+    <div :class="{'property-card':true, 'active' : active, 'collapse-item': !status}" :id="'property-'+item.id">
         <div class="property-card-container">
             <ItemPictures :item="item" />
             <div class="data">
@@ -7,7 +7,7 @@
                 <ItemFeatures :item="item" />
             </div>
             <RoomsList :rooms="item.rooms" :item_id="item.id" />
-            <ItemAdditional :item="item" />
+            <ItemAdditional :item="item" :status="status" @collapse="collapseDo"/>
         </div>
     </div>
 </template>
@@ -26,6 +26,7 @@ export default {
         return {
             NoPhoto: false,
             hideAdress: true,
+            status: true
         }
     },
     mounted() {
@@ -72,6 +73,9 @@ export default {
         },
         transFeatureName(item) {
             return item.name
+        },
+        collapseDo() {
+            this.status = !this.status;
         }
     },
     computed: {
