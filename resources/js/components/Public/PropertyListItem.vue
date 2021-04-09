@@ -35,8 +35,9 @@ export default {
     },
     methods: {
         getUrlLangPrefix() {
-            let locale = document.location.pathname.split('/')[1];
-            return locale ? "/" + locale + "/" : "/";
+            let locale = jQuery('html').attr('lang');
+            //temporary solution
+            return locale != 'de' ? "/" + locale + "/" : "/";
         },
         findOptionRoom(room, name) {
             if (!room.options) {
@@ -44,7 +45,9 @@ export default {
             }
             return room.options.find(elem => elem.key === name);
         },
-        addToFavorites() {
+        addToFavorites(e) {
+            e.preventDefault();
+
             let id = this.item.id;
             let favoritesObject = JSON.parse(localStorage.getItem("favoritesList"));
 

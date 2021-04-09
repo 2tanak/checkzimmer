@@ -68,7 +68,9 @@ export default {
             }
             return this.minRoomPrice;
         },
-        addToFavorites() {
+        addToFavorites(e) {
+            e.preventDefault();
+
             let id = this.item.id;
             let favoritesObject = JSON.parse(localStorage.getItem("favoritesList"));
 
