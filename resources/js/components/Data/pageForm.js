@@ -12,6 +12,6 @@ export default {
     text: {
         label: 'Page content',
         placeholder: 'Please enter page content',
-        type: 'textarea',
+        type: 'wysiwyg',
     }
 }

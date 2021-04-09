@@ -14,10 +14,13 @@
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Inter:400,500,600,700&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}?ver={{ time() }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+
 </head>
 <body>
     @yield('content')
     <script src="{{ asset('js/app.js') }}?ver={{ time() }}" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js" defer></script>
     <script>
         (function(w, d, s, h, id) {
             w.roistatProjectId = id; w.roistatHost = h;
