@@ -38,6 +38,11 @@
                             <div class="input-container">
                                 <input id="text" name="address" type="text" placeholder="{{ __('Example') }}: 04315 Leipzig">
                             </div>
+                            <div class="result-search">
+                                <ul>
+                                    <li>Результат</li>
+                                </ul>
+                            </div>
                         </div>
                         <div class="distance-block select-block">
                             <label for="distance-select">{{ __('distance') }}</label>

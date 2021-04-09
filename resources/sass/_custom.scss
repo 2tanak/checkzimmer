@@ -2788,6 +2788,10 @@ header.height-menu .mobile-menu {
         top: 11px;
         left: 17px;
         z-index: 10;
+        color: #333646;
+    }
+    .background-image-block .sample-block .input-block label {
+        left: 20px;
     }
     .background-image-block .sample-block .select-block {
         position: relative;
@@ -3417,10 +3421,6 @@ header.height-menu .mobile-menu {
         -webkit-appearance: none;
         padding-left: 17px;
         padding-top: 10px;
-    }
-    .background-image-block .sample-block label {
-        left: 20px;
-        color: #333646;
     }
     .background-image-block .sample-block .distance-block select {
         padding-left: 12px;
