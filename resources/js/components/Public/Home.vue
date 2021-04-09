@@ -9,17 +9,37 @@ export default {
     name: 'app',
     components: {
     },
-
+    data() {
+        return {
+            searchRes: []
+        }
+    },
     mounted() {
         let that = this;
+        let timer = null;
 
-        jQuery('.entry.login-link').click(function(e) {
+        jQuery('.entry.login-link').click(function (e) {
             that.login(e);
         })
         jQuery('.modal-form.login input').on('input', function() {
             jQuery(this).removeClass('error');
             jQuery(this).closest('.input-block').find('.error-text').removeClass('active')
         });
+        jQuery('[name="address"]').on('input', function (e) {
+            if (e.target.value.length < 3) {
+                return;
+            }
+            if (timer) {
+                clearTimeout(timer);
+            }
+            timer = setTimeout( () => {
+                timer = null;
+                axios.post('/search/tooltip', { input: e.target.value})
+                .then( (resp) => {
+                    that.searchRes = resp.data;
+                })
+            }, 1000)
+        })
 
     },
     methods: {

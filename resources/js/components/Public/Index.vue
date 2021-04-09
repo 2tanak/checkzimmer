@@ -1101,6 +1101,20 @@ export default {
         jQuery(window).scroll( () => {
             this.lazySearch()
         })
+
+        let timer = null;
+        jQuery('[name="address"]').on('input', function (e) {
+            console.log(e.target.value);
+            if (timer) {
+                clearTtimeout(timer);
+            }
+            timer = setTimeout( () => {
+                axios.post('/api/search/tooltip', { input: e.target.value})
+                    .then( (resp) => {
+                        that.searchRes = resp.data
+                    })
+            })
+        })
     },
     methods: {
         lazySearch() {
