@@ -44,7 +44,9 @@ export default {
             }
             return room.options.find(elem => elem.key === name);
         },
-        addToFavorites() {
+        addToFavorites(e) {
+            e.preventDefault();
+
             let id = this.item.id;
             let favoritesObject = JSON.parse(localStorage.getItem("favoritesList"));
 
