@@ -61,6 +61,12 @@ export default {
                 })
             }, 1000)
         })
+        jQuery('[name="address"]').keydown((e) => {
+            if (e.keyCode === 13) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        })
         jQuery('.result-search').on('click', 'ul li', function(e) {
             let type = jQuery(e.target).attr('type');
             if (!type) {

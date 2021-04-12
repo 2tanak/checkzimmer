@@ -597,6 +597,7 @@ export default {
         })
 
         jQuery('.find-housing').click((e) => {
+            e.preventDefault();
             this.submitForm(true);
         });
 
