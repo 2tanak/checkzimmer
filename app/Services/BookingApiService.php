@@ -23,7 +23,12 @@ class BookingApiService
     public function __construct()
     {
         $this->getCredentials();
-        $this->client = new HttpClient(['base_uri' => $this->options['booking_url']]);
+        if (isset($this->options['booking_url'])) {
+            $this->client = new HttpClient(['base_uri' => $this->options['booking_url']]);
+        } else {
+            $this->client = null;
+        }
+
     }
 
     /**

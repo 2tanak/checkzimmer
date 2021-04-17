@@ -75,11 +75,10 @@ class PropertyController extends Controller
         $noCity = $request->query('nocity');
         $noDist = $request->query('nodist') ?? false;
 
-        $address = $data['address'] ?
-            ($subdomain ? $subdomain->city : 'Leipzig').' '.$data['address'] :
-            ($subdomain ? $subdomain->city : 'Leipzig');
+        $city = $subdomain ? $subdomain->city : 'Leipzig';
+        $address = $data['address'] ? $city.' '.$data['address'] : $city;
 
-        $km = $data['distance'] ? $data['distance']  : 10;
+        $km = $data['distance'] ? $data['distance']  : 30;
         $people = $data['people'];
 
         $geo_data = $this->service->getCoords($address);
@@ -92,9 +91,9 @@ class PropertyController extends Controller
                 ->where(Property::raw($lngD), '<', $km);
         } else {
             $objects = Property::where(Property::raw($latD), '>', $km)
-                ->where(Property::raw($lngD), '>', $km);
-                //->where(Property::raw($latD), '<=', 60)
-                //->where(Property::raw($lngD), '<=', 60);
+                ->where(Property::raw($lngD), '>', $km)
+                ->where(Property::raw($latD), '<=', 60)
+                ->where(Property::raw($lngD), '<=', 60);
         }
 
 

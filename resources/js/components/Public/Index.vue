@@ -597,6 +597,7 @@ export default {
         })
 
         jQuery('.find-housing').click((e) => {
+            e.preventDefault();
             this.submitForm(true);
         });
 
@@ -914,7 +915,11 @@ export default {
 
         favoritesCount() {
             let favs = JSON.parse(localStorage.getItem("favoritesList")) || [];
-            return favs.length;
+            let favNoNull = favs.filter( (item) => item !== null);
+            if (favs.filter( (item) => item === null).length) {
+                localStorage.setItem('favoritesList', JSON.stringify(favNoNull));
+            }
+            return favNoNull.length;
         },
         favoritesDisplay() {
             jQuery('.favoritesCount').text( this.favoritesCount() )
