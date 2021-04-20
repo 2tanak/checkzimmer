@@ -268,8 +268,6 @@
 
 <script>
 
-    document.getElementById("f5").value=location.href;
-
     document.addEventListener('DOMContentLoaded', function() {
         jQuery('.sh_nmr').click(function () {
             jQuery('.sidebar .number-phone').addClass('gray');
@@ -278,14 +276,10 @@
             jQuery('.phone-hide').attr('href', 'tel:' + atob(window.phonenum));
         });
 
-        function copytext(el) {
-            var $tmp = jQuery("#f5").text(this.value)
-            $tmp.select();
-            document.execCommand("copy");
-        }
+        var url = document.location.href;
+        new Clipboard('a.copy-link', {text: function(){ return url;}});
 
         jQuery("a.copy-link").click(function() {
-            copytext();
             jQuery('.congratulations-block').addClass('active');
             setTimeout (function(){
                 jQuery('.congratulations-block').removeClass('active');
