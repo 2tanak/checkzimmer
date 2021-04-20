@@ -274,6 +274,7 @@ jQuery(document).ready(function() {
     jQuery('a.drucken').click(function (e) {
         e.preventDefault();
         jQuery('.sidebar-modal-block').removeClass('active');
+        window.print();
     });
 
     jQuery('.number-phone a').click(function (e) {
