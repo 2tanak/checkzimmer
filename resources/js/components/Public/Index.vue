@@ -654,7 +654,6 @@ export default {
         })
         jQuery('.result-search').on('click', 'ul li', (e) => {
             let type = jQuery(e.target).attr('type');
-            console.log(type);
             if (!type) {
                 jQuery('.result-search').removeClass('active');
                 return;

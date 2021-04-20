@@ -173,12 +173,18 @@
                                 </a>
                             </div>
                             <div class="col-4 share-block-item">
-                                <a>
+                                <a class="copy-link">
                                     <svg width="19" height="22" viewBox="0 0 19 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M13 0H2C0.9 0 0 0.9 0 2V15C0 15.55 0.45 16 1 16C1.55 16 2 15.55 2 15V3C2 2.45 2.45 2 3 2H13C13.55 2 14 1.55 14 1C14 0.45 13.55 0 13 0ZM13.59 4.59L18.42 9.42C18.79 9.79 19 10.3 19 10.83V20C19 21.1 18.1 22 17 22H5.99C4.89 22 4 21.1 4 20L4.01 6C4.01 4.9 4.9 4 6 4H12.17C12.7 4 13.21 4.21 13.59 4.59ZM13 11H17.5L12 5.5V10C12 10.55 12.45 11 13 11Z" fill="#7A8793"/>
                                     </svg>
                                     <span>{{ __('Copy link') }}</span>
                                 </a>
+                                <div class="copy-link-block">
+                                    <input type="text" value="" id="f5">
+                                </div>
+                                <div class="congratulations-block">
+                                    {{ __('Page address copied') }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -261,6 +267,9 @@
 </div>
 
 <script>
+
+    document.getElementById("f5").value=location.href;
+
     document.addEventListener('DOMContentLoaded', function() {
         jQuery('.sh_nmr').click(function () {
             jQuery('.sidebar .number-phone').addClass('gray');
@@ -268,5 +277,20 @@
             jQuery('.phone-hide').html(atob(window.phonenumStr));
             jQuery('.phone-hide').attr('href', 'tel:' + atob(window.phonenum));
         });
+
+        function copytext(el) {
+            var $tmp = jQuery("#f5").text(this.value)
+            $tmp.select();
+            document.execCommand("copy");
+        }
+
+        jQuery("a.copy-link").click(function() {
+            copytext();
+            jQuery('.congratulations-block').addClass('active');
+            setTimeout (function(){
+                jQuery('.congratulations-block').removeClass('active');
+            }.bind(this), 2000);
+        });
+
     });
 </script>
