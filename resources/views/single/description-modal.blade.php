@@ -274,7 +274,8 @@
         let images = '/img/point-img.png';
         let marker = new google.maps.Marker ({
             position: myCenter,
-            map: mapCanvas
+            map: mapCanvas,
+            icon: images
         });
         let map = new google.maps.Map(mapCanvas ,mapOptions);
         let contentString = '<div id="content">'+
