@@ -25,6 +25,18 @@ Route::get('/de', 'HomeController@redirect');
 
 $locales = app('locale')->getLanguagesAvailable();
 $defaultLocale = app('locale')->getDefaultLocale();
+
+foreach ($locales as $locale) {
+    $prefix = $locale != $defaultLocale ? $locale : null;
+    Route::group(
+        [
+            'prefix' => $prefix,
+            'middleware' => ['isMaintenance', 'checkLocale', 'checkSubdomain']
+        ],
+        function () use ($locale, $defaultLocale) {
+            Route::get('/', 'HomeController@index')->name("home-$locale");
+        });
+}
 foreach ($locales as $locale) {
     $prefix = $locale != $defaultLocale ? $locale : null;
     Route::group(
@@ -35,8 +47,6 @@ foreach ($locales as $locale) {
         function () use ($locale) {
             Auth::routes();
 
-            Route::get('/', 'HomeController@index')->name("home-$locale");
-            Route::get('/'.$locale, 'HomeController@index')->name("home-$locale");
             Route::get('/list', 'HomeController@list')->name("list-$locale");
             Route::get('/single', 'HomeController@single')->name("single-$locale");
             Route::get('/single/{slug}', 'HomeController@singleProperty')->name("single-$locale");
@@ -53,6 +63,6 @@ foreach ($locales as $locale) {
             Route::get('/registration2', 'HomeController@registration2')->name("registration2-$locale");
             Route::get('/registration3', 'HomeController@registration3')->name("registration3-$locale");
 
-            Route::get('/'.$locale.'/{page}', 'HomeController@singlePage')->name("singlePage");
+            Route::get('/{page}', 'HomeController@singlePage')->name("singlePage");
         });
 }
