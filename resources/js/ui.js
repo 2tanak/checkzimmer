@@ -38,15 +38,18 @@ Vue.use(VueI18n)
 import messagesLocaleEn from '../lang/en.json';
 import messagesLocaleDe from "../lang/de.json";
 
-const locale = document.location.pathname.split('/')[1];
-
+let locale = document.location.pathname.split('/')[1];
+let translations = {
+        en: messagesLocaleEn,
+        de: messagesLocaleDe
+    }
+if (!translations[locale]) {
+    locale = 'de'
+}
 
 const i18n = new VueI18n({
     locale: locale, // set locale
-    messages: {
-        en: messagesLocaleEn,
-        de: messagesLocaleDe
-    },
+    messages: translations,
 })
 
 const app = new Vue({
