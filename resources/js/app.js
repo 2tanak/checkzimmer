@@ -33,6 +33,10 @@ auth.plugins = {
     http: Vue.axios, // Axios
     router: Vue.router
 };
+auth.options = {
+    authRedirect: '/dashboard/login'
+}
+console.log(auth.options);
 
 import VueAuth from '@websanova/vue-auth/dist/v2/vue-auth.esm'
 
