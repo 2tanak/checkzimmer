@@ -62,7 +62,7 @@ Vue.use(Router);
 
 const permissionsAdmin = {
     roles: 'admin',
-    redirect: { name: 'login' },
+    //redirect: { name: 'login' },
     forbiddenRedirect:  { name: 'login' }
 }
 

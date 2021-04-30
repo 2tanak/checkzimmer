@@ -1,4 +1,4 @@
-<div class="languages-block languages-block-desctope">
+{{--<div class="languages-block languages-block-desctope">
     <div class="selected-language">
         <a href="#">{{ app()->getLocale() }}</a>
     </div>
@@ -9,4 +9,4 @@
         @endforeach
         </div>
     </div>
-</div>
+</div>--}}
