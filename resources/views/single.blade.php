@@ -78,15 +78,32 @@
 
     <style>
         @media print {
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            .single-content .sidebar .number-phone .sh_nmr {
+                display: none !important;
+            }
+            .single-content .sidebar .number-phone a {
+                text-align: center !important;
+            }
             body {
                 padding: 0 !important;
                 min-width: auto !important;
+                background: #ffffff;
             }
             .single-gallery {
                 display: none !important;
+                margin-bottom: 0 !important;
             }
             .sidebar-bottom {
                 display: none !important;
+                padding: 0 !important;
+                border: 0 !important;
+            }
+            .single-content .sidebar .address-map {
+                margin-bottom: 0 !important;
             }
             .single-load-content {
                 display: none !important;
@@ -105,11 +122,11 @@
                 display: none !important;
             }
             .single-content .sidebar {
-                width: 300px !important;
-                margin: 0 auto !important;
+                width: 100% !important;
             }
             .single-content .sidebar a.inquiry {
                 display: none !important;
+                margin-bottom: 0 !important;
             }
             .single-content {
                 padding-top: 0 !important;
@@ -117,12 +134,21 @@
             h1 {
                 color: black !important;
                 font-size: 2.25rem !important;
-                margin-bottom: 0.5rem !important;
                 font-weight: 500 !important;
-                line-height: 1.2 !important;
-                display: block !important;
+                line-height: normal !important;
+                display: inline-block !important;
+                padding: 0 !important;
+                margin: 0 !important;
             }
             .additional-information {
+                display: none !important;
+                margin-bottom: 0 !important;
+                padding-bottom: 0 !important;
+            }
+            .favorites.favorites-mobile {
+                display: none !important;
+            }
+            .single-content .additional-information .mobile-title {
                 display: none !important;
             }
             .superhost-icon {
@@ -144,6 +170,150 @@
             }
             .comfort a.comfort-collapse-link {
                 display: none !important;
+            }
+            .nav.nav-tabs {
+                display: none; !important;
+            }
+            .single-content .bottom-text {
+                display: none; !important;
+            }
+            .single-content .mobile-price-situation h2 {
+                display: none !important;
+            }
+            .single-content .mobile-object-description {
+                display: none !important;
+            }
+            .single-content .comfort {
+                margin-bottom: 0 !important;
+                padding: 0 !important;
+            }
+            .single-content .object-description-desctope .description-content {
+                padding-top: 0 !important;
+            }
+            .single-content .main-block {
+                margin-bottom: 0 !important;
+                padding: 0 !important;
+            }
+            .single-content .object-description .nav-tabs .nav-link {
+                padding-bottom: 0 !important;
+            }
+            .single-content .object-description-desctope {
+                padding: 0 !important;
+            }
+            .single-content .add-time {
+                display: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                font-size: 0 !important;
+                line-height: 0 !important;
+            }
+            .single-content .viewed {
+                display: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                font-size: 0 !important;
+                line-height: 0 !important;
+            }
+            .single-content .sidebar {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .desctop-sidebar {
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .mobile-sidebar {
+                display: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .single-content {
+                display: flex !important;
+                flex-direction: column-reverse !important;
+            }
+            .single-content .sidebar .sidebar-top {
+                padding: 0 !important;
+                margin-bottom: 0 !important;
+                margin-right: 25px !important;
+                border: 0;
+            }
+            .sidebar-middle {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+            }
+            .single-content .sidebar .sidebar-middle .price {
+                margin: 0 !important;
+                align-items: center !important;
+            }
+            .single-content .sidebar .number-phone {
+                margin: 0 !important;
+                width: 300px !important;
+            }
+            .single-content .sidebar .address-map .map-container {
+                display: none !important;
+            }
+            .single-content .sidebar .address-map .address {
+                font-size: 1.1rem !important;
+                margin-left: 25px !important;
+            }
+            .single-content .sidebar .sidebar-middle .left,
+            .single-content .sidebar .sidebar-middle .right {
+                font-size: 1.1rem !important;
+            }
+            .single-content .sidebar .number-phone {
+                margin-bottom: 0 !important;
+            }
+            .single-content .sidebar .sidebar-middle .right {
+                width: 110px !important;
+                margin-right: 25px !important;
+            }
+            .single-content .sidebar .number-phone a {
+                font-size: 1.3rem !important;
+            }
+            .single-content .sidebar .sidebar-top-block .title {
+                font-size: 1.1rem !important;
+            }
+            .single-content .sidebar .sidebar-top-block .subtitle {
+                font-size: 1.1rem !important;
+            }
+            .single-content .sidebar .sidebar-top-block img {
+                width: 20px !important;
+            }
+            .single-content .sidebar .sidebar-top-block {
+                align-items: center !important;
+            }
+            .roominess {
+                margin-right: 25px !important;
+            }
+            .quality {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .sidebar-small-block {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .inquiry-modal {
+                padding: 0 !important;
+                margin: 0 !important;
+                display: none !important;
+            }
+            .modal-overlay {
+                padding: 0 !important;
+                margin: 0 !important;
+                display: none !important;
+            }
+            .main-top-block {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                padding-bottom: 0 !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                margin-bottom: 0 !important;
             }
         }
     </style>

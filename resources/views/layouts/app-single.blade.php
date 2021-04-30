@@ -100,7 +100,7 @@
                 @if ($options['website_phone'] ?? '')
                     <a class="whatsapp-number" href="tel:{{ $phoneNumAdmin }}">
                         {{ $options['website_phone'] ?? '' }}
-                        <span class="explanatory-text">24/7 бесплатно с мобильного</span>
+                        <span class="explanatory-text">24/7 {{ __('free from mobile') }}</span>
                     </a>
                 @endif
             </div>
@@ -188,6 +188,8 @@
 <script src="{{ asset('js/slick.min.js') }}" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" defer></script>
 <script src="https://www.google.com/recaptcha/api.js?render={{env('GOOGLE_RECAPTHCA3')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
+
 <script>
     let favs = JSON.parse(localStorage.getItem("favoritesList")) || [];
     document.getElementsByClassName('favoritesCount')[0].innerHTML = favs.length;
