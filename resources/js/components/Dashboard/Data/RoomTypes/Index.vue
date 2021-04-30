@@ -4,7 +4,7 @@
             <h1>{{ $t('Room type catalog') }}</h1>
             <b-button style="margin-right:0 !important;" type="submit" variant="success" class="mr-2" v-b-modal.modal-room-type>{{ $t('New room type') }}</b-button>
         </div>
-        <div class="row mt-4">
+        <!--<div class="row mt-4">
             <div class="col-md-6 grid-margin">
                 <div class="card">
                     <div class="card-body">
@@ -26,13 +26,13 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="row">
             <div class="col-md-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
                         <b-form-group>
-                            <b-table striped hover responsive :busy="loading" :items="subTypesFiltered" :fields="fields">
+                            <b-table striped hover responsive :busy="loading" :items="rootTypes" :fields="fields">
                                 <template v-slot:cell(room_type)="data">
                                     {{ rootCategory(data.item).name }}
                                 </template>
@@ -68,7 +68,7 @@
                 <b-button type="submit" variant="success" class="mr-2" v-b-modal.modal-room-type>{{ $t('New room type') }}</b-button>
             </div>
         </div>
-        <b-modal id="modal-room-type" :title="$t('Room Type add/edit')">
+        <b-modal id="modal-room-type" :title="$t('Room Type add/edit')" @ok='roomTypeUpdateOk'>
             <Forms v-model="roomTypesAction" :fields="roomTypesAction" :data="data"></Forms>
         </b-modal>
         <b-modal id="modal-room-type-delete" :title="$t('Room type delete')" @ok='roomTypeDeleteOk'>
@@ -102,7 +102,7 @@
                     { id: 16, room_type_id: 0, picture: '', name: 'квартира', persons: 2 },
                     { id: 31, room_type_id: 16, picture: '', name: 'двухместная', persons: 2 },
                 ],
-                fields: [this.$t('id'), this.$t('room_type'), this.$t('picture'), this.$t('Name'), this.$t('Persons'), this.$t('Edit'), this.$t('Delete')],
+                fields: [this.$t('id'), this.$t('picture'), this.$t('Name'), this.$t('Edit'), this.$t('Delete')],
                 data: roomTypesForm,
                 roomTypesAction: { name: ''}
             }
@@ -110,7 +110,7 @@
         mounted() {
             roomTypes.all()
                 .then(resp => {
-                    //this.room_types = resp.data;
+                    this.room_types = resp.data;
                     this.loading = false;
                     this.data.room_type_id.options = this.getRootTypes();
                 })

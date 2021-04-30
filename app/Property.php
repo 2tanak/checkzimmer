@@ -4,6 +4,7 @@ namespace App;
 
 use App\Services\BookingDataService;
 use App\Traits\noCRUD;
+use App\Traits\optionsLink;
 use App\Traits\propertyFeatures;
 use Illuminate\Database\Eloquent\Model;
 use DB;
@@ -13,9 +14,10 @@ class Property extends Model
 {
     use noCRUD;
     use propertyFeatures;
+    use optionsLink;
 
     protected $table = 'property';
-    protected $fillable = ['user_id', 'type', 'status', 'ord', 'views', 'access', 'lat', 'lng', 'name', 'city', 'zip', 'address', 'slug', 'description'];
+    protected $fillable = ['user_id', 'type', 'status', 'ord', 'views', 'access', 'lat', 'lng', 'name', 'city', 'zip', 'address', 'slug', 'description', 'price'];
     protected $with = ['options', 'user', 'rooms', 'questions', 'rating', 'questions', 'features'];
     protected $fillableRelations = ['options', 'rooms', 'features'];
     private static $identifier = 'id';
@@ -102,11 +104,6 @@ class Property extends Model
         return  $langs ? explode(',', $langs): ['ru', 'en', 'de'];
     }
 
-//    public function features() {
-//        $this->getOptions();
-//        return json_decode(self::optionFind($this->_options, 'features'), true) ?: [];
-//    }
-
     public function features()
     {
         return $this->belongsToMany(Feature::class, 'property_features',
@@ -172,8 +169,8 @@ class Property extends Model
     }
 
     public function featuresByCat($featureCategoryId) {
-        return array_filter($this->features->toArray(), function($item) use ($featureCategoryId) {
-            return $item['feature_category']['id'] == $featureCategoryId;
+        return array_filter($this->features->all(), function($item) use ($featureCategoryId) {
+            return $item->feature_category['id'] == $featureCategoryId;
         });
     }
 
@@ -334,6 +331,19 @@ class Property extends Model
     }
     public function getSEODescription() {
         $description = $this->getCurrentOption('seo_description');
-        return $this->handleTemplate($description['value'] ?? '');
+        return $this->handleTemplate($description ?? '');
+    }
+    static function phoneFormat($phone): string {
+        if (!$phone) {
+            return '';
+        }
+        $phone = preg_replace('/[^0-9]/', '', $phone);
+        $phone = '+'.$phone;
+        return $phone;
+    }
+    function locDate($date = null) {
+        $date = $date ?: date('H:i, j {} Y', strtotime($this->created_at));
+        $mon = __(date('F', strtotime($this->created_at)));
+        return str_replace('{}', $mon, $date);
     }
 }

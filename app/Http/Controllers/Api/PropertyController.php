@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Property;
 use Auth;
 use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Ramsey\Collection\Collection;
 
@@ -27,13 +28,16 @@ class PropertyController extends Controller
 
     public function index(PropertyListRequest $request)
     {
+        $user = Auth::user();
         $subdomain = Domain::getSubdomain();
 
         $paginate = $request->query('page');
         $noCity = $request->query('nocity');
 
-        $objects = Property::orderBy('ord')->where(function ($query) {
-            $query->whereNull('access')->orWhere('access', '');
+        $objects = Property::orderBy('ord')->where(function ($query) use ($user) {
+            if (!$user || $user->role != 'admin' && $user->role != 'manager') {
+                $query->whereNull('access')->orWhere('access', '');
+            }
         });
 
         if ($subdomain) {
@@ -64,24 +68,87 @@ class PropertyController extends Controller
     public function queryFilter(Request $request)
     {
         $data = $request->input();
+        $user = Auth::user();
         $subdomain = Domain::getSubdomain();
 
         $paginate = $request->query('page');
         $noCity = $request->query('nocity');
+        $noDist = $request->query('nodist') ?? false;
 
-        $address = $data['address'];
-        $km = $data['km'] ? $data['km']  : 10;
+        $city = $subdomain ? $subdomain->city : 'Leipzig';
+        $address = $data['address'] ? $city.' '.$data['address'] : $city;
+
+        $km = $data['distance'] ? $data['distance']  : 30;
         $people = $data['people'];
 
         $geo_data = $this->service->getCoords($address);
 
-        $objects = Property::where(Property::raw('abs('.$geo_data['lat'].' - lat) * 111'), '<', $km)
-            ->where(Property::raw('abs('.$geo_data['lng'].' - lng) * 111'), '<', $km);
+        $latD = 'abs('.$geo_data['lat'].' - lat) * 111';
+        $lngD = 'abs('.$geo_data['lng'].' - lng) * 111';
 
-        if ($subdomain) {
-            $relate = $noCity ? '!=' : '=';
-            $objects->where('city', $relate, $subdomain->city);
+        if (!$noDist) {
+            $objects = Property::where(Property::raw($latD), '<', $km)
+                ->where(Property::raw($lngD), '<', $km);
+        } else {
+            $objects = Property::where(Property::raw($latD), '>', $km)
+                ->where(Property::raw($lngD), '>', $km)
+                ->where(Property::raw($latD), '<=', 60)
+                ->where(Property::raw($lngD), '<=', 60);
         }
+
+
+        // Set items order
+        switch ($data['ord'] ?? '') {
+            case 'min':
+                $objects->orderBy('price');
+                break;
+            case 'max':
+                $objects->orderByDesc('price');
+                break;
+            case 'rating':
+                $objects->orderByDesc('hotel_rating');
+                break;
+            default:
+                $objects->orderBy('ord');
+        }
+
+        if ($people) {
+            $totalIds = Room::select(DB::raw('SUM(number * person) as people'), 'property_id')->groupBy('property_id')->having('people', '>=', $people)->pluck('property_id');
+        } else {
+            $totalIds = [];
+        }
+
+        // Filter by selected properties: single rooms, double rooms, multiple beds
+        if ($data['single'] || $data['double']) {
+            $objectsPreliminary = $objects->get()->pluck('id');
+
+            if ($data['single']) {
+                $singleIds = Room::where('person', 1)->whereIn('property_id', $objectsPreliminary)->get()->pluck('property_id')->toArray();
+            } else {
+                $singleIds = [];
+            }
+            if ($data['double']) {
+                $doubleIds = Room::where('person', 2)->whereIn('property_id', $objectsPreliminary)->get()->pluck('property_id')->toArray();
+            } else {
+                $doubleIds = [];
+            }
+            if ($data['multi']) {
+                $multiIds = Room::where('person', '>', 2)->whereIn('property_id', $objectsPreliminary)->get()->pluck('property_id')->toArray();
+            } else {
+                $multiIds = [];
+            }
+            $totalIds = array_merge($totalIds, $singleIds, $doubleIds, $multiIds);
+        }
+        $objects->whereIn('id', $totalIds);
+
+        $objects = $objects->where(function ($query) use ($user) {
+            if (!$user || $user->role != 'admin' && $user->role != 'manager') {
+                $query->whereNull('access')->orWhere('access', '');
+            }
+        });
+
+        $relate = $noCity ? '!=' : '=';
+        $objects->where('city', $relate, $subdomain ? $subdomain->city : 'Leipzig');
 
         $objects = $objects->paginate(20);
 
@@ -91,7 +158,6 @@ class PropertyController extends Controller
             $objects[$key]->rate = array_reduce( $ratings, function($carry, $item) { return $carry + $item['rating']; } ) / $count;
             $objects[$key]->geo = $geo_data;
         }
-
         return response()->json(['objects' => $objects, 'coords' => $geo_data]);
     }
 
@@ -134,7 +200,9 @@ class PropertyController extends Controller
             'free' => '',
             'realprice' => '',
             'inclVAT' => '',
-            'hideZip' => ''
+            'hideZip' => '',
+            'rentMin' => '',
+            'info' => ''
         ];
 
         $property = Property::findOrFail($id);
@@ -235,10 +303,13 @@ class PropertyController extends Controller
                 $fields['rooms'][$roomKey]['options'][$optionKey]['value'] = $option['value'] ?? '';
             }
         }
-
-        foreach($fields['options'] as $item) {
-            if (!$item['id']) {
-                $option = Option::create($item);
+        foreach($fields['options'] as $key => $item) {
+            if (!$item['id'] && $item['value'] != '') {
+                $option = Option::updateOrCreate($item);
+                $result[$key] = $option;
+            } elseif ($item['id'] && $item['value'] == '') {
+                $option = Option::find($item['id']);
+                $option->delete();
             }
         }
         $property->updateRelations($fields);

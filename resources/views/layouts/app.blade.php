@@ -1,3 +1,4 @@
+@php use App\Property @endphp
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -19,7 +20,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-
 </head>
 <body>
     <div id="app" class="property-list">
@@ -69,8 +69,7 @@
                     </div>
                     <div class="language-number-phone">
                         @include('partials.lang-switch')
-                        <a class="whatsapp-number" href="tel:{{ str_replace(' ', '', $options['website_phone'] ?? '') }}">
-                            {{ $options['website_phone'] ?? '' }}
+                        <a class="whatsapp-number" href="tel:{{ $phoneNumAdmin }}">{{ $options['website_phone'] ?? '' }}
                             <span class="explanatory-text">24/7 бесплатно с мобильного</span>
                         </a>
                     </div>
@@ -80,6 +79,7 @@
 
             <div class="mobile-menu height">
                 <div class="mobile-menu-content">
+                    @include('partials.lang-switch-mobile')
                     <ul>
                         <li>
                             <a href="{{ route(app('locale')->routeApply('favorites')) }}">
@@ -98,36 +98,9 @@
                             </a>
                         </li>
                     </ul>
-                    <a class="whatsapp-number" href="tel:{{ str_replace('', '', $options['website_phone'] ?? '') }}">
-                        <img src="/svg/whatsapp-mobile.svg" alt="Whatsapp">
-                        {{ $options['website_phone'] ?? '' }}
+                    <a class="whatsapp-number" href="tel:{{ $phoneNumAdmin }}">{{ $options['website_phone'] ?? '' }}
+                        <span class="explanatory-text">24/7 бесплатно с мобильного</span>
                     </a>
-                    @include('partials.lang-switch-mobile')
-
-                    @include('partials.lang-switch-mobile')
-
-                <ul>
-                    <li>
-                        <a href="/favorites">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M15.1614 9.97563C16.597 8.4996 16.597 6.10223 15.1614 4.6262C13.7316 3.1561 11.4179 3.1561 9.98803 4.6262L9.27309 5.36128C9.12351 5.51507 8.87649 5.51507 8.72691 5.36128L8.01197 4.6262C6.58214 3.1561 4.26843 3.1561 2.8386 4.6262C1.40301 6.10223 1.40301 8.4996 2.8386 9.97563L9 16.3106L15.1614 9.97563ZM9.44185 4.09498C11.1708 2.3173 13.9786 2.3173 15.7076 4.09498C17.4308 5.86675 17.4308 8.73508 15.7076 10.5068L9.27309 17.1226C9.12351 17.2764 8.87649 17.2764 8.72691 17.1226L2.29242 10.5068C0.569193 8.73508 0.569193 5.86675 2.29242 4.09498C4.02141 2.3173 6.82916 2.3173 8.55815 4.09498L9 4.54928L9.44185 4.09498Z" fill="#7A8793" stroke="#7A8793" stroke-width="0.2"/>
-                            </svg>
-                            {{ __('Favorites') }} (<span class="favoritesCount">0</span>)
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/plans">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.6667 16.2381H13.5714C14.2026 16.2381 14.7143 15.7264 14.7143 15.0952V7.17201C14.7143 7.13056 14.7209 7.09066 14.7331 7.0533L9 1.89347L3.26686 7.0533C3.2791 7.09066 3.28572 7.13056 3.28572 7.17201V15.0952C3.28572 15.7264 3.79739 16.2381 4.42857 16.2381H6.33334V13.5714C6.33334 12.5195 7.18613 11.6667 8.2381 11.6667H9.76191C10.8139 11.6667 11.6667 12.5195 11.6667 13.5714V16.2381ZM15.4762 7.72204V15.0952C15.4762 16.1472 14.6234 17 13.5714 17H4.42857C3.3766 17 2.52381 16.1472 2.52381 15.0952V7.72204L1.6358 8.52126C1.47941 8.662 1.23854 8.64932 1.0978 8.49294C0.95705 8.33655 0.969727 8.09568 1.12611 7.95494L8.74516 1.09779C8.89003 0.967402 9.10997 0.967402 9.25484 1.09779L16.8739 7.95494C17.0303 8.09568 17.043 8.33655 16.9022 8.49294C16.7615 8.64932 16.5206 8.662 16.3642 8.52126L15.4762 7.72204ZM10.9048 13.5714C10.9048 12.9402 10.3931 12.4286 9.76191 12.4286H8.2381C7.60692 12.4286 7.09524 12.9402 7.09524 13.5714V16.2381H10.9048V13.5714Z" fill="#7A8793" stroke="#7A8793" stroke-width="0.2"/>
-                            </svg>
-                            {{ __('Rent out') }}
-                        </a>
-                    </li>
-                </ul>
-                <a class="whatsapp-number" href="tel:{{ str_replace(' ', '', $options['website_phone'] ?? '') }}">
-                    {{ $options['website_phone'] ?? '' }}
-                    <span class="explanatory-text">24/7 бесплатно с мобильного</span>
-                </a>
                 </div>
             </div>
 
@@ -170,11 +143,11 @@
                         </div>
                     </div>
                     <div class="whatsapp-link">
-                        <a class="whatsapp-link-number" href="tel:+49 341 1234 2223">
+                        <a class="whatsapp-link-number" href="tel:{{ $phoneNumAdmin }}">
                             <img src="/svg/whatsapp-big.svg" alt="Whatsapp">
                             {{ $options['website_phone'] ?? '' }}
                         </a>
-                        <a class="whatsapp-link-text" href="tel:+49 341 1234 2223">Просто напишите нам в Whatsapp</a>
+                        <a class="whatsapp-link-text" href="tel:{{ $phoneNumAdmin }}">Просто напишите нам в Whatsapp</a>
                     </div>
                     <div class="mobile-underlink-text">Нажмите на кнопку и сделайте прямой запрос по WhatsApp. Сравните цены и доступность из более 150
                         обьектов в городе Х</div>
@@ -289,15 +262,44 @@
                         </defs>
                     </svg>
                 </a>
+
+                <div class="social-block">
+                    <div class="social-block-item">
+                        <a href="#">
+                            <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path class="hover" d="M6.77967 7.78768L7.12795 5.50736H4.94932V4.02823C4.94932 3.40438 5.25371 2.79562 6.22949 2.79562H7.22V0.854271C7.22 0.854271 6.32109 0.700195 5.4616 0.700195C3.6673 0.700195 2.49452 1.79228 2.49452 3.76938V5.50736H0.5V7.78768H2.49452V13.3002H4.94932V7.78768H6.77967Z" fill="#7A8793"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="social-block-item">
+                        <a href="#">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path class="hover" d="M7.00094 0.700195C5.2899 0.700195 5.07533 0.707448 4.40337 0.738207C3.7314 0.768967 3.27426 0.876001 2.87338 1.0318C2.45303 1.18994 2.07223 1.43786 1.75753 1.75828C1.43711 2.07298 1.18919 2.45378 1.03105 2.87413C0.875251 3.27501 0.768717 3.7329 0.738207 4.40337C0.707698 5.07383 0.700195 5.2899 0.700195 7.00094C0.700195 8.71198 0.707448 8.92655 0.738207 9.59851C0.768967 10.2705 0.875251 10.7269 1.03105 11.1277C1.18926 11.5481 1.43727 11.9289 1.75778 12.2436C2.07238 12.5641 2.4531 12.8121 2.87338 12.9703C3.27351 13.1261 3.73215 13.2327 4.40262 13.2632C5.07308 13.2937 5.28915 13.3012 7.00019 13.3012C8.71123 13.3012 8.9258 13.2939 9.59776 13.2632C10.2697 13.2324 10.7264 13.1261 11.127 12.9703C11.5455 12.8085 11.9256 12.5609 12.2429 12.2436C12.5602 11.9263 12.8077 11.5463 12.9696 11.1277C13.1254 10.7276 13.2319 10.269 13.2624 9.59851C13.2929 8.92805 13.3004 8.71198 13.3004 7.00094C13.3004 5.2899 13.2932 5.07533 13.2624 4.40337C13.2317 3.7314 13.1254 3.27476 12.9696 2.87413C12.8114 2.45376 12.5634 2.07296 12.2428 1.75828C11.9282 1.43777 11.5474 1.18976 11.127 1.03155C10.7261 0.876001 10.2682 0.769467 9.59776 0.738958C8.9273 0.708448 8.71123 0.700946 7.00019 0.700946L7.00094 0.700195Z" fill="#7A8793"/>
+                                <path class="not-hover" d="M7.0004 3.76611C6.36059 3.76616 5.73515 3.95594 5.20319 4.31144C4.67122 4.66693 4.25662 5.17219 4.01181 5.76332C3.76699 6.35445 3.70296 7.0049 3.82782 7.63242C3.95267 8.25993 4.2608 8.83634 4.71323 9.28874C5.16567 9.74114 5.7421 10.0492 6.36962 10.174C6.99715 10.2988 7.64759 10.2348 8.2387 9.98989C8.82981 9.74503 9.33504 9.33039 9.6905 8.7984C10.046 8.26641 10.2357 7.64096 10.2357 7.00114C10.2357 6.57629 10.152 6.1556 9.98941 5.76309C9.82681 5.37058 9.5885 5.01395 9.28807 4.71354C8.98765 4.41314 8.63099 4.17485 8.23847 4.01229C7.84595 3.84973 7.42525 3.76608 7.0004 3.76611ZM7.0004 9.10131C6.58493 9.10131 6.17879 8.97811 5.83334 8.74728C5.48788 8.51646 5.21863 8.18838 5.05964 7.80453C4.90065 7.42068 4.85905 6.99831 4.9401 6.59082C5.02115 6.18333 5.22122 5.80903 5.51501 5.51524C5.80879 5.22146 6.18309 5.02139 6.59058 4.94034C6.99807 4.85928 7.42045 4.90088 7.80429 5.05988C8.18814 5.21887 8.51622 5.48812 8.74704 5.83357C8.97787 6.17903 9.10107 6.58517 9.10107 7.00064C9.101 7.55773 8.87966 8.09198 8.48571 8.48587C8.09177 8.87977 7.55749 9.10106 7.0004 9.10106V9.10131Z" fill="white"/>
+                                <path class="not-hover" d="M10.756 3.51198C11.1735 3.51198 11.512 3.17351 11.512 2.75599C11.512 2.33847 11.1735 2 10.756 2C10.3385 2 10 2.33847 10 2.75599C10 3.17351 10.3385 3.51198 10.756 3.51198Z" fill="white"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="social-block-item">
+                        <a href="#">
+                            <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path class="hover" d="M13.7084 1.63858C13.6286 1.3404 13.4722 1.06853 13.255 0.85017C13.0378 0.631815 12.7673 0.474634 12.4707 0.394356C11.3782 0.100098 7 0.100098 7 0.100098C7 0.100098 2.62068 0.100098 1.53046 0.394356C1.23383 0.474634 0.963376 0.631815 0.74616 0.85017C0.528943 1.06853 0.372582 1.3404 0.292723 1.63858C0 2.73568 0 5.02602 0 5.02602C0 5.02602 0 7.31637 0.292723 8.41347C0.372582 8.71165 0.528943 8.98352 0.74616 9.20188C0.963376 9.42023 1.23383 9.57741 1.53046 9.65769C2.62183 9.94732 7 9.94732 7 9.94732C7 9.94732 11.3793 9.94732 12.4695 9.65306C12.7662 9.57278 13.0366 9.4156 13.2538 9.19724C13.4711 8.97889 13.6274 8.70702 13.7073 8.40883C14 7.31174 14 5.02139 14 5.02139C14 5.02139 14 2.73568 13.7084 1.63858ZM5.59977 7.1368V2.91524L9.23806 5.02602L5.59977 7.1368Z" fill="#7A8793"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
                 <ul class="footer-menu">
-                    <li><a href="#">Datenschutz</a></li>
-                    <li><a href="#">Impressum</a></li>
+                    <li><a href="//check-zimmer.de/agb">AGB</a></li>
+                    <li><a href="//check-zimmer.de/impressum">Impressum</a></li>
+                    <li><a href="//check-zimmer.de/datenschutz">Datenschutz</a></li>
                 </ul>
                 <div class="copyright">
                     &copy; {{ now()->year }} {{ $options['copyright'] ?? '' }}
                 </div>
             </div>
         </div>
+        <script>(function(a,m,o,c,r,m){a[m]={id:"41373",hash:"02054bc01863d1cb9eb06492ca7868cd80bac2992311ba581ade40ec6bbe7b4b",locale:"ru",setMeta:function(p){this.params=(this.params||[]).concat([p])}};a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};var d=a.document,s=d.createElement('script');s.async=true;s.id=m+'_script';s.src='https://gso.amocrm.ru/js/button.js?1614073604';d.head&&d.head.appendChild(s)}(window,0,'amoSocialButton',0,0,'amo_social_button'));</script>
     </footer>
 
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
@@ -306,6 +308,13 @@
     <script src="{{ asset('js/select2.full.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 
-
+    <script>
+        (function(w, d, s, h, id) {
+            w.roistatProjectId = id; w.roistatHost = h;
+            var p = d.location.protocol == "https:" ? "https://" : "http://";
+            var u = /^.*roistat_visit=[^;]+(.*)?$/.test(d.cookie) ? "/dist/module.js" : "/api/site/1.0/"+id+"/init?referrer="+encodeURIComponent(d.location.href);
+            var js = d.createElement(s); js.charset="UTF-8"; js.async = 1; js.src = p+h+u; var js2 = d.getElementsByTagName(s)[0]; js2.parentNode.insertBefore(js, js2);
+        })(window, document, 'script', 'cloud.roistat.com', '3471f90cb1269b9107391c11fb73fefc');
+    </script>
 </body>
 </html>

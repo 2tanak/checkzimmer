@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $hotel->getSEOTitle() }}</title>
+    <title>{{ $seoTitle }}</title>
     <meta name="description" content="{{ $hotel->getSEODescription() }}"/>
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -78,6 +78,7 @@
                         @include('partials.logo-mobile-menu')
                     </a>
                 </div>
+                @include('partials.lang-switch-mobile')
                 <ul>
                     <li>
                         <a href="{{ route(app('locale')->routeApply('favorites')) }}">
@@ -96,11 +97,12 @@
                         </a>
                     </li>
                 </ul>
-                <a class="whatsapp-number" href="tel:{{ str_replace('', '', $options['website_phone'] ?? '') }}">
-                    <img src="/svg/whatsapp-mobile.svg" alt="Whatsapp">
-                    {{ $options['website_phone'] ?? '' }}
-                </a>
-                @include('partials.lang-switch-mobile')
+                @if ($options['website_phone'] ?? '')
+                    <a class="whatsapp-number" href="tel:{{ $phoneNumAdmin }}">
+                        {{ $options['website_phone'] ?? '' }}
+                        <span class="explanatory-text">24/7 бесплатно с мобильного</span>
+                    </a>
+                @endif
             </div>
         </div>
 
@@ -137,9 +139,36 @@
                     </defs>
                 </svg>
             </a>
+            <div class="social-block">
+                <div class="social-block-item">
+                    <a href="#">
+                        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path class="hover" d="M6.77967 7.78768L7.12795 5.50736H4.94932V4.02823C4.94932 3.40438 5.25371 2.79562 6.22949 2.79562H7.22V0.854271C7.22 0.854271 6.32109 0.700195 5.4616 0.700195C3.6673 0.700195 2.49452 1.79228 2.49452 3.76938V5.50736H0.5V7.78768H2.49452V13.3002H4.94932V7.78768H6.77967Z" fill="#7A8793"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="social-block-item">
+                    <a href="#">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path class="hover" d="M7.00094 0.700195C5.2899 0.700195 5.07533 0.707448 4.40337 0.738207C3.7314 0.768967 3.27426 0.876001 2.87338 1.0318C2.45303 1.18994 2.07223 1.43786 1.75753 1.75828C1.43711 2.07298 1.18919 2.45378 1.03105 2.87413C0.875251 3.27501 0.768717 3.7329 0.738207 4.40337C0.707698 5.07383 0.700195 5.2899 0.700195 7.00094C0.700195 8.71198 0.707448 8.92655 0.738207 9.59851C0.768967 10.2705 0.875251 10.7269 1.03105 11.1277C1.18926 11.5481 1.43727 11.9289 1.75778 12.2436C2.07238 12.5641 2.4531 12.8121 2.87338 12.9703C3.27351 13.1261 3.73215 13.2327 4.40262 13.2632C5.07308 13.2937 5.28915 13.3012 7.00019 13.3012C8.71123 13.3012 8.9258 13.2939 9.59776 13.2632C10.2697 13.2324 10.7264 13.1261 11.127 12.9703C11.5455 12.8085 11.9256 12.5609 12.2429 12.2436C12.5602 11.9263 12.8077 11.5463 12.9696 11.1277C13.1254 10.7276 13.2319 10.269 13.2624 9.59851C13.2929 8.92805 13.3004 8.71198 13.3004 7.00094C13.3004 5.2899 13.2932 5.07533 13.2624 4.40337C13.2317 3.7314 13.1254 3.27476 12.9696 2.87413C12.8114 2.45376 12.5634 2.07296 12.2428 1.75828C11.9282 1.43777 11.5474 1.18976 11.127 1.03155C10.7261 0.876001 10.2682 0.769467 9.59776 0.738958C8.9273 0.708448 8.71123 0.700946 7.00019 0.700946L7.00094 0.700195Z" fill="#7A8793"/>
+                            <path class="not-hover" d="M7.0004 3.76611C6.36059 3.76616 5.73515 3.95594 5.20319 4.31144C4.67122 4.66693 4.25662 5.17219 4.01181 5.76332C3.76699 6.35445 3.70296 7.0049 3.82782 7.63242C3.95267 8.25993 4.2608 8.83634 4.71323 9.28874C5.16567 9.74114 5.7421 10.0492 6.36962 10.174C6.99715 10.2988 7.64759 10.2348 8.2387 9.98989C8.82981 9.74503 9.33504 9.33039 9.6905 8.7984C10.046 8.26641 10.2357 7.64096 10.2357 7.00114C10.2357 6.57629 10.152 6.1556 9.98941 5.76309C9.82681 5.37058 9.5885 5.01395 9.28807 4.71354C8.98765 4.41314 8.63099 4.17485 8.23847 4.01229C7.84595 3.84973 7.42525 3.76608 7.0004 3.76611ZM7.0004 9.10131C6.58493 9.10131 6.17879 8.97811 5.83334 8.74728C5.48788 8.51646 5.21863 8.18838 5.05964 7.80453C4.90065 7.42068 4.85905 6.99831 4.9401 6.59082C5.02115 6.18333 5.22122 5.80903 5.51501 5.51524C5.80879 5.22146 6.18309 5.02139 6.59058 4.94034C6.99807 4.85928 7.42045 4.90088 7.80429 5.05988C8.18814 5.21887 8.51622 5.48812 8.74704 5.83357C8.97787 6.17903 9.10107 6.58517 9.10107 7.00064C9.101 7.55773 8.87966 8.09198 8.48571 8.48587C8.09177 8.87977 7.55749 9.10106 7.0004 9.10106V9.10131Z" fill="white"/>
+                            <path class="not-hover" d="M10.756 3.51198C11.1735 3.51198 11.512 3.17351 11.512 2.75599C11.512 2.33847 11.1735 2 10.756 2C10.3385 2 10 2.33847 10 2.75599C10 3.17351 10.3385 3.51198 10.756 3.51198Z" fill="white"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="social-block-item">
+                    <a href="#">
+                        <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path class="hover" d="M13.7084 1.63858C13.6286 1.3404 13.4722 1.06853 13.255 0.85017C13.0378 0.631815 12.7673 0.474634 12.4707 0.394356C11.3782 0.100098 7 0.100098 7 0.100098C7 0.100098 2.62068 0.100098 1.53046 0.394356C1.23383 0.474634 0.963376 0.631815 0.74616 0.85017C0.528943 1.06853 0.372582 1.3404 0.292723 1.63858C0 2.73568 0 5.02602 0 5.02602C0 5.02602 0 7.31637 0.292723 8.41347C0.372582 8.71165 0.528943 8.98352 0.74616 9.20188C0.963376 9.42023 1.23383 9.57741 1.53046 9.65769C2.62183 9.94732 7 9.94732 7 9.94732C7 9.94732 11.3793 9.94732 12.4695 9.65306C12.7662 9.57278 13.0366 9.4156 13.2538 9.19724C13.4711 8.97889 13.6274 8.70702 13.7073 8.40883C14 7.31174 14 5.02139 14 5.02139C14 5.02139 14 2.73568 13.7084 1.63858ZM5.59977 7.1368V2.91524L9.23806 5.02602L5.59977 7.1368Z" fill="#7A8793"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
             <ul class="footer-menu">
-                <li><a href="#">Datenschutz</a></li>
-                <li><a href="#">Impressum</a></li>
+                <li><a href="//check-zimmer.de/agb">AGB</a></li>
+                <li><a href="//check-zimmer.de/impressum">Impressum</a></li>
+                <li><a href="//check-zimmer.de/datenschutz">Datenschutz</a></li>
             </ul>
             <div class="copyright">
                 &copy; {{ now()->year }} {{ $system_option['copyright'] ?? '' }}
@@ -147,110 +176,10 @@
         </div>
     </div>
 
+    @include('single.inquiry-modal')
 
-
-    <div class="modal-overlay inquiry-modal-overlay">
-        <div class="inquiry-modal">
-            <div class="modal-close">
-                <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0956 2.0934C10.369 1.82004 10.369 1.37682 10.0956 1.10345C9.82227 0.830087 9.37906 0.830087 9.10569 1.10345L5.49959 4.70956L1.89389 1.10387C1.62053 0.830501 1.17731 0.830501 0.903944 1.10387C0.630577 1.37724 0.630577 1.82045 0.903944 2.09382L4.50964 5.69951L0.903253 9.30589C0.629887 9.57926 0.629886 10.0225 0.903253 10.2958C1.17662 10.5692 1.61984 10.5692 1.8932 10.2958L5.49959 6.68946L9.10638 10.2963C9.37975 10.5696 9.82297 10.5696 10.0963 10.2963C10.3697 10.0229 10.3697 9.57967 10.0963 9.30631L6.48954 5.69951L10.0956 2.0934Z" fill="#545769"/>
-                </svg>
-            </div>
-            <div class="title">{{ __('Send request') }}</div>
-            <form>
-                <div class="input-block-item">
-                    <input id="company" type="text">
-                    <label for="company">{{ __('Company name') }}</label>
-                </div>
-                <div class="input-block-item">
-                    <input id="name" type="text">
-                    <label for="name">{{ __('Name and Surname') }}*</label>
-                    <div class="validation-block">{{ __('Please fill in this field') }}</div>
-                </div>
-                <div class="input-block-item">
-                    <input id="email" type="email">
-                    <label for="email">{{ __('Email') }}*</label>
-                    <div class="validation-block">{{ __('Please fill in this field') }}</div>
-                </div>
-                <div class="input-block-item">
-                    <input id="telephone" type="tel">
-                    <label for="telephone">{{ __('Phone number') }}*</label>
-                    <div class="validation-block">{{ __('Please fill in this field') }}</div>
-                </div>
-                <div class="data-block">
-                    <input id="arrival-date" data-provide="datepicker" readonly>
-                    <label for="arrival-date">{{ __('Arrival date') }}</label>
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13 0H14V2H16C16.5523 2 17 2.44772 17 3V6V7V17C17 17.5523 16.5523 18 16 18H2C1.44772 18 1 17.5523 1 17V7V6V3C1 2.44772 1.44772 2 2 2H4V0H5V2H13V0ZM5 3H4H2V6H16V3H14H13H5ZM16 17H2V7H16V17ZM10 12H14V13H10V12ZM14 10H10V11H14V10ZM4 12H8V13H4V12ZM8 10H4V11H8V10Z" fill="#7A8793"/>
-                    </svg>
-                </div>
-                <div class="data-block">
-                    <input id="date-departure" data-provide="datepicker" readonly>
-                    <label for="date-departure">{{ __('Date departure') }}</label>
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13 0H14V2H16C16.5523 2 17 2.44772 17 3V6V7V17C17 17.5523 16.5523 18 16 18H2C1.44772 18 1 17.5523 1 17V7V6V3C1 2.44772 1.44772 2 2 2H4V0H5V2H13V0ZM5 3H4H2V6H16V3H14H13H5ZM16 17H2V7H16V17ZM10 12H14V13H10V12ZM14 10H10V11H14V10ZM4 12H8V13H4V12ZM8 10H4V11H8V10Z" fill="#7A8793"/>
-                    </svg>
-                </div>
-                <div class="select-block">
-                    <select id="number-persons">
-                        <option>1 {{ __('Person') }}</option>
-                        <option>2 {{ __('Persons') }}</option>
-                        <option>3 {{ __('Persons') }}</option>
-                        <option>4 {{ __('Persons') }}</option>
-                        <option>5 {{ __('Person') }}</option>
-                        <option>6 {{ __('Person') }}</option>
-                    </select>
-                    <label for="number-persons">{{ __('Number persons') }}</label>
-                </div>
-                <div class="select-block">
-                    <select id="type">
-                        <option>{{ __('Whole apartment') }}</option>
-                        <option>{{ __('House') }}</option>
-                        <option>{{ __('Room') }}</option>
-                        <option>{{ __('Garage') }}</option>
-                    </select>
-                    <label for="number-persons">{{ __('Housing type') }}</label>
-                </div>
-                <div class="text-area-block">
-                    <textarea placeholder="{{ __('Message to owner') }}"></textarea>
-                </div>
-                <div class="checkbox-block checkbox-middle">
-                    <input id="email-checkbox" class="checkbox" type="checkbox">
-                    <label for="email-checkbox">{{ __('Send me a copy by email') }}</label>
-                </div>
-                <div class="checkbox-block checkbox-top">
-                    <input id="consent-checkbox" class="checkbox" type="checkbox">
-                    <label for="consent-checkbox">{{ __('I consent to the processing of my data as described in') }} <a href="#">{{ __('statement of consent') }}</a> {{ __('from') }} Checkzimmer.</label>
-                </div>
-                <a class="send-request" href="#">{{ __('Send request') }}</a>
-            </form>
-        </div>
-    </div>
-
-    <div class="modal-overlay slider-modal-overlay">
-        <div class="modal-close">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M23.2514 24.0004C23.0614 24.0004 22.8714 23.9304 22.7214 23.7804L12.0014 13.0604L1.28141 23.7804C0.991406 24.0704 0.511406 24.0704 0.221406 23.7804C-0.0685937 23.4904 -0.0685937 23.0104 0.221406 22.7204L10.9414 12.0004L0.221406 1.28043C-0.0685937 0.99043 -0.0685937 0.51043 0.221406 0.22043C0.511406 -0.0695703 0.991406 -0.0695703 1.28141 0.22043L12.0014 10.9404L22.7214 0.22043C23.0114 -0.0695703 23.4914 -0.0695703 23.7814 0.22043C24.0714 0.51043 24.0714 0.99043 23.7814 1.28043L13.0614 12.0004L23.7814 22.7204C24.0714 23.0104 24.0714 23.4904 23.7814 23.7804C23.6314 23.9304 23.4414 24.0004 23.2514 24.0004Z" fill="white"/>
-            </svg>
-        </div>
-        <div class="slider-block">
-            <div class="big-slider">
-                @foreach ($hotel->photos() as $key => $photo)
-                    <div class="slider-item"><img src="{{ $photo['url_original'] }}" alt="alt"></div>
-                @endforeach
-            </div>
-            <div class="small-slider">
-                @foreach ($hotel->photos() as $key => $photo)
-                    <div class="slider-item"><img src="{{ $photo['url_max300'] }}" alt="alt"></div>
-                @endforeach
-            </div>
-            <div class="name-slide-number">
-                <div class="number">1/{{count($hotel->photos())}}</div>
-            </div>
-        </div>
-    </div>
-
-
+    @include('single.gallery-modal')
+    <script>(function(a,m,o,c,r,m){a[m]={id:"41373",hash:"02054bc01863d1cb9eb06492ca7868cd80bac2992311ba581ade40ec6bbe7b4b",locale:"ru",setMeta:function(p){this.params=(this.params||[]).concat([p])}};a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};var d=a.document,s=d.createElement('script');s.async=true;s.id=m+'_script';s.src='https://gso.amocrm.ru/js/button.js?1614073604';d.head&&d.head.appendChild(s)}(window,0,'amoSocialButton',0,0,'amo_social_button'));</script>
 </footer>
 
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
@@ -258,18 +187,25 @@
 <script src="{{ asset('js/select2.full.js') }}" defer></script>
 <script src="{{ asset('js/slick.min.js') }}" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" defer></script>
-<script src="https://www.google.com/recaptcha/api.js?render=6LejY9AZAAAAAFpdc0QzQzrqRtaaflf3PfP64qdE"></script>
+<script src="https://www.google.com/recaptcha/api.js?render={{env('GOOGLE_RECAPTHCA3')}}"></script>
 <script>
     let favs = JSON.parse(localStorage.getItem("favoritesList")) || [];
     document.getElementsByClassName('favoritesCount')[0].innerHTML = favs.length;
 
     document.addEventListener('DOMContentLoaded', function() {
         jQuery('#arrival-date, #date-departure').datepicker({
-            autoclose: true
-        });
+            format: "dd/mm/yyyy"
+        })
     });
 </script>
 
-
+<script>
+    (function(w, d, s, h, id) {
+        w.roistatProjectId = id; w.roistatHost = h;
+        var p = d.location.protocol == "https:" ? "https://" : "http://";
+        var u = /^.*roistat_visit=[^;]+(.*)?$/.test(d.cookie) ? "/dist/module.js" : "/api/site/1.0/"+id+"/init?referrer="+encodeURIComponent(d.location.href);
+        var js = d.createElement(s); js.charset="UTF-8"; js.async = 1; js.src = p+h+u; var js2 = d.getElementsByTagName(s)[0]; js2.parentNode.insertBefore(js, js2);
+    })(window, document, 'script', 'cloud.roistat.com', '3471f90cb1269b9107391c11fb73fefc');
+</script>
 </body>
 </html>

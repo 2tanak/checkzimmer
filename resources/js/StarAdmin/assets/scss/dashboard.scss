@@ -79,6 +79,24 @@ a.back-link:hover {
 .form-group label {
     line-height: inherit !important;
 }
+.custom-control-label {
+    cursor: pointer;
+}
+.page-body-wrapper .comfort-block-item {
+    display: flex;
+    align-items: center;
+}
+.page-body-wrapper .comfort-block-item label {
+    margin-bottom: 0;
+    margin-left: 15px;
+    cursor: pointer;
+}
+.page-body-wrapper .comfort-block-item img {
+    margin-left: 15px;
+}
+.page-body-wrapper .comfort-block-item input[type="checkbox"] {
+    cursor: pointer;
+}
 
 
 @media (max-width: 991px) {

@@ -46,6 +46,7 @@ import RoomTypes from '../../components/Dashboard/Data/RoomTypes/Index';
 import GeocoderCache from '../../components/Dashboard/Data/GeocoderCache/Index';
 import Questions from '../../components/Dashboard/Feedback/Questions/Index';
 import Reviews from '../../components/Dashboard/Feedback/Reviews/Index';
+import Request from '../../components/Dashboard/Feedback/Request/Index';
 import Property from '../../components/Dashboard/Property/Property/Index';
 import PropertySingle from '../../components/Dashboard/Property/Property/Single';
 import Rooms from '../../components/Dashboard/Property/Rooms/Index';
@@ -54,6 +55,8 @@ import BookingItems from '../../components/Dashboard/Booking/Items/Index';
 import BookingMapping from '../../components/Dashboard/Booking/Mapping/Index';
 import BookingData from '../../components/Dashboard/Booking/Data/Index';
 import BookingSettings from '../../components/Dashboard/Booking/Settings/Index';
+import Pages from '../../components/Dashboard/Website/Pages/Index';
+import PageSingle from '../../components/Dashboard/Website/Pages/Single';
 
 Vue.use(Router);
 
@@ -215,6 +218,24 @@ export default new Router({
             path: '/dashboard/data/reviews',
             name: 'reviews',
             component: Reviews,
+            meta: { auth: true }
+        },
+        {
+            path: '/dashboard/feedback/request',
+            name: 'request',
+            component: Request,
+            meta: { auth: true }
+        },
+        {
+            path: '/dashboard/website/pages',
+            name: 'website-pages',
+            component: Pages,
+            meta: { auth: true }
+        },
+        {
+            path: '/dashboard/website/pages/:page',
+            name: 'website-pages-single',
+            component: PageSingle,
             meta: { auth: true }
         },
         {

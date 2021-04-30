@@ -18,7 +18,7 @@ class CreateGuestsTable extends Migration
             $table->string('pin');
             $table->string('name')->nullable();
             $table->string('email')->unique();
-            $table->text('reference')->default('');
+            $table->text('reference');
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

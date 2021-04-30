@@ -67,6 +67,7 @@
               <li class="nav-item"><router-link class="nav-link" :to="{ name: 'website-footer' }">{{ $t('Footer') }}</router-link></li>
               <li class="nav-item"><router-link class="nav-link" :to="{ name: 'website-settings' }">{{ $t('Settings') }}</router-link></li>
               <li class="nav-item"><router-link class="nav-link" :to="{ name: 'website-domains' }">{{ $t('Domains') }}</router-link></li>
+              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'website-pages' }">{{ $t('Pages') }}</router-link></li>
             </ul>
           </b-collapse>
         </li>
@@ -94,6 +95,7 @@
                   <ul class="nav flex-column sub-menu">
                       <li class="nav-item"><router-link class="nav-link" :to="{ name: 'questions' }">{{ $t('Questions') }}</router-link></li>
                       <li class="nav-item"><router-link class="nav-link" :to="{ name: 'reviews' }">{{ $t('Reviews') }}</router-link></li>
+                      <li class="nav-item"><router-link class="nav-link" :to="{ name: 'request' }">{{ $t('Request') }}</router-link></li>
                   </ul>
               </b-collapse>
           </li>

@@ -28,16 +28,12 @@ class QuestionsController extends Controller
 
     public function create(Request $request)
     {
-        $data = [
-            'question' => $request->question,
-            'property_id' => (int) $request->property_id,
-            'response' => '',
-        ];
-
+        $data = $request->all();
+        $data['response'] = '';
         $item = new Question($data);
         $item->save();
 
-        return redirect('/');
+        return response()->json(['code' => 'ok','question' => $item]);
     }
 
     public function paginated()

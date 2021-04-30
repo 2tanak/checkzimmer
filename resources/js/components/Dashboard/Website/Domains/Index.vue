@@ -44,7 +44,7 @@
                                             </a>
                                         </td>
                                         <td >
-                                            <a href="" @click.prevent="deleteDomain(domain)">&times;</a>
+                                            <a href="" v-b-modal.modal-object-delete @click.prevent="deleteDomain(domain)">&times;</a>
                                         </td>
                                     </b-tr>
                                 </tbody>
@@ -107,7 +107,8 @@ export default {
             },
             domainFields: domainsForm,
             operationOk: '',
-            operationError: ''
+            operationError: '',
+            domainDelete: {},
         }
     },
     mounted() {
@@ -117,6 +118,9 @@ export default {
             })
     },
     methods: {
+        deleteDomain(domain) {
+            this.domainDelete = domain;
+        },
         newDomainApply() {
             subdomains.create(this.newDomain).then(response => {
                 if(response.data.code === 'ok'){
@@ -135,7 +139,11 @@ export default {
             });
         },
         deleteOk(domain) {
-
+            subdomains.delete(this.domainDelete.id)
+                .then(resp => {
+                    let toDeleteIndex = this.domains.findIndex( item => item.id === this.domainDelete.id );
+                    this.domains.splice(toDeleteIndex, 1);
+                });
         },
         badge(item) {
             return item.active ? 'success' : 'danger';

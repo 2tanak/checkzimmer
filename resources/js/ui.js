@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Public from './components/Public/Index'
+import Home from './components/Public/Home'
 import Favorites from './components/Public/Favorites'
 import Single from './components/Public/Single'
 
@@ -37,14 +38,18 @@ Vue.use(VueI18n)
 import messagesLocaleEn from '../lang/en.json';
 import messagesLocaleDe from "../lang/de.json";
 
-const locale = document.location.pathname.split('/')[1];
+let locale = document.location.pathname.split('/')[1];
+let translations = {
+        en: messagesLocaleEn,
+        de: messagesLocaleDe
+    }
+if (!translations[locale]) {
+    locale = 'de'
+}
 
 const i18n = new VueI18n({
     locale: locale, // set locale
-    messages: {
-        en: messagesLocaleEn,
-        de: messagesLocaleDe
-    },
+    messages: translations,
 })
 
 const app = new Vue({
@@ -52,11 +57,12 @@ const app = new Vue({
     router,
     components: {
         Public,
+        Home,
         Favorites,
-        Single
+        Single,
     },
     store,
-    i18n
+    i18n,
 });
 
 
@@ -221,14 +227,22 @@ jQuery(document).ready(function() {
                     el.text(arr[c++ % arr.length]);
                 }}());
         })};
-    jQuery(function() {
-        jQuery('.sh_nmr').textToggle(".sh_nmr","").click();
-        jQuery('.sh_nmr').textToggle(".num_hide","ХХХХ ХХХX").click();
-        jQuery('.sh_nmr').click(function () {
-            jQuery('.sidebar .number-phone').addClass('gray');
-            jQuery('.sh_nmr').css('display', 'none');
-        });
+
+    jQuery('.languages-block .selected-language').click(function (e) {
+        e.preventDefault();
+        jQuery(this).toggleClass('active');
+        jQuery('.list-languages').toggleClass('active');
     });
+
+    jQuery(document).mouseup(function (e){
+        var div = jQuery(".selected-language");
+        if (!div.is(e.target)
+            && div.has(e.target).length === 0) {
+            jQuery('.list-languages').removeClass('active');
+            jQuery('.selected-language').removeClass('active');
+        }
+    });
+
 
     jQuery('.inquiry-modal .input-block-item input, .modal-block input').focus(function () {
         var parent = jQuery(this).closest('.input-block-item, .modal-block');
@@ -255,7 +269,6 @@ jQuery(document).ready(function() {
     });
 
     jQuery('.sidebar-bottom a').click(function (e) {
-        e.preventDefault();
         var parent = jQuery(this).closest('.sidebar-bottom-block');
         jQuery('.sidebar-modal-block').removeClass('active');
         jQuery(parent).find('.sidebar-modal-block').addClass('active');
@@ -277,15 +290,7 @@ jQuery(document).ready(function() {
     });
 
     jQuery('.close-block').click(function () {
-        jQuery('.sidebar-small-block, .sidebar-modal-block').removeClass('active');
-    });
-
-    jQuery(document).mouseup(function (e){
-        var div = jQuery(".sidebar-small-block");
-        if (!div.is(e.target)
-            && div.has(e.target).length === 0) {
-            jQuery('.sidebar-modal-block').removeClass('active');
-        }
+        jQuery('.sidebar-modal-block').removeClass('active');
     });
 
     jQuery(document).mouseup(function (e){
@@ -293,6 +298,14 @@ jQuery(document).ready(function() {
         if (!div.is(e.target)
             && div.has(e.target).length === 0) {
             jQuery('.quality').removeClass('active');
+        }
+    });
+
+    jQuery(document).click(function (e) {
+        if (jQuery(e.target).closest('.sidebar-small-block').length === 0 &&
+            jQuery(e.target).closest('.select2-container').length === 0  &&
+            jQuery('.sidebar-small-block').hasClass('active')) {
+            jQuery('.sidebar-modal-block').removeClass('active');
         }
     });
 
@@ -310,29 +323,6 @@ jQuery(document).ready(function() {
             jQuery('#number-persons, #type, #offer-select3, #distance-select, #number-personse').select2();
         }
     });
-
-    jQuery('.selected-language').click(function (e) {
-        e.preventDefault();
-        jQuery('.list-languages').toggleClass('active');
-        jQuery('.selected-language').toggleClass('active');
-    });
-
-    jQuery(document).mouseup(function (e){
-        var div = jQuery(".list-languages");
-        if (!div.is(e.target)
-            && div.has(e.target).length === 0) {
-            jQuery('.list-languages').removeClass('active');
-            jQuery('.selected-language').removeClass('active');
-        }
-    });
-
-    /*jQuery('.list-languages a').click(function (e) {
-        e.preventDefault();
-        var paragraph = jQuery(this).text();
-        jQuery('.selected-language a').text(paragraph);
-        jQuery('.list-languages').removeClass('active');
-        jQuery('.selected-language').removeClass('active');
-    });*/
 
 
     jQuery('.mobile-card-button').click(function () {
@@ -355,6 +345,18 @@ jQuery(document).ready(function() {
         infinite: true,
         asNavFor: '.small-slider'
     });
+
+    jQuery('.property-card-slider').slick({
+        arrows: false,
+        dots: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        infinite: true
+    });
+
+    if (jQuery(window).width() < 1040) {
+        jQuery('.property-card-slider').slick('unslick');
+    }
 
     jQuery('.small-slider').slick({
         slidesToShow: 10,
@@ -379,6 +381,8 @@ jQuery(document).ready(function() {
 
     jQuery('.see-number-phone').click(function () {
        jQuery('.see-number-phone').addClass('active');
+        jQuery('.phone-hide').html(atob(window.phonenumStr));
+        jQuery('.phone-hide').attr('href', 'tel:' + atob(window.phonenum));
     });
 
     jQuery('a.map-picture').bind("click", function(e){
@@ -393,7 +397,7 @@ jQuery(document).ready(function() {
         jQuery('.map-active a').addClass('active');
     });
 
-    jQuery('a.map-picture.map-mobile-picture').bind("click", function(e){
+    jQuery('a.map-mobile-picture').bind("click", function(e){
         e.preventDefault();
         var anchor = jQuery(this);
         jQuery('html, body').stop().animate({
@@ -433,8 +437,32 @@ jQuery(document).ready(function() {
         tempScrollTop = currentScrollTop;
     });
 
-    jQuery('.single-content .favorites').click(function () {
+    let id = parseInt(jQuery('.single-content .favorites').attr('id'));
+    let favoritesObject = JSON.parse(localStorage.getItem("favoritesList"));
+    if (favoritesObject === null) {
+        favoritesObject = [];
+    }
+    if (favoritesObject.indexOf(id) !== -1) {
+        jQuery('.single-content .favorites').addClass('active');
+    }
+
+    jQuery('.single-content .favorites').click(function (e) {
+        e.preventDefault();
+
         jQuery('.single-content .favorites').toggleClass('active');
+        let id = parseInt(jQuery(this).attr('id'));
+        let favoritesObject = JSON.parse(localStorage.getItem("favoritesList"));
+
+        if (favoritesObject === null) {
+            favoritesObject = [];
+        }
+        if (favoritesObject.indexOf(id) !== -1) {
+            favoritesObject.splice(favoritesObject.indexOf(id), 1);
+        } else {
+            favoritesObject.push(id);
+        }
+        jQuery('.favoritesCount').html(favoritesObject.length);
+        localStorage.setItem('favoritesList', JSON.stringify(favoritesObject));
     });
 
 });
@@ -488,7 +516,8 @@ jQuery(window).on('load', function() {
             slidesToScroll: 1,
             arrows: false,
             infinite: true,
-            dots: true
+            dots: true,
+            centerMode: true
         });
     }
 

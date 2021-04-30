@@ -1,4 +1,4 @@
-<div class="mobile-object-description object-description">
+<div class="mobile-object-description" id="object-description">
 
     <div class="mobile-description-content paddings-block">
         <div class="head-collapse" data-toggle="collapse" data-target="#mobile-description-content-collapse" aria-expanded="false" aria-controls="mobile-description-content-collapse">
@@ -7,16 +7,8 @@
         </div>
         <div class="collapse" id="mobile-description-content-collapse">
             <div class="description-content">
-                Absolutely brand new, amazing studio unit (part of 3 unit complex) located in prime central Leipzig,
-                one block from Ristrasse Street. Surrounded by embassies, restaurants, cafes this makes for
-                amazing location. The apartment is totally equipped with everything including king sized bed,
-                LCD TV with Smart TV, fully equipped kitchen, balcony, Air Conditioner, High Speed Wi Fi,
-                washing machine, shower cabin and much more. Perfect place for your next stay in Leipzig!
-                Absolutely brand new, amazing studio unit (part of 3 unit complex) located in prime central
-                Leipzig, one block from Ristrasse Street. Surrounded by embassies, restaurants, cafes this
-                makes for amazing location. The apartment is totally equipped with everything including king
-                sized bed, LCD TV with Smart TV, fully equipped kitchen, balcony, Air Conditioner, High Speed
-                Wi Fi, washing machine, shower cabin and much more. Perfect place for your next stay in Leipzig!
+                {{ $hotel['description'] }}
+                @if (false)
                 <div class="collapse collapse-content" id="description-collapse">
                     Absolutely brand new, amazing studio unit (part of 3 unit complex) located in prime central Leipzig,
                     one block from Ristrasse Street. Surrounded by embassies, restaurants, cafes this makes for amazing
@@ -33,13 +25,14 @@
                     {{ __('More details') }}
                     <img src="/svg/i-arrow-show-more.svg" alt="alt">
                 </a>
+                @endif
             </div>
         </div>
     </div>
 
     <div class="reviews-content mobile-reviews-content paddings-block">
         <div class="head-collapse" data-toggle="collapse" data-target="#mobile-reviews-content-collapse" aria-expanded="false" aria-controls="mobile-reviews-content-collapse">
-            <div>{{ __('Reviews') }} <span>(72)</span></div>
+            <div>{{ __('Reviews') }} <span class="rev-number">(72)</span></div>
             <div class="decompose-button"></div>
         </div>
         <div class="collapse" id="mobile-reviews-content-collapse">
@@ -255,3 +248,54 @@
         </div>
     </div>
 </div>
+
+<script>
+    function initMap() {
+        if (typeof google === 'undefined' || !document.getElementById('map-mobile')) {
+            setTimeout( () => { initMap() }, 100 );
+            return;
+        }
+
+        let mapCanvas = document.getElementById("map-mobile");
+
+        let myCenter = new google.maps.LatLng(window.myCenter2.lat, window.myCenter2.lng);
+        let myTrip = window.myTrip2;
+        let mapOptions = {
+            center: myCenter,
+            zoom: 10,
+            disableDefaultUI: true,
+            zoomControl: true,
+            zoomControlOptions: {
+                style: google.maps.ZoomControlStyle.DEFAULT,
+                position: google.maps.ControlPosition.TOP_RIGHT
+            },
+            mapTypeId: google.maps.MapTypeId.MOBILE
+        };
+        let images = '/img/point-img.png';
+        let marker = new google.maps.Marker ({
+            position: myCenter,
+            map: mapCanvas
+        });
+        let map = new google.maps.Map(mapCanvas ,mapOptions);
+        let contentString = '<div id="content">'+
+            '<span class="index">&euro;{{ $hotel->price }}</span>'+
+            '<span>&nbsp;</span>'+
+            '<span class="town"></span>'+
+            '</div>';
+        let infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+        infowindow.open(map, marker);
+        var flightPath = new google.maps.Polygon({
+            path: myTrip,
+            strokeColor: "#6bb638",
+            strokeOpacity: 1,
+            strokeWeight: 2,
+            fillColor: "rgb(117, 242, 122)",
+            fillOpacity: 0.2
+        });
+        marker.setMap(map);
+        flightPath.setMap(map);
+    }
+
+</script>

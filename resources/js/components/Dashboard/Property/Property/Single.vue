@@ -14,8 +14,8 @@
         <div class="row mt-4">
             <div class="col-md-12 grid-margin">
                 <form>
-                    <div class="row">
-                        <div class="col-md-12">
+                    <div class="row mb-4">
+                        <div class="col-md-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
                                     <b-form-group :label="$t('Name hotel')" label-for="input-hotel-name">
@@ -27,14 +27,13 @@
                                     <b-form-group :label="$t('Object display order')" label-for="input-hotel-name">
                                         <b-form-input v-model="property.ord" id="input-hotel-name"></b-form-input>
                                     </b-form-group>
-                                    <b-form-checkbox v-model="showPin" style="margin-bottom:16px;">{{ $t('Closed access') }}</b-form-checkbox>
-                                    <b-form-group :label="$t('Object access') + '(PIN)'" label-for="input-hotel-name" v-if="showPin">
+                                    <b-form-group style="margin-bottom:0;">
+                                        <b-form-checkbox v-model="showPin" style="margin-bottom:16px;">{{ $t('Closed access') }}</b-form-checkbox>
+                                    </b-form-group>
+                                    <b-form-group :label="$t('Object access') + ' ' + '(PIN)'" label-for="input-hotel-name" v-if="showPin">
                                         <b-form-input v-model="property.access" id="input-hotel-name"></b-form-input>
                                         <small v-if="!property.access" class="text-info">{{ $t('Free access') }}</small>
                                         <small v-else class="text-danger">{{ $t('access is limited by the specified PIN codes. Codes can be separated by commas') }}</small>
-                                    </b-form-group>
-                                    <b-form-group>
-                                        <b-form-checkbox v-model="property.opts.hideAddress" value="true">{{ $t('Hide address') }}</b-form-checkbox>
                                     </b-form-group>
                                     <b-form-group class="checkbox-block">
                                         <b-form-checkbox v-model="property.opts.superhost">{{ $t('Superhost') }}</b-form-checkbox>
@@ -44,15 +43,29 @@
                                     <b-form-group>
                                         <b-form-checkbox id="vat"
                                                          v-model="property.opts.inclVAT"
-                                                         name="vat">
+                                                         name="vat"
+                                                         >
                                             {{ $t('Tax (VAT) is included in the price') }}</b-form-checkbox>
+                                    </b-form-group>
+                                    <b-form-group :label="$t('Minimum rent')" class="rent-block" style="font-size:0.875rem;">
+                                        <b-form-input v-model="property.opts.rentMin" id="input-hotel-name"></b-form-input>
                                     </b-form-group>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row mt-4 mb-4">
+                    <div class="row mb-2">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 style="margin-bottom:0;">{{ $t('SEO') }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
                         <div class="col-md-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
@@ -117,7 +130,7 @@
                                 <div class="card-body">
                                     <div class="row mt-4 mb-4">
                                         <div class="col-md-3">
-                                            <b-form-group :label="$t('Landlord')" laber-for="input-client-name">
+                                            <b-form-group :label="$t('Landlord')" label-for="input-landlord-fullname">
                                                 <b-form-input v-model="property.opts.landlordName" id="input-landlord-fullname"></b-form-input>
                                             </b-form-group>
                                             <b-form-group>
@@ -125,20 +138,20 @@
                                             </b-form-group>
                                         </div>
                                         <div class="col-md-3">
-                                            <b-form-group :label="$t('Phone number')" laber-for="input-phone">
-                                                <b-form-input v-model="property.opts.landlordPhoneNumber" id="input-landlord-phone"></b-form-input>
+                                            <b-form-group :label="$t('Phone number')" label-for="input-phone">
+                                                <b-form-input v-model="property.opts.landlordPhoneNumber" id="input-landlord-phone" @keyup="phoneInput"></b-form-input>
                                             </b-form-group>
                                             <b-form-group>
                                                 <b-form-checkbox v-model="property.opts.landlordHidePhone">{{ $t('Hide') }}</b-form-checkbox>
                                             </b-form-group>
                                         </div>
                                         <div class="col-md-3">
-                                            <b-form-group :label="$t('Client email')" laber-for="input-email">
+                                            <b-form-group :label="$t('Client email')" label-for="input-email">
                                                 <b-form-input v-model="property.opts.landlordClientEmail" id="input-landlord-email"></b-form-input>
                                             </b-form-group>
                                         </div>
                                         <div class="col-md-3">
-                                            <b-form-group :label="$t('Languages')" laber-for="input-email">
+                                            <b-form-group :label="$t('Languages')" label-for="input-email">
                                                 <b-form-input v-model="property.opts.landlordLanguages" id="input-landlord-talking"></b-form-input>
                                             </b-form-group>
                                         </div>
@@ -148,11 +161,38 @@
                         </div>
                     </div>
 
-                    <div class="row mt-4 mb-4">
+                    <div class="row mb-4">
                         <div class="col-md-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4>{{ $t('Photo') }}</h4>
+                                    <input type="hidden" v-model="property.price">
+
+                                    <b-form-group :label="$t('Property description')" label-for="input-property-description">
+                                        <b-textarea v-model="property.description" class="form-control" id="input-property-description" type="text" />
+                                    </b-form-group>
+                                    <b-form-group :label="$t('Hotel info')" class="rent-block" style="font-size:0.875rem;">
+                                        <b-form-input v-model="property.opts.info" id="input-hotel-name"></b-form-input>
+                                        <small>Text under room description</small>
+                                    </b-form-group>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 style="margin-bottom:0;">{{ $t('Photo') }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
                                     <draggable class="row mt-4 photos-gallery" v-model="imageData" @start="drag=true" @end="drag=false">
                                         <div class="col-xl-2 col-lg-3 col-sm-4 mb-4" v-for="element in imageData" :key="element.id">
                                             <div class="photos-gallery-item">
@@ -171,19 +211,28 @@
                         </div>
                     </div>
 
-                    <div class="row mt-4 mb-4">
+                    <div class="row mb-2">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 style="margin-bottom:0;">{{ $t('Facilities') }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
                         <div class="col-md-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4>{{ $t('Facilities') }}</h4>
                                     <template v-for="feature in features">
                                         <div class="comfort-block mt-5">
                                             <h3>{{feature.name }}</h3>
                                             <div class="row">
                                                 <div class="col-md-3 col-sm-4 col-6 comfort-block-item mt-2" v-for="itemFeature in feature.features">
+                                                    <input type="checkbox" :id="itemFeature.id" :name="itemFeature.name" v-model="itemFeature.check"  @change="addFeatures(itemFeature)">
                                                     <img :src="itemFeature.picture" alt="alt">
-                                                    <span>{{ itemFeature.name }}</span>
-                                                    <input type="checkbox" :name="itemFeature.name" v-model="itemFeature.check"  @change="addFeatures(itemFeature)">
+                                                    <label :for="itemFeature.id">{{ itemFeature.name }}</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -215,7 +264,7 @@
                                         <b-button class="button-collapse" v-b-toggle="'id-'+room.id"> {{ $t('Room') }} № {{ i+1 }}</b-button>
                                     </div>
                                     <div class="delete-room">
-                                        <b-button v-if="room.newRoom" type="submit" variant="success" class="mr-2" @click="saveRoom(room)">
+                                        <b-button v-if="room.newRoom" type="submit" variant="success" class="mr-2" @click.prevent="saveRoom(room)">
                                             {{ $t('Save room') }}</b-button>
                                         <b-button v-if="room.newRoom" variant="danger" @click="deleteNewRoom()">{{ $t('Delete room') }}</b-button>
                                         <b-button v-else variant="danger" @click="deleteRoomOk($event, room)">{{ $t('Delete room') }}</b-button>
@@ -251,14 +300,13 @@
                                                     <div class="col-md-4">
                                                         <b-form-group :label="$t('Cost, from')" :label-for="'input-room-'+i+'-price'">
                                                             <b-form-input v-model="room.price" :id="'input-room-'+i+'-price'"></b-form-input>
-                                                            <span style="font-size:0.875rem;">{{ tax }}</span>
                                                         </b-form-group>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <b-form-group :label="$t('Shower')" :label-for="'input-room-'+i+'-shower'">
                                                             <b-select v-model="room.shower">
-                                                                <b-select-option value="single">{{ $t('Its') }}</b-select-option>
-                                                                <b-select-option value="shared">{{ $t('Joint') }}</b-select-option>
+                                                                <b-select-option value="single">{{ $t('Private') }}</b-select-option>
+                                                                <b-select-option value="shared">{{ $t('Shared') }}</b-select-option>
                                                                 <b-select-option value="none">{{ $t('Absent') }}</b-select-option>
                                                             </b-select>
                                                         </b-form-group>
@@ -275,8 +323,8 @@
                                                     <div class="col-md-4">
                                                         <b-form-group :label="$t('Kitchen')" :label-for="'input-room-'+i+'-shower'">
                                                             <b-select v-model="room.kitchen">
-                                                                <b-select-option value="single">{{ $t('Its') }}</b-select-option>
-                                                                <b-select-option value="shared">{{ $t('Joint') }}</b-select-option>
+                                                                <b-select-option value="single">{{ $t('Private') }}</b-select-option>
+                                                                <b-select-option value="shared">{{ $t('Shared') }}</b-select-option>
                                                                 <b-select-option value="kitchenette">{{ $t('Kitchenette') }}</b-select-option>
                                                                 <b-select-option value="none">{{ $t('Absent') }}</b-select-option>
                                                             </b-select>
@@ -316,8 +364,15 @@
         </div>
         <div class="row mb-4">
             <div class="col-md-12">
-                <b-button type="submit" variant="outline-primary" class="mr-2" @click="addRoom">{{ $t('Add room') }}</b-button>
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <b-button type="submit" variant="outline-primary" class="mr-2" @click="addRoom">{{ $t('Add room') }}</b-button>
+                    <a class="back-link" href="/dashboard/property/items">{{ $t('Back') }}</a>
+                </div>
             </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content: flex-end;">
+            <b-button style="margin-right:10px;" v-b-modal.deleteHotelModal variant="danger" @click="deleteHotel">{{ $t('Delete hotel') }}</b-button>
+            <b-button style="margin-right:0 !important;" type="submit" variant="success" class="mr-2 " @click="save">{{ $t('Save') }}</b-button>
         </div>
 
         <b-modal id="deleteHotelModal" :title="$t('Delete Hotel')" @ok="deleteHotelOk">
@@ -385,7 +440,7 @@ let defOptions = {
         type: 'bool',
     },
     seo_title: {
-        value: '%site-title% - Monteurzimmer in %city%, <hide-zip>%postcode%,</hide-zip> <hide-address>%street%, %house-number%</hide-address>',
+        value: '%site-title% - Monteurzimmer in %city%<hide-all>,</hide-all><hide-zip> %postcode%</hide-zip><hide-address> %street%, %house-number%</hide-address>',
         type: ''
     },
     seo_description: {
@@ -411,6 +466,14 @@ let defOptions = {
     hideZip: {
         value: '',
         type: 'bool'
+    },
+    rentMin: {
+        value: '3',
+        type: ''
+    },
+    info: {
+        value: '',
+        type: ''
     }
 }
 
@@ -419,7 +482,7 @@ export default {
     name: "Single",
     data() {
         return {
-            property: { opts: {}},
+            property: { opts: { landlordPhoneNumber: ''}},
             nameSelected: null,
             capacitySelected: null,
             nameOptions: [
@@ -449,7 +512,6 @@ export default {
                 { value: '10', text: 'Ten-seater' }
             ],
             showPin: false,
-            tax: 'not including taxes',
             imageData: [],
             newRoomOptions: [
                 {
@@ -538,16 +600,26 @@ export default {
 
     },
     methods: {
+        phoneInput(ph) {
+            let start = this.property.opts.landlordPhoneNumber.substr(0, 3);
+            if (start != '+49') {
+                this.property.opts.landlordPhoneNumber = this.property.opts.landlordPhoneNumber.replace(start, '+49');
+            }
+            console.log(start);
+            console.log(this.property.opts.landlordPhoneNumber);
+        },
         initOptions() {
             for (let i in defOptions) {
                 if (!this.property.opts[i]) {
-                    this.property.opts[i] = defOptions[i].value;
+                    //this.property.opts[i] = defOptions[i].value;
+                    Vue.set(this.property.opts, i, defOptions[i].value);
                     continue;
                 }
-                this.property.opts[i] = defOptions[i].type === 'bool' ?
+                Vue.set(this.property.opts, i, defOptions[i].type === 'bool' ?
                     (this.property.opts[i] && this.property.opts[i] !== '0'? true : false)
-                    : this.property.opts[i];
+                    : this.property.opts[i]);
             }
+            Vue.set(this.property, 'opts', this.property.opts);
         },
         addFeatures(feature){
             const indexFeatures = this.property.features.findIndex(item => item.id === feature.id);
@@ -667,13 +739,13 @@ export default {
                 (i===0) ? item.main_photo = true : delete item.main_photo;
             });
             for(let option of this.property.options){
-                if(option.key === 'photos'){
+                if (option.key === 'photos'){
                     option.value = JSON.stringify(this.imageData);
                 }
             }
             this.property.rooms.forEach( room => {
                 for(let option of room.options){
-                    if(option.key === 'photos'){
+                    if (option &&option.key === 'photos'){
                         option.value = JSON.stringify(room.photos);
                     }
                 }
@@ -693,6 +765,8 @@ export default {
                     });
                 }
             }
+            this.property.price = this.minRoomPrice;
+
             properties.update(this.property.id, this.property)
                 .then(resp => {
                     /*properties.get(this.$route.params.item)
@@ -763,7 +837,12 @@ export default {
             return this.getPhotos()
         },
         roomTypeOptions() {
-            return this.roomTypes.map( item => { return { value: item.id, text: item.name } })
+            return this.roomTypes.filter( item => item.room_type_id === 0).map( item => { return { value: item.id, text: item.name } })
+        },
+        minRoomPrice() {
+
+            console.log(this.property.rooms);
+            return this.property.rooms.reduce( (carry, item) => carry ? (item.price ? Math.min(item.price, carry) : carry) : item.price, 0 );
         }
     },
 }

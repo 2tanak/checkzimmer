@@ -31,8 +31,10 @@ Route::middleware('auth')->namespace('Api')->group(function () {
     Route::resource('geocode-cache', 'GeocodeCacheController');
     Route::resource('questions', 'QuestionsController');
     Route::resource('reviews', 'ReviewsController');
+    Route::resource('pages', 'PageController');
 
     Route::post('property/query', 'PropertyController@query');
+    Route::post('features/language', 'FeaturesController@language');
 
     Route::get('options/bytype/{type}', 'OptionsController@showByType');
     Route::get('property/init', 'PropertyController@init');
@@ -55,12 +57,15 @@ Route::middleware('auth')->namespace('Api')->group(function () {
 
     Route::get('/questions', 'QuestionsController@paginated');
     Route::get('/reviews', 'ReviewsController@paginated');
+    Route::post('/question/create', 'QuestionsController@create');
+    Route::post('/reviews/create', 'ReviewsController@create');
 
     Route::get('users', 'UsersController@index')->middleware('isAdmin');
     Route::get('users/{id}', 'UsersController@show')->middleware('isAdminOrSelf');
 
     Route::get('languages/{id}', 'LanguagesController@get');
     Route::put('languages/{id}', 'LanguagesController@update');
+
 });
 
 Route::group(['namespace' => 'Api'], function() {
@@ -71,6 +76,7 @@ Route::group(['namespace' => 'Api'], function() {
     Route::post('/property/querySort', 'PropertyController@querySort');
     Route::post('/property/initMap', 'PropertyController@initMap');
     Route::post('/property/list', 'PropertyController@listUpdate');
+    Route::post('search/tooltip', 'PostcodeController@query');
 });
 
 Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {

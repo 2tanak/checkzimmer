@@ -14,7 +14,7 @@ class Room extends Model
     protected $table = 'rooms';
     protected $fillable = ['property_id', 'room_type_id', 'number', 'person', 'price', 'bed', 'shower', 'kitchen', 'status', 'native_id'];
     protected $fillableRelations = ['options'];
-    protected $with = ['options'];
+    protected $with = ['options', 'roomType'];
 
     static function hasFeature($name, $room_facilities)
     {
@@ -27,39 +27,42 @@ class Room extends Model
     {
         switch ($room['kitchen']) {
             case 'kitchenette':
-                return 'kitchenette';
+                return __('kitchenette');
             case 'shared':
-                return 'shared';
+                return __('shared');
             case 'single':
-                return 'single';
+                return __('single');
         }
-        return 'none';
+        return __('none');
     }
 
     static function getShowerType($room_facilities)
     {
         if (self::hasFeature('Shared bathroom', $room_facilities)){
-            return 'shared';
+            return __('shared');
         }
         if (self::hasFeature('Shower', $room_facilities) || self::hasFeature('Private bathroom', $room_facilities)){
-            return 'single';
+            return __('single');
         }
-        return 'none';
+        return __('none');
     }
 
     static function getBedroomType($bedrooms)
     {
         if (count($bedrooms) == 0){
-            return 'none';
+            return __('none');
         }
         foreach ($bedrooms as $bedroom){
             if (strpos($bedroom['description'], 'double') !== false){
-                return 'double';
+                return __('double');
             }
         }
-        return 'single';
+        return __('single');
     }
 
+    public function roomType() {
+        return $this->belongsTo(RoomType::class, 'room_type_id');
+    }
     public function options()
     {
         return $this->hasMany(Option::class, 'parent')->where('type', 'room');
@@ -123,7 +126,7 @@ class Room extends Model
             case 'double':
                 return __('double');
         }
-        return __('unknown');
+        return __('none');
     }
 
     static public function getBedroomLabelColor($item)
@@ -158,9 +161,9 @@ class Room extends Model
             if ($relationData = $data[$fillableRelationName]){
                 $currentRelation = $this->$fillableRelationName;
 
-                array_map(static function (array $data) use ($relationData, $currentRelation) {
+                array_map(function (array $data) use ($relationData, $currentRelation) {
                     $relationModel = $currentRelation->filter(function ($item) use ($data) {
-                        return $item->id === $data['id'];
+                        return $item->id === ($data['id'] ?? 0);
                     })->first();
                     if($relationModel){
                         $relationModel->fill($data);
