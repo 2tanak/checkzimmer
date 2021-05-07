@@ -113,7 +113,7 @@ class PropertyController extends Controller
         }
 
         if ($people) {
-            $totalIds = Room::select(DB::raw('SUM(number * person) as people'), 'property_id')->groupBy('property_id')->having('people', '>=', $people)->pluck('property_id');
+            $totalIds = Room::select(DB::raw('SUM(number * person) as people'), 'property_id')->groupBy('property_id')->having('people', '>=', $people)->pluck('property_id')->toArray();
         } else {
             $totalIds = [];
         }
