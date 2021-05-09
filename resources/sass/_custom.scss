@@ -458,7 +458,7 @@ header .head-search input {
     border-radius: 6px;
     padding: 0 40px;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 100%;
     color: #545769;
     outline: none;
@@ -6048,9 +6048,6 @@ header.height-menu .mobile-menu {
 
 
 @media (max-width: 1211px) {
-    .single-content .single-gallery {
-        display: none;
-    }
     .single-content .no-photo {
         height: 396px;
         margin-bottom: 0;
