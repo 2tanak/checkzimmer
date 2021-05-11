@@ -9,8 +9,13 @@
 @if ($hotel->getCurrentOption('superhost') == 1)
     <div class="superhost-icon">{{ __('Superhost') }}</div>
 @endif
-@if (count($hotel->photos()))
+@if (count($hotel->photos()) || $hotel->photoMain())
 <div class="single-main-slider">
+    <div class="main-slider-item">
+        <a class="open-gallery" href="#">
+            <img src="{{ $hotel->photoMain()['url_original'] }}" alt="alt">
+        </a>
+    </div>
     @foreach ($hotel->photos() as $key => $photo)
         <div class="main-slider-item">
             <a class="open-gallery" href="#">

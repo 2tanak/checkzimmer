@@ -203,6 +203,39 @@ class HomeController extends Controller
     public function redirect() {
         return response()->redirectToRoute(app('locale')->routeApply('home'));
     }
+    public function roistatSend($data) {
+        $roistatData = array(
+            'roistat' => isset($_COOKIE['roistat_visit']) ? $_COOKIE['roistat_visit'] : 'nocookie',
+            'key' => 'Yzc5MTY2Y2UyNmE4ZDdkNjM4YWI0OGFhNzNlMmFiZjk6MTg0Nzg4',
+            'title' => ($data['name'] ?? '').' - '.($data['telephone'] ?? '').' - '.date('Y-m-d'),
+            'comment' => $data['message'] ?? '',
+            'name' => $data['name'] ?? '', // Имя клиента
+            'email' => $data['email'] ?? '', // Email клиента
+            'phone' => $data['telephone'] ?? '', // Номер телефона клиента
+            'order_creation_method' => 'website-form', // Способ создания сделки (необязательный параметр). Укажите то значение, которое затем должно отображаться в аналитике в группировке "Способ создания заявки"
+            'is_need_callback' => '0',
+            'callback_phone' => '',
+            'sync' => '0',
+            'is_need_check_order_in_processing' => '1',
+            'is_need_check_order_in_processing_append' => '1',
+            'is_skip_sending' => '0', // Не отправлять заявку в CRM.
+            'fields'  => array(
+                'company' => $data['company'] ?? '',
+                'arrival-date' => $data['arrival-date'] ?? '',
+                'date-departure' => $data['date-departure'] ?? '',
+                'language' => $data['language'] ?? '',
+                'number-persons' => $data['number-persons'] ?? '',
+                'type' => $data['type'] ?? '',
+                'email-checkbox' => $data['email-checkbox'] ?? '',
+                'consent-checkbox' => $data['consent-checkbox'] ?? '',
+                'property' => $data['property'] ?? '',
+                "charset" => "Windows-1251", // Сервер преобразует значения полей из указанной кодировки в UTF-8.
+            ),
+        );
+
+	    file_get_contents("https://cloud.roistat.com/api/proxy/1.0/leads/add?" . http_build_query($roistatData));
+
+    }
     public function inquiryForm(InquiryFormRequest $request)
     {
         $data = $request->all();
@@ -216,6 +249,7 @@ class HomeController extends Controller
                     Mail::to($data['email'])->send(new InquiryHotel($property, $data));
                 }
             }
+            $this->roistatSend($data);
             return response()->json(['code' => 'ok']);
         } else {
             return response()->json(['code' => 'error']);

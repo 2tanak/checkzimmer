@@ -458,7 +458,7 @@ header .head-search input {
     border-radius: 6px;
     padding: 0 40px;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 100%;
     color: #545769;
     outline: none;
@@ -3531,6 +3531,7 @@ header.height-menu .mobile-menu {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 .single-content .no-photo .no-photo-small {
     min-width: 62px;
@@ -6392,6 +6393,8 @@ header.height-menu .mobile-menu {
     }
     .single-content .comfort .comfort-block {
         margin-bottom: 12px !important;
+        max-height: 74px;
+        overflow: hidden;
     }
     .comfort a.comfort-collapse-link {
         display: flex;
