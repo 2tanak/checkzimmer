@@ -11281,4 +11281,6 @@ footer .social-block {
 
 .photo-container a.img-link {
     display: block;
+    position: relative;
+    z-index: 10;
 }
