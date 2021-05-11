@@ -6392,13 +6392,15 @@ header.height-menu .mobile-menu {
         padding: 30px 16px;
     }
     .single-content .comfort .comfort-block {
-        margin-bottom: 12px !important;
         max-height: 74px;
         overflow: hidden;
     }
     .comfort a.comfort-collapse-link {
         display: flex;
-        transition: all .3s;
+        margin-top: 12px;
+    }
+    .comfort a.comfort-collapse-link.active {
+        margin-top: 0;
     }
     .comfort a.comfort-collapse-link[aria-expanded="true"] img {
         transform: rotate(180deg);
@@ -6805,7 +6807,7 @@ header.height-menu .mobile-menu {
         border-top: 1px solid #e3e4e6;
     }
     .single-content .sidebar.mobile-sidebar {
-        min-height: 396px;
+        min-height: auto;
         height: auto;
         order: 4;
         margin-left: 0;
