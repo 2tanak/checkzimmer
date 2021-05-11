@@ -6,7 +6,7 @@
 
         <div class="background-image-block">
             <a href="https://web.whatsapp.com/send?phone={{ __($options['website_phone_watsapp'] ?? '' ) }}" class="write-whatsapp">
-                <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="20" height="21" viewBox="0 0 20 21" fill="none">
                     <g clip-path="url(#clip0)" filter="url(#filter0_d)">
                         <path d="M17.1 2.87417C15.2 1.0375 12.7 0 10.0375 0C2.39583 0 -2.4025 8.27917 1.41333 14.865L0 20L5.27917 18.6233C7.57917 19.8658 9.46333 19.7558 10.0425 19.8292C18.9033 19.8292 23.3142 9.10917 17.0875 2.90667L17.1 2.87417Z" fill="white"/>
                         <path d="M10.056 18.1258L10.051 18.1249H10.0376C7.38598 18.1249 5.69181 16.8691 5.52515 16.7966L2.40015 17.6091L3.23765 14.5716L3.03848 14.2591C2.21348 12.9458 1.77515 11.4333 1.77515 9.87576C1.77515 2.54827 10.7293 -1.1159 15.911 4.06327C21.0801 9.18826 17.451 18.1258 10.056 18.1258Z" fill="#4CAF50"/>
