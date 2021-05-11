@@ -6048,6 +6048,9 @@ header.height-menu .mobile-menu {
 
 
 @media (max-width: 1211px) {
+    .single-content .single-gallery {
+        display: none;
+    }
     .single-content .no-photo {
         height: 396px;
         margin-bottom: 0;

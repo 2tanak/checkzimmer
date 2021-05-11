@@ -6,7 +6,7 @@
     </div>
     <div class="slider-block">
         <div class="big-slider">
-            @if ($hotel->photoMain())
+            @if (true || $hotel->photoMain())
                 <div class="slider-item"><img src="{{ $hotel->photoMain()['url_original'] }}" alt="alt"></div>
             @endif
             @foreach ($hotel->photos() as $key => $photo)
@@ -14,7 +14,7 @@
             @endforeach
         </div>
         <div class="small-slider">
-            @if ($hotel->photoMain())
+            @if (true || $hotel->photoMain())
                 <div class="slider-item"><img src="{{ $hotel->photoMain()['url_original'] }}" alt="alt"></div>
             @endif
             @foreach ($hotel->photos() as $key => $photo)
