@@ -7,7 +7,7 @@
             <div v-if="isSuperhost" class="superhost-icon">{{ $t('Superhost') }}</div>
         </div>
         <div style="position:relative;" v-if="getPhotos.length && !sizedForSlider">
-            <a href="":href="'/'+$i18n.locale+'/single/'+item.slug" class="img-link">
+            <a href="":href="getUrlLangPrefix+'/single/'+item.slug" class="img-link">
                 <img v-if="getPhotos.length && !sizedForSlider" :src="getPhotos[0].url_max300">
             </a>
             <div v-if="isSuperhost" class="superhost-icon">{{ $t('Superhost') }}</div>
@@ -17,7 +17,7 @@
                               :slidesToShow="1" :slidesToScroll="1"
                               ref="carousel" :infinite="true">
                 <div v-for="photo in getPhotos" class="slider-item">
-                    <a style="display:block;" :href="'/'+$i18n.locale+'/single/'+item.slug">
+                    <a style="display:block;" :href="getUrlLangPrefix+'/single/'+item.slug">
                         <img :src="photo.url_max300" alt="Property picture">
                     </a>
                 </div>
@@ -75,6 +75,12 @@ export default {
         },
         noPhotos() {
             return this.getPhotos.length === 0;
+        },
+        getUrlLangPrefix() {
+            let locale = jQuery('html').attr('lang');
+            console.log(locale);
+            //temporary solution
+            return locale && locale !== 'de' ? `/${locale}/` : '';
         },
     }
 

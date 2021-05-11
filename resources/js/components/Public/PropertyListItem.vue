@@ -3,7 +3,7 @@
         <div class="property-card-container">
             <ItemPictures :item="item" />
             <div class="data">
-                <a :href="getUrlLangPrefix()+'single/'+item.slug" class="title"><span>{{ item.name }}</span></a>
+                <a :href="getUrlLangPrefix+'/single/'+item.slug" class="title"><span>{{ item.name }}</span></a>
                 <ItemFeatures :item="item"/>
             </div>
             <RoomsList :rooms="item.rooms" :item_id="item.id" />
@@ -34,11 +34,6 @@ export default {
     created() {
     },
     methods: {
-        getUrlLangPrefix() {
-            let locale = jQuery('html').attr('lang');
-            //temporary solution
-            return locale != 'de' ? "/" + locale + "/" : "/";
-        },
         findOptionRoom(room, name) {
             if (!room.options) {
                 return false;
@@ -104,6 +99,11 @@ export default {
 
         getRooms() {
             return this.item.rooms;
+        },
+        getUrlLangPrefix() {
+            let locale = jQuery('html').attr('lang');
+            //temporary solution
+            return locale &&  locale !== 'de' ? `/${locale}/` : '';
         },
     }
 }
