@@ -13,5 +13,16 @@
                 jQuery('.slick-track .slick-active').focus();
             }, 200 );
         });
+        jQuery('.comfort a.comfort-collapse-link').click(function(e) {
+            e.preventDefault();
+            var maxHeight = jQuery('.comfort-block').css('max-height');
+            if (!maxHeight || maxHeight === 'none') {
+                jQuery('.comfort-block').css('max-height', '74px');
+                jQuery('.comfort-block').css('overflow', 'hidden');
+            } else {
+                jQuery('.comfort-block').css('max-height', 'none');
+                jQuery('.comfort-block').css('overflow', 'hidden');
+            }
+        })
     })
 </script>
