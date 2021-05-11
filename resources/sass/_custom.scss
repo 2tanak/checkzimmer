@@ -6393,6 +6393,8 @@ header.height-menu .mobile-menu {
     }
     .single-content .comfort .comfort-block {
         margin-bottom: 12px !important;
+        max-height: 74px;
+        overflow: hidden;
     }
     .comfort a.comfort-collapse-link {
         display: flex;
