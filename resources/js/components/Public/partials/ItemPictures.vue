@@ -1,13 +1,13 @@
 <template>
     <div class="photo-container">
         <div style="position:relative;" class="no-photo-block">
-            <div class="no-photo" v-if="noPhotos">
+            <a :href="getUrlLangPrefix+'/single/'+item.slug" class="no-photo" v-if="noPhotos">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="2" fill="#EDEDEF"></rect> <path d="M10 19L4 27H28L21 16L15 24L10 19Z" fill="#D8D8D8"></path></svg>
-            </div>
+            </a>
             <div v-if="isSuperhost" class="superhost-icon">{{ $t('Superhost') }}</div>
         </div>
         <div style="position:relative;" v-if="getPhotos.length && !sizedForSlider">
-            <a href="":href="getUrlLangPrefix+'/single/'+item.slug" class="img-link">
+            <a :href="getUrlLangPrefix+'/single/'+item.slug" class="img-link">
                 <img v-if="getPhotos.length && !sizedForSlider" :src="getPhotos[0].url_max300">
             </a>
             <div v-if="isSuperhost" class="superhost-icon">{{ $t('Superhost') }}</div>
