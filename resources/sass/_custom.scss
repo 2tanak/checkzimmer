@@ -1522,6 +1522,8 @@ h1.list-title {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 10;
 }
 .favorites {
     width: 26px;
@@ -2132,6 +2134,7 @@ h1.list-title {
     letter-spacing: 0.02em;
     text-transform: uppercase;
     color: #333646;
+    z-index: 10;
 }
 .main-top-block .superhost-icon {
     z-index: 1;
@@ -3164,6 +3167,10 @@ header.height-menu .mobile-menu {
     }
 }
 @media (max-width: 575px) {
+    .superhost-icon {
+        left: 50%;
+        transform: translateX(-50%);
+    }
     .list-content .property.show-map .property-card .photo-container {
         display: none;
     }
@@ -11278,3 +11285,9 @@ footer .social-block {
 }
 
 /*---end-created-page---*/
+
+.photo-container a.img-link {
+    display: block;
+    position: relative;
+    z-index: 10;
+}
