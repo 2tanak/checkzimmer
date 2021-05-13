@@ -5,16 +5,16 @@
             <FeatureIcon v-for="feature in featuresForList" :item="feature" classes="data-block-circle" />
 
             <template v-if="getKitchenType==='private' || getKitchenType==='kitchenette'">
-                <FeatureKitchen v-if="getKitchenType" :type="getKitchenType" />
-                <FeatureShower v-if="getShowerType" :type="getShowerType" />
+                <FeatureKitchen v-if="getKitchenType" :type="$t(getKitchenType)" />
+                <FeatureShower v-if="getShowerType" :type="$t(getShowerType)" />
             </template>
             <template v-else-if="getShowerType==='private'">
-                <FeatureShower v-if="getShowerType" :type="getShowerType" />
-                <FeatureKitchen v-if="getKitchenType" :type="getKitchenType" />
+                <FeatureShower v-if="getShowerType" :type="$t(getShowerType)" />
+                <FeatureKitchen v-if="getKitchenType" :type="$t(getKitchenType)" />
             </template>
             <template v-else>
-                <FeatureKitchen v-if="getKitchenType" :type="getKitchenType" />
-                <FeatureShower v-if="getShowerType" :type="getShowerType" />
+                <FeatureKitchen v-if="getKitchenType" :type="$t(getKitchenType)" />
+                <FeatureShower v-if="getShowerType" :type="$t(getShowerType)" />
             </template>
         </div>
     </div>

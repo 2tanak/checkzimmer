@@ -28,7 +28,7 @@ class LanguagesController extends Controller
     }
     public function update(Request $request, $id) {
         $file = __DIR__."/../../../../resources/lang/$id.json";
-        file_put_contents($file, json_encode($request->get('data')));
+        file_put_contents($file, json_encode($request->get('data', JSON_UNESCAPED_UNICODE)));
         return response('');
     }
 }
