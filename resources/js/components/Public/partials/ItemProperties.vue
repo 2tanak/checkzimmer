@@ -3,12 +3,12 @@
         <div v-if="hideAddress" class="data-item-container">
             <div class="distance" v-if="distance">
                 <img src="/svg/i-distance.svg" alt="">
-                {{ distance }}{{ $t('km') }} {{ $t('from') }} &nbsp; <span class="desctop-span">{{ $t('said') }}</span> <span class="mobile-span">{{ $t('said') }}.</span> &nbsp; {{ $t('your addresses') }}
+                {{ distance }}{{ $t('km') }} {{ $t('from') }}&nbsp;<span class="desctop-span">{{ $t('said') }}</span> <span class="mobile-span">{{ $t('said') }}.</span> &nbsp; {{ $t('your addresses') }}
             </div>
         </div>
         <div class="geolocation">
             <img src="/svg/i-pin.svg" alt="">
-            <span v-if="!isHideZip">{{ item.zip }}</span>, <span>{{ item.city }}</span>
+            <span v-if="!isHideZip">{{ item.zip }}</span>,&nbsp;<span>{{ item.city }}</span>
         </div>
         <div class="humans">
             <img src="/svg/i-people.svg" alt="">
@@ -16,7 +16,7 @@
         </div>
         <div class="distance" v-if="distance">
             <img src="/svg/i-distance.svg" alt="">
-            {{ distance }}{{ $t('km') }} {{ $t('from') }} &nbsp; <span class="desctop-span">{{ $t('your addresses') }}</span> <span class="mobile-span">{{ $t('your addr') }}.</span> &nbsp;
+            {{ distance }}{{ $t('km') }} {{ $t('from') }}&nbsp;<span class="desctop-span">{{ $t('your addresses') }}</span> <span class="mobile-span">{{ $t('your addr') }}.</span> &nbsp;
         </div>
     </div>
 </template>
