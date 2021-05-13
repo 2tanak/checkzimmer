@@ -220,11 +220,12 @@ class HomeController extends Controller
             'is_need_check_order_in_processing_append' => '1',
             'is_skip_sending' => '0', // Не отправлять заявку в CRM.
             'fields'  => array(
-                'company' => $data['company'] ?? '',
-                'arrival-date' => $data['arrival-date'] ?? '',
-                'date-departure' => $data['date-departure'] ?? '',
+                'company.name' => $data['company'] ?? '',
+                'contact.name' => $data['name'] ?? '',
+                '500281' => $data['arrival-date'] ?? '',
+                '490395' => $data['date-departure'] ?? '',
+                '498251' => $data['number-persons'] ?? '',
                 'language' => $data['language'] ?? '',
-                'number-persons' => $data['number-persons'] ?? '',
                 'type' => $data['type'] ?? '',
                 'email-checkbox' => $data['email-checkbox'] ?? '',
                 'consent-checkbox' => $data['consent-checkbox'] ?? '',
