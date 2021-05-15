@@ -7,7 +7,17 @@
                     <div class="card-body">
                         <b-table striped hover responsive :busy="loading" :items="questionItems" :fields="fields">
                             <template v-slot:cell(created_at)="data">
-                                {{ data.item.created_at }}
+                                {{ getDate(data.item.created_at) }}
+                            </template>
+                            <template v-slot:cell(property)="data">
+                                <template v-if="data.item.property">
+                                    <a :href="'/dashboard/property/'+data.item.property.id">
+                                        {{ data.item.property.name }}
+                                    </a> <!--(<a href="">page</a>)-->
+                                </template>
+                                <template v-else>
+                                    {{ $t('Not exist') }}
+                                </template>
                             </template>
                             <template v-slot:cell(question)="data">
                                 {{ data.item.question }}
@@ -82,7 +92,7 @@ export default {
         return {
             textareaAnswer: '',
             modalApproove: false,
-            fields: [this.$t('created_at'), this.$t('Question'), this.$t('Response'), this.$t('Answer'), this.$t('Delete')],
+            fields: [this.$t('created_at'), this.$t('property'), this.$t('question'), this.$t('response'), this.$t('answer'), this.$t('delete')],
             questionItems: [],
             answer: true,
             loading: false,
@@ -149,6 +159,16 @@ export default {
             if (this.modalApproove === false) {
                 this.answerObject.response = '';
             }
+        },
+        format00(num) {
+           return num <= 9 ? '0' + num : num
+        },
+        getDate(date) {
+            let dt = new Date(date.replace('T', ' ').replace(/-/g,'/'));
+            let day = this.format00(dt.getDate());
+            let month = this.format00(dt.getMonth()+1);
+            let year = dt.getFullYear();
+            return `${year}-${month}-${day}`;
         }
     }
 }
