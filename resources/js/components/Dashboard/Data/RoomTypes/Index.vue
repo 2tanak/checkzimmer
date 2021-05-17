@@ -2,7 +2,7 @@
     <section class="header-dashboard">
         <div style="display:flex;align-items:center;justify-content:space-between;">
             <h1>{{ $t('Room type catalog') }}</h1>
-            <b-button style="margin-right:0 !important;" type="submit" variant="success" class="mr-2" v-b-modal.modal-room-type>{{ $t('New room type') }}</b-button>
+            <b-button style="margin-right:0 !important;" type="submit" variant="success" class="mr-2" v-b-modal.modal-room-type @click="roomTypeNew">{{ $t('New room type') }}</b-button>
         </div>
         <!--<div class="row mt-4">
             <div class="col-md-6 grid-margin">
@@ -65,7 +65,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <b-button type="submit" variant="success" class="mr-2" v-b-modal.modal-room-type>{{ $t('New room type') }}</b-button>
+                <b-button type="submit" variant="success" class="mr-2" v-b-modal.modal-room-type @click="roomTypeNew">{{ $t('New room type') }}</b-button>
             </div>
         </div>
         <b-modal id="modal-room-type" :title="$t('Room Type add/edit')" @ok='roomTypeUpdateOk'>
@@ -73,6 +73,15 @@
         </b-modal>
         <b-modal id="modal-room-type-delete" :title="$t('Room type delete')" @ok='roomTypeDeleteOk'>
             <span class="text-danger">{{ $t('A you sure you want to delete') }} <strong>{{ roomTypesAction.name }}</strong>?</span>
+        </b-modal>
+        <b-modal id="modal-room-type-save-error" :title="$t('Room type save error')">
+            <span class="text-danger">{{ $t('There was error while saving the room type')}}</span>
+        </b-modal>
+        <b-modal id="modal-room-type-identical-error" :title="$t('Two identical categories found')">
+            <span class="text-danger">{{ $t('Identical categories are not allowed')}}</span>
+        </b-modal>
+        <b-modal id="modal-room-type-save-success" :title="$t('Room type save success')">
+            <span class="text-success">{{ $t('Room type was successfully saved')}}</span>
         </b-modal>
     </section>
 </template>
@@ -94,7 +103,10 @@
             return {
                 types: 0,
                 loading: true,
-                modalApproove: false,
+                modalAprove: false,
+                roomTypeEmpty: {
+                    id: 0, room_type_id: 0, picture: '', name: '', persons: 0
+                },
                 room_types: [
                     { id: 1, room_type_id: 0, picture: '', name: 'дом (целиком)', persons: 2 },
                     { id: 6, room_type_id: 1, picture: '', name: 'одноместный', persons: 2 },
@@ -104,7 +116,9 @@
                 ],
                 fields: [this.$t('id'), this.$t('picture'), this.$t('Name'), this.$t('Edit'), this.$t('Delete')],
                 data: roomTypesForm,
-                roomTypesAction: { name: ''}
+                roomTypesAction: { name: ''},
+                roomTypesPrev: { name: ''},
+                currentItem: false
             }
         },
         mounted() {
@@ -142,14 +156,66 @@
                 }
                 return this.room_types;
             },
+            roomTypeNew() {
+                this.roomTypesAction = { ...this.roomTypeEmpty }
+                this.currentItem = false;
+            },
             roomTypeEdit(item) {
                 this.roomTypesAction = item;
+                this.currentItem = this.room_types.findIndex(item => item.id === this.roomTypesAction.id);
+                this.roomTypesPrev = { ...item };
+            },
+            roomTypeUpdateOk(item) {
+                let foundItem = this.room_types.findIndex(item => item.name === this.roomTypesAction.name);
+                if (foundItem !== -1 && (!this.roomTypesAction.id || foundItem !== this.currentItem)) {
+                    this.$bvModal.show('modal-room-type-identical-error')
+                    if (this.roomTypesAction.id) {
+                        this.roomTypesAction.name = this.roomTypesPrev.name;
+                        this.roomTypesAction.picture = this.roomTypesPrev.picture;
+                    }
+                    return
+                }
+                //this.clearModalErrors();
+                if (this.roomTypesAction.id) {
+                    roomTypes.update(this.roomTypesAction.id, this.roomTypesAction).then(response => {
+                        if(response.data.code === 'ok'){
+                            this.$bvModal.show('modal-room-type-save-success');
+                        }else{
+                            this.$bvModal.show('modal-room-type-save-error');
+                        }
+
+                    }).catch(error => {
+                        this.$bvModal.show('modal-room-type-save-error');
+                    });
+                } else {
+                    roomTypes.create(this.roomTypesAction).then(response => {
+                        if(response.data.code === 'ok'){
+                            this.$bvModal.show('modal-room-type-save-success');
+                            this.textOperation = this.$t('Added');
+                            this.operationOk = true;
+                            this.room_types.push(response.data.roomType);
+                        }else{
+                            this.textOperation = this.$t('Fail');
+                            this.operationError = true;
+                        }
+                    }).catch(error => {
+                        this.$bvModal.show('modal-room-type-save-error');
+                    });
+                }
+
             },
             roomTypeDelete(item) {
                 this.roomTypesAction = item;
             },
             roomTypeDeleteOk(item) {
-                this.roomTypesAction = item;
+                //this.roomTypesAction = item;
+                roomTypes.delete(this.roomTypesAction.id)
+                    .then((resp) => {
+                        let index = this.room_types.findIndex(item => item.id === this.roomTypesAction.id);
+                        if (index) {
+                            this.room_types.splice(index, 1);
+                        }
+                    });
             }
         }
     }

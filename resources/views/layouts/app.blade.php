@@ -17,6 +17,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
     <!-- Styles -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -235,8 +236,6 @@
 
         </div>
 
-        @include('single.inquiry-modal', [ 'hotel' => json_decode('{ "id": 0}')])
-
     </div>
 
     <footer id="main-footer">
@@ -301,15 +300,16 @@
                 </div>
             </div>
         </div>
+        @include('single.inquiry-modal', [ 'hotel' => json_decode('{ "id": 0}')])
         <script>(function(a,m,o,c,r,m){a[m]={id:"41373",hash:"02054bc01863d1cb9eb06492ca7868cd80bac2992311ba581ade40ec6bbe7b4b",locale:"ru",setMeta:function(p){this.params=(this.params||[]).concat([p])}};a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};var d=a.document,s=d.createElement('script');s.async=true;s.id=m+'_script';s.src='https://gso.amocrm.ru/js/button.js?1614073604';d.head&&d.head.appendChild(s)}(window,0,'amoSocialButton',0,0,'amo_social_button'));</script>
     </footer>
 
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
     <script src="{{ asset('js/ui.js') }}" defer></script>
     <script src="{{ asset('js/slick.min.js') }}" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" defer></script>
     <script src="{{ asset('js/select2.full.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-
     <script>
         (function(w, d, s, h, id) {
             w.roistatProjectId = id; w.roistatHost = h;
@@ -323,6 +323,9 @@
                 e.preventDefault();
                 jQuery('.inquiry-modal-overlay').addClass('modal-show');
             });
+            jQuery('#arrival-date, #date-departure').datepicker({
+                format: "dd/mm/yyyy"
+            })
         });
 
     </script>

@@ -497,5 +497,9 @@
     "Page address copied": "Page address copied",
     "free from mobile": "free from mobile",
     "Price info": "Price info",
-    "Text note about spoken languages": "Text note about spoken languages"
+    "Text note about spoken languages": "Text note about spoken languages",
+    "Two identical categories found": "Two identical categories found",
+    "Identical categories are not allowed": "Identical categories are not allowed",
+    "Room type save success": "Room type save success",
+    "Room type was successfully saved": "Room type was successfully saved"
 }
