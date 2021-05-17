@@ -496,7 +496,7 @@
                         <a href="#" @click.prevent="loadMore">{{ $t('Load surrounding places') }}</a>
                         <div class="shadow-block"></div>
                     </div>
-                    <div class="link-block" v-if="!additional_load && endoflist">
+                    <div class="link-block" v-if="!additional_load && endoflist" @click.prevent="modalShow">
                         <a href="#">{{ $t('Contact manager') }}</a>
                         <div class="shadow-block"></div>
                     </div>
@@ -697,6 +697,9 @@ export default {
             if (screenTop + screenHeight + 200 > itemTop + itemHeight && !this.endoflist) {
                 this.submitForm();
             }
+        },
+        modalShow() {
+            jQuery('.inquiry-modal-overlay').addClass('modal-show');
         },
         mapScrolling() {
             if (!jQuery('.list-content .property').hasClass('show-map')) {

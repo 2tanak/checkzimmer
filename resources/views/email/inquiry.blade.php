@@ -15,7 +15,7 @@
 
 <h2>{{ __('Inquiry details') }}</h2>
 
-<p><strong>{{ __('Hotel') }}:</strong> {{ $hotel->name }}</p>
+<p><strong>{{ __('Hotel') }}:</strong> {{ $hotel->name ?? 'Unknown'}}</p>
 <p><strong>{{ __('Language') }}:</strong> {{ $data['language'] }}</p>
 
 @if (($data['arrival-date'] ?? false) || ($data['date-departure'] ?? false))
