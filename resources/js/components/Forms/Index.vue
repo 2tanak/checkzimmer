@@ -58,7 +58,7 @@
                 url: '/image-upload',
                 data: formData
                 }).then(function (response) {
-                    that.fields.picture = response;
+                    that.fields.picture = response.data.image;
                 });
             },
 
