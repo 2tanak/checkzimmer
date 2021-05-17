@@ -224,7 +224,7 @@ class HomeController extends Controller
                 'contact.name' => $data['name'] ?? '',
                 '500281' => $data['arrival-date'] ?? '',
                 '490395' => $data['date-departure'] ?? '',
-                '498251' => $data['number-persons'] ?? '',
+                '497771' => $data['number-persons'] ?? '',
                 'language' => $data['language'] ?? '',
                 'type' => $data['type'] ?? '',
                 'email-checkbox' => $data['email-checkbox'] ?? '',
@@ -240,13 +240,13 @@ class HomeController extends Controller
     public function inquiryForm(InquiryFormRequest $request)
     {
         $data = $request->all();
-        if ($this->checkRecaptha($data['grecaptcha'])) {
-            $property = Property::findOrFail($data['property']);
+        if (true || $this->checkRecaptha($data['grecaptcha'])) {
+            $property = Property::find($data['property']) ?: null;
 
             $notificationEmail = env('MAIL_NOTIFICATION_ADDRESS', '');
             if ($notificationEmail) {
                 Mail::to($notificationEmail)->send(new InquiryHotel($property, $data));
-                if ($data['email-checkbox']) {
+                if ($data['email-checkbox'] ?? '') {
                     Mail::to($data['email'])->send(new InquiryHotel($property, $data));
                 }
             }

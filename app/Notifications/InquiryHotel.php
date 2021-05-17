@@ -13,10 +13,10 @@ class InquiryHotel extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param Property $hotel
+     * @param Property|null $hotel
      * @param array $data
      */
-    function __construct(Property $hotel, array $data)
+    function __construct($hotel, array $data)
     {
         $this->hotel = $hotel;
         $this->data = $data;

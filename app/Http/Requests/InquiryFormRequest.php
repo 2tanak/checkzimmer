@@ -37,7 +37,7 @@ class InquiryFormRequest extends FormRequest
             'telephone' => "required|min:5|max:15",
             'language' => "required|in:$languagesLine",
             'message' => "max:200",
-            "property" => "required|exists:property,id",
+            //"property" => "required|exists:property,id",
             'number-persons' => "required|in:$numberPersonLine",
             'type' => "required|in:$typeLine",
             'arrival-date' => "required|date_format:d/m/Y",

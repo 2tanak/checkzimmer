@@ -52,8 +52,7 @@
             <a href="#" class="send-inquiry inquiry">{{ __('Send request') }}</a>
             @if (($hotel->getCurrentOption('landlordPhoneNumber') == null) || ($hotel->getCurrentOption('landlordHidePhone') == 1))
                 <div class="not-phone">
-                    <div class="speaks">{{ __('Object owner speaks') }}:</div>
-                    <div class="language-item">{{ $hotel->getCurrentOption('landlordLanguages') ?: 'DE' }}</div>
+                    @include('single.landlord-language', ['hotel' => $hotel])
                 </div>
                 @else
                 <div class="see-number-phone">

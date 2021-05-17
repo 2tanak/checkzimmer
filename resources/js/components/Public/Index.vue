@@ -7,7 +7,7 @@
                         <div class="left-block">
                             <a class="list active" href="#">{{ $t('List') }}</a>
                             <a class="map" href="#">{{ $t('Map') }}</a>
-                            <div class="result">{{ $t('Found') }} <span class="property-found">{{ property.length }}</span> {{ $t('housing options') }}</div>
+                            <div class="result">{{ $t('Found') }} <span class="property-found">{{ totals }}</span> {{ $t('housing options') }}</div>
                         </div>
                         <div class="sorting">
                             <a href="#">{{ $t('Sort by default') }}</a>
@@ -496,7 +496,7 @@
                         <a href="#" @click.prevent="loadMore">{{ $t('Load surrounding places') }}</a>
                         <div class="shadow-block"></div>
                     </div>
-                    <div class="link-block" v-if="!additional_load && endoflist">
+                    <div class="link-block" v-if="!additional_load && endoflist" @click.prevent="modalShow">
                         <a href="#">{{ $t('Contact manager') }}</a>
                         <div class="shadow-block"></div>
                     </div>
@@ -553,6 +553,7 @@ export default {
             loadingData: false,
             endoflist: false,
             property: [],
+            totals: 0,
             propertyAlt: [],
             page: 1,
             nocity: 0,
@@ -696,6 +697,9 @@ export default {
             if (screenTop + screenHeight + 200 > itemTop + itemHeight && !this.endoflist) {
                 this.submitForm();
             }
+        },
+        modalShow() {
+            jQuery('.inquiry-modal-overlay').addClass('modal-show');
         },
         mapScrolling() {
             if (!jQuery('.list-content .property').hasClass('show-map')) {
@@ -849,7 +853,7 @@ export default {
                     } else {
                         that.propertyAlt = resp.data.objects.data;
                     }
-
+                    that.totals = resp.data.objects.total;
                     that.page = resp.data.objects.current_page;
                     that.additional_pages = resp.data.current_page < resp.data.last_page;
                     that.loadingData = false;

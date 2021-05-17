@@ -55,8 +55,7 @@
         <a href="#" class="inquiry">{{ __('Send request') }}</a>
         @if (($hotel->getCurrentOption('landlordPhoneNumber') == null) || ($hotel->getCurrentOption('landlordHidePhone') == 1))
             <div class="number-phone not-phone">
-                <div class="speaks">{{ __('Object owner speaks') }}:</div>
-                <div class="language-item">{{ $hotel->getCurrentOption('landlordLanguages') }}</div>
+                @include('single.landlord-language', ['hotel' => $hotel])
             </div>
         @else
         <div class="number-phone">
@@ -64,8 +63,7 @@
             <span class="sh_nmr">{{ __('show') }}</span>
             <div class="message">{{ __('Let us know that you are from the site Check-zimmer.de') }}</div>
             <div class="language">
-                <div class="speaks">{{ __('Speaks') }}:</div>
-                <div class="language-item">{{ $hotel->getCurrentOption('landlordLanguages') }}</div>
+                @include('single.landlord-language', ['hotel' => $hotel])
             </div>
         </div>
         @endif

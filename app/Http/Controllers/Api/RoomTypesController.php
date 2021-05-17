@@ -21,12 +21,13 @@ class RoomTypesController extends Controller
             'name'      => 'required'
         ]);
 
-        $data = $request->input();
+        $data = $request->all();
+        $data['picture'] = $data['picture'] ?? '';
 
         $item = new RoomType($data);
         $item->save();
 
-        return $item ? response()->json(['code' => 'ok','user' => $item]) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
+        return $item ? response()->json(['code' => 'ok','roomType' => $item]) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
     }
 
     public function update(Request $request, $id) {
