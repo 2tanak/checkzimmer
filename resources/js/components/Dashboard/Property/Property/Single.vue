@@ -156,6 +156,14 @@
                                             </b-form-group>
                                         </div>
                                     </div>
+                                    <div class="row mt-4 mb-4">
+                                        <div class="col-md-12">
+                                            <b-form-group :label="$t('Landlord speaks text')" label-for="input-landlord-speaks">
+                                                <b-form-input v-model="property.opts.landlordSpeaks" id="input-landlord-speaks"></b-form-input>
+                                                <small>{{$t('Text note about spoken languages')}}</small>
+                                            </b-form-group>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -169,10 +177,6 @@
 
                                     <b-form-group :label="$t('Property description')" label-for="input-property-description">
                                         <b-textarea v-model="property.description" class="form-control" id="input-property-description" type="text" />
-                                    </b-form-group>
-                                    <b-form-group :label="$t('Hotel info')" class="rent-block" style="font-size:0.875rem;">
-                                        <b-form-input v-model="property.opts.info" id="input-hotel-name"></b-form-input>
-                                        <small>Text under room description</small>
                                     </b-form-group>
                                 </div>
                             </div>
@@ -247,6 +251,10 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h4 style="margin-bottom:0;">{{ $t('Rooms') }}</h4>
+                                    <b-form-group :label="$t('Price info')" class="rent-block mt-4" style="font-size:0.875rem;">
+                                        <b-form-input v-model="property.opts.info" id="input-hotel-name"></b-form-input>
+                                        <small>Text under room description</small>
+                                    </b-form-group>
                                 </div>
                             </div>
                         </div>
@@ -411,6 +419,10 @@ let featureRequest = ApiRequest('features');
 let features = new featureRequest;
 
 let defOptions = {
+    landlordSpeaks: {
+        value: '',
+        type: '',
+    },
     landlordName: {
         value: '',
         type: '',
