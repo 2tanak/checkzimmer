@@ -224,7 +224,7 @@ class HomeController extends Controller
                 'contact.name' => $data['name'] ?? '',
                 '500281' => $data['arrival-date'] ?? '',
                 '490395' => $data['date-departure'] ?? '',
-                '498251' => $data['number-persons'] ?? '',
+                '497771' => $data['number-persons'] ?? '',
                 'language' => $data['language'] ?? '',
                 'type' => $data['type'] ?? '',
                 'email-checkbox' => $data['email-checkbox'] ?? '',

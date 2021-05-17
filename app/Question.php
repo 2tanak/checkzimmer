@@ -11,8 +11,9 @@ class Question extends Model
 
     protected $table = 'questions';
     protected $fillable = ['property_id', 'question', 'response'];
+    //protected $with = ['property'];
 
-    static function reCAPTCHA3($response)
+    static function reCAPTCHA3($response): bool
     {
         if (!RECAPTCHA_SITE){
             return true;
@@ -33,5 +34,8 @@ class Question extends Model
             return true;
         }
         return false;
+    }
+    function property() {
+        return $this->belongsTo(Property::class);
     }
 }

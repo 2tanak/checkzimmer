@@ -187,6 +187,7 @@ class PropertyController extends Controller
     public function show($id)
     {
         $specOptions = [
+            'landlordSpeaks' => '',
             'landlordName' => '',
             'landlordHideName' => false,
             'landlordHidePhone' => false,

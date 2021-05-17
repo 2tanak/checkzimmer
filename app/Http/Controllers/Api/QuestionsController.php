@@ -38,6 +38,6 @@ class QuestionsController extends Controller
 
     public function paginated()
     {
-        return response()->json( Question::where('response', '!=', '')->paginate(50) );
+        return response()->json( Question::with('property')->paginate(50) );
     }
 }
