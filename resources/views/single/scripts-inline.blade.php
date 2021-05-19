@@ -23,6 +23,17 @@
                 jQuery('.comfort-block').css('max-height', 'none');
                 jQuery('.comfort-block').css('overflow', 'hidden');
             }
-        })
+
+        });
+        jQuery('.comfort a.comfort-collapse-link span.open-link').click(function (e) {
+            e.preventDefault();
+            jQuery(this).addClass('not-active')
+            jQuery('.comfort a.comfort-collapse-link span.close-link').addClass('active');
+        });
+        jQuery('.comfort a.comfort-collapse-link span.close-link').click(function (e) {
+            e.preventDefault();
+            jQuery(this).removeClass('active')
+            jQuery('.comfort a.comfort-collapse-link span.open-link').removeClass('not-active');
+        });
     })
 </script>
