@@ -323,7 +323,7 @@
     "City": "City",
     "Postcode": "Postcode",
     "Address": "Address",
-    "Photo": "Photo",
+    "photo": "Photo",
     "Facilities": "Facilities",
     "Rooms": "Rooms",
     "Delete room": "Delete room",
