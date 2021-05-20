@@ -322,7 +322,7 @@
     "City": "Stadt",
     "Postcode": "Postleitzahl",
     "Address": "Adresse",
-    "Photo": "Foto",
+    "photo": "Foto",
     "Facilities": "Anlagen",
     "Rooms": "Zimmer",
     "Delete room": "L\u00f6schen",
