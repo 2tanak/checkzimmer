@@ -13,8 +13,14 @@
             </div>
         @endforeach
     </div>
-    <a class="comfort-collapse-link" data-toggle="collapse" href="#comfort-collapse" role="button" aria-expanded="false" aria-controls="comfort-collapse">
-        {{ __('Show all amenities') }}
-        <img src="/svg/i-arrow-show-more.svg" alt="alt">
+    <a class="comfort-collapse-link">
+        <span class="open-link">
+            {{ __('Show all amenities') }}
+            <img src="/svg/i-arrow-show-more.svg" alt="alt">
+        </span>
+        <span class="close-link">
+            {{ __('Hide all amenities') }}
+            <img src="/svg/i-arrow-show-more.svg" alt="alt">
+        </span>
     </a>
 </div>

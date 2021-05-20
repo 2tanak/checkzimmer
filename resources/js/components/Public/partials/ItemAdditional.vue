@@ -10,7 +10,7 @@
                 </svg>
             </a>
             <div class="price">
-                <span class="price-span">{{ $t('from') }} &euro;{{ minRoomPrice }}</span>
+                <span class="price-span">{{ $t('from') }}&nbsp;{{ minRoomPrice }}&euro;</span>
                 <span class="night-span">{{ $t('night') }}</span>
             </div>
             <div class="price-free">
