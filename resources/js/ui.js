@@ -68,6 +68,29 @@ const app = new Vue({
 
 jQuery(document).ready(function() {
 
+    function phoneTrack() {
+
+        if (!window.phonenumStr || !window.roistat || !window.roistat.callTracking.enabled) {
+            return;
+        }
+        try {
+            var calltrackingPhone = JSON.parse(window.roistat.callTracking.phoneScriptsJson).filter(function (script) {
+                return (script.replaceable_numbers.indexOf(atob(window.phonenumStr).replace(/[^\d;]/g, '')) != -1);
+            });
+            window.phonenumStr = calltrackingPhone.length ? btoa(calltrackingPhone.shift().phone) : window.phonenumStr;
+            window.phonenum = window.phonenumStr;
+            console.log(window.phonenumStr)
+        } catch (e) {
+            console.log(e)
+        }
+        /*jQuery('.sidebar .number-phone').addClass('gray');
+        jQuery('.sh_nmr').css('display', 'none');
+        jQuery('.phone-hide').html(phone);
+        jQuery('.phone-hide').attr('href', 'tel:' + phone);*/
+    }
+
+    phoneTrack();
+
     jQuery('a.comfort-collapse-link').click(function (e) {
         e.preventDefault();
         jQuery(this).toggleClass('active');
