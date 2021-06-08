@@ -61,27 +61,27 @@
                             <label class="desctop-label" for="number-personse">{{ __('Num people') }}</label>
                             <div class="select-container">
                                 <select name="person" id="number-personse" class="number-personse">
-                                    <option value="1" selected>1 {{ __('ppl') }}.</option>
-                                    <option value="2">2 {{ __('ppl') }}.</option>
-                                    <option value="3">3 {{ __('ppl') }}.</option>
-                                    <option value="4">4 {{ __('ppl') }}.</option>
-                                    <option value="5">5 {{ __('ppl') }}.</option>
-                                    <option value="6">6 {{ __('ppl') }}.</option>
-                                    <option value="7">7 {{ __('ppl') }}.</option>
-                                    <option value="8">8 {{ __('ppl') }}.</option>
-                                    <option value="9">9 {{ __('ppl') }}.</option>
-                                    <option value="10">10 {{ __('ppl') }}.</option>
-                                    <option value="11">11 {{ __('ppl') }}.</option>
-                                    <option value="12">12 {{ __('ppl') }}.</option>
-                                    <option value="13">13 {{ __('ppl') }}.</option>
-                                    <option value="14">14 {{ __('ppl') }}.</option>
-                                    <option value="15">15 {{ __('ppl') }}.</option>
-                                    <option value="16">16 {{ __('ppl') }}.</option>
-                                    <option value="17">17 {{ __('ppl') }}.</option>
-                                    <option value="18">18 {{ __('ppl') }}.</option>
-                                    <option value="19">19 {{ __('ppl') }}.</option>
-                                    <option value="20">20 {{ __('ppl') }}.</option>
-                                    <option value="21">20+ {{ __('ppl') }}.</option>
+                                    <option value="1" selected>1 {{ __('person') }}</option>
+                                    <option value="2">2 {{ __('persons') }}</option>
+                                    <option value="3">3 {{ __('persons') }}</option>
+                                    <option value="4">4 {{ __('persons') }}</option>
+                                    <option value="5">5 {{ __('persons') }}</option>
+                                    <option value="6">6 {{ __('persons') }}</option>
+                                    <option value="7">7 {{ __('persons') }}</option>
+                                    <option value="8">8 {{ __('persons') }}</option>
+                                    <option value="9">9 {{ __('persons') }}</option>
+                                    <option value="10">10 {{ __('persons') }}</option>
+                                    <option value="11">11 {{ __('persons') }}</option>
+                                    <option value="12">12 {{ __('persons') }}</option>
+                                    <option value="13">13 {{ __('persons') }}</option>
+                                    <option value="14">14 {{ __('persons') }}</option>
+                                    <option value="15">15 {{ __('persons') }}</option>
+                                    <option value="16">16 {{ __('persons') }}</option>
+                                    <option value="17">17 {{ __('persons') }}</option>
+                                    <option value="18">18 {{ __('persons') }}</option>
+                                    <option value="19">19 {{ __('persons') }}</option>
+                                    <option value="20">20 {{ __('persons') }}</option>
+                                    <option value="21">20+ {{ __('persons') }}</option>
                                 </select>
                             </div>
                         </div>
@@ -110,7 +110,7 @@
             <div class="plans-container">
 
                 <h1>{{ __('Our pricing plans are transparent & flexible') }}</h1>
-                <div class="subtitle">{{ __('Contact us, we will compare the properties in the city') }} {{ __('Х') }} {{ __('for you and find the most') }}</div>
+                <div class="subtitle">{{ __('Contact us, we will compare the properties in the city') }}</div>
                 <div class="price-block">
                     @foreach($subdomains as $subdomain)
                         <a href="{{$subdomain['link']}}"
@@ -140,7 +140,7 @@
 
                 </div>
             </div>
-            <div class="subtitle down-subtitle">{{ __('Contact us, we will compare the properties in the city') }} {{ __('Х') }} {{ __('for you and find the most optimal accommodation for you!') }}</div>
+            <div class="subtitle down-subtitle">{{ __('Contact us, we will compare the properties in the city') }} {{ __('X') }} {{ __('for you and find the most optimal accommodation for you!') }}</div>
         </div>
     </section>
 
