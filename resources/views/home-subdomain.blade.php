@@ -63,7 +63,7 @@
                     <div class="select-container">
                         <select name="person" id="number-personse" class="number-personse">
                             @foreach(range(1, 21, 1) as $person)
-                                <option value="{{ $person }}" {{ $person == ($getData['person'] ?? 1) ? 'selected' : '' }}>{{ $person <= 20 ? $person : '20+' }} {{ __('ppl') }}.</option>
+                                <option value="{{ $person }}" {{ $person == ($getData['person'] ?? 1) ? 'selected' : '' }}>{{ $person <= 20 ? $person : '20+' }} {{ __('persons') }}</option>
                             @endforeach
                         </select>
                     </div>

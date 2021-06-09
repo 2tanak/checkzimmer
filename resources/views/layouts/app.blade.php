@@ -71,7 +71,7 @@
                     <div class="language-number-phone">
                         @include('partials.lang-switch')
                         <a class="whatsapp-number" href="tel:{{ $phoneNumAdmin }}">{{ $options['website_phone'] ?? '' }}
-                            <span class="explanatory-text">24/7 {{ __('free from mobile') }}</span>
+                            <span class="explanatory-text">{{ __('free from mobile') }}</span>
                         </a>
                     </div>
                     <a href="#" class="mobile-accaunt personal-area-link"><img src="/svg/i-account-mobile.svg" alt="mobile-accaunt"></a>
@@ -100,7 +100,7 @@
                         </li>
                     </ul>
                     <a class="whatsapp-number" href="tel:{{ $phoneNumAdmin }}">{{ $options['website_phone'] ?? '' }}
-                        <span class="explanatory-text">24/7 {{ __('free from mobile') }}</span>
+                        <span class="explanatory-text">{{ __('free from mobile') }}</span>
                     </a>
                 </div>
             </div>
