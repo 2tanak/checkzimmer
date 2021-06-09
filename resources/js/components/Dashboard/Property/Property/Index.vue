@@ -13,7 +13,7 @@
                         <b-form-group :label="$t('Housing type')"  label-for="input-phone">
                             <b-select v-model="type">
                                 <b-select-option href="#" value="">{{ $t('Not chosen') }}</b-select-option>
-                                <b-select-option v-for="rootType in propertyTypes" href="#" :value="rootType.native_id">{{ rootType.name }}</b-select-option>
+                                <b-select-option v-for="rootType in propertyTypes" href="#" :value="rootType.id">{{ rootType.name }}</b-select-option>
                             </b-select>
                         </b-form-group>
                     </div>
@@ -112,7 +112,7 @@
 
     let PropertyRequest = ApiRequest('property')
     let properties = new PropertyRequest;
-    let TypesRequest = ApiRequest('booking-roomtypes');
+    let TypesRequest = ApiRequest('room-types');
     let types = new TypesRequest;
 
     export default {
@@ -172,6 +172,9 @@
                 let type = item.options.find( ch => ch.key === 'hotel_type')
                 return type ? type.value : false;
             },
+            hasItemType(item, type) {
+                return true;
+            },
             featureDelete(item) {
                 this.hotelDelete = item;
             },
@@ -222,12 +225,10 @@
         },
         computed: {
             propertyTypes() {
-                if (!this.property.length) {
+                if (!this.property.length || !this.types.length) {
                     return []
                 }
-
-                let types = [ ...new Set(this.property.map( item => this.getTypeId(item))) ];
-                return this.types.filter( item => types.includes(item.native_id));
+                return this.types;
             },
             filteredHotels() {
                 if (!this.property.length) {
@@ -235,7 +236,7 @@
                 }
 
                 return this.property
-                    .filter( item => !this.type || this.getTypeId(item) === this.type )
+                    .filter( item => !this.type || this.hasItemType(item, this.type))
                     .filter( item => !this.role || item.user.role === this.role || (this.role === -1 && item.user.role !== 'admin'));
             }
         },
