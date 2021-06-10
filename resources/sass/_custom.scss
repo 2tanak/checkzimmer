@@ -7870,8 +7870,8 @@ body .popup-bubble-anchor.active:after {
     margin-bottom: 25px;
     margin-right: 2.1%;
     text-decoration: none;
-    /*max-width: 276px;*/
     width: 23.4%;
+    min-height: 230px;
 }
 .plans-section.city-section .price-block-item:nth-of-type(4n) {
     margin-right: 0;
@@ -7982,6 +7982,7 @@ body .popup-bubble-anchor.active:after {
     .plans-section.city-section .price-block-item {
         max-width: none;
         width: 31.9%;
+        min-height: auto;
     }
     .plans-section.city-section .price-block-item:nth-of-type(4n) {
         margin-right: 2.1%;
