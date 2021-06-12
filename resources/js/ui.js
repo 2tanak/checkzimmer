@@ -71,6 +71,9 @@ jQuery(document).ready(function() {
     function phoneTrack() {
 
         if (!window.phonenumStr || !window.roistat || !window.roistat.callTracking.enabled) {
+            window.setTimeout( () => {
+                phoneTrack();
+            }, 200);
             return;
         }
         try {
