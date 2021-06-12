@@ -100,7 +100,7 @@
                 @if ($options['website_phone'] ?? '')
                     <a class="whatsapp-number" href="tel:{{ $phoneNumAdmin }}">
                         {{ $options['website_phone'] ?? '' }}
-                        <span class="explanatory-text">24/7 {{ __('free from mobile') }}</span>
+                        <span class="explanatory-text">{{ __('free from mobile') }}</span>
                     </a>
                 @endif
             </div>

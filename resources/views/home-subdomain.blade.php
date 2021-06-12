@@ -62,8 +62,9 @@
                     <label class="mobile-label" for="number-personse">{{ __($options['label_people'] ?? '' ) }}</label>
                     <div class="select-container">
                         <select name="person" id="number-personse" class="number-personse">
-                            @foreach(range(1, 21, 1) as $person)
-                                <option value="{{ $person }}" {{ $person == ($getData['person'] ?? 1) ? 'selected' : '' }}>{{ $person <= 20 ? $person : '20+' }} {{ __('ppl') }}.</option>
+                            <option value="1" {{ 1 == ($getData['person'] ?? 1) ? 'selected' : '' }}>1 {{ __('person') }}</option>
+                            @foreach(range(2, 21, 1) as $person)
+                                <option value="{{ $person }}" {{ $person == ($getData['person'] ?? 1) ? 'selected' : '' }}>{{ $person <= 20 ? $person : '20+' }} {{ __('persons') }}</option>
                             @endforeach
                         </select>
                     </div>
