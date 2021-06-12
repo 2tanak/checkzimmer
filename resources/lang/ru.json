@@ -30,7 +30,7 @@
     "Date departure": "Date departure",
     "Person": "Person",
     "person": "person",
-    "Persons": "Persons",
+    "persons": "Personen",
     "Number persons": "Number persons",
     "Whole Apartment": "Whole apartment",
     "House": "House",
@@ -504,6 +504,5 @@
     "Two identical categories found": "Two identical categories found",
     "Identical categories are not allowed": "Identical categories are not allowed",
     "Room type save success": "Room type save success",
-    "Room type was successfully saved": "Room type was successfully saved",
-    "persons": "persons"
+    "Room type was successfully saved": "Room type was successfully saved"
 }
