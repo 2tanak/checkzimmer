@@ -8544,7 +8544,7 @@ body .popup-bubble-anchor.active:after {
     text-transform: uppercase;
     color: #FFFFFF;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
-    width: 74px;
+    width: 85px;
     height: 22px;
 }
 .registration-sidebar .your-tariff .tariff.tariff-desctope {
@@ -9341,14 +9341,171 @@ body .popup-bubble-anchor.active:after {
 .registration-section .object-data-table .object-data-link a.delete:hover {
     color: #EE483F;
 }
-.registration-section .object-data-table .select-room {
+.registration-section .object-data-table-room .select-room {
     margin-left: 29px;
     position: relative;
 }
-.registration-section .object-data-table .select-room svg {
+.registration-section .vs__dropdown-toggle {
+    border: 0;
+}
+.registration-section .v-select {
+    width: 145px;
+    height: 29px;
+    background: #F3F3F3;
+    border-radius: 6px;
+    position: relative;
+}
+.registration-section .object-data-table-room .v-select:after,
+.registration-section .object-data-table-type .v-select:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 5px;
+    width: 8px;
+    height: 18px;
+    background-image: url("/svg/select-arrow.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.registration-section .v-select.vs--open {
+    background: #FFFFFF;
+    border: 1px solid #C0C1C2;
+}
+.registration-section .object-data-table-room .v-select.vs--open:after,
+.registration-section .object-data-table-type .v-select.vs--open:after {
+    background-image: url("/svg/select-arrow-active.svg");
+}
+.registration-section input.vs__search {
+    background: transparent;
+    opacity: 0;
+    height: 0;
+    margin-top: 0;
+}
+.registration-section .vs__selected-options {
+    padding: 0;
+    height: 29px;
+    width: 145px;
+}
+.registration-section .object-data-table-room .vs__selected {
+    margin: 0;
+    padding: 0 15px;
+    border: 0;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 242%;
+    color: #333646;
+}
+.registration-section .object-data-table-type .vs__selected {
+    margin: 0;
+    padding: 0 15px;
+    border: 0;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 242%;
+    color: #333646;
+}
+.registration-section .vs__clear {
+    display: none;
+}
+.registration-section .vs__actions {
+    display: none;
+}
+.registration-section .vs__dropdown-menu {
+    top: calc(100% - -4px);
+    background: #FFFFFF;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+    border-radius: 6px;
+    border: 0;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    min-width: auto;
+}
+.registration-section .object-data-table-room .vs__dropdown-menu li {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 200%;
+    color: #333646;
+    margin: 0 6px;
+    background: transparent;
+}
+.registration-section .object-data-table-type .v-select .vs__dropdown-menu li {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 200%;
+    color: #333646;
+    margin: 0 6px;
+    background: transparent;
+}
+.registration-section .vs__dropdown-menu li:hover {
+    background: #E7F7DF !important;
+    border-radius: 2px !important;
+    color: #3B8B3E !important;
+}
+.registration-section .object-data-table-room svg.desctope-line {
     position: absolute;
     top: -13px;
-    left: -14px;
+    left: -13px;
+}
+svg.mobile-line {
+    display: none;
+}
+.registration-section.billing-section .v-select {
+    height: 54px;
+    width: 100%;
+}
+.registration-section.billing-section .v-select .vs__selected-options {
+    height: 54px;
+    width: 100%;
+}
+.registration-section.billing-section .vs__selected {
+    margin: 0;
+    padding: 0 15px;
+    border: 0;
+    width: 100%;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 100%;
+    color: #333646;
+    height: 54px;
+}
+.registration-section.billing-section .vs__dropdown-menu li {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 200%;
+    color: #333646;
+    margin: 0 6px;
+    background: transparent;
+}
+.registration-section.billing-section .v-select:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 15px;
+    width: 9px;
+    height: 5px;
+    background-image: url("/svg/arrow-dropdown-input.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.2s;
+}
+.registration-section.billing-section .v-select.vs--open:after {
+    transform: translateY(-50%) rotate(180deg);
 }
 .registration-section .object-data-table .add-room {
     position: relative;
@@ -9374,8 +9531,8 @@ body .popup-bubble-anchor.active:after {
 }
 .registration-section .object-data-table .add-room > svg {
     position: absolute;
-    left: 15px;
-    top: -14px;
+    left: 16px;
+    top: -13px;
 }
 .registration-section .object-data-table .add-room a:hover {
     color: #3B8B3E;
@@ -9411,7 +9568,9 @@ body .popup-bubble-anchor.active:after {
     fill: #3B8B3E;
 }
 .registration-section .object-data-table .unselected-object .add-room > svg {
-    top: -11px;
+    top: -12px;
+    left: 15px;
+    height: 31px;
 }
 .registration-section .object-data-table .add-object {
     background: #FBFCFF;
@@ -9452,6 +9611,9 @@ body .popup-bubble-anchor.active:after {
     box-shadow: 0 4px 30px rgb(51 54 70 / 16%);
     border-radius: 14px;
     z-index: -1;
+}
+.registration-section .furnishings-section img {
+    margin-right: 10px;
 }
 .registration-section .furnishings-section .furnishings-title {
     margin-bottom: 20px;
@@ -9497,6 +9659,10 @@ body .popup-bubble-anchor.active:after {
 }
 .registration-section .furnishings-section .furnishings-block span {
     z-index: 1;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .registration-section .furnishings-section .furnishings-block:hover {
     color: #3B8B3E;
@@ -10113,10 +10279,14 @@ body .popup-bubble-anchor.active:after {
     line-height: 130%;
     color: #545769;
     width: 100%;
-    max-width: 740px;
-    margin: auto;
     margin-bottom: 20px;
-    padding: 0 16px;
+}
+.data-checking-section .familiarization .checkbox-line label::before {
+    top: 0;
+    transform: none;
+}
+.data-checking-section .familiarization .checkbox-line label::after {
+    top: 6px;
 }
 .data-checking-section .familiarization span {
     color: #6BB63F;
@@ -10441,6 +10611,9 @@ body .popup-bubble-anchor.active:after {
     }
     .registration-section .social-media-checking .address-checking-name {
         max-width: none;
+    }
+    .data-checking-section .familiarization {
+        padding: 0 16px;
     }
 }
 @media (max-width: 767px) {
@@ -10831,6 +11004,9 @@ body .popup-bubble-anchor.active:after {
     .steps-section .dots .dots-item:nth-of-type(14),
     .steps-section .dots .dots-item:nth-of-type(15) {
         display: none;
+    }
+    .registration-section .object-data-table-room .v-select {
+        width: 100%;
     }
     .steps-section .dots .dots-item:nth-of-type(16) {
         margin-left: 0;
