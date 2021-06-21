@@ -10,6 +10,7 @@ use App\Page;
 use App\Property;
 use App\Room;
 use App\Services\GeocoderService;
+use App\Services\RoiStatService;
 use App\Services\WebsiteData;
 use App\Statistic;
 use Illuminate\Http\Request;
@@ -94,6 +95,10 @@ class HomeController extends Controller
 
         $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
         $phoneNumLandlord = Property::phoneFormat($hotel->getCurrentOption('landlordPhoneNumber'));
+
+        $phoneTrack = new RoiStatService;
+        $phoneNumLandlord = $phoneTrack->getPhone($phoneNumLandlord);
+        //dd($phoneNumLandlord);
         $phoneHide = substr($phoneNumLandlord, 0, 3) . 'X XXXXXXX';
 
         if ($hotel->access) {
@@ -190,7 +195,13 @@ class HomeController extends Controller
     }
     public function registration()
     {
-        return view('registration');
+        $data = WebsiteData::getOptions();
+        $seoTitle = $data['title'];
+        $seoDescription = $data['description'];
+        $options = $data['options'];
+
+        $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
+        return view('registration', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
     }
     public function registration2()
     {

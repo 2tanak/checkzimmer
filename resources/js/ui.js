@@ -3,8 +3,9 @@ import Public from './components/Public/Index'
 import Home from './components/Public/Home'
 import Favorites from './components/Public/Favorites'
 import Single from './components/Public/Single'
+import Registration from './components/Public/Registration'
 
-require('./bootstrap');
+//require('./bootstrap');
 
 import axios from 'axios';
 import VueAxios from 'vue-axios';
@@ -30,13 +31,19 @@ import VueAuth from '@websanova/vue-auth/dist/v2/vue-auth.esm'
 Vue.use(VueAuth, auth)
 
 window.Vue = require('vue');
-var jQuery = require('jquery')
+
+
+//var jQuery = require('jquery')
 
 import VueI18n from 'vue-i18n'
 Vue.use(VueI18n)
 
 import messagesLocaleEn from '../lang/en.json';
 import messagesLocaleDe from "../lang/de.json";
+
+import vSelect from "vue-select";
+Vue.component("v-select", vSelect);
+import 'vue-select/dist/vue-select.css';
 
 let locale = document.location.pathname.split('/')[1];
 let translations = {
@@ -60,6 +67,7 @@ const app = new Vue({
         Home,
         Favorites,
         Single,
+        Registration,
     },
     store,
     i18n,
@@ -67,32 +75,6 @@ const app = new Vue({
 
 
 jQuery(document).ready(function() {
-
-    function phoneTrack() {
-
-        if (!window.phonenumStr || !window.roistat || !window.roistat.callTracking.enabled) {
-            window.setTimeout( () => {
-                phoneTrack();
-            }, 200);
-            return;
-        }
-        try {
-            var calltrackingPhone = JSON.parse(window.roistat.callTracking.phoneScriptsJson).filter(function (script) {
-                return (script.replaceable_numbers.indexOf(atob(window.phonenumStr).replace(/[^\d;]/g, '')) != -1);
-            });
-            window.phonenumStr = calltrackingPhone.length ? btoa(calltrackingPhone.shift().phone) : window.phonenumStr;
-            window.phonenum = window.phonenumStr;
-            console.log(window.phonenumStr)
-        } catch (e) {
-            console.log(e)
-        }
-        /*jQuery('.sidebar .number-phone').addClass('gray');
-        jQuery('.sh_nmr').css('display', 'none');
-        jQuery('.phone-hide').html(phone);
-        jQuery('.phone-hide').attr('href', 'tel:' + phone);*/
-    }
-
-    phoneTrack();
 
     jQuery('a.comfort-collapse-link').click(function (e) {
         e.preventDefault();
