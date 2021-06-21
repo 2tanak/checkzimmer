@@ -189,12 +189,12 @@
                         </div>
                         <a class="entry login-link" href="#">{{ __('Login button') }}</a>
                     </form>
-                    <div class="or">{{ __('Or') }}</div>
+                    <!-- <div class="or">{{ __('Or') }}</div>
                     <a class="facebook-entry" href="#">
                         <img class="standart" src="/svg/i-facebook-cube.svg" alt="Facebook Icon">
                         <img class="hover" src="/svg/i-facebook-cube-hover.svg" alt="Facebook Icon">
                         {{ __('Login with Facebook') }}
-                    </a>
+                    </a> -->
                     <div class="new">{{ __('New user') }}? <a href="#">{{ __('Registration') }}</a></div>
                 </div>
             </div>

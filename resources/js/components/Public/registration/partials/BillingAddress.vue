@@ -26,14 +26,7 @@
             <div class="forms-line">
                 <div class="greeting forms-line-block">
                     <label for="greeting-select">Приветствие:</label>
-                    <select id="greeting-select" v-model="data.person.addr">
-                        <option value="mister" selected>
-                            Mister
-                        </option>
-                        <option value="missis">
-                            Missis
-                        </option>
-                    </select>
+                    <v-select id="greeting-select" v-model="data.person.addr" :options="optionsPerson"></v-select>
                 </div>
                 <div class="name-block forms-line-block">
                     <label for="name-input">Имя:*</label>
@@ -73,11 +66,7 @@
                 </div>
                 <div class="country-block forms-line-block">
                     <label for="country-select">Страна:*</label>
-                    <select id="country-select">
-                        <option value="01">Russia</option>
-                        <option value="02" selected>Germany</option>
-                        <option value="03">USA</option>
-                    </select>
+                    <v-select id="country-select" v-model="data.country" :options="optionsCountry"></v-select>
                 </div>
             </div>
 
@@ -112,7 +101,16 @@ export default {
     props: [ 'data' ],
     data() {
         return {
-            account: this.data
+            account: this.data,
+            optionsPerson: [
+                { code: 0, label: 'Mister' },
+                { code: 1, label: 'Missis' }
+            ],
+            optionsCountry: [
+                { code: 0, label: 'Germany' },
+                { code: 1, label: 'Russia' },
+                { code: 2, label: 'USA' },
+            ]
         }
     },
     /*watch: {
@@ -129,8 +127,6 @@ export default {
                 jQuery('.company-line').toggleClass('not-show');
                 jQuery('.add-id').toggleClass('show');
             });
-
-            jQuery('#greeting-select, #country-select').select2();
 
             jQuery('.add-id a').click(function (e) {
                 e.preventDefault();

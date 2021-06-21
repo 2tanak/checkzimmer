@@ -15,8 +15,11 @@
                 @include('registration.total')
 
                 <div class="familiarization">
-                    Я ознакомился с <span>условиями</span>, <span>политикой отмены</span> и положениями о защите данных провайдера,<br>
-                    и я согласен на оформление моей заявки.
+                    <div class="checkbox-line legal-address-line">
+                        <input type="checkbox" id="got-acquainted">
+                        <label for="got-acquainted">Я ознакомился с <span>условиями</span>, <span>политикой отмены</span> и положениями о защите данных провайдера,<br>
+                            и я согласен на оформление моей заявки.</label>
+                    </div>
                 </div>
 
                 <a href="#" class="save">Подтвердить с обязанностью платежа</a>

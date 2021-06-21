@@ -12,15 +12,9 @@
                     </clipPath>
                 </defs>
             </svg>
-            <select name="select-type-item" id="select-type-item" data-select2-id="select-type-item" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
-                <option value="0" selected>Выберите тип</option>
-                <option value="1">Квартира</option>
-                <option value="2">Дом (целиком)</option>
-                <option value="3">Пансионат</option>
-                <option value="4">Гостевой дом</option>
-                <option value="5">Хостел</option>
-                <option value="6">Отель</option>
-            </select>
+
+            <v-select v-model="myValue"  name="select-type-item" id="select-type-room" :options="options"></v-select>
+
         </div>
         <div class="quality-input-block">
             <div class="quality-head-mobile table-head-item table-head-item-mobile">Кол-во</div>
@@ -56,7 +50,22 @@
 
 <script>
 export default {
-name: "PropertyItemSummary"
+name: "PropertyItemSummary",
+    data() {
+        return {
+            myValue: '',
+            options: [
+                { code: 0, label: 'Выберите номер' },
+                { code: 1, label: 'Квартира' },
+                { code: 2, label: 'Дом (целиком)' },
+                { code: 3, label: 'Пансионат' },
+                { code: 4, label: 'Гостевой дом' },
+                { code: 5, label: 'Хостел' },
+                { code: 6, label: 'Отель' },
+
+            ]
+        }
+    },
 }
 </script>
 
