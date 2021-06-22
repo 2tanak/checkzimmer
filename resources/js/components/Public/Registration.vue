@@ -3,7 +3,7 @@
         <RegistrationSteps v-if="step > 1" :step="step" />
 
         <RegistrationStepPlans v-if="step === 1" :planActive="planActive" :plans="plans" :questions="questions" v-model="account.plan" @input="toAccountData"/>
-        <RegistrationStepClient v-else-if="step === 2" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData"/>
+        <RegistrationStepClient v-else-if="step === 2" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData" />
         <RegistrationStepProperty v-else-if="step === 3" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData"/>
     </div>
 </template>
@@ -103,7 +103,7 @@ export default {
             account: {
                 plan: 'intro',
                 billing: {
-                    type: '',
+                    type: 'company',
                     company: 'Test Name',
                     stid: 'A123',
                     person: {
@@ -115,16 +115,15 @@ export default {
                         street: '',
                         house: '',
                         postcode: '',
-                        city: '',
+                        country: 'Germany',
                     },
                     match_address: false,
                     match_person: false
                 },
                 contact: {
                     person: {
+                        name: '',
                         addr: '',
-                        first_name: '',
-                        last_name: '',
                     },
                     email: '',
                     email_display: true,
@@ -139,7 +138,12 @@ export default {
                     website: '',
                     website_enable: false
                 },
-                languages: {}
+                languages: {
+                    german: true,
+                    english: false,
+                    poland: false,
+                    russian: false
+                }
             }
         }
     },
@@ -152,7 +156,7 @@ export default {
         },
         toPropertyData() {
             this.step = 3;
-        }
+        },
     }
 }
 </script>

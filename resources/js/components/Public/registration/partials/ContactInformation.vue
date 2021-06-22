@@ -20,7 +20,7 @@
                             </div>
                         </a>
                     </label>
-                    <input type="text" placeholder="Укажите кто является контактным лицом" id="contact-person-input" name="contact-person-input">
+                    <input type="text" placeholder="Укажите кто является контактным лицом" id="contact-person-input" name="contact-person-input" v-model="data.person.name">
                     <span class="error-text">Вы не указали контактное лицо</span>
                 </div>
             </div>
@@ -103,23 +103,23 @@
                 </div>
             </div>
 
-            <div class="forms-line fax-line">
+            <div :class="{'forms-line': true, 'fax-line': true, 'show': data.fax_enable}">
                 <div class="number-phone fax-number forms-line-block">
                     <div class="number-phone-content">
                         <div class="number-phone-item">
                             <label for="fax-input">Факс:</label>
-                            <input type="tel" placeholder="Укажите номер факса" id="fax-input" name="fax-input">
+                            <input type="tel" placeholder="Укажите номер факса" id="fax-input" name="fax-input"  v-model="data.phone_fax">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="forms-line url-line">
+            <div :class="{'forms-line': true, 'url-line': true, 'show': data.website_enable}">
                 <div class="number-phone url-address forms-line-block">
                     <div class="number-phone-content">
                         <div class="number-phone-item">
                             <label for="url-address-input">URL вашего сайта:</label>
-                            <input type="text" placeholder="Укажите URL вашего сайта" id="url-address-input" name="url-address-input">
+                            <input type="text" placeholder="Укажите URL вашего сайта" id="url-address-input" name="url-address-input" v-model="data.website">
                         </div>
                     </div>
                 </div>
@@ -133,13 +133,13 @@
                 </svg>
                 Добавить ещё один телефон
             </a>
-            <a href="#" class="add-fax">
+            <a href="#" class="add-fax" @click.prevent="doShowFax" :style="{ display: data.fax_enable ? 'none' : 'block'}">
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M4 9C4 9.55228 4.44772 10 5 10C5.55228 10 6 9.55229 6 9V6H9C9.55228 6 10 5.55228 10 5C10 4.44772 9.55229 4 9 4L6 4V1C6 0.447715 5.55228 0 5 0C4.44772 0 4 0.447715 4 1V4L1 4C0.447715 4 0 4.44771 0 5C0 5.55228 0.447715 6 1 6H4V9Z" fill="#3B8B3E"/>
                 </svg>
                 Добавить факс
             </a>
-            <a href="#" class="add-url">
+            <a href="#" class="add-url" @click.prevent="doShowUrl" :style="{ display: data.website_enable ? 'none' : 'block'}">
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M4 9C4 9.55228 4.44772 10 5 10C5.55228 10 6 9.55229 6 9V6H9C9.55228 6 10 5.55228 10 5C10 4.44772 9.55229 4 9 4L6 4V1C6 0.447715 5.55228 0 5 0C4.44772 0 4 0.447715 4 1V4L1 4C0.447715 4 0 4.44771 0 5C0 5.55228 0.447715 6 1 6H4V9Z" fill="#3B8B3E"/>
                 </svg>
@@ -162,6 +162,12 @@
 export default {
     name: "ContactInformation",
     props: [ 'data' ],
+    data() {
+        return {
+            showFax: false,
+            showUrl: false
+        }
+    },
     mounted() {
         document.addEventListener('DOMContentLoaded', function () {
             jQuery('a.add-phone').on('click', function (e) {
@@ -182,6 +188,18 @@ export default {
             });
 
         });
+    },
+    methods: {
+        doShowFax() {
+            let contact = { ...this.data };
+            contact.fax_enable = !contact.fax_enable;
+            this.$emit('input', contact);
+        },
+        doShowUrl() {
+            let contact = { ...this.data };
+            contact.website_enable = !contact.website_enable;
+            this.$emit('input', contact);
+        }
     }
 }
 </script>

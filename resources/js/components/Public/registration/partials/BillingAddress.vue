@@ -5,8 +5,8 @@
         <div class="type-company">
             <span>Выберите тип компании:</span>
             <div class="type-company-links">
-                <a href="#" class="private-person">Частное лицо</a>
-                <a href="#" class="entity active">Юридическое лицо</a>
+                <a href="#" class="private-person" @click.prevent="setAccountType('private')">Частное лицо</a>
+                <a href="#" class="entity active" @click.prevent="setAccountType('company')">Юридическое лицо</a>
             </div>
         </div>
 
@@ -26,16 +26,16 @@
             <div class="forms-line">
                 <div class="greeting forms-line-block">
                     <label for="greeting-select">Приветствие:</label>
-                    <v-select id="greeting-select" v-model="data.person.addr" :options="optionsPerson"></v-select>
+                    <v-select id="greeting-select" v-model="data.person.addr" :options="optionsPerson" @input="toContactDetails"></v-select>
                 </div>
                 <div class="name-block forms-line-block">
                     <label for="name-input">Имя:*</label>
-                    <input type="text" placeholder="Укажите ваше имя" name="name-input" id="name-input" v-model="data.person.first_name">
+                    <input type="text" placeholder="Укажите ваше имя" name="name-input" id="name-input" v-model="data.person.first_name" @input="toContactDetails">
                     <span class="error-text">Вы не указали имя</span>
                 </div>
                 <div class="surname-block forms-line-block">
                     <label for="surname-input">Фамилия:*</label>
-                    <input type="text" placeholder="Укажите вашу фамилию" name="surname-input" id="surname-input" v-model="data.person.last_name">
+                    <input type="text" placeholder="Укажите вашу фамилию" name="surname-input" id="surname-input" v-model="data.person.last_name" @input="toContactDetails">
                     <span class="error-text">Вы не указали фамилию</span>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                 </div>
                 <div class="country-block forms-line-block">
                     <label for="country-select">Страна:*</label>
-                    <v-select id="country-select" v-model="data.country" :options="optionsCountry"></v-select>
+                    <v-select id="country-select" v-model="data.address.country" :options="optionsCountry"></v-select>
                 </div>
             </div>
 
@@ -76,7 +76,7 @@
             </div>
 
             <div class="checkbox-line transfer-contacts-line">
-                <input type="checkbox" id="transfer-contacts" v-model="data.match_person">
+                <input type="checkbox" id="transfer-contacts" v-model="data.match_person" @change="setContactAsBilling">
                 <label for="transfer-contacts">Перенести контактные данные из платежных данных</label>
             </div>
         </form>
@@ -102,15 +102,8 @@ export default {
     data() {
         return {
             account: this.data,
-            optionsPerson: [
-                { code: 0, label: 'Mister' },
-                { code: 1, label: 'Missis' }
-            ],
-            optionsCountry: [
-                { code: 0, label: 'Germany' },
-                { code: 1, label: 'Russia' },
-                { code: 2, label: 'USA' },
-            ]
+            optionsPerson: [ 'Mister', 'Missis' ],
+            optionsCountry: [ 'Germany', 'Russia', 'USA'  ],
         }
     },
     /*watch: {
@@ -140,6 +133,22 @@ export default {
                 jQuery('.company-line').removeClass('not-show');
             });
         })
+    },
+    methods: {
+        setAccountType(type) {
+            let billing = { ...this.data };
+            billing.type = type
+            this.$emit('input', billing);
+        },
+        toContactDetails() {
+            this.setContactAsBilling()
+        },
+        setContactAsBilling() {
+            if (this.data.match_person) {
+                this.$emit('setContactAsBilling', '');
+            }
+
+        }
     }
 }
 </script>

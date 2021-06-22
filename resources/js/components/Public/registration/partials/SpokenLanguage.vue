@@ -27,24 +27,7 @@
         </div>
         <div class="languages-speak-item">
             <div class="languages-speak-content">
-                <div class="languages-speak-block german active">
-                    <img src="/svg/de.svg" alt="German flag">
-                    Немецкий
-                </div>
-                <div class="languages-speak-block english">
-                    <img src="/svg/us.svg" alt="USA flag">
-                    Английский
-                </div>
-            </div>
-            <div class="languages-speak-content">
-                <div class="languages-speak-block polish">
-                    <img src="/svg/pl.svg" alt="Polish flag">
-                    Польский
-                </div>
-                <div class="languages-speak-block polish">
-                    <img src="/svg/ru.svg" alt="Russia flag">
-                    Русский
-                </div>
+                <SpokenLanguageItem v-for="(language, index) in languages" :key="language.flag" :language="language " :active="data[language.slug]" @click.native="switchLang(index)"/>
             </div>
         </div>
     </section>
@@ -52,8 +35,40 @@
 </template>
 
 <script>
+import SpokenLanguageItem from "./SpokenLanguageItem";
 export default {
     name: "SpokenLanguage",
+    components: {SpokenLanguageItem},
+    props: [ 'data' ],
+    data() {
+        return {
+            languages: {
+                german: {
+                    title: 'Немецкий',
+                    flag: '/svg/de.svg',
+                    alt: 'German flag',
+                    slug: 'german',
+                },
+                english: {
+                    title: 'Английский',
+                    flag: '/svg/us.svg',
+                    alt: 'USA flag',
+                    slug: 'english',
+                },
+                poland: {
+                    title: 'Польский',
+                    flag: '/svg/pl.svg',
+                    alt: 'Polish flag',
+                    slug: 'poland',
+                },
+                russian: {
+                    title: 'Русский',
+                    flag: '/svg/ru.svg',
+                    alt: 'Russian flag',
+                    slug: 'russian',
+                }}
+        }
+    },
     mounted() {
         document.addEventListener('DOMContentLoaded', function() {
 
@@ -62,6 +77,13 @@ export default {
             });
 
         });
+    },
+    methods: {
+        switchLang(index) {
+            let langs = this.data;
+            langs[index] = !langs[index];
+            this.$emit('input', langs);
+        }
     }
 }
 </script>

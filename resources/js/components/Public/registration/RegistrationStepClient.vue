@@ -3,7 +3,7 @@
         <section class="registration-section billing-section">
             <div class="billing-address-container">
                 <div class="main-registration-content">
-                    <BillingAddress :data="account.billing" v-model="account.billing" />
+                    <BillingAddress :data="account.billing" v-model="account.billing" @setContactAsBilling="setContactAsBilling"/>
                     <ContactInformation :data="account.contact" v-model="account.contact" />
                     <SpokenLanguage :data="account.languages" v-model="account.languages" />
 
@@ -36,6 +36,11 @@ export default {
         },
         saveAndContinue() {
             this.$emit('toPropertyData', '')
+        },
+        setContactAsBilling() {
+            let account = { ...this.account }
+            account.contact.person.name = account.billing.person.addr + ' ' + account.billing.person.first_name + ' ' + account.billing.person.last_name;
+            this.$emit('input', account);
         }
     }
 }
