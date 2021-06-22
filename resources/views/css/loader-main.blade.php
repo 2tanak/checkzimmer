@@ -364,8 +364,9 @@
         }
         .head-load-block .left-part-item {
             flex-direction: column;
-            padding: 16px;
+            padding: 16px 0;
             align-items: flex-start;
+            width: 100%;
         }
         .head-load-block .list, .head-load-block .map {
             margin-right: 0;
