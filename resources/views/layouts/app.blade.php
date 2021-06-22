@@ -195,7 +195,7 @@
                         <img class="hover" src="/svg/i-facebook-cube-hover.svg" alt="Facebook Icon">
                         {{ __('Login with Facebook') }}
                     </a> -->
-                    <div class="new">{{ __('New user') }}? <a href="#">{{ __('Registration') }}</a></div>
+                    <div class="new">{{ __('New user') }}? <a href="/registration">{{ __('Registration') }}</a></div>
                 </div>
             </div>
 

@@ -92,8 +92,8 @@
         <div class="plans-content city-content">
             <div class="plans-container">
 
-                <h1>{{ __('Our pricing plans are transparent & flexible') }}</h1>
-                <div class="subtitle">{{ __('Contact us, we will compare the properties in the city') }}</div>
+                <h1>{{ __('Our pricing plans are transparent & flexible (main page)') }}</h1>
+                <div class="subtitle">{{ __('Contact us, we will compare the properties in the city (main page)') }}</div>
                 <div class="price-block">
                     @foreach($subdomains as $subdomain)
                         <a href="{{$subdomain['link']}}"
@@ -111,12 +111,12 @@
                     @endforeach
 
 
-                    <a href="#" class="plus-city">
+                    <a href="/registration" class="plus-city">
                         <span class="add">{{ __('Add your city') }}</span>
                         <span class="plus">✚</span>
                     </a>
 
-                    <a href="#" class="plus-city">
+                    <a href="/registration" class="plus-city">
                         <span class="add">{{ __('Add your city') }}</span>
                         <span class="plus">✚</span>
                     </a>
