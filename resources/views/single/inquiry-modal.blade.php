@@ -72,7 +72,7 @@
             </div>
             <div class="checkbox-block checkbox-top">
                 <input id="consent-checkbox" class="checkbox input" name="consent-checkbox" type="checkbox" required>
-                <label for="consent-checkbox">{{ __('I consent to the processing of my data as described in') }} <a href="#">{{ __('statement of consent') }}</a> {{ __('from') }} Checkzimmer.</label>
+                <label for="consent-checkbox">{{ __('I consent to the processing of my data as described in') }} <a href="/datenschutz">{{ __('statement of consent') }}</a> {{ __('from') }} Checkzimmer.</label>
             </div>
             <input type="hidden" name="grecaptcha" value="">
             <a class="send-request" href="#">{{ __('Send request') }}</a>

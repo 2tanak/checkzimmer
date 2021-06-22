@@ -1092,26 +1092,40 @@ h1.list-title {
     font-size: 15px;
     line-height: 100%;
     color: #66707A;
-    min-width: 98px;
     height: 36px;
     background: #FFFFFF;
     border: 1px solid #7A8793;
     border-radius: 100px;
     text-decoration: none;
     outline: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin-right: 10px;
+    padding: 10px 16px;
+    position: relative;
+}
+.list-content .sorting-block .left-block a:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #7A8793;
+    border-radius: 100px;
+    z-index: 1;
 }
 .list-content .sorting-block .left-block a:hover {
     color: #333646;
-    border: 2px solid #7A8793;
+    background-color: #ffffff;
+}
+.list-content .sorting-block .left-block a:hover:before {
+    content: "";
 }
 .list-content .sorting-block .left-block a.active {
     background-color: #9fa0a4 !important;
     border: 0 !important;
     color: #fff !important;
+}
+.list-content .sorting-block .left-block a.active:hover:before {
+    content: none;
 }
 .list-content .sorting-block .left-block {
     display: flex;
@@ -1130,7 +1144,7 @@ h1.list-title {
     justify-content: flex-end;
     position: relative;
     width: 100%;
-    max-width: 215px;
+    max-width: 240px;
 }
 .list-content .sorting-block .sorting a {
     font-weight: 400;
@@ -1161,12 +1175,11 @@ h1.list-title {
 .list-content .sorting-block .filter-block {
     position: absolute;
     top: 31px;
-    left: -30px;
+    right: 0;
     background: #FFFFFF;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
     border-radius: 6px;
     z-index: 100;
-    width: 245px;
     min-height: 136px;
     padding: 12px 6px;
 }
@@ -8259,8 +8272,11 @@ body .popup-bubble-anchor.active:after {
     display: flex;
     align-items: flex-start;
 }
-.registration-section form .forms-line:not(:last-of-type) {
+.registration-section form .forms-line {
     margin-bottom: 30px;
+}
+.registration-section form .forms-line:last-of-type {
+    margin-bottom: 0;
 }
 .registration-section .billing-address-section form .forms-line:last-of-type {
     margin-bottom: 10px;
@@ -8781,9 +8797,7 @@ body .popup-bubble-anchor.active:after {
     color: #3B8B3E;
     display: flex;
     align-items: center;
-}
-.registration-section .add-links a:not(:last-of-type) {
-    margin-bottom: 20px;
+    margin-top: 20px;
 }
 .registration-section .add-links a svg {
     margin-right: 6px;
@@ -8924,7 +8938,7 @@ body .popup-bubble-anchor.active:after {
     background: #FFFFFF;
     box-shadow: 0 0 14px rgb(51 54 70 / 14%);
     border-radius: 12px;
-    padding: 30px 16px;
+    padding: 30px 16px 10px 16px;
     margin-bottom: 30px;
     max-width: 780px;
     width: 100%;
@@ -8974,16 +8988,20 @@ body .popup-bubble-anchor.active:after {
     align-items: center;
     background: #F3F3F3;
     border-radius: 6px;
-    width: 50%;
+    width: 22.97%;
     height: 54px;
     padding: 0 21px;
-    margin-right: 20px;
+    margin-right: 2.7%;
     cursor: pointer;
     position: relative;
     font-weight: 400;
     font-size: 15px;
     line-height: 100%;
     color: #333646;
+    margin-bottom: 20px;
+}
+.registration-section .languages-speak-item .languages-speak-block:nth-of-type(4n) {
+    margin-right: 0;
 }
 .registration-section .languages-speak-item .languages-speak-block:after {
     position: absolute;
@@ -8993,9 +9011,6 @@ body .popup-bubble-anchor.active:after {
     left: 0;
     border: 2px solid #6BB63F;
     border-radius: 6px;
-}
-.registration-section .languages-speak-item .languages-speak-block:last-of-type {
-    margin-right: 0;
 }
 .registration-section .languages-speak-item .languages-speak-block img {
     margin-right: 10px;
@@ -9037,6 +9052,7 @@ body .popup-bubble-anchor.active:after {
     display: flex;
     align-items: center;
     width: 100%;
+    flex-wrap: wrap;
 }
 .registration-section .languages-speak-content:not(:last-of-type) {
     margin-right: 16px;
@@ -10746,6 +10762,12 @@ svg.mobile-line {
     .registration-section .languages-speak-section .subtitle.subtitle-desctope {
         display: none;
     }
+    .registration-section .languages-speak-item .languages-speak-block:nth-of-type(2n) {
+        margin-right: 0;
+    }
+    .registration-section .languages-speak-item .languages-speak-block {
+        width: 48.6%;
+    }
 }
 @media (max-width: 575px) {
     .steps-section .number-step {
@@ -10815,9 +10837,6 @@ svg.mobile-line {
     .registration-section .url-line.show {
         padding-bottom: 30px !important;
     }
-    .registration-section .add-links a {
-        margin-bottom: 20px !important;
-    }
     .registration-section .contact-information-section {
         display: flex;
         flex-direction: column;
@@ -10830,6 +10849,8 @@ svg.mobile-line {
     }
     .registration-section .add-links a.add-phone-mobile {
         display: inline-block;
+        margin-bottom: 0 !important;
+        margin-top: 0;
     }
     .registration-section .number-phone a.add-phone-desctope {
         display: none;
@@ -10846,9 +10867,6 @@ svg.mobile-line {
     }
     .registration-section .languages-speak-content:not(:last-of-type) {
         margin-bottom: 14px;
-    }
-    .registration-section .languages-speak-item .languages-speak-block {
-        margin-right: 14px;
     }
     .registration-section .type-company-links a {
         text-align: center;
