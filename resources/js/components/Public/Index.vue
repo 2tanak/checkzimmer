@@ -7,7 +7,7 @@
                         <div class="left-block">
                             <a class="list active" href="#">{{ $t('List') }}</a>
                             <a class="map" href="#">{{ $t('Map') }}</a>
-                            <div class="result">{{ $t('Found') }} <span class="property-found">{{ totals }}</span> {{ $t('housing options') }}</div>
+                            <div class="result"><span class="property-found">{{ totals }}</span> {{ $t('housing options') }}</div>
                         </div>
                         <div class="sorting">
                             <a href="#">{{ $t('Sort by default') }}</a>
@@ -493,7 +493,7 @@
                         {{ $t('The offers on your request are over, increase the distance or contact the manager directly') }}
                     </div>
                     <div class="link-block" v-if="!additional_load && !endoflist">
-                        <a href="#" @click.prevent="loadMore">{{ $t('Load surrounding places') }}</a>
+                        <a href="/registration" @click.prevent="loadMore">{{ $t('Load surrounding places') }}</a>
                         <div class="shadow-block"></div>
                     </div>
                     <div class="link-block" v-if="!additional_load && endoflist" @click.prevent="modalShow">

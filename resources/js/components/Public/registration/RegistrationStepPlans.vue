@@ -3,8 +3,8 @@
         <section class="plans-section">
             <div class="plans-content">
                 <div class="plans-container">
-                    <h1>{{ $t('Our pricing plans are transparent & flexible') }}</h1>
-                    <div class="subtitle">{{ $t('Contact us, we will compare the properties in the city') }} {{ $t('Х') }} {{ $t('for you and find the most optimal accommodation for you!') }}</div>
+                    <h1>{{ $t('Our pricing plans are transparent & flexible (domain plans)') }}</h1>
+                    <div class="subtitle">{{ $t('Contact us, we will compare the properties in the city Х for you and find the most optimal accommodation for you! (domain plans)') }}</div>
                     <div class="price-block">
                         <PriceBlockItem v-for="(plan, key) in plans" :active="key === planActive" :plan="plan" @input="planSelect(key)"/>
                     </div>

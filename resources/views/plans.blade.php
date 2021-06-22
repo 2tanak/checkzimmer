@@ -5,8 +5,8 @@
     <section class="plans-section">
         <div class="plans-content">
             <div class="plans-container">
-                <h1>{{ __('Our pricing plans are transparent & flexible') }}</h1>
-                <div class="subtitle">{{ __('Contact us, we will compare the properties in the city') }} {{ __('Х') }} {{ __('for you and find the most optimal accommodation for you!') }}</div>
+                <h1>{{ __('Our pricing plans are transparent & flexible (domain plans)') }}</h1>
+                <div class="subtitle">{{ __('Contact us, we will compare the properties in the city (domain plans)') }}</div>
                 <div class="price-block">
                     <div class="price-block-item">
                         <div class="price-block-head">
