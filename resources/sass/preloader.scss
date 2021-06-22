@@ -17,6 +17,33 @@ $recast-light-highlight: lighten($recast-light-background, 4%);
         animation: recast $recast-animation-duration ease-in-out infinite;
     }
 }
+.list.recast:after {
+    border-radius: 100px;
+}
+.map.recast:after {
+    border-radius: 100px;
+}
+.found.recast:after {
+    border-radius: 6px;
+}
+.images-block.recast:after {
+    border-radius: 6px;
+}
+.middle-gray-block.recast:after {
+    border-radius: 100px;
+}
+.short-gray-block.recast:after {
+    border-radius: 100px;
+}
+.long-gray-block.recast:after {
+    border-radius: 100px;
+}
+.circle-gray-block.recast:after {
+    border-radius: 50%;
+}
+.rectangle-block.recast:after {
+    border-radius: 6px;
+}
 
 @keyframes recast {
     0% {

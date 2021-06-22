@@ -1,10 +1,6 @@
 <template>
     <section class="contact-information-section">
         <div class="title">Контактная информация</div>
-        <div class="checkbox-line transfer-line">
-            <input type="checkbox" id="transfer">
-            <label for="transfer">Перенести контактные данные из платежных данных</label>
-        </div>
         <form class="contact-information-form">
             <div class="forms-line">
                 <div class="contact-person forms-line-block">

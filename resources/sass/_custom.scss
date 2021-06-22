@@ -8938,7 +8938,7 @@ body .popup-bubble-anchor.active:after {
     background: #FFFFFF;
     box-shadow: 0 0 14px rgb(51 54 70 / 14%);
     border-radius: 12px;
-    padding: 30px 16px;
+    padding: 30px 16px 10px 16px;
     margin-bottom: 30px;
     max-width: 780px;
     width: 100%;
@@ -8988,16 +8988,20 @@ body .popup-bubble-anchor.active:after {
     align-items: center;
     background: #F3F3F3;
     border-radius: 6px;
-    width: 50%;
+    width: 22.97%;
     height: 54px;
     padding: 0 21px;
-    margin-right: 20px;
+    margin-right: 2.7%;
     cursor: pointer;
     position: relative;
     font-weight: 400;
     font-size: 15px;
     line-height: 100%;
     color: #333646;
+    margin-bottom: 20px;
+}
+.registration-section .languages-speak-item .languages-speak-block:nth-of-type(4n) {
+    margin-right: 0;
 }
 .registration-section .languages-speak-item .languages-speak-block:after {
     position: absolute;
@@ -9007,9 +9011,6 @@ body .popup-bubble-anchor.active:after {
     left: 0;
     border: 2px solid #6BB63F;
     border-radius: 6px;
-}
-.registration-section .languages-speak-item .languages-speak-block:last-of-type {
-    margin-right: 0;
 }
 .registration-section .languages-speak-item .languages-speak-block img {
     margin-right: 10px;
@@ -9051,6 +9052,7 @@ body .popup-bubble-anchor.active:after {
     display: flex;
     align-items: center;
     width: 100%;
+    flex-wrap: wrap;
 }
 .registration-section .languages-speak-content:not(:last-of-type) {
     margin-right: 16px;
@@ -10760,6 +10762,12 @@ svg.mobile-line {
     .registration-section .languages-speak-section .subtitle.subtitle-desctope {
         display: none;
     }
+    .registration-section .languages-speak-item .languages-speak-block:nth-of-type(2n) {
+        margin-right: 0;
+    }
+    .registration-section .languages-speak-item .languages-speak-block {
+        width: 48.6%;
+    }
 }
 @media (max-width: 575px) {
     .steps-section .number-step {
@@ -10859,9 +10867,6 @@ svg.mobile-line {
     }
     .registration-section .languages-speak-content:not(:last-of-type) {
         margin-bottom: 14px;
-    }
-    .registration-section .languages-speak-item .languages-speak-block {
-        margin-right: 14px;
     }
     .registration-section .type-company-links a {
         text-align: center;
