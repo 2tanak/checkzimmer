@@ -2,7 +2,7 @@
     <section class="contact-information-section">
         <div class="title">Контактная информация</div>
         <div class="checkbox-line transfer-line">
-            <input type="checkbox" id="transfer">
+            <input type="checkbox" id="transfer" v-model="sameAsBilling" @input="setAsBilling">
             <label for="transfer">Перенести контактные данные из платежных данных</label>
         </div>
         <form class="contact-information-form">
@@ -20,7 +20,7 @@
                             </div>
                         </a>
                     </label>
-                    <input type="text" placeholder="Укажите кто является контактным лицом" id="contact-person-input" name="contact-person-input">
+                    <input type="text" placeholder="Укажите кто является контактным лицом" id="contact-person-input" name="contact-person-input" v-model="contact.person.name">
                     <span class="error-text">Вы не указали контактное лицо</span>
                 </div>
             </div>
@@ -28,10 +28,10 @@
             <div class="forms-line">
                 <div class="email-address forms-line-block">
                     <label for="email-address-input">Email адрес:*</label>
-                    <input type="email" placeholder="Укажите свой email адрес" id="email-address-input" name="email-address-input">
+                    <input type="email" placeholder="Укажите свой email адрес" id="email-address-input" name="email-address-input" v-model="contact.email">
                     <span class="error-text">Вы не указали свой email</span>
                     <div class="checkbox-line email-contacts-line">
-                        <input type="checkbox" id="email-contacts">
+                        <input type="checkbox" id="email-contacts" v-model="contact.email_display">
                         <label for="email-contacts">Отображать email адрес</label>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                     <div class="number-phone-content">
                         <div class="number-phone-item">
                             <label for="number-phone-input">Номер телефона:*</label>
-                            <input type="tel" placeholder="+49 15168161326" id="number-phone-input" name="number-phone-input">
+                            <input type="tel" placeholder="+49 15168161326" id="number-phone-input" name="number-phone-input" v-model="contact.phone">
                             <span class="error-text">Вы не указали свой телефон</span>
                         </div>
                         <a href="#" class="add-phone add-phone-desctope">
@@ -53,11 +53,11 @@
                         </a>
                     </div>
                     <div class="checkbox-line number-phone-show-line">
-                        <input type="checkbox" id="number-phone-show">
+                        <input type="checkbox" id="number-phone-show" v-model="contact.phone_display" >
                         <label for="number-phone-show">Отображать этот контактный номер телефона</label>
                     </div>
                     <div class="checkbox-line number-phone-watsapp-line">
-                        <input type="checkbox" id="number-phone-watsapp">
+                        <input type="checkbox" id="number-phone-watsapp" v-model="contact.phone_whatsapp">
                         <label for="number-phone-watsapp">Включить запрос по этому номеру через Whatsapp (если номер доступен в сети)</label>
                     </div>
                 </div>
@@ -78,11 +78,11 @@
                         </a>
                     </div>
                     <div class="checkbox-line number-phone-show-line">
-                        <input type="checkbox" id="additional-number-phone-show">
+                        <input type="checkbox" id="additional-number-phone-show" v-model="contact.phone_display">
                         <label for="additional-number-phone-show">Отображать этот контактный номер телефона</label>
                     </div>
                     <div class="checkbox-line number-phone-watsapp-line">
-                        <input type="checkbox" id="additional-number-phone-watsapp">
+                        <input type="checkbox" id="additional-number-phone-watsapp" v-modal="contact.phone_whatsapp">
                         <label for="additional-number-phone-watsapp">Включить запрос по этому номеру через Whatsapp (если номер доступен в сети)</label>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                     <div class="number-phone-content">
                         <div class="number-phone-item">
                             <label for="landline-number-phone-input">Номер телефона (стационарный):</label>
-                            <input type="tel" placeholder="+49 15168161326" id="landline-number-phone-input" name="landline-number-phone-input">
+                            <input type="tel" placeholder="+49 15168161326" id="landline-number-phone-input" name="landline-number-phone-input" v-model="contact.phone">
                         </div>
                     </div>
                     <div class="checkbox-line number-phone-show-line">
@@ -108,7 +108,7 @@
                     <div class="number-phone-content">
                         <div class="number-phone-item">
                             <label for="fax-input">Факс:</label>
-                            <input type="tel" placeholder="Укажите номер факса" id="fax-input" name="fax-input">
+                            <input type="tel" placeholder="Укажите номер факса" id="fax-input" name="fax-input" v-model="contact.phone_fax">
                         </div>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                     <div class="number-phone-content">
                         <div class="number-phone-item">
                             <label for="url-address-input">URL вашего сайта:</label>
-                            <input type="text" placeholder="Укажите URL вашего сайта" id="url-address-input" name="url-address-input">
+                            <input type="text" placeholder="Укажите URL вашего сайта" id="url-address-input" name="url-address-input" v-model="contact.website">
                         </div>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
 
         <div class="display-request-form">
             <div class="checkbox-line">
-                <input type="checkbox" id="display-request">
+                <input type="checkbox" id="display-request" v-model="contact.form_display">
                 <label for="display-request">Отображать форму запроса, в противном случае объявления будут приходить по телефону</label>
             </div>
         </div>
@@ -162,6 +162,12 @@
 <script>
 export default {
     name: "PropertyContacts",
+    props: ['contact', 'billing'],
+    data() {
+        return {
+            sameAsBilling: false
+        }
+    },
     mounted() {
         document.addEventListener('DOMContentLoaded', function() {
             jQuery('a.add-phone').on('click', function(e) {
@@ -183,6 +189,16 @@ export default {
 
         });
 
+    },
+    methods: {
+        setAsBilling() {
+            this.sameAsBilling = !this.sameAsBilling;
+            if (this.sameAsBilling) {
+                let contact = { ...this.contact };
+                contact.person.name = this.billing.addr + ' ' + this.billing.first_name + ' ' + this.billing.last_name;
+                this.$emit('input', contact);
+            }
+        }
     }
 }
 </script>
