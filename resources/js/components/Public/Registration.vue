@@ -204,6 +204,53 @@ export default {
                     english: false,
                     poland: false,
                     russian: false
+                },
+                property: {
+                    contact: {
+                        person: {
+                            name: '',
+                            addr: '',
+                        },
+                        email: '',
+                        email_display: true,
+                        phones: [
+                            ''
+                        ],
+                        phone: '',
+                        phone_display: true,
+                        phone_whatsapp: false,
+                        phone_fax: '',
+                        phone_fax_enable: '',
+                        website: '',
+                        website_enable: false,
+                        form_display: true
+                    },
+                    propertyTypes: [
+                        {
+                            name: '',
+                            num: 0,
+                            persons: 1,
+                            price: 0,
+                            rooms: [
+                                {
+                                    name: '',
+                                    num: 0,
+                                    persons: 1,
+                                    price: 0
+                                }
+                            ]
+                        }
+                    ],
+                    facilities: [],
+                    media: {
+                        photos: [
+                            '/img/background.png',
+                            '/img/background.png',
+                            '/img/background.png',
+                        ],
+                        video: '',
+                        facebook: ''
+                    }
                 }
             }
         }

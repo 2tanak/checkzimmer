@@ -16,7 +16,6 @@ class FeaturesController extends Controller
         }
         return response()->json($features);
     }
-
     public function show($id)
     {
         $feature = static::get($id);

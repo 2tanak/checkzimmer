@@ -2,7 +2,7 @@
     <section class="furnishings-section">
         <div class="title">Выберите мебелирование</div>
         <div class="furnishings-content">
-            <PropertyFacilitiesCategory v-for="category in categories" :key="JSON.stringify(category)" :category="category" :items="belongToCat(category.id)" />
+            <PropertyFacilitiesCategory v-for="category in categories" :key="JSON.stringify(category)" :category="category" :facilities="facilities" :items="belongToCat(category.id)" @update="facilityUpdate" />
         </div>
     </section>
 </template>
@@ -11,12 +11,13 @@
 import ApiRequest from "../../../API/ApiRequest";
 import PropertyFacilitiesCategory from "./PropertyFacilitiesCategory";
 
-let featureRequest = ApiRequest('features');
+let featureRequest = ApiRequest('features-public');
 let features = new featureRequest;
 
 export default {
     name: "PropertyFacilities",
     components: {PropertyFacilitiesCategory},
+    props: ['facilities'],
     data() {
         return {
             features: []
@@ -31,6 +32,16 @@ export default {
     methods: {
         belongToCat(id) {
             return this.features.filter( (item) => item.feature_category_id  === id);
+        },
+        facilityUpdate(facility) {
+            let facilities = this.facilities;
+            let index = facilities.findIndex((item) => item === facility.id)
+            if (index === -1) {
+                facilities.push(facility.id)
+            } else {
+                facilities.splice(index, 1);
+            }
+            this.$emit('facilityUpdate', facilities);
         }
     },
     computed: {
