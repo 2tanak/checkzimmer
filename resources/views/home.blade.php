@@ -123,7 +123,7 @@
 
                 </div>
             </div>
-            <div class="subtitle down-subtitle">{{ __('Contact us, we will compare the properties in the city') }} {{ __('X') }} {{ __('for you and find the most optimal accommodation for you!') }}</div>
+            <div class="subtitle down-subtitle">{{ __('Contact us, we will compare the properties in the city X for you and find the most optimal accommodation for you!') }}</div>
         </div>
     </section>
 
