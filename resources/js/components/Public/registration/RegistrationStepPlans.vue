@@ -4,7 +4,7 @@
             <div class="plans-content">
                 <div class="plans-container">
                     <h1>{{ $t('Our pricing plans are transparent & flexible (domain plans)') }}</h1>
-                    <div class="subtitle">{{ $t('Contact us, we will compare the properties in the city Х for you and find the most optimal accommodation for you! (domain plans)') }}</div>
+                    <div class="subtitle">{{ $t('Contact us, we will compare the properties in the city (domain plans)') }}</div>
                     <div class="price-block">
                         <PriceBlockItem v-for="(plan, key) in plans" :active="key === planActive" :plan="plan" @input="planSelect(key)"/>
                     </div>
@@ -16,8 +16,8 @@
                             <QuestionItem v-for="(item, index) in questions" :question="item" :index="index" />
                         </div>
                         <div class="communication-manager">
-                            Не нашли ответ на свой вопрос? Не проблема, просто свяжитесь с нашим менежером напрямую
-                            <a class="communication-manager" href="#">Связаться с менеджером</a>
+                            {{ $t('Did not find an answer to your question ? No problem, just contact our manager directly') }}
+                            <a class="communication-manager" href="#" @click.prevent="modalShow">{{ $t('Contact the manager') }}</a>
                         </div>
                     </div>
                 </div>
@@ -41,6 +41,9 @@ export default {
     methods: {
         planSelect(key) {
             this.$emit('input', key);
+        },
+        modalShow() {
+            jQuery('.inquiry-modal-overlay').addClass('modal-show');
         }
     }
 }

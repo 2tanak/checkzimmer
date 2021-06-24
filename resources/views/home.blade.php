@@ -123,7 +123,79 @@
 
                 </div>
             </div>
-            <div class="subtitle down-subtitle">{{ __('Contact us, we will compare the properties in the city') }} {{ __('X') }} {{ __('for you and find the most optimal accommodation for you!') }}</div>
+
+            <div class="subtitle down-subtitle">{{ __('Contact us, we will compare the properties in the city X for you and find the most optimal accommodation for you!') }}</div>
+
+            <div class="questions-block">
+                <div class="questions-content">
+                    <div class="title">{{ __('Freequently asked Questions') }}</div>
+                    <div class="questions-block-item">
+                        <div class="questions-item">
+                            <div class="collapse-button" data-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapse1">
+                                <div style="display:flex;">
+                                    <div class="point"></div>
+                                    Was ist ein Monteurzimmer?
+                                </div>
+                                <div class="plus-minus"></div>
+                            </div>
+                            <div  class="collapse-content collapse" id="collapse1">
+                                <p>Ein Monteurzimmer ist eine Unterkunft für Menschen, die außerhalb ihrer Wohnumgebung arbeiten. In der Regel sind dies Handwerker oder Bauarbeiter, aber im Grunde kann jeder der beruflich unterwegs ist und einen Platz zum Übernachten benötigt.</p>
+                                <p>Monteurunterkünfte sind in der Regel eher einfach eingerichtet. Für jeden Mieter ist stehen ein Bett, Aufbewahrungsmöglichkeiten, ein Platz zum Sitzen und Essen sowie die Möglichkeit sich etwas zum Essen zu machen zur Verfügung. Dies kann ganz unterschiedlich aufgebaut sein: Man findet Einzel- oder Gruppenzimmer, private Küchen und Badezimmer, aber auch Gemeinschaftsbäder und -küchen. All dies hängt von der Immobilie und den Möglichkeiten des Vermieters ab.</p>
+                                <p>Da Monteure in der Regel sehr untypische Arbeitszeiten haben, ist eine Unterbringung im Hotel nicht immer sinnvoll. Hotels sind deutlich teurer und die meisten Annehmlichkeiten können aufgrund der Arbeitszeiten nicht genutzt werden. Stattdessen ist den meisten Monteuren wichtig, die Möglichkeit zu haben, sich essen zuzubereiten oder aufzuwärmen und Arbeitgeber profitieren vom günstigen Preis.</p>
+                            </div>
+                        </div>
+                        <div class="questions-item">
+                            <div class="collapse-button" data-toggle="collapse" href="#collapse2" role="button" aria-expanded="false" aria-controls="collapse2">
+                                <div style="display:flex;">
+                                    <div class="point"></div>
+                                    Wo finde ich eine günstige Monteurunterkunft?
+                                </div>
+                                <div class="plus-minus"></div>
+                            </div>
+                            <div  class="collapse-content collapse" id="collapse2">
+                                <p>Wenn Sie auf der Suche nach einem günstigen Monteurzimmer sind, finden Sie bei CHECK-ZIMMER eine große Auswahl an Vermietern.</p>
+                                <p>Wir sind sogar auf Sachsen und Sachsen-Anhalt spezialisiert:</p>
+                                <p><a href="https://leipzig.check-zimmer.de">https://leipzig.check-zimmer.de</a></p>
+                                <p><a href="https://schkeuditz.check-zimmer.de">https://schkeuditz.check-zimmer.de</a></p>
+                                <p><a href="https://bitterfeld.check-zimmer.de">https://bitterfeld.check-zimmer.de</a></p>
+                                <p><a href="https://chemnitz.check-zimmer.de">https://chemnitz.check-zimmer.de</a></p>
+                                <p><a href="https://halle.check-zimmer.de">https://halle.check-zimmer.de</a></p>
+                                <p><a href="https://sandersdorf.check-zimmer.de">https://sandersdorf.check-zimmer.de</a></p>
+                            </div>
+                        </div>
+                        <div class="questions-item">
+                            <div class="collapse-button" data-toggle="collapse" href="#collapse3" role="button" aria-expanded="false" aria-controls="collapse3">
+                                <div style="display:flex;">
+                                    <div class="point"></div>
+                                    Wie viel kostet eine Übernachtung in einer Monteurunterkunft?
+                                </div>
+                                <div class="plus-minus"></div>
+                            </div>
+                            <div  class="collapse-content collapse" id="collapse3">
+                                <p>Aktuell finden Sie bei uns Anbieter, die ihre Monteurzimmer für einen Preis von 13€ bis 25€ pro Nacht und Person vermieten.</p>
+                                <p>Die Preise von Monteurwohnungen sind in der Regel von verschiedenen Faktoren abhängig. Der wichtigste Faktor ist die Lage der Monteurunterkunft. Immobilien in großen Städten sind teurer als in ländlichen Regionen und somit auch die Preise für das Monteurzimmer. Auch innerhalb einer Stadt kann der Preis je nach Stadtteil unterschiedlich ausfallen.</p>
+                                <p>Ähnlich verhält es sich mit der Aufenthaltsdauer. Je länger die Monteurunterkunft gemietet wird desto günstiger der Preis, da Leerstand vermieden wird und nicht kompensiert werden muss. Dasselbe gilt für die Personenzahl.</p>
+                                <p>Auch die Saison ist für den Preis entscheidend. In der Hauptsaison sind die Preise aufgrund der hohen Nachfrage etwas höher als in der Nebensaison.</p>
+                            </div>
+                        </div>
+                        <div class="questions-item">
+                            <div class="collapse-button" data-toggle="collapse" href="#collapse4" role="button" aria-expanded="false" aria-controls="collapse4">
+                                <div style="display:flex;">
+                                    <div class="point"></div>
+                                    Wie finde ich geeignete Monteurzimmer für große Gruppen?
+                                </div>
+                                <div class="plus-minus"></div>
+                            </div>
+                            <div  class="collapse-content collapse" id="collapse4">
+                                <p>Kontaktieren Sie uns jederzeit telefonisch oder senden Sie uns eine Kontaktanfrage (Hyperlink) und wir erledigen den Rest. Außerdem finden Sie bei CHECK-ZIMMER eine große Anzahl an Vermietern, die über kleine wie große Wohneinheiten verfügen. Sie finden bei uns das perfekte Monteurzimmer für jeden Ihrer Mitarbeiter schnell und günstig.</p>
+                                <p>Sie finden bei jedem Objekt Angaben über die Ausstattung des Monteurzimmers und können entscheiden welche Gebäude-Art (Haus oder Wohnung) und welche Annehmlichkeiten, wie zum Beispiel Einzelbäder oder Gemeinschaftsbäder, eigene Küchen oder Gemeinschaftsküchen, Sie in der Monteurunterkunft haben möchten.</p>
+                                <p>Sie sind sich nicht sicher, was genau Sie benötigen oder welche Monteurzimmer für Ihren Zweck geeignet sind? Kontaktieren Sie uns jederzeit Online oder telefonisch – wir sind rund um die Uhr für Sie da.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 

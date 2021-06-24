@@ -8,20 +8,20 @@
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0.5 0C0.776142 0 1 0.223861 1 0.500004V221.5C1 221.776 1.22386 222 1.5 222H9.5C9.77614 222 10 222.224 10 222.5C10 222.776 9.77614 223 9.5 223H1.5C0.671573 223 0 222.328 0 221.5V0.5C0 0.223858 0.223858 0 0.5 0Z" fill="#CCD1DA"/>
             </svg>
 
-            <v-select v-model="myValue"  name="select-type-item" id="select-type-room" :options="options"></v-select>
+            <v-select v-model="room.name"  name="select-type-item" id="select-type-room" :options="options"></v-select>
         </div>
         <div class="quality-input-block">
             <div class="quality-head-mobile table-head-item table-head-item-mobile">Кол-во</div>
-            <input type="text" value="" name="quality-input" id="quality-input" placeholder="0">
+            <input type="text" value="" name="quality-input" id="quality-input" placeholder="0" v-model="room.num">
         </div>
         <div class="personen-input-block">
             <div class="personen-head-mobile table-head-item table-head-item-mobile">Personen</div>
-            <input type="text" value="" name="personen-input" id="personen-input" placeholder="0">
+            <input type="text" value="" name="personen-input" id="personen-input" placeholder="0" v-model="room.persons">
         </div>
         <div class="price-input-block">
             <div class="price-head-mobile table-head-item table-head-item-mobile">Цена/ Чел</div>
             <span class="from">от</span>
-            <input type="text" value="" name="price-input" id="price-input" placeholder="0">
+            <input type="text" value="" name="price-input" id="price-input" placeholder="0" v-model="room.price">
             <span class="dollar-sign">€</span>
         </div>
         <div class="object-data-link">
@@ -51,16 +51,7 @@ export default {
     data() {
         return {
             myValue: '',
-            options: [
-                { code: 0, label: 'Выберите номер' },
-                { code: 1, label: 'одноместный' },
-                { code: 2, label: 'двухместный' },
-                { code: 3, label: 'трехместный' },
-                { code: 4, label: 'четырёхместный' },
-                { code: 5, label: 'пятиместный' },
-                { code: 6, label: 'многоместный' },
-
-            ]
+            options: [ 'Выберите номер', 'одноместный', 'двухместный', 'трехместный', 'четырёхместный', 'пятиместный', 'многоместный' ],
         }
     },
     methods: {

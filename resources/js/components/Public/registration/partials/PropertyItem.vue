@@ -1,9 +1,9 @@
 <template>
     <div class="object-data-table-content selected-object">
 
-        <PropertyItemSummary />
+        <PropertyItemSummary :roomTypes="roomTypes" :index="index" :property="property" v-model="property" @deleteType="deleteType" @duplicateType="duplicateType" />
 
-        <PropertyItemRoom v-for="(room, index) in rooms" :key="JSON.stringify(room) + index" :room="room" :index="index" @duplicate="duplicateRoom" @delete="deleteRoom"/>
+        <PropertyItemRoom v-for="(room, index) in property.rooms" :key="JSON.stringify(room) + index" :room="room" :index="index" v-model="property.rooms[index]" @duplicate="duplicateRoom" @delete="deleteRoom"/>
 
         <PropertyItemRoomAdd @click.native="addRoom"/>
 
@@ -18,6 +18,7 @@ import PropertyItemSummary from "./PropertyItemSummary";
 export default {
     name: "PropertyItem",
     components: {PropertyItemSummary, PropertyItemRoom, PropertyItemRoomAdd},
+    props: ['roomTypes', 'property', 'index'],
     data() {
         return {
             rooms: [{
@@ -32,15 +33,23 @@ export default {
     mounted() {
     },
     methods: {
-        duplicateRoom(index) {
-            this.rooms.splice(index, 0, { ...this.rooms[index] });
+        addRoom() {
+            this.$emit('addRoom', this.index);
         },
         deleteRoom(index) {
-            console.log(index);
-            this.rooms.splice(index, 1);
+            this.$emit('addRoom', { index: this.index, room: index });
         },
-        addRoom() {
-            this.rooms.push({ title: String(this.rooms.length + 1)});
+        duplicateRoom(index) {
+            this.$emit('addRoom', { index: this.index, room: index });
+        },
+        deleteType() {
+            if (this.index === 0) {
+                return false;
+            }
+            this.$emit('deleteType', this.index);
+        },
+        duplicateType() {
+            this.$emit('duplicateType', this.index);
         }
     }
 }
