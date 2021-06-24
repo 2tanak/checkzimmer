@@ -5,9 +5,10 @@ import Router from 'vue-router'
 import dashboard from '../views/dashboard'
 
 // Widgets
-import widgets from '../views/widgets'
+//import widgets from '../views/widgets'
 
 // UI Components
+/*
 import alerts from '../views/ui-components/alerts'
 import badges from '../views/ui-components/badges'
 import breadcrumbs from '../views/ui-components/breadcrumbs'
@@ -22,14 +23,14 @@ import tables from '../views/ui-components/tables'
 import typography from '../views/ui-components/typography'
 import tabs from '../views/ui-components/tabs'
 import tooltips from '../views/ui-components/tooltips'
-
+*/
 // Form Components
-import forms from '../views/forms/forms'
+//import forms from '../views/forms/forms'
 
 // Sample Pages
-import error404 from '../views/sample-pages/error-404'
-import login from '../views/sample-pages/login'
-import register from '../views/sample-pages/register'
+//import error404 from '../views/sample-pages/error-404'
+//import login from '../views/sample-pages/login'
+//import register from '../views/sample-pages/register'
 
 import Requests from '../../components/Dashboard/Requests/Index';
 import Header from '../../components/Dashboard/Website/Header/Index';
@@ -130,12 +131,12 @@ export default new Router({
             component: BookingSettings,
             meta: { auth: true }
         },
-        {
+        /*{
             path: '/dashboard/categories',
             name: 'categories',
             component: widgets,
             meta: { auth: true }
-        },
+        },*/
         {
             path: '/dashboard/website/header',
             name: 'website-header',
@@ -238,6 +239,7 @@ export default new Router({
             component: PageSingle,
             meta: { auth: true }
         },
+        /*
         {
             path: '/404',
             name: 'error-404',
@@ -327,5 +329,5 @@ export default new Router({
     path: '/forms',
     name: 'forms',
     component: forms
-  }]
+  }*/]
 })

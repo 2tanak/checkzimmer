@@ -128,9 +128,7 @@
 
     </header>
 
-    <main class="py-4">
-        @yield('content')
-    </main>
+    @yield('content')
 
     <div class="modal-overlay">
 
@@ -161,13 +159,13 @@
                     </div>
                     <a class="entry login-link" href="#">{{ __('Login') }}</a>
                 </form>
-                <div class="or">{{ __('Or') }}</div>
+                <!-- <div class="or">{{ __('Or') }}</div>
                 <a class="facebook-entry" href="#">
                     <img class="standart" src="/svg/i-facebook-cube.svg" alt="Facebook Icon">
                     <img class="hover" src="/svg/i-facebook-cube-hover.svg" alt="Facebook Icon">
                     {{ __('Login with Facebook') }}
-                </a>
-                <div class="new">{{ __('New user?') }} <a href="#">{{ __('Registration') }}</a></div>
+                </a> -->
+                <div class="new">{{ __('New user?') }} <a href="/registration">{{ __('Registration') }}</a></div>
             </div>
         </div>
 

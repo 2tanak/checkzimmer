@@ -12,11 +12,12 @@
         </div>
         <div class="humans">
             <img src="/svg/i-people.svg" alt="">
+            {{ $t('up to') }}
             {{ sumPeopleNumStr }}
         </div>
         <div class="distance" v-if="distance">
             <img src="/svg/i-distance.svg" alt="">
-            {{ distance }}&nbsp;{{ $t('km') }} {{ $t('from') }}&nbsp;<span class="desctop-span">{{ $t('your addresses') }}</span> <span class="mobile-span">{{ $t('your addresses') }}.</span> &nbsp;
+            {{ $t('approx') }}&nbsp;{{ distance }}&nbsp;{{ $t('km') }}&nbsp;<span class="desctop-span">{{ $t('your addresses') }}</span> <span class="mobile-span">{{ $t('your addresses') }}.</span> &nbsp;
         </div>
     </div>
 </template>

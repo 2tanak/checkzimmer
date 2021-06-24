@@ -1092,26 +1092,40 @@ h1.list-title {
     font-size: 15px;
     line-height: 100%;
     color: #66707A;
-    min-width: 98px;
     height: 36px;
     background: #FFFFFF;
     border: 1px solid #7A8793;
     border-radius: 100px;
     text-decoration: none;
     outline: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin-right: 10px;
+    padding: 10px 16px;
+    position: relative;
+}
+.list-content .sorting-block .left-block a:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #7A8793;
+    border-radius: 100px;
+    z-index: 1;
 }
 .list-content .sorting-block .left-block a:hover {
     color: #333646;
-    border: 2px solid #7A8793;
+    background-color: #ffffff;
+}
+.list-content .sorting-block .left-block a:hover:before {
+    content: "";
 }
 .list-content .sorting-block .left-block a.active {
     background-color: #9fa0a4 !important;
     border: 0 !important;
     color: #fff !important;
+}
+.list-content .sorting-block .left-block a.active:hover:before {
+    content: none;
 }
 .list-content .sorting-block .left-block {
     display: flex;
@@ -1130,7 +1144,7 @@ h1.list-title {
     justify-content: flex-end;
     position: relative;
     width: 100%;
-    max-width: 215px;
+    max-width: 240px;
 }
 .list-content .sorting-block .sorting a {
     font-weight: 400;
@@ -1161,12 +1175,11 @@ h1.list-title {
 .list-content .sorting-block .filter-block {
     position: absolute;
     top: 31px;
-    left: -30px;
+    right: 0;
     background: #FFFFFF;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
     border-radius: 6px;
     z-index: 100;
-    width: 245px;
     min-height: 136px;
     padding: 12px 6px;
 }
@@ -7297,7 +7310,7 @@ header.height-menu .mobile-menu {
     background: #3b8b3e;
 }
 .plans-section .collapse-button[aria-expanded="true"] {
-    color: #545769;
+    color: #3b8b3e;
 }
 .plans-section .collapse-button[aria-expanded="true"] .point {
     background: #545769;
@@ -7348,7 +7361,7 @@ header.height-menu .mobile-menu {
     margin: auto;
     text-align: center;
     width: 100%;
-    max-width: 403px;
+    max-width: 600px;
     font-weight: 400;
     font-size: 15px;
     line-height: 160%;
@@ -8259,8 +8272,11 @@ body .popup-bubble-anchor.active:after {
     display: flex;
     align-items: flex-start;
 }
-.registration-section form .forms-line:not(:last-of-type) {
+.registration-section form .forms-line {
     margin-bottom: 30px;
+}
+.registration-section form .forms-line:last-of-type {
+    margin-bottom: 0;
 }
 .registration-section .billing-address-section form .forms-line:last-of-type {
     margin-bottom: 10px;
@@ -8544,7 +8560,7 @@ body .popup-bubble-anchor.active:after {
     text-transform: uppercase;
     color: #FFFFFF;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
-    width: 74px;
+    width: 85px;
     height: 22px;
 }
 .registration-sidebar .your-tariff .tariff.tariff-desctope {
@@ -8781,9 +8797,7 @@ body .popup-bubble-anchor.active:after {
     color: #3B8B3E;
     display: flex;
     align-items: center;
-}
-.registration-section .add-links a:not(:last-of-type) {
-    margin-bottom: 20px;
+    margin-top: 20px;
 }
 .registration-section .add-links a svg {
     margin-right: 6px;
@@ -8924,7 +8938,7 @@ body .popup-bubble-anchor.active:after {
     background: #FFFFFF;
     box-shadow: 0 0 14px rgb(51 54 70 / 14%);
     border-radius: 12px;
-    padding: 30px 16px;
+    padding: 30px 16px 10px 16px;
     margin-bottom: 30px;
     max-width: 780px;
     width: 100%;
@@ -8974,16 +8988,20 @@ body .popup-bubble-anchor.active:after {
     align-items: center;
     background: #F3F3F3;
     border-radius: 6px;
-    width: 50%;
+    width: 22.97%;
     height: 54px;
     padding: 0 21px;
-    margin-right: 20px;
+    margin-right: 2.7%;
     cursor: pointer;
     position: relative;
     font-weight: 400;
     font-size: 15px;
     line-height: 100%;
     color: #333646;
+    margin-bottom: 20px;
+}
+.registration-section .languages-speak-item .languages-speak-block:nth-of-type(4n) {
+    margin-right: 0;
 }
 .registration-section .languages-speak-item .languages-speak-block:after {
     position: absolute;
@@ -8993,9 +9011,6 @@ body .popup-bubble-anchor.active:after {
     left: 0;
     border: 2px solid #6BB63F;
     border-radius: 6px;
-}
-.registration-section .languages-speak-item .languages-speak-block:last-of-type {
-    margin-right: 0;
 }
 .registration-section .languages-speak-item .languages-speak-block img {
     margin-right: 10px;
@@ -9037,6 +9052,7 @@ body .popup-bubble-anchor.active:after {
     display: flex;
     align-items: center;
     width: 100%;
+    flex-wrap: wrap;
 }
 .registration-section .languages-speak-content:not(:last-of-type) {
     margin-right: 16px;
@@ -9341,14 +9357,171 @@ body .popup-bubble-anchor.active:after {
 .registration-section .object-data-table .object-data-link a.delete:hover {
     color: #EE483F;
 }
-.registration-section .object-data-table .select-room {
+.registration-section .object-data-table-room .select-room {
     margin-left: 29px;
     position: relative;
 }
-.registration-section .object-data-table .select-room svg {
+.registration-section .vs__dropdown-toggle {
+    border: 0;
+}
+.registration-section .v-select {
+    width: 145px;
+    height: 29px;
+    background: #F3F3F3;
+    border-radius: 6px;
+    position: relative;
+}
+.registration-section .object-data-table-room .v-select:after,
+.registration-section .object-data-table-type .v-select:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 5px;
+    width: 8px;
+    height: 18px;
+    background-image: url("/svg/select-arrow.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.registration-section .v-select.vs--open {
+    background: #FFFFFF;
+    border: 1px solid #C0C1C2;
+}
+.registration-section .object-data-table-room .v-select.vs--open:after,
+.registration-section .object-data-table-type .v-select.vs--open:after {
+    background-image: url("/svg/select-arrow-active.svg");
+}
+.registration-section input.vs__search {
+    background: transparent;
+    opacity: 0;
+    height: 0;
+    margin-top: 0;
+}
+.registration-section .vs__selected-options {
+    padding: 0;
+    height: 29px;
+    width: 145px;
+}
+.registration-section .object-data-table-room .vs__selected {
+    margin: 0;
+    padding: 0 15px;
+    border: 0;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 242%;
+    color: #333646;
+}
+.registration-section .object-data-table-type .vs__selected {
+    margin: 0;
+    padding: 0 15px;
+    border: 0;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 242%;
+    color: #333646;
+}
+.registration-section .vs__clear {
+    display: none;
+}
+.registration-section .vs__actions {
+    display: none;
+}
+.registration-section .vs__dropdown-menu {
+    top: calc(100% - -4px);
+    background: #FFFFFF;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+    border-radius: 6px;
+    border: 0;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    min-width: auto;
+}
+.registration-section .object-data-table-room .vs__dropdown-menu li {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 200%;
+    color: #333646;
+    margin: 0 6px;
+    background: transparent;
+}
+.registration-section .object-data-table-type .v-select .vs__dropdown-menu li {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 200%;
+    color: #333646;
+    margin: 0 6px;
+    background: transparent;
+}
+.registration-section .vs__dropdown-menu li:hover {
+    background: #E7F7DF !important;
+    border-radius: 2px !important;
+    color: #3B8B3E !important;
+}
+.registration-section .object-data-table-room svg.desctope-line {
     position: absolute;
     top: -13px;
-    left: -14px;
+    left: -13px;
+}
+svg.mobile-line {
+    display: none;
+}
+.registration-section.billing-section .v-select {
+    height: 54px;
+    width: 100%;
+}
+.registration-section.billing-section .v-select .vs__selected-options {
+    height: 54px;
+    width: 100%;
+}
+.registration-section.billing-section .vs__selected {
+    margin: 0;
+    padding: 0 15px;
+    border: 0;
+    width: 100%;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 100%;
+    color: #333646;
+    height: 54px;
+}
+.registration-section.billing-section .vs__dropdown-menu li {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 200%;
+    color: #333646;
+    margin: 0 6px;
+    background: transparent;
+}
+.registration-section.billing-section .v-select:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 15px;
+    width: 9px;
+    height: 5px;
+    background-image: url("/svg/arrow-dropdown-input.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.2s;
+}
+.registration-section.billing-section .v-select.vs--open:after {
+    transform: translateY(-50%) rotate(180deg);
 }
 .registration-section .object-data-table .add-room {
     position: relative;
@@ -9374,8 +9547,8 @@ body .popup-bubble-anchor.active:after {
 }
 .registration-section .object-data-table .add-room > svg {
     position: absolute;
-    left: 15px;
-    top: -14px;
+    left: 16px;
+    top: -13px;
 }
 .registration-section .object-data-table .add-room a:hover {
     color: #3B8B3E;
@@ -9411,7 +9584,9 @@ body .popup-bubble-anchor.active:after {
     fill: #3B8B3E;
 }
 .registration-section .object-data-table .unselected-object .add-room > svg {
-    top: -11px;
+    top: -12px;
+    left: 15px;
+    height: 31px;
 }
 .registration-section .object-data-table .add-object {
     background: #FBFCFF;
@@ -9452,6 +9627,9 @@ body .popup-bubble-anchor.active:after {
     box-shadow: 0 4px 30px rgb(51 54 70 / 16%);
     border-radius: 14px;
     z-index: -1;
+}
+.registration-section .furnishings-section img {
+    margin-right: 10px;
 }
 .registration-section .furnishings-section .furnishings-title {
     margin-bottom: 20px;
@@ -9497,6 +9675,10 @@ body .popup-bubble-anchor.active:after {
 }
 .registration-section .furnishings-section .furnishings-block span {
     z-index: 1;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .registration-section .furnishings-section .furnishings-block:hover {
     color: #3B8B3E;
@@ -10113,10 +10295,14 @@ body .popup-bubble-anchor.active:after {
     line-height: 130%;
     color: #545769;
     width: 100%;
-    max-width: 740px;
-    margin: auto;
     margin-bottom: 20px;
-    padding: 0 16px;
+}
+.data-checking-section .familiarization .checkbox-line label::before {
+    top: 0;
+    transform: none;
+}
+.data-checking-section .familiarization .checkbox-line label::after {
+    top: 6px;
 }
 .data-checking-section .familiarization span {
     color: #6BB63F;
@@ -10442,6 +10628,9 @@ body .popup-bubble-anchor.active:after {
     .registration-section .social-media-checking .address-checking-name {
         max-width: none;
     }
+    .data-checking-section .familiarization {
+        padding: 0 16px;
+    }
 }
 @media (max-width: 767px) {
     .steps-section .dots {
@@ -10573,6 +10762,12 @@ body .popup-bubble-anchor.active:after {
     .registration-section .languages-speak-section .subtitle.subtitle-desctope {
         display: none;
     }
+    .registration-section .languages-speak-item .languages-speak-block:nth-of-type(2n) {
+        margin-right: 0;
+    }
+    .registration-section .languages-speak-item .languages-speak-block {
+        width: 48.6%;
+    }
 }
 @media (max-width: 575px) {
     .steps-section .number-step {
@@ -10642,9 +10837,6 @@ body .popup-bubble-anchor.active:after {
     .registration-section .url-line.show {
         padding-bottom: 30px !important;
     }
-    .registration-section .add-links a {
-        margin-bottom: 20px !important;
-    }
     .registration-section .contact-information-section {
         display: flex;
         flex-direction: column;
@@ -10657,6 +10849,8 @@ body .popup-bubble-anchor.active:after {
     }
     .registration-section .add-links a.add-phone-mobile {
         display: inline-block;
+        margin-bottom: 0 !important;
+        margin-top: 0;
     }
     .registration-section .number-phone a.add-phone-desctope {
         display: none;
@@ -10673,9 +10867,6 @@ body .popup-bubble-anchor.active:after {
     }
     .registration-section .languages-speak-content:not(:last-of-type) {
         margin-bottom: 14px;
-    }
-    .registration-section .languages-speak-item .languages-speak-block {
-        margin-right: 14px;
     }
     .registration-section .type-company-links a {
         text-align: center;
@@ -10831,6 +11022,9 @@ body .popup-bubble-anchor.active:after {
     .steps-section .dots .dots-item:nth-of-type(14),
     .steps-section .dots .dots-item:nth-of-type(15) {
         display: none;
+    }
+    .registration-section .object-data-table-room .v-select {
+        width: 100%;
     }
     .steps-section .dots .dots-item:nth-of-type(16) {
         margin-left: 0;
@@ -11329,4 +11523,19 @@ footer .social-block {
 }
 .single-content .main-top-block .superhost-icon {
     display: none;
+}
+.plans-section.city-section .questions-block-item {
+    margin-bottom: 0;
+}
+.plans-section.city-section .questions-block-item p a {
+    color: #545769;
+}
+.plans-section.city-section .questions-block {
+    margin-bottom: 100px;
+}
+
+@media (max-width: 575px) {
+    .plans-section.city-section .questions-block {
+        margin-bottom: 40px;
+    }
 }

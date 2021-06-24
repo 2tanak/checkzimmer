@@ -21,11 +21,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->namespace('Api')->group(function () {
 
     Route::post('/image-upload', 'ImageUploadController@imageUploadPost');
+    Route::resource('features', 'FeaturesController');
     Route::resource('options', 'OptionsController');
     Route::resource('users', 'UsersController');
     Route::resource('guests', 'GuestsController');
-    Route::resource('features', 'FeaturesController');
-    Route::resource('room-types', 'RoomTypesController');
+
     Route::resource('domains', 'DomainController');
     Route::apiResource('room', 'RoomController');
     Route::resource('geocode-cache', 'GeocodeCacheController');
@@ -69,7 +69,9 @@ Route::middleware('auth')->namespace('Api')->group(function () {
 });
 
 Route::group(['namespace' => 'Api'], function() {
+    Route::resource('room-types', 'RoomTypesController');
     Route::apiResource('property', 'PropertyController');
+    Route::get('features-public', 'FeaturesController@index');
     Route::get('languages', 'LanguagesController@index');
     Route::post('/property/query', 'PropertyController@queryProperty');
     Route::post('/property/queryFilter', 'PropertyController@queryFilter');
