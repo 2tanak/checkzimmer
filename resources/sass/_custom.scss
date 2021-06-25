@@ -2858,8 +2858,6 @@ header.height-menu .mobile-menu {
     }
     .list-content .sorting-block .left-block a {
         margin-right: 9px;
-        min-width: 89px;
-        height: 28px;
         font-size: 14px;
     }
     .background-image-block .sample-block .input-container {
@@ -11500,6 +11498,10 @@ footer .social-block {
 
 /*---created-page---*/
 
+.py-4 {
+    min-height: calc(100vh - 165px);
+}
+
 .single-content.created-page {
     flex-direction: column;
     padding-top: 40px;
@@ -11537,5 +11539,8 @@ footer .social-block {
 @media (max-width: 575px) {
     .plans-section.city-section .questions-block {
         margin-bottom: 40px;
+    }
+    .py-4 {
+        min-height: calc(100vh - 239px);
     }
 }
