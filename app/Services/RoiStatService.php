@@ -66,6 +66,5 @@ class RoiStatService {
                 return $phoneRep;
             }
         }
-        dd($data);
     }
 }

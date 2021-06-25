@@ -4,11 +4,13 @@
 
         <RegistrationStepPlans v-if="step === 1" :planActive="planActive" :plans="plans" :questions="questions" v-model="account.plan" @input="toAccountData"/>
         <RegistrationStepClient v-else-if="step === 2" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData" />
-        <RegistrationStepProperty v-else-if="step === 3" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData"/>
+        <RegistrationStepProperty v-else-if="step === 3" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toSummaryData="toSummaryData"/>
+        <RegistrationStepSummary v-else-if="step === 4" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData"/>
     </div>
 </template>
 
 <script>
+import RegistrationStepSummary from "./registration/RegistrationStepSummary";
 require('../../bootstrap');
 
 import RegistrationStepProperty from "./registration/RegistrationStepProperty";
@@ -18,7 +20,9 @@ import RegistrationStepClient from "./registration/RegistrationStepClient";
 
 export default {
     name: "Registration",
-    components: {RegistrationStepProperty, RegistrationSteps, RegistrationStepClient, RegistrationStepPlans},
+    components: {
+        RegistrationStepSummary,
+        RegistrationStepProperty, RegistrationSteps, RegistrationStepClient, RegistrationStepPlans},
     data() {
         return {
             step: 3,
@@ -265,6 +269,9 @@ export default {
         toPropertyData() {
             this.step = 3;
         },
+        toSummaryData() {
+            this.step = 4;
+        }
     }
 }
 </script>
