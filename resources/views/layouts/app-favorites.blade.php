@@ -74,7 +74,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route(app('locale')->routeApply('plans')) }}">
+                            <a href="{{ route(app('locale')->routeApply('registration')) }}">
                                 <img class="normal" src="/svg/i-rent-header.svg" alt="Аренда Жилья">
                                 <img class="hover" src="/svg/i-rent-hover.svg" alt="Аренда Жилья">
                                 {{ __('Rent out') }}
