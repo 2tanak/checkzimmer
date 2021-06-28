@@ -1,12 +1,12 @@
 <template>
     <section class="object-data-section">
-        <div class="title">Данные об объекте</div>
+        <div class="title">{{ $t('Object data') }}</div>
         <div class="object-data-table">
             <div class="table-head">
-                <div class="type-head table-head-item">Тип</div>
-                <div class="quality-head table-head-item">Кол-во</div>
-                <div class="personen-head table-head-item">Personen</div>
-                <div class="price-head table-head-item">Цена/ чел</div>
+                <div class="type-head table-head-item">{{ $t('type (register)') }}</div>
+                <div class="quality-head table-head-item">{{ $t('QTY') }}</div>
+                <div class="personen-head table-head-item">{{ $t('Personen') }}</div>
+                <div class="price-head table-head-item">{{ $t('PRICE / PERSON') }}</div>
                 <div class="links-head"></div>
             </div>
             <PropertyItem v-for="(propertyItem, key) in property.propertyTypes" :index="key" :roomTypes="roomTypes"
