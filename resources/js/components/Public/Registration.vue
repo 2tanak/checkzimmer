@@ -172,7 +172,7 @@ export default {
                     company: 'Test Name',
                     stid: 'A123',
                     person: {
-                        addr: 'Mister',
+                        addr: this.$t('Mister'),
                         first_name: '',
                         last_name: '',
                     },
@@ -180,7 +180,7 @@ export default {
                         street: '',
                         house: '',
                         postcode: '',
-                        country: 'Germany',
+                        country: this.$t('Germany'),
                         city: 'Leipzig'
                     },
                     match_address: true,

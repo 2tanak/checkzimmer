@@ -51,8 +51,9 @@ export default {
     data() {
         return {
             myValue: '',
-            options: [ 'Выберите номер', 'одноместный', 'двухместный', 'трехместный', 'четырёхместный', 'пятиместный', 'многоместный' ],
+            options: [ this.$t('Select room'), this.$t('Single'), this.$t('Double'), this.$t('Triple'), this.$t('Quadruple'), this.$t('Five-seater'), this.$t('Multi-seat') ],
         }
+
     },
     methods: {
         duplicateMe() {

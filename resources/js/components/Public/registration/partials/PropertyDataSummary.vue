@@ -1,15 +1,15 @@
 <template>
     <section class="accommodation-facility-section">
         <div class="title">
-            {{ $t('Property data') }}
+            {{ $t('Accommodation data') }}
             <a href="#">{{  $t('Change') }}</a>
         </div>
         <div class="accommodation-facility-table">
             <div class="head-table">
-                <div>{{ $t('Type') }}</div>
-                <div>{{ $t('Num')}}</div>
-                <div>{{ $t('Persons')}}</div>
-                <div>{{ $t('Price/person') }}</div>
+                <div>{{ $t('type') }}</div>
+                <div>{{ $t('Num') }}</div>
+                <div>{{ $t('persone') }}</div>
+                <div>{{ $t('Price') }}</div>
             </div>
 
             <div v-for="propertyItem in property.propertyTypes" class="table-block">
