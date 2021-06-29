@@ -1,6 +1,6 @@
 <template>
     <section class="furnishings-section">
-        <div class="title">Выберите мебелирование</div>
+        <div class="title">{{ $t('Choose furniture') }}</div>
         <div class="furnishings-content">
             <PropertyFacilitiesCategory v-for="category in categories" :key="JSON.stringify(category)" :category="category" :facilities="facilities" :items="belongToCat(category.id)" @update="facilityUpdate" />
         </div>

@@ -8,7 +8,7 @@
                     <PropertyMedia v-model="account.property.media" :media="account.property.media" />
                     <PropertyContacts v-model="account.property.contact" :contact="account.property.contact" :billing="account.billing.person"/>
 
-                    <a href="#" class="save" @click.prevent="toSummary">Сохранить и продолжить</a>
+                    <a href="#" class="save" @click.prevent="toSummary">{{ $t('Save and continue') }}</a>
 
                 </div>
                 <aside class="registration-sidebar">

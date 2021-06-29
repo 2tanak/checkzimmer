@@ -1,7 +1,7 @@
 <template>
     <div class="try">
-        <div class="guarantee">Попробуйте нас в течение 14 дней с нашей <span>гарантией возврата денег</span></div>
-        <div class="choice">Просто выберите подходящий пакет из представленных нами типов заявок!</div>
+        <div class="guarantee">{{ $t('Try us for 14 days with our') }} <span>{{ $t('money back guarantee') }}</span></div>
+        <div class="choice">{{ $t('Just choose the appropriate package from the types of applications we have presented!')}}</div>
     </div>
 </template>
 
