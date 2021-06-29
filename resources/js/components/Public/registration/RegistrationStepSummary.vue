@@ -10,15 +10,15 @@
                 <div class="familiarization">
                     <div class="checkbox-line legal-address-line">
                         <input type="checkbox" id="got-acquainted">
-                        <label for="got-acquainted">Я ознакомился с <span>условиями</span>, <span>политикой отмены</span> и положениями о защите данных провайдера,<br>
-                            и я согласен на оформление моей заявки.</label>
+                        <label for="got-acquainted">{{ $t('I got acquainted with') }} <span>{{ $t('conditions') }}</span>,
+                            <span>{{ $t('cancellation policy') }}</span> {{ $t('and the data protection regulations of the provider, and I agree to the execution of my application.') }}</label>
                     </div>
                 </div>
 
-                <a href="#" class="save">Подтвердить с обязанностью платежа</a>
+                <a href="#" class="save">{{ $t('Confirm with payment obligation') }}</a>
 
                 <div class="duration">
-                    * Продолжительность 12 месяцев с автоматом. Продление. Срок уведомления 4 недели. Процедура обратной оплаты (§ 13b UStG) для клиентов, находящихся за границей
+                    * {{ $t('Duration 12 months with automatic machine. Renewal. Notice period 4 weeks. Payback procedure (§ 13b UStG) for clients staying abroad') }}
                 </div>
 
             </div>

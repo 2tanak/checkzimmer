@@ -1,7 +1,7 @@
 <template>
     <section class="billing-address-checking contact-information-checking">
         <div class="title">
-            {{ $t('Contact Information')}}
+            {{ $t('Contact Information') }}
             <a href="#" @click.prevent="toAccountData">{{  $t('Change') }}</a>
         </div>
         <div class="address-checking-content">
@@ -17,7 +17,7 @@
                     <div class="address-checking-total">{{ account.contact.email }}</div>
                 </div>
                 <div class="address-checking-line">
-                    <div class="address-checking-name">Отображать указанный Email адрес:</div>
+                    <div class="address-checking-name">{{ $t('Display the specified Email address') }}:</div>
                     <div class="dots"></div>
                     <div class="address-checking-total">{{ account.contact.email_display ? $t('Yes') : $t('No') }}</div>
                 </div>
@@ -39,31 +39,31 @@
             </div>
             <div class="address-checking-block">
                 <div class="address-checking-line">
-                    <div class="address-checking-name">Дополнительный номер телефона:</div>
+                    <div class="address-checking-name">{{ $t('Additional phone number') }}:</div>
                     <div class="dots"></div>
                     <div class="address-checking-total">+34149 994488</div>
                 </div>
                 <div class="address-checking-line">
-                    <div class="address-checking-name">Отображать указанный номер телефона:</div>
+                    <div class="address-checking-name">{{ $t('Display the specified phone number') }}:</div>
                     <div class="dots"></div>
-                    <div class="address-checking-total">Да</div>
+                    <div class="address-checking-total">{{ $t('Yes') }}</div>
                 </div>
                 <div class="address-checking-line">
-                    <div class="address-checking-name">Включить запрос через Whatsapp:</div>
+                    <div class="address-checking-name">{{ $t('Enable request via Whatsapp') }}:</div>
                     <div class="dots"></div>
-                    <div class="address-checking-total">Да</div>
+                    <div class="address-checking-total">{{ $t('Yes') }}</div>
                 </div>
             </div>
             <div class="address-checking-block">
                 <div class="address-checking-line">
-                    <div class="address-checking-name">Стационарный номер телефона:</div>
+                    <div class="address-checking-name">{{ $t('Landline phone number') }}:</div>
                     <div class="dots"></div>
                     <div class="address-checking-total">+34149 994488</div>
                 </div>
                 <div class="address-checking-line">
-                    <div class="address-checking-name">Отображать указанный номер телефона:</div>
+                    <div class="address-checking-name">{{ $t('Display the specified phone number') }}:</div>
                     <div class="dots"></div>
-                    <div class="address-checking-total">Да</div>
+                    <div class="address-checking-total">{{ $t('Yes') }}</div>
                 </div>
                 <div class="address-checking-line" v-if="account.contact.phone_fax" >
                     <div class="address-checking-name">{{ $t('Fax') }}:</div>
