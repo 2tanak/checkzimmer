@@ -71,7 +71,7 @@ export default {
                     ]
                 },
                 enterprise: {
-                    title: this.$t('Enterprice'),
+                    title: this.$t('Enterprise'),
                     price: 229,
                     annual: 468,
                     description: this.$t('For most businesses that want to optimize web queries'),
