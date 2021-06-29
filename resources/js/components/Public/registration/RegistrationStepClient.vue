@@ -8,7 +8,7 @@
                     <ContactInformation :data="account.contact" v-model="account.contact" />
                     <SpokenLanguage :data="account.languages" v-model="account.languages" />
 
-                    <a href="#" class="save" @click.prevent="saveAndContinue">Сохранить и продолжить</a>
+                    <a href="#" class="save" @click.prevent="saveAndContinue">{{ $t('Save and continue') }}</a>
 
                 </div>
                 <aside class="registration-sidebar">
