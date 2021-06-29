@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <div class="forms-line">
+            <div class="forms-line" v-if="!data.match_address">
                 <div class="street-block forms-line-block">
                     <label for="street-input-legal">Улица:*</label>
                     <input type="text" placeholder="Укажите вашу улицу" id="street-input-legal" name="street-input" v-model="data.address.street">
@@ -38,7 +38,7 @@
                 </div>
             </div>
 
-            <div class="forms-line">
+            <div class="forms-line" v-if="!data.match_address">
                 <div class="zip-block forms-line-block">
                     <label for="zip-input-legal">Индекс:*</label>
                     <input type="text" placeholder="Ваш индекс" id="zip-input-legal" name="zip-input" v-model="data.address.postcode">

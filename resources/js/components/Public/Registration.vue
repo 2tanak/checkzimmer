@@ -183,7 +183,7 @@ export default {
                         country: 'Germany',
                         city: 'Leipzig'
                     },
-                    match_address: false,
+                    match_address: true,
                     match_person: false
                 },
                 contact: {
@@ -232,16 +232,42 @@ export default {
                     },
                     propertyTypes: [
                         {
-                            name: '',
-                            num: 0,
-                            persons: 1,
-                            price: 0,
+                            name: 'Wohnung',
+                            num: 9,
+                            persons: 18,
+                            price: 10,
                             rooms: [
                                 {
-                                    name: '',
-                                    num: 0,
+                                    name: 'одноместный',
+                                    num: 2,
                                     persons: 1,
-                                    price: 0
+                                    price: 10
+                                },
+                                {
+                                    name: 'двухместный',
+                                    num: 5,
+                                    persons: 2,
+                                    price: 12
+                                },
+                                {
+                                    name: 'трехместный',
+                                    num: 2,
+                                    persons: 3,
+                                    price: 15
+                                },
+                            ]
+                        },
+                        {
+                            name: 'Pension',
+                            num: 2,
+                            persons: 6,
+                            price: 17,
+                            rooms: [
+                                {
+                                    name: 'трехместный',
+                                    num: 2,
+                                    persons: 3,
+                                    price: 17
                                 }
                             ]
                         }
