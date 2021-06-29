@@ -2,7 +2,11 @@
     <section class="registration-section data-checking-section">
         <div class="billing-address-container">
             <div class="main-registration-content">
-                <PropertyFacilities :facilities="account.property.facilities" />
+                <BillingAddressSummary :account="account" @toAccountData="toAccountData" />
+                <ContactInformationSummary :account="account" @toAccountData="toAccountData"  />
+                <PropertyDataSummary :property="account.property"  />
+                <PropertyFacilities :facilities="account.property.facilities" :readonly="true" />
+                <PropertyMediaSummary :media="account.property.media" @toPropertyData="toPropertyData" />
                 <div class="familiarization">
                     <div class="checkbox-line legal-address-line">
                         <input type="checkbox" id="got-acquainted">
@@ -20,7 +24,7 @@
             </div>
             <aside class="registration-sidebar">
                 <ChosenPlan :plan="plan" @backToPlans="backToPlans" />
-                <PromoBlock />
+                <AdvertiseBlock />
             </aside>
         </div>
     </section>
@@ -30,13 +34,31 @@
 import ChosenPlan from "./partials/ChosenPlan";
 import PromoBlock from "../partials/PromoBlock";
 import PropertyFacilities from "./partials/PropertyFacilities";
+import BillingAddressSummary from "./partials/BillingAddressSummary";
+import ContactInformationSummary from "./partials/ContactInformationSummary";
+import PropertyData from "./partials/PropertyData";
+import PropertyMediaSummary from "./partials/PropertyMediaSummary";
+import AdvertiseBlock from "./partials/AdvertiseBlock";
+import PropertyDataSummary from "./partials/PropertyDataSummary";
 export default {
     name: "RegistrationStepSummary",
     props: ['account', 'plan'],
-    components: {PropertyFacilities, PromoBlock, ChosenPlan},
+    components: {
+        PropertyDataSummary,
+        AdvertiseBlock,
+        PropertyMediaSummary,
+        PropertyData,
+        ContactInformationSummary, BillingAddressSummary, PropertyFacilities, PromoBlock, ChosenPlan},
     methods: {
         backToPlans() {
             this.$emit('backToPlans', '');
+        },
+        toAccountData() {
+            this.$emit('toAccountData', '');
+        },
+        toPropertyData() {
+            this.$emit('toPropertyData', '');
+
         }
     }
 }

@@ -17,7 +17,7 @@ let features = new featureRequest;
 export default {
     name: "PropertyFacilities",
     components: {PropertyFacilitiesCategory},
-    props: ['facilities'],
+    props: ['facilities', 'readonly'],
     data() {
         return {
             features: []
@@ -34,6 +34,9 @@ export default {
             return this.features.filter( (item) => item.feature_category_id  === id);
         },
         facilityUpdate(facility) {
+            if (this.readonly) {
+                return false;
+            }
             let facilities = this.facilities;
             let index = facilities.findIndex((item) => item === facility.id)
             if (index === -1) {

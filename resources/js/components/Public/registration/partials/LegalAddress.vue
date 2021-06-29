@@ -64,10 +64,16 @@
 <script>
 export default {
     name: "LegalAddress",
+    props: ['data'],
     data() {
         return {
             optionsCountry: [ 'Germany', 'Russia', 'USA'  ]
         }
+    },
+    methods: {
+        toContactDetails() {
+            this.$emit('setContactAsBilling', '');
+        },
     }
 }
 </script>
