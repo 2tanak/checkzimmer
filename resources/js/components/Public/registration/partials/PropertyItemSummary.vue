@@ -19,28 +19,28 @@
         </div>
 
         <div class="quality-input-block">
-            <div class="quality-head-mobile table-head-item table-head-item-mobile">Кол-во</div>
+            <div class="quality-head-mobile table-head-item table-head-item-mobile">{{ $t('QTY') }}</div>
             <input type="text" value="" name="quality-input" id="quality-input" placeholder="0" v-model="property.num">
         </div>
         <div class="personen-input-block">
-            <div class="personen-head-mobile table-head-item table-head-item-mobile">Personen</div>
+            <div class="personen-head-mobile table-head-item table-head-item-mobile">{{ $t('Personen') }}</div>
             <input type="text" value="" name="personen-input" id="personen-input" placeholder="0" v-model="property.persons">
         </div>
         <div class="price-input-block">
-            <div class="price-head-mobile table-head-item table-head-item-mobile">Цена/ Чел</div>
-            <span class="from">от</span>
+            <div class="price-head-mobile table-head-item table-head-item-mobile">{{ $t('PRICE / PERSON') }}</div>
+            <span class="from">{{ $t('from') }}</span>
             <input type="text" value="" name="price-input" id="price-input" placeholder="0" v-model="property.price">
             <span class="dollar-sign">€</span>
         </div>
         <div class="object-data-link">
-            <a href="#" class="duplicate duplicate-desctope" @click.prevent="duplicateType">Дублировать</a>
+            <a href="#" class="duplicate duplicate-desctope" @click.prevent="duplicateType">{{ $t('Duplicate') }}</a>
             <a href="#" class="duplicate duplicate-mobile" @click.prevent="duplicateType">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M5.4 4.4V13.6H12.6V4.4H5.4ZM5 3C4.44772 3 4 3.44772 4 4V14C4 14.5523 4.44772 15 5 15H13C13.5523 15 14 14.5523 14 14V4C14 3.44772 13.5523 3 13 3H5Z" fill="#9496A4"/>
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M2.9998 1.70005C2.83412 1.70005 2.6998 1.83436 2.6998 2.00005V11C2.6998 11.3866 2.3864 11.7 1.9998 11.7C1.61321 11.7 1.2998 11.3866 1.2998 11V2.00005C1.2998 1.06117 2.06092 0.300049 2.9998 0.300049H9.9998C10.3864 0.300049 10.6998 0.613449 10.6998 1.00005C10.6998 1.38665 10.3864 1.70005 9.9998 1.70005H2.9998Z" fill="#9496A4"/>
                 </svg>
             </a>
-            <a href="#" :class="{'delete': true, 'delete-desctope': true, 'not-active': index === 0}" @click.prevent="deleteType">Удалить</a>
+            <a href="#" :class="{'delete': true, 'delete-desctope': true, 'not-active': index === 0}" @click.prevent="deleteType">{{ $t('Delete (register)') }}</a>
             <a href="#" :class="{'delete': true, 'delete-mobile': true, 'not-active': index === 0}" @click.prevent="deleteType">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M4.19497 3.20503C3.92161 2.93166 3.47839 2.93166 3.20503 3.20503C2.93166 3.47839 2.93166 3.92161 3.20503 4.19497L7.21025 8.2002L3.20542 12.205C2.93205 12.4784 2.93205 12.9216 3.20542 13.195C3.47878 13.4683 3.922 13.4683 4.19537 13.195L8.2002 9.19015L12.205 13.195C12.4784 13.4683 12.9216 13.4683 13.195 13.195C13.4683 12.9216 13.4683 12.4784 13.195 12.205L9.19015 8.2002L13.1954 4.19497C13.4687 3.92161 13.4687 3.47839 13.1954 3.20503C12.922 2.93166 12.4788 2.93166 12.2054 3.20503L8.2002 7.21025L4.19497 3.20503Z" fill="#9496A4"/>
