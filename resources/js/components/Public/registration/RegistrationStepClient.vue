@@ -4,7 +4,7 @@
             <div class="billing-address-container">
                 <div class="main-registration-content">
                     <BillingAddress :data="account.billing" v-model="account.billing" @setContactAsBilling="setContactAsBilling"/>
-                    <LegalAddress  />
+                    <LegalAddress :data="account.billing" v-model="account.billing" @setContactAsBilling="setContactAsBilling"/>
                     <ContactInformation :data="account.contact" v-model="account.contact" />
                     <SpokenLanguage :data="account.languages" v-model="account.languages" />
 

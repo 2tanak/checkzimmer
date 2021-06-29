@@ -5,7 +5,7 @@
         <RegistrationStepPlans v-if="step === 1" :planActive="planActive" :plans="plans" :questions="questions" v-model="account.plan" @input="toAccountData"/>
         <RegistrationStepClient v-else-if="step === 2" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData" />
         <RegistrationStepProperty v-else-if="step === 3" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toSummaryData="toSummaryData"/>
-        <RegistrationStepSummary v-else-if="step === 4" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData"/>
+        <RegistrationStepSummary v-else-if="step === 4" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData" @toAccountData="toAccountData"/>
     </div>
 </template>
 
@@ -181,6 +181,7 @@ export default {
                         house: '',
                         postcode: '',
                         country: 'Germany',
+                        city: 'Leipzig'
                     },
                     match_address: false,
                     match_person: false
