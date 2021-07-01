@@ -28,25 +28,25 @@ export default {
             step: 3,
             planActive: 'popular',
             plans: {
-                intro: {
-                    title: this.$t('Intro'),
-                    price: 39,
+                base: {
+                    title: this.$t('Base'),
+                    price: 0,
                     annual: 468,
-                    description: this.$t('For most businesses that want to optimize web queries'),
+                    description: this.$t('Our permanently free version'),
                     options: [
                         { text: this.$t('Own analytics platform'), active: true },
                         { text: this.$t('Chat support'), active: true },
-                        { text: this.$t('Unlimited options'), active: true },
-                        { text: this.$t('Optimization'), active: true },
+                        { text: this.$t('Unlimited options'), active: false },
+                        { text: this.$t('Optimization'), active: false },
                         { text: this.$t('Phone support'), adtive: false },
                         { text: this.$t('Special application'), active: false }
                     ]
                 },
-                base: {
-                    title: this.$t('Base'),
-                    price: 99,
+                intro: {
+                    title: this.$t('Intro'),
+                    price: 10,
                     annual: 468,
-                    description: this.$t('For most businesses that want to optimize web queries'),
+                    description: this.$t('Perfect for beginners with multiple objects'),
                     options: [
                         { text: this.$t('Own analytics platform'), active: true },
                         { text: this.$t('Chat support'), active: true },
@@ -58,9 +58,9 @@ export default {
                 },
                 popular: {
                     title: this.$t('Popular'),
-                    price: 129,
+                    price: 20,
                     annual: 468,
-                    description: this.$t('For most businesses that want to optimize web queries'),
+                    description: this.$t('Our recommendation for maximum profit'),
                     options: [
                         { text: this.$t('Own analytics platform'), active: true },
                         { text: this.$t('Chat support'), active: true },
@@ -72,16 +72,17 @@ export default {
                 },
                 enterprise: {
                     title: this.$t('Enterprise'),
-                    price: 229,
+                    price: 50,
                     annual: 468,
-                    description: this.$t('For most businesses that want to optimize web queries'),
+                    description: this.$t('The luxury version with its own page'),
                     options: [
                         { text: this.$t('Own analytics platform'), active: true },
                         { text: this.$t('Chat support'), active: true },
                         { text: this.$t('Unlimited options'), active: true },
                         { text: this.$t('Optimization'), active: true },
                         { text: this.$t('Phone support'), active: true },
-                        { text: this.$t('Special application'), active: true }
+                        { text: this.$t('Special application'), active: true },
+                        { text: this.$t('own sub-domain (only business plan)'), active: true }
                     ]
                 }
             },
