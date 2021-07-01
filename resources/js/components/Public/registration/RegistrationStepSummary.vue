@@ -4,8 +4,8 @@
             <div class="main-registration-content">
                 <BillingAddressSummary :account="account" @toAccountData="toAccountData" />
                 <ContactInformationSummary :account="account" @toAccountData="toAccountData"  />
-                <PropertyDataSummary :property="account.property"  />
-                <PropertyFacilities :facilities="account.property.facilities" :readonly="true" />
+                <PropertyDataSummary :property="account.property"  @toPropertyData="toPropertyData" />
+                <PropertyFacilities :facilities="account.property.facilities" :readonly="true" :filtered="true" />
                 <PropertyMediaSummary :media="account.property.media" @toPropertyData="toPropertyData" />
                 <div class="familiarization">
                     <div class="checkbox-line legal-address-line">

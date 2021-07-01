@@ -4,7 +4,7 @@
         <a class="furnishings-title furnishings-title-mobile"  data-toggle="collapse" href="#kitchen-collapse" role="button" aria-expanded="false" aria-controls="#kitchen-collapse">{{ category.name }}</a>
         <div class="collapse" id="kitchen-collapse">
             <div class="row padding-left">
-                <PropertyFacilitiesCategoryItem v-for="item in items" :key="JSON.stringify(item)" :item="item" :active="isItemActive(item.id)"
+                <PropertyFacilitiesCategoryItem v-for="item in items" :key="JSON.stringify(item)" :item="item" :active="!noactive && isItemActive(item.id)"
                                                  @click.native="itemClicked(item)"/>
             </div>
         </div>
@@ -16,7 +16,7 @@ import PropertyFacilitiesCategoryItem from "./PropertyFacilitiesCategoryItem";
 export default {
     name: "PropertyFacilitiesCategory",
     components: {PropertyFacilitiesCategoryItem},
-    props: ['category', 'items', 'facilities'],
+    props: ['category', 'items', 'facilities', 'noactive'],
     methods: {
         itemClicked(item) {
             this.$emit('update', item)

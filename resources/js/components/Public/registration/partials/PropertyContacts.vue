@@ -20,16 +20,16 @@
                             </div>
                         </a>
                     </label>
-                    <input type="text" v-bind:placeholder="$t('Indicate who is the contact person')" id="contact-person-input" name="contact-person-input" v-model="contact.person.name">
-                    <span class="error-text">{{ $t('You have not specified a contact person') }}</span>
+                    <input type="text" :placeholder="$t('Indicate who is the contact person')" id="contact-person-input" name="contact-person-input" v-model="contact.person.name">
+                    <span class="error-text visible" v-if="validate && !contact.person.name">{{ $t('You have not specified a contact person') }}</span>
                 </div>
             </div>
 
             <div class="forms-line">
                 <div class="email-address forms-line-block">
                     <label for="email-address-input">{{ $t('Email address') }}:*</label>
-                    <input type="email" v-bind:placeholder="$t('Enter your email address')" id="email-address-input" name="email-address-input" v-model="contact.email">
-                    <span class="error-text">{{ $t('You did not enter your email') }}</span>
+                    <input type="email" :placeholder="$t('Enter your email address')" id="email-address-input" name="email-address-input" v-model="contact.email">
+                    <span class="error-text visible" v-if="validate && !contact.email">{{ $t('You did not enter your email') }}</span>
                     <div class="checkbox-line email-contacts-line">
                         <input type="checkbox" id="email-contacts" v-model="contact.email_display">
                         <label for="email-contacts">{{ $t('Display email address') }}</label>
@@ -43,9 +43,9 @@
                         <div class="number-phone-item">
                             <label for="number-phone-input">{{ $t("Phone number (register)") }}:*</label>
                             <input type="tel" placeholder="+49 15168161326" id="number-phone-input" name="number-phone-input" v-model="contact.phone">
-                            <span class="error-text">{{ $t('You did not provide your phone number') }}</span>
+                            <span class="error-text visible" v-if="validate && !contact.phone">{{ $t('You did not provide your phone number') }}</span>
                         </div>
-                        <a href="#" class="add-phone add-phone-desctope">
+                        <a href="#" class="add-phone add-phone-desctope" @click.prevent="addNumber('two')" v-if="!numberDisplay.two">
                             <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M4 9C4 9.55228 4.44772 10 5 10C5.55228 10 6 9.55229 6 9V6H9C9.55228 6 10 5.55228 10 5C10 4.44772 9.55229 4 9 4L6 4V1C6 0.447715 5.55228 0 5 0C4.44772 0 4 0.447715 4 1V4L1 4C0.447715 4 0 4.44771 0 5C0 5.55228 0.447715 6 1 6H4V9Z" fill="#3B8B3E"/>
                             </svg>
@@ -63,14 +63,14 @@
                 </div>
             </div>
 
-            <div class="forms-line additional-phone-line">
+            <div class="forms-line additional-phone-line show" v-if="numberDisplay.two">
                 <div class="number-phone additional-phone-number forms-line-block">
                     <div class="number-phone-content">
                         <div class="number-phone-item">
                             <label for="additional-number-phone-input">{{ $t('Additional phone number') }}:</label>
-                            <input type="tel" placeholder="+49 15168161326" id="additional-number-phone-input" name="additional-number-phone-input">
+                            <input type="tel" placeholder="+49 15168161326" id="additional-number-phone-input" name="additional-number-phone-input" v-model="contact.phoneAdditional">
                         </div>
-                        <a href="#" class="add-phone add-phone-desctope">
+                        <a href="#" class="add-phone add-phone-desctope" @click.prevent="addNumber('three')" v-if="!numberDisplay.three">
                             <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M4 9C4 9.55228 4.44772 10 5 10C5.55228 10 6 9.55229 6 9V6H9C9.55228 6 10 5.55228 10 5C10 4.44772 9.55229 4 9 4L6 4V1C6 0.447715 5.55228 0 5 0C4.44772 0 4 0.447715 4 1V4L1 4C0.447715 4 0 4.44771 0 5C0 5.55228 0.447715 6 1 6H4V9Z" fill="#3B8B3E"/>
                             </svg>
@@ -78,26 +78,26 @@
                         </a>
                     </div>
                     <div class="checkbox-line number-phone-show-line">
-                        <input type="checkbox" id="additional-number-phone-show" v-model="contact.phone_display">
+                        <input type="checkbox" id="additional-number-phone-show" v-model="contact.phoneAdditional_display">
                         <label for="additional-number-phone-show">{{ $t('Display this contact phone number') }}</label>
                     </div>
                     <div class="checkbox-line number-phone-watsapp-line">
-                        <input type="checkbox" id="additional-number-phone-watsapp" v-modal="contact.phone_whatsapp">
+                        <input type="checkbox" id="additional-number-phone-watsapp" v-model="contact.phoneAdditional_whatsapp">
                         <label for="additional-number-phone-watsapp">{{ $t('Enable request for this number via Whatsapp (if the number is available on the network)') }}</label>
                     </div>
                 </div>
             </div>
 
-            <div class="forms-line landline-phone-line">
+            <div class="forms-line landline-phone-line show" v-if="numberDisplay.three">
                 <div class="number-phone landline-phone-number forms-line-block">
                     <div class="number-phone-content">
                         <div class="number-phone-item">
                             <label for="landline-number-phone-input">{{ $t('Phone number (landline)') }}:</label>
-                            <input type="tel" placeholder="+49 15168161326" id="landline-number-phone-input" name="landline-number-phone-input" v-model="contact.phone">
+                            <input type="tel" placeholder="+49 15168161326" id="landline-number-phone-input" name="landline-number-phone-input" v-model="contact.phoneStat">
                         </div>
                     </div>
                     <div class="checkbox-line number-phone-show-line">
-                        <input type="checkbox" id="landline-number-phone-show">
+                        <input type="checkbox" id="landline-number-phone-show" v-model="contact.phoneStat_display">
                         <label for="landline-number-phone-show">{{ $t('Display this contact phone number') }}</label>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                     <div class="number-phone-content">
                         <div class="number-phone-item">
                             <label for="fax-input">{{ $t('Fax') }}:</label>
-                            <input type="tel" v-bind:placeholder="$t('Enter the fax number')" id="fax-input" name="fax-input" v-model="contact.phone_fax">
+                            <input type="tel" :placeholder="$t('Enter the fax number')" id="fax-input" name="fax-input" v-model="contact.phone_fax">
                         </div>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                     <div class="number-phone-content">
                         <div class="number-phone-item">
                             <label for="url-address-input">{{ $t('Your site url') }}:</label>
-                            <input type="text" v-bind:placeholder="$t('Enter your website URL')" id="url-address-input" name="url-address-input" v-model="contact.website">
+                            <input type="text" :placeholder="$t('Enter your website URL')" id="url-address-input" name="url-address-input" v-model="contact.website">
                         </div>
                     </div>
                 </div>
@@ -162,10 +162,15 @@
 <script>
 export default {
     name: "PropertyContacts",
-    props: ['contact', 'billing'],
+    props: ['contact', 'billing', 'validate'],
     data() {
         return {
-            sameAsBilling: false
+            sameAsBilling: false,
+            numberDisplay: {
+                one: true,
+                two: false,
+                three: false
+            }
         }
     },
     mounted() {
@@ -198,6 +203,9 @@ export default {
                 contact.person.name = this.billing.addr + ' ' + this.billing.first_name + ' ' + this.billing.last_name;
                 this.$emit('input', contact);
             }
+        },
+        addNumber(num) {
+            this.numberDisplay[num] = true;
         }
     }
 }

@@ -6,7 +6,7 @@
                     <PropertyData :property="account.property" v-model="account.property" />
                     <PropertyFacilities v-model="account.property.facilities" :facilities="account.property.facilities" />
                     <PropertyMedia v-model="account.property.media" :media="account.property.media" />
-                    <PropertyContacts v-model="account.property.contact" :contact="account.property.contact" :billing="account.billing.person"/>
+                    <PropertyContacts v-model="account.property.contact" :contact="account.property.contact" :billing="account.billing.person" :validate="account.validate"/>
 
                     <a href="#" class="save" @click.prevent="toSummary">{{ $t('Save and continue') }}</a>
 
@@ -41,7 +41,17 @@ export default {
             this.$emit('backToPlans', '');
         },
         toSummary() {
-            this.$emit('toSummaryData', '');
+            if (this.allValid) {
+                this.$emit('validate', false);
+                this.$emit('toSummaryData', '');
+                return;
+            }
+            this.$emit('validate', true);
+        }
+    },
+    computed: {
+        allValid() {
+            return this.account.property.contact.person.name && this.account.property.contact.email && this.account.property.contact.phone
         }
     }
 }

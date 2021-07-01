@@ -9064,6 +9064,9 @@ body .popup-bubble-anchor.active:after {
     margin-bottom: 18px;
     display: none;
 }
+.registration-section .error-text.visible {
+    display: block;
+}
 .registration-section .forms-line-block.error input {
     border: 1px solid #EE483F;
     border-radius: 6px;

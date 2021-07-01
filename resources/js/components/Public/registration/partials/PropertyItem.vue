@@ -37,10 +37,10 @@ export default {
             this.$emit('addRoom', this.index);
         },
         deleteRoom(index) {
-            this.$emit('addRoom', { index: this.index, room: index });
+            this.$emit('deleteRoom', { index: this.index, room: index });
         },
         duplicateRoom(index) {
-            this.$emit('addRoom', { index: this.index, room: index });
+            this.$emit('duplicateRoom', { index: this.index, room: index });
         },
         deleteType() {
             if (this.index === 0) {

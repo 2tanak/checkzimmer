@@ -31,52 +31,53 @@
                 <div class="name-block forms-line-block">
                     <label for="name-input">{{ $t('Name') }}:*</label>
                     <input type="text" :placeholder="$t('Please enter your name')" name="name-input" id="name-input" v-model="data.person.first_name" @input="toContactDetails">
-                    <span class="error-text">{{ $t('You did not provide a name') }}</span>
+                    <span class="error-text visible" v-if="validate && !data.person.first_name">{{ $t('You did not provide a name') }}</span>
                 </div>
                 <div class="surname-block forms-line-block">
                     <label for="surname-input">{{ $t('Surname') }}:*</label>
                     <input type="text" :placeholder="$t('Enter your last name')" name="surname-input" id="surname-input" v-model="data.person.last_name" @input="toContactDetails">
-                    <span class="error-text">{{ $t('You did not enter your last name') }}</span>
+                    <span class="error-text visible" v-if="validate && !data.person.last_name">{{ $t('You did not enter your last name') }}</span>
                 </div>
             </div>
 
             <div class="forms-line">
                 <div class="street-block forms-line-block">
                     <label for="street-input">{{ $t('Street') }}:*</label>
-                    <input type="text" :placeholder="$t('Indicate your street')" id="street-input" name="street-input" v-model="data.address.street">
-                    <span class="error-text">{{ $t('You have not indicated the street') }}</span>
+                    <input type="text" :placeholder="$t('Indicate your street')" id="street-input" name="street-input" v-model="data.address.street" @input="setLegalAsBilling">
+                    <span class="error-text visible" v-if="validate && !data.address.street">{{ $t('You have not indicated the street') }}</span>
                 </div>
                 <div class="house-number-block forms-line-block">
                     <label for="house-number-input">{{ $t('House number') }}:*</label>
-                    <input type="text" :placeholder="$t('House number')" id="house-number-input" name="house-number-input" v-model="data.address.house">
-                    <span class="error-text">{{ $t('You have not indicated the house number') }}</span>
+                    <input type="text" :placeholder="$t('House number')" id="house-number-input" name="house-number-input" v-model="data.address.house" @input="setLegalAsBilling">
+                    <span class="error-text visible" v-if="validate && !data.address.house">{{ $t('You have not indicated the house number') }}</span>
                 </div>
             </div>
 
             <div class="forms-line">
                 <div class="zip-block forms-line-block">
                     <label for="zip-input">{{ $t('Postcode') }}:*</label>
-                    <input type="text" :placeholder="$t('Your postcode')" id="zip-input" name="zip-input" v-model="data.address.postcode">
-                    <span class="error-text">{{ $t('You have not provided a postal code') }}</span>
+                    <input type="text" :placeholder="$t('Your postcode')" id="zip-input" name="zip-input" v-model="data.address.postcode" @input="setLegalAsBilling">
+                    <span class="error-text visible" v-if="validate && !data.address.postcode">{{ $t('You have not provided a postal code') }}</span>
                 </div>
                 <div class="city-block forms-line-block">
                     <label for="city-input">{{ $t('City') }}:*</label>
-                    <input type="text" :placeholder="$t('Enter your city')" id="city-input" name="city-input" v-model="data.address.city">
-                    <span class="error-text">{{ $t('You have not specified a city') }}</span>
+                    <input type="text" :placeholder="$t('Enter your city')" id="city-input" name="city-input" v-model="data.address.city" @input="setLegalAsBilling">
+                    <span class="error-text visible" v-if="validate && !data.address.city">{{ $t('You have not specified a city') }}</span>
                 </div>
                 <div class="country-block forms-line-block">
                     <label for="country-select">{{ $t('Country') }}:*</label>
-                    <v-select id="country-select" v-model="data.address.country" :options="optionsCountry"></v-select>
+                    <v-select id="country-select" v-model="data.address.country" :options="optionsCountry" @input="setLegalAsBilling"></v-select>
+                </div>
                 </div>
             </div>
 
             <div class="checkbox-line legal-address-line">
-                <input type="checkbox" id="legal-address" v-model="data.match_address">
+                <input type="checkbox" id="legal-address" v-model="data.match_address" @change="unsetLegalAsBilling">
                 <label for="legal-address">{{ $t('The legal address is the same as the address of the object') }}</label>
             </div>
 
             <div class="checkbox-line transfer-contacts-line">
-                <input type="checkbox" id="transfer-contacts" v-model="data.match_person" @change="setContactAsBilling">
+                <input type="checkbox" id="transfer-contacts" v-model="data.match_person" @change="toContactDetails">
                 <label for="transfer-contacts">{{ $t('Migrate contact information from billing information') }}</label>
             </div>
         </form>
@@ -98,7 +99,7 @@
 <script>
 export default {
     name: "BillingAddress",
-    props: [ 'data' ],
+    props: [ 'data', 'validate' ],
     data() {
         return {
             account: this.data,
@@ -154,6 +155,17 @@ export default {
         },
         showSteur() {
             this.steurShow = !this.steurShow;
+        },
+        setLegalAsBilling() {
+            this.$emit('setLegalAsBilling', '');
+        },
+        unsetLegalAsBilling() {
+            if (this.data.match_address) {
+                this.$emit('setLegalAsBilling', '');
+                return;
+            }
+
+            this.$emit('unsetLegalAsBilling', '');
         }
     }
 }

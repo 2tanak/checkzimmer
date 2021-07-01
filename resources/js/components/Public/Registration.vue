@@ -3,8 +3,8 @@
         <RegistrationSteps v-if="step > 1" :step="step" />
 
         <RegistrationStepPlans v-if="step === 1" :planActive="planActive" :plans="plans" :questions="questions" v-model="account.plan" @input="toAccountData"/>
-        <RegistrationStepClient v-else-if="step === 2" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData" />
-        <RegistrationStepProperty v-else-if="step === 3" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toSummaryData="toSummaryData"/>
+        <RegistrationStepClient v-else-if="step === 2" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData" @validate="validate" />
+        <RegistrationStepProperty v-else-if="step === 3" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toSummaryData="toSummaryData" @validate="validate"/>
         <RegistrationStepSummary v-else-if="step === 4" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData" @toAccountData="toAccountData"/>
     </div>
 </template>
@@ -25,7 +25,7 @@ export default {
         RegistrationStepProperty, RegistrationSteps, RegistrationStepClient, RegistrationStepPlans},
     data() {
         return {
-            step: 3,
+            step: 2,
             planActive: 'popular',
             plans: {
                 intro: {
@@ -166,6 +166,7 @@ export default {
                 }
             ],
             account: {
+                validate: false,
                 plan: 'intro',
                 billing: {
                     type: 'company',
@@ -186,6 +187,20 @@ export default {
                     match_address: true,
                     match_person: false
                 },
+                post: {
+                    person: {
+                        addr: this.$t('Mister'),
+                        first_name: '',
+                        last_name: '',
+                    },
+                    address: {
+                        street: '',
+                        house: '',
+                        postcode: '',
+                        country: this.$t('Germany'),
+                        city: 'Leipzig'
+                    },
+                },
                 contact: {
                     person: {
                         name: '',
@@ -193,14 +208,17 @@ export default {
                     },
                     email: '',
                     email_display: true,
-                    phones: [
-                        ''
-                    ],
+
                     phone: '',
                     phone_display: true,
                     phone_whatsapp: false,
                     phone_fax: '',
                     phone_fax_enable: '',
+                    phoneAdditional: '',
+                    phoneAdditional_display: false,
+                    phoneAdditional_whatsapp: false,
+                    phoneStat: '',
+                    phoneStat_display: false,
                     website: '',
                     website_enable: false
                 },
@@ -218,12 +236,14 @@ export default {
                         },
                         email: '',
                         email_display: true,
-                        phones: [
-                            ''
-                        ],
                         phone: '',
                         phone_display: true,
                         phone_whatsapp: false,
+                        phoneAdditional: '',
+                        phoneAdditional_display: false,
+                        phoneAdditional_whatsapp: false,
+                        phoneStat: '',
+                        phoneStat_display: false,
                         phone_fax: '',
                         phone_fax_enable: '',
                         website: '',
@@ -298,6 +318,9 @@ export default {
         },
         toSummaryData() {
             this.step = 4;
+        },
+        validate(value) {
+            this.account.validate = value;
         }
     }
 }

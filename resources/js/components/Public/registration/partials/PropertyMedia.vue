@@ -5,7 +5,7 @@
             <div class="left-subtitle">{{ $t('Upload a photo of the object') }}:</div>
             <div class="right-subtitle">{{ $t('JPG, PNG up to 20MB in size, no less than 1780px wide, no more than 10 pieces.') }}</div>
         </div>
-        <form class="input-file-block" id="uploadForm" method="post">
+        <form class="input-file-block" id="uploadForm" method="post" @input="addPhoto">
             <input type="file" id="input-file">
             <label for="input-file" multiple="multiple" accept=".jpg,.png,image/*" class="add-photo">
                 <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,11 +26,11 @@
             <div class="social-media-links">
                 <div class="facebook-block">
                     <label for="facebook-input">{{ $t('Object video') }}:</label>
-                    <input type="text" id="facebook-input" name="facebook-input" v-bind:placeholder="$t('Provide a link to the video of the object')" v-model="media.video">
+                    <input type="text" id="facebook-input" name="facebook-input" :placeholder="$t('Provide a link to the video of the object')" v-model="media.video">
                 </div>
                 <div class="video-block">
                     <label for="video-input">{{ $t('Link to Facebook') }}:</label>
-                    <input type="text" id="video-input" name="video-input" v-bind:placeholder="$t('Provide a link to the Facebook object')" v-model="media.facebook">
+                    <input type="text" id="video-input" name="video-input" :placeholder="$t('Provide a link to the Facebook object')" v-model="media.facebook">
                 </div>
             </div>
         </div>
@@ -40,6 +40,12 @@
 
 <script>
 import PropertyMediaPhoto from "./PropertyMediaPhoto";
+
+import ApiRequest from "../../../API/ApiRequest";
+
+let ImageRequest = ApiRequest('image-public');
+let imageRequest = new ImageRequest;
+
 export default {
     name: "PropertyMedia",
     components: {PropertyMediaPhoto},
@@ -49,6 +55,36 @@ export default {
             let media = this.media;
             media.photos.splice(index, 1);
             this.$emit('input', media);
+        },
+        addPhoto(e) {
+            let photo = e.target.value;
+            let photoExt = photo.split('.').pop().toLowerCase();
+            /*var formData = new FormData();
+            var imagefile = document.querySelector('#file');
+            formData.append("image", imagefile.files[0]);
+            axios.post('upload_file', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })*/
+            if (['png', 'jpg', 'jpeg'].indexOf(photoExt) === -1) {
+                alert('Wrong file, only PNG and JPG are allowed');
+                return;
+            }
+
+            const input = e.target;
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.readAsDataURL(input.files[0]);
+                reader.onload = (e) => {
+                    imageRequest.create({"image": e.target.result})
+                        .then(res => {
+                            let media = this.media;
+                            media.photos.push(res.data.image);
+                            this.$emit('input', media);
+                        })
+                }
+            }
         }
     }
 }
