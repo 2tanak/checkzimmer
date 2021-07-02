@@ -8765,8 +8765,9 @@ body .popup-bubble-anchor.active:after {
 }
 .registration-section .number-phone-item {
     width: 100%;
+}
+.registration-section .number-phone-item input {
     max-width: 440px;
-    margin-right: 20px;
 }
 .registration-section .number-phone .number-phone-content {
     display: flex;
@@ -8780,7 +8781,7 @@ body .popup-bubble-anchor.active:after {
     color: #3B8B3E;
     display: flex;
     align-items: center;
-    margin-bottom: 19px;
+    margin-left: 20px;
 }
 .registration-section .number-phone a.add-phone svg {
     margin-right: 6px;
@@ -9063,6 +9064,9 @@ body .popup-bubble-anchor.active:after {
     margin-top: 8px;
     margin-bottom: 18px;
     display: none;
+}
+.registration-section .error-text.visible {
+    display: block;
 }
 .registration-section .forms-line-block.error input {
     border: 1px solid #EE483F;
@@ -10380,9 +10384,6 @@ svg.mobile-line {
     .registration-section .object-data-container {
         padding: 0;
     }
-    .registration-section .furnishings-section .collapse:not(.show) {
-        display: none;
-    }
     .registration-section .furnishings-section .furnishings-line {
         padding-bottom: 0;
     }
@@ -10415,7 +10416,6 @@ svg.mobile-line {
         left: 50%;
         transform: translateX(-50%);
         bottom: -52px;
-        width: 100px;
         text-align: center;
         font-size: 16px;
     }
@@ -10768,6 +10768,9 @@ svg.mobile-line {
     }
 }
 @media (max-width: 575px) {
+    .registration-section .number-phone-item input {
+        max-width: none;
+    }
     .steps-section .number-step {
         min-width: 34px;
         max-width: 34px;
@@ -11542,5 +11545,68 @@ footer .social-block {
     }
     .py-4 {
         min-height: calc(100vh - 239px);
+    }
+}
+
+.register-modal {
+    background: #FFFFFF;
+    position: fixed;
+    visibility: hidden;
+    backface-visibility: hidden;
+    transition: all 0.2s;
+    padding: 45px;
+    box-shadow: 0 0 14px rgb(51 54 70 / 14%);
+    border-radius: 12px;
+    transform: scale(0.7);
+    opacity: 0;
+}
+.register-modal .modal-close {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    cursor: pointer;
+}
+.register-modal .modal-title {
+    margin-bottom: 22px;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 130%;
+    text-align: center;
+    color: #333646;
+}
+.modal-overlay.modal-show .register-modal {
+    transform: scale(1);
+    opacity: 1;
+    visibility: visible;
+}
+.register-modal p {
+    font-weight: 400;
+    line-height: 130%;
+    color: #545769;
+    text-align: center;
+}
+
+@media (max-width: 680px) {
+    .register-modal {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        overflow-y: auto;
+        padding-top: 50px;
+    }
+    .register-modal .modal-title {
+        font-size: 20px;
+        margin-bottom: 19px;
+    }
+    .register-modal .modal-close {
+        width: 31px;
+        height: 31px;
+        border: 1px solid #EEEEEE;
+        border-radius: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 10px;
+        right: 10px;
     }
 }

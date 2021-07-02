@@ -6,9 +6,9 @@
                     <PropertyData :property="account.property" v-model="account.property" />
                     <PropertyFacilities v-model="account.property.facilities" :facilities="account.property.facilities" />
                     <PropertyMedia v-model="account.property.media" :media="account.property.media" />
-                    <PropertyContacts v-model="account.property.contact" :contact="account.property.contact" :billing="account.billing.person"/>
+                    <PropertyContacts v-model="account.property.contact" :contact="account.property.contact" :billing="account.billing.person" :validate="account.validate"/>
 
-                    <a href="#" class="save" @click.prevent="toSummary">Сохранить и продолжить</a>
+                    <a href="#" class="save" @click.prevent="toSummary">{{ $t('Save and continue') }}</a>
 
                 </div>
                 <aside class="registration-sidebar">
@@ -32,6 +32,18 @@ export default {
     name: "RegistrationStepProperty",
     props: ['plan', 'account'],
     mounted() {
+        window.setTimeout( () => {
+            let hash = window.location.hash;
+            let top = 0;
+            if (hash) {
+                let elem = document.getElementById(hash.substr(1));
+                if (elem) {
+                    top = elem.offsetTop;
+                }
+            }
+            window.scrollTo(0, top-100);
+            window.location.hash = '';
+        }, 500);
     },
     components: {
         PropertyContacts,
@@ -41,7 +53,23 @@ export default {
             this.$emit('backToPlans', '');
         },
         toSummary() {
-            this.$emit('toSummaryData', '');
+            if (this.allValid) {
+                this.$emit('dataProceed', '');
+                this.$emit('validate', false);
+                this.$emit('toSummaryData', '');
+                return;
+            }
+            this.$emit('validate', true);
+            window.setTimeout(() => {
+                let element = jQuery('.error-text');
+                let offs = jQuery(element).offset().top;
+                window.scroll(0, offs-200);
+            }, 500);
+        }
+    },
+    computed: {
+        allValid() {
+            return this.account.property.contact.person.name && this.account.property.contact.email && this.account.property.contact.phone
         }
     }
 }

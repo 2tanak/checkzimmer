@@ -3,9 +3,9 @@
         <RegistrationSteps v-if="step > 1" :step="step" />
 
         <RegistrationStepPlans v-if="step === 1" :planActive="planActive" :plans="plans" :questions="questions" v-model="account.plan" @input="toAccountData"/>
-        <RegistrationStepClient v-else-if="step === 2" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData" />
-        <RegistrationStepProperty v-else-if="step === 3" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toSummaryData="toSummaryData"/>
-        <RegistrationStepSummary v-else-if="step === 4" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData"/>
+        <RegistrationStepClient v-else-if="step === 2" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData" @validate="validate" @dataProceed="dataProceed" />
+        <RegistrationStepProperty v-else-if="step === 3" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toSummaryData="toSummaryData" @validate="validate" @dataProceed="dataProceed" />
+        <RegistrationStepSummary v-else-if="step === 4" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData" @toAccountData="toAccountData" @dataProceed="dataProceed"/>
     </div>
 </template>
 
@@ -25,28 +25,28 @@ export default {
         RegistrationStepProperty, RegistrationSteps, RegistrationStepClient, RegistrationStepPlans},
     data() {
         return {
-            step: 3,
+            step: 1,
             planActive: 'popular',
             plans: {
-                intro: {
-                    title: this.$t('Intro'),
-                    price: 39,
+                base: {
+                    title: this.$t('Base'),
+                    price: 0,
                     annual: 468,
-                    description: this.$t('For most businesses that want to optimize web queries'),
+                    description: this.$t('Our permanently free version'),
                     options: [
                         { text: this.$t('Own analytics platform'), active: true },
                         { text: this.$t('Chat support'), active: true },
-                        { text: this.$t('Unlimited options'), active: true },
-                        { text: this.$t('Optimization'), active: true },
+                        { text: this.$t('Unlimited options'), active: false },
+                        { text: this.$t('Optimization'), active: false },
                         { text: this.$t('Phone support'), adtive: false },
                         { text: this.$t('Special application'), active: false }
                     ]
                 },
-                base: {
-                    title: this.$t('Base'),
-                    price: 99,
+                intro: {
+                    title: this.$t('Intro'),
+                    price: 10,
                     annual: 468,
-                    description: this.$t('For most businesses that want to optimize web queries'),
+                    description: this.$t('Perfect for beginners with multiple objects'),
                     options: [
                         { text: this.$t('Own analytics platform'), active: true },
                         { text: this.$t('Chat support'), active: true },
@@ -58,9 +58,9 @@ export default {
                 },
                 popular: {
                     title: this.$t('Popular'),
-                    price: 129,
+                    price: 20,
                     annual: 468,
-                    description: this.$t('For most businesses that want to optimize web queries'),
+                    description: this.$t('Our recommendation for maximum profit'),
                     options: [
                         { text: this.$t('Own analytics platform'), active: true },
                         { text: this.$t('Chat support'), active: true },
@@ -72,16 +72,17 @@ export default {
                 },
                 enterprise: {
                     title: this.$t('Enterprise'),
-                    price: 229,
+                    price: 50,
                     annual: 468,
-                    description: this.$t('For most businesses that want to optimize web queries'),
+                    description: this.$t('The luxury version with its own page'),
                     options: [
                         { text: this.$t('Own analytics platform'), active: true },
                         { text: this.$t('Chat support'), active: true },
                         { text: this.$t('Unlimited options'), active: true },
                         { text: this.$t('Optimization'), active: true },
                         { text: this.$t('Phone support'), active: true },
-                        { text: this.$t('Special application'), active: true }
+                        { text: this.$t('Special application'), active: true },
+                        { text: this.$t('own sub-domain (only business plan)'), active: true }
                     ]
                 }
             },
@@ -166,13 +167,14 @@ export default {
                 }
             ],
             account: {
+                validate: false,
                 plan: 'intro',
                 billing: {
                     type: 'company',
-                    company: 'Test Name',
-                    stid: 'A123',
+                    company: '',
+                    stid: '',
                     person: {
-                        addr: 'Mister',
+                        addr: this.$t('Mister'),
                         first_name: '',
                         last_name: '',
                     },
@@ -180,10 +182,25 @@ export default {
                         street: '',
                         house: '',
                         postcode: '',
-                        country: 'Germany',
+                        country: this.$t('Germany'),
+                        city: 'Leipzig'
                     },
-                    match_address: false,
+                    match_address: true,
                     match_person: false
+                },
+                post: {
+                    person: {
+                        addr: this.$t('Mister'),
+                        first_name: '',
+                        last_name: '',
+                    },
+                    address: {
+                        street: '',
+                        house: '',
+                        postcode: '',
+                        country: this.$t('Germany'),
+                        city: 'Leipzig'
+                    },
                 },
                 contact: {
                     person: {
@@ -192,14 +209,17 @@ export default {
                     },
                     email: '',
                     email_display: true,
-                    phones: [
-                        ''
-                    ],
+
                     phone: '',
                     phone_display: true,
                     phone_whatsapp: false,
                     phone_fax: '',
                     phone_fax_enable: '',
+                    phoneAdditional: '',
+                    phoneAdditional_display: false,
+                    phoneAdditional_whatsapp: false,
+                    phoneStat: '',
+                    phoneStat_display: false,
                     website: '',
                     website_enable: false
                 },
@@ -217,12 +237,14 @@ export default {
                         },
                         email: '',
                         email_display: true,
-                        phones: [
-                            ''
-                        ],
                         phone: '',
                         phone_display: true,
                         phone_whatsapp: false,
+                        phoneAdditional: '',
+                        phoneAdditional_display: false,
+                        phoneAdditional_whatsapp: false,
+                        phoneStat: '',
+                        phoneStat_display: false,
                         phone_fax: '',
                         phone_fax_enable: '',
                         website: '',
@@ -231,16 +253,42 @@ export default {
                     },
                     propertyTypes: [
                         {
-                            name: '',
-                            num: 0,
-                            persons: 1,
-                            price: 0,
+                            name: 'Wohnung',
+                            num: 9,
+                            persons: 18,
+                            price: 10,
                             rooms: [
                                 {
-                                    name: '',
-                                    num: 0,
+                                    name: 'одноместный',
+                                    num: 2,
                                     persons: 1,
-                                    price: 0
+                                    price: 10
+                                },
+                                {
+                                    name: 'двухместный',
+                                    num: 5,
+                                    persons: 2,
+                                    price: 12
+                                },
+                                {
+                                    name: 'трехместный',
+                                    num: 2,
+                                    persons: 3,
+                                    price: 15
+                                },
+                            ]
+                        },
+                        {
+                            name: 'Pension',
+                            num: 2,
+                            persons: 6,
+                            price: 17,
+                            rooms: [
+                                {
+                                    name: 'трехместный',
+                                    num: 2,
+                                    persons: 3,
+                                    price: 17
                                 }
                             ]
                         }
@@ -259,6 +307,13 @@ export default {
             }
         }
     },
+    mounted() {
+        let acc = JSON.parse(localStorage.getItem('application-data'))
+        if (acc) {
+            this.account = acc;
+        }
+
+    },
     methods: {
         choosePlan() {
             this.step = 1;
@@ -271,6 +326,12 @@ export default {
         },
         toSummaryData() {
             this.step = 4;
+        },
+        validate(value) {
+            this.account.validate = value;
+        },
+        dataProceed() {
+            localStorage.setItem('application-data', JSON.stringify(this.account));
         }
     }
 }

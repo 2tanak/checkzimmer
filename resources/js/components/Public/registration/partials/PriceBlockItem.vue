@@ -17,7 +17,7 @@
             </ul>
             <a class="choose-plan" href="#" @click.prevent="chosenPlan">{{ $t('Choose Plan') }}</a>
             <div class="footnote">
-                * {{ $t('Please note that the annual rate is EUR') }} {{ plan.annual }}.
+                * {{ $t('Please note that the annual rate is EUR') }} <!-- {{ plan.annual }} -->
             </div>
         </div>
     </div>

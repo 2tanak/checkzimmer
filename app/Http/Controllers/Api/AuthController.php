@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Notifications\InquiryHotel;
+use App\Notifications\InquiryRegistration;
 use App\User;
 use Cookie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 
@@ -73,4 +76,12 @@ class AuthController extends Controller
     {
         return Auth::guard();
     }
+    public function registrationProcess(Request $request) {
+        $data = $request->all();
+        $notificationEmail = env('MAIL_NOTIFICATION_ADDRESS', '');
+
+        Mail::to($notificationEmail)->send(new InquiryRegistration($data));
+        return response()->json(['code' => 'ok']);
+    }
+
 }

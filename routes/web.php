@@ -61,7 +61,7 @@ foreach ($locales as $locale) {
 
             Route::get('/registration', 'HomeController@registration')->name("registration-$locale");
             Route::get('/registration2', 'HomeController@registration2')->name("registration2-$locale");
-            Route::get('/registration3', 'HomeController@registration3')->name("registration3-$locale");
+            Route::get('/registration-preview', 'HomeController@registration3')->name("registration3-$locale");
 
             Route::get('/{page}', 'HomeController@singlePage')->name("singlePage");
         });

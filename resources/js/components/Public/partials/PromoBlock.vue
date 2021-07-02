@@ -75,7 +75,7 @@
 
 <script>
 export default {
-name: "PromoBlock"
+    name: "PromoBlock"
 }
 </script>
 
