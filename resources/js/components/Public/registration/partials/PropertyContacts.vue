@@ -1,5 +1,5 @@
 <template>
-    <section class="contact-information-section">
+    <section class="contact-information-section one">
         <div class="title">{{ $t('Contact Information') }}</div>
         <div class="checkbox-line transfer-line">
             <input type="checkbox" id="transfer" v-model="sameAsBilling" @input="setAsBilling">
@@ -42,15 +42,17 @@
                     <div class="number-phone-content">
                         <div class="number-phone-item">
                             <label for="number-phone-input">{{ $t("Phone number (register)") }}:*</label>
-                            <input type="tel" placeholder="+49 15168161326" id="number-phone-input" name="number-phone-input" v-model="contact.phone">
+                            <div style="display:flex;align-items:center;width:100%;">
+                                <input type="tel" placeholder="+49 15168161326" id="number-phone-input" name="number-phone-input" v-model="contact.phone">
+                                <a href="#" class="add-phone add-phone-desctope" @click.prevent="addNumber('two')" v-if="!numberDisplay.two">
+                                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M4 9C4 9.55228 4.44772 10 5 10C5.55228 10 6 9.55229 6 9V6H9C9.55228 6 10 5.55228 10 5C10 4.44772 9.55229 4 9 4L6 4V1C6 0.447715 5.55228 0 5 0C4.44772 0 4 0.447715 4 1V4L1 4C0.447715 4 0 4.44771 0 5C0 5.55228 0.447715 6 1 6H4V9Z" fill="#3B8B3E"/>
+                                    </svg>
+                                    {{ $t('Add another phone') }}
+                                </a>
+                            </div>
                             <span class="error-text visible" v-if="validate && !contact.phone">{{ $t('You did not provide your phone number') }}</span>
                         </div>
-                        <a href="#" class="add-phone add-phone-desctope" @click.prevent="addNumber('two')" v-if="!numberDisplay.two">
-                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M4 9C4 9.55228 4.44772 10 5 10C5.55228 10 6 9.55229 6 9V6H9C9.55228 6 10 5.55228 10 5C10 4.44772 9.55229 4 9 4L6 4V1C6 0.447715 5.55228 0 5 0C4.44772 0 4 0.447715 4 1V4L1 4C0.447715 4 0 4.44771 0 5C0 5.55228 0.447715 6 1 6H4V9Z" fill="#3B8B3E"/>
-                            </svg>
-                            {{ $t('Add another phone') }}
-                        </a>
                     </div>
                     <div class="checkbox-line number-phone-show-line">
                         <input type="checkbox" id="number-phone-show" v-model="contact.phone_display" >
@@ -68,14 +70,16 @@
                     <div class="number-phone-content">
                         <div class="number-phone-item">
                             <label for="additional-number-phone-input">{{ $t('Additional phone number') }}:</label>
-                            <input type="tel" placeholder="+49 15168161326" id="additional-number-phone-input" name="additional-number-phone-input" v-model="contact.phoneAdditional">
+                            <div style="display:flex;align-items:center;width:100%;">
+                                <input type="tel" placeholder="+49 15168161326" id="additional-number-phone-input" name="additional-number-phone-input" v-model="contact.phoneAdditional">
+                                <a href="#" class="add-phone add-phone-desctope" @click.prevent="addNumber('three')" v-if="!numberDisplay.three">
+                                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M4 9C4 9.55228 4.44772 10 5 10C5.55228 10 6 9.55229 6 9V6H9C9.55228 6 10 5.55228 10 5C10 4.44772 9.55229 4 9 4L6 4V1C6 0.447715 5.55228 0 5 0C4.44772 0 4 0.447715 4 1V4L1 4C0.447715 4 0 4.44771 0 5C0 5.55228 0.447715 6 1 6H4V9Z" fill="#3B8B3E"/>
+                                    </svg>
+                                    {{ $t('Add another phone') }}
+                                </a>
+                            </div>
                         </div>
-                        <a href="#" class="add-phone add-phone-desctope" @click.prevent="addNumber('three')" v-if="!numberDisplay.three">
-                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M4 9C4 9.55228 4.44772 10 5 10C5.55228 10 6 9.55229 6 9V6H9C9.55228 6 10 5.55228 10 5C10 4.44772 9.55229 4 9 4L6 4V1C6 0.447715 5.55228 0 5 0C4.44772 0 4 0.447715 4 1V4L1 4C0.447715 4 0 4.44771 0 5C0 5.55228 0.447715 6 1 6H4V9Z" fill="#3B8B3E"/>
-                            </svg>
-                            {{ $t('Add another phone') }}
-                        </a>
                     </div>
                     <div class="checkbox-line number-phone-show-line">
                         <input type="checkbox" id="additional-number-phone-show" v-model="contact.phoneAdditional_display">

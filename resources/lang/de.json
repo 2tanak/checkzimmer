@@ -56,7 +56,7 @@
     "Phone support": "\"Anzeige teilen\"-Funktion",
     "Special application": "Statistik",
     "Choose Plan": "W\u00e4hlen Sie einen Plan",
-    "Intro": "Einstieg",
+    "Intro": "Einsteiger",
     "Base": "Basis",
     "Popular": "Premium",
     "Enterprise": "Business",
@@ -541,7 +541,7 @@
     "Just choose the appropriate package from the types of applications we have presented!": "Wählen Sie anhand der angegebenen Leistungen einfach den passenden Tarif aus!",
     "Your tariff": "Ihr Tarif",
     "Edit (register sidebar)": "Ändern",
-    "Please note that the annual rate is EUR": "Bitte beachten Sie, dass der Jahrespreis EUR . beträgt",
+    "Please note that the annual rate is EUR": "nur jährliche Zahlung",
     "Accommodation photos": "Fotografien des Objektes",
     "Upload a photo of the object": "Laden Sie Fotos des Objektes hoch",
     "JPG, PNG up to 20MB in size, no less than 1780px wide, no more than 10 pieces.": "Die Bilder sollte im JPG oder PNG Format und maximal 20MB groß sein, eine Mindestbreite von 1780px haben und die Anzahl von 10 nicht überschreiten.",
@@ -589,7 +589,7 @@
     "Private person": "Privatperson",
     "Legal entity": "Juristische Person",
     "Greeting": "Gruß",
-    "The legal address is the same as the address of the object": "Die juristische Adresse ist die gleiche wie die Adresse des Objekts",
+    "The legal address is the same as the address of the object": "Die Adresse ist die gleiche wie die Adresse des Objekts",
     "Add Steuer ID": "Steuer-ID hinzufügen",
     "Mister": "Herr",
     "Missis": "Frau",
@@ -632,5 +632,10 @@
     "and the data protection regulations of the provider, and I agree to the execution of my application.": "sowie die Datenschutzbestimmungen des Anbieters und stimme der Durchführung meiner Bewerbung zu.",
     "Confirm with payment obligation": "Mit Zahlungsverpflichtung bestätigen",
     "Duration 12 months with automatic machine. Renewal. Notice period 4 weeks. Payback procedure (§ 13b UStG) for clients staying abroad": "Laufzeit 12 Monate mit Automat. Verlängerung. Kündigungsfrist 4 Wochen. Payback-Verfahren (§ 13b UStG) für Kunden mit Auslandsaufenthalt",
-    "Accommodation data": "Unterkunftsdaten"
+    "Accommodation data": "Unterkunftsdaten",
+    "Our permanently free version": "Unsere dauerhaft kostenfreie Variante",
+    "Perfect for beginners with multiple objects": "Perfekt für Einsteiger mit mehreren Objekten",
+    "Our recommendation for maximum profit": "Unsere Empfehlung für maximalen Gewinn",
+    "The luxury version with its own page": "Die Luxus-Version mit eigener Seite",
+    "own sub-domain (only business plan)": "eigene Sub-Domain (only Business plan)"
 }

@@ -20,16 +20,16 @@
 
         <div class="quality-input-block">
             <div class="quality-head-mobile table-head-item table-head-item-mobile">{{ $t('QTY') }}</div>
-            <input type="text" value="" name="quality-input" id="quality-input" placeholder="0" v-model="property.num">
+            <input type="text" value="" name="quality-input" placeholder="0" v-model="property.num">
         </div>
         <div class="personen-input-block">
             <div class="personen-head-mobile table-head-item table-head-item-mobile">{{ $t('Personen') }}</div>
-            <input type="text" value="" name="personen-input" id="personen-input" placeholder="0" v-model="property.persons">
+            <input type="text" value="" name="personen-input" placeholder="0" v-model="property.persons">
         </div>
         <div class="price-input-block">
             <div class="price-head-mobile table-head-item table-head-item-mobile">{{ $t('PRICE / PERSON') }}</div>
             <span class="from">{{ $t('from') }}</span>
-            <input type="text" value="" name="price-input" id="price-input" placeholder="0" v-model="property.price">
+            <input type="text" value="" name="price-input" placeholder="0" v-model="property.price">
             <span class="dollar-sign">€</span>
         </div>
         <div class="object-data-link">

@@ -8765,8 +8765,9 @@ body .popup-bubble-anchor.active:after {
 }
 .registration-section .number-phone-item {
     width: 100%;
+}
+.registration-section .number-phone-item input {
     max-width: 440px;
-    margin-right: 20px;
 }
 .registration-section .number-phone .number-phone-content {
     display: flex;
@@ -8780,7 +8781,7 @@ body .popup-bubble-anchor.active:after {
     color: #3B8B3E;
     display: flex;
     align-items: center;
-    margin-bottom: 19px;
+    margin-left: 20px;
 }
 .registration-section .number-phone a.add-phone svg {
     margin-right: 6px;
@@ -10383,9 +10384,6 @@ svg.mobile-line {
     .registration-section .object-data-container {
         padding: 0;
     }
-    .registration-section .furnishings-section .collapse:not(.show) {
-        display: none;
-    }
     .registration-section .furnishings-section .furnishings-line {
         padding-bottom: 0;
     }
@@ -10770,6 +10768,9 @@ svg.mobile-line {
     }
 }
 @media (max-width: 575px) {
+    .registration-section .number-phone-item input {
+        max-width: none;
+    }
     .steps-section .number-step {
         min-width: 34px;
         max-width: 34px;
