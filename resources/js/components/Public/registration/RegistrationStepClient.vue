@@ -53,6 +53,7 @@ export default {
         },
         saveAndContinue() {
             if (this.allValid) {
+                this.$emit('dataProceed', '');
                 this.$emit('validate', false);
                 this.$emit('toPropertyData', '');
                 return;

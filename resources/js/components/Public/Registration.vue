@@ -3,9 +3,9 @@
         <RegistrationSteps v-if="step > 1" :step="step" />
 
         <RegistrationStepPlans v-if="step === 1" :planActive="planActive" :plans="plans" :questions="questions" v-model="account.plan" @input="toAccountData"/>
-        <RegistrationStepClient v-else-if="step === 2" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData" @validate="validate" />
-        <RegistrationStepProperty v-else-if="step === 3" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toSummaryData="toSummaryData" @validate="validate"/>
-        <RegistrationStepSummary v-else-if="step === 4" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData" @toAccountData="toAccountData"/>
+        <RegistrationStepClient v-else-if="step === 2" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData" @validate="validate" @dataProceed="dataProceed" />
+        <RegistrationStepProperty v-else-if="step === 3" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toSummaryData="toSummaryData" @validate="validate" @dataProceed="dataProceed" />
+        <RegistrationStepSummary v-else-if="step === 4" v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData" @toAccountData="toAccountData" @dataProceed="dataProceed"/>
     </div>
 </template>
 
@@ -307,6 +307,13 @@ export default {
             }
         }
     },
+    mounted() {
+        let acc = JSON.parse(localStorage.getItem('application-data'))
+        if (acc) {
+            this.account = acc;
+        }
+
+    },
     methods: {
         choosePlan() {
             this.step = 1;
@@ -322,6 +329,9 @@ export default {
         },
         validate(value) {
             this.account.validate = value;
+        },
+        dataProceed() {
+            localStorage.setItem('application-data', JSON.stringify(this.account));
         }
     }
 }

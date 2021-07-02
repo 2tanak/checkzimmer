@@ -54,6 +54,7 @@ export default {
         },
         toSummary() {
             if (this.allValid) {
+                this.$emit('dataProceed', '');
                 this.$emit('validate', false);
                 this.$emit('toSummaryData', '');
                 return;
