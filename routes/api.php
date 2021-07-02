@@ -79,6 +79,7 @@ Route::group(['namespace' => 'Api'], function() {
     Route::post('/property/initMap', 'PropertyController@initMap');
     Route::post('/property/list', 'PropertyController@listUpdate');
     Route::post('search/tooltip', 'PostcodeController@query');
+    Route::post('/image-public', 'ImageUploadController@imageUploadPost');
 });
 
 Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {

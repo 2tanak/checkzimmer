@@ -83,7 +83,8 @@ export default {
         duplicateRoom(data) {
             let property = { ...this.property };
             let newRoom = JSON.parse(JSON.stringify(property.propertyTypes[data.index].rooms[data.room])) //{ ... }
-            property.propertyTypes[index].rooms.splice(data.index+1, 0, [newRoom]);
+            console.log(newRoom);
+            property.propertyTypes[data.index].rooms.splice(data.room+1, 0, newRoom);
             this.$emit('input', property);
         }
     }
