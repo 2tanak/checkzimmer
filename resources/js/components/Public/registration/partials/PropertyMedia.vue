@@ -1,5 +1,5 @@
 <template>
-    <section class="photos-object-section">
+    <section class="photos-object-section" id="property-media">
         <div class="title">{{ $t('Accommodation photos') }}</div>
         <div class="subtitle subtitle-desctope">
             <div class="left-subtitle">{{ $t('Upload a photo of the object') }}:</div>

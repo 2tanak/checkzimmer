@@ -25,7 +25,7 @@ export default {
         RegistrationStepProperty, RegistrationSteps, RegistrationStepClient, RegistrationStepPlans},
     data() {
         return {
-            step: 2,
+            step: 1,
             planActive: 'popular',
             plans: {
                 intro: {
@@ -170,8 +170,8 @@ export default {
                 plan: 'intro',
                 billing: {
                     type: 'company',
-                    company: 'Test Name',
-                    stid: 'A123',
+                    company: '',
+                    stid: '',
                     person: {
                         addr: this.$t('Mister'),
                         first_name: '',

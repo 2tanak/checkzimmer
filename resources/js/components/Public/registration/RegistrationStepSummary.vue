@@ -49,6 +49,9 @@ export default {
         PropertyMediaSummary,
         PropertyData,
         ContactInformationSummary, BillingAddressSummary, PropertyFacilities, PromoBlock, ChosenPlan},
+    mounted() {
+        window.scrollTo(0, 0);
+    },
     methods: {
         backToPlans() {
             this.$emit('backToPlans', '');

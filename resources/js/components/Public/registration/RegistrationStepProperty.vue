@@ -32,6 +32,18 @@ export default {
     name: "RegistrationStepProperty",
     props: ['plan', 'account'],
     mounted() {
+        window.setTimeout( () => {
+            let hash = window.location.hash;
+            let top = 0;
+            if (hash) {
+                let elem = document.getElementById(hash.substr(1));
+                if (elem) {
+                    top = elem.offsetTop;
+                }
+            }
+            window.scrollTo(0, top-100);
+            window.location.hash = '';
+        }, 500);
     },
     components: {
         PropertyContacts,
@@ -47,6 +59,11 @@ export default {
                 return;
             }
             this.$emit('validate', true);
+            window.setTimeout(() => {
+                let element = jQuery('.error-text');
+                let offs = jQuery(element).offset().top;
+                window.scroll(0, offs-200);
+            }, 500);
         }
     },
     computed: {

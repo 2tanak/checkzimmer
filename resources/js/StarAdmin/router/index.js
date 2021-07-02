@@ -329,5 +329,6 @@ export default new Router({
     path: '/forms',
     name: 'forms',
     component: forms
-  }*/]
+  }*/],
+
 })

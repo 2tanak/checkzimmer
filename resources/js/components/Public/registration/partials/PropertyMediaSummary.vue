@@ -2,7 +2,7 @@
     <section class="photos-property-section">
         <div class="title">
             {{ $t('Photo of the property') }}
-            <a href="#" @click.prevent="toPropertyData">{{ $t('Change') }}</a>
+            <a href="#" @click.prevent="toPropertyData('property-media')">{{ $t('Change') }}</a>
         </div>
         <div class="photo-checking-block">
             <img v-for="photo in media.photos" :src="photo" alt="">
@@ -29,7 +29,8 @@ export default {
     name: "PropertyMediaSummary",
     props: ['media'],
     methods: {
-        toPropertyData() {
+        toPropertyData(hash) {
+            window.location.hash = hash;
             this.$emit('toPropertyData', '');
         }
     }
