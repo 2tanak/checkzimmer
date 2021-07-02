@@ -311,4 +311,5 @@ class HomeController extends Controller
         }
         return response()->json(['code' => 'error']);
     }
+
 }

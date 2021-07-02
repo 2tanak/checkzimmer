@@ -33,17 +33,38 @@ export default {
     name: "RegistrationStepClient",
     props: ['account', 'plan'],
     components: {AdvertiseBlock, RegistrationSteps, ChosenPlan, SpokenLanguage, ContactInformation, BillingAddress, LegalAddress},
+    mounted() {
+        window.setTimeout( () => {
+            let hash = window.location.hash;
+            let top = 0;
+            if (hash) {
+                let elem = document.getElementById(hash.substr(1));
+                if (elem) {
+                    top = elem.offsetTop;
+                }
+            }
+            window.scrollTo(0, top-100);
+        }, 500);
+
+    },
     methods: {
         backToPlans() {
             this.$emit('backToPlans', '');
         },
         saveAndContinue() {
             if (this.allValid) {
+                this.$emit('dataProceed', '');
                 this.$emit('validate', false);
                 this.$emit('toPropertyData', '');
                 return;
             }
             this.$emit('validate', true);
+            window.setTimeout(() => {
+                let element = jQuery('.error-text');
+                let offs = jQuery(element).offset().top;
+                console.log(offs);
+                window.scroll(0, offs-200);
+            }, 500);
         },
         setContactAsBilling() {
             let account = { ...this.account }
@@ -73,7 +94,7 @@ export default {
     },
     computed: {
         allValid() {
-            return true || this.account.billing.person.first_name && this.account.billing.person.last_name // Billing
+            return this.account.billing.person.first_name && this.account.billing.person.last_name // Billing
                 && this.account.billing.address.street && this.account.billing.address.house &&  this.account.billing.address.postcode
                 &&  this.account.billing.address.city
                 // Post

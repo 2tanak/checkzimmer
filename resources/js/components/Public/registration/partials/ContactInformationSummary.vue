@@ -2,7 +2,7 @@
     <section class="billing-address-checking contact-information-checking">
         <div class="title">
             {{ $t('Contact Information') }}
-            <a href="#" @click.prevent="toAccountData">{{  $t('Change') }}</a>
+            <a href="#" @click.prevent="toAccountData('account-contact')">{{  $t('Change') }}</a>
         </div>
         <div class="address-checking-content">
             <div class="address-checking-block">
@@ -92,7 +92,8 @@ export default {
     name: "ContactInformationSummary",
     props: ['account'],
     methods: {
-        toAccountData() {
+        toAccountData(hash) {
+            window.location.hash = hash;
             this.$emit('toAccountData', '');
         }
     }

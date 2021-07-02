@@ -1,5 +1,5 @@
 <template>
-    <section class="contact-information-section">
+    <section class="contact-information-section" id="account-contact">
         <div class="title">{{ $t('Contact Information') }}</div>
         <form class="contact-information-form">
             <div class="forms-line">

@@ -38,6 +38,9 @@ export default {
 
         }
     },
+    mounted() {
+        window.scrollTo(0, 0);
+    },
     methods: {
         planSelect(key) {
             this.$emit('input', key);

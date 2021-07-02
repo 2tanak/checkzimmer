@@ -80,6 +80,7 @@ Route::group(['namespace' => 'Api'], function() {
     Route::post('/property/list', 'PropertyController@listUpdate');
     Route::post('search/tooltip', 'PostcodeController@query');
     Route::post('/image-public', 'ImageUploadController@imageUploadPost');
+    Route::post('/registration', 'AuthController@registrationProcess');
 });
 
 Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {
