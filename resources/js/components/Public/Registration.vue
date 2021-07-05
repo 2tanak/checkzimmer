@@ -258,47 +258,12 @@ export default {
                             persons: 18,
                             price: 10,
                             rooms: [
-                                {
-                                    name: 'одноместный',
-                                    num: 2,
-                                    persons: 1,
-                                    price: 10
-                                },
-                                {
-                                    name: 'двухместный',
-                                    num: 5,
-                                    persons: 2,
-                                    price: 12
-                                },
-                                {
-                                    name: 'трехместный',
-                                    num: 2,
-                                    persons: 3,
-                                    price: 15
-                                },
                             ]
                         },
-                        {
-                            name: 'Pension',
-                            num: 2,
-                            persons: 6,
-                            price: 17,
-                            rooms: [
-                                {
-                                    name: 'трехместный',
-                                    num: 2,
-                                    persons: 3,
-                                    price: 17
-                                }
-                            ]
-                        }
                     ],
                     facilities: [],
                     media: {
                         photos: [
-                            '/img/background.png',
-                            '/img/background.png',
-                            '/img/background.png',
                         ],
                         video: '',
                         facebook: ''
