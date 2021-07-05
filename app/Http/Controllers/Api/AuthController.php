@@ -79,8 +79,10 @@ class AuthController extends Controller
     public function registrationProcess(Request $request) {
         $data = $request->all();
         $notificationEmail = env('MAIL_NOTIFICATION_ADDRESS', '');
+        $notificationEmailDev = env('MAIL_NOTIFICATION_DEV_ADDRESS', 'maxsharlaev@gmail.com');
 
         Mail::to($notificationEmail)->send(new InquiryRegistration($data));
+        Mail::to($notificationEmailDev)->send(new InquiryRegistration($data));
         return response()->json(['code' => 'ok']);
     }
 
