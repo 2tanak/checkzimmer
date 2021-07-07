@@ -41,29 +41,29 @@
                 <div class="address-checking-line">
                     <div class="address-checking-name">{{ $t('Additional phone number') }}:</div>
                     <div class="dots"></div>
-                    <div class="address-checking-total">+34149 994488</div>
+                    <div class="address-checking-total">{{ account.contact.phoneAdditional }}</div>
                 </div>
                 <div class="address-checking-line">
                     <div class="address-checking-name">{{ $t('Display the specified phone number') }}:</div>
                     <div class="dots"></div>
-                    <div class="address-checking-total">{{ $t('Yes') }}</div>
+                    <div class="address-checking-total">{{ account.contact.phoneAdditional_display ? $t('Yes') : $t('No') }}</div>
                 </div>
                 <div class="address-checking-line">
                     <div class="address-checking-name">{{ $t('Enable request via Whatsapp') }}:</div>
                     <div class="dots"></div>
-                    <div class="address-checking-total">{{ $t('Yes') }}</div>
+                    <div class="address-checking-total">{{ account.contact.phoneAdditional_whatsapp ? $t('Yes') : $t('No') }}</div>
                 </div>
             </div>
             <div class="address-checking-block">
                 <div class="address-checking-line">
                     <div class="address-checking-name">{{ $t('Landline phone number') }}:</div>
                     <div class="dots"></div>
-                    <div class="address-checking-total">+34149 994488</div>
+                    <div class="address-checking-total">{{ account.contact.phoneStat }}</div>
                 </div>
                 <div class="address-checking-line">
                     <div class="address-checking-name">{{ $t('Display the specified phone number') }}:</div>
                     <div class="dots"></div>
-                    <div class="address-checking-total">{{ $t('Yes') }}</div>
+                    <div class="address-checking-total">{{ account.contact.phoneStat_display ? $t('Yes') : $t('No') }}</div>
                 </div>
                 <div class="address-checking-line" v-if="account.contact.phone_fax" >
                     <div class="address-checking-name">{{ $t('Fax') }}:</div>
