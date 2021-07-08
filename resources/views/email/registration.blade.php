@@ -7,6 +7,7 @@
             <div class="main-registration-content" style="font-family:'Open Sans', 'Arial', sans-serif; ">
                 @include('email.registration.account', ['data' => $data])
                 @include('email.registration.contact', ['data' => $data])
+                @include('email.registration.facilities', ['data' => $data])
                 @include('email.registration.property-data', ['data' => $data])
                 @include('email.registration.photos', ['data' => $data])
             </div>
