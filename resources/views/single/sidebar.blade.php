@@ -271,7 +271,11 @@
             jQuery('.sidebar .number-phone').addClass('gray');
             jQuery('.sh_nmr').css('display', 'none');
             jQuery('.phone-hide').html(atob(window.phonenumStr));
-            jQuery('.phone-hide').attr('href', 'tel:' + atob(window.phonenum));
+            let phoneAttr = atob(window.phonenum);
+            if (phoneAttr.substr(0, 1) !== '+') {
+                phoneAttr = '+' + phoneAttr;
+            }
+            jQuery('.phone-hide').attr('href', 'tel:' + phoneAttr);
         });
 
         var url = document.location.href;

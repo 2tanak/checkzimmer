@@ -60,11 +60,15 @@ class RoiStatService {
     function getPhone($phone) {
         $data = json_decode($this->data, true);
         $phone = preg_replace('/[^0-9]/', '', $phone);
+        if (!is_array($data)) {
+            return $phone;
+        }
         foreach ($data as $block) {
             $phoneRep = preg_replace('/[^0-9]/', '', $block['phone']);
             if (array_search($phone, $block['replaceable_numbers']) !== false) {
                 return $phoneRep;
             }
         }
+        return $phone;
     }
 }

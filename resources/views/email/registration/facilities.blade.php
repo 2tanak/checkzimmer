@@ -2,11 +2,13 @@
 
 <table>
     <tr>
-        <td>Name</td>
+        <td>{{ __('Category') }}</td>
+        <td>{{ __('Name') }}</td>
     </tr>
-    @foreach($data['property']['facilities'] as $facility_id)
+    @foreach($data['property']['features'] as $feature)
         <tr>
-            <td>{{ \App\Feature::find($facility_id)->first()->name }}</td>
+            <td>{{ $feature->feature_category->name }}</td>
+            <td><img src="{{ $data['domain'].$feature->picture }}" /> {{ $feature->name }}</td>
         </tr>
     @endforeach
 </table>
