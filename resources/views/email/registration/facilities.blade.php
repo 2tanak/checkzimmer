@@ -3,14 +3,11 @@
     <h2 style="margin-top:0;margin-bottom:0;vertical-align:middle;display:inline-block;">Facilities information</h2>
 </div>
 
-<table>
-    <tr>
-        <td style="width:20%;background-color:#f3f3f3;">{{ __('Category') }}</td>
-        <td>{{ __('Name') }}</td>
-    </tr>
+<table style="width:100%;margin-bottom:40px;">
     @foreach($data['property']['features'] as $feature)
         <tr>
             <td style="width:20%;background-color:#f3f3f3;">{{ $feature->feature_category->name }}</td>
+            <td style="width:10%;"></td>
             <td><img src="{{ $data['domain'].$feature->picture }}" /> {{ $feature->name }}</td>
         </tr>
     @endforeach
