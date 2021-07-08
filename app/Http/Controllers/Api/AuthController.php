@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Feature;
 use App\Notifications\InquiryHotel;
 use App\Notifications\InquiryRegistration;
 use App\User;
@@ -78,6 +79,10 @@ class AuthController extends Controller
     }
     public function registrationProcess(Request $request) {
         $data = $request->all();
+        $features = Feature::whereIn('id', $data['property']['facilities'])->get();
+        $data['property']['features'] = $features;
+        $data['domain'] = $request->getSchemeAndHttpHost();
+
         $notificationEmail = env('MAIL_NOTIFICATION_ADDRESS', '');
         $notificationEmailDev = env('MAIL_NOTIFICATION_DEV_ADDRESS', 'maxsharlaev@gmail.com');
 
