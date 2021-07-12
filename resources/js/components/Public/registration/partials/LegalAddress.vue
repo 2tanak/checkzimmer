@@ -40,8 +40,8 @@
 
             <div class="forms-line" v-if="!data.match_address">
                 <div class="zip-block forms-line-block">
-                    <label for="zip-input-legal">{{ $t('Postcode') }}:*</label>
-                    <input type="text" :placeholder="$t('Your postcode')" id="zip-input-legal" name="zip-input" v-model="data.address.postcode">
+                    <label for="zip-input-legal">{{ $t('Postcode (register)') }}:*</label>
+                    <input type="text" :placeholder="$t('Postcode (register)')" id="zip-input-legal" name="zip-input" v-model="data.address.postcode">
                     <span class="error-text visible" v-if="validate && !data.address.postcode">{{ $t('You have not provided a postal code') }}</span>
                 </div>
                 <div class="city-block forms-line-block">
