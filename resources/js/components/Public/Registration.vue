@@ -39,7 +39,8 @@ export default {
                         { text: this.$t('Unlimited options'), active: false },
                         { text: this.$t('Optimization'), active: false },
                         { text: this.$t('Phone support'), adtive: false },
-                        { text: this.$t('Special application'), active: false }
+                        { text: this.$t('Special application'), active: false },
+                        { text: this.$t('own sub-domain'), active: false }
                     ]
                 },
                 intro: {
@@ -53,7 +54,8 @@ export default {
                         { text: this.$t('Unlimited options'), active: true },
                         { text: this.$t('Optimization'), active: true },
                         { text: this.$t('Phone support'), active: true },
-                        { text: this.$t('Special application'), active: false }
+                        { text: this.$t('Special application'), active: false },
+                        { text: this.$t('own sub-domain'), active: false }
                     ]
                 },
                 popular: {
@@ -67,7 +69,8 @@ export default {
                         { text: this.$t('Unlimited options'), active: true },
                         { text: this.$t('Optimization'), active: true },
                         { text: this.$t('Phone support'), active: true },
-                        { text: this.$t('Special application'), active: true }
+                        { text: this.$t('Special application'), active: true },
+                        { text: this.$t('own sub-domain'), active: false }
                     ]
                 },
                 enterprise: {
@@ -82,7 +85,7 @@ export default {
                         { text: this.$t('Optimization'), active: true },
                         { text: this.$t('Phone support'), active: true },
                         { text: this.$t('Special application'), active: true },
-                        { text: this.$t('own sub-domain (only business plan)'), active: true }
+                        { text: this.$t('own sub-domain'), active: true }
                     ]
                 }
             },
