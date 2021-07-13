@@ -5,8 +5,8 @@
         <div class="type-company">
             <span>{{ $t('Select the type of company') }}:</span>
             <div class="type-company-links">
-                <a href="#" class="private-person" @click.prevent="setAccountType('private')">{{ $t('Private person') }}</a>
-                <a href="#" class="entity active" @click.prevent="setAccountType('company')">{{ $t('Legal entity') }}</a>
+                <a href="#" :class="{ 'private-person': true, 'active': data.type === 'private'}" @click.prevent="setAccountType('private')">{{ $t('Private person') }}</a>
+                <a href="#" :class="{'entity': true, 'active': data.type === 'company'}" @click.prevent="setAccountType('company')">{{ $t('Legal entity') }}</a>
             </div>
         </div>
 
