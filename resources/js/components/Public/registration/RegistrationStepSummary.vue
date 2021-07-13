@@ -117,7 +117,7 @@ export default {
         modalCloseOk() {
             this.modalOk = false;
             this.$emit('dataProceed', '');
-            //document.location = '/';
+            document.location = '/';
         },
         modalCloseFail() {
             this.modalFail = false;

@@ -92,8 +92,10 @@ class AuthController extends Controller
 
         $propertyData = $data['property'];
         $propertyData['address'] = $data['post']['address'];
+        $propertyData['languages'] = $data['languages'];
 
         $property = PropertyRepository::create($user->id, $propertyData);
+        PropertyRepository::optionAdd($property, 'applicationOrigin', json_encode($property));
 
         $features = Feature::whereIn('id', $data['property']['facilities'])->get();
         $data['property']['features'] = $features;

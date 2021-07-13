@@ -12,6 +12,12 @@ use App\GeocodeCache;
 use Spatie\Geocoder\Geocoder;
 
 class PropertyRepository {
+    const LANG_CODES = [
+        'english' => 'en',
+        'german' => 'ge',
+        'poland' => 'pl',
+        'russian' => 'ru',
+    ];
     static function create($userId, $data, $status = null) {
         $geocode = app()->make(Geocoder::class);
         $service = new GeocoderService($geocode, new GeocodeCache);
@@ -40,6 +46,15 @@ class PropertyRepository {
 
         $item->options()->delete();
 
+        $languages = [];
+        foreach ($data['languages'] as $lang=>$value) {
+            if (!$value) {
+                continue;
+            }
+            $languages[] = $lang;
+        }
+
+        $data['contact']['languages'] = implode('|', $languages);
         self::metaDataUpdate($item, $data['contact']);
         self::photoAttach($item, $data['media']['photos']);
         self::optionsAttach($item, $data['media'], ['photos']);
@@ -47,7 +62,7 @@ class PropertyRepository {
 
         $item->save();
 
-        return $item ? response()->json(['code' => 'ok','property' => $item]) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
+        return $item;
     }
     static function featureAssign($property, $featureIds) {
 
@@ -124,7 +139,7 @@ class PropertyRepository {
             'landlordLanguages'=> "de",
             'landlordPhoneNumber' => $data['phone'],
             'landlordHidePhone' => !$data['phone_display'],
-            'landlordSpeaks' => "",
+            'landlordSpeaks' => $data['languages'],
             'realprice' => false,
             'rentMin' => "1",
             'seo_description'=> "",
