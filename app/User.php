@@ -68,4 +68,19 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->email;
     }
+    public function metaUpdate($key, $value) {
+        $option = Option::where('parent', $this->id)->where('type', 'user')->where('key', $key)->first();
+        if (!$option) {
+            $option = Option::create([
+                'parent' => $this->id,
+                'type' => 'user',
+                'key' => $key,
+                'value' => is_array($value) ? json_encode($value) : $value
+            ]);
+        } else {
+            $option->value = $value;
+            $option->save();
+        }
+        return $option;
+    }
 }
