@@ -9,7 +9,7 @@
         </div>
         <div class="tariff tariff-desctope">{{ plan.title }}</div>
         <div class="price">
-            <div class="price-item">&euro;{{ plan.price }}<span>*</span></div>
+            <div class="price-item">&euro;{{ plan.price }}</div>
             <div class="month">/ {{ $t('Month') }}</div>
         </div>
         <div class="description">
