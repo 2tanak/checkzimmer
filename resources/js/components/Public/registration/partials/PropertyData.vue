@@ -11,7 +11,7 @@
             </div>
             <PropertyItem v-for="(propertyItem, key) in property.propertyTypes" :index="key" :roomTypes="roomTypes"
                           :property="propertyItem" v-model="property.propertyTypes[key]"
-                          :key="JSON.stringify(propertyItem)+key"
+                          :key="'prop' + JSON.stringify(propertyItem.name) + key"
                           @deleteType="deleteType" @duplicateType="duplicateType"
                           @addRoom="addRoom" @deleteRoom="deleteRoom" @duplicateRoom="duplicateRoom" />
 

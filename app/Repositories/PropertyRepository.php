@@ -25,7 +25,7 @@ class PropertyRepository {
         $geo_data = $service->getCoords($data['address']['city'] . ' ' . $data['address']['postcode'] . ' ' . $address);
 
         $propertyData = [
-            'name'      => $data['contact']['person']['name'],
+            'name'      => $address,
             'slug'      => (string) Str::uuid(),
             'address'   => $address,
             'zip'       => $data['address']['postcode'],
@@ -51,10 +51,12 @@ class PropertyRepository {
             if (!$value) {
                 continue;
             }
-            $languages[] = $lang;
+            $languages[] = PropertyRepository::LANG_CODES[$lang];
         }
 
         $data['contact']['languages'] = implode('|', $languages);
+
+        self::roomAttach($item, $data['propertyTypes']);
         self::metaDataUpdate($item, $data['contact']);
         self::photoAttach($item, $data['media']['photos']);
         self::optionsAttach($item, $data['media'], ['photos']);
@@ -74,18 +76,20 @@ class PropertyRepository {
         $propertyTypes = RoomType::all()->toArray();
         $propertyNames = array_column($propertyTypes, 'name');
 
-        foreach ($data['propertyTypes'] as $propertyType) {
+        $property->rooms()->delete();
+
+        foreach ($data as $propertyType) {
             $nameIndex = array_search($propertyType['name'], $propertyNames);
             if ($nameIndex === false) {
+
+                dd($propertyType['name']);
                 continue;
             }
-
-            $property->rooms()->delete();
 
             foreach ($propertyType['rooms'] as $room) {
                 Room::create([
                     'property_id' => $property->id,
-                    'room_type_id' => $propertyTypes[$nameIndex]->id,
+                    'room_type_id' => $propertyTypes[$nameIndex]['id'],
                     'number' => $room['num'] ?? $room['number'],
                     'person' => $room['persons'] ?? $room['person'],
                     'native_id' => 0,
@@ -116,16 +120,6 @@ class PropertyRepository {
         $property->options()->create($optionsData);
     }
 
-    static function vatAttach($property) {
-        $optionsData = [
-            'key'    => 'inclVat',
-            'parent' => $property->id,
-            'type'   => 'property',
-            'value'  => '',
-        ];
-        $property->options()->create($optionsData);
-    }
-
     static function metaDataUpdate($property, $data) {
         $metadata = [
             'free' => "",
@@ -136,7 +130,7 @@ class PropertyRepository {
             'landlordClientEmail' => $data['email'],
             'landlordName' => $data['person']['name'],
             'landlordHideName' => true,
-            'landlordLanguages'=> "de",
+            'landlordLanguages'=> $data['languages'],
             'landlordPhoneNumber' => $data['phone'],
             'landlordHidePhone' => !$data['phone_display'],
             'landlordSpeaks' => $data['languages'],

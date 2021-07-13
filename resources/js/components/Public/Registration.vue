@@ -173,7 +173,7 @@ export default {
                 validate: false,
                 plan: 'intro',
                 billing: {
-                    type: 'company',
+                    type: 'private',
                     company: '',
                     stid: '',
                     person: {
