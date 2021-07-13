@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Feature;
 use App\Notifications\InquiryHotel;
 use App\Notifications\InquiryRegistration;
+use App\Repositories\PropertyRepository;
+use App\Repositories\UserRepository;
 use App\User;
 use Cookie;
 use Illuminate\Http\Request;
@@ -79,6 +81,20 @@ class AuthController extends Controller
     }
     public function registrationProcess(Request $request) {
         $data = $request->all();
+        $registerData = [
+            'plan' => $data['plan'],
+            'post' => $data['post'],
+            'billing' => $data['billing'],
+            'profile' => $data['contact'],
+            'contact' => $data['contact']
+        ];
+        $user = UserRepository::register($registerData);
+
+        $propertyData = $data['property'];
+        $propertyData['address'] = $data['post']['address'];
+
+        $property = PropertyRepository::create($user->id, $propertyData);
+
         $features = Feature::whereIn('id', $data['property']['facilities'])->get();
         $data['property']['features'] = $features;
         $data['domain'] = $request->getSchemeAndHttpHost();
