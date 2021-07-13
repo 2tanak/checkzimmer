@@ -3,7 +3,7 @@
 
         <PropertyItemSummary :roomTypes="roomTypes" :index="index" :property="property" v-model="property" @deleteType="deleteType" @duplicateType="duplicateType" />
 
-        <PropertyItemRoom v-for="(room, index) in property.rooms" :key="JSON.stringify(room) + index" :room="room" :index="index" v-model="property.rooms[index]" @duplicate="duplicateRoom" @delete="deleteRoom"/>
+        <PropertyItemRoom v-for="(room, ind) in property.rooms" :key="index + 'room' + JSON.stringify(room.name) + ind" :room="room" :index="ind" v-model="property.rooms[ind]" @duplicate="duplicateRoom" @delete="deleteRoom"/>
 
         <PropertyItemRoomAdd @click.native="addRoom"/>
 

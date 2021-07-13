@@ -7449,7 +7449,7 @@ header.height-menu .mobile-menu {
     letter-spacing: -0.04em;
     color: #333646;
     position: relative;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 .plans-section .price-block-item .max-price span {
     position: absolute;
@@ -7488,7 +7488,6 @@ header.height-menu .mobile-menu {
     margin-bottom: 0;
 }
 .plans-section .price-block-item .advantages svg {
-    display: block;
     margin-right: 8px;
     min-width: 18px;
     max-width: 18px;
@@ -8384,7 +8383,7 @@ body .popup-bubble-anchor.active:after {
 }
 .registration-section form .zip-block {
     width: 100%;
-    max-width: 132px;
+    max-width: 150px;
     margin-right: 20px;
     position: relative;
 }
@@ -8579,7 +8578,7 @@ body .popup-bubble-anchor.active:after {
     letter-spacing: -0.04em;
     color: #333646;
     position: relative;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 .registration-sidebar .your-tariff .price .price-item span {
     font-size: 18px;
@@ -10307,11 +10306,11 @@ svg.mobile-line {
 .data-checking-section .familiarization .checkbox-line label::after {
     top: 6px;
 }
-.data-checking-section .familiarization span {
+/*.data-checking-section .familiarization span {
     color: #6BB63F;
     border-bottom: 1px solid #6BB63F;
     padding-bottom: 1px;
-}
+}*/
 .data-checking-section .duration {
     font-weight: 400;
     font-size: 14px;
@@ -10325,6 +10324,19 @@ svg.mobile-line {
 }
 .registration-section {
     padding-bottom: 100px;
+}
+svg.active-svg,
+svg.not-active-svg {
+    display: none;
+}
+.available svg.active-svg {
+    display: block;
+}
+.not-available svg.not-active-svg {
+    display: block;
+}
+.popular .not-available svg.not-active-svg circle {
+    fill-opacity: 0.5;
 }
 
 

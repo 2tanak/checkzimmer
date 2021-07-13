@@ -5,8 +5,8 @@
         <div class="type-company">
             <span>{{ $t('Select the type of company') }}:</span>
             <div class="type-company-links">
-                <a href="#" class="private-person" @click.prevent="setAccountType('private')">{{ $t('Private person') }}</a>
-                <a href="#" class="entity active" @click.prevent="setAccountType('company')">{{ $t('Legal entity') }}</a>
+                <a href="#" :class="{ 'private-person': true, 'active': data.type === 'private'}" @click.prevent="setAccountType('private')">{{ $t('Private person') }}</a>
+                <a href="#" :class="{'entity': true, 'active': data.type === 'company'}" @click.prevent="setAccountType('company')">{{ $t('Legal entity') }}</a>
             </div>
         </div>
 
@@ -55,8 +55,8 @@
 
             <div class="forms-line">
                 <div class="zip-block forms-line-block">
-                    <label for="zip-input">{{ $t('Postcode') }}:*</label>
-                    <input type="text" :placeholder="$t('Your postcode')" id="zip-input" name="zip-input" v-model="data.address.postcode" @input="setLegalAsBilling">
+                    <label for="zip-input">{{ $t('Postcode (register)') }}:*</label>
+                    <input type="text" :placeholder="$t('Postcode (register)')" id="zip-input" name="zip-input" v-model="data.address.postcode" @input="setLegalAsBilling">
                     <span class="error-text visible" v-if="validate && !data.address.postcode">{{ $t('You have not provided a postal code') }}</span>
                 </div>
                 <div class="city-block forms-line-block">
