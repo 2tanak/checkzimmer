@@ -124,7 +124,7 @@ export default {
             operationOk : false,
             operationError : false,
             textOperation: '',
-            fields: [this.$t('created_at'), this.$t('raiting'), this.$t('Name'), this.$t('company'), this.$t('title'), this.$t('description'), this.$t('publish'), this.$t('Delete')],
+            fields: [this.$t('created_at'), this.$t('raiting'), this.$t('name'), this.$t('company'), this.$t('title'), this.$t('description'), this.$t('publish'), this.$t('delete')],
             reviewList: [],
             activeReview: {
                 id: 0,
