@@ -68,7 +68,7 @@
         </b-modal>
 
         <b-modal id="deleteReviewModal" :title="$t('Delete review')" @ok="handleDeleteReview">
-            <p class="mb-3">A you sure you want to delete review?</p>
+            <p class="mb-3">{{ $t('A you sure you want to delete review') }}?</p>
             <div><span class="mr-2"><strong>{{ $t('Created At') }}:</strong></span> {{ activeReview.created_at }}</div>
             <div><span class="mr-2"><strong>{{ $t('Rating') }}:</strong></span> <img src="/svg/star-yellow.svg" v-for="star in activeReview.rating"></div>
             <div><span class="mr-2"><strong>{{ $t('Name') }}:</strong></span> {{ activeReview.name }}</div>
@@ -78,7 +78,7 @@
         </b-modal>
 
         <b-modal id="withdrawReviewModal" :title="$t('Withdraw review')" @ok="handleWithdrawReview()">
-            <p class="mb-3">A you sure you want to withdraw review?</p>
+            <p class="mb-3">{{ $t('A you sure you want to withdraw review') }}?</p>
             <div><span class="mr-2"><strong>{{ $t('Created At') }}:</strong></span> {{ activeReview.created_at }}</div>
             <div><span class="mr-2"><strong>{{ $t('Rating') }}:</strong></span> <img src="/svg/star-yellow.svg" v-for="star in activeReview.rating"></div>
             <div><span class="mr-2"><strong>{{ $t('Name') }}:</strong></span> {{ activeReview.name }}</div>
@@ -124,7 +124,7 @@ export default {
             operationOk : false,
             operationError : false,
             textOperation: '',
-            fields: [this.$t('created_at'), this.$t('raiting'), this.$t('Name'), this.$t('company'), this.$t('title'), this.$t('description'), this.$t('publish'), this.$t('Delete')],
+            fields: [this.$t('created_at'), this.$t('raiting'), this.$t('name'), this.$t('company'), this.$t('title'), this.$t('description'), this.$t('publish'), this.$t('delete')],
             reviewList: [],
             activeReview: {
                 id: 0,
