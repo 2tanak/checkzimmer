@@ -54,6 +54,7 @@ foreach ($locales as $locale) {
             Route::get('/favorites', 'HomeController@favorites')->name("favorites-$locale");
             Route::get('/plans', 'HomeController@plans')->name("plans-$locale");
             Route::get('/city', 'HomeController@city')->name("city-$locale");
+            Route::get('/nothing-found', 'HomeController@nothingFound')->name("nothing-found-$locale");
             Route::get('single/question/create', 'Api\QuestionsController@create');
             Route::get('single/review/create', 'Api\ReviewsController@create');
             Route::post('/inquiryForm', 'HomeController@inquiryForm')->name("inquiryForm-$locale");
