@@ -484,15 +484,15 @@
                 <div class="communication not-active" style="top:34px;position:relative;">
                     <div class="description">
                     <div class="load-more" v-if="additional_load">
-                        <div class="btn btn-success" @click.prevent="loadMore">{{ $t('Load more') }}</div>
+                        <div style="display:none;" class="btn btn-success" @click.prevent="loadMore">{{ $t('Load more') }}</div>
                     </div>
-                    <div class="description" v-if="!additional_load && !endoflist">
+                    <div style="display:none;" class="description" v-if="!additional_load && !endoflist">
                         {{ $t('The offers on your request are over, but you can check surrounding places within chosen distance') }}
                     </div>
                     <div class="description" v-if="!additional_load && endoflist">
                         {{ $t('The offers on your request are over, increase the distance or contact the manager directly') }}
                     </div>
-                    <div class="link-block" v-if="!additional_load && !endoflist">
+                    <div style="display:none;" class="link-block" v-if="!additional_load && !endoflist">
                         <a href="/registration" @click.prevent="loadMore">{{ $t('Load surrounding places') }}</a>
                         <div class="shadow-block"></div>
                     </div>
