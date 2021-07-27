@@ -4,7 +4,7 @@
 
     @include('css.loader-main')
     <div class="background-image-block">
-        <a href="https://web.whatsapp.com/send?phone={{ __($options['website_phone_watsapp'] ?? '' ) }}" class="write-whatsapp">
+        <a href="https://wa.me/{{ __($options['website_phone_watsapp'] ?? '' ) }}" class="write-whatsapp">
             <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0)" filter="url(#filter0_d)">
                     <path d="M17.1 2.87417C15.2 1.0375 12.7 0 10.0375 0C2.39583 0 -2.4025 8.27917 1.41333 14.865L0 20L5.27917 18.6233C7.57917 19.8658 9.46333 19.7558 10.0425 19.8292C18.9033 19.8292 23.3142 9.10917 17.0875 2.90667L17.1 2.87417Z" fill="white"/>

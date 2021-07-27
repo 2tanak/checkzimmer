@@ -60,7 +60,7 @@
             </div>
 
             <div class="link-block-item">
-                <a href="https://web.whatsapp.com/send?phone=+493419288032" class="write-whatsapp">
+                <a href="https://wa.me/4915792467400" class="write-whatsapp">
                     <span>{{ __('Write to WhatsApp') }}!</span>
                 </a>
 
