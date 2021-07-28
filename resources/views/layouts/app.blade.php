@@ -310,6 +310,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" defer></script>
     <script src="{{ asset('js/select2.full.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+
     <script>
         (function(w, d, s, h, id) {
             w.roistatProjectId = id; w.roistatHost = h;

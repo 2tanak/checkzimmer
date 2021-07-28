@@ -101,7 +101,11 @@
     "Shower": "Shower",
     "Kitchen": "Kitchen",
     "kitchen": "kitchen",
-    "Apartment": "apartment",
+    "Apartment": "Apartment",
+    "Pension": "Pension",
+    "apartment": "apartment",
+    "Hotel": "Hotel",
+    "Own use": "Own use",
     "The text of the comment to the table with prices. The offers on your request are over, increase the distance or contact the manager directly": "The text of the comment to the table with prices. The offers on your request are over, increase the distance or contact the manager directly",
     "Prices and furnishings": "Prices and furnishings",
     "Find the best housing for fitters in": "Find the best housing for fitters in",
@@ -661,5 +665,5 @@
     "It seems something went wrong on our side. Your application was saved, please try again later from this browser": "It seems something went wrong on our side. Your application was saved, please try again later from this browser",
     "Your application has been successfully completed": "Your application has been successfully completed",
     "Please accept our terms and conditions before proceed": "Please accept our terms and conditions before proceed",
-    "We won\\'t be able to process your application unril you approved our agreements": "We won\\'t be able to process your application unril you approved our agreements"
+    "We won't be able to process your application unril you approved our agreements": "We won\\'t be able to process your application unril you approved our agreements"
 }

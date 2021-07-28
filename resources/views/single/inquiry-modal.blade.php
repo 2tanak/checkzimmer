@@ -51,17 +51,23 @@
                     <option value="4">4 {{ __('Persons') }}</option>
                     <option value="5">5 {{ __('Person') }}</option>
                     <option value="6">6 {{ __('Person') }}</option>
+                    <option value="7">{{ __('Before')  }} 100 {{ __('Persons') }}</option>
+                    <option value="8">100+ {{ __('Persons') }}</option>
                 </select>
                 <label for="number-persons">{{ __('Number persons') }}</label>
             </div>
             <div class="select-block">
                 <select id="type" name="type" class="input">
-                    <option value="Whole apartment">{{ __('Whole apartment') }}</option>
+                    <option value="Whole apartment">{{ __('Whole Apartment') }}</option>
+                    <option value="apartment">{{ __('apartment') }}</option>
+                    <option value="Apartment">{{ __('Apartment') }}</option>
                     <option value="House">{{ __('House') }}</option>
+                    <option value="Pension">{{ __('Pension') }}</option>
+                    <option value="Hotel">{{ __('Hotel') }}</option>
                     <option value="Room">{{ __('Room') }}</option>
-                    <option value="Garage">{{ __('Garage') }}</option>
+                    <option value="Own use">{{ __('Own use') }}</option>
                 </select>
-                <label for="number-persons">{{ __('Housing type') }}</label>
+                <label for="type">{{ __('Housing type') }}</label>
             </div>
             <div class="text-area-block">
                 <textarea placeholder="{{ __('Message to owner') }}" name="message" class="input"></textarea>
@@ -72,7 +78,7 @@
             </div>
             <div class="checkbox-block checkbox-top">
                 <input id="consent-checkbox" class="checkbox input" name="consent-checkbox" type="checkbox" required>
-                <label for="consent-checkbox">{{ __('I consent to the processing of my data as described in') }} <a href="/datenschutz">{{ __('statement of consent') }}</a> {{ __('from') }} Checkzimmer.</label>
+                <label for="consent-checkbox">{{ __('I consent to the processing of my data as described in') }} <a href="/datenschutz">Datenschutz</a></label>
             </div>
             <input type="hidden" name="grecaptcha" value="">
             <a class="send-request" href="#">{{ __('Send request') }}</a>
