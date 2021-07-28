@@ -75,7 +75,7 @@
         </b-modal>
 
         <b-modal id="requestDelete" :title="$t('Request Delete')" @ok="deleteOk">
-            <strong>A you sure you want to delete request?</strong>
+            <strong>{{ $t('A you sure you want to delete request') }}?</strong>
         </b-modal>
 
     </section>
@@ -100,7 +100,7 @@ name: "Index",
                 { value: 'b', text: this.$t('Processing') },
                 { value: 'c', text: this.$t('Completed') }
             ],
-            requestFields: [this.$t('created_at'), this.$t('company'), this.$t('Name'), this.$t('email'), this.$t('phone'), this.$t('arrival_date'), this.$t('date_departure'), this.$t('number_persons'), this.$t('housing_type'), this.$t('message'), this.$t('status'), this.$t('Delete')],
+            requestFields: [this.$t('created_at'), this.$t('company'), this.$t('name'), this.$t('email'), this.$t('phone'), this.$t('arrival_date'), this.$t('date_departure'), this.$t('number_persons'), this.$t('housing_type'), this.$t('message'), this.$t('status'), this.$t('delete')],
             requestList: [
                 { created_at: '01', company: 'Test company', name: 'Max', email: 'test@email.com', phone: '+79996669966', arrival_date: '01.01.2012', date_departure: '01.02.2021', number_persons: '5', housing_type: 'hostel' }
             ]

@@ -19,7 +19,7 @@
 
     <div class="sidebar-top">
         <div class="sidebar-top-block roominess">
-            <img src="/svg/i-people.svg" alt="alt">
+            <img src="/svg/people.svg" alt="alt">
             <div class="sidebar-top-block-item roominess-item">
                 <div class="title">{{ __('roomin.') }}:</div>
                 @if ($hotel->getRoomPersonsMin() == 0)
