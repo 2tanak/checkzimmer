@@ -635,5 +635,9 @@
     "Accommodation data": "Accommodation data",
     "Your registration request is pending": "Your registration request is pending",
     "We will review your application and send feedback": "We will review your application and send feedback",
-    "In case of any concerns please contact us": "In case of any concerns please contact us"
+    "In case of any concerns please contact us": "In case of any concerns please contact us",
+    "It seems something went wrong on our side. Your application was saved, please try again later from this browser": "It seems something went wrong on our side. Your application was saved, please try again later from this browser",
+    "Your application has been successfully completed": "Your application has been successfully completed",
+    "Please accept our terms and conditions before proceed": "Please accept our terms and conditions before proceed",
+    "We won\\'t be able to process your application unril you approved our agreements": "We won\\'t be able to process your application unril you approved our agreements"
 }

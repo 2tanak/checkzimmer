@@ -42,8 +42,6 @@ class PropertyRepository {
         $item = new Property($propertyData);
         $item->save();
 
-        self::vatAttach($item);
-
         $item->options()->delete();
 
         $languages = [];

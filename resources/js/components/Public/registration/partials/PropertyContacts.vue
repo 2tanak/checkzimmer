@@ -1,5 +1,5 @@
 <template>
-    <section class="contact-information-section one">
+    <section class="contact-information-section">
         <div class="title">{{ $t('Contact Information') }}</div>
         <div class="checkbox-line transfer-line">
             <input type="checkbox" id="transfer" v-model="sameAsBilling" @input="setAsBilling">
@@ -20,7 +20,7 @@
                             </div>
                         </a>
                     </label>
-                    <input type="text" :placeholder="$t('Indicate who is the contact person')" id="contact-person-input" name="contact-person-input" v-model="contact.person.name">
+                    <input class="only-text" type="text" :placeholder="$t('Indicate who is the contact person')" id="contact-person-input" name="contact-person-input" v-model="contact.person.name">
                     <span class="error-text visible" v-if="validate && !contact.person.name">{{ $t('You have not specified a contact person') }}</span>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                         <div class="number-phone-item">
                             <label for="number-phone-input">{{ $t("Phone number (register)") }}:*</label>
                             <div style="display:flex;align-items:center;width:100%;">
-                                <input type="tel" placeholder="+49 15168161326" id="number-phone-input" name="number-phone-input" v-model="contact.phone">
+                                <input type="number" placeholder="+49 15168161326" id="number-phone-input" name="number-phone-input" v-model="contact.phone">
                                 <a href="#" class="add-phone add-phone-desctope" @click.prevent="addNumber('two')" v-if="!numberDisplay.two">
                                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M4 9C4 9.55228 4.44772 10 5 10C5.55228 10 6 9.55229 6 9V6H9C9.55228 6 10 5.55228 10 5C10 4.44772 9.55229 4 9 4L6 4V1C6 0.447715 5.55228 0 5 0C4.44772 0 4 0.447715 4 1V4L1 4C0.447715 4 0 4.44771 0 5C0 5.55228 0.447715 6 1 6H4V9Z" fill="#3B8B3E"/>
@@ -71,7 +71,7 @@
                         <div class="number-phone-item">
                             <label for="additional-number-phone-input">{{ $t('Additional phone number') }}:</label>
                             <div style="display:flex;align-items:center;width:100%;">
-                                <input type="tel" placeholder="+49 15168161326" id="additional-number-phone-input" name="additional-number-phone-input" v-model="contact.phoneAdditional">
+                                <input type="number" placeholder="+49 15168161326" id="additional-number-phone-input" name="additional-number-phone-input" v-model="contact.phoneAdditional">
                                 <a href="#" class="add-phone add-phone-desctope" @click.prevent="addNumber('three')" v-if="!numberDisplay.three">
                                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M4 9C4 9.55228 4.44772 10 5 10C5.55228 10 6 9.55229 6 9V6H9C9.55228 6 10 5.55228 10 5C10 4.44772 9.55229 4 9 4L6 4V1C6 0.447715 5.55228 0 5 0C4.44772 0 4 0.447715 4 1V4L1 4C0.447715 4 0 4.44771 0 5C0 5.55228 0.447715 6 1 6H4V9Z" fill="#3B8B3E"/>
@@ -97,7 +97,7 @@
                     <div class="number-phone-content">
                         <div class="number-phone-item">
                             <label for="landline-number-phone-input">{{ $t('Phone number (landline)') }}:</label>
-                            <input type="tel" placeholder="+49 15168161326" id="landline-number-phone-input" name="landline-number-phone-input" v-model="contact.phoneStat">
+                            <input type="number" placeholder="+49 15168161326" id="landline-number-phone-input" name="landline-number-phone-input" v-model="contact.phoneStat">
                         </div>
                     </div>
                     <div class="checkbox-line number-phone-show-line">
@@ -112,7 +112,7 @@
                     <div class="number-phone-content">
                         <div class="number-phone-item">
                             <label for="fax-input">{{ $t('Fax') }}:</label>
-                            <input type="tel" :placeholder="$t('Enter the fax number')" id="fax-input" name="fax-input" v-model="contact.phone_fax">
+                            <input type="number" :placeholder="$t('Enter the fax number')" id="fax-input" name="fax-input" v-model="contact.phone_fax">
                         </div>
                     </div>
                 </div>
@@ -196,6 +196,14 @@ export default {
                 e.preventDefault();
                 jQuery(this).css('display', 'none');
                 jQuery('.url-line').addClass('show');
+            });
+            jQuery(document).on('keypress', '.only-text', function (event) {
+                var regex = new RegExp("^[a-zA-Z ]+$");
+                var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+                if (!regex.test(key)) {
+                    event.preventDefault();
+                    return false;
+                }
             });
 
         });
