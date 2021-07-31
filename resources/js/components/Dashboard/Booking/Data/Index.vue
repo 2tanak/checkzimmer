@@ -92,7 +92,20 @@
                 cities: { count: 0 },
                 features: { root: [], rooted: [], children: []},
                 types: [],
-                fields: [ this.$t('id'), this.$t('name'), this.$t('type') ],
+                fields: [
+                    {
+                        key: 'id',
+                        label: this.$t('id')
+                    },
+                    {
+                        key: 'name',
+                        label: this.$t('name'),
+                    },
+                    {
+                        key: 'type',
+                        label: this.$t('type')
+                    }
+                ],
                 loading: true,
                 featuresLoader: false,
                 citiesLoader: false,

@@ -62,7 +62,7 @@
             </div>
         @else
             <div class="number-phone">
-                <a href="tel:" class="phone-hide">{{ $phoneHide }}</a>
+                <a href="tel:" class="phone-hide">+{{ $phoneHide }}</a>
                 <div class="sh_nmr">
                     <span>{{ __('show') }}</span>
                 </div>

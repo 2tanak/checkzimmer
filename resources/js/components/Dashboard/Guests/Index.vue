@@ -113,7 +113,34 @@ export default {
             deleteGuest: {},
             guests: [],
             guestFields: [
-                this.$t('id'), this.$t('pin'), this.$t('name'), this.$t('email'), this.$t('active'), this.$t('Edit'), this.$t('Delete')
+                {
+                    key: 'id',
+                    label: this.$t('id')
+                },
+                {
+                    key: 'pin',
+                    label: this.$t('pin')
+                },
+                {
+                    key: 'name',
+                    label: this.$t('name')
+                },
+                {
+                    key: 'email',
+                    label: this.$t('email')
+                },
+                {
+                    key: 'active',
+                    label: this.$t('active')
+                },
+                {
+                    key: 'edit',
+                    label: this.$t('Edit')
+                },
+                {
+                    key: 'delete',
+                    label: this.$t('Delete')
+                }
             ],
             data: guestsTable
         }

@@ -90,7 +90,28 @@ export default {
             operationError : false,
             textOperation: '',
             loading: false,
-            geocoderCacheFields: [ this.$t('address'), this.$t('created_at'), this.$t('coordinates'), this.$t('update'), this.$t('Delete')],
+            geocoderCacheFields: [
+                {
+                    key: 'address',
+                    label: this.$t('address')
+                },
+                {
+                    key: 'created_at',
+                    label: this.$t('created_at')
+                },
+                {
+                    key: 'coordinates',
+                    label: this.$t('coordinates')
+                },
+                {
+                    key: 'update',
+                    label: this.$t('update')
+                },
+                {
+                    key: 'delete',
+                    label: this.$t('Delete')
+                }
+            ],
             geocoderCacheItems: []
         }
     },
