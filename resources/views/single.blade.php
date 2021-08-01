@@ -11,7 +11,7 @@
                     <div class="main-top-block">
 
                         @include('single.slider-single', ['hotel' => $hotel])
-                        @include('single.sidebar-modal', ['phoneHide' => $phoneHide])
+                        @include('single.sidebar-modal', ['phoneHide' => $phoneHide, 'phoneNumLandlord' => $phoneNumLandlord])
                         @include('single.gallery', ['hotel' => $hotel])
 
                         <h1>{{ $hotel->name }}</h1>

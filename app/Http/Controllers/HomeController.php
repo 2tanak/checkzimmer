@@ -96,8 +96,8 @@ class HomeController extends Controller
         $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
         $phoneNumLandlord = Property::phoneFormat($hotel->getCurrentOption('landlordPhoneNumber'));
 
-        $phoneTrack = new RoiStatService;
-        $phoneNumLandlord = $phoneTrack->getPhone($phoneNumLandlord);
+        //$phoneTrack = new RoiStatService;
+        //$phoneNumLandlord = $phoneTrack->getPhone($phoneNumLandlord);
         //dd($phoneNumLandlord);
         $phoneHide = substr($phoneNumLandlord, 0, 3) . 'X XXXXXXX';
 
@@ -183,7 +183,7 @@ class HomeController extends Controller
         $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
         return view('plans', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
     }
-    public function nothingFound()
+    public function propertyRequest()
     {
         $data = WebsiteData::getOptions();
         $seoTitle = $data['title'];
@@ -191,7 +191,7 @@ class HomeController extends Controller
         $options = $data['options'];
 
         $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
-        return view('nothing-found', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
+        return view('property-request', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
     }
     public function city()
     {

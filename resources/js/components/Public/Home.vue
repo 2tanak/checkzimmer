@@ -102,8 +102,9 @@ export default {
             let domain = jQuery('form input[name="address"]').attr('domain');
 
             if (!domain) {
-                jQuery('.result-search ul').html('<li>' + that.$t('Wrong query: city is not found. Try city name or a postcode') + '</li>');
-                jQuery('.result-search').addClass('active');
+                document.location = '/property-request';
+                //jQuery('.result-search ul').html('<li>' + that.$t('Wrong query: city is not found. Try city name or a postcode') + '</li>');
+                //jQuery('.result-search').addClass('active');
                 return false;
             }
             document.location = domain + '/?' + jQuery('form.find-subdomain-redirect').serialize().replace(/_token=.*?&/, '');
