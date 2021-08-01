@@ -135,7 +135,36 @@ export default {
             selectedUser: 'admin',
             selectedUserItem: 'not_choice',
             selectedObjectItem: 'not_choice',
-            fields: [this.$t('id'), this.$t('room_type'), this.$t('picture'), this.$t('Name'), this.$t('Persons'), this.$t('Edit'), this.$t('Delete')],
+            fields: [
+                {
+                    key: 'id',
+                    label: this.$t('id')
+                },
+                {
+                    key: 'room_type',
+                    label: this.$t('room_type')
+                },
+                {
+                    key: 'picture',
+                    label: this.$t('picture')
+                },
+                {
+                    key: 'name',
+                    label: this.$t('Name')
+                },
+                {
+                    key: 'persons',
+                    label: this.$t('Persons')
+                },
+                {
+                    key: 'edit',
+                    label: this.$t('Edit')
+                },
+                {
+                    key: 'delete',
+                    label: this.$t('Delete')
+                }
+            ],
             room_types: [
                 { id: 1, room_type_id: 0, picture: '', name: 'дом (целиком)', persons: 2 },
                 { id: 6, room_type_id: 1, picture: '', name: 'многоместный', persons: 10 },

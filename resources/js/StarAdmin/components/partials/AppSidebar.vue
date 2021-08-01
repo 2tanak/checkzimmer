@@ -95,7 +95,7 @@
                   <ul class="nav flex-column sub-menu">
                       <li class="nav-item"><router-link class="nav-link" :to="{ name: 'questions' }">{{ $t('Questions') }}</router-link></li>
                       <li class="nav-item"><router-link class="nav-link" :to="{ name: 'reviews' }">{{ $t('Reviews') }}</router-link></li>
-                      <li class="nav-item"><router-link class="nav-link" :to="{ name: 'request' }">{{ $t('Request') }}</router-link></li>
+                      <li class="nav-item"><router-link class="nav-link" :to="{ name: 'request' }">{{ $t('Requests') }}</router-link></li>
                   </ul>
               </b-collapse>
           </li>

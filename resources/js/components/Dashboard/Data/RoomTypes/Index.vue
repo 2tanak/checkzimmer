@@ -114,7 +114,28 @@
                     { id: 16, room_type_id: 0, picture: '', name: 'квартира', persons: 2 },
                     { id: 31, room_type_id: 16, picture: '', name: 'двухместная', persons: 2 },
                 ],
-                fields: [this.$t('id'), this.$t('picture'), this.$t('Name'), this.$t('Edit'), this.$t('Delete')],
+                fields: [
+                    {
+                        key: 'id',
+                        label: this.$t('id')
+                    },
+                    {
+                        key: 'picture',
+                        label: this.$t('picture')
+                    },
+                    {
+                        key: 'name',
+                        label: this.$t('Name')
+                    },
+                    {
+                        key: 'edit',
+                        label: this.$t('Edit')
+                    },
+                    {
+                        key: 'delete',
+                        label: this.$t('Delete')
+                    }
+                ],
                 data: roomTypesForm,
                 roomTypesAction: { name: ''},
                 roomTypesPrev: { name: ''},

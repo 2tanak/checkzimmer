@@ -19,7 +19,7 @@
 
     <div class="sidebar-top">
         <div class="sidebar-top-block roominess">
-            <img src="/svg/i-people.svg" alt="alt">
+            <img src="/svg/people.svg" alt="alt">
             <div class="sidebar-top-block-item roominess-item">
                 <div class="title">{{ __('roomin.') }}:</div>
                 @if ($hotel->getRoomPersonsMin() == 0)
@@ -268,14 +268,15 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         jQuery('.sh_nmr').click(function () {
+            var openPhone = jQuery('.hiddenphone').text();
             jQuery('.sidebar .number-phone').addClass('gray');
             jQuery('.sh_nmr').css('display', 'none');
-            jQuery('.phone-hide').html(atob(window.phonenumStr));
-            let phoneAttr = atob(window.phonenum);
+            jQuery('.phone-hide').html(openPhone); {{-- atob(window.phonenumStr) --}}
+            /*let phoneAttr = atob(window.phonenum);
             if (phoneAttr.substr(0, 1) !== '+') {
                 phoneAttr = '+' + phoneAttr;
-            }
-            jQuery('.phone-hide').attr('href', 'tel:' + phoneAttr);
+            }*/
+            jQuery('.phone-hide').attr('href', 'tel:' + openPhone);
         });
 
         var url = document.location.href;

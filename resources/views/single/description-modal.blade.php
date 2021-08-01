@@ -95,7 +95,7 @@
                 </div>
                 <div class="bottom">На основе отзывов</div>
             </div>--}}
-            <div class="link-container"><a class="give-feedback" href="#">Оставить отзыв</a></div>
+            <div class="link-container"><a class="give-feedback" href="#">{{ __('Give feedback') }}</a></div>
             <div class="empty-block">
                 <div class="reviews-form">
                     <div class="close-form">
@@ -113,13 +113,13 @@
                      </div>--}}
                     <form action="review/create">
                         <div class="top-form">
-                            <input type="text" name="name" placeholder="Ваше имя">
-                            <input type="text" name="company" placeholder="Название компании">
+                            <input type="text" name="name" placeholder="{{ __('Your name') }}">
+                            <input type="text" name="company" placeholder="{{ __('Company name') }}">
                             <input type="hidden" name="property_id" value="{{$hotel->id}}">
                         </div>
-                        <input type="text" name="title" placeholder="Заголовок отзыва">
-                        <textarea name="description" placeholder="Текст отзыва"></textarea>
-                        <input type="submit" value="Отправить">
+                        <input type="text" name="title" placeholder="{{ __('Review title') }}">
+                        <textarea name="description" placeholder="{{ __('Review text') }}"></textarea>
+                        <input type="submit" value="{{ __('Send') }}">
                     </form>
                 </div>
             </div>
@@ -213,9 +213,9 @@
         </div>
         <div class="collapse" id="mobile-questions-content-collapse">
             <form class="questions-form" action="question/create">
-                <input type="text" placeholder="Задайте свой вопрос" name="question">
+                <input type="text" placeholder="{{ __('Ask your question') }}" name="question">
                 <input type="hidden" value="{{ $hotel->id }}" name="property_id">
-                <input type="submit" value="Отправить">
+                <input type="submit" value="{{ __('Send') }}">
             </form>
             <div class="questions-received">
 

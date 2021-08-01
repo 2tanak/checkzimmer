@@ -116,7 +116,36 @@ export default {
             operationOk : false,
             operationError : false,
             textOperation: '',
-            fields: [ this.$t('id'), this.$t('room_type_id'), this.$t('picture'), this.$t('Name'), this.$t('Persons'), this.$t('Edit'), this.$t('Delete') ],
+            fields: [
+                {
+                    key: 'id',
+                    label: this.$t('id')
+                },
+                {
+                    key: 'room_type_id',
+                    label: this.$t('room_type_id')
+                },
+                {
+                    key: 'picture',
+                    label: this.$t('picture')
+                },
+                {
+                    key: 'name',
+                    label: this.$t('Name')
+                },
+                {
+                    key: 'persons',
+                    label: this.$t('Persons')
+                },
+                {
+                    key: 'edit',
+                    label: this.$t('Edit')
+                },
+                {
+                    key: 'delete',
+                    label: this.$t('Delete')
+                }
+            ],
             room_types: [
                 { id: 1, room_type_id: 0, name: 'дом (целиком)' },
                 { id: 6, room_type_id: 1,  name: 'одноместный' }

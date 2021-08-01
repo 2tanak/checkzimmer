@@ -5,7 +5,7 @@
     <section class="plans-section city-section">
 
         <div class="background-image-block">
-            <a href="https://web.whatsapp.com/send?phone={{ __($options['website_phone_watsapp'] ?? '' ) }}" class="write-whatsapp">
+            <a href="https://wa.me/{{ __($options['website_phone_watsapp'] ?? '' ) }}" class="write-whatsapp">
                 <svg width="20" height="21" viewBox="0 0 20 21" fill="none">
                     <g clip-path="url(#clip0)" filter="url(#filter0_d)">
                         <path d="M17.1 2.87417C15.2 1.0375 12.7 0 10.0375 0C2.39583 0 -2.4025 8.27917 1.41333 14.865L0 20L5.27917 18.6233C7.57917 19.8658 9.46333 19.7558 10.0425 19.8292C18.9033 19.8292 23.3142 9.10917 17.0875 2.90667L17.1 2.87417Z" fill="white"/>
@@ -113,12 +113,37 @@
 
                     <a href="/registration" class="plus-city">
                         <span class="add">{{ __('Add your city') }}</span>
-                        <span class="plus">✚</span>
+                        <span class="plus">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0)">
+                                    <rect x="18" y="7.5" width="3" height="18" rx="1.5" transform="rotate(90 18 7.5)" fill="#545769"/>
+                                    <rect x="7.5" width="3" height="18" rx="1.5" fill="#545769"/>
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0">
+                                        <rect width="18" height="18" fill="white"/>
+                                    </clipPath>
+                                </defs>
+                            </svg>
+
+                        </span>
                     </a>
 
-                    <a href="/registration" class="plus-city">
-                        <span class="add">{{ __('Add your city') }}</span>
-                        <span class="plus">✚</span>
+                        <a href="/registration" class="plus-city">
+                            <span class="add">{{ __('Add your city') }}</span>
+                            <span class="plus">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0)">
+                                        <rect x="18" y="7.5" width="3" height="18" rx="1.5" transform="rotate(90 18 7.5)" fill="#545769"/>
+                                        <rect x="7.5" width="3" height="18" rx="1.5" fill="#545769"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0">
+                                            <rect width="18" height="18" fill="white"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                        </span>
                     </a>
 
                 </div>
@@ -126,6 +151,7 @@
 
             <div class="subtitle down-subtitle">{{ __('Contact us, we will compare the properties in the city X for you and find the most optimal accommodation for you!') }}</div>
 
+            <div style="z-index:100;position:relative;">
             <div class="questions-block">
                 <div class="questions-content">
                     <div class="title">{{ __('Freequently asked Questions') }}</div>
@@ -194,6 +220,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
+                <div class="shadow-block"></div>
             </div>
 
         </div>

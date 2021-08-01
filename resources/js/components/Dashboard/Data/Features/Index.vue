@@ -116,7 +116,32 @@
                 loading: true,
                 categoriesTemp: [],
                 features: [],
-                fields: ['id', 'feature_category', 'picture', 'name', 'edit', 'delete'],
+                fields: [
+                    {
+                        key: 'id',
+                        label: this.$t('id')
+                    },
+                    {
+                        key: 'feature_category',
+                        label: this.$t('feature_category')
+                    },
+                    {
+                        key: 'picture',
+                        label: this.$t('picture')
+                    },
+                    {
+                        key: 'name',
+                        label: this.$t('name')
+                    },
+                    {
+                        key: 'edit',
+                        label: this.$t('edit')
+                    },
+                    {
+                        key: 'delete',
+                        label: this.$t('delete')
+                    }
+                ],
                 data: featuresForm,
                 operationOk : false,
                 operationError : false,

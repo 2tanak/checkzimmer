@@ -76,6 +76,12 @@ const app = new Vue({
 
 jQuery(document).ready(function() {
 
+    jQuery('.write-whatsapp').click(function(e) {
+        gtag('event', 'clickWhatsapp', {
+            'event_category': 'clicks',
+            'event_label': 'WhatsApp click',
+            });
+    })
     jQuery('a.comfort-collapse-link').click(function (e) {
         e.preventDefault();
         jQuery(this).toggleClass('active');
@@ -257,25 +263,13 @@ jQuery(document).ready(function() {
     });
 
 
-    jQuery('.inquiry-modal .input-block-item input, .modal-block input').focus(function () {
+    jQuery('.modal-block input').focus(function () {
         var parent = jQuery(this).closest('.input-block-item, .modal-block');
         jQuery(parent).find('label').addClass('active');
     });
-    jQuery('.inquiry-modal .input-block-item input, .modal-block input').blur(function () {
+    jQuery('.modal-block input').blur(function () {
         var value = jQuery(this).val();
         var parent = jQuery(this).closest('.input-block-item, .modal-block');
-        if (value === '') {
-            jQuery(parent).find('label').removeClass('active');
-        }
-    });
-    jQuery('.inquiry-modal .data-block input').focus(function () {
-        var parent = jQuery(this).closest('.data-block');
-        jQuery(parent).find('label').addClass('active');
-    });
-
-    jQuery('.inquiry-modal .data-block input').blur(function () {
-        var value = jQuery(this).val();
-        var parent = jQuery(this).closest('.data-block');
         if (value === '') {
             jQuery(parent).find('label').removeClass('active');
         }
@@ -332,9 +326,9 @@ jQuery(document).ready(function() {
 
     jQuery(window).on('load', function() {
         if (jQuery(window).width() <= 575) {
-            jQuery('#number-persons, #type, #offer-select3, #distance-select, #number-personse').select2('destroy');
+            jQuery('#offer-select3, #distance-select, #number-personse').select2('destroy');
         } else {
-            jQuery('#number-persons, #type, #offer-select3, #distance-select, #number-personse').select2();
+            jQuery('#offer-select3, #distance-select, #number-personse').select2();
         }
     });
 
@@ -506,8 +500,12 @@ jQuery(window).on('load', function() {
 
         if (scroll > offset && counter === 0) {
             jQuery('.scroll-top').addClass('absolute');
+            jQuery('.fixed-bar').addClass('bottom');
+            jQuery('.single-content').addClass('padding-bottom');
         } else {
             jQuery('.scroll-top').removeClass('absolute');
+            jQuery('.fixed-bar').removeClass('bottom');
+            jQuery('.single-content').removeClass('paddong-bottom');
         }
 
         if (jQuery(this).scrollTop() > 300) {
@@ -581,5 +579,5 @@ window.onload = function () {
         jQuery('.communication').removeClass('not-active');
     }, 1000);
 
-
+    jQuery('.nothing-found-section .avatar-slider').css('overflow', 'visible').css('opacity', '1');
 };

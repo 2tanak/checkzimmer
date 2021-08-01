@@ -111,7 +111,27 @@ export default {
             requestsCalendarUsual: '',
             requestsCalendarFromTo: '',
             loading: false,
-            requestsFields: [this.$t('created_at'), this.$t('status'), this.$t('picture'), this.$t('object'), this.$t('address')],
+            requestsFields: [
+                {
+                    key: 'created_at',
+                    label: this.$t('created_at')
+                },
+                {
+                    key: 'created_at',
+                    label: this.$t('status')},
+                {
+                    key: 'picture',
+                    label: this.$t('picture')
+                },
+                {
+                    key: 'object',
+                    label: this.$t('object')
+                },
+                {
+                    key: 'address',
+                    label: this.$t('address')
+                }
+            ],
             requestsItems: [
                 { id: 1, created_at: '01.01.2020', status: 'Новый', picture: '', object: '', address: 'Berlin' },
                 { id: 2, created_at: '02.02.2020', status: 'На утверждении', picture: '', object: '', address: 'Berlin' },

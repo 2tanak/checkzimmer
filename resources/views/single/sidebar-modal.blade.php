@@ -17,7 +17,7 @@
     @endif
     <div class="sidebar-top">
         <div class="sidebar-top-block roominess">
-            <img src="/svg/i-people.svg" alt="alt">
+            <img src="/svg/people.svg" alt="alt">
             <div class="sidebar-top-block-item roominess-item">
                 <div class="title">{{ __('roomin.') }}:</div>
                 @if ($hotel->getRoomPersonsMin() == 0)
@@ -59,6 +59,7 @@
             </div>
         @else
         <div class="number-phone">
+            <span class="d-none hiddenphone">{{ $phoneNumLandlord }}</span>
             <a href="tel:" class="phone-landlord phone-hide">{{ $phoneHide }}</a>
             <span class="sh_nmr">{{ __('show') }}</span>
             <div class="message">{{ __('Let us know that you are from the site Check-zimmer.de') }}</div>
