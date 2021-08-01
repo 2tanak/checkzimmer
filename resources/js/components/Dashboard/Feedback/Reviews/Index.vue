@@ -124,7 +124,40 @@ export default {
             operationOk : false,
             operationError : false,
             textOperation: '',
-            fields: [this.$t('created_at'), this.$t('raiting'), this.$t('name'), this.$t('company'), this.$t('title'), this.$t('description'), this.$t('publish'), this.$t('delete')],
+            fields: [
+                {
+                    key: 'created_at'
+                },
+                {
+                    key: 'rtaiting',
+                    label: this.$t('Raiting')
+                },
+                {
+                    key: 'name',
+                    label: this.$t('Name')
+                },
+                {
+                    key: 'company',
+                    label: this.$t('Company')
+                },
+                {
+                    key: 'title',
+                    label: this.$t('Title')
+                },
+                {
+                    key: 'description',
+                    label: this.$t('Description')
+                },
+                {
+                    key: 'publish',
+                    label: this.$t('Publish')
+                },
+                {
+                    key: 'delete',
+                    label: this.$t('Delete')
+                },
+            ],
+
             reviewList: [],
             activeReview: {
                 id: 0,

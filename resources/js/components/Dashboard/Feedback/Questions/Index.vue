@@ -1,6 +1,6 @@
 <template>
     <section class="header-dashboard">
-        <h1>{{ $t('Customer questions')}}</h1>
+        <h1>{{ $t('Customer questions') }}</h1>
         <div class="row mt-4">
             <div class="col-md-12 grid-margin">
                 <div class="card">
@@ -26,14 +26,20 @@
                                 {{ data.item.response }}
                             </template>
                             <template v-slot:cell(answer)="data">
-                                <b-button v-b-modal.modalQuestion variant="success" @click="answerModal(data.item)" v-if="data.item.response === ''">
-                                    {{ $t('Reply') }}</b-button>
-                                <b-button v-b-modal.modalQuestion variant="outline-primary" @click="answerModal(data.item)" v-else>
-                                    {{ $t('Edit') }}</b-button>
+                                <b-button v-b-modal.modalQuestion variant="success" @click="answerModal(data.item)"
+                                          v-if="data.item.response === ''">
+                                    {{ $t('Reply') }}
+                                </b-button>
+                                <b-button v-b-modal.modalQuestion variant="outline-primary"
+                                          @click="answerModal(data.item)" v-else>
+                                    {{ $t('Edit') }}
+                                </b-button>
                             </template>
                             <template v-slot:cell(delete)="data">
-                                <b-button v-b-modal.modalQuestionDelete variant="danger" @click="answerModalDelete(data.item)">
-                                    {{ $t('Delete')}}</b-button>
+                                <b-button v-b-modal.modalQuestionDelete variant="danger"
+                                          @click="answerModalDelete(data.item)">
+                                    {{ $t('Delete') }}
+                                </b-button>
                             </template>
                             <template v-slot:table-busy>
                                 <div class="text-center text-danger my-2">
@@ -47,31 +53,33 @@
             </div>
         </div>
 
-        <b-modal id="modalQuestion" @ok="answerOk" @cancel="answerCancel" @hidden="answerHidden" :title="$t('Answer to the question')">
-            <div><span><strong>{{ $t('Data') }}:</strong></span> {{ answerObject.created_at }}  </div>
-            <div><span><strong>{{ $t('Question') }}:</strong></span> {{ answerObject.question }}  </div>
+        <b-modal id="modalQuestion" @ok="answerOk" @cancel="answerCancel" @hidden="answerHidden"
+                 :title="$t('Answer to the question')">
+            <div><span><strong>{{ $t('Data') }}:</strong></span> {{ answerObject.created_at }}</div>
+            <div><span><strong>{{ $t('Question') }}:</strong></span> {{ answerObject.question }}</div>
             <div>
                 <div class="mb-2 mt-3"><strong>{{ $t('Your answer') }}:</strong></div>
                 <div>
-                    <b-form-textarea id="textareaAnswer" v-model="answerObject.response" :placeholder="$t('Enter your answer')" rows="10"></b-form-textarea>
+                    <b-form-textarea id="textareaAnswer" v-model="answerObject.response"
+                                     :placeholder="$t('Enter your answer')" rows="10"></b-form-textarea>
                 </div>
             </div>
         </b-modal>
 
         <b-modal id="modalQuestionDelete" @ok="answerDelete" :title="$t('Delete question')">
             <p class="mb-3">{{ $t('Are you sure you want to delete') }}?</p>
-            <div><span><strong>{{ $t('Data') }}:</strong></span> {{ answerObject.created_at }}  </div>
-            <div><span><strong>{{ $t('Question') }}:</strong></span> {{ answerObject.question }}  </div>
+            <div><span><strong>{{ $t('Data') }}:</strong></span> {{ answerObject.created_at }}</div>
+            <div><span><strong>{{ $t('Question') }}:</strong></span> {{ answerObject.question }}</div>
         </b-modal>
 
         <div class="row mt-5">
             <div class="col-md-12">
 
                 <b-alert dismissible v-model="operationOk" variant="success">
-                    {{ textOperation}}
+                    {{ textOperation }}
                 </b-alert>
                 <b-alert dismissible v-model="operationError" variant="danger">
-                    {{ textOperation}}
+                    {{ textOperation }}
                 </b-alert>
             </div>
         </div>
@@ -92,12 +100,37 @@ export default {
         return {
             textareaAnswer: '',
             modalApproove: false,
-            fields: [this.$t('created_at'), this.$t('property'), this.$t('question'), this.$t('response'), this.$t('answer'), this.$t('delete')],
+            fields: [
+                {
+                    key: 'created_at',
+                    label: this.$t('created_at')
+                },
+                {
+                    key: 'property',
+                    label: this.$t('Property')
+                },
+                {
+                    key: 'question',
+                    label: this.$t('Question')
+                },
+                {
+                    key: 'response',
+                    label: this.$t('Response')
+                },
+                {
+                    key: 'answer',
+                    label: this.$t('Answer')
+                },
+                {
+                    key: 'delete',
+                    label: this.$t('Delete')
+                }
+            ],
             questionItems: [],
             answer: true,
             loading: false,
-            operationOk : false,
-            operationError : false,
+            operationOk: false,
+            operationError: false,
             textOperation: '',
             answerObject: {
                 id: 0,
@@ -113,7 +146,7 @@ export default {
             .then(resp => {
                 this.questionItems = resp.data.data;
             })
-     },
+    },
     mounted() {
     },
     methods: {
@@ -126,17 +159,17 @@ export default {
         answerOk() {
             this.modalApproove = true;
 
-            let data = {'answer' : this.answerObject.response};
+            let data = {'answer': this.answerObject.response};
             questionsData.update(this.answerObject.id, data)
                 .then(response => {
-                    if(response.data.code == 'ok') {
+                    if (response.data.code == 'ok') {
                         this.textOperation = this.$t('Answer added');
                         this.operationOk = true;
                     } else {
                         this.textOperation = this.$t('Error');
                         this.operationError = true;
                     }
-            });
+                });
         },
         answerCancel() {
             this.modalApproove = false;
@@ -144,16 +177,16 @@ export default {
         answerDelete() {
             questionsData.delete(this.answerObject.id)
                 .then(response => {
-                    if(response.data.code == 'ok') {
+                    if (response.data.code == 'ok') {
                         this.textOperation = this.$t('Delete');
                         this.operationOk = true;
-                        let index = this.questionItems.findIndex( (elem, index, arr) => elem.id === this.answerObject.id);
+                        let index = this.questionItems.findIndex((elem, index, arr) => elem.id === this.answerObject.id);
                         this.questionItems.splice(index, 1);
                     } else {
                         this.textOperation = this.$t('Delete error');
                         this.operationError = true;
                     }
-            });
+                });
         },
         answerHidden() {
             if (this.modalApproove === false) {
@@ -161,12 +194,12 @@ export default {
             }
         },
         format00(num) {
-           return num <= 9 ? '0' + num : num
+            return num <= 9 ? '0' + num : num
         },
         getDate(date) {
-            let dt = new Date(date.replace('T', ' ').replace(/-/g,'/'));
+            let dt = new Date(date.replace('T', ' ').replace(/-/g, '/'));
             let day = this.format00(dt.getDate());
-            let month = this.format00(dt.getMonth()+1);
+            let month = this.format00(dt.getMonth() + 1);
             let year = dt.getFullYear();
             return `${year}-${month}-${day}`;
         }

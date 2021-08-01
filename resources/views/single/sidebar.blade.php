@@ -268,14 +268,15 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         jQuery('.sh_nmr').click(function () {
+            var openPhone = jQuery('.hiddenphone').text();
             jQuery('.sidebar .number-phone').addClass('gray');
             jQuery('.sh_nmr').css('display', 'none');
-            jQuery('.phone-hide').html(atob(window.phonenumStr));
-            let phoneAttr = atob(window.phonenum);
+            jQuery('.phone-hide').html(openPhone); {{-- atob(window.phonenumStr) --}}
+            /*let phoneAttr = atob(window.phonenum);
             if (phoneAttr.substr(0, 1) !== '+') {
                 phoneAttr = '+' + phoneAttr;
-            }
-            jQuery('.phone-hide').attr('href', 'tel:' + phoneAttr);
+            }*/
+            jQuery('.phone-hide').attr('href', 'tel:' + openPhone);
         });
 
         var url = document.location.href;

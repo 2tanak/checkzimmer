@@ -72,7 +72,20 @@ export default {
             search: '',
             timer: null,
             loading: true,
-            fields: [this.$t('id'), this.$t('original'), this.$t('translation')],
+            fields: [
+                {
+                    key: 'id',
+                    label: this.$t('id')
+                },
+                {
+                    key: 'original',
+                    label: this.$t('original')
+                },
+                {
+                    key: 'translation',
+                    label: this.$t('translation')
+                }
+            ],
         }
     },
     mounted() {

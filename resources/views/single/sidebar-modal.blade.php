@@ -59,6 +59,7 @@
             </div>
         @else
         <div class="number-phone">
+            <span class="d-none hiddenphone">{{ $phoneNumLandlord }}</span>
             <a href="tel:" class="phone-landlord phone-hide">{{ $phoneHide }}</a>
             <span class="sh_nmr">{{ __('show') }}</span>
             <div class="message">{{ __('Let us know that you are from the site Check-zimmer.de') }}</div>
