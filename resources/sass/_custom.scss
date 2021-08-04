@@ -5457,6 +5457,9 @@ header.height-menu .mobile-menu {
 .single-content .single-main-slider {
     display: none;
 }
+.single-content .single-main-slider.disabled-dots .slick-dots {
+    display: none;
+}
 .single-content .parameters .title.personen {
     padding: 0;
 }

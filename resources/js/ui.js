@@ -473,6 +473,12 @@ jQuery(document).ready(function() {
         localStorage.setItem('favoritesList', JSON.stringify(favoritesObject));
     });
 
+    if(jQuery(".single-main-slider .main-slider-item").length === 1) {
+        jQuery('.single-main-slider').addClass( "disabled-dots" );
+    } else {
+        jQuery('.single-main-slider').removeClass( "disabled-dots" );
+    }
+
 });
 
 jQuery(window).on('load', function() {
