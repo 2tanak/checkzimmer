@@ -38,12 +38,9 @@
     <div class="select-block">
         <select id="number-persons" name="number-persons" class="input">
             <option value="1">1 {{ __('Person') }}</option>
-            <option value="2">2 {{ __('Persons') }}</option>
-            <option value="3">3 {{ __('Persons') }}</option>
-            <option value="4">4 {{ __('Persons') }}</option>
-            <option value="5">5 {{ __('Person') }}</option>
-            <option value="6">6 {{ __('Person') }}</option>
-            <option value="7">{{ __('Before')  }} 100 {{ __('Persons') }}</option>
+            @for($i=2; $i<100; $i++)
+                <option value="{{ $i }}">{{ $i }} {{ __('Persons') }}</option>
+            @endfor
             <option value="8">100+ {{ __('Persons') }}</option>
         </select>
         <label for="number-persons">{{ __('Number persons') }}</label>
