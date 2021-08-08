@@ -1,6 +1,14 @@
 // Variables
 @import 'variables';
 
+@import "components/fonts/inter";
+@import "components/fonts/fira-sans";
+@import "components/select2/select2-min";
+@import "components/slick/slick";
+@import "components/slick/slick-theme";
+@import "components/datepicker/bootstra-datepicker.min";
+
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
