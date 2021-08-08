@@ -5457,6 +5457,9 @@ header.height-menu .mobile-menu {
 .single-content .single-main-slider {
     display: none;
 }
+.single-content .single-main-slider.disabled-dots .slick-dots {
+    display: none;
+}
 .single-content .parameters .title.personen {
     padding: 0;
 }
@@ -6851,7 +6854,7 @@ header.height-menu .mobile-menu {
 .plans-section {
     position: relative;
 }
-.plans-section:after {
+/*.plans-section:after {
     content: "";
     position: absolute;
     z-index: -1;
@@ -6863,7 +6866,7 @@ header.height-menu .mobile-menu {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-}
+}*/
 .plans-container {
     width: 100%;
     max-width: 1240px;
