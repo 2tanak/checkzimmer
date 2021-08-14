@@ -82,6 +82,188 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+
+.registration-section {
+    .accommodation-facility-section {
+        &:after {
+            position: absolute;
+            content: "";
+            max-width: 720px;
+            width: 100%;
+            height: 110px;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            background: #FFFFFF;
+            box-shadow: 0 4px 30px rgb(51 54 70 / 16%);
+            border-radius: 14px;
+            z-index: -1;
+        }
+        background: #FFFFFF;
+        box-shadow: 0 0 14px rgb(51 54 70 / 14%);
+        border-radius: 12px;
+        padding: 30px 16px 0 16px;
+        margin-bottom: 20px;
+        max-width: 780px;
+        width: 100%;
+        position: relative;
+    }
+    .title {
+        a {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 100%;
+            color: #3B8B3E;
+            text-decoration: none;
+        }
+        margin-bottom: 16px;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 130%;
+        color: #333646;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .accommodation-facility-table {
+        .head-table {
+            div {
+                &:first-of-type {
+                    width: 120px;
+                }
+                &:nth-of-type(2) {
+                    width: 45px;
+                }
+                &:nth-of-type(3) {
+                    width: 57px;
+                }
+                &:last-of-type {
+                    width: 56px;
+                }
+                font-weight: 600;
+                font-size: 10px;
+                line-height: 140%;
+                letter-spacing: 0.02em;
+                text-transform: uppercase;
+                color: #8F98A2;
+            }
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 30px;
+            padding: 0 36px;
+        }
+        .table-line {
+            div {
+                &:first-of-type {
+                    img {
+                        margin-right: 7px;
+                    }
+                    width: 120px;
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                }
+                &:nth-of-type(2) {
+                    width: 45px;
+                    text-align: center;
+                }
+                &:nth-of-type(3) {
+                    width: 57px;
+                    text-align: center;
+                }
+                &:last-of-type {
+                    width: 56px;
+                }
+            }
+            svg.line {
+                position: absolute;
+                top: -6px;
+                left: -14.5px;
+            }
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .table-head-line {
+            div {
+                span {
+                    font-size: 10px;
+                }
+                &:last-of-type {
+                    font-weight: 700;
+                }
+                &:nth-of-type(2) {
+                    margin-left: 21px;
+                }
+                font-weight: 600;
+                font-size: 12px;
+                line-height: 300%;
+                color: #333646;
+            }
+            padding-left: 15px;
+            padding-right: 36px;
+            background-color: #f7f8fa;
+        }
+        .table-body-line {
+            &:last-of-type {
+                border-bottom: 0;
+            }
+            div {
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 300%;
+                color: #333646;
+            }
+            padding-left: 36px;
+            padding-right: 36px;
+            height: 36px;
+            border-bottom: 1px solid #edeef0;
+        }
+        padding-bottom: 17px;
+    }
+}
+
+@media (max-width: 1040px) {
+    .registration-section {
+        .title {
+            font-size: 18px;
+        }
+        .accommodation-facility-section {
+            &::after {
+                width: calc(100% - 32px);
+            }
+            max-width: none;
+            border-radius: 0;
+        }
+    }
+}
+@media (max-width: 479px) {
+    .registration-section {
+        .accommodation-facility-table {
+            .head-table {
+                padding: 0 10px;
+            }
+            .table-head-line {
+                div {
+                    &:nth-of-type(2) {
+                        margin-left: 0;
+                    }
+                }
+                padding: 0 10px;
+            }
+            .table-body-line {
+                padding:  0 10px;
+            }
+            .table-line {
+                svg.line {
+                    display: none;
+                }
+            }
+        }
+    }
+}
 
 </style>

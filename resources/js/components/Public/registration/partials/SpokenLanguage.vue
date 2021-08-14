@@ -88,6 +88,208 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+
+.registration-section {
+    .languages-speak-section {
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #FFFFFF;
+            box-shadow: 0 4px 30px rgba(51, 54, 70, 0.16);
+            border-radius: 14px;
+            max-width: 720px;
+            width: 100%;
+            height: 100px;
+            z-index: -1;
+        }
+        .subtitle {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 100%;
+            color: #545769;
+        }
+        .subtitle.subtitle-mobile {
+            display: none;
+        }
+        a.tooltip-link {
+            &:hover {
+                .tooltip {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateX(-50%) scale(1);
+                }
+            }
+            position: relative;
+            margin-left: 7px;
+            cursor: pointer;
+        }
+        background: #FFFFFF;
+        box-shadow: 0 0 14px rgb(51 54 70 / 14%);
+        border-radius: 12px;
+        padding: 30px 16px 10px 16px;
+        margin-bottom: 30px;
+        max-width: 780px;
+        width: 100%;
+        position: relative;
+    }
+    .title {
+        a {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 100%;
+            color: #3B8B3E;
+            text-decoration: none;
+        }
+        margin-bottom: 16px;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 130%;
+        color: #333646;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .subtitle {
+        svg {
+            border-radius: 50%;
+            display: block;
+        }
+    }
+    .languages-speak-item {
+        .languages-speak-block {
+            &:nth-of-type(4n) {
+                margin-right: 0;
+            }
+        }
+        display: flex;
+        align-items: center;
+    }
+    .tooltip {
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) matrix(0.71, -0.7, -0.71, -0.71, 0, 0);
+            width: 24.27px;
+            height: 24.27px;
+            background: #333646;
+            border-radius: 2px;
+            z-index: -1;
+        }
+        background: #333646;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 130%;
+        color: #FFFFFF;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+        width: 282px;
+        padding: 14px 12px;
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%) scale(0.7);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.2s;
+    }
+    .languages-speak-content {
+        &:not(:last-of-type) {
+            margin-right: 16px;
+        }
+        display: flex;
+        align-items: center;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 1100px) {
+    .registration-section {
+        .languages-speak-item {
+            .languages-speak-block {
+                padding: 0;
+                justify-content: center;
+            }
+        }
+    }
+}
+@media (max-width: 1040px) {
+    .registration-section {
+        .languages-speak-section {
+            &::after {
+                width: calc(100% - 60px);
+                max-width: none;
+            }
+            max-width: none;
+            border-radius: 0;
+        }
+        .languages-speak-item {
+            .languages-speak-block {
+                padding: 0 21px;
+                justify-content: flex-start;
+            }
+        }
+        .languages-speak-content {
+            width: 100%;
+        }
+    }
+}
+@media (max-width: 680px) {
+    .registration-section {
+        .languages-speak-section {
+            .subtitle.subtitle-mobile {
+                display: flex;
+            }
+            .subtitle.subtitle-desctope {
+                display: none;
+            }
+        }
+        .languages-speak-item {
+            .languages-speak-block {
+                &:nth-of-type(2n) {
+                    margin-right: 0;
+                }
+                width: 48.6%;
+            }
+            flex-direction: column;
+        }
+        .languages-speak-content {
+            &:not(:last-of-type) {
+                margin-right: 0;
+                margin-bottom: 16px;
+            }
+        }
+    }
+}
+@media (max-width: 575px) {
+    .registration-section {
+        .languages-speak-item {
+            .languages-speak-block {
+                img {
+                    margin-right: 7px;
+                }
+                padding: 0 12px;
+            }
+        }
+        .languages-speak-content {
+            &:not(:last-of-type) {
+                margin-bottom: 14px;
+            }
+        }
+    }
+}
 
 </style>

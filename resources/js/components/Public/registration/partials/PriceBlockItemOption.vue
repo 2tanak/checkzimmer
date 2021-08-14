@@ -19,6 +19,23 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+
+svg.active-svg {
+    display: none;
+}
+svg.not-active-svg {
+    display: none;
+}
+.available {
+    svg.active-svg {
+        display: block;
+    }
+}
+.not-available {
+    svg.not-active-svg {
+        display: block;
+    }
+}
 
 </style>

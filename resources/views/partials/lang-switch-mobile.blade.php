@@ -1,4 +1,4 @@
-<div class="languages-block languages-block-mobile">
+<!--<div class="languages-block languages-block-mobile">
     <div class="selected-language">
         <a href="#">{{ app()->getLocale() }}</a>
     </div>
@@ -7,4 +7,4 @@
             <a href="{{ app('locale')->getLocaleUrl($lang) }}">{{ $lang }}</a>
         @endforeach
     </div>
-</div>
+</div>-->

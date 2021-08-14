@@ -77,6 +77,132 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+
+.registration-section {
+    .title {
+        a {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 100%;
+            color: #3B8B3E;
+            text-decoration: none;
+        }
+        margin-bottom: 16px;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 130%;
+        color: #333646;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .billing-address-checking {
+        &::after {
+            position: absolute;
+            content: "";
+            max-width: 720px;
+            width: 100%;
+            height: 110px;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            background: #FFFFFF;
+            box-shadow: 0 4px 30px rgb(51 54 70 / 16%);
+            border-radius: 14px;
+            z-index: -1;
+        }
+        .address-checking-line {
+            &:not(:last-of-type) {
+                margin-bottom: 12px;
+            }
+            display: flex;
+            align-items: flex-end;
+        }
+        .address-checking-name {
+            margin-right: 10px;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 140%;
+            color: #545769;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .address-checking-total {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 140%;
+            color: #333646;
+            white-space: nowrap;
+            flex-basis: 285px;
+            margin-left: 10px;
+        }
+        .dots {
+            flex-grow: 1;
+            border-bottom: 1px dotted #545769;
+            margin-bottom: 5px;
+            opacity: 0.3;
+        }
+        background: #FFFFFF;
+        box-shadow: 0 0 14px rgb(51 54 70 / 14%);
+        border-radius: 12px;
+        padding: 30px 16px;
+        margin-bottom: 20px;
+        max-width: 780px;
+        width: 100%;
+        position: relative;
+    }
+}
+
+@media (max-width: 1040px) {
+    .registration-section {
+        .title {
+            font-size: 18px;
+        }
+        .billing-address-checking {
+            &::after {
+                width: calc(100% - 32px);
+            }
+            max-width: none;
+            border-radius: 0;
+        }
+    }
+}
+@media (max-width: 575px) {
+    .registration-section {
+        .billing-address-checking {
+            .address-checking-total {
+                flex-basis: auto;
+                margin-left: 0;
+            }
+            .dots {
+                display: none;
+            }
+        }
+    }
+}
+@media (max-width: 479px) {
+    .registration-section {
+        .billing-address-checking {
+            .address-checking-line {
+                &:not(:last-of-type) {
+                    margin-bottom: 26px;
+                }
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .address-checking-name {
+                span {
+                    display: none;
+                }
+                margin-right: 0;
+                margin-bottom: 12px;
+            }
+            .address-checking-total {
+                min-width: auto;
+            }
+        }
+    }
+}
 
 </style>

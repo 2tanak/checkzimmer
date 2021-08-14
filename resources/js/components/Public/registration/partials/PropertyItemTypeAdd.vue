@@ -15,6 +15,73 @@ name: "PropertyItemTypeAdd"
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+
+.registration-section {
+    .object-data-table {
+        .object-data-table-line {
+            border-bottom: 1px solid #edeef0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .add-object {
+            a {
+                svg {
+                    margin-right: 5px;
+                    transition: all 0.2s;
+                }
+                &:hover {
+                    svg {
+                        path {
+                            fill: #3B8B3E;
+                        }
+                    }
+                    color: #3B8B3E;
+                }
+                font-weight: 600;
+                font-size: 12px;
+                line-height: 300%;
+                color: #333646;
+                outline: none;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                margin-left: 11px;
+                transition: all 0.2s;
+            }
+            background: #FBFCFF;
+            border-radius: 2px;
+        }
+    }
+}
+
+@media (max-width: 760px) {
+    .registration-section {
+        .object-data-table {
+            .add-object {
+                a {
+                    margin-left: 18px;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 479px) {
+    .registration-section {
+        .object-data-table {
+            .object-data-table-line {
+                &:first-of-type {
+                    border-top: 1px solid #edeef0;
+                }
+                &:last-of-type {
+                    border-bottom: 0;
+                }
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    }
+}
 
 </style>
