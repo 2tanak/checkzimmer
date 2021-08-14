@@ -90,6 +90,9 @@
                     @endif
                     {{ $hotel->city }}
                 </div>
+
+                <div class="clarification" style="margin-top:5px;font-style:italic;">{{ __('You will receive the full address on request') }}.</div>
+
             </div>
             <div class="map-container">
                 <a class="map-picture" href="#object-description">
