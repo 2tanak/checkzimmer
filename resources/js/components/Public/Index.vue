@@ -946,6 +946,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 .fade-enter-active, .fade-leave-active {
     transition: opacity 1.2s;
 }
@@ -1041,6 +1042,42 @@ export default {
             bottom: -78px;
         }
     }
+}
+
+.alternative-classifieds {
+    .alternative-classifieds-content {
+        &::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            z-index: -1;
+            background: #FFFFFF;
+            box-shadow: 0 4px 30px rgba(51, 54, 70, 0.16);
+            border-radius: 14px;
+            width: calc(100% - 60px);
+            height: 110px;
+        }
+        background: #FFFFFF;
+        box-shadow: 0 0 14px rgba(51, 54, 70, 0.14);
+        border-radius: 12px;
+        position: relative;
+        flex-direction: column;
+    }
+    .title-text {
+        margin-bottom: 24px;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 130%;
+        color: #333646;
+        padding: 0 16px;
+        display: block;
+    }
+    .property-card {
+        background-color: transparent;
+    }
+    margin-top: 44px;
 }
 
 </style>
