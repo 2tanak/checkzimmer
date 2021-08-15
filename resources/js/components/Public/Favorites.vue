@@ -347,6 +347,37 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+
+.favorites-content {
+    h1 {
+        margin-bottom: 40px;
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 130%;
+        text-align: center;
+        color: #333646;
+    }
+    .communication {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    padding-top: 60px;
+    min-height: calc(100vh - 165px);
+}
+
+@media (max-width: 575px) {
+    .favorites-content {
+    .communication {
+            position: static;
+            transform: none;
+        }
+        padding-top: 40px;
+        min-height: auto;
+        padding-bottom: 40px;
+    }
+}
 
 </style>

@@ -544,62 +544,140 @@ export default {
     }
 }
 </script>
-<style>
+
+<style lang="scss">
+
 .fade-enter-active, .fade-leave-active {
     transition: opacity 1.2s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+.fade-enter, .fade-leave-to {
     opacity: 0;
 }
-/* The popup bubble styling. */
 .popup-bubble {
-    /* Position the bubble centred-above its parent. */
     position: absolute;
     top: 0;
     left: 0;
     transform: translate(-50%, -100%);
-    /* Style the bubble. */
     background-color: white;
     padding: 5px;
     border-radius: 5px;
     font-family: sans-serif;
     overflow-y: auto;
     max-height: 60px;
-    box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.5);
 }
-
-/* The parent of the bubble. A zero-height div at the top of the tip. */
 .popup-bubble-anchor {
-    /* Position the div a fixed distance above the tip. */
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, 0);
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 8px solid white;
+    }
     position: absolute;
     width: 100%;
     bottom: 8px;
     left: 0;
 }
-
-/* This element draws the tip. */
-.popup-bubble-anchor::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    /* Center the tip horizontally. */
-    transform: translate(-50%, 0);
-    /* The tip is a https://css-tricks.com/snippets/css/css-triangle/ */
-    width: 0;
-    height: 0;
-    /* The tip is 8px high, and 12px wide. */
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 8px solid white;
-}
-
-/* JavaScript will position this div at the bottom of the popup tip. */
 .popup-container {
     cursor: auto;
     height: 0;
     position: absolute;
-    /* The max width of the info window. */
     width: 200px;
 }
+
+.list-content {
+    .load-all-objects {
+        .load-all {
+            svg {
+                margin-right: 7px;
+            }
+            span {
+                font-weight: 500;
+                font-size: 15px;
+                line-height: 100%;
+                color: #333646;
+            }
+            svg.rot {
+                animation: 1s linear 0s normal none infinite running rot;
+                -webkit-animation: 1s linear 0s normal none infinite running rot;
+            }
+            display: flex;
+            align-items: center;
+        }
+        height: 74px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top: 1px solid #e8e8ed;
+    }
+}
+.load-more {
+    .btn {
+        &:hover {
+            background-color: #60a338;
+            transition: all 0.4s ease;
+        }
+        background: #6bb63f;
+        border-color: #6bb63f;
+        color: #ffffff;
+    }
+}
+
+@media (max-width: 991px) {
+    .load-more {
+        .btn {
+            bottom: -68px;
+        }
+    }
+}
+@media (max-width: 575px) {
+    .load-more {
+        .btn {
+            bottom: -78px;
+        }
+    }
+}
+
+.alternative-classifieds {
+    .alternative-classifieds-content {
+        &::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            z-index: -1;
+            background: #FFFFFF;
+            box-shadow: 0 4px 30px rgba(51, 54, 70, 0.16);
+            border-radius: 14px;
+            width: calc(100% - 60px);
+            height: 110px;
+        }
+        background: #FFFFFF;
+        box-shadow: 0 0 14px rgba(51, 54, 70, 0.14);
+        border-radius: 12px;
+        position: relative;
+        flex-direction: column;
+    }
+    .title-text {
+        margin-bottom: 24px;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 130%;
+        color: #333646;
+        padding: 0 16px;
+        display: block;
+    }
+    .property-card {
+        background-color: transparent;
+    }
+    margin-top: 44px;
+}
+
 </style>

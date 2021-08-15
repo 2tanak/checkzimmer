@@ -1,0 +1,252 @@
+.slider-modal-overlay {
+    .modal-close {
+        right: 40px;
+        top: 40px;
+        position: absolute;
+        cursor: pointer;
+    }
+    .slider-block {
+        position: fixed;
+        visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transition: all 0.2s;
+        transform: scale(0.7);
+        opacity: 0;
+        max-width: 968px;
+        width: 100%;
+    }
+    .big-slider {
+        .slick-list {
+            height: 348px;
+            border-radius: 6.5px;
+        }
+        .slider-item {
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            width: 522px;
+            height: 348px;
+        }
+        img.prev-arrow {
+            position: absolute;
+            left: -45px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        img.next-arrow {
+            position: absolute;
+            right: -45px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        width: 522px;
+        height: 348px;
+        margin: auto;
+    }
+    .small-slider {
+        .slider-item {
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 4px;
+            }
+            width: 86px !important;
+            height: 60px;
+            outline: none;
+            margin-left: 1px;
+            margin-right: 1px;
+            border: 2px solid transparent;
+            padding: 2px;
+        }
+        .slider-item.slick-current {
+            border: 2px solid #7A8793;
+            border-radius: 5px;
+            padding: 2px;
+        }
+        .slick-list {
+            &::after {
+                position: absolute;
+                content: "";
+                width: 53px;
+                height: 52px;
+                background: linear-gradient(270deg, #484A59 0%, rgba(72, 74, 89, 0) 100%);
+                top: 4px;
+                right: 0;
+                z-index: 1;
+            }
+            &::before {
+                position: absolute;
+                content: "";
+                width: 53px;
+                height: 52px;
+                background: linear-gradient(270deg, #484A59 0%, rgba(72, 74, 89, 0) 100%);
+                top: 4px;
+                left: 0;
+                transform: rotate(180deg);
+                z-index: 1;
+            }
+            position: relative;
+        }
+        height: 60px;
+        margin-top: 24px;
+        margin-bottom: 21px;
+        position: relative;
+    }
+    .small-slider.transform {
+        .slick-track {
+            transform: translate3d(0px, 0px, 0px) !important;
+            display: flex;
+            justify-content: center;
+        }
+    }
+    .name-slide-number {
+        .number {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 100%;
+            color: #FFFFFF;
+        }
+        .dash {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 100%;
+            color: #FFFFFF;
+            margin: 0 5px;
+        }
+        .name {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 100%;
+            color: #FFFFFF;
+        }
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+.slider-modal-overlay.modal-show {
+    .slider-block {
+        transform: scale(1);
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+
+@media (max-width: 1211px) {
+    .slider-modal-overlay {
+        .small-slider {
+            display: none;
+        }
+        .slider-block {
+            max-width: none;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .big-slider {
+            .slick-list {
+                height: 512px;
+                border-radius: 0;
+            }
+            .slider-item {
+                width: 100%;
+                height: 512px;
+            }
+            width: 100%;
+            height: 512px;
+            margin: 0;
+            position: static;
+        }
+        .name-slide-number {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 24px;
+        }
+        .modal-close {
+            z-index: 10;
+        }
+        .big-slider {
+            img.prev-arrow {
+                left: calc(44.4% - 60px);
+                top: auto;
+                transform: none;
+                bottom: 23px;
+            }
+            img.next-arrow {
+                right: calc(44.4% - 60px);
+                top: auto;
+                transform: none;
+                bottom: 23px;
+            }
+        }
+        background-color: #13141a;
+    }
+}
+@media (max-width: 991px) {
+    .slider-modal-overlay {
+        .modal-close {
+            svg {
+                width: 14px;
+                height: 14px;
+                display: block;
+            }
+            right: 16px;
+            top: 16px;
+        }
+        .name-slide-number {
+            .dash {
+                display: none;
+            }
+            .name {
+                display: none;
+            }
+        }
+    }
+}
+@media (max-width: 720px) {
+    .slider-modal-overlay {
+        .big-slider {
+            .slick-list {
+                height: 412px;
+            }
+            .slider-item {
+                height: 412px;
+            }
+            height: 412px;
+        }
+    }
+}
+@media (max-width: 575px) {
+    .slider-modal-overlay {
+        .big-slider {
+            .slick-list {
+                height: 312px;
+            }
+            .slider-item {
+                height: 312px;
+            }
+            height: 312px;
+        }
+    }
+}
+@media (max-width: 420px) {
+    .slider-modal-overlay {
+        .big-slider {
+            .slick-list {
+                height: 212px;
+            }
+            .slider-item {
+                height: 212px;
+            }
+            height: 212px;
+        }
+    }
+}

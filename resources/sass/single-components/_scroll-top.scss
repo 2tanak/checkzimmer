@@ -1,0 +1,30 @@
+.scroll-top {
+    svg {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    background: #FFFFFF;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
+    width: 42px;
+    height: 42px;
+    position: fixed;
+    right: 164px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    bottom: 40px;
+}
+.scroll-top.absolute {
+    position: absolute;
+    bottom: 160px;
+}
+
+
+
+@media (max-width: 1211px) {
+    .scroll-top {
+        display: none !important;
+    }
+}

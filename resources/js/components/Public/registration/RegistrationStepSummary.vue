@@ -149,6 +149,197 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+
+.registration-section {
+    a.save {
+        &::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            background: #FFFFFF;
+            box-shadow: 0 4px 30px rgba(107, 182, 63, 0.6);
+            border-radius: 14px;
+            z-index: -1;
+            max-width: 720px;
+            width: 100%;
+            height: 33px;
+        }
+        width: 100%;
+        height: 54px;
+        background: #6BB63F;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 100%;
+        color: #FFFFFF;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+        position: relative;
+    }
+    .billing-address-container {
+        display: flex;
+        align-items: flex-start;
+        padding: 0 16px;
+        width: 100%;
+        max-width: 1212px;
+        margin: 0 auto;
+    }
+    .main-registration-content {
+        margin-right: 20px;
+        width: 100%;
+    }
+    .checkbox-line {
+        label {
+            &::before {
+                content: "";
+                display: inline-block;
+                height: 20px;
+                width: 20px;
+                border: 2px solid #d9d9d9;
+                left: 0;
+                border-radius: 4px;
+                transition: all 0.2s;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            ::after {
+                position: absolute;
+                display: inline-block;
+                border-left: 2px solid #fff;
+                border-bottom: 2px solid #fff;
+                transform: rotate(-45deg);
+                left: 5px;
+                top: 5px;
+                height: 6px;
+                width: 10px;
+                transition: all 0.2s;
+            }
+            span {
+                color: #3b8b3e;
+                border-bottom: 1px solid #3b8b3e;
+            }
+            cursor: pointer;
+            margin: 0;
+            display: block;
+            padding-left: 30px;
+            position: relative;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 130%;
+            color: #545769;
+        }
+        input[type="checkbox"] {
+            opacity: 0;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+        }
+        input[type=checkbox]:checked + label {
+            &::before {
+                background-color: #6BB63F;
+                border-color: #6BB63F;
+            }
+            &::after {
+                content: "";
+            }
+        }
+    }
+    padding-bottom: 100px;
+}
+.data-checking-section {
+    .familiarization {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 130%;
+        color: #545769;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .checkbox-line {
+        label {
+            &::before {
+                top: 0 !important;
+                transform: none !important;
+            }
+            &::after {
+                top: 6px !important;
+            }
+        }
+    }
+    .duration {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 130%;
+        color: #545769;
+        width: 100%;
+        max-width: 744px;
+        margin: auto;
+        margin-top: 20px;
+        padding: 0 16px;
+    }
+}
+
+@media (max-width: 1040px) {
+    .registration-section {
+        a.save {
+            &::after {
+                width: calc(100% - 60px);
+                max-width: none;
+            }
+            width: calc(100% - 32px);
+            margin: 0 auto;
+        }
+        .registration-sidebar {
+            width: 100%;
+            margin-top: 20px;
+        }
+        .checkbox-line {
+            label {
+                font-size: 14px;
+            }
+        }
+        .billing-address-container {
+            padding: 0;
+            flex-direction: column-reverse;
+        }
+        .main-registration-content {
+            margin-right: 0;
+            width: 100%;
+        }
+        padding-bottom: 40px;
+    }
+    .data-checking-section {
+        .familiarization {
+            padding: 0 16px;
+        }
+    }
+}
+@media (max-width: 700px) {
+    .data-checking-section {
+        .familiarization {
+            br {
+                display: none;
+            }
+        }
+    }
+}
+@media (max-width: 575px) {
+    .registration-section {
+        a.save {
+            padding: 0 16px;
+            text-align: center;
+        }
+        .registration-sidebar {
+            margin-top: 0;
+        }
+    }
+}
 
 </style>

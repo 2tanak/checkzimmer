@@ -30,6 +30,93 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+
+.registration-section {
+    .photos-object-section {
+        .img-block {
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 6px;
+            }
+            &:nth-of-type(5n) {
+                margin-right: 0;
+            }
+            &::before {
+                border: 0.495536px solid rgba(0, 0, 0, 0.12);
+                border-radius: 6px;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                content: "";
+            }
+            a.delete-img {
+                svg {
+                    display: block;
+                }
+                position: absolute;
+                top: -5px;
+                right: -5px;
+                text-decoration: none;
+            }
+            width: 18.88%;
+            height: 92px;
+            margin-right: 1.36%;
+            margin-bottom: 1.36%;
+            position: relative;
+            border-radius: 6px;
+        }
+    }
+}
+
+@media (max-width: 575px) {
+    .registration-section {
+        .photos-object-section {
+            .img-block {
+                &:nth-of-type(5n) {
+                    margin-right: 1.36%;
+                }
+
+                &:nth-of-type(3n) {
+                    margin-right: 0;
+                    width: 32.3%;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 479px) {
+    .registration-section {
+        .photos-object-section {
+            .img-block {
+                &:nth-of-type(3n) {
+                    margin-right: 9px;
+                }
+                &:nth-of-type(2n) {
+                    margin-right: 0;
+                }
+                &:nth-of-type(5n) {
+                    margin-right: 9px;
+                }
+                width: 48.6%;
+                margin-right: 9px;
+                margin-bottom: 9px;
+            }
+        }
+    }
+}
+@media (max-width: 370px) {
+    .registration-section {
+        .photos-object-section {
+            .img-block {
+                width: 48.3%;
+            }
+        }
+    }
+}
 
 </style>
