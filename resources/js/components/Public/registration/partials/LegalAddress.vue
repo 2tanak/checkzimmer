@@ -88,6 +88,292 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+
+.registration-section {
+    .billing-address-section {
+        &::after {
+            position: absolute;
+            content: "";
+            max-width: 720px;
+            width: 100%;
+            height: 110px;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            background: #FFFFFF;
+            box-shadow: 0 4px 30px rgba(51, 54, 70, 0.16);
+            border-radius: 14px;
+            z-index: -1;
+        }
+        background: #FFFFFF;
+        box-shadow: 0 0 14px rgba(51, 54, 70, 0.14);
+        border-radius: 12px;
+        padding: 30px 16px;
+        margin-bottom: 20px;
+        max-width: 780px;
+        width: 100%;
+        position: relative;
+    }
+    .title {
+        a {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 100%;
+            color: #3B8B3E;
+            text-decoration: none;
+        }
+        margin-bottom: 16px;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 130%;
+        color: #333646;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    input {
+        &::-webkit-input-placeholder {
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 100%;
+            color: #8F98A2;
+        }
+        &::-moz-placeholder {
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 100%;
+            color: #8F98A2;
+        }
+        &:-moz-placeholder {
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 100%;
+            color: #8F98A2;
+        }
+        &:-ms-input-placeholder {
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 100%;
+            color: #8F98A2;
+        }
+    }
+    .billing-address-section.legal-address-section {
+        .company-name {
+            width: 100%;
+        }
+        form {
+            .name-block {
+                width: 50%;
+                max-width: none;
+                margin-right: 20px;
+                position: relative;
+            }
+            .surname-block {
+                 width: 50%;
+                 max-width: none;
+                 position: relative;
+             }
+        }
+    }
+    form {
+        .street-block {
+            width: 100%;
+            max-width: 596px;
+            margin-right: 20px;
+            position: relative;
+        }
+        .house-number-block {
+            width: 100%;
+            max-width: 132px;
+            position: relative;
+        }
+        .zip-block {
+            width: 100%;
+            max-width: 150px;
+            margin-right: 20px;
+            position: relative;
+        }
+        .city-block {
+            width: 100%;
+            max-width: 288px;
+            margin-right: 20px;
+            position: relative;
+        }
+        .country-block {
+            width: 100%;
+            max-width: 288px;
+        }
+        label {
+            margin-bottom: 16px;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 100%;
+            color: #545769;
+        }
+        input[type="text"] {
+            &:focus {
+                background: #FFFFFF;
+                border: 1px solid #C0C1C2;
+                border-radius: 6px;
+                box-shadow: 0 0 0 4px rgb(243 243 243 / 90%);
+            }
+            width: 100%;
+            height: 54px;
+            background: #F3F3F3;
+            border-radius: 6px;
+            border: 0;
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 100%;
+            color: #333646;
+            padding: 0 13px;
+            outline: none;
+        }
+        [type="email"] {
+            &:focus {
+                background: #FFFFFF;
+                border: 1px solid #C0C1C2;
+                border-radius: 6px;
+                box-shadow: 0 0 0 4px rgb(243 243 243 / 90%);
+            }
+            width: 100%;
+            height: 54px;
+            background: #F3F3F3;
+            border-radius: 6px;
+            border: 0;
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 100%;
+            color: #333646;
+            padding: 0 13px;
+            outline: none;
+        }
+        [type="tel"] {
+            &:focus {
+                background: #FFFFFF;
+                border: 1px solid #C0C1C2;
+                border-radius: 6px;
+                box-shadow: 0 0 0 4px rgb(243 243 243 / 90%);
+            }
+            width: 100%;
+            height: 54px;
+            background: #F3F3F3;
+            border-radius: 6px;
+            border: 0;
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 100%;
+            color: #333646;
+            padding: 0 13px;
+            outline: none;
+        }
+        [type="number"] {
+            &:focus {
+                background: #FFFFFF;
+                border: 1px solid #C0C1C2;
+                border-radius: 6px;
+                box-shadow: 0 0 0 4px rgb(243 243 243 / 90%);
+            }
+            &::-webkit-outer-spin-button {
+                display: none;
+                -webkit-appearance: none;
+                margin: 0;
+            }
+            &::-webkit-inner-spin-button {
+                display: none;
+                -webkit-appearance: none;
+                margin: 0;
+            }
+            width: 100%;
+            height: 54px;
+            background: #F3F3F3;
+            border-radius: 6px;
+            border: 0;
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 100%;
+            color: #333646;
+            padding: 0 13px;
+            outline: none;
+        }
+    }
+    .error-text {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 100%;
+        color: #EE483F;
+        margin-top: 8px;
+        margin-bottom: 18px;
+        display: none;
+    }
+    .error-text.visible {
+        display: block;
+    }
+    .company-line {
+        transition: all 0.2s;
+    }
+    .forms-line-block {
+        position: relative;
+    }
+}
+
+
+@media (max-width: 1040px) {
+    .registration-section {
+        .title {
+            font-size: 18px;
+        }
+        .billing-address-section {
+            max-width: none;
+            border-radius: 0;
+        }
+        form {
+            .street-block {
+                max-width: none;
+            }
+            .house-number-block {
+                max-width: none;
+            }
+            .city-block {
+                max-width: none;
+            }
+            .country-block {
+                max-width: none;
+            }
+        }
+    }
+}
+@media (max-width: 575px) {
+    .registration-section {
+        .billing-address-section.legal-address-section {
+            form {
+                .name-block {
+                    width: 100%;
+                    margin-right: 0;
+                    margin-bottom: 24px;
+                }
+                .surname-block {
+                    width: 100%;
+                }
+            }
+        }
+        form {
+            .street-block {
+                margin-right: 0;
+                margin-bottom: 24px;
+            }
+            .zip-block {
+                max-width: none;
+                margin-right: 0;
+                margin-bottom: 24px;
+            }
+            .city-block {
+                margin-right: 0;
+                margin-bottom: 24px;
+            }
+        }
+    }
+}
 
 </style>

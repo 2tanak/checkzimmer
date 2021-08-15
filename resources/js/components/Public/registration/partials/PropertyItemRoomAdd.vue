@@ -22,6 +22,107 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+
+.registration-section {
+    .object-data-table {
+        .add-room {
+            a {
+                svg {
+                    margin-right: 5px;
+                    transition: all 0.2s;
+                }
+                &:hover {
+                    svg {
+                        path {
+                            fill: #3B8B3E;
+                        }
+                    }
+                    color: #3B8B3E;
+                }
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 300%;
+                color: #333646;
+                outline: none;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                margin-left: 37px;
+                transition: all 0.2s;
+            }
+            position: relative;
+        }
+        .add-room > svg {
+            position: absolute;
+            left: 16px;
+            top: -13px;
+        }
+        .object-data-table-line {
+            border-bottom: 1px solid #edeef0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .selected-object {
+            svg.mobile-line {
+                display: none;
+            }
+        }
+    }
+}
+
+@media (max-width: 760px) {
+    .registration-section {
+        .object-data-table {
+            .add-room {
+                a {
+                    margin-left: 42px;
+                }
+            }
+            .add-room > svg {
+                left: 22px;
+            }
+        }
+    }
+}
+@media (max-width: 479px) {
+    .registration-section {
+        .object-data-table {
+            .object-data-table-line {
+                &:first-of-type {
+                    border-top: 1px solid #edeef0;
+                }
+                &:last-of-type {
+                    border-bottom: 0;
+                }
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .selected-object {
+                .select-room {
+                    svg.mobile-line {
+                        display: block;
+                        position: absolute;
+                        top: -208px;
+                        left: 6px;
+                    }
+                }
+                .add-room {
+                    svg.mobile-line {
+                        display: block;
+                        position: absolute;
+                        top: -200px;
+                        left: 22px;
+                    }
+                    padding: 0 !important;
+                }
+                svg.desctope-line {
+                    display: none;
+                }
+            }
+        }
+    }
+}
 
 </style>

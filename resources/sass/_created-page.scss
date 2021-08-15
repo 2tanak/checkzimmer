@@ -1,0 +1,28 @@
+.pt-4 {
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+}
+.py-4 {
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+    min-height: calc(100vh - 165px);
+}
+.single-content.created-page {
+    h1 {
+        text-align: center;
+        width: 100%;
+        order: inherit;
+        display: block;
+    }
+    flex-direction: column;
+    padding-top: 40px;
+}
+.single-container.created-page-container {
+    padding: 0 15px;
+}
+
+@media (max-width: 575px) {
+    .py-4 {
+        min-height: calc(100vh - 239px);
+    }
+}

@@ -16,7 +16,10 @@
 
             @include('inquiry.contact')
 
-            @include('single.inquiry-form', ['id' => 0, 'classes' => 'nothing-found-form'])
+            <div class="nothing-found-block">
+                <div class="title">{{ __('Send request') }}</div>
+                @include('single.inquiry-form', ['id' => 0, 'classes' => 'nothing-found-form'])
+            </div>
 
             <div class="fixed-bar">
                 <a href="#" class="send-inquiry inquiry"><span>Unverbindliche</span><span>Anfrage</span></a>

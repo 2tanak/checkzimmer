@@ -66,6 +66,295 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
 
+.registration-section {
+    .object-data-table {
+        .table-head-item-mobile {
+            display: none;
+        }
+        .object-data-table-line {
+            border-bottom: 1px solid #edeef0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        input {
+            &:focus {
+                background: #FFFFFF;
+                border: 1px solid #C0C1C2;
+                border-radius: 6px;
+                box-shadow: 0 0 0 4px rgb(243 243 243 / 90%);
+            }
+            background: #F3F3F3;
+            border-radius: 6px;
+            padding: 0 12px;
+            border: 0;
+            outline: none;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 300%;
+            color: #333646;
+        }
+        .select-type {
+            svg {
+                margin-right: 6px;
+            }
+        }
+        .price-input-block {
+            input {
+                width: 57px;
+                height: 29px;
+            }
+        }
+        .personen-input-block {
+            input {
+                width: 57px;
+                height: 29px;
+            }
+        }
+        .quality-input-block {
+            input {
+                width: 50px;
+                height: 29px;
+            }
+        }
+        .price-input-block {
+            span.from {
+                font-weight: 500;
+                font-size: 10px;
+                line-height: 356.5%;
+                color: #333646;
+                margin-right: 6px;
+            }
+            span.dollar-sign {
+                font-weight: 700;
+                font-size: 10px;
+                line-height: 360.5%;
+                color: #333646;
+                margin-left: 4px;
+            }
+            display: flex;
+            align-items: center;
+        }
+        .object-data-link {
+            a {
+                text-decoration: none;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 100%;
+                color: #333646;
+                outline: none;
+                transition: all 0.2s;
+            }
+            a.duplicate {
+                &:hover {
+                    color: #3B8B3E;
+                }
+                margin-right: 20px;
+            }
+            a.not-active {
+                pointer-events: none;
+                color: #B5B7C1;
+            }
+            a.delete {
+                &:hover {
+                    color: #EE483F;
+                }
+            }
+            a.duplicate.duplicate-mobile {
+                display: none;
+            }
+            a.delete.delete-mobile {
+                display: none;
+            }
+            display: flex;
+            align-items: center;
+            margin-right: 24px;
+        }
+        .object-data-select {
+            display: flex;
+            align-items: center;
+        }
+        .table-head-item {
+            font-weight: 600;
+            font-size: 10px;
+            line-height: 140%;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            color: #8F98A2;
+            white-space: nowrap;
+        }
+        .selected-object {
+            svg.mobile-line {
+                display: none;
+            }
+        }
+    }
+    .object-data-table-room {
+        .select-room {
+            margin-left: 29px;
+            position: relative;
+        }
+        svg.desctope-line {
+            position: absolute;
+            top: -13px;
+            left: -13px;
+        }
+    }
+}
+
+@media (max-width: 760px) {
+    .registration-section {
+        .object-data-table {
+            .price-input-block {
+                margin-right: 23px;
+            }
+            .object-data-link {
+                a.duplicate.duplicate-desctope {
+                    display: none;
+                }
+                a.duplicate.duplicate-mobile {
+                    display: block;
+                }
+                a.delete.delete-mobile {
+                    display: block;
+                }
+                a.delete.delete-desctope {
+                    display: none;
+                }
+                a.duplicate {
+                    margin-right: 12px;
+                }
+                margin-right: 12px;
+            }
+            .select-room {
+                margin-right: 10px;
+                margin-left: 36px;
+            }
+            .quality-input-block {
+                margin-right: 10px;
+            }
+            .personen-input-block {
+                margin-right: 10px;
+            }
+        }
+    }
+}
+@media (max-width: 479px) {
+    .registration-section {
+        .object-data-table {
+            .table-head-item-mobile {
+                display: block;
+            }
+            .object-data-table-line {
+                &:first-of-type {
+                    border-top: 1px solid #edeef0;
+                }
+                &:last-of-type {
+                    border-bottom: 0;
+                }
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            input {
+                width: 100% !important;
+            }
+            .price-input-block {
+                margin-right: 0;
+                margin-left: 0;
+                margin-bottom: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                padding-left: 34px;
+                width: 100%;
+            }
+            .price-input-block {
+                input {
+                    margin-left: 0;
+                }
+            }
+            .select-room {
+                margin-right: 0;
+                margin-left: 0;
+                width: 100%;
+                margin-bottom: 15px;
+                padding-left: 20px;
+            }
+            .object-data-link {
+                a.duplicate.duplicate-mobile {
+                    display: none;
+                }
+                a.duplicate.duplicate-desctope {
+                    display: block;
+                }
+                a.delete.delete-desctope {
+                    display: block;
+                }
+                a.delete.delete-mobile {
+                    display: none;
+                }
+                margin-right: 0;
+                margin-left: 34px;
+                margin-top: 5px;
+            }
+            .selected-object {
+                .select-room {
+                    svg.mobile-line {
+                        display: block;
+                        position: absolute;
+                        top: -208px;
+                        left: 6px;
+                    }
+                }
+                .object-data-table-line {
+                    padding: 14px 16px 20px 16px;
+                }
+                svg.desctope-line {
+                    display: none;
+                }
+                .add-room {
+                    svg.mobile-line {
+                        display: block;
+                        position: absolute;
+                        top: -200px;
+                        left: 22px;
+                    }
+                }
+            }
+            .quality-input-block {
+                margin-right: 0;
+                margin-left: 0;
+                margin-bottom: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                padding-left: 34px;
+                padding-right: 11px;
+                width: 100%;
+            }
+            .personen-input-block {
+                margin-right: 0;
+                margin-left: 0;
+                margin-bottom: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                padding-left: 34px;
+                padding-right: 11px;
+                width: 100%;
+            }
+            .quality-head-mobile {
+                margin-right: 44px;
+            }
+            .personen-head-mobile {
+                margin-right: 30px;
+            }
+            .price-head-mobile {
+                margin-right: 10px;
+            }
+        }
+    }
+}
 </style>

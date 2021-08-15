@@ -25,6 +25,29 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+
+.steps-section {
+    .steps-container {
+        width: 100%;
+        max-width: 1212px;
+        padding: 0 16px;
+        margin: auto;
+    }
+    .steps-content {
+        display: flex;
+        align-items: center;
+        padding: 30px 0;
+    }
+}
+
+@media (max-width: 1040px) {
+    .steps-section {
+        .steps-content {
+            justify-content: space-between;
+            padding-bottom: 48px;
+        }
+    }
+}
 
 </style>
