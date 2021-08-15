@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const client = axios.create({
-    //  baseURL: '/api',
+    //  baseURL: '',
 });
 
 function getConfig() {
@@ -31,7 +31,7 @@ export default (base) => class ApiRequest {
     all() {
         let token = localStorage.getItem('token');
 
-        return client.get(`/api/${base}`, getConfig());
+        return client.get(`/${base}`, getConfig());
     }
     byPage(page, params) {
         params = params || {};
@@ -39,13 +39,13 @@ export default (base) => class ApiRequest {
         if (query !== '') {
             query = '&' + query;
         }
-        return client.get(`/api/${base}?page=${page}${query}`, getConfig());
+        return client.get(`/${base}?page=${page}${query}`, getConfig());
     }
     get(id) {
-        return client.get(`/api/${base}/${id}`, getConfig());
+        return client.get(`/${base}/${id}`, getConfig());
     }
     query(data) {
-        return client.post(`/api/${base}/query`, data, getConfig());
+        return client.post(`/${base}/query`, data, getConfig());
     }
     request(action, data, reqType, params) {
         reqType = reqType || 'post';
@@ -54,7 +54,7 @@ export default (base) => class ApiRequest {
         if (query !== '') {
             action += '?' + query;
         }
-        let url = `/api/${base}/${action}`;
+        let url = `/${base}/${action}`;
         switch (reqType) {
             case 'post':
                 return client.post(url, data, getConfig());
@@ -67,19 +67,19 @@ export default (base) => class ApiRequest {
         }
     }
     update(id, data) {
-        return client.put(`/api/${base}/${id}`, data, getConfig());
+        return client.put(`/${base}/${id}`, data, getConfig());
     }
     updateAll(data) {
-        return client.put(`/api/${base}`, data, getConfig());
+        return client.put(`/${base}`, data, getConfig());
     }
     delete(id) {
-        return client.delete(`/api/${base}/${id}`, getConfig());
+        return client.delete(`/${base}/${id}`, getConfig());
     }
     deleteAll() {
-        return client.post(`/api/${base}`, getConfig());
+        return client.post(`/${base}`, getConfig());
     }
     create(data) {
-        return client.post(`/api/${base}`, data, getConfig());
+        return client.post(`/${base}`, data, getConfig());
     }
 };
 
