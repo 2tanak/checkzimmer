@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // Dashboard Components
-import dashboard from '../views/dashboard'
+import dashboard from '../views/dashboard.vue'
 
 // Widgets
 //import widgets from '../views/widgets'

@@ -2,6 +2,9 @@
 
 namespace App\Console;
 
+use App\Console\Commands\optimizeImages;
+use App\Console\Commands\thumbnailImages;
+use App\Console\Commands\webpImages;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Console\Commands\updateBookingProperties;
@@ -14,7 +17,10 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        updateBookingProperties::class
+        updateBookingProperties::class,
+        optimizeImages::class,
+        thumbnailImages::class,
+        webpImages::class
     ];
 
     /**

@@ -1,16 +1,14 @@
 import Vue from 'vue'
-import Public from './components/Public/Index'
-import Home from './components/Public/Home'
-import Favorites from './components/Public/Favorites'
-import Single from './components/Public/Single'
-import Registration from './components/Public/Registration'
+
+import Public from './components/Public/PublicRoot';
+import Home from './components/Public/Home';
 
 //require('./bootstrap');
 
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import {store} from './store';
-import router from "./StarAdmin/router";
+import router from "./router-public";
 
 Vue.config.productionTip = false;
 axios.defaults.baseURL = `/api`;
@@ -59,15 +57,18 @@ const i18n = new VueI18n({
     messages: translations,
 })
 
+console.log('wrooom');
+
 const app = new Vue({
     el: '#application',
     router,
     components: {
+        //Public,
+        //Home,
         Public,
-        Home,
-        Favorites,
-        Single,
-        Registration,
+        //Favorites,
+        //Single,
+        //Registration,
     },
     store,
     i18n,
@@ -87,44 +88,14 @@ jQuery(document).ready(function() {
         jQuery(this).toggleClass('active');
     });
 
-    jQuery('.list-content').css('display', 'block');
+    //jQuery('.list-content').css('display', 'block');
     jQuery(' .load-block-content.first-load-block-content').css('display', 'none')
-
-    jQuery('.sorting a').click(function(e) {
-        e.preventDefault();
-        jQuery('.sorting').toggleClass('up');
-    });
-
-    jQuery('.filter-block li').click(function () {
-        var paragraph = jQuery(this).text();
-        jQuery('.filter-block li').removeClass('check');
-        jQuery(this).addClass('check');
-        jQuery('.sorting a').text(paragraph);
-        jQuery('.sorting').removeClass('up');
-    });
 
     jQuery(document).mouseup(function (e){
         var modal = jQuery(".filter-block");
         if (!modal.is(e.target) && modal.has(e.target).length === 0){
             jQuery('.sorting').removeClass('up');
         }
-    });
-
-    jQuery(".left-block a").click(function(e) {
-        e.preventDefault();
-        jQuery(".left-block a").removeClass('active');
-        jQuery(this).addClass('active');
-    });
-
-    jQuery('.left-block a.map').click(function() {
-        jQuery('.property .container').addClass('active');
-        jQuery('.property').addClass('show-map');
-        jQuery('.property').removeClass('not-map');
-    });
-    jQuery('.left-block a.list').click(function() {
-        jQuery('.property .container').removeClass('active');
-        jQuery('.property').removeClass('show-map');
-        jQuery('.property').addClass('not-map');
     });
 
     jQuery('.mobile-button label').click(function () {
