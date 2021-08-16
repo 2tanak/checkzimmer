@@ -195,11 +195,11 @@
     let favs = JSON.parse(localStorage.getItem("favoritesList")) || [];
     document.getElementsByClassName('favoritesCount')[0].innerHTML = favs.length;
 
-    /*document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
         jQuery('#arrival-date, #date-departure').datepicker({
             format: "dd/mm/yyyy"
         })
-    });*/
+    });
 </script>
 
 <script>
