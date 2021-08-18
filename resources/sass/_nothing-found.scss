@@ -538,11 +538,26 @@
                 margin-bottom: 0;
             }
             img {
-                margin-right: 100px;
                 width: 500px;
                 height: 346px;
                 object-fit: cover;
                 border-radius: 12px;
+                position: relative;
+                z-index: 1;
+            }
+            .img-container {
+                &:after {
+                    content:"";
+                    position: absolute;
+                    width: 500px;
+                    height: 346px;
+                    background: #FFFFFF;
+                    border-radius: 12px;
+                    top: 30px;
+                    right: -30px;
+                }
+                position: relative;
+                margin-right: 100px;
             }
             .advertising-title {
                 margin-bottom: 18px;
@@ -621,9 +636,11 @@
     .nothing-found-section {
         .advertising {
             .advertising-item {
-                img {
+                .img-container {
                     margin-right: 0;
                     margin-bottom: 76px;
+                    width: 500px;
+                    height: 346px;
                 }
                 .advertising-title {
                     font-size: 18px;
@@ -764,6 +781,13 @@
         .advertising {
             .advertising-item {
                 img {
+                    width: 100%;
+                    height: 200px;
+                }
+                .img-container {
+                    &::after {
+                        content: none;
+                    }
                     width: 100%;
                     margin-bottom: 24px;
                     height: 200px;
