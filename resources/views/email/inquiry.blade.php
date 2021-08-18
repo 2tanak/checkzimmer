@@ -1,5 +1,7 @@
 <h1>{{ __('Rent Inquiry') }}</h1>
 
+<strong>Sent from:</strong> <a href="{{ request()->headers->get('referer') }}" target="_blank">{{ request()->headers->get('referer') }}</a>
+
 <h2>{{ __('Personal info') }}</h2>
 
 <strong>{{ __('From') }}:</strong> {{ $data['name'] }}
