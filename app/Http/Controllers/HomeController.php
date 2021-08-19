@@ -266,8 +266,8 @@ class HomeController extends Controller
 
             $notificationEmail = env('MAIL_NOTIFICATION_ADDRESS', '');
             if ($notificationEmail) {
-                $data['arrival-date'] = date('d.m.Y', strtotime($data['arrival-date']));
-                $data['date-departure'] = date('d.m.Y', strtotime($data['date-departure']));
+                $data['arrival-date'] = date('m.d.Y', strtotime($data['arrival-date']));
+                $data['date-departure'] = date('m.d.Y', strtotime($data['date-departure']));
                 $data['date-inquiry'] = date('d.m.Y', strtotime($data['date-departure']));
                 Mail::to($notificationEmail)->send(new InquiryHotel($property, $data));
                 if ($data['email-checkbox'] ?? '') {
