@@ -7,7 +7,7 @@
     })(window, document, 'script', 'cloud.roistat.com', '3471f90cb1269b9107391c11fb73fefc');
 </script>
 <!-- BEGIN WHATSAPP INTEGRATION WITH ROISTAT -->
-<script type="bogus" class="js-whatsapp-message-container">Обязательно отправьте это сообщение и дождитесь ответа. Ваш номер: {roistat_visit}</script>
+<script type="bogus" class="js-whatsapp-message-container">Senden Sie diese Nachricht unbedingt ab und warten Sie auf eine Antwort. Ihr Zimmernummer ist: {roistat_visit}</script>
 <script>
     (function() {
         if (window.roistat !== undefined) {
