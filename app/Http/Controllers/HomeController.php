@@ -245,7 +245,7 @@ class HomeController extends Controller
                 'contact.name' => $data['name'] ?? '',
                 '500281' => $data['arrival-date'] ?? '',
                 '490395' => $data['date-departure'] ?? '',
-                '498251' => $data['number-persons'] ?? '',
+                '586761' => $data['number-persons'] ?? '',
                 '585571' => request()->headers->get('referer'),
                 'language' => $data['language'] ?? '',
                 'type' => $data['type'] ?? '',
