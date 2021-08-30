@@ -571,6 +571,13 @@
                 line-height: 160%;
                 color: #545769;
             }
+            .advertising-text {
+                p {
+                    &:last-of-type {
+                        margin-bottom: 0;
+                    }
+                }
+            }
             display: flex;
             margin-bottom: 100px;
         }
