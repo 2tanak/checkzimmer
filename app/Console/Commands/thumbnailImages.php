@@ -39,7 +39,7 @@ class thumbnailImages extends Command
      */
     public function handle()
     {
-        $this->checkDirectory('public/images/thumbs200');
+        $this->checkDirectory('public/images/thumbs300');
         $this->checkDirectory('public/images/small500');
         $this->directoryScan('public/images/uploaded');
         return 0;
@@ -50,7 +50,7 @@ class thumbnailImages extends Command
 
         foreach ($directories as $i => $directory) {
 
-            $thumbdir = str_replace('/images/uploaded', '/images/thumbs200', $directory);
+            $thumbdir = str_replace('/images/uploaded', '/images/thumbs300', $directory);
             $smalldir = str_replace('/images/uploaded', '/images/small500', $directory);
             $this->checkDirectory($thumbdir);
             $this->checkDirectory($smalldir);
@@ -61,17 +61,18 @@ class thumbnailImages extends Command
 
             $files = Storage::disk('local')->allFiles($directory);
 
+            $k300 = 300 / 500;
+
             foreach ($files as $file) {
                 echo "Processing ".$file."\r\n";
                 list($width, $height) = getimagesize(storage_path() . '/app/' . $file);
 
                 $output500 = str_replace('/images/uploaded', '/images/small500', $file);
-                $output200 = str_replace('/images/uploaded', '/images/thumbs200', $file);
+                $output300 = str_replace('/images/uploaded', '/images/thumbs300', $file);
 
-                $k200 = 200 / $width;
                 $k500 = 500 / $width;
                 $imgSvc->imageResize(storage_path() . '/app/' . $file, $k500, storage_path() . '/app/' . $output500);
-                $imgSvc->imageResize(storage_path() . '/app/' . $output500, $k200, storage_path() . '/app/' . $output200);
+                $imgSvc->imageResize(storage_path() . '/app/' . $output500, $k300, storage_path() . '/app/' . $output300);
             }
         }
     }
