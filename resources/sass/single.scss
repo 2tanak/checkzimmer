@@ -1,3 +1,6 @@
+@import "resources/sass/main-header";
+@import "resources/sass/footer";
+
 @import "resources/sass/single-components/sidebar";
 @import "resources/sass/single-components/fixed-bar";
 @import "resources/sass/single-components/modal-slider";
@@ -7,6 +10,8 @@
 @import "resources/sass/single-components/main-top-block";
 @import "resources/sass/single-components/scroll-top";
 @import "resources/sass/single-components/object-description";
+
+
 
 .single-content {
     .left-part {
