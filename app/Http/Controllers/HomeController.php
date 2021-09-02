@@ -245,7 +245,8 @@ class HomeController extends Controller
                 'contact.name' => $data['name'] ?? '',
                 '500281' => $data['arrival-date'] ?? '',
                 '490395' => $data['date-departure'] ?? '',
-                '497771' => $data['number-persons'] ?? '',
+                '586761' => $data['number-persons'] ?? '',
+                '585571' => request()->headers->get('referer'),
                 'language' => $data['language'] ?? '',
                 'type' => $data['type'] ?? '',
                 'email-checkbox' => $data['email-checkbox'] ?? '',
@@ -266,9 +267,11 @@ class HomeController extends Controller
 
             $notificationEmail = env('MAIL_NOTIFICATION_ADDRESS', '');
             if ($notificationEmail) {
-                $data['arrival-date'] = date('d.m.Y', strtotime($data['arrival-date']));
-                $data['date-departure'] = date('d.m.Y', strtotime($data['date-departure']));
-                $data['date-inquiry'] = date('d.m.Y', strtotime($data['date-departure']));
+                $data['arrival-date'] = implode('-', array_reverse(explode('/', $data['arrival-date'])));
+                $data['date-departure'] = implode('-', array_reverse(explode('/', $data['date-departure'])));
+                $data['arrival-date'] = date('Y-m-d', strtotime($data['arrival-date']));
+                $data['date-departure'] = date('Y-m-d', strtotime($data['date-departure']));
+                $data['date-inquiry'] = date('Y-m-d', strtotime($data['date-departure']));
                 Mail::to($notificationEmail)->send(new InquiryHotel($property, $data));
                 if ($data['email-checkbox'] ?? '') {
                     Mail::to($data['email'])->send(new InquiryHotel($property, $data));

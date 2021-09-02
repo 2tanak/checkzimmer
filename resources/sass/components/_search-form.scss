@@ -299,10 +299,12 @@ $color4: #6BB63F;
     }
     form.find-subdomain-redirect {
         width: 100%;
+        overflow: hidden;
+        opacity: 0;
     }
     margin-bottom: 68px;
     min-height: 404px;
-    background-image: url("/img/list-main-bg.png");
+    background-image: url("/img/list-main-bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

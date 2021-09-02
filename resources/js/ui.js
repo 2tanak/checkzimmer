@@ -57,8 +57,6 @@ const i18n = new VueI18n({
     messages: translations,
 })
 
-console.log('wrooom');
-
 const app = new Vue({
     el: '#application',
     router,
@@ -89,7 +87,7 @@ jQuery(document).ready(function() {
     });
 
     //jQuery('.list-content').css('display', 'block');
-    jQuery(' .load-block-content.first-load-block-content').css('display', 'none')
+    //jQuery(' .load-block-content.first-load-block-content').css('display', 'none')
 
     jQuery(document).mouseup(function (e){
         var modal = jQuery(".filter-block");
@@ -557,4 +555,6 @@ window.onload = function () {
     }, 1000);
 
     jQuery('.nothing-found-section .avatar-slider').css('overflow', 'visible').css('opacity', '1');
+
+    jQuery('.background-image-block .find-subdomain-redirect').css('overflow', 'visible').css('opacity', '1');
 };
