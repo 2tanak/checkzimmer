@@ -448,6 +448,11 @@ jQuery(document).ready(function() {
         jQuery('.single-main-slider').removeClass( "disabled-dots" );
     }
 
+    jQuery('.collapse-button').click(function() {
+        var item = jQuery(this).parents('.questions-item');
+        item.toggleClass('show').siblings('.show').removeClass('show');
+    })
+
 });
 
 jQuery(window).on('load', function() {
