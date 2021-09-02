@@ -2,5 +2,10 @@
     "/js/app.js": "/js/app.js",
     "/js/ui.js": "/js/ui.js",
     "/css/app.css": "/css/app.css",
-    "/css/style.css": "/css/style.css"
+    "/css/main-subdomain.css": "/css/main-subdomain.css",
+    "/css/main.css": "/css/main.css",
+    "/css/style.css": "/css/style.css",
+    "/css/nothing-found.css": "/css/nothing-found.css",
+    "/css/register.css": "/css/register.css",
+    "/css/single.css": "/css/single.css"
 }

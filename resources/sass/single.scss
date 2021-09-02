@@ -1,6 +1,15 @@
+@import 'resources/sass/components/vendor/bootstrap';
+@import "resources/sass/components/datepicker/bootstra-datepicker.min";
+@import "components/select2/select2-min";
+@import "resources/sass/general-style";
 @import "resources/sass/main-header";
 @import "resources/sass/footer";
-
+@import "resources/sass/preloader";
+@import "resources/sass/components/fonts/inter";
+@import "resources/sass/components/fonts/fira-sans";
+@import "resources/sass/components/login-modal";
+@import "resources/sass/components/inquiry-form";
+@import "resources/sass/components/datepicker";
 @import "resources/sass/single-components/sidebar";
 @import "resources/sass/single-components/fixed-bar";
 @import "resources/sass/single-components/modal-slider";

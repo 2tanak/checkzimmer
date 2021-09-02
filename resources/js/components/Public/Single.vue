@@ -1,16 +1,16 @@
 <template>
     <div class="object-description object-description-desctope" id="object-description">
         <ul class="nav nav-tabs">
-            <li class="nav-item">
+            <li class="nav-item description-tab-link">
                 <a class="nav-link active" data-toggle="tab" href="#description">{{ $t('Description object') }}</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item reviews-tab-link">
                 <a class="nav-link" data-toggle="tab" href="#reviews">{{ $t('Reviews') }} <span>{{ reviews ? reviews.length : 0 }}</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item questions-tab-link">
                 <a class="nav-link" data-toggle="tab" href="#questions">{{ $t('Questions') }} <span>{{ questions ? questions.length : 0 }}</span></a>
             </li>
-            <li class="nav-item map-active">
+            <li class="nav-item map-block-tab-link map-active">
                 <a class="nav-link" data-toggle="tab" href="#map-block">{{ $t('Map') }}</a>
             </li>
         </ul>
@@ -166,6 +166,8 @@
 
 <script>
 import axios from 'axios';
+require('../../bootstrap');
+
 export default {
     name: "Single",
     data() {
@@ -193,6 +195,13 @@ export default {
         this.description = jQuery('.description-content').text();
         this.initMap();
         this.initGrecaptcha();
+
+        /*jQuery(".nav-tabs a").click(function(e) {
+            e.preventDefault();
+            jQuery('.nav-tabs a').removeClass('active');
+            jQuery(this).addClass('active');
+        });*/
+
     },
     methods: {
         addQuestion() {
