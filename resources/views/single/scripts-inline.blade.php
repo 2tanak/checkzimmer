@@ -35,5 +35,17 @@
             jQuery(this).removeClass('active')
             jQuery('.comfort a.comfort-collapse-link span.open-link').removeClass('not-active');
         });
+
+        jQuery('.see-number-phone').click(function () {
+            jQuery('.see-number-phone').addClass('active');
+            jQuery('.phone-hide').html(atob(window.phonenumStr));
+            jQuery('.phone-hide').attr('href', 'tel:' + atob(window.phonenum));
+        });
+
+        jQuery('.scroll-top').click(function () {
+            jQuery('html, body').animate({
+                scrollTop: 0
+            }, 400);
+        });
     })
 </script>

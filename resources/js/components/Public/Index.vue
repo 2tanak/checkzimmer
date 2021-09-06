@@ -29,11 +29,11 @@
                                     </div>
                                 </div>
                                 <div class="property-shadow" v-if="property.length"></div>
-                                <div class="google-map">
+                                <div :class="{'google-map': true, 'fullscreen': fullscreenMap}">
                                     <div id="map"></div>
 
-                                    <div class="fullscreen-button"><img src="/svg/i-fullscrean.svg" alt="Full Screen Map"></div>
-                                    <div class="close-button"><img src="/svg/i-close-burger.svg" alt="Full Screen Map"></div>
+                                    <div class="fullscreen-button" @click="mapFullscreen"><img src="/svg/i-fullscrean.svg" alt="Full Screen Map"></div>
+                                    <div class="close-button" @click="mapFullscreenOff"><img src="/svg/i-close-burger.svg" alt="Full Screen Map"></div>
 
                                     <div class="mobile-picture">
                                         <img src="/img/property-picture.png" alt="alt">
@@ -161,6 +161,7 @@ export default {
             additional_pages: true,
             search: {...newSearch},
             activeItems: [],
+            fullscreenMap: false
         };
     },
     mounted() {
@@ -542,6 +543,12 @@ export default {
                 return 0;
             }
             return property.rooms.reduce( (acc, cur) => cur.price ? ( acc ? Math.min(acc, cur.price) : cur.price ) : acc, 0 )
+        },
+        mapFullscreen() {
+            this.fullscreenMap = true;
+        },
+        mapFullscreenOff() {
+            this.fullscreenMap = false;
         }
     }
 }
