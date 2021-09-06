@@ -282,10 +282,6 @@
     align-items: center;
     justify-content: center;
 }
-.modal-show {
-    opacity: 1;
-    visibility: visible;
-}
 .modal-overlay.inquiry-modal-overlay.modal-show {
     opacity: 1;
     visibility: visible;
@@ -301,6 +297,8 @@
         }
         visibility: visible;
     }
+    opacity: 1;
+    visibility: visible;
 }
 .modal-block.modal-success {
     img {

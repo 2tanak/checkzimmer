@@ -102,6 +102,10 @@ jQuery(document).ready(function() {
         if (jQuery('#distance-select, #number-personse').length) {
             indexFormSelect2Init()
         }
+
+        jQuery('.nothing-found-section .avatar-slider').css('overflow', 'visible').css('opacity', '1');
+
+        jQuery('.background-image-block .find-subdomain-redirect').css('overflow', 'visible').css('opacity', '1');
     });
 
 

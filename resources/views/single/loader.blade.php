@@ -451,9 +451,5 @@
         setTimeout (function() {
             jQuery('.communication').removeClass('not-active');
         }, 1000);
-
-        jQuery('.nothing-found-section .avatar-slider').css('overflow', 'visible').css('opacity', '1');
-
-        jQuery('.background-image-block .find-subdomain-redirect').css('overflow', 'visible').css('opacity', '1');
     });
 </script>
