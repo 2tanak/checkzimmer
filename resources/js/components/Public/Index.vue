@@ -1,6 +1,6 @@
 <template>
     <div id="app-list">
-        <div class="list-content" :style="{display: loadingData ? 'none' : 'block'}">
+        <div class="list-content" :style="{display: loading ? 'none' : 'block'}">
             <div class="list-content-item">
                 <div class="container">
                     <div class="sorting-block">
@@ -29,11 +29,11 @@
                                     </div>
                                 </div>
                                 <div class="property-shadow" v-if="property.length"></div>
-                                <div class="google-map">
+                                <div :class="{'google-map': true, 'fullscreen': fullscreenMap}">
                                     <div id="map"></div>
 
-                                    <div class="fullscreen-button"><img src="/svg/i-fullscrean.svg" alt="Full Screen Map"></div>
-                                    <div class="close-button"><img src="/svg/i-close-burger.svg" alt="Full Screen Map"></div>
+                                    <div class="fullscreen-button" @click="mapFullscreen"><img src="/svg/i-fullscrean.svg" alt="Full Screen Map"></div>
+                                    <div class="close-button" @click="mapFullscreenOff"><img src="/svg/i-close-burger.svg" alt="Full Screen Map"></div>
 
                                     <div class="mobile-picture">
                                         <img src="/img/property-picture.png" alt="alt">
@@ -45,7 +45,7 @@
                         </transition>
                         <transition name="fade">
                             <div class="load-block-content" :style="{ display: loading ? 'block':'none !important' }">
-                                <ItemListLoading v-if="loading" />
+                                <ItemListLoading />
                                 <div class="place-card"></div>
                             </div>
                         </transition>
@@ -161,6 +161,7 @@ export default {
             additional_pages: true,
             search: {...newSearch},
             activeItems: [],
+            fullscreenMap: false
         };
     },
     mounted() {
@@ -458,6 +459,7 @@ export default {
                     that.additional_pages = resp.data.current_page < resp.data.last_page;
                     that.loadingData = false;
                     that.loading = false;
+                    jQuery(' .load-block-content.first-load-block-content').css('display', 'none')
                     if (resp.data.objects.current_page  >= resp.data.objects.last_page) {
                         if (that.additional_load === false) {
                             if (this.nodist === 0 ) {
@@ -506,6 +508,7 @@ export default {
             this.search.ord = order;
             this.loading = true;
             this.loadingData = true;
+            jQuery(' .load-block-content.first-load-block-content').css('display', 'block');
             this.submitForm(true);
 
             /*properties.request('querySort', data)
@@ -540,6 +543,12 @@ export default {
                 return 0;
             }
             return property.rooms.reduce( (acc, cur) => cur.price ? ( acc ? Math.min(acc, cur.price) : cur.price ) : acc, 0 )
+        },
+        mapFullscreen() {
+            this.fullscreenMap = true;
+        },
+        mapFullscreenOff() {
+            this.fullscreenMap = false;
         }
     }
 }

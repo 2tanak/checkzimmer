@@ -1,49 +1,49 @@
 .datepicker {
     &.dropdown-menu {
-        margin: 0;
-        min-width: 280px;
-        padding: 15px 24px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
-        border-radius: 6px;
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 24px;
-        color: #333646;
+        margin: 0 !important;
+        min-width: 280px !important;
+        padding: 15px 24px !important;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18) !important;
+        border-radius: 6px !important;
+        font-weight: 500 !important;
+        font-size: 12px !important;
+        line-height: 24px !important;
+        color: #333646 !important;
         border: 1px solid #e3e4e5 !important;
         /*position: fixed;*/
     }
     &.dropdown-menu table {
-        width: 100%;
+        width: 100% !important;
     }
     td, th {
-        width: 32px;
-        height: 32px;
+        width: 32px !important;
+        height: 32px !important;
     }
-    table tr td.active.active {
+    table tr td.active {
         background-color: #6BB63F !important;
-        color: #ffffff;
-        background-image: none;
-        border-radius: 100%;
+        color: #ffffff !important;
+        background-image: none !important;
+        border-radius: 100% !important;
     }
     th.dow {
-        font-weight: 400;
-        font-size: 11px;
-        line-height: 100%;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
-        color: #9BADC2;
+        font-weight: 400 !important;
+        font-size: 11px !important;
+        line-height: 100% !important;
+        letter-spacing: 0.02em !important;
+        text-transform: uppercase !important;
+        color: #9BADC2 !important;
     }
     .datepicker-switch {
-        font-weight: 600;
-        font-size: 12px;
-        line-height: 100%;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
-        color: #3B8B3E;
+        font-weight: 600 !important;
+        font-size: 12px !important;
+        line-height: 100% !important;
+        letter-spacing: 0.02em !important;
+        text-transform: uppercase !important;
+        color: #3B8B3E !important;
     }
     @media (max-width: 680px) {
         &.dropdown-menu {
-            width: calc(100% - 32px);
+            width: calc(100% - 32px) !important;
         }
     }
 }

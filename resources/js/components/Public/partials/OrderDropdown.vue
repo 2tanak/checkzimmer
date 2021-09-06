@@ -1,6 +1,6 @@
 <template>
-    <div :class="{sorting: true, up: active}">
-        <a href="#" @click.prevent="switchActive">{{ modeActive.title }}</a>
+    <div :class="{sorting: true, up: active}" v-closable="{ exclude: ['sorting'], handler: 'orderBlockHide' }">
+        <a href="#" @click.prevent="switchActive">{{ $t('Sortieren nach') }}: {{ modeActive.title }}</a>
         <div class="filter-block">
             <ul>
                 <li v-for="option in options" @click.prevent="loadSort(option.mode)" :class="{check: mode === option.mode}">{{ option.title }}</li>
@@ -37,6 +37,9 @@ export default {
         }
     },
     methods: {
+        orderBlockHide() {
+            this.active = false;
+        },
         switchActive() {
             this.active = !this.active
         },

@@ -11,6 +11,12 @@
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function (e) {
+        jQuery('.inquiry-modal .modal-close').click(function () {
+            jQuery('.modal-overlay').removeClass('modal-show');
+            if (jQuery(window).width() <= 680) {
+                jQuery('body').removeClass('overflow');
+            }
+        });
 
     });
 </script>

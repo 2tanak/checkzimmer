@@ -33,6 +33,6 @@ export default new Router({
             path: '/favorites',
             name: 'favorites',
             component: Favorites
-        }
+        },
     ]
 });

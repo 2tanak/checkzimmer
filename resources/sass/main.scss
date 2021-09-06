@@ -1,3 +1,15 @@
+@import 'resources/sass/components/vendor/bootstrap';
+@import "resources/sass/general-style";
+@import "resources/sass/main-header";
+@import "resources/sass/footer";
+@import "resources/sass/components/search-form";
+@import "resources/sass/components/fonts/inter";
+@import "resources/sass/components/fonts/fira-sans";
+@import "resources/sass/components/login-modal";
+@import "components/select2/select2-min";
+
+
+
 $background: #3b8b3e;
 $background2: #6BB63F;
 $border-color: #6BB63F;
@@ -76,6 +88,22 @@ $color4: #6BB63F;
         padding-bottom: 20px;
         padding-top: 20px;
         border-bottom: 1px solid #E8E8ED;
+    }
+    .questions-item.show {
+        .collapse-content {
+            display: block;
+        }
+        .plus-minus {
+            &::before {
+                transform: translate(-50%,-50%) rotate(90deg);
+                background: #df9d3c;
+            }
+            &::after {
+                background: #df9d3c;
+            }
+            background: #fff0db;
+            border: 1px solid #fff0db;
+        }
     }
     .collapse-button {
         &:hover {
@@ -841,6 +869,13 @@ $color4: #6BB63F;
     .plans-section.city-section {
         .questions-block {
             margin-bottom: 40px;
+        }
+        .city-content {
+            .down-subtitle {
+                margin-bottom: 40px;
+                margin-top: 40px;
+                padding: 0 15px;
+            }
         }
     }
 }

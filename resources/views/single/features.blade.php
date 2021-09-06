@@ -24,3 +24,16 @@
         </span>
     </a>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if(jQuery(window).width() <= 991) {
+            jQuery('.comfort .collapse').removeClass('show');
+        }
+
+        jQuery('a.comfort-collapse-link').click(function (e) {
+            e.preventDefault();
+            jQuery(this).toggleClass('active');
+        });
+    });
+</script>
