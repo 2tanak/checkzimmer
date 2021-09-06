@@ -233,7 +233,7 @@
                 </svg>
             </a>
 
-            <!--<a class="melden">
+            {{--<a class="melden">
                 <img class="not-hover" src="/svg/i-report.svg" alt="">
                 <img class="hover" src="/svg/i-report-hover.svg" alt="">
                 <span>{{ __('Report') }}</span>
@@ -260,7 +260,7 @@
                     </div>
                     <a class="submit" href="#">{{ __('Send') }}</a>
                 </div>
-            </div>-->
+            </div>--}}
 
         </div>
     </div>
@@ -269,6 +269,19 @@
 <script>
 
     document.addEventListener('DOMContentLoaded', function() {
+        jQuery('.mobile-sidebar a.inquiry').click(function (e) {
+            e.preventDefault();
+            jQuery('.inquiry-modal-overlay').addClass('modal-show');
+        });
+        jQuery('a.map-mobile-picture').bind("click", function(e){
+            e.preventDefault();
+            var anchor = jQuery(this);
+            jQuery('html, body').stop().animate({
+                scrollTop: jQuery(anchor.attr('href')).offset().top
+            }, 650);
+            jQuery('.mobile-map-content .collapse').addClass('show');
+            jQuery('.click-collapse').find('.head-collapse').attr("aria-expanded", true).removeClass('collapsed');
+        });
     });
 
 </script>

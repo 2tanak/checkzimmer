@@ -443,3 +443,13 @@
         <div class="sidebar-footer recast"></div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        jQuery('.single-load-content').addClass('hide');
+        jQuery('.single-content').removeClass('not-active');
+        setTimeout (function() {
+            jQuery('.communication').removeClass('not-active');
+        }, 1000);
+    });
+</script>

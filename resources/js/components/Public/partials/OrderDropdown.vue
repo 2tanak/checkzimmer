@@ -1,5 +1,5 @@
 <template>
-    <div :class="{sorting: true, up: active}">
+    <div :class="{sorting: true, up: active}" v-closable="{ exclude: ['sorting'], handler: 'orderBlockHide' }">
         <a href="#" @click.prevent="switchActive">{{ $t('Sortieren nach') }}: {{ modeActive.title }}</a>
         <div class="filter-block">
             <ul>
@@ -37,6 +37,9 @@ export default {
         }
     },
     methods: {
+        orderBlockHide() {
+            this.active = false;
+        },
         switchActive() {
             this.active = !this.active
         },

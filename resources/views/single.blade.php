@@ -75,6 +75,9 @@
 
     @include('single.scripts-inline')
 
+    <script>
+
+    </script>
     <style>
         @media print {
             * {

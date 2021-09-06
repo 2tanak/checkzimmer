@@ -76,11 +76,16 @@
 </form>
 
 <script>
+    function select2InitModal() {
+        if (!jQuery('.property-inquiry-form select').select2) {
+            setTimeout(select2InitModal, 100);
+            return;
+        }
+        jQuery('.property-inquiry-form select').select2();
+    }
     document.addEventListener('DOMContentLoaded', function (e) {
-        jQuery(window).on('load', function() {
-            jQuery('.property-inquiry-form select').select2();
-        });
 
+        select2InitModal();
 
         jQuery('.property-inquiry-form .input-block-item input').focus(function () {
             var parent = jQuery(this).closest('.input-block-item, .modal-block');
@@ -185,4 +190,5 @@
             }
         });
     })
+
 </script>

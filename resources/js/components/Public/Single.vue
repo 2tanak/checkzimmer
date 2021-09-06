@@ -37,21 +37,18 @@
             <div class="tab-pane fade reviews-content" id="reviews">
                 <div class="top-block">
                     <div class="top-block-head">
-                        <a class="give-feedback" href="#">{{ $t('Give feedback') }}</a>
+                        <a :class="{'give-feedback': true, 'hide': feedbackForm}" href="#" @click.prevent="toggleFeedbackForm">{{ $t('Give feedback') }}</a>
                     </div>
-                    <div class="empty-block">
+                    <div :class="{'empty-block': true, 'active': feedbackForm}">
                         <div class="reviews-form">
-                            <div class="close-form">
+                            <div class="close-form" @click="toggleFeedbackForm">
                                 <img src="/svg/i-close-popup.svg" alt="alt">
                             </div>
                             <div class="rate">
                                 <div class="title">{{ $t('Rate the object') }}:</div>
                                 <div class="stars">
-                                    <img src="/svg/star-gray.svg" alt="alt">
-                                    <img src="/svg/star-gray.svg" alt="alt">
-                                    <img src="/svg/star-gray.svg" alt="alt">
-                                    <img src="/svg/star-gray.svg" alt="alt">
-                                    <img src="/svg/star-gray.svg" alt="alt">
+                                    <img v-for="i in 5" :src="i <= hoveredStars || i <= clickedStars ? '/svg/star-yellow.svg' : '/svg/star-gray.svg'" :alt="'Rate '+i"
+                                         @mouseenter="activeStars(i)" @mouseout="activeStarsOff" @click="activeStarClicked(i)">
                                 </div>
                             </div>
                             <form @submit.prevent="addReviews">
@@ -69,7 +66,6 @@
                     </div>
                 </div>
                 <div class="reviews-block">
-                    <!--@foreach ($reviews as $key => $review)-->
                     <div v-for="review in reviews" class="reviews-block-item">
                         <div class="reviews-head">
                             <img class="avatar" src="/svg/avatar.svg" alt="avatar">
@@ -107,10 +103,10 @@
                             </div>
                             <div class="title">{{ review.title }}</div>
                         </div>
-                        <div class="reviews-text">
+                        <div :class="{'reviews-text': true, 'full': reviewsFull}">
                             {{ review.description }}
                         </div>
-                        <a class="full" href="#">
+                        <a :class="{'full': true, 'active': reviewsFull}" href="#" @click.prevent="fullReviewSwitch">
                             {{ $t('Read completely') }} <img src="/svg/i-arrow-show-more.svg" alt="alt">
                         </a>
                     </div>
@@ -178,7 +174,11 @@ export default {
             questions: [],
             reviews: [],
             reviewsPages: 1,
-            reviewsCurrent: 1
+            reviewsCurrent: 1,
+            reviewsFull: false,
+            feedbackForm: false,
+            hoveredStars: 0,
+            clickedStars: 0
         }
     },
     mounted() {
@@ -322,6 +322,21 @@ export default {
         pageChange(page) {
             this.reviewsCurrent = page;
             this.reviewsLoad();
+        },
+        fullReviewSwitch() {
+            this.reviewsFull = !this.reviewsFull;
+        },
+        toggleFeedbackForm() {
+            this.feedbackForm = !this.feedbackForm;
+        },
+        activeStarsOff() {
+            this.hoveredStars = 0;
+        },
+        activeStars(num) {
+            this.hoveredStars = num;
+        },
+        activeStarClicked(num) {
+            this.clickedStars = num;
         }
     }
 }

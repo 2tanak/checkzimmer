@@ -143,7 +143,25 @@
 
 <script>
 export default {
-name: "PropertyCard"
+    name: "PropertyCard",
+    mounted() {
+        jQuery('.mobile-card-button').click(function () {
+            jQuery('.property-card').toggleClass('big');
+            jQuery('.mobile-picture').toggleClass('active');
+        });
+        jQuery('.property-card-slider').slick({
+            arrows: false,
+            dots: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: true
+        });
+
+        if (jQuery(window).width() < 1040) {
+            jQuery('.property-card-slider').slick('unslick');
+        }
+
+    }
 }
 </script>
 
