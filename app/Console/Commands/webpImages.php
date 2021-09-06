@@ -40,16 +40,20 @@ class webpImages extends Command
     public function handle()
     {
         $this->checkDirectory('public/images/webp');
-        $this->directoryScan('public/images/uploaded');
+        $this->directoryScan('public/images/', 'uploaded');
+        $this->directoryScan('public/images/', 'small500');
+        $this->directoryScan('public/images/', 'thumbs300');
+
         return 0;
     }
-    public function directoryScan($base) {
+    public function directoryScan($base, $target) {
         $imgSvc = new ImageService;
-        $directories = Storage::disk('local')->allDirectories($base);
+        $directories = Storage::disk('local')->allDirectories($base . $target);
 
         foreach ($directories as $i => $directory) {
 
-            $webpdir = str_replace('/images/uploaded', '/images/webp', $directory);
+            $webpdir = str_replace('/images/'.$target, '/images/webp/'.$target, $directory);
+            echo 'Checking ' . $webpdir . "\r\n";
             $this->checkDirectory($webpdir);
 
             if ($i == 0) {
@@ -65,8 +69,8 @@ class webpImages extends Command
                 $slugs[] = 'webp';
                 $webpFile = implode('.', $slugs);
 
-                $output = str_replace('/images/uploaded', '/images/webp', $webpFile);
-
+                $output = str_replace('/images/'.$target, '/images/webp/'.$target, $webpFile);
+                //echo "To ".$output."\r\n";
                 $imgSvc->imageWebP(storage_path() . '/app/' . $file, storage_path() . '/app/' . $output);
             }
         }
