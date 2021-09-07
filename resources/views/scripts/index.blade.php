@@ -1,2 +1,2 @@
-@include('scripts.amo')
+{{--@include('scripts.amo')--}}
 @include('scripts.roistat')

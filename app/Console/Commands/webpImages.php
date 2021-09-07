@@ -40,6 +40,10 @@ class webpImages extends Command
     public function handle()
     {
         $this->checkDirectory('public/images/webp');
+        $this->checkDirectory('public/images/webp/uploaded');
+        $this->checkDirectory('public/images/webp/small500');
+        $this->checkDirectory('public/images/webp/thumbs300');
+
         $this->directoryScan('public/images/', 'uploaded');
         $this->directoryScan('public/images/', 'small500');
         $this->directoryScan('public/images/', 'thumbs300');
@@ -47,6 +51,7 @@ class webpImages extends Command
         return 0;
     }
     public function directoryScan($base, $target) {
+
         $imgSvc = new ImageService;
         $directories = Storage::disk('local')->allDirectories($base . $target);
 
