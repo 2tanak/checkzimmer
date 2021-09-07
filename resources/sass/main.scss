@@ -616,6 +616,9 @@ $color4: #6BB63F;
         z-index: 1;
     }
     .city-content {
+        * {
+            opacity: 1;
+        }
         .down-subtitle {
             margin-bottom: 100px;
         }

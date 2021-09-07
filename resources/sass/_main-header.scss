@@ -3,6 +3,9 @@ $color2: #8F98A2;
 $color3: #545769;
 
 header {
+    * {
+        opacity: 1;
+    }
     .head-logo {
         .logo-mobile {
             display: none;

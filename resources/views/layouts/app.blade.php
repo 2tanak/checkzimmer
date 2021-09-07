@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">--}}
 
     <!-- Styles -->
-    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    @include('critical-css.main-critical-css')
+    <link href="{{ asset('css/main.css') }}" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 </head>
 <body>
 <div id="app" class="property-list">
@@ -131,9 +132,7 @@
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 <script src="{{ asset('js/ui.js') }}" defer></script>
-
 <script src="{{ asset('js/slick.min.js') }}" defer></script>
 <script src="{{ asset('js/select2.full.js') }}" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
@@ -144,7 +143,6 @@
         crossorigin="anonymous"></script>
 
 @include('scripts.index')
-
 
 </body>
 </html>

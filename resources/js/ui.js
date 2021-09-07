@@ -105,7 +105,9 @@ jQuery(document).ready(function() {
 
         jQuery('.nothing-found-section .avatar-slider').css('overflow', 'visible').css('opacity', '1');
 
-        jQuery('.background-image-block .find-subdomain-redirect').css('overflow', 'visible').css('opacity', '1');
+        if (jQuery(window).width() > 575) {
+            jQuery('form.find-subdomain-redirect').css('opacity', '1').css('overflow', 'visible')
+        }
     });
 
 

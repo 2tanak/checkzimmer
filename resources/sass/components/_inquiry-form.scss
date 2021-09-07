@@ -1,4 +1,7 @@
 .modal-overlay {
+    * {
+        opacity: 1;
+    }
     .inquiry-modal {
         .title {
             margin-bottom: 22px;
@@ -358,7 +361,6 @@
     top: 0;
     left: 0;
     visibility: hidden;
-    opacity: 0;
     transition: all 0.2s;
     display: flex;
     align-items: center;
