@@ -23,6 +23,9 @@
     .nothing-found-section * {
         opacity: 0;
     }
+    .single-container * {
+        opacity: 0;
+    }
     .plans-section .price-block-item .name-tariff {
         padding: 4px 10px;
         font-weight: 500;
