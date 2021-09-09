@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Storage;
 class webpImages extends Command
 {
     /**
+     * Image sizes to convert
+     */
+    const FOLDERS = [
+        'uploaded',
+        'small500',
+        'thumbs300',
+        'thumbs170'
+    ];
+
+    /**
      * The name and signature of the console command.
      *
      * @var string
@@ -40,13 +50,11 @@ class webpImages extends Command
     public function handle()
     {
         $this->checkDirectory('public/images/webp');
-        $this->checkDirectory('public/images/webp/uploaded');
-        $this->checkDirectory('public/images/webp/small500');
-        $this->checkDirectory('public/images/webp/thumbs300');
 
-        $this->directoryScan('public/images/', 'uploaded');
-        $this->directoryScan('public/images/', 'small500');
-        $this->directoryScan('public/images/', 'thumbs300');
+        foreach (self::FOLDERS as $key => $size) {
+            $this->checkDirectory('public/images/webp/' . $key);
+            $this->directoryScan('public/images/', $key);
+        }
 
         return 0;
     }
