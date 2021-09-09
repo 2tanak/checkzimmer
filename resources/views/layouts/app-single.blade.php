@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/single.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/single.css') }}" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 </head>
 <body>
 <div id="app" class="property-list">

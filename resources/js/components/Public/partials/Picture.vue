@@ -12,7 +12,7 @@ export default {
     props: ['src'],
     computed: {
         webP() {
-            return this.src.replace('uploaded', 'webp');
+            return this.src.replace('uploaded', 'webp/thumbs300').replace(/\.(jpeg|jpg|png)/, '.webp');
         },
         thumb() {
             return this.src.replace('uploaded', 'thumbs300')

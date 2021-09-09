@@ -41,6 +41,9 @@ class optimizeImages extends Command
     public function handle()
     {
         $this->directoryScan('public/images/uploaded');
+        $this->directoryScan('public/images/small500');
+        $this->directoryScan('public/images/thumbs300');
+        $this->directoryScan('public/images/webp');
         return 0;
     }
     public function directoryScan($base) {
