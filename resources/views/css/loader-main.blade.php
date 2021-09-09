@@ -7,6 +7,7 @@
         border-radius: 12px;
         max-width: 1180px;
         margin: auto;
+        margin-bottom: 114px;
     }
     .load-block.big-load-block {
         width: 100%;
@@ -287,6 +288,9 @@
         .place-card {
             height: 452px;
         }
+        .load-block-content {
+            margin-bottom: 59px;
+        }
     }
     @media (max-width: 770px) {
         .single-content .price-situation .collapse-content-line .price-item {
@@ -371,6 +375,9 @@
         .head-load-block .list, .head-load-block .map {
             margin-right: 0;
             margin-bottom: 10px;
+        }
+        .load-block-content {
+            margin-bottom: 69px;
         }
     }
     @media (max-width: 400px) {

@@ -293,7 +293,7 @@ export default {
         background: #FFFFFF;
         box-shadow: 0 0 14px rgb(51 54 70 / 14%);
         border-radius: 12px;
-        padding: 30px 0;
+        padding-top: 30px;
         margin-bottom: 20px;
         max-width: 780px;
         width: 100%;
@@ -831,16 +831,12 @@ export default {
             padding-bottom: 30px !important;
         }
         .add-links {
-            a {
-                &:last-of-type {
-                    margin-bottom: 30px !important;
-                }
-            }
             a.add-phone-mobile {
                 display: inline-block;
                 margin-bottom: 0 !important;
                 margin-top: 0;
             }
+            margin-bottom: 30px;
         }
     }
     .data-section {
@@ -849,6 +845,7 @@ export default {
                 margin-top: 0;
                 margin-bottom: 30px;
             }
+            padding-bottom: 0;
         }
     }
 }
