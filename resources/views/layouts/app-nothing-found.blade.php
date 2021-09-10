@@ -136,6 +136,15 @@
     <script src="{{ asset('js/slick.min.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" defer></script>
 
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            jQuery('#arrival-date, #date-departure').datepicker({
+                format: "dd/mm/yyyy"
+            })
+        });
+    </script>
+
     @include('scripts.index')
 
 

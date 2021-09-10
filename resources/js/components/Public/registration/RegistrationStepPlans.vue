@@ -41,9 +41,9 @@ export default {
     mounted() {
         window.scrollTo(0, 0);
 
-        window.onload = function () {
+        /*window.onload = function () {
             jQuery('footer').css('position', 'fixed').css('bottom', '0').css('width', '100%');
-        };
+        };*/
 
     },
     methods: {

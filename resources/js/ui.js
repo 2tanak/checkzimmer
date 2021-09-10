@@ -194,7 +194,7 @@ jQuery(window).scroll( function() {
     } else {
         jQuery('.scroll-top').removeClass('absolute');
         jQuery('.fixed-bar').removeClass('bottom');
-        jQuery('.single-content').removeClass('paddong-bottom');
+        jQuery('.single-content').removeClass('padding-bottom');
     }
 
     if (jQuery(this).scrollTop() > 300) {
