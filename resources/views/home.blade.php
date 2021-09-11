@@ -226,8 +226,6 @@
         </div>
     </section>
 
-    <div id="application">
-
-    </div>
+    <div id="application"><Home /></div>
 
 @endsection

@@ -1,5 +1,5 @@
 <template>
-    <div id="app"><router-view></router-view></div>
+    <div id="app"></div>
 </template>
 
 <script>
@@ -17,7 +17,6 @@ export default {
     mounted() {
         let that = this;
         let timer = null;
-
         jQuery('.entry.login-link').click(function (e) {
             that.login(e);
         })

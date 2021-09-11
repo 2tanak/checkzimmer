@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const client = axios.create({
-    //  baseURL: '',
+      baseURL: '/api/',
 });
 
 function getConfig() {
@@ -31,7 +31,8 @@ export default (base) => class ApiRequest {
     all() {
         let token = localStorage.getItem('token');
 
-        return client.get(`/api//${base}`, getConfig());
+        return client.get(`/${base}`, getConfig());
+        //return client.get(`/api/${base}`, getConfig());
     }
     byPage(page, params) {
         params = params || {};
@@ -45,7 +46,7 @@ export default (base) => class ApiRequest {
         return client.get(`/api/${base}/${id}`, getConfig());
     }
     query(data) {
-        return client.post(`/api/${base}/query`, data, getConfig());
+        return client.post(`/${base}/query`, data, getConfig());
     }
     request(action, data, reqType, params) {
         reqType = reqType || 'post';

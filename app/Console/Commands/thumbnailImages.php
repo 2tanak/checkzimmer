@@ -48,11 +48,12 @@ class thumbnailImages extends Command
      */
     public function handle()
     {
-
-        $this->directoryScan('public/images/uploaded');
         foreach (self::SIZES as $key => $size) {
             $this->checkDirectory('public/images/' . $key);
         }
+
+        $this->directoryScan('public/images/uploaded');
+
         return 0;
     }
     public function directoryScan($base) {

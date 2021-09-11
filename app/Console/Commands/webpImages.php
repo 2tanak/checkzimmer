@@ -51,9 +51,9 @@ class webpImages extends Command
     {
         $this->checkDirectory('public/images/webp');
 
-        foreach (self::FOLDERS as $key => $size) {
-            $this->checkDirectory('public/images/webp/' . $key);
-            $this->directoryScan('public/images/', $key);
+        foreach (self::FOLDERS as $folder) {
+            $this->checkDirectory('public/images/webp/' . $folder);
+            $this->directoryScan('public/images/', $folder);
         }
 
         return 0;
