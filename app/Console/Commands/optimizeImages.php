@@ -10,6 +10,17 @@ use Illuminate\Support\Facades\Storage;
 class optimizeImages extends Command
 {
     /**
+     * Image sizes to optimize
+     */
+    const FOLDERS = [
+        'uploaded',
+        'small500',
+        'thumbs300',
+        'thumbs170',
+        'webp'
+    ];
+
+    /**
      * The name and signature of the console command.
      *
      * @var string
@@ -40,10 +51,9 @@ class optimizeImages extends Command
      */
     public function handle()
     {
-        $this->directoryScan('public/images/uploaded');
-        $this->directoryScan('public/images/small500');
-        $this->directoryScan('public/images/thumbs300');
-        $this->directoryScan('public/images/webp');
+        foreach (self::FOLDERS as $folder) {
+            $this->directoryScan('public/images/' . $folder);
+        }
         return 0;
     }
     public function directoryScan($base) {

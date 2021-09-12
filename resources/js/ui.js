@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 import Public from './components/Public/PublicRoot';
-//import Home from './components/Public/Home';
+import Home from './components/Public/Home';
 
 //require('./bootstrap');
 
@@ -66,7 +66,7 @@ const app = new Vue({
     router,
     components: {
         //Public,
-        //Home,
+        Home,
         Public,
         //Favorites,
         //Single,

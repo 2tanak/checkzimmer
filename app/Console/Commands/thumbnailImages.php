@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Storage;
 class thumbnailImages extends Command
 {
     /**
+     * Image sizes to make
+     */
+    const SIZES = [
+      'small500' => 500,
+      'thumbs300' => 300,
+      'thumbs170' => 170
+    ];
+
+    /**
      * The name and signature of the console command.
      *
      * @var string
@@ -39,9 +48,12 @@ class thumbnailImages extends Command
      */
     public function handle()
     {
-        $this->checkDirectory('public/images/thumbs300');
-        $this->checkDirectory('public/images/small500');
+        foreach (self::SIZES as $key => $size) {
+            $this->checkDirectory('public/images/' . $key);
+        }
+
         $this->directoryScan('public/images/uploaded');
+
         return 0;
     }
     public function directoryScan($base) {
@@ -50,10 +62,10 @@ class thumbnailImages extends Command
 
         foreach ($directories as $i => $directory) {
 
-            $thumbdir = str_replace('/images/uploaded', '/images/thumbs300', $directory);
-            $smalldir = str_replace('/images/uploaded', '/images/small500', $directory);
-            $this->checkDirectory($thumbdir);
-            $this->checkDirectory($smalldir);
+            foreach (self::SIZES as $key => $size) {
+                $destDir = str_replace('/images/uploaded', '/images/'.$key, $directory);
+                $this->checkDirectory($destDir);
+            }
 
             if ($i == 0) {
                 continue;
@@ -61,18 +73,15 @@ class thumbnailImages extends Command
 
             $files = Storage::disk('local')->allFiles($directory);
 
-            $k300 = 300 / 500;
-
             foreach ($files as $file) {
                 echo "Processing ".$file."\r\n";
                 list($width, $height) = getimagesize(storage_path() . '/app/' . $file);
 
-                $output500 = str_replace('/images/uploaded', '/images/small500', $file);
-                $output300 = str_replace('/images/uploaded', '/images/thumbs300', $file);
-
-                $k500 = 500 / $width;
-                $imgSvc->imageResize(storage_path() . '/app/' . $file, $k500, storage_path() . '/app/' . $output500);
-                $imgSvc->imageResize(storage_path() . '/app/' . $output500, $k300, storage_path() . '/app/' . $output300);
+                foreach (self::SIZES as $key => $size) {
+                    $output = str_replace('/images/uploaded', '/images/' . $key, $file);
+                    $k = $size / $width;
+                    $imgSvc->imageResize(storage_path() . '/app/' . $file, $k, storage_path() . '/app/' . $output);
+                }
             }
         }
     }

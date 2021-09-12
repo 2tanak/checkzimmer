@@ -21,8 +21,8 @@ import 'es6-promise/auto';
 import {store} from './store';
 
 Vue.config.productionTip = false;
-
 axios.defaults.baseURL = '/api';
+
 Vue.use(VueAxios, axios);
 
 Vue.router = router;
