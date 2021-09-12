@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">--}}
 
     <!-- Styles -->
-    @include('critical-css.main-domain-critical-css')
+    @include('critical-css.main-critical-css')
     <link href="{{ asset('css/main-subdomain.css') }}" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
 </head>
 <body>
