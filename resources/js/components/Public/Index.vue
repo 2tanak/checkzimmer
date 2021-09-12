@@ -44,7 +44,7 @@
                             </div>
                         </transition>
                         <transition name="fade">
-                            <div class="load-block-content" :style="{ display: loading ? 'block':'none !important' }">
+                            <div class="load-block-content" :style="{ display: loading ? 'block':'none' }">
                                 <ItemListLoading />
                                 <div class="place-card"></div>
                             </div>

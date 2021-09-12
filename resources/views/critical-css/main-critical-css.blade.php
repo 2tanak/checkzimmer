@@ -1,6 +1,10 @@
 <style>
     body{
         font-family: "Segoe UI", "Arial", sans-serif;
+        height: calc(100vh - 97px);
+    }
+    #app {
+        height: 100%;
     }
     a {
         color: #545769;

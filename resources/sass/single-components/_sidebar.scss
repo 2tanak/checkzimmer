@@ -756,6 +756,7 @@
             box-shadow: none;
             min-height: 396px;
             min-width: 248px;
+            max-width: 248px;
             margin-left: 15px;
             order: 2;
         }
@@ -939,6 +940,7 @@
         }
         .sidebar.mobile-sidebar {
             min-height: auto;
+            max-width: none;
             height: auto;
             order: 4;
             margin-left: 0;
