@@ -16,7 +16,7 @@
                     </a>
                 @else
                     <a class="open-gallery" href="#" {{ $key }}>
-                        {{--<img src="{{ $photo['url_max300'] }}" alt="Фото отеля {{ $key }}">--}}
+                        {{--<img src="{{ $photo['url_max300'] }}" alt="Hotelfotos {{ $key }}">--}}
                         @include('partials.picture', ['src' => $photo['url_max300'], 'mode' => '500'])
                     </a>
                 @endif

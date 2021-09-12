@@ -21,7 +21,9 @@
 @import "resources/sass/single-components/object-description";
 
 
-
+body {
+    height: auto;
+}
 .single-container {
     * {
         opacity: 1;

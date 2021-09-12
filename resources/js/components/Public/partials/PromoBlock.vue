@@ -60,14 +60,14 @@
         </div>
         <div class="ad-content">
             <div class="ad-text">
-                <div class="title">Ничего не нашли? Сложно подобрать проживание?</div>
-                <div class="subtitle">Мы подберем для вас проживыание возле вашей стройки)</div>
-                <div class="usual-text">Свободное размещение прямо сейчас, мы работаем 24/7</div>
+                <div class="title">Nichts gefunden? Ist es schwierig, eine Unterkunft zu finden?</div>
+                <div class="subtitle">Wir suchen für Sie eine Unterkunft in der Nähe Ihrer Baustelle aus)</div>
+                <div class="usual-text">Kostenlose Vermittlung im Moment, wir arbeiten 24/7</div>
             </div>
             <div class="request">
-                <a class="request-item" href="#">Оставте заявку</a>
+                <a class="request-item" href="#">Hinterlassen Sie eine Anfrage</a>
                 <a href="tel:+49 341 1234 2223" class="number-phone">+49 341 1234 2223</a>
-                <div class="text">Текст в одну строку</div>
+                <div class="text">Einzeiliger Text</div>
             </div>
         </div>
     </div>
