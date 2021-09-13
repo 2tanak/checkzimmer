@@ -59,5 +59,10 @@
         } else {
             jQuery('.small-slider').removeClass('transform');
         }
+
+        jQuery('.slider-modal-overlay .modal-close').click(function (){
+           jQuery('.slider-modal-overlay').removeClass('modal-show');
+        });
+
     });
 </script>
