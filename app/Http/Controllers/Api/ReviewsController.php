@@ -3,6 +3,7 @@
 use App\Http\Controllers\Controller;
 use App\Option;
 use App\Http\Requests\PropertyListRequest;
+use App\Property;
 use Illuminate\Http\Request;
 use App\Reviews;
 use Auth;
@@ -18,9 +19,13 @@ class ReviewsController extends Controller
 
     public function paginated()
     {
-        return response()->json( Reviews::where('status', '1')->paginate(10) );
+        return response()->json( Reviews::paginate(10) );
     }
 
+    public function reviewsPublic($property) {
+        $property = Property::where('slug', $property)->first();
+        return response()->json( Reviews::where('status', '1')->where('property_id', $property->id)->paginate(10) );
+    }
     public function destroy($id)
     {
         Reviews::find($id)->delete();

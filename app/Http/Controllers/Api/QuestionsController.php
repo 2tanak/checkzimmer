@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Api;
 
+use App\Property;
 use App\RoomType;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -12,6 +13,10 @@ class QuestionsController extends Controller
         return response()->json( Question::all() );
     }
 
+    public function indexPublic($property) {
+        $property = Property::where('slug', $property)->first();
+        return response()->json( Question::where('response', '!=','')->where('property_id', $property->id)->paginate(10) );
+    }
     public function destroy($id)
     {
         Question::find($id)->delete();

@@ -305,16 +305,10 @@ export default {
         setTimeout(function() {
             console.log(that.$auth.user());
         }, 1000);
-        jQuery('body').on('click', 'a.collapse-circle', function(e) {
-            e.preventDefault();
-            var parent = jQuery(this).closest('.property-card');
-            jQuery(parent).toggleClass('collapse-item');
-            jQuery(this).toggleClass('active');
-        });
-        jQuery('body').on('click', 'a.favorites', function(e) {
+        /*jQuery('body').on('click', 'a.favorites', function(e) {
             e.preventDefault();
             jQuery(this).toggleClass('active');
-        });
+        });*/
         function initMap() {
             if (typeof google === 'undefined' || !document.getElementById('map')) {
                 setTimeout( () => { initMap() }, 100 )

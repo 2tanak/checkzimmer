@@ -172,12 +172,12 @@ export default {
         }
     },
     created() {
+    },
+    mounted() {
         reviewsData.all()
             .then(resp => {
                 this.reviewList = resp.data.data;
             })
-    },
-    mounted() {
     },
 
     methods: {

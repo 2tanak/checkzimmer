@@ -72,18 +72,8 @@ export default {
             e.preventDefault();
 
             let id = this.item.id;
-            let favoritesObject = JSON.parse(localStorage.getItem("favoritesList"));
 
-            if (favoritesObject === null) {
-                favoritesObject = [];
-            }
-            if (favoritesObject.indexOf(id) !== -1) {
-                favoritesObject.splice(favoritesObject.indexOf(id), 1);
-            } else {
-                favoritesObject.push(id);
-            }
-            localStorage.setItem('favoritesList', JSON.stringify(favoritesObject));
-            jQuery('.favoritesCount').html(favoritesObject.length);
+            favoritesAddRemove(id);
 
             this.$emit('favsUpdated');
         },

@@ -76,7 +76,37 @@
     @include('single.scripts-inline')
 
     <script>
+        function isFavorite(id) {
+            let favoritesObject = JSON.parse(localStorage.getItem("favoritesList")) || [];
+            return favoritesObject.includes(id);
+        }
 
+        function favoritesAddRemove(id) {
+            let favoritesObject = JSON.parse(localStorage.getItem("favoritesList"));
+            favoritesObject = favoritesObject.filter( item => item !== null );
+            if (favoritesObject === null) {
+                favoritesObject = [];
+            }
+            if (favoritesObject.indexOf(id) !== -1) {
+                favoritesObject.splice(favoritesObject.indexOf(id), 1);
+            } else {
+                favoritesObject.push(id);
+            }
+            localStorage.setItem('favoritesList', JSON.stringify(favoritesObject));
+            jQuery('.favoritesCount').html(favoritesObject.length);
+            markFavorite(id);
+        }
+        function markFavorite(id) {
+            let isFav = isFavorite(id);
+            if (isFav) {
+                jQuery('a.favorites').addClass('active');
+            } else {
+                jQuery('a.favorites').removeClass('active');
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function (e) {
+            markFavorite({{ $hotel->id }});
+        });
     </script>
     <style>
         @media print {
