@@ -55,7 +55,7 @@
                                 <div class="top-form">
                                     <input type="text" v-model="reviewsForm.name" :placeholder="$t('Your name')">
                                     <input type="text" v-model="reviewsForm.company" :placeholder="$t('Company name')">
-                                    <input type="hidden" name="rating" value="0">
+                                    <input type="hidden" name="rating" :value="clickedStars">
                                     <input type="hidden" name="grecaptcha" value="">
                                 </div>
                                 <input type="text" v-model="reviewsForm.title" :placeholder="$t('Review title')">
@@ -182,11 +182,11 @@ export default {
         }
     },
     mounted() {
-        axios.get('/questions?page=1')
+        axios.get('/questionsPublic/' + this.$route.params.property + '/?page=1')
         .then(resp => {
             this.questions = resp.data.data;
         })
-        axios.get('/reviews?page=1')
+        axios.get('/reviewsPublic/' + this.$route.params.property + '?page=1')
             .then(resp => {
                 this.reviews = resp.data.data;
                 this.reviews_page = resp.data.last_page;
@@ -301,7 +301,7 @@ export default {
             flightPath.setMap(map);
         },
         reviewsLoad() {
-            axios.get('/reviews?page='+this.reviewsCurrent)
+            axios.get('/reviewsPublic/' + this.$route.params.property + '?page='+this.reviewsCurrent)
                 .then(resp => {
                     this.reviews = resp.data.data;
                     this.reviews_page = resp.data.last_page;

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-
+import axios from 'axios';
 
 export default {
     name: 'app',
@@ -31,6 +31,7 @@ export default {
             }
         });
         jQuery('[name="address"]').on('input', function (e) {
+            console.log('!!!!');
             if (e.target.value.length < 3) {
                 return;
             }

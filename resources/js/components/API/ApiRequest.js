@@ -30,7 +30,6 @@ export default (base) => class ApiRequest {
 
     all() {
         let token = localStorage.getItem('token');
-
         return client.get(`/${base}`, getConfig());
         //return client.get(`/api/${base}`, getConfig());
     }
