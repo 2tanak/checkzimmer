@@ -132,34 +132,6 @@ jQuery(document).ready(function() {
         tempScrollTop = currentScrollTop;
     });
 
-    let id = parseInt(jQuery('.single-content .favorites').attr('id'));
-    let favoritesObject = JSON.parse(localStorage.getItem("favoritesList"));
-    if (favoritesObject === null) {
-        favoritesObject = [];
-    }
-    if (favoritesObject.indexOf(id) !== -1) {
-        jQuery('.single-content .favorites').addClass('active');
-    }
-
-    jQuery('.single-content .favorites').click(function (e) {
-        e.preventDefault();
-
-        jQuery('.single-content .favorites').toggleClass('active');
-        let id = parseInt(jQuery(this).attr('id'));
-        let favoritesObject = JSON.parse(localStorage.getItem("favoritesList"));
-
-        if (favoritesObject === null) {
-            favoritesObject = [];
-        }
-        if (favoritesObject.indexOf(id) !== -1) {
-            favoritesObject.splice(favoritesObject.indexOf(id), 1);
-        } else {
-            favoritesObject.push(id);
-        }
-        jQuery('.favoritesCount').html(favoritesObject.length);
-        localStorage.setItem('favoritesList', JSON.stringify(favoritesObject));
-    });
-
     if(jQuery(".single-main-slider .main-slider-item").length === 1) {
         jQuery('.single-main-slider').addClass( "disabled-dots" );
     } else {
