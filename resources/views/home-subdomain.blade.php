@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-subdomain')
 
 @section('content')
 
@@ -242,7 +242,7 @@
             <div class="place-card"></div>
         </div>
 
-        <Public/>
+        <Public></Public>
     </div>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChFeaunpThR-Lo4t-SMP3n7s-fDBs67hU&callback=initMap" async defer></script>

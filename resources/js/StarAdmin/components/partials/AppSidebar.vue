@@ -1,5 +1,5 @@
 <template>
-  <section class="app-sidebar" v-if="$auth.ready() && $auth.user()">
+  <section class="app-sidebar" v-if="$auth.ready() && $auth.user() !== null && $auth.user().id ">
     <nav class="sidebar sidebar-offcanvas" id="sidebar">
       <ul class="nav">
         <li class="nav-item nav-profile">
@@ -16,19 +16,19 @@
         </li>
         <li class="nav-item">
             <router-link class="nav-link" :to="{ name: 'dashboard' }">
-                <img class="menu-icon" src="../../assets/images/menu_icons/01.png" alt="menu icon">
+                <img class="menu-icon" :src="require('../../assets/images/menu_icons/01.png').default" alt="menu icon">
                 <span class="menu-title">{{ $t('Dashboard') }}</span>
             </router-link>
         </li>
         <li class="nav-item">
             <router-link class="nav-link" :to="{ name: 'requests'}">
-                <img class="menu-icon" src="../../assets/images/menu_icons/02.png" alt="menu icon">
+                <img class="menu-icon" :src="require('../../assets/images/menu_icons/02.png').default" alt="menu icon">
                 <span class="menu-title">{{ $t('Requests') }}</span>
             </router-link>
         </li>
         <li class="nav-item">
           <span class="nav-link" v-b-toggle="'sample-pages'">
-            <img class="menu-icon" src="../../assets/images/menu_icons/08.png" alt="menu icon">
+            <img class="menu-icon" :src="require('../../assets/images/menu_icons/08.png').default" alt="menu icon">
               <span class="menu-title">{{ $t('Property') }}</span>
               <i class="fa fa-angle-down ml-auto mr-0"></i>
           </span>
@@ -42,7 +42,7 @@
         </li>
           <li class="nav-item">
           <span class="nav-link" v-b-toggle="'booking-submenu'">
-            <img class="menu-icon" src="../../assets/images/menu_icons/08.png" alt="menu icon">
+            <img class="menu-icon" :src="require('../../assets/images/menu_icons/08.png').default" alt="menu icon">
               <span class="menu-title">{{ $t('Booking') }}.{{ $t('com') }}</span>
               <i class="fa fa-angle-down ml-auto mr-0"></i>
           </span>
@@ -57,7 +57,7 @@
           </li>
         <li class="nav-item">
           <span class="nav-link" v-b-toggle="'ui-components'">
-            <img class="menu-icon" src="../../assets/images/menu_icons/03.png" alt="menu icon">
+            <img class="menu-icon" :src="require('../../assets/images/menu_icons/03.png').default" alt="menu icon">
             <span class="menu-title">{{ $t('Website') }}</span>
               <i class="fa fa-angle-down ml-auto mr-0"></i>
           </span>
@@ -73,7 +73,7 @@
         </li>
         <li class="nav-item">
           <span class="nav-link" v-b-toggle="'utilities'">
-            <img class="menu-icon" src="../../assets/images/menu_icons/06.png" alt="menu icon">
+            <img class="menu-icon" :src="require('../../assets/images/menu_icons/06.png').default" alt="menu icon">
             <span class="menu-title">{{ $t('Data') }}</span>
               <i class="fa fa-angle-down ml-auto mr-0"></i>
           </span>
@@ -87,7 +87,7 @@
         </li>
           <li class="nav-item">
           <span class="nav-link" v-b-toggle="'feedback'">
-            <img class="menu-icon" src="../../assets/images/menu_icons/06.png" alt="menu icon">
+            <img class="menu-icon" :src="require('../../assets/images/menu_icons/06.png').default" alt="menu icon">
             <span class="menu-title">{{ $t('Feedback') }}</span>
               <i class="fa fa-angle-down ml-auto mr-0"></i>
           </span>
@@ -101,7 +101,7 @@
           </li>
           <li class="nav-item">
               <span class="nav-link" v-b-toggle="'translation'">
-                  <img class="menu-icon" src="../../assets/images/menu_icons/06.png" alt="menu icon">
+                  <img class="menu-icon" :src="require('../../assets/images/menu_icons/06.png').default" alt="menu icon">
                    <span class="menu-title">{{ $t('Translation') }}</span>
                    <i class="fa fa-angle-down ml-auto mr-0"></i>
               </span>
@@ -112,8 +112,12 @@
                   </ul>
               </b-collapse>
           </li>
-          <li class="nav-item"><router-link class="nav-link" :to="{ name: 'users' }"><img class="menu-icon" src="../../assets/images/menu_icons/04.png" alt="menu icon"><span class="menu-title">{{ $t('Users') }}</span></router-link></li>
-          <li class="nav-item"><router-link class="nav-link" :to="{ name: 'guests' }"><img class="menu-icon" src="../../assets/images/menu_icons/04.png" alt="menu icon"><span class="menu-title">{{ $t('Guests') }}</span></router-link></li>
+          <li class="nav-item"><router-link class="nav-link" :to="{ name: 'users' }">
+              <img class="menu-icon" :src="require('../../assets/images/menu_icons/04.png').default" alt="menu icon"><span class="menu-title">{{ $t('Users') }}</span></router-link>
+          </li>
+          <li class="nav-item"><router-link class="nav-link" :to="{ name: 'guests' }">
+              <img class="menu-icon" :src="require('../../assets/images/menu_icons/04.png').default" alt="menu icon"><span class="menu-title">{{ $t('Guests') }}</span></router-link>
+          </li>
       </ul>
     </nav>
   </section>

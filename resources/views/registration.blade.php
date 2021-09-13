@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.app-register')
 
 @section('content')
 
     <main id="application" class="py-4">
-        <Registration />
+        <Public></Public>
     </main>
 
 @endsection

@@ -1,5 +1,5 @@
 <div id="application">
-    <Single/>
+    <Public></Public>
 </div>
 <script>
     window.myCenter = { lat: {{$hotel->lat}}, lng: {{$hotel->lng}} };

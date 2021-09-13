@@ -57,8 +57,6 @@ Route::middleware('auth')->namespace('Api')->group(function () {
 
     Route::get('/questions', 'QuestionsController@paginated');
     Route::get('/reviews', 'ReviewsController@paginated');
-    Route::post('/question/create', 'QuestionsController@create');
-    Route::post('/reviews/create', 'ReviewsController@create');
 
     Route::get('users', 'UsersController@index')->middleware('isAdmin');
     Route::get('users/{id}', 'UsersController@show')->middleware('isAdminOrSelf');
@@ -73,6 +71,10 @@ Route::group(['namespace' => 'Api'], function() {
     Route::apiResource('property', 'PropertyController');
     Route::get('features-public', 'FeaturesController@index');
     Route::get('languages', 'LanguagesController@index');
+    Route::get('questionsPublic/{property}', 'QuestionsController@indexPublic');
+    Route::get('reviewsPublic/{property}', 'ReviewsController@reviewsPublic');
+    Route::post('/question/create', 'QuestionsController@create');
+    Route::post('/reviews/create', 'ReviewsController@create');
     Route::post('/property/query', 'PropertyController@queryProperty');
     Route::post('/property/queryFilter', 'PropertyController@queryFilter');
     Route::post('/property/querySort', 'PropertyController@querySort');

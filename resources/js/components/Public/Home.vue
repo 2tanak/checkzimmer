@@ -3,7 +3,7 @@
 </template>
 
 <script>
-
+import axios from 'axios';
 
 export default {
     name: 'app',
@@ -17,7 +17,6 @@ export default {
     mounted() {
         let that = this;
         let timer = null;
-
         jQuery('.entry.login-link').click(function (e) {
             that.login(e);
         })
@@ -32,6 +31,7 @@ export default {
             }
         });
         jQuery('[name="address"]').on('input', function (e) {
+            console.log('!!!!');
             if (e.target.value.length < 3) {
                 return;
             }

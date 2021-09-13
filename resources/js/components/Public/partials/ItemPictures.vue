@@ -8,7 +8,7 @@
         </div>
         <div style="position:relative;" v-if="getPhotos.length && !sizedForSlider">
             <a :href="getUrlLangPrefix+'/single/'+item.slug" class="img-link">
-                <img v-if="getPhotos.length && !sizedForSlider" :src="getPhotos[0].url_max300">
+                <Picture v-if="getPhotos.length && !sizedForSlider" :src="getPhotos[0].url_max300" />
             </a>
             <div v-if="isSuperhost" class="superhost-icon">{{ $t('Superhost') }}</div>
         </div>
@@ -18,7 +18,8 @@
                               ref="carousel" :infinite="true">
                 <div v-for="photo in getPhotos" class="slider-item">
                     <a style="display:block;" :href="getUrlLangPrefix+'/single/'+item.slug">
-                        <img :src="photo.url_max300" alt="Property picture">
+                        <!--<img :src="photo.url_max300" alt="Property picture">-->
+                        <Picture :src="photo.url_max300" />
                     </a>
                 </div>
             </VueSlickCarousel>
@@ -31,11 +32,12 @@
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
+import Picture from "./Picture";
 
 export default {
     name: "ItemPictures",
     props: ['item'],
-    components: {VueSlickCarousel},
+    components: {Picture, VueSlickCarousel},
     data() {
         return {
             sizedForSlider: this.sizedForSlider = jQuery(window).width() > 1040

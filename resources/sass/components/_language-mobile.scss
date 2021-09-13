@@ -1,0 +1,112 @@
+.languages-block {
+    position: relative;
+    margin-right: 47px;
+}
+.languages-block .list-languages {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    transition: all 0.2s;
+    position: absolute;
+    background-color: #fff;
+    overflow: auto;
+    box-shadow: 0 8px 20px rgb(0 0 0 / 18%);
+    border-radius: 6px;
+    z-index: 1;
+    min-width: 78px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 28px;
+}
+.languages-block .list-languages-container {
+    padding: 6px;
+}
+.languages-block a {
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 100%;
+    color: #545769;
+    display: block;
+    text-transform: uppercase;
+    text-align: center;
+}
+.languages-block .selected-language {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.languages-block .list-languages.active {
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+}
+.languages-block .list-languages a {
+    padding: 8px 23px;
+}
+.languages-block .list-languages a:hover {
+    background-color: #f1f1f1;
+}
+.languages-block.languages-block-mobile {
+    display: none;
+}
+.languages-block .selected-language a {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+.languages-block .selected-language a:after {
+    position: absolute;
+    content: "";
+    width: 10px;
+    height: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("/svg/dropdown.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: 0.4s;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -13px;
+}
+.languages-block .selected-language.active a:after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+@media (max-width: 650px) {
+    .languages-block.languages-block-desctope {
+        display: none;
+    }
+    .languages-block.languages-block-mobile {
+        display: block;
+        margin-bottom: 11px;
+        margin-right: 0;
+        padding-bottom: 11px;
+        border-bottom: 1px solid #e3e4e6;
+    }
+    .languages-block.languages-block-mobile .selected-language {
+        display: block;
+        margin-bottom: 10px;
+    }
+    .languages-block.languages-block-mobile .selected-language a {
+        display: inline;
+    }
+    .languages-block.languages-block-mobile .list-languages {
+        transform: none;
+        width: 100%;
+        position: static;
+        background-color: transparent;
+        box-shadow: none;
+    }
+    .languages-block a {
+        text-align: left;
+    }
+    .languages-block .list-languages a {
+        padding-left: 0;
+    }
+}

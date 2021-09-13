@@ -86,6 +86,10 @@
                         @endif
                         {{ $hotel->city }}
                     </div>
+                    @if (!$hotel->address)
+                        <div class="clarification" style="margin-top:5px;font-style:italic;">{{ __('You will receive the full address on request') }}.</div>
+                    @endif
+
                 </div>
             <div class="map-container">
                 <a class="map-picture map-mobile-picture" href="#map-mobile-block">
@@ -171,7 +175,7 @@
                                     <input type="text" value="" id="f5">
                                 </div>
                                 <div class="congratulations-block">
-                                    Page address copied
+                                    {{ __('Page address copied') }}
                                 </div>
                             </div>
                         </div>
@@ -220,7 +224,10 @@
             </a>
         </div>
         <div class="sidebar-bottom-block">
-            <a class="melden">
+
+            @include('partials.button-favorites', ['hotel' => $hotel])
+
+            {{--<a class="melden">
                 <img class="not-hover" src="/svg/i-report.svg" alt="">
                 <img class="hover" src="/svg/i-report-hover.svg" alt="">
                 <span>{{ __('Report') }}</span>
@@ -247,7 +254,7 @@
                     </div>
                     <a class="submit" href="#">{{ __('Send') }}</a>
                 </div>
-            </div>
+            </div>--}}
 
         </div>
     </div>
@@ -256,6 +263,19 @@
 <script>
 
     document.addEventListener('DOMContentLoaded', function() {
+        jQuery('.mobile-sidebar a.inquiry').click(function (e) {
+            e.preventDefault();
+            jQuery('.inquiry-modal-overlay').addClass('modal-show');
+        });
+        jQuery('a.map-mobile-picture').bind("click", function(e){
+            e.preventDefault();
+            var anchor = jQuery(this);
+            jQuery('html, body').stop().animate({
+                scrollTop: jQuery(anchor.attr('href')).offset().top
+            }, 650);
+            jQuery('.mobile-map-content .collapse').addClass('show');
+            jQuery('.click-collapse').find('.head-collapse').attr("aria-expanded", true).removeClass('collapsed');
+        });
     });
 
 </script>

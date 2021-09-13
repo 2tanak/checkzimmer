@@ -1,16 +1,16 @@
 <template>
     <div class="object-description object-description-desctope" id="object-description">
         <ul class="nav nav-tabs">
-            <li class="nav-item">
+            <li class="nav-item description-tab-link">
                 <a class="nav-link active" data-toggle="tab" href="#description">{{ $t('Description object') }}</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item reviews-tab-link">
                 <a class="nav-link" data-toggle="tab" href="#reviews">{{ $t('Reviews') }} <span>{{ reviews ? reviews.length : 0 }}</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item questions-tab-link">
                 <a class="nav-link" data-toggle="tab" href="#questions">{{ $t('Questions') }} <span>{{ questions ? questions.length : 0 }}</span></a>
             </li>
-            <li class="nav-item map-active">
+            <li class="nav-item map-block-tab-link map-active">
                 <a class="nav-link" data-toggle="tab" href="#map-block">{{ $t('Map') }}</a>
             </li>
         </ul>
@@ -37,28 +37,25 @@
             <div class="tab-pane fade reviews-content" id="reviews">
                 <div class="top-block">
                     <div class="top-block-head">
-                        <a class="give-feedback" href="#">{{ $t('Give feedback') }}</a>
+                        <a :class="{'give-feedback': true, 'hide': feedbackForm}" href="#" @click.prevent="toggleFeedbackForm">{{ $t('Give feedback') }}</a>
                     </div>
-                    <div class="empty-block">
+                    <div :class="{'empty-block': true, 'active': feedbackForm}">
                         <div class="reviews-form">
-                            <div class="close-form">
+                            <div class="close-form" @click="toggleFeedbackForm">
                                 <img src="/svg/i-close-popup.svg" alt="alt">
                             </div>
                             <div class="rate">
                                 <div class="title">{{ $t('Rate the object') }}:</div>
                                 <div class="stars">
-                                    <img src="/svg/star-gray.svg" alt="alt">
-                                    <img src="/svg/star-gray.svg" alt="alt">
-                                    <img src="/svg/star-gray.svg" alt="alt">
-                                    <img src="/svg/star-gray.svg" alt="alt">
-                                    <img src="/svg/star-gray.svg" alt="alt">
+                                    <img v-for="i in 5" :src="i <= hoveredStars || i <= clickedStars ? '/svg/star-yellow.svg' : '/svg/star-gray.svg'" :alt="'Rate '+i"
+                                         @mouseenter="activeStars(i)" @mouseout="activeStarsOff" @click="activeStarClicked(i)">
                                 </div>
                             </div>
                             <form @submit.prevent="addReviews">
                                 <div class="top-form">
                                     <input type="text" v-model="reviewsForm.name" :placeholder="$t('Your name')">
                                     <input type="text" v-model="reviewsForm.company" :placeholder="$t('Company name')">
-                                    <input type="hidden" name="rating" value="0">
+                                    <input type="hidden" name="rating" :value="clickedStars">
                                     <input type="hidden" name="grecaptcha" value="">
                                 </div>
                                 <input type="text" v-model="reviewsForm.title" :placeholder="$t('Review title')">
@@ -69,7 +66,6 @@
                     </div>
                 </div>
                 <div class="reviews-block">
-                    <!--@foreach ($reviews as $key => $review)-->
                     <div v-for="review in reviews" class="reviews-block-item">
                         <div class="reviews-head">
                             <img class="avatar" src="/svg/avatar.svg" alt="avatar">
@@ -107,10 +103,10 @@
                             </div>
                             <div class="title">{{ review.title }}</div>
                         </div>
-                        <div class="reviews-text">
+                        <div :class="{'reviews-text': true, 'full': reviewsFull}">
                             {{ review.description }}
                         </div>
-                        <a class="full" href="#">
+                        <a :class="{'full': true, 'active': reviewsFull}" href="#" @click.prevent="fullReviewSwitch">
                             {{ $t('Read completely') }} <img src="/svg/i-arrow-show-more.svg" alt="alt">
                         </a>
                     </div>
@@ -166,6 +162,8 @@
 
 <script>
 import axios from 'axios';
+require('../../bootstrap');
+
 export default {
     name: "Single",
     data() {
@@ -176,15 +174,19 @@ export default {
             questions: [],
             reviews: [],
             reviewsPages: 1,
-            reviewsCurrent: 1
+            reviewsCurrent: 1,
+            reviewsFull: false,
+            feedbackForm: false,
+            hoveredStars: 0,
+            clickedStars: 0
         }
     },
     mounted() {
-        axios.get('/questions?page=1')
+        axios.get('/questionsPublic/' + this.$route.params.property + '/?page=1')
         .then(resp => {
             this.questions = resp.data.data;
         })
-        axios.get('/reviews?page=1')
+        axios.get('/reviewsPublic/' + this.$route.params.property + '?page=1')
             .then(resp => {
                 this.reviews = resp.data.data;
                 this.reviews_page = resp.data.last_page;
@@ -193,6 +195,13 @@ export default {
         this.description = jQuery('.description-content').text();
         this.initMap();
         this.initGrecaptcha();
+
+        /*jQuery(".nav-tabs a").click(function(e) {
+            e.preventDefault();
+            jQuery('.nav-tabs a').removeClass('active');
+            jQuery(this).addClass('active');
+        });*/
+
     },
     methods: {
         addQuestion() {
@@ -292,7 +301,7 @@ export default {
             flightPath.setMap(map);
         },
         reviewsLoad() {
-            axios.get('/reviews?page='+this.reviewsCurrent)
+            axios.get('/reviewsPublic/' + this.$route.params.property + '?page='+this.reviewsCurrent)
                 .then(resp => {
                     this.reviews = resp.data.data;
                     this.reviews_page = resp.data.last_page;
@@ -313,6 +322,21 @@ export default {
         pageChange(page) {
             this.reviewsCurrent = page;
             this.reviewsLoad();
+        },
+        fullReviewSwitch() {
+            this.reviewsFull = !this.reviewsFull;
+        },
+        toggleFeedbackForm() {
+            this.feedbackForm = !this.feedbackForm;
+        },
+        activeStarsOff() {
+            this.hoveredStars = 0;
+        },
+        activeStars(num) {
+            this.hoveredStars = num;
+        },
+        activeStarClicked(num) {
+            this.clickedStars = num;
         }
     }
 }

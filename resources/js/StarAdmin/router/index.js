@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // Dashboard Components
-import dashboard from '../views/dashboard'
+import dashboard from '../views/dashboard.vue'
 
 // Widgets
 //import widgets from '../views/widgets'
@@ -29,7 +29,7 @@ import tooltips from '../views/ui-components/tooltips'
 
 // Sample Pages
 //import error404 from '../views/sample-pages/error-404'
-//import login from '../views/sample-pages/login'
+import login from '../views/sample-pages/login'
 //import register from '../views/sample-pages/register'
 
 import Requests from '../../components/Dashboard/Requests/Index';
@@ -244,12 +244,12 @@ export default new Router({
             path: '/404',
             name: 'error-404',
             component: error404
-        },
+        },*/
         {
             path: '/dashboard/login',
             name: 'login',
             component: login
-        },
+        },/*
         {
             path: '/register',
             name: 'register',

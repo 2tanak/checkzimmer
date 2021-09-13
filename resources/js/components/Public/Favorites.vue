@@ -26,7 +26,7 @@
                     </div>
                 </div>
 
-                <div class="property not-map">
+                <div v-if="false" class="property not-map">
                     <div class="container">
                         <transition name="fade" appear>
                             <div :style="{position: 'relative', opacity: loading ? 0:1, position: loading ? 'absolute':'relative' }">
@@ -62,11 +62,11 @@
                                                 </div>
                                                 <div class="humans">
                                                     <img src="/svg/i-people.svg" alt="humans">
-                                                    12 человек
+                                                    12 Personen
                                                 </div>
                                                 <div class="distance">
                                                     <img src="/svg/i-distance.svg" alt="distance">
-                                                    7км от указанного вами адреса
+                                                    7 km von der von Ihnen angegebenen Adresse entfernt
                                                 </div>
                                                 <div class="additionally">
                                                     <div class="wi-fi data-block-circle" data-toggle="tooltip" data-placement="top" title="wi-fi"><img src="/svg/i-wifi.svg"></div>
@@ -75,11 +75,11 @@
                                                     <div class="washing-machine data-block-circle" data-toggle="tooltip" data-placement="top" title="стиральная машина"><img src="/svg/i-washingmachine.svg"></div>
                                                     <div class="kitchen data-block-oval">
                                                         <img src="/svg/i-canteen.svg">
-                                                        своя кухня
+                                                        eigene Küche
                                                     </div>
                                                     <div class="shower data-block-oval">
                                                         <img src="/svg/i-shower.svg">
-                                                        свой душ
+                                                        deine Dusche
                                                     </div>
                                                 </div>
                                             </div>
@@ -87,17 +87,17 @@
                                         <table class="type">
                                             <thead>
                                             <tr>
-                                                <th class="title">Тип</th>
-                                                <th class="title">Кол-во</th>
+                                                <th class="title">Art der</th>
+                                                <th class="title">Menge</th>
                                                 <th class="title">Personen</th>
-                                                <th class="title">Цена</th>
+                                                <th class="title">Preis</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
                                                 <td class="type-block">
                                                     <img  src="svg/i-one.svg" alt="Одноместный">
-                                                    одноместный
+                                                    Einzel
                                                 </td>
                                                 <td class="type-block quantity-block">1</td>
                                                 <td class="type-block personen-block">1</td>
@@ -106,7 +106,7 @@
                                             <tr>
                                                 <td class="type-block">
                                                     <img  src="svg/i-two.svg" alt="двухместный">
-                                                    двухместный
+                                                    doppelt
                                                 </td>
                                                 <td class="type-block quantity-block">2</td>
                                                 <td class="type-block personen-block">2</td>
@@ -115,7 +115,7 @@
                                             <tr>
                                                 <td class="type-block">
                                                     <img  src="svg/i-multi.svg" alt="многоместный">
-                                                    многоместный
+                                                    Mehrsitzer
                                                 </td>
                                                 <td class="type-block quantity-block">3</td>
                                                 <td class="type-block personen-block">3</td>
@@ -124,7 +124,7 @@
                                             <tr>
                                                 <td class="type-block">
                                                     <img  src="svg/i-flat.svg" alt="квартира целиком">
-                                                    квартира целиком
+                                                    ganze Wohnung
                                                 </td>
                                                 <td class="type-block quantity-block">5</td>
                                                 <td class="type-block personen-block">5</td>
@@ -133,7 +133,7 @@
                                             <tr>
                                                 <td class="type-block">
                                                     <img  src="svg/i-house.svg" alt="дом">
-                                                    дом
+                                                    Haus
                                                 </td>
                                                 <td class="type-block quantity-block">12</td>
                                                 <td class="type-block personen-block">20</td>
@@ -150,7 +150,7 @@
                                                     <path d="M12.1 1.5c-.6-.7-1.5-1-2.4-1-.9 0-1.8.4-2.4 1l-.3.3-.3-.3C6.1.8 5.2.5 4.3.5c-.9 0-1.8.4-2.4 1C.6 2.9.6 5.1 1.9 6.4l4.8 5c.1.1.2.1.3.1.1 0 .2 0 .3-.1l4.8-5c1.3-1.3 1.3-3.5 0-4.9z" fill="#EE483F"/>
                                                 </svg>
                                             </a>
-                                            <div class="price"><span>от € 250</span> ночь</div>
+                                            <div class="price"><span>von € 250</span> Nacht</div>
                                         </div>
                                         <div class="rating">
                                             <div class="rating-number">
@@ -180,7 +180,7 @@
                             </div>
                         </transition>
                         <transition name="fade">
-                            <div class="load-block-content" :style="{ display: loading ? 'display':'none !important' }">
+                            <div class="load-block-content" :style="{ display: loading ? 'display':'none' }">
                                 <div class="load-block-item">
                                     <div class="load-block big-load-block">
                                         <div class="left-part images-block">
@@ -305,16 +305,10 @@ export default {
         setTimeout(function() {
             console.log(that.$auth.user());
         }, 1000);
-        jQuery('body').on('click', 'a.collapse-circle', function(e) {
-            e.preventDefault();
-            var parent = jQuery(this).closest('.property-card');
-            jQuery(parent).toggleClass('collapse-item');
-            jQuery(this).toggleClass('active');
-        });
-        jQuery('body').on('click', 'a.favorites', function(e) {
+        /*jQuery('body').on('click', 'a.favorites', function(e) {
             e.preventDefault();
             jQuery(this).toggleClass('active');
-        });
+        });*/
         function initMap() {
             if (typeof google === 'undefined' || !document.getElementById('map')) {
                 setTimeout( () => { initMap() }, 100 )
@@ -347,6 +341,94 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+
+.favorites-content {
+    h1 {
+        margin-bottom: 40px;
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 130%;
+        text-align: center;
+        color: #333646;
+    }
+    .communication {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    padding-top: 60px;
+    min-height: calc(100vh - 165px);
+}
+
+@media (max-width: 575px) {
+    .favorites-content {
+    .communication {
+            position: static;
+            transform: none;
+        }
+        padding-top: 40px;
+        min-height: auto;
+        padding-bottom: 40px;
+    }
+}
+
+$recast-animation-duration: 0.8s;
+$recast-border-radius: 4px;
+$recast-light-background: #DEDEE2;
+$recast-light-highlight: lighten($recast-light-background, 4%);
+
+.recast {
+    position: relative;
+    overflow: hidden;
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, $recast-light-background, $recast-light-highlight, $recast-light-background);
+        animation: recast $recast-animation-duration ease-in-out infinite;
+    }
+}
+.list.recast:after {
+    border-radius: 100px;
+}
+.map.recast:after {
+    border-radius: 100px;
+}
+.found.recast:after {
+    border-radius: 6px;
+}
+.images-block.recast:after {
+    border-radius: 6px;
+}
+.middle-gray-block.recast:after {
+    border-radius: 100px;
+}
+.short-gray-block.recast:after {
+    border-radius: 100px;
+}
+.long-gray-block.recast:after {
+    border-radius: 100px;
+}
+.circle-gray-block.recast:after {
+    border-radius: 50%;
+}
+.rectangle-block.recast:after {
+    border-radius: 6px;
+}
+
+@keyframes recast {
+    0% {
+        transform: translate3d(-100%, 0, 0);
+    }
+    100% {
+        transform: translate3d(100%, 0, 0);
+    }
+}
+
 
 </style>

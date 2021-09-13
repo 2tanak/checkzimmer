@@ -1,0 +1,70 @@
+.communication {
+    .description {
+        max-width: 530px;
+        width: 100%;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 160%;
+        text-align: center;
+        color: #545769;
+        margin-bottom: 17px;
+    }
+    a {
+        &:hover {
+            color: #ffffff;
+            background: #6BB63F;
+        }
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 100%;
+        color: #3b8b3e;
+        background: #FFFFFF;
+        border: 1px solid #6BB63F;
+        border-radius: 6px;
+        outline: none;
+        text-decoration: none;
+        padding: 15px 24px;
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+        transition: all 0.4s;
+        min-width: 240px;
+        text-align: center;
+    }
+    .link-block {
+        .shadow-block {
+            &:hover {
+                .shadow-block {
+                    box-shadow: 0 4px 10px rgba(107, 182, 63, 0.16);
+                }
+            }
+            width: 100%;
+            max-width: 208px;
+            height: 26px;
+            background-color: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(29, 29, 36, 0.16);
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        position: relative;
+    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 15px;
+    width: 100%;
+}
+.communication.not-active {
+    display: none !important;
+}
+
+@media (max-width: 575px) {
+    .communication {
+        a {
+            width: 100%;
+        }
+    }
+}

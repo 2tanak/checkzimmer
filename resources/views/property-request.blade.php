@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-nothing-found')
 
 @section('content')
 
@@ -6,26 +6,24 @@
     <div class="nothing-found-container">
         <div class="nothing-found-content">
 
-            <h1>{{ __('Nothing found') }}!</h1>
+            <h1 class="desktop-title">{{ __('Nothing found') }}!</h1>
+            <h1 class="mobile-title">{{ __('Sie suchen - wir finden') }}</h1>
 
             <div class="description-text">
-                <span>{{ __("Don't waste time researching the internet for hours") }}.</span> <br> <span>{{ __('Our team of fitters has years of experience and the right contacts') }}.</span>
+                <span>{{ __("We ALWAYS have suitable accommodations for you in every city in Germany. Our professional team takes care of all the work and finds the right accommodation for you!") }}.</span>
             </div>
 
             @include('inquiry.team')
 
             @include('inquiry.contact')
 
-            @include('single.inquiry-form', ['id' => 0, 'classes' => 'nothing-found-form'])
-
-            <div class="fixed-bar">
-                <a href="#" class="send-inquiry inquiry"><span>Unverbindliche</span><span>Anfrage</span></a>
-                <div class="see-number-phone">
-                    <a class="number-phone phone-hide" href="tel:+4915792467400">+49 157 92467400</a>
-                </div>
-            </div>
         </div>
     </div>
+
+    @include('inquiry.picture-form-block')
+
+    @include('inquiry.advertising')
+
 </section>
 
 

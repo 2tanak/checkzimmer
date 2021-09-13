@@ -1,5 +1,5 @@
 <template>
-    <div class="ad-block">
+    <div v-if="false" class="ad-block">
         <div class="avatar-block">
             <div class="avatar">
                 <div class="img-container"><img src="/img/avatar.png" alt=""></div>
@@ -60,14 +60,14 @@
         </div>
         <div class="ad-content">
             <div class="ad-text">
-                <div class="title">Ничего не нашли? Сложно подобрать проживание?</div>
-                <div class="subtitle">Мы подберем для вас проживыание возле вашей стройки)</div>
-                <div class="usual-text">Свободное размещение прямо сейчас, мы работаем 24/7</div>
+                <div class="title">Nichts gefunden? Ist es schwierig, eine Unterkunft zu finden?</div>
+                <div class="subtitle">Wir suchen für Sie eine Unterkunft in der Nähe Ihrer Baustelle aus)</div>
+                <div class="usual-text">Kostenlose Vermittlung im Moment, wir arbeiten 24/7</div>
             </div>
             <div class="request">
-                <a class="request-item" href="#">Оставте заявку</a>
+                <a class="request-item" href="#">Hinterlassen Sie eine Anfrage</a>
                 <a href="tel:+49 341 1234 2223" class="number-phone">+49 341 1234 2223</a>
-                <div class="text">Текст в одну строку</div>
+                <div class="text">Einzeiliger Text</div>
             </div>
         </div>
     </div>
@@ -79,6 +79,175 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+
+.ad-block {
+    .avatar-block {
+        .name {
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 130%;
+            text-align: center;
+            color: #000000;
+        }
+        margin-right: 55px;
+    }
+    .img-container {
+        min-width: 82px;
+        max-width: 82px;
+        height: 82px;
+        border: 1.23077px solid rgba(0, 0, 0, 0.06);
+        box-sizing: border-box;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+    .avatar {
+        img {
+            min-width: 82px;
+            max-width: 82px;
+            height: 82px;
+            border-radius: 50%;
+        }
+        margin-bottom: 4px;
+    }
+    .rating {
+        svg {
+            &:last-of-type {
+                margin-right: 0;
+            }
+            margin-right: 2px;
+        }
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .ad-content {
+        &::before {
+            content: "";
+            position: absolute;
+            border-radius: 2px;
+            left: -8px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-45deg);
+            width: 30px;
+            height: 30px;
+            background: #EEF7FC;
+            z-index: -1;
+        }
+        display: flex;
+        align-items: center;
+        background: #EEF7FC;
+        border-radius: 12px;
+        position: relative;
+        padding: 26px 66px 17px 36px;
+        z-index: 10;
+    }
+    .title {
+        margin-bottom: 10px;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 130%;
+        color: #333646;
+    }
+    .subtitle {
+        margin-bottom: 6px;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 130%;
+        color: #333646;
+    }
+    .usual-text {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 130%;
+        color: #333646;
+    }
+    .ad-text {
+        margin-right: 104px;
+    }
+    .request {
+        a.request-item {
+            &:hover {
+                color: #ffffff;
+                background: #6BB63F;
+            }
+            padding: 20px 40px;
+            display: inline-block;
+            border: 1px solid #6BB63F;
+            box-sizing: border-box;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 100%;
+            color: #3B8B3E;
+            text-decoration: none;
+            min-width: 240px;
+            text-align: center;
+            transition: all 0.4s;
+            margin-bottom: 12px;
+        }
+        a.number-phone {
+            margin-bottom: 5px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 100%;
+            text-align: center;
+            color: #333646;
+        }
+        .text {
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 100%;
+            text-align: center;
+            color: #333646;
+        }
+        display: flex;
+        flex-direction: column;
+    }
+    padding: 15px 58px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #E8E8ED
+}
+
+@media (max-width: 1040px) {
+    .ad-block {
+        .avatar-block {
+            margin-right: 40px;
+        }
+
+        .ad-text {
+            margin-right: 40px;
+        }
+        .ad-content {
+            padding: 16px;
+        }
+        padding: 16px;
+    }
+}
+@media (max-width: 740px) {
+    .ad-block {
+        .ad-content {
+            &::before {
+                left: 50%;
+                top: -8px;
+                transform: translateX(-50%) rotate(-45deg);
+            }
+            flex-direction: column;
+            align-items: center;
+        }
+        .ad-text {
+            margin-right: 0;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .avatar-block {
+            margin-right: 0;
+            margin-bottom: 30px;
+        }
+        flex-direction: column;
+    }
+}
 
 </style>

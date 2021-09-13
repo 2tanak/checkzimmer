@@ -90,9 +90,13 @@
                     @endif
                     {{ $hotel->city }}
                 </div>
+                @if (!$hotel->address)
+                    <div class="clarification" style="margin-top:5px;font-style:italic;">{{ __('You will receive the full address on request') }}.</div>
+                @endif
+
             </div>
             <div class="map-container">
-                <a class="map-picture" href="#object-description">
+                <a class="map-picture map-desktop-picture" href="#object-description">
                     <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0)">
                             <path d="M1 -5.1811V-2.04882L39.1139 41L81 -6.30551C80.5285 -8.3937 78.6424 -10 76.442 -10H5.71513C3.12181 -10 1 -7.8315 1 -5.1811Z" fill="#E4EBF3"/>
@@ -231,13 +235,16 @@
             </a>
         </div>
         <div class="sidebar-bottom-block sidebar-bottom-modal">
-            <a class="melden">
+
+            @include('partials.button-favorites', ['hotel' => $hotel])
+
+            {{--<a class="melden">
                 <img class="not-hover" src="/svg/i-report.svg" alt="">
                 <img class="hover" src="/svg/i-report-hover.svg" alt="">
                 <span>{{ __('Report') }}</span>
             </a>
 
-            <div class="modal-offer-block sidebar-modal-block">
+        <div class="modal-offer-block sidebar-modal-block">
                 <div class="overlay"></div>
                 <div class="offer sidebar-small-block">
                     <div class="close-block"><img src="/svg/i-close-burger.svg" alt="alt"></div>
@@ -258,7 +265,7 @@
                     </div>
                     <a class="submit" href="#">{{ __('Send') }}</a>
                 </div>
-            </div>
+            </div>--}}
 
         </div>
     </div>
@@ -289,5 +296,114 @@
             }.bind(this), 2000);
         });
 
+        jQuery('.sidebar-bottom a').click(function (e) {
+            var parent = jQuery(this).closest('.sidebar-bottom-block');
+            jQuery('.sidebar-modal-block').removeClass('active');
+            jQuery(parent).find('.sidebar-modal-block').addClass('active');
+        });
+
+        jQuery('a.drucken').click(function (e) {
+            e.preventDefault();
+            jQuery('.sidebar-modal-block').removeClass('active');
+            window.print();
+        });
+
+        jQuery('.number-phone a').click(function (e) {
+            e.preventDefault();
+            jQuery('.quality, .modal-quality-block.sidebar-modal-block').addClass('active');
+        });
+
+        jQuery('.modal-quality-block .stars img').mouseover(function() {
+            jQuery(this).addClass('hovered');
+
+            var block = false;
+            jQuery('.modal-quality-block .stars img').each(function() {
+                if (block) {
+                    return;
+                }
+                jQuery(this).attr('src', '/svg/star-yellow.svg');
+                if (jQuery(this).hasClass('hovered')) {
+                    block = true;
+                }
+            })
+        });
+        jQuery('.modal-quality-block .stars img').mouseout(function() {
+            jQuery('.modal-quality-block .stars img').removeClass('hovered')
+            jQuery('.modal-quality-block .stars img').each(function() {
+                if (!jQuery(this).hasClass('clicked')) {
+                    jQuery(this).attr('src', '/svg/star-gray.svg');
+                }
+            })
+        })
+        jQuery('.modal-quality-block .stars img').click(function() {
+            jQuery('.modal-quality-block .stars img').removeClass('clicked')
+            jQuery(this).addClass('clicked');
+
+            var block = false;
+            var count = 0;
+            jQuery('.modal-quality-block .stars img').each(function() {
+                if (block) {
+                    jQuery(this).attr('src', '/svg/star-gray.svg');
+                    return;
+                }
+                count++;
+                if (jQuery(this).hasClass('clicked')) {
+                    block = true;
+                    return;
+                }
+                jQuery(this).addClass('clicked');
+            })
+            jQuery('[name="rating"]').val(count);
+        });
+
+        jQuery('.close-block').click(function () {
+            jQuery('.sidebar-modal-block').removeClass('active');
+        });
+
+        jQuery('a.another-time').click(function (e) {
+            e.preventDefault();
+            jQuery('.quality, .modal-quality-block.sidebar-modal-block').removeClass('active');
+        });
+
+        jQuery(document).mouseup(function (e){
+            var div = jQuery(".quality");
+            if (!div.is(e.target)
+                && div.has(e.target).length === 0) {
+                jQuery('.quality').removeClass('active');
+            }
+        });
+
+        jQuery(document).click(function (e) {
+            if (jQuery(e.target).closest('.sidebar-small-block').length === 0 &&
+                jQuery(e.target).closest('.select2-container').length === 0  &&
+                jQuery('.sidebar-small-block').hasClass('active')) {
+                jQuery('.sidebar-modal-block').removeClass('active');
+            }
+        });
+
+        jQuery('.sidebar-modal-block .overlay').click(function () {
+            jQuery('.sidebar-modal-block').removeClass('active');
+        });
+
+        jQuery('.desctop-sidebar a.inquiry').click(function (e) {
+            e.preventDefault();
+            jQuery('.inquiry-modal-overlay').addClass('modal-show');
+
+            if (jQuery(window).width() <= 680) {
+                jQuery('body').addClass('overflow');
+            }
+        });
+
+        jQuery('a.map-desktop-picture').on("click", function(e) {
+            e.preventDefault();
+            var anchor = jQuery(this);
+            jQuery('html, body').stop().animate({
+                scrollTop: jQuery(anchor.attr('href')).offset().top
+            }, 650);
+            jQuery('.tab-pane').removeClass('active show');
+            jQuery('a.nav-link').removeClass('active');
+            jQuery('.map-content').addClass('active show');
+            jQuery('.map-active a').addClass('active');
+        });
     });
 </script>

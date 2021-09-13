@@ -26,3 +26,43 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function (e) {
+        jQuery('.big-slider').slick({
+            arrows: true,
+            prevArrow: '<img class="prev-arrow" src="/svg/i-previous-lightbox.svg">',
+            nextArrow: '<img class="next-arrow" src="/svg/i-next-lightbox.svg">',
+            fade: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: true,
+            asNavFor: '.small-slider'
+        });
+        jQuery('.small-slider').slick({
+            slidesToShow: 10,
+            slidesToScroll: 1,
+            arrows: false,
+            infinite: true,
+            focusOnSelect: true,
+            asNavFor: '.big-slider',
+            centerMode: true,
+            responsive: [
+                {
+                    breakpoint: 1212,
+                    settings: "unslick"
+                }
+            ]
+        });
+        if(jQuery('.small-slider .slider-item').length <= 10) {
+            jQuery('.small-slider').addClass('transform');
+        } else {
+            jQuery('.small-slider').removeClass('transform');
+        }
+
+        jQuery('.slider-modal-overlay .modal-close').click(function (){
+           jQuery('.slider-modal-overlay').removeClass('modal-show');
+        });
+
+    });
+</script>

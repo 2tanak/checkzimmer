@@ -178,7 +178,514 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+
+.registration-section {
+    .billing-address-section {
+        &:after {
+            position: absolute;
+            content: "";
+            max-width: 720px;
+            width: 100%;
+            height: 110px;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            background: #FFFFFF;
+            box-shadow: 0 4px 30px rgba(51, 54, 70, 0.16);
+            border-radius: 14px;
+            z-index: -1;
+        }
+        form {
+            .forms-line {
+                &:last-of-type {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+        background: #FFFFFF;
+        box-shadow: 0 0 14px rgba(51, 54, 70, 0.14);
+        border-radius: 12px;
+        padding: 30px 16px;
+        margin-bottom: 20px;
+        max-width: 780px;
+        width: 100%;
+        position: relative;
+    }
+    .title {
+        a {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 100%;
+            color: #3B8B3E;
+            text-decoration: none;
+        }
+        margin-bottom: 16px;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 130%;
+        color: #333646;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .type-company {
+        span {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 100%;
+            color: #545769;
+        }
+        margin-bottom: 30px;
+    }
+    .type-company-links {
+        a {
+            max-width: 374px;
+            width: 100%;
+            height: 44px;
+            background: #FFFFFF;
+            border: 1px solid #6BB63F;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 100%;
+            color: #3B8B3E;
+            transition: all 0.2s;
+        }
+        a.private-person {
+            border-radius: 6px 0 0 6px;
+            border-right: 0;
+        }
+        a.entity {
+            border-radius: 0 6px 6px 0;
+        }
+        a.active {
+            color: #FFFFFF;
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+            background: #6BB63F;
+            border-color: #6BB63F;
+        }
+        display: flex;
+        align-items: center;
+        margin-top: 12px;
+    }
+    form {
+        .forms-line {
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+        .checkbox-line {
+            display: flex;
+            align-items: center;
+        }
+        .legal-address-line {
+            margin-bottom: 15px;
+        }
+        .company-name {
+            width: 100%;
+            max-width: 596px;
+            margin-right: 20px;
+        }
+        .steuer {
+            width: 100%;
+            max-width: 132px;
+        }
+        .greeting {
+            width: 100%;
+            max-width: 132px;
+            margin-right: 20px;
+        }
+        .name-block {
+            width: 100%;
+            max-width: 288px;
+            margin-right: 20px;
+            position: relative;
+        }
+        .surname-block {
+            width: 100%;
+            max-width: 288px;
+            position: relative;
+        }
+        .street-block {
+            width: 100%;
+            max-width: 596px;
+            margin-right: 20px;
+            position: relative;
+        }
+        .house-number-block {
+            width: 100%;
+            max-width: 132px;
+            position: relative;
+        }
+        .zip-block {
+            width: 100%;
+            max-width: 150px;
+            margin-right: 20px;
+            position: relative;
+        }
+        .city-block {
+            width: 100%;
+            max-width: 288px;
+            margin-right: 20px;
+            position: relative;
+        }
+        .country-block {
+            width: 100%;
+            max-width: 288px;
+        }
+        input {
+            &::-webkit-input-placeholder {
+                font-weight: 400;
+                font-size: 15px;
+                line-height: 100%;
+                color: #8F98A2;
+            }
+            &::-moz-placeholder {
+                font-weight: 400;
+                font-size: 15px;
+                line-height: 100%;
+                color: #8F98A2;
+            }
+            &:-moz-placeholder {
+                font-weight: 400;
+                font-size: 15px;
+                line-height: 100%;
+                color: #8F98A2;
+            }
+            &:-ms-input-placeholder {
+                font-weight: 400;
+                font-size: 15px;
+                line-height: 100%;
+                color: #8F98A2;
+            }
+        }
+        input[type="text"] {
+            &:focus {
+                background: #FFFFFF;
+                border: 1px solid #C0C1C2;
+                border-radius: 6px;
+                box-shadow: 0 0 0 4px rgb(243 243 243 / 90%);
+            }
+            width: 100%;
+            height: 54px;
+            background: #F3F3F3;
+            border-radius: 6px;
+            border: 0;
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 100%;
+            color: #333646;
+            padding: 0 13px;
+            outline: none;
+        }
+        [type="email"] {
+            &:focus {
+                background: #FFFFFF;
+                border: 1px solid #C0C1C2;
+                border-radius: 6px;
+                box-shadow: 0 0 0 4px rgb(243 243 243 / 90%);
+            }
+            width: 100%;
+            height: 54px;
+            background: #F3F3F3;
+            border-radius: 6px;
+            border: 0;
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 100%;
+            color: #333646;
+            padding: 0 13px;
+            outline: none;
+        }
+        [type="tel"] {
+            &:focus {
+                background: #FFFFFF;
+                border: 1px solid #C0C1C2;
+                border-radius: 6px;
+                box-shadow: 0 0 0 4px rgb(243 243 243 / 90%);
+            }
+            width: 100%;
+            height: 54px;
+            background: #F3F3F3;
+            border-radius: 6px;
+            border: 0;
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 100%;
+            color: #333646;
+            padding: 0 13px;
+            outline: none;
+        }
+        input[type="number"] {
+            &:focus {
+                background: #FFFFFF;
+                border: 1px solid #C0C1C2;
+                border-radius: 6px;
+                box-shadow: 0 0 0 4px rgb(243 243 243 / 90%);
+            }
+            &::-webkit-outer-spin-button {
+                display: none;
+                -webkit-appearance: none;
+                margin: 0;
+            }
+            &::-webkit-inner-spin-button {
+                display: none;
+                -webkit-appearance: none;
+                margin: 0;
+            }
+            width: 100%;
+            height: 54px;
+            background: #F3F3F3;
+            border-radius: 6px;
+            border: 0;
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 100%;
+            color: #333646;
+            padding: 0 13px;
+            outline: none;
+        }
+        label {
+            margin-bottom: 16px;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 100%;
+            color: #545769;
+        }
+    }
+    .checkbox-line {
+        label {
+            span {
+                color: #3b8b3e;
+                border-bottom: 1px solid #3b8b3e;
+            }
+            &::before {
+                content: "";
+                display: inline-block;
+                height: 20px;
+                width: 20px;
+                border: 2px solid #d9d9d9;
+                left: 0;
+                border-radius: 4px;
+                transition: all 0.2s;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            &::after {
+                position: absolute;
+                display: inline-block;
+                border-left: 2px solid #fff;
+                border-bottom: 2px solid #fff;
+                transform: rotate(-45deg);
+                left: 5px;
+                top: 5px;
+                height: 6px;
+                width: 10px;
+                transition: all 0.2s;
+            }
+            cursor: pointer;
+            margin: 0;
+            display: block;
+            padding-left: 30px;
+            position: relative;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 130%;
+            color: #545769;
+        }
+        input[type="checkbox"] {
+            opacity: 0;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+        }
+    }
+    input[type=checkbox]:checked + label {
+        &::before {
+            background-color: #6BB63F;
+            border-color: #6BB63F;
+        }
+        &::after {
+            content: "";
+        }
+    }
+    .error-text {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 100%;
+        color: #EE483F;
+        margin-top: 8px;
+        margin-bottom: 18px;
+        display: none;
+    }
+    .error-text.visible {
+        display: block;
+    }
+    .company-line.not-show {
+        height: 0;
+        margin-bottom: 0 !important;
+        opacity: 0;
+        visibility: hidden;
+    }
+    .company-line.steuer-show {
+        .company-name {
+            width: 0;
+            max-width: none;
+            margin-right: 0;
+            height: 0;
+            opacity: 0;
+            visibility: hidden;
+            margin-bottom: 0;
+        }
+        .steuer {
+            max-width: none;
+        }
+    }
+    .add-id {
+        height: 0;
+        margin-top: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.2s;
+    }
+    .add-id.show {
+        opacity: 1;
+        visibility: visible;
+        margin-top: 30px;
+        height: auto;
+    }
+    a {
+        svg {
+            display: block;
+            margin-right: 6px;
+        }
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 100%;
+        color: #3B8B3E;
+        text-decoration: none;
+    }
+    .forms-line-block {
+        position: relative;
+    }
+}
+
+@media (max-width: 1040px) {
+    .registration-section {
+        .billing-address-section {
+            &::after {
+                width: calc(100% - 32px);
+            }
+            max-width: none;
+            border-radius: 0;
+        }
+        .type-company-links {
+            a {
+                max-width: none;
+            }
+        }
+        form {
+            .name-block {
+                max-width: none;
+            }
+            .surname-block {
+                max-width: none;
+            }
+            .street-block {
+                max-width: none;
+            }
+            .house-number-block {
+                max-width: none;
+            }
+            .city-block {
+                max-width: none;
+            }
+            .country-block {
+                max-width: none;
+            }
+            .company-name {
+                max-width: none;
+            }
+        }
+        .title {
+            font-size: 18px;
+        }
+    }
+}
+@media (max-width: 575px) {
+    .registration-section {
+        form {
+            .forms-line {
+                &:not(:last-of-type) {
+                    margin-bottom: 24px;
+                }
+                flex-direction: column;
+            }
+            .steuer {
+                max-width: none;
+            }
+            .greeting {
+                width: 100%;
+                margin-bottom: 24px;
+                margin-right: 0;
+                max-width: none;
+            }
+            .name-block {
+                margin-right: 0;
+                margin-bottom: 24px;
+            }
+            .street-block {
+                margin-right: 0;
+                margin-bottom: 24px;
+            }
+            .zip-block {
+                max-width: none;
+                margin-right: 0;
+                margin-bottom: 24px;
+            }
+            .city-block {
+                margin-right: 0;
+                margin-bottom: 24px;
+            }
+            .company-name {
+                margin-right: 0;
+                margin-bottom: 24px;
+                max-width: none;
+            }
+            .forms-line {
+                a {
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 479px) {
+    .registration-section {
+        .checkbox-line {
+            label {
+                &::before {
+                    top: 0;
+                    transform: none;
+                }
+                ::after {
+                    top: 6px !important;
+                }
+            }
+        }
+    }
+}
 
 </style>
 

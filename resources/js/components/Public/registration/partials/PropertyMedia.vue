@@ -90,6 +90,243 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+
+.registration-section {
+    .photos-object-section {
+        &:after {
+            position: absolute;
+            content: "";
+            max-width: 720px;
+            width: 100%;
+            height: 110px;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            background: #FFFFFF;
+            box-shadow: 0 4px 30px rgb(51 54 70 / 16%);
+            border-radius: 14px;
+            z-index: -1;
+        }
+        .subtitle {
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+        }
+        .left-subtitle {
+            margin-right: 25px;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 100%;
+            color: #545769;
+        }
+        .right-subtitle {
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 140%;
+            color: #545769;
+        }
+        .input-file-block {
+            label {
+                &::before {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    border: 1px solid rgba(107, 182, 63, 0.3);
+                    border-radius: 6px;
+                    pointer-events: none;
+                }
+                &:hover {
+                    &::before {
+                        content: "";
+                    }
+                }
+                svg {
+                    display: block;
+                    margin-right: 4px;
+                }
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 100%;
+                color: #3B8B3E;
+                background: #E7F4EF;
+                border-radius: 6px;
+                width: 100%;
+                height: 54px;
+                cursor: pointer;
+                position: relative;
+                transition: all 0.2s;
+                margin-bottom: 0;
+            }
+            input[type="file"] {
+                opacity: 0;
+                visibility: hidden;
+                position: absolute;
+                left: -99999px;
+            }
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+        .pictures-block {
+            padding: 20px 16px;
+            border-bottom: 2px solid #E3E4E6;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .title {
+            padding: 0 16px;
+        }
+        .social-media-object {
+            padding: 0 16px;
+        }
+        .social-media-links {
+            label {
+                margin-bottom: 16px;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 100%;
+                color: #545769;
+            }
+            input {
+                &:focus {
+                    background: #FFFFFF;
+                    border: 1px solid #C0C1C2;
+                    border-radius: 6px;
+                    box-shadow: 0 0 0 4px rgb(243 243 243 / 90%);
+                }
+                &::-moz-placeholder {
+                    color:#c0392b;
+                }
+                &::-webkit-input-placeholder {
+                    font-weight: 400;
+                    font-size: 15px;
+                    line-height: 100%;
+                    color: #8F98A2;
+                }
+                &:-moz-placeholder {
+                    color:#c0392b;
+                }
+                &:-ms-input-placeholder {
+                    color:#c0392b;
+                }
+                padding: 0 13px;
+                background: #F3F3F3;
+                border-radius: 6px;
+                width: 100%;
+                height: 54px;
+                border: 0;
+                font-weight: 400;
+                font-size: 15px;
+                line-height: 100%;
+                color: #333646;
+                outline: none;
+            }
+            display: flex;
+            justify-content: space-between;
+        }
+        .facebook-block {
+            width: 50%;
+            margin-right: 20px;
+        }
+        .video-block {
+            width: 50%;
+        }
+        .social-media-object {
+            .title {
+                padding: 0;
+            }
+        }
+        .subtitle-mobile {
+            display: none;
+            margin-top: 16px;
+        }
+        background: #FFFFFF;
+        box-shadow: 0 0 14px rgb(51 54 70 / 14%);
+        border-radius: 12px;
+        padding: 30px 0;
+        margin-bottom: 20px;
+        max-width: 800px;
+        width: 100%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+    .title {
+        a {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 100%;
+            color: #3B8B3E;
+            text-decoration: none;
+        }
+        margin-bottom: 16px;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 130%;
+        color: #333646;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 1100px) {
+    .registration-section {
+        .photos-object-section {
+            &::after {
+                width: calc(100% - 32px);
+            }
+            max-width: none;
+            border-radius: 0;
+        }
+    }
+}
+@media (max-width: 1040px) {
+    .registration-section {
+        .title {
+            font-size: 18px;
+        }
+    }
+}
+@media (max-width: 760px) {
+    .registration-section {
+        .photos-object-section {
+            .subtitle-desctope {
+                .right-subtitle {
+                    display: none;
+                }
+            }
+            .subtitle-mobile {
+                .left-subtitle {
+                    display: none;
+                }
+                display: block;
+            }
+        }
+    }
+}
+@media (max-width: 575px) {
+    .registration-section {
+        .photos-object-section {
+            .social-media-links {
+                flex-direction: column;
+            }
+            .facebook-block {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 24px;
+            }
+            .video-block {
+                width: 100%;
+            }
+        }
+    }
+}
 
 </style>

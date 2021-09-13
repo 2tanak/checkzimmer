@@ -40,26 +40,6 @@ export default {
             }
             return room.options.find(elem => elem.key === name);
         },
-        addToFavorites(e) {
-            e.preventDefault();
-
-            let id = this.item.id;
-            let favoritesObject = JSON.parse(localStorage.getItem("favoritesList"));
-
-            if (favoritesObject === null) {
-                favoritesObject = [];
-            }
-            if (favoritesObject.indexOf(id) !== -1) {
-                favoritesObject.splice(favoritesObject.indexOf(id), 1);
-            } else {
-                favoritesObject.push(id);
-            }
-            localStorage.setItem('favoritesList', JSON.stringify(favoritesObject));
-            jQuery('.favoritesCount').html(favoritesObject.length);
-
-            this.$emit('favsUpdated');
-        },
-
         getRoomOptionByType(name) {
             let resultName = name.charAt(0).toUpperCase() + name.slice(1);
             let result = [];

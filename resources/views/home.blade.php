@@ -110,7 +110,6 @@
                         </a>
                     @endforeach
 
-
                     <a href="/registration" class="plus-city">
                         <span class="add">{{ __('Add your city') }}</span>
                         <span class="plus">
@@ -227,8 +226,6 @@
         </div>
     </section>
 
-    <div id="application">
-        <Home/>
-    </div>
+    <div id="application"><Home /></div>
 
 @endsection
