@@ -207,10 +207,10 @@ export default {
 
         this.submitForm(true);
 
-        jQuery('body').on('click', 'a.favorites', function(e) {
+        /*jQuery('body').on('click', 'a.favorites', function(e) {
             e.preventDefault();
             jQuery(this).toggleClass('active');
-        });
+        });*/
         jQuery(window).scroll( () => {
             this.lazySearch()
         })

@@ -80,18 +80,18 @@
             let favoritesObject = JSON.parse(localStorage.getItem("favoritesList")) || [];
             return favoritesObject.includes(id);
         }
-
         function favoritesAddRemove(id) {
             let favoritesObject = JSON.parse(localStorage.getItem("favoritesList"));
-            favoritesObject = favoritesObject.filter( item => item !== null );
             if (favoritesObject === null) {
                 favoritesObject = [];
             }
+            favoritesObject = favoritesObject.filter( item => item !== null );
             if (favoritesObject.indexOf(id) !== -1) {
                 favoritesObject.splice(favoritesObject.indexOf(id), 1);
             } else {
                 favoritesObject.push(id);
             }
+            console.log(favoritesObject);
             localStorage.setItem('favoritesList', JSON.stringify(favoritesObject));
             jQuery('.favoritesCount').html(favoritesObject.length);
             markFavorite(id);
