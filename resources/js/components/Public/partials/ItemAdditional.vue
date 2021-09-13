@@ -55,6 +55,16 @@
 export default {
     name: "ItemAdditional",
     props: ['item', 'status'],
+    data() {
+        return {
+            isFavorite: false,
+        }
+    },
+    mounted() {
+        let id = this.item.id;
+        let favoritesObject = JSON.parse(localStorage.getItem("favoritesList")) || [];
+        this.isFavorite = favoritesObject.includes(id);
+    },
     methods: {
         findOption(name) {
             if (!this.item.options) {
@@ -72,8 +82,20 @@ export default {
             e.preventDefault();
 
             let id = this.item.id;
+            let favoritesObject = JSON.parse(localStorage.getItem("favoritesList"));
 
-            favoritesAddRemove(id);
+            if (favoritesObject === null) {
+                favoritesObject = [];
+            }
+            if (favoritesObject.indexOf(id) !== -1) {
+                favoritesObject.splice(favoritesObject.indexOf(id), 1);
+                this.isFavorite = false;
+            } else {
+                favoritesObject.push(id);
+                this.isFavorite = true;
+            }
+            localStorage.setItem('favoritesList', JSON.stringify(favoritesObject));
+            jQuery('.favoritesCount').html(favoritesObject.length);
 
             this.$emit('favsUpdated');
         },
@@ -96,12 +118,6 @@ export default {
         isFree() {
             let free = this.findOption('free');
             return free && parseInt(free.value);
-        },
-        isFavorite() {
-            let id = this.item.id;
-            let favoritesObject = JSON.parse(localStorage.getItem("favoritesList")) || [];
-
-            return favoritesObject.includes(id);
         },
 
     }

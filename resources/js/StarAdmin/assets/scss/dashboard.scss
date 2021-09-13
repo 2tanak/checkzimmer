@@ -97,6 +97,21 @@ a.back-link:hover {
 .page-body-wrapper .comfort-block-item input[type="checkbox"] {
     cursor: pointer;
 }
+.login {
+    form.pt-5 {
+        .form-group {
+            .mdi {
+                position: absolute;
+                bottom: 3px;
+                left: 10px;
+            }
+            .form-control {
+                padding-left: 2rem;
+            }
+            position: relative;
+        }
+    }
+}
 
 
 @media (max-width: 991px) {

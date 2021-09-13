@@ -42,7 +42,7 @@ export default (base) => class ApiRequest {
         return client.get(`/api/${base}?page=${page}${query}`, getConfig());
     }
     get(id) {
-        return client.get(`/api/${base}/${id}`, getConfig());
+        return client.get(`/${base}/${id}`, getConfig());
     }
     query(data) {
         return client.post(`/${base}/query`, data, getConfig());

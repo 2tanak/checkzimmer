@@ -1,10 +1,6 @@
 <style>
     body{
         font-family: "Segoe UI", "Arial", sans-serif;
-        height: calc(100vh - 97px);
-    }
-    #app {
-        height: 100%;
     }
     a {
         color: #545769;
@@ -73,6 +69,12 @@
     }
     .plans-section.city-section a.plus-city:last-of-type {
         margin-right: 0;
+    }
+    footer {
+        opacity: 0;
+    }
+    main {
+        min-height: calc(100vh - 165px);
     }
 
 </style>
