@@ -19,10 +19,11 @@
 @import "resources/sass/single-components/main-top-block";
 @import "resources/sass/single-components/scroll-top";
 @import "resources/sass/single-components/object-description";
+@import "resources/sass/footer";
 
 
-body {
-    height: auto;
+footer {
+    opacity: 1;
 }
 .single-container {
     * {
@@ -95,12 +96,33 @@ body {
         .right-part {
             position: static;
         }
+        .main-block {
+            .main-top-block {
+                .favorites {
+                    display: flex;
+                    right: 288px;
+                    top: 25px;
+                }
+            }
+        }
         padding-top: 0;
         padding-bottom: 40px;
     }
 }
 @media (max-width: 991px) {
-    .single-content.padding-bottom {
+    .single-content {
         padding-bottom: 160px;
+    }
+}
+@media (max-width: 650px) {
+    .single-content {
+        .main-block {
+            .main-top-block {
+                .favorites {
+                    right: 25px;
+                    top: 25px;
+                }
+            }
+        }
     }
 }

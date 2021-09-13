@@ -1,5 +1,5 @@
 <template>
-    <div class="ad-block">
+    <div v-if="false" class="ad-block">
         <div class="avatar-block">
             <div class="avatar">
                 <div class="img-container"><img src="/img/avatar.png" alt=""></div>

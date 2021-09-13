@@ -1,7 +1,6 @@
 @import 'resources/sass/components/vendor/bootstrap';
 @import "resources/sass/general-style";
 @import "resources/sass/main-header";
-@import "resources/sass/footer";
 @import "resources/sass/components/fonts/inter";
 @import "resources/sass/components/fonts/fira-sans";
 @import "resources/sass/components/login-modal";
@@ -9,8 +8,9 @@
 @import "resources/sass/components/datepicker";
 @import "components/select2/select2-min";
 @import "resources/sass/components/datepicker/bootstra-datepicker.min";
+@import "resources/sass/footer";
 
 
-body {
-    height: auto;
+footer {
+    opacity: 1;
 }

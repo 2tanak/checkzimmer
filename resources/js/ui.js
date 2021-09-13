@@ -190,11 +190,9 @@ jQuery(window).scroll( function() {
     if (scroll > offset && counter === 0) {
         jQuery('.scroll-top').addClass('absolute');
         jQuery('.fixed-bar').addClass('bottom');
-        jQuery('.single-content').addClass('padding-bottom');
     } else {
         jQuery('.scroll-top').removeClass('absolute');
         jQuery('.fixed-bar').removeClass('bottom');
-        jQuery('.single-content').removeClass('padding-bottom');
     }
 
     if (jQuery(this).scrollTop() > 300) {

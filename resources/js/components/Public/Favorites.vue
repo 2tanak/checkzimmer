@@ -26,7 +26,7 @@
                     </div>
                 </div>
 
-                <div class="property not-map">
+                <div v-if="false" class="property not-map">
                     <div class="container">
                         <transition name="fade" appear>
                             <div :style="{position: 'relative', opacity: loading ? 0:1, position: loading ? 'absolute':'relative' }">

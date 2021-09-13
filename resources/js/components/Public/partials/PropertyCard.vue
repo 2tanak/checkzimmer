@@ -1,5 +1,5 @@
 <template>
-    <div class="property-card">
+    <div v-if="false" class="property-card">
         <div class="mobile-card-button"></div>
         <div class="property-card-slider">
             <div><img src="/img/property-picture.png" alt="Property picture"></div>
