@@ -7,6 +7,8 @@
                 <PropertyDataSummary :property="account.property"  @toPropertyData="toPropertyData" />
                 <PropertyFacilities :facilities="account.property.facilities" :readonly="true" :filtered="true" />
                 <PropertyMediaSummary :media="account.property.media" @toPropertyData="toPropertyData" />
+                <RegistrationTotals v-if="false" />
+
                 <div class="familiarization">
                     <div class="checkbox-line legal-address-line">
                         <input type="checkbox" id="got-acquainted" v-model="agreement">
@@ -90,6 +92,7 @@ import PropertyData from "./partials/PropertyData";
 import PropertyMediaSummary from "./partials/PropertyMediaSummary";
 import AdvertiseBlock from "./partials/AdvertiseBlock";
 import PropertyDataSummary from "./partials/PropertyDataSummary";
+import RegistrationTotals from "./partials/RegistrationTotals";
 export default {
     name: "RegistrationStepSummary",
     props: ['account', 'plan'],
@@ -106,7 +109,7 @@ export default {
         AdvertiseBlock,
         PropertyMediaSummary,
         PropertyData,
-        ContactInformationSummary, BillingAddressSummary, PropertyFacilities, PromoBlock, ChosenPlan},
+        ContactInformationSummary, BillingAddressSummary, PropertyFacilities, PromoBlock, ChosenPlan, RegistrationTotals},
     mounted() {
         window.scrollTo(0, 0);
     },

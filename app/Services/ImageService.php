@@ -15,6 +15,11 @@ class ImageService
     const ALLOWED_TYPES = [
         'image/png', 'image/jpeg'
     ];
+    const SIZES = [
+        'small500' => 500,
+        'thumbs300' => 300,
+        'thumbs170' => 170
+    ];
 
     public function storeImage(UploadedFile $uploadedFile)
     {
@@ -25,7 +30,10 @@ class ImageService
         }
         $file = $uploadedFile->move(public_path('images/uploaded/'.date('Y/m/d')), $imageName);
 
+        $this->thumbsUp($file->getRealPath());
         $this->optimize($file->getRealPath());
+        $this->thumbsOptimize($file->getRealPath());
+        $this->webpAll($file->getRealPath());
 
         return str_replace('\\', '/', str_replace('/public', '', $this->preparePublicImageUrl($file->getRealPath())));
     }
@@ -46,7 +54,11 @@ class ImageService
             return false;
         }
 
-        $this->noExif(Storage::disk('local')->path($imageName));
+        $file = Storage::disk('local')->path($imageName);
+        $this->thumbsUp($file);
+        $this->optimize($file);
+        $this->thumbsOptimize($file);
+        $this->webpAll($file);
 
         return URL::asset('storage/' . $imageName);
     }
@@ -116,4 +128,43 @@ class ImageService
         }
     }
 
+    function thumbsUp($image) {
+        foreach (self::SIZES as $key => $size) {
+            list($width, $height) = getimagesize($image);
+            $destFile = str_replace('/images/uploaded', '/images/'.$key, $image);
+            $this->checkDirectory($destFile);
+            $k = $size / $width;
+            $this->imageResize($image, $k, $destFile);
+        }
+    }
+    function thumbsOptimize($image) {
+        foreach (self::SIZES as $key => $size) {
+            $destFile = str_replace('/images/uploaded', '/images/'.$key, $image);
+            $this->optimize($destFile);
+        }
+    }
+    function webpAll($image) {
+        $destFile = str_replace('/images/uploaded', '/images/webp/uploaded', $image);
+        $this->checkDirectory($destFile);
+        $this->imageWebP($image, $destFile);
+
+        foreach (self::SIZES as $key => $size) {
+            $srcFile = str_replace('/images/uploaded', '/images/'.$key, $image);
+            $destFile = str_replace('/images/uploaded', '/images/webp/'.$key, $image);
+            $this->checkDirectory($destFile);
+            $this->imageWebP($srcFile, $destFile);
+        }
+    }
+    function checkDirectory($destFile, $isDir = false) {
+        if (!$isDir) {
+            $destSlugs = explode('/', $destFile);
+            array_pop($destSlugs);
+            $destDir = implode('/', $destSlugs);
+        } else {
+            $destDir = $destFile;
+        }
+        if (!file_exists($destDir)) {
+            mkdir($destDir);
+        }
+    }
 }

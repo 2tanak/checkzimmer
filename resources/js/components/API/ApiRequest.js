@@ -39,7 +39,7 @@ export default (base) => class ApiRequest {
         if (query !== '') {
             query = '&' + query;
         }
-        return client.get(`/api/${base}?page=${page}${query}`, getConfig());
+        return client.get(`/${base}?page=${page}${query}`, getConfig());
     }
     get(id) {
         return client.get(`/${base}/${id}`, getConfig());
@@ -67,19 +67,19 @@ export default (base) => class ApiRequest {
         }
     }
     update(id, data) {
-        return client.put(`/api/${base}/${id}`, data, getConfig());
+        return client.put(`/${base}/${id}`, data, getConfig());
     }
     updateAll(data) {
-        return client.put(`/api/${base}`, data, getConfig());
+        return client.put(`/${base}`, data, getConfig());
     }
     delete(id) {
-        return client.delete(`/api/${base}/${id}`, getConfig());
+        return client.delete(`/${base}/${id}`, getConfig());
     }
     deleteAll() {
-        return client.post(`/api/${base}`, getConfig());
+        return client.post(`/${base}`, getConfig());
     }
     create(data) {
-        return client.post(`/api/${base}`, data, getConfig());
+        return client.post(`/${base}`, data, getConfig());
     }
 };
 

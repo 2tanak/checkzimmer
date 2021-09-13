@@ -38,8 +38,8 @@ class InquiryFormRequest extends FormRequest
             'language' => "required|in:$languagesLine",
             'message' => "max:200",
             //"property" => "required|exists:property,id",
-            'number-persons' => "required|in:$numberPersonLine",
-            'type' => "required|in:$typeLine",
+            //'number-persons' => "required|in:$numberPersonLine",
+            //'type' => "required|in:$typeLine",
             'arrival-date' => "required|date_format:d/m/Y",
             'date-departure' => "required|date_format:d/m/Y|after:arrival-date",
         ];
