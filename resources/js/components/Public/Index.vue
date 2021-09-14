@@ -642,6 +642,12 @@ export default {
     }
 }
 
+@keyframes rot {
+    0% {transform: rotate(0);}
+
+    100% {transform: rotate(360deg);}
+}
+
 @media (max-width: 991px) {
     .load-more {
         .btn {
