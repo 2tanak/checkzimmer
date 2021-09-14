@@ -7,13 +7,15 @@
 <div class="single-main-slider">
     <div class="main-slider-item">
         <a class="open-gallery" href="#">
-            <img src="{{ $hotel->photoMain()['url_original'] }}" alt="alt">
+            {{--<img src="{{ $hotel->photoMain()['url_original'] }}" alt="alt">--}}
+            @include('partials.picture', ['src' => $hotel->photoMain()['url_original'], 'mode' => 'full'])
         </a>
     </div>
     @foreach ($hotel->photos() as $key => $photo)
         <div class="main-slider-item">
             <a class="open-gallery" href="#">
-                <img src="{{ $photo['url_original'] }}" alt="alt">
+                {{--<img src="{{ $photo['url_original'] }}" alt="alt">--}}
+                @include('partials.picture', ['src' => $photo['url_original'], 'mode' => 'full'])
             </a>
         </div>
     @endforeach

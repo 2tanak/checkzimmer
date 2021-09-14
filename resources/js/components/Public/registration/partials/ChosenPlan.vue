@@ -24,7 +24,6 @@ export default {
     props: ['plan'],
     methods: {
         backToPlans() {
-            console.log('!');
             this.$emit('backToPlans', '');
         }
     }

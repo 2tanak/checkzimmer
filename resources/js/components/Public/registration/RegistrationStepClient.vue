@@ -62,7 +62,6 @@ export default {
             window.setTimeout(() => {
                 let element = jQuery('.error-text');
                 let offs = jQuery(element).offset().top;
-                console.log(offs);
                 window.scroll(0, offs-200);
             }, 500);
         },

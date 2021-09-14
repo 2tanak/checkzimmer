@@ -4,7 +4,7 @@
             <div class="list-content-item">
                 <div class="container">
                     <div class="sorting-block">
-                        <ListModeDisplay :listMode="listMode" :total="totals" v-model="listMode" />
+                        <ListModeDisplay :listMode="listMode" :total="totals.reduce( (sum, item) => sum + item)" v-model="listMode" />
                         <OrderDropdown :mode="this.search.ord" @switch="loadSort" />
                     </div>
                 </div>
@@ -151,7 +151,7 @@ export default {
             loadingData: false,
             endoflist: false,
             property: [],
-            totals: 0,
+            totals: [0, 0, 0],
             propertyAlt: [],
             page: 1,
             nocity: 0,
@@ -267,7 +267,6 @@ export default {
             let subdomain = domain.split('//')[1].split('.')[0];
             let current = document.location.hostname.split('.')[0];
             if (current !== subdomain) {
-                //console.log(domain + '/?' + jQuery('form.find-subdomain-redirect').serialize().replace(/_token=.*?&/, ''));
                 document.location = domain + '/?' + jQuery('form.find-subdomain-redirect').serialize().replace(/_token=.*?&/, '');
             } else {
                 this.search.address = value;
@@ -437,6 +436,7 @@ export default {
                 this.nodist = 0;
                 this.property = [];
                 this.propertyAlt = [];
+                this.totals = [0, 0, 0];
             } else {
                 this.page += 1;
             }
@@ -446,7 +446,6 @@ export default {
 
             let search = { ...this.search };
             search.distance = this.nodist ? search.distance : 60;
-            console.log(properties);
             properties.request('queryFilter', this.search, 'post', { page: this.page, nocity: this.nocity, nodist: this.nodist})
                 .then( resp => {
                     if (!this.nodist) {
@@ -454,7 +453,8 @@ export default {
                     } else {
                         that.propertyAlt = resp.data.objects.data;
                     }
-                    that.totals = resp.data.objects.total;
+                    //that.totals += resp.data.objects.total;
+                    that.foundTotal(resp.data.objects.total);
                     that.page = resp.data.objects.current_page;
                     that.additional_pages = resp.data.current_page < resp.data.last_page;
                     that.loadingData = false;
@@ -473,7 +473,6 @@ export default {
                         that.page = 0;
                         that.nocity = 1;
                     }
-                    that.foundTotal()
                     that.favoritesDisplay();
                     that.initMap();
                 })
@@ -500,7 +499,7 @@ export default {
                     }
 
                     that.favoritesDisplay();
-                    that.foundTotal();
+                    //that.foundTotal();
             })
         },
 
@@ -533,7 +532,12 @@ export default {
         updateFavCount() {
             this.favoritesDisplay();
         },
-        foundTotal() {
+        foundTotal(total) {
+            if (total === 0) {
+                return;
+            }
+            let ind = (this.nocity === 0 && this.nodist === 0) ? 0 : (this.nocity === 1 && this.nodist === 0 ? 1 : 2);
+            this.totals[ind] = total;
         },
         minRoomPrice(property, room) {
             if (room && room.price) {
