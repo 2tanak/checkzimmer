@@ -385,7 +385,7 @@
             jQuery('.sidebar-modal-block').removeClass('active');
         });
 
-        jQuery('.desctop-sidebar a.inquiry').click(function (e) {
+        jQuery('.desctop-sidebar a.inquiry, .fixed-bar a.inquiry').click(function (e) {
             e.preventDefault();
             jQuery('.inquiry-modal-overlay').addClass('modal-show');
 
