@@ -26,7 +26,7 @@
                     </div>
                 </div>
 
-                <div v-if="false" class="property not-map">
+                <div class="property not-map">
                     <div class="container">
                         <transition name="fade" appear>
                             <div :style="{position: 'relative', opacity: loading ? 0:1, position: loading ? 'absolute':'relative' }">
@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="property-shadow" v-if="property.length"></div>
 
-                                <div class="google-map">
+                                <div v-if="false" class="google-map">
                                     <div id="map"></div>
 
                                     <div class="fullscreen-button"><img src="/svg/i-fullscrean.svg" alt="Full Screen Map"></div>
@@ -303,18 +303,13 @@ export default {
         });
 
         setTimeout(function() {
-            console.log(that.$auth.user());
         }, 1000);
-        /*jQuery('body').on('click', 'a.favorites', function(e) {
-            e.preventDefault();
-            jQuery(this).toggleClass('active');
-        });*/
+
         function initMap() {
             if (typeof google === 'undefined' || !document.getElementById('map')) {
                 setTimeout( () => { initMap() }, 100 )
                 return;
             }
-            console.log(document.getElementById('map'));
             map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: 51.340000, lng: 12.382000},
                 zoom: 8

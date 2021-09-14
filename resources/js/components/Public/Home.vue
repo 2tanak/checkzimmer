@@ -31,7 +31,6 @@ export default {
             }
         });
         jQuery('[name="address"]').on('input', function (e) {
-            console.log('!!!!');
             if (e.target.value.length < 3) {
                 return;
             }
@@ -81,14 +80,11 @@ export default {
             let subdomain = domain.split('//')[1].split('.')[0];
             let current = document.location.hostname.split('.')[0];
             if (current !== subdomain) {
-                //console.log(domain + '/?' + jQuery('form.find-subdomain-redirect').serialize().replace(/_token=.*?&/, ''));
                 document.location = domain + '/?' + jQuery('form.find-subdomain-redirect').serialize().replace(/_token=.*?&/, '');
             }
 
         })
         jQuery('body').on('click', function(e) {
-            console.log(jQuery(e.target).closest('.result-search'));
-            console.log(jQuery(e.target).closest('form'));
             if (jQuery(e.target).closest('.result-search').length === 0 && jQuery(e.target).closest('form').length === 0) {
                 jQuery('.result-search').removeClass('active');
             }
@@ -112,7 +108,6 @@ export default {
     },
     methods: {
         login(e) {
-            console.log(this.$auth);
             e.preventDefault();
             let res = true;
             jQuery('.modal-form.login input').each(function() {

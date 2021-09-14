@@ -80,7 +80,6 @@ export default {
         },
         getUrlLangPrefix() {
             let locale = jQuery('html').attr('lang');
-            console.log(locale);
             //temporary solution
             return locale && locale !== 'de' ? `/${locale}/` : '';
         },
