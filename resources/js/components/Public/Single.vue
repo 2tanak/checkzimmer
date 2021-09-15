@@ -6,10 +6,10 @@
                     <a class="nav-link active" data-toggle="tab" href="#description">{{ $t('Description object') }}</a>
                 </li>
                 <li class="nav-item reviews-tab-link">
-                    <a class="nav-link" data-toggle="tab" href="#reviews">{{ $t('Reviews') }} <span>{{ reviews ? reviews.length : 0 }}</span></a>
+                    <a class="nav-link" data-toggle="tab" href="#reviews">{{ $t('Reviews') }} <span>({{ reviews ? reviews.length : 0 }})</span></a>
                 </li>
                 <li class="nav-item questions-tab-link">
-                    <a class="nav-link" data-toggle="tab" href="#questions">{{ $t('Questions') }} <span>{{ questions ? questions.length : 0 }}</span></a>
+                    <a class="nav-link" data-toggle="tab" href="#questions">{{ $t('Questions') }} <span>({{ questions ? questions.length : 0 }})</span></a>
                 </li>
                 <li class="nav-item map-block-tab-link map-active">
                     <a class="nav-link" data-toggle="tab" href="#map-block">{{ $t('Map') }}</a>
@@ -333,7 +333,7 @@
 
             <div class="questions-content mobile-questions-content paddings-block">
                 <div class="head-collapse" data-toggle="collapse" data-target="#mobile-questions-content-collapse" aria-expanded="false" aria-controls="mobile-questions-content-collapse">
-                    <div>{{ $t('Questions') }} <span>{{ questions.length }}</span></div>
+                    <div>{{ $t('Questions') }} <span>({{ questions.length }})</span></div>
                     <div class="decompose-button"></div>
                 </div>
                 <div class="collapse" id="mobile-questions-content-collapse">
@@ -542,7 +542,7 @@ export default {
             });
             let map = new google.maps.Map(mapCanvas ,mapOptions);
             let contentString = '<div id="content">'+
-                '<span class="index">&euro;{{ $hotel->price }}</span>'+
+                '<span class="index"><strong>&euro;' + window.hotel_price + '</strong></span>'+
                 '<span>&nbsp;</span>'+
                 '<span class="town"></span>'+
                 '</div>';

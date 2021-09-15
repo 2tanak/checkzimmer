@@ -205,7 +205,7 @@ export default {
                 }
                 &::-webkit-input-placeholder {
                     font-weight: 400;
-                    font-size: 15px;
+                    font-size: 16px;
                     line-height: 100%;
                     color: #8F98A2;
                 }
@@ -222,7 +222,7 @@ export default {
                 height: 54px;
                 border: 0;
                 font-weight: 400;
-                font-size: 15px;
+                font-size: 16px;
                 line-height: 100%;
                 color: #333646;
                 outline: none;

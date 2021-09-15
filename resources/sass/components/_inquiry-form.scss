@@ -60,7 +60,7 @@
                 background: #F3F3F3;
                 border-radius: 6px;
                 font-weight: 400;
-                font-size: 15px;
+                font-size: 16px;
                 line-height: 100%;
                 color: #333646;
                 padding: 26px 16px 10px 16px;
@@ -417,7 +417,7 @@
                 margin-top: 50px;
             }
             .input-block-item {
-                max-width: none;
+                max-width: none !important;
             }
             .select-block {
                 label {
@@ -450,15 +450,14 @@
                         right: 13px;
                     }
                 }
-                max-width: none;
+                max-width: none !important;
                 display: flex;
                 flex-direction: column-reverse;
                 background: #F3F3F3;
                 border-radius: 6px;
-                padding-right: 18px;
             }
             .data-block {
-                max-width: none;
+                max-width: none !important;
             }
             .checkbox-block {
                 margin-bottom: 10px;
