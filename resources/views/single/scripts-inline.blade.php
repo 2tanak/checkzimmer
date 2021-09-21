@@ -38,8 +38,9 @@
 
         jQuery('.see-number-phone').click(function () {
             jQuery('.see-number-phone').addClass('active');
-            jQuery('.phone-hide').html(atob(window.phonenumStr));
-            jQuery('.phone-hide').attr('href', 'tel:' + atob(window.phonenum));
+            let phone = jQuery('.see-number-phone .phone-hide').html();
+            console.log(phone);
+            jQuery('.phone-hide').attr('href', 'tel:' + phone);
         });
 
         jQuery('.scroll-top').click(function () {
