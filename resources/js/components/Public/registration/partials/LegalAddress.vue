@@ -135,25 +135,25 @@ export default {
     input {
         &::-webkit-input-placeholder {
             font-weight: 400;
-            font-size: 15px;
+            font-size: 16px;
             line-height: 100%;
             color: #8F98A2;
         }
         &::-moz-placeholder {
             font-weight: 400;
-            font-size: 15px;
+            font-size: 16px;
             line-height: 100%;
             color: #8F98A2;
         }
         &:-moz-placeholder {
             font-weight: 400;
-            font-size: 15px;
+            font-size: 16px;
             line-height: 100%;
             color: #8F98A2;
         }
         &:-ms-input-placeholder {
             font-weight: 400;
-            font-size: 15px;
+            font-size: 16px;
             line-height: 100%;
             color: #8F98A2;
         }
@@ -224,7 +224,7 @@ export default {
             border-radius: 6px;
             border: 0;
             font-weight: 400;
-            font-size: 15px;
+            font-size: 16px;
             line-height: 100%;
             color: #333646;
             padding: 0 13px;
@@ -243,7 +243,7 @@ export default {
             border-radius: 6px;
             border: 0;
             font-weight: 400;
-            font-size: 15px;
+            font-size: 16px;
             line-height: 100%;
             color: #333646;
             padding: 0 13px;
@@ -262,7 +262,7 @@ export default {
             border-radius: 6px;
             border: 0;
             font-weight: 400;
-            font-size: 15px;
+            font-size: 16px;
             line-height: 100%;
             color: #333646;
             padding: 0 13px;
@@ -291,7 +291,7 @@ export default {
             border-radius: 6px;
             border: 0;
             font-weight: 400;
-            font-size: 15px;
+            font-size: 16px;
             line-height: 100%;
             color: #333646;
             padding: 0 13px;

@@ -57,7 +57,7 @@
                 @else
                 <div class="see-number-phone">
                     <span class="number-phone-text">{{ __('Show phone') }}</span>
-                    <a class="number-phone phone-hide" href="tel:">{{ $phoneHide }}</a>
+                    <a class="number-phone phone-hide" href="tel:">{{ $phoneNumLandlord }}</a>
                 </div>
             @endif
         </div>

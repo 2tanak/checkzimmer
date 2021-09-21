@@ -84,6 +84,7 @@ jQuery(document).ready(function() {
             'event_category': 'clicks',
             'event_label': 'WhatsApp click',
             });
+        roistat.event.send('clickWhatsapp');
     })
 
     function indexFormSelect2Init() {
