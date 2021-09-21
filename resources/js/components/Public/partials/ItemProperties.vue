@@ -57,9 +57,9 @@ export default {
             if (!this.item.geo) {
                 return 0;
             }
-            let c_1 = Math.abs(parseFloat(this.item.geo.lng) - parseFloat(this.item.lng));
-            let c_2 = Math.abs(parseFloat(this.item.geo.lat) - parseFloat(this.item.lat));
-            return Math.ceil(Math.sqrt( c_1 ** 2 + c_2 ** 2 ) * 111);
+            let c_1 = (parseFloat(this.item.geo.lng) - parseFloat(this.item.lng)) ** 2;
+            let c_2 = (parseFloat(this.item.geo.lat) - parseFloat(this.item.lat)) ** 2;
+            return Math.ceil(Math.sqrt( c_1 + c_2 ) * 111);
         },
         sumPeopleNumStr() {
             let sum = this.sumPeopleNum(),
