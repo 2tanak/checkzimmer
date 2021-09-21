@@ -83,8 +83,8 @@ class PropertyController extends Controller
 
         $geo_data = $this->service->getCoords($address);
 
-        $latD = 'abs('.$geo_data['lat'].' - lat) * 111';
-        $lngD = 'abs('.$geo_data['lng'].' - lng) * 111';
+        $latD = 'abs(' . $geo_data['lat'] . ' - lat) * 111';
+        $lngD = 'abs(' . $geo_data['lng'] . ' - lng) * 111';
 
         if (!$noDist) {
             $objects = Property::where(Property::raw($latD), '<', $km)

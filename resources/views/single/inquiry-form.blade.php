@@ -170,6 +170,7 @@
                             'event_category': 'forms',
                             'event_label': 'Inquiry form sent',
                         });
+                        roistat.event.send('sendInquiry');
 
                         setTimeout(() => {
                             jQuery('.property-inquiry-form .sent-ok').addClass('inactive');
