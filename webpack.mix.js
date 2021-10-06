@@ -19,4 +19,5 @@ mix.js('resources/js/app.js', 'public/js').vue()
     .sass('resources/sass/main-subdomain.scss', 'public/css')
     .sass('resources/sass/single.scss', 'public/css')
     .sass('resources/sass/register.scss', 'public/css')
-    .sass('resources/sass/nothing-found.scss', 'public/css');
+    .sass('resources/sass/nothing-found.scss', 'public/css')
+    .sass('resources/sass/rate.scss', 'public/css');
