@@ -1,0 +1,68 @@
+@import "resources/sass/rate-components/real-rating";
+@import "resources/sass/rate-components/reviews";
+
+.google-reviews-section {
+    h2 {
+        margin-top: 0;
+        margin-bottom: 12px;
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 130%;
+        text-align: center;
+        color: #333646;
+        padding: 0 16px;
+    }
+    .subtitle-reviews {
+        font-weight: 400;
+        font-size: 17px;
+        line-height: 160%;
+        text-align: center;
+        color: #545769;
+        margin-bottom: 20px;
+        padding: 0 16px;
+    }
+    a.all-reviews {
+        &:hover {
+            background-color: #589634;
+        }
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        outline: none;
+        text-decoration: none;
+        background: #6BB63F;
+        border-radius: 6px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 100%;
+        color: #FFFFFF;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+        transition: all 0.3s;
+        width: 220px;
+        height: 54px;
+        margin: auto;
+    }
+    padding-top: 100px;
+}
+
+
+@media (max-width: 991px) {
+    .google-reviews-section {
+        h2 {
+            font-size: 28px;
+        }
+        padding-top: 78px;
+    }
+}
+@media (max-width: 650px) {
+    .google-reviews-section {
+        h2 {
+            font-size: 20px;
+        }
+        .subtitle-reviews {
+            font-size: 14px;
+            line-height: 140%;
+        }
+        padding-top: 48px;
+    }
+}

@@ -142,7 +142,49 @@ jQuery(document).ready(function() {
     jQuery('.collapse-button').click(function() {
         var item = jQuery(this).parents('.questions-item');
         item.toggleClass('show').siblings('.show').removeClass('show');
+    });
+
+    jQuery('.rating-stars img').mouseover(function() {
+        jQuery(this).addClass('hovered');
+
+        var block = false;
+        jQuery('.rating-stars img').each(function() {
+            if (block) {
+                return;
+            }
+            jQuery(this).attr('src', '/svg/i-star-active.svg');
+            if (jQuery(this).hasClass('hovered')) {
+                block = true;
+            }
+        })
+    });
+    jQuery('.rating-stars img').mouseout(function() {
+        jQuery('.rating-stars img').removeClass('hovered')
+        jQuery('.rating-stars img').each(function() {
+            if (!jQuery(this).hasClass('clicked')) {
+                jQuery(this).attr('src', '/svg/i-star.svg');
+            }
+        })
     })
+    jQuery('.rating-stars img').click(function() {
+        jQuery('.rating-stars img').removeClass('clicked')
+        jQuery(this).addClass('clicked');
+
+        var block = false;
+        var count = 0;
+        jQuery('.rating-stars img').each(function() {
+            if (block) {
+                jQuery(this).attr('src', '/svg/i-star.svg');
+                return;
+            }
+            count++;
+            if (jQuery(this).hasClass('clicked')) {
+                block = true;
+                return;
+            }
+            jQuery(this).addClass('clicked');
+        });
+    });
 
 });
 
