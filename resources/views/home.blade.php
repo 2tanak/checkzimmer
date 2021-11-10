@@ -110,7 +110,7 @@
                         </a>
                     @endforeach
 
-                    <a href="/registration" class="plus-city">
+                    <a href="/registration" class="plus-city price-block-item">
                         <span class="add">{{ __('Add your city') }}</span>
                         <span class="plus">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -128,7 +128,7 @@
                         </span>
                     </a>
 
-                        <a href="/registration" class="plus-city">
+                        <a href="/registration" class="plus-city price-block-item">
                             <span class="add">{{ __('Add your city') }}</span>
                             <span class="plus">
                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
