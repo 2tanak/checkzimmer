@@ -22,6 +22,11 @@ $color4: #6BB63F;
 footer {
     opacity: 1;
 }
+.single-container.created-page-container {
+    * {
+        opacity: 1;
+    }
+}
 .plans-section {
     .plans-content {
         padding: 100px 0;
