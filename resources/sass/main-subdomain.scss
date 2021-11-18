@@ -830,6 +830,10 @@ footer {
                 left: 0;
                 pointer-events: none;
             }
+            a {
+                display: block;
+                position: relative;
+            }
             outline: none;
             position: relative;
             height: 156px !important;
