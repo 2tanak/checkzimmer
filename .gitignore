@@ -13,6 +13,7 @@
 /storage/debugbar/*
 .idea
 /vendor
+/docker-compose/mysql_data
 .env
 .env.backup
 .phpunit.result.cache
