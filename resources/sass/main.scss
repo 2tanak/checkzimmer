@@ -22,6 +22,13 @@ $color4: #6BB63F;
 footer {
     opacity: 1;
 }
+.single-container.created-page-container {
+    * {
+        opacity: 1;
+    }
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
 .plans-section {
     .plans-content {
         padding: 100px 0;
@@ -772,6 +779,13 @@ footer {
         &::after {
             content: none;
         }
+    }
+    .single-container.created-page-container {
+        h1 {
+            font-size: 23px;
+        }
+        padding-top: 30px;
+        padding-bottom: 0;
     }
 }
 @media (max-width: 750px) {
