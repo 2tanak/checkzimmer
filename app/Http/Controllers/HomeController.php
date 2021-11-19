@@ -193,7 +193,7 @@ class HomeController extends Controller
         $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
         return view('property-request', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
     }
-    public function rate()
+    public function rate($code)
     {
         $data = WebsiteData::getOptions();
         $seoTitle = $data['title'];
@@ -201,8 +201,9 @@ class HomeController extends Controller
         $options = $data['options'];
 
         $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
-        return view('rate', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
+        return view('rate', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin', 'code'));
     }
+
     public function city()
     {
         $data = WebsiteData::getOptions();
