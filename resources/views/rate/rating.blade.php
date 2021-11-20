@@ -2,6 +2,7 @@
 <section class="rating-block">
     <form id="feedback-form">
         <input type="hidden" value="{{ $code }}" name="client_id"/>
+        <input type="hidden" name="grecaptcha" value="">
         <div class="rating-block-item">
             <div class="rating-title">{{ __('Furnishing') }}</div>
             <div class="rating-stars">
@@ -107,5 +108,17 @@
                 console.log(resp)
             })
         })
+        function initFBGrecaptcha() {
+            if (typeof grecaptcha === 'undefined') {
+                setTimeout( () => { initFBGrecaptcha() }, 100 );
+                return;
+            }
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LejY9AZAAAAAFpdc0QzQzrqRtaaflf3PfP64qdE', {action: 'submit'}).then(function(token) {
+                    let elements = document.querySelectorAll('[name="grecaptcha"]');
+                    elements.forEach( el => el.value = token);
+                });
+            });
+        }
     })
 </script>
