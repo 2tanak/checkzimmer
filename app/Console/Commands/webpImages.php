@@ -6,6 +6,12 @@ use App\Services\ImageService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Class webpImages
+ * Creates webp images for all files in the specified directories
+ *
+ * @package App\Console\Commands
+ */
 class webpImages extends Command
 {
     /**
@@ -30,7 +36,7 @@ class webpImages extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Creates webp images for all files in the specified directories';
 
     /**
      * Create a new command instance.

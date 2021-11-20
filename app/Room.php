@@ -5,10 +5,28 @@ namespace App;
 use App\Option;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Room
+ * Model for storing rooms
+ *
+ * @package App
+ */
+
 class Room extends Model
 {
+    /**
+     * @const PRIVATE_COLOR for private features
+     */
     const PRIVATE_COLOR = '#4CAF50';
+
+    /**
+     * @const SHARED_COLOR for shared fatures
+     */
     const SHARED_COLOR = '#F8981D';
+
+    /**
+     * @const NONE_COLOR for absent features
+     */
     const NONE_COLOR = '#DDDDDD';
 
     protected $table = 'rooms';
@@ -16,14 +34,27 @@ class Room extends Model
     protected $fillableRelations = ['options'];
     protected $with = ['options', 'roomType'];
 
-    static function hasFeature($name, $room_facilities)
+    /**
+     * Check if room has a feature
+     *
+     * @param $name
+     * @param $room_facilities
+     * @return bool
+     */
+    static function hasFeature($name, $room_facilities): bool
     {
         $facilities = array_column($room_facilities, 'name');
 
         return array_search($name, $facilities) !== false;
     }
 
-    static function getKitchenType($room)
+    /**
+     * Get kitchen type
+     *
+     * @param $room
+     * @return string
+     */
+    static function getKitchenType($room): string
     {
         switch ($room['kitchen']) {
             case 'kitchenette':
@@ -36,6 +67,12 @@ class Room extends Model
         return __('none');
     }
 
+    /**
+     * Get shower type
+     *
+     * @param $room_facilities
+     * @return array|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Translation\Translator|string|null
+     */
     static function getShowerType($room_facilities)
     {
         if (self::hasFeature('Shared bathroom', $room_facilities)){
@@ -47,7 +84,13 @@ class Room extends Model
         return __('none');
     }
 
-    static function getBedroomType($bedrooms)
+    /**
+     * Get bedroom type
+     *
+     * @param $bedrooms
+     * @return string
+     */
+    static function getBedroomType($bedrooms): string
     {
         if (count($bedrooms) == 0){
             return __('none');
@@ -60,15 +103,31 @@ class Room extends Model
         return __('single');
     }
 
+    /**
+     * Get related room type
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function roomType() {
         return $this->belongsTo(RoomType::class, 'room_type_id');
     }
+
+    /**
+     * Get related options
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function options()
     {
         return $this->hasMany(Option::class, 'parent')->where('type', 'room');
     }
 
-    public static function getKitchenTypeText($room)
+    /**
+     * Get related kitchen type title
+     *
+     * @param $room
+     * @return string
+     */
+    public static function getKitchenTypeText($room): string
     {
         switch ($room['kitchen'])
         {
@@ -82,7 +141,13 @@ class Room extends Model
         }
     }
 
-    public static function getKitchenLabelColor($room)
+    /**
+     * Get kitchen color
+     *
+     * @param $room
+     * @return string
+     */
+    public static function getKitchenLabelColor($room): string
     {
         $type = $room['kitchen'];
         if ($type == 'kitchenette' || $type == 'single'){
@@ -93,7 +158,13 @@ class Room extends Model
         return self::NONE_COLOR;
     }
 
-    public static function getShowerTypeText($room)
+    /**
+     * Get shower title
+     *
+     * @param $room
+     * @return string
+     */
+    public static function getShowerTypeText($room): string
     {
         switch ($room['shower'])
         {
@@ -105,7 +176,13 @@ class Room extends Model
         return __('none');
     }
 
-    public static function getShowerLabelColor($room)
+    /**
+     * Get shower label color
+     *
+     * @param $room
+     * @return string
+     */
+    public static function getShowerLabelColor($room): string
     {
         switch ($room['shower'])
         {
@@ -117,7 +194,13 @@ class Room extends Model
         return self::NONE_COLOR;
     }
 
-    public static function getBedroomTypeText($room)
+    /**
+     * Get bedroom type text
+     *
+     * @param $room
+     * @return string
+     */
+    public static function getBedroomTypeText($room): string
     {
         switch ($room['bed'])
         {
@@ -129,7 +212,13 @@ class Room extends Model
         return __('none');
     }
 
-    static public function getBedroomLabelColor($item)
+    /**
+     * Get bedroom type color
+     *
+     * @param $item
+     * @return string
+     */
+    static public function getBedroomLabelColor($item): string
     {
         switch ($item['bed'])
         {
@@ -141,6 +230,11 @@ class Room extends Model
         return self::NONE_COLOR;
     }
 
+    /**
+     * Get persons number text
+     *
+     * @return string
+     */
     public function getPersonsText()
     {
         if ($this->person == 1){
@@ -151,6 +245,11 @@ class Room extends Model
         return __('many places');
     }
 
+    /**
+     * Update relations
+     *
+     * @param array $data
+     */
     public function updateRelations(array $data)
     {
         //TODO вынести в трейт fillRelations
@@ -176,8 +275,16 @@ class Room extends Model
             }
         }
     }
-    public static function getName ($persons) {
+
+    /**
+     * Get room name
+     *
+     * @param $persons
+     * @return string
+     */
+    public static function getName ($persons): string
+    {
         $roomNames = ['', 'Single room', 'Double room', 'Triple room', 'Quadruple', 'Quintuple', 'Six-seater', 'Seven-seater', 'Eight-seater', 'Nine-seater', 'Ten-seater' ];
-        return $roomNames[$persons] ?? 0;
+        return $roomNames[$persons] ?? '';
     }
 }

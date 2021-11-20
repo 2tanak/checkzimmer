@@ -2,45 +2,81 @@
 
 use App\Option;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+
+/**
+ * Class OptionsController
+ * Handles options for different objects like website itself, properties, etc
+ *
+ * @package App\Http\Controllers\Api
+ */
 
 class OptionsController extends Controller
 {
-    public function index()
+    /**
+     * Show all saved options
+     * @return JsonResponse
+     */
+    public function index(): JsonResponse
     {
         return response()->json( Option::all() );
     }
 
-    public function show($id)
+    /**
+     * Gets the specific option data
+     * @param $id
+     * @return JsonResponse
+     */
+    public function show($id): JsonResponse
     {
         $option = Option::withParams($id, ['type' => Option::$optionType]);
-        /*if (!$option) {
-            return response()->json( [] );
-        }*/
         return response()->json( $option->pluck('value', 'key', 'id') );
     }
 
-    public function showByType($type)
+    /**
+     * Get all options for the specified type
+     * @param $type
+     * @return JsonResponse
+     */
+    public function showByType($type): JsonResponse
     {
         $options = Option::params(['type' => $type]);
         return response()->json( $options->pluck('value', 'key') );
     }
 
-    public function store(Request $request)
+    /**
+     * Stores new option to the database
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function store(Request $request): JsonResponse
     {
-        return response()->json(['111']);
+        // No new option dynamics from this controller ATM
+        return response()->json(['success' => true]);
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Update option
+     * @param Request $request
+     * @param $id
+     * @return JsonResponse
+     */
+    public function update(Request $request, $id): JsonResponse
     {
         $fields = $request->all();
         foreach($fields as $key => $value) {
             Option::upd([ 'key' => $key, 'value' => $value, 'type' => $id, 'parent' => 0 ], ['key' => $key, 'type' => $id]);
         }
-        return response()->json(['222']);
+        return response()->json(['success' => true]);
     }
 
-    public function delete($id)
+    /**
+     * Delete the specified option
+     * @param $id
+     * @return JsonResponse
+     */
+    public function delete($id): JsonResponse
     {
         return response()->json(['code' => 'ok']);
     }

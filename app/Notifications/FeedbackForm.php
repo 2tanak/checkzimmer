@@ -5,6 +5,13 @@ namespace App\Notifications;
 use App\Property;
 use Illuminate\Mail\Mailable;
 
+/**
+ * Class FeedbackForm
+ * Notification for feedback form request
+ *
+ * @package App\Http\Requests
+ */
+
 class FeedbackForm extends Mailable
 {
     protected $data = null;

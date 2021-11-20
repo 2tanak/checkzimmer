@@ -7,8 +7,24 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * Class User
+ * Model for storing users
+ *
+ * @package App
+ */
+
 class User extends Authenticatable implements JWTSubject
 {
+    /**
+     * Model properties
+     *
+     * @property int $name user name
+     * @property int $role user role
+     * @property string $email user email
+     * @property string $password user pass
+     */
+
     use Notifiable;
 
     public const ADMIN = 1;

@@ -4,6 +4,13 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class ImageUploadRequest
+ * Checks sets rules for the allowed image uploads
+ *
+ * @package App\Http\Requests
+ */
+
 class ImageUploadRequest extends FormRequest
 {
     /**
@@ -11,7 +18,7 @@ class ImageUploadRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,7 +28,7 @@ class ImageUploadRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',

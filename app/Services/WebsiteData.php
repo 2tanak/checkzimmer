@@ -5,7 +5,20 @@ namespace App\Services;
 use App\Domain;
 use App\Option;
 
+/**
+ * Class WebsiteData
+ * Provides website-wide data
+ *
+ * @package App\Http\Services
+ */
+
 class WebsiteData {
+
+    /**
+     * Get website-related data
+     *
+     * @return array
+     */
     static public function getOptions() {
         $subdomain = Domain::getSubdomain();
         $options = Option::where('type', 'system')->get()->pluck('value', 'key')->all();

@@ -5,6 +5,13 @@ namespace App\Services;
 use App\GeocodeCache;
 use Spatie\Geocoder\Geocoder;
 
+/**
+ * Class GeocoderService
+ * Provides geocoding functions
+ *
+ * @package App\Http\Services
+ */
+
 class GeocoderService
 {
     /**
@@ -29,6 +36,7 @@ class GeocoderService
     }
 
     /**
+     * Get geo coordinates by the provided address
      * @param string $address
      * @return array
      */
@@ -39,10 +47,12 @@ class GeocoderService
     }
 
      /**
-     * @param string $city
-     * @param string $zip
-     * @return array
-     */
+      * Provides geocoordinates by the provided city and zip code
+      *
+      * @param string $city
+      * @param string $zip
+      * @return array
+      */
     public function getCoordsFromZipAndCity(string $city, string $zip): array
     {
         $address = $city . ' ' . $zip;
@@ -52,7 +62,7 @@ class GeocoderService
     }
 
     /**
-     * Store retrieved data
+     * Store the retrieved data in cache
      * @param string $address
      * @param array $data
      */
@@ -67,7 +77,7 @@ class GeocoderService
     }
 
     /**
-     * Get data from db
+     * Get cached data from the DB
      * @param string $address
      * @return GeocodeCache|null
      */
@@ -89,5 +99,4 @@ class GeocoderService
 
         return $data;
     }
-
 }

@@ -5,12 +5,43 @@ namespace App\Services;
 use App\Option;
 use GuzzleHttp;
 
+/**
+ * Class RoiStatService
+ * Roistat services
+ *
+ * @package App\Http\Services
+ */
+
 class RoiStatService {
+
+    /**
+     * @const ROISTAT_URL - API url
+     */
     const ROISTAT_URL = 'https://cloud.roistat.com/api/site/1.0/';
+
+    /**
+     * @const ROISTAT_GETPHONE - "get phone" function
+     */
     const ROISTAT_GETPHONE = 'get-phone';
+
+    /**
+     * @var mixed $apiKey API for roistat
+     */
     private $apiKey = null;
+
+    /**
+     * @var string $apiUrl API URL for roistat
+     */
     private $apiUrl = '';
+
+    /**
+     * @var GuzzleHttp\Client $client API object
+     */
     private $client = null;
+
+    /**
+     * @var string $data phone obtained from roistat
+     */
     private $data = '';
 
     function __construct() {
@@ -19,10 +50,23 @@ class RoiStatService {
         $this->client = new GuzzleHttp\Client(['base_uri' => $this->apiUrl]);
         $this->getPhoneData();
     }
+
+    /**
+     * Get phone from API
+     *
+     * @return \Psr\Http\Message\StreamInterface
+     * @throws GuzzleHttp\Exception\GuzzleException
+     */
     function getPhoneViaApi() {
         $response = $this->client->get($this->apiUrl . '/' . self::ROISTAT_GETPHONE);
         return $response->getBody();
     }
+
+    /**
+     * Update cached phone num
+     * @param $key
+     * @param $data
+     */
     function phoneDataCacheUpdate($key, $data) {
         $timestamp = Option::where('type', 'system')->where('key', $key)->first();
         if (!$timestamp) {
@@ -36,6 +80,11 @@ class RoiStatService {
         $timestamp->value = $data;
         $timestamp->save();
     }
+
+    /**
+     * Get phone via API
+     * @throws GuzzleHttp\Exception\GuzzleException
+     */
     function getPhoneData() {
         $timestamp = Option::where('type', 'system')->where('key', 'roi_timestamp')->first();
         if (!$timestamp || $timestamp < time()) {
@@ -57,6 +106,13 @@ class RoiStatService {
         }
         $this->data = Option::where('type', 'system')->where('key', 'roi_data')->first();
     }
+
+    /**
+     * Change phone from the provided one to the one obtained from roistat
+     * Needed for call tracking functions
+     * @param $phone
+     * @return array|string|string[]|null
+     */
     function getPhone($phone) {
         $data = json_decode($this->data, true);
         $phone = preg_replace('/[^0-9]/', '', $phone);

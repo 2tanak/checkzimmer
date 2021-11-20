@@ -3,14 +3,39 @@
 use App\Feedback;
 use App\Http\Controllers\Controller;
 use App\Notifications\FeedbackForm;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Psy\Util\Json;
+
+/**
+ * Class FeedbackController
+ * Handles feedbacks from clients
+ *
+ * @package App\Http\Controllers\Api
+ */
+
 
 class FeedbackController extends Controller {
-    public function index() {
+
+    /**
+     * Returns all stored feedbacks
+     *
+     * @return JsonResponse
+     */
+    public function index(): JsonResponse
+    {
         return response()->json(Feedback::all());
     }
-    public function store(Request $request) {
+
+    /**
+     * Stores new feedback in the database
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function store(Request $request): JsonResponse
+    {
         $data = $request->all();
         if (!$this->checkRecaptha($data['grecaptcha'])) {
             return response()->json(['success' => true, 'data' => ['message' => 'GRecaptcha error']]);
@@ -22,10 +47,18 @@ class FeedbackController extends Controller {
         $fb->fill($data);
         $fb->save();
         $notificationEmail = env('MAIL_NOTIFICATION_ADDRESS', '');
+
         Mail::to($notificationEmail)->send(new FeedbackForm($data));
         return response()->json(['success' => true, 'data' => $fb->toArray()]);
     }
-    public function checkRecaptha($response)
+
+    /**
+     * Checks recaptcha data to filter spam
+     *
+     * @param $response
+     * @return bool
+     */
+    public function checkRecaptha($response): bool
     {
         if (isset($response)) {
             $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';

@@ -47,7 +47,6 @@ foreach ($locales as $locale) {
         function () use ($locale) {
             Auth::routes();
 
-            Route::get('/list', 'HomeController@list')->name("list-$locale");
             Route::get('/single', 'HomeController@single')->name("single-$locale");
             Route::get('/single/{slug}', 'HomeController@singleProperty')->name("single-$locale");
             Route::post('/single/{slug}', 'HomeController@singlePropertyAccess')->name("single-access-$locale");
@@ -62,8 +61,6 @@ foreach ($locales as $locale) {
             Route::post('/findSubdomainRedirect', 'HomeController@getUrlForRedirectOnSubdomain')->name("findSubdomainRedirect-$locale");
 
             Route::get('/registration', 'HomeController@registration')->name("registration-$locale");
-            //Route::get('/registration2', 'HomeController@registration2')->name("registration2-$locale");
-            //Route::get('/registration-preview', 'HomeController@registration3')->name("registration3-$locale");
 
             Route::get('/{page}', 'HomeController@singlePage')->name("singlePage");
         });

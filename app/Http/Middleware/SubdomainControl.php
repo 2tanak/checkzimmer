@@ -6,8 +6,23 @@ use App\Option;
 use Closure;
 use Illuminate\Support\Facades\View;
 
+/**
+ * Class SubdomainControl
+ * Checks if user is in a correct domain
+ *
+ * @package App\Http\Middleware
+ */
+
 class SubdomainControl
 {
+    /**
+     * Checks current domain
+     * and redirects if the domain is wrong
+     *
+     * @param $request
+     * @param Closure $next
+     * @return \Illuminate\Http\Response|mixed
+     */
     public function handle($request, Closure $next)
     {
         $domain = $request->root();

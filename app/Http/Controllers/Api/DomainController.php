@@ -4,10 +4,17 @@ namespace App\Http\Controllers\Api;
 
 use App\Option;
 use App\Services\GeocoderService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Domain;
 
+/**
+ * Class DomainController
+ * Handles domain CRUD requests
+ *
+ * @package App\Http\Controllers\Api
+ */
 class DomainController extends Controller
 {
     /**
@@ -21,11 +28,11 @@ class DomainController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display all created domains.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         return response()->json(Domain::all());
     }
@@ -37,16 +44,16 @@ class DomainController extends Controller
      */
     public function create()
     {
-        //
+        // No form is provided by the controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created domain in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         //
         request()->validate([
@@ -79,14 +86,13 @@ class DomainController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified domain.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param  int $id - id for the domain
+     * @return JsonResponse
      */
-    public function show($id)
+    public function show($id): JsonResponse
     {
-        //
         $domain = Domain::where('subdomain', $id)->first();
         $domain->options = Option::where('type', 'domain')->where('parent', $domain->id)->get()->pluck('value', 'key');
         return response()->json($domain);
@@ -100,19 +106,18 @@ class DomainController extends Controller
      */
     public function edit($id)
     {
-        //
+        // No edit form is provided by the controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified domain in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param  Request $request - domain data
+     * @param  int  $id - domain id
+     * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id): JsonResponse
     {
-        //
         request()->validate([
             'subdomain'      => 'required',
             'city'   => 'required',
@@ -156,16 +161,17 @@ class DomainController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified domain from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int  $id - domain id
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(int $id): JsonResponse
     {
         $result = Domain::find($id)->delete();
-        if($result) {
+        if ($result) {
             return response()->json(['code' => 'ok']);
         }
+        return response()->json(['code' => 'fail']);
     }
 }
