@@ -105,8 +105,13 @@
             e.preventDefault();
             var data = jQuery('#feedback-form').serialize();
             jQuery.post("{{ route('got-feedback') }}", data, function(resp) {
-                console.log(resp)
-            })
+                jQuery('.thanks-overlay').addClass('active');
+                jQuery('.rating-stars img').removeClass('hodered').removeClass('clicked')
+                    .attr('src', '/svg/i-star.svg');
+                jQuery('.rating-stars input').val(0);
+                jQuery('#name-block-input').val('');
+                jQuery('#comment').val('');
+            });
         })
         function initFBGrecaptcha() {
             if (typeof grecaptcha === 'undefined') {
@@ -114,11 +119,15 @@
                 return;
             }
             grecaptcha.ready(function() {
+                // ToDo: remove code for GRecaptcha
                 grecaptcha.execute('6LejY9AZAAAAAFpdc0QzQzrqRtaaflf3PfP64qdE', {action: 'submit'}).then(function(token) {
                     let elements = document.querySelectorAll('[name="grecaptcha"]');
                     elements.forEach( el => el.value = token);
                 });
             });
         }
-    })
+        jQuery('.thanks-overlay').click(function() {
+            jQuery(this).removeClass('active');
+        });
+    });
 </script>

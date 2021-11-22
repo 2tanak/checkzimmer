@@ -1,9 +1,15 @@
+/**
+ * Root file for public pages
+ * @package resources\js
+ */
+
 import Vue from 'vue'
 
+/**
+ * Import public page components
+ */
 import Public from './components/Public/PublicRoot';
 import Home from './components/Public/Home';
-
-//require('./bootstrap');
 
 import axios from 'axios';
 import VueAxios from 'vue-axios';
@@ -30,9 +36,9 @@ Vue.use(VueAuth, auth)
 
 window.Vue = require('vue');
 
-
-//var jQuery = require('jquery')
-
+/**
+ * Init i18n
+ */
 import VueI18n from 'vue-i18n'
 Vue.use(VueI18n)
 
@@ -152,7 +158,6 @@ jQuery(document).ready(function() {
         var count = 0;
         jQuery(parent).find('img').each(function() {
             if (block) {
-                console.log(count);
                 return;
             }
             count++;

@@ -4,7 +4,7 @@
 <strong>Sender ID:</strong> {{ $client_id }}
 <br><br><br>
 <strong>{{ __('Sender comment') }}:</strong><br>
-{{ $data['comment'] }}
+{{ $comment }}
 <br><br>
 <h2>{{ __('Sender feedback') }}</h2>
 

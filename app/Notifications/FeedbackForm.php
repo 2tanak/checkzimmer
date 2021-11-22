@@ -35,7 +35,7 @@ class FeedbackForm extends Mailable
     public function build()
     {
         return $this->view('email.feedbackform')
-            ->subject(__('Rent Inquiry'))
+            ->subject(__('New feedback'))
             ->with($this->data);
     }
 }

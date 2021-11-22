@@ -46,8 +46,8 @@ class FeedbackController extends Controller {
         }
         $fb->fill($data);
         $fb->save();
-        $notificationEmail = env('MAIL_NOTIFICATION_ADDRESS', '');
 
+        $notificationEmail = env('MAIL_NOTIFICATION_ADDRESS', '');
         Mail::to($notificationEmail)->send(new FeedbackForm($data));
         return response()->json(['success' => true, 'data' => $fb->toArray()]);
     }
@@ -60,6 +60,7 @@ class FeedbackController extends Controller {
      */
     public function checkRecaptha($response): bool
     {
+        return true;
         if (isset($response)) {
             $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
             $recaptcha_secret = env('GOOGLE_RECAPTHCA3_SECRET');
