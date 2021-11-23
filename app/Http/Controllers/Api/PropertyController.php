@@ -6,6 +6,7 @@ use App\Option;
 use App\Http\Requests\PropertyListRequest;
 use App\Room;
 use App\Services\GeocoderService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Property;
 use Auth;
@@ -14,6 +15,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Ramsey\Collection\Collection;
 
+/**
+ * Class PropertyController
+ * Handles property CRUD operations
+ *
+ * @package App\Http\Controllers\Api
+ */
 class PropertyController extends Controller
 {
     /**
@@ -26,7 +33,12 @@ class PropertyController extends Controller
         $this->service = $service;
     }
 
-    public function index(PropertyListRequest $request)
+    /**
+     * Get all properties allowed for current user
+     * @param PropertyListRequest $request
+     * @return JsonResponse
+     */
+    public function index(PropertyListRequest $request): JsonResponse
     {
         $user = Auth::user();
         $subdomain = Domain::getSubdomain();
@@ -65,7 +77,12 @@ class PropertyController extends Controller
         return response()->json(['objects' => $objects, 'coords' => null]);
     }
 
-    public function queryFilter(Request $request)
+    /**
+     * Get filtered properties
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function queryFilter(Request $request): JsonResponse
     {
         $data = $request->input();
         $user = Auth::user();
@@ -161,7 +178,12 @@ class PropertyController extends Controller
         return response()->json(['objects' => $objects, 'coords' => $geo_data]);
     }
 
-    public function querySort (Request $request)
+    /**
+     * Get sorted properties
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function querySort (Request $request): JsonResponse
     {
         $data = $request->input();
 
@@ -170,7 +192,11 @@ class PropertyController extends Controller
         return response()->json(['objects' => $objects, 'coords' => null]);
     }
 
-    public function initMap()
+    /**
+     * Gets geo coordinates data for properties
+     * @return JsonResponse
+     */
+    public function initMap(): JsonResponse
     {
         $coords = [];
 
@@ -184,7 +210,12 @@ class PropertyController extends Controller
         return response()->json(['coords' => $coords]);
     }
 
-    public function show($id)
+    /**
+     * Returns the specific property data
+     * @param $id
+     * @return JsonResponse
+     */
+    public function show($id): JsonResponse
     {
         $specOptions = [
             'landlordSpeaks' => '',
@@ -216,14 +247,23 @@ class PropertyController extends Controller
         return response()->json($property);
     }
 
-    public function init()
+    /**
+     * Get 10 first properties
+     * @return JsonResponse
+     */
+    public function init(): JsonResponse
     {
         $property = Property::orderBy('created_at')->limit(10)->get();
 
         return response()->json($property);
     }
 
-    public function queryProperty(Request $request)
+    /**
+     * Get data for the specified property ids
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function queryProperty(Request $request): JsonResponse
     {
         $fields = $request->all();
         $property = Property::whereIn('id', $fields['id'])->get();
@@ -231,7 +271,13 @@ class PropertyController extends Controller
         return response()->json($property);
     }
 
-    public function destroy(Property $property)
+    /**
+     * Remove the specific data from the storage
+     * @param Property $property
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function destroy(Property $property): JsonResponse
     {
         foreach ($property->rooms as $room) {
             Option::where(['parent' => $room->id, 'type' => 'room'])->delete();
@@ -242,7 +288,13 @@ class PropertyController extends Controller
         return response()->json(['code' => 'ok']);
     }
 
-    public function store(Request $request)
+    /**
+     * Creates new property
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function store(Request $request): JsonResponse
     {
         request()->validate([
             'name'      => 'required',
@@ -290,7 +342,14 @@ class PropertyController extends Controller
         return $item ? response()->json(['code' => 'ok','property' => $item]) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
     }
 
-    public function update(Property $property, Request $request)
+    /**
+     * Update property data
+     *
+     * @param Property $property
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function update(Property $property, Request $request): JsonResponse
     {
         $fields = $request->all();
 
@@ -325,6 +384,11 @@ class PropertyController extends Controller
 
         return $property ? response()->json(['code' => 'ok']) : response()->json(['code' => 'error','message' => 'Ошибка сохранения']);
     }
+
+    /**
+     * Bulk property update
+     * @param Request $request
+     */
     function listUpdate(Request $request) {
         $data = $request->all();
         foreach ($data as $item) {

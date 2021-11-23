@@ -4,38 +4,45 @@ namespace App\Http\Controllers\Api;
 
 use App\Page;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Psy\Util\Json;
+
+/**
+ * Class PageController
+ * Handles CRUD for public pages
+ *
+ * @package App\Http\Controllers\Api
+ */
 
 class PageController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of pages.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
         return response()->json(Page::all());
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        // No create page form is provided from this controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created page in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         //
         $data = $request->all();
@@ -47,14 +54,13 @@ class PageController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Returns the specified page data.
      *
      * @param  \App\Page  $page
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function show(Page $page)
+    public function show(Page $page): JsonResponse
     {
-        //
         return response()->json($page);
     }
 
@@ -62,21 +68,20 @@ class PageController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Page  $page
-     * @return \Illuminate\Http\Response
      */
     public function edit(Page $page)
     {
-        //
+        // No edit page form is specified for current controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified page in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Page  $page
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @param  Page  $page
+     * @return JsonResponse
      */
-    public function update(Request $request, Page $page)
+    public function update(Request $request, Page $page): JsonResponse
     {
         //
         $data = $request->all();
@@ -86,14 +91,17 @@ class PageController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Page  $page
-     * @return \Illuminate\Http\Response
+     * @param Page $page
+     * @return JsonResponse
+     * @throws \Exception
      */
-    public function destroy(Page $page)
+    public function destroy(Page $page): JsonResponse
     {
-        //
-        $page->delete();
+        try {
+            $page->delete();
+        } catch (\Exception $e) {
+
+        }
+        return response()->json(['success' => true]);
     }
 }

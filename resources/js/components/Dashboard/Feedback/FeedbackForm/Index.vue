@@ -10,6 +10,15 @@
                                 <template v-slot:cell(created_at)="data">
                                     {{ getDate(data.item.created_at) }}
                                 </template>
+                                <template v-slot:cell(rating)="data">
+                                    {{
+                                        Math.floor( (data.item.furnish + data.item.comfort + data.item.location + data.item.price_to_perf +
+                                            data.item.cleanliness + data.item.staff) / 6 )
+                                    }}
+                                </template>
+                                <template v-slot:cell(info)="data")>
+                                    <button @click="showModal(data.item)">Details</button>
+                                </template>
                                 <template v-slot:table-busy>
                                     <div class="text-center text-danger my-2">
                                         <b-spinner class="align-middle"></b-spinner>
@@ -24,21 +33,20 @@
         </div>
 
         <div>
-            <b-button id="show-modal" @click="showModal">Увидеть модалку</b-button>
 
             <b-modal hide-footer ref="feedback-modal" title="Отзывы клиентов">
                 <div class="mb-5">
-                    <p><strong>Name:</strong> здесь идет имя клиента </p>
-                    <p><strong>Furnish:</strong> здесь будет стоять оценка </p>
-                    <p><strong>Comfort:</strong> здесь будет стоять оценка </p>
-                    <p><strong>Location:</strong> здесь будет стоять оценка </p>
-                    <p><strong>P/Perf:</strong> здесь будет стоять оценка </p>
-                    <p><strong>Cleanliness:</strong> здесь будет стоять оценка </p>
-                    <p><strong>Staff:</strong> здесь будет стоять оценка </p>
-                    <p><strong>Comment:</strong> здесь будет стоять оценка </p>
+                    <p><strong>Name:</strong> {{ current.name }} </p>
+                    <p><strong>Furnish:</strong> {{ current.furnish}} </p>
+                    <p><strong>Comfort:</strong> {{ current.comfort }} </p>
+                    <p><strong>Location:</strong> {{ current.location }} </p>
+                    <p><strong>P/Perf:</strong> {{ current.price_to_perf }} </p>
+                    <p><strong>Cleanliness:</strong> {{ current.cleanliness }} </p>
+                    <p><strong>Staff:</strong> {{ current.staff }} </p>
+                    <p><strong>Comment:</strong> {{ current.comment }} </p>
                 </div>
                 <div style="text-align: right;">
-                    <b-button variant="outline-danger" @click="hideModal">Close</b-button>
+                    <!--<b-button variant="outline-danger" @click="hideModal">Close</b-button>-->
                     <b-button variant="outline-primary" @click="hideModal">Ок</b-button>
                 </div>
             </b-modal>
@@ -62,6 +70,17 @@ export default {
             operationOk : false,
             operationError : false,
             textOperation: '',
+            current: {
+                name: '1',
+                furnish: '2',
+                comfort: '3',
+                location: '3',
+                price_to_perf: '4',
+                cleanliness: '3',
+                staff: '5',
+                comment: '123',
+
+            },
             fields: [
                 {
                     key: 'created_at',
@@ -76,36 +95,12 @@ export default {
                     label: this.$t('Name')
                 },
                 {
-                    key: 'furnish',
-                    label: this.$t('Furnish')
+                    key: 'rating',
+                    label: this.$t('Rating')
                 },
                 {
-                    key: 'comfort',
-                    label: this.$t('Comfort')
-                },
-                {
-                    key: 'location',
-                    label: this.$t('Location')
-                },
-                {
-                    key: 'price_to_perf',
-                    label: this.$t('P/Perf')
-                },
-                {
-                    key: 'cleanliness',
-                    label: this.$t('Cleanliness')
-                },
-                {
-                    key: 'cleanliness',
-                    label: this.$t('Internet')
-                },
-                {
-                    key: 'staff',
-                    label: this.$t('Staff')
-                },
-                {
-                    key: 'comment',
-                    label: this.$t('Comment')
+                    key: 'info',
+                    label: this.$t('Info')
                 },
             ],
 
@@ -142,7 +137,8 @@ export default {
             let year = dt.getFullYear();
             return `${year}-${month}-${day}`;
         },
-        showModal() {
+        showModal(data) {
+            this.current = data;
             this.$refs['feedback-modal'].show()
         },
         hideModal() {

@@ -3,11 +3,24 @@
 use App\Feature;
 use App\Http\Controllers\Controller;
 use App\Option;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+
+/**
+ * Class FeaturesController
+ * Handles property features
+ *
+ * @package App\Http\Controllers\Api
+ */
 
 class FeaturesController extends Controller
 {
-    public function index()
+    /**
+     * Shows all stored features
+     *
+     * @return JsonResponse
+     */
+    public function index(): JsonResponse
     {
         $features = Feature::ind();
         foreach ($features as $key => $item) {
@@ -16,19 +29,39 @@ class FeaturesController extends Controller
         }
         return response()->json($features);
     }
-    public function show($id)
+
+    /**
+     * Returns data for the specified feature
+     *
+     * @param int $id - feature ID
+     * @return JsonResponse
+     */
+    public function show(int $id): JsonResponse
     {
         $feature = static::get($id);
 
         return response()->json($feature->pluck('value', 'key', 'id'));
     }
 
-    public function store(Request $request)
+    /**
+     * Stores new feature in the database
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function store(Request $request): JsonResponse
     {
         return response()->json([]);
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Updates data for the specified feature
+     *
+     * @param Request $request
+     * @param $id
+     * @return JsonResponse
+     */
+    public function update(Request $request, $id): JsonResponse
     {
         $data = [
             'feature_category_id' => $request->category,
@@ -73,6 +106,11 @@ class FeaturesController extends Controller
         return response()->json(['code' => 'ok', 'feature' => $feature]);
     }
 
+    /**
+     * Removes the specified feature from the database
+     * @param $id
+     * @return JsonResponse
+     */
     public function destroy($id)
     {
         Feature::find($id)->delete();
@@ -80,7 +118,13 @@ class FeaturesController extends Controller
         return response()->json(['code' => 'ok']);
     }
 
-    public function language(Request $request) {
+    /**
+     * Saves language data for features
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function language(Request $request): JsonResponse {
         $data = $request->all();
         if (!$data['id']) {
             $option = Option::create($data);

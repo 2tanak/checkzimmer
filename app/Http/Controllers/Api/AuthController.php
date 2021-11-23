@@ -9,15 +9,31 @@ use App\Repositories\PropertyRepository;
 use App\Repositories\UserRepository;
 use App\User;
 use Cookie;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 
+/**
+ * Class AuthController
+ * Works with website authentication
+ *
+ * @package App\Http\Controllers\Api
+ */
+
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    /**
+     * Performs registration procedures
+     * Handles POST request with new user data
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function register(Request $request): JsonResponse
     {
         $v = Validator::make($request->all(), [
             'email' => 'required|email|unique:users',
@@ -36,7 +52,14 @@ class AuthController extends Controller
         return response()->json(['status' => 'success'], 200);
     }
 
-    public function login(Request $request)
+    /**
+     * Login mechanics
+     * Handles POST request with login data
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function login(Request $request): JsonResponse
     {
         $credentials = $request->only('email', 'password');
         if ($token = $this->guard()->attempt($credentials)) {
@@ -46,7 +69,13 @@ class AuthController extends Controller
         return response()->json(['error' => 'login_error'], 401);
     }
 
-    public function logout()
+    /**
+     * Logout mechanics
+     * Handles POST request for logout
+     *
+     * @return JsonResponse
+     */
+    public function logout(): JsonResponse
     {
         $this->guard()->logout();
         $cookie = Cookie::forget('authDone');
@@ -56,7 +85,14 @@ class AuthController extends Controller
         ], 200)->withCookie($cookie);
     }
 
-    public function user(Request $request)
+    /**
+     * Getting user data
+     * Handles POST request with user data
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function user(Request $request): JsonResponse
     {
         $user = User::find(Auth::user()->id);
         return response()->json([
@@ -65,7 +101,12 @@ class AuthController extends Controller
         ]);
     }
 
-    public function refresh()
+    /**
+     * Refreshes user auth data
+     *
+     * @return JsonResponse
+     */
+    public function refresh(): JsonResponse
     {
         if ($token = $this->guard()->refresh()) {
             return response()
@@ -75,11 +116,24 @@ class AuthController extends Controller
         return response()->json(['error' => 'refresh_token_error'], 401);
     }
 
+    /**
+     * Returns auth guard
+     *
+     * @return \Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard
+     */
     private function guard()
     {
         return Auth::guard();
     }
-    public function registrationProcess(Request $request) {
+
+    /**
+     * User registration mechanics
+     * Handles POST request with user and property data
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function registrationProcess(Request $request): JsonResponse {
         $data = $request->all();
         $registerData = [
             'plan' => $data['plan'],
@@ -88,6 +142,7 @@ class AuthController extends Controller
             'profile' => $data['contact'],
             'contact' => $data['contact']
         ];
+
         $user = UserRepository::register($registerData);
 
         $propertyData = $data['property'];

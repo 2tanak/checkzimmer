@@ -5,6 +5,13 @@ namespace App\Notifications;
 use App\Property;
 use Illuminate\Mail\Mailable;
 
+/**
+ * Class InquiryRegistration
+ * Notification for new user registration form
+ *
+ * @package App\Http\Requests
+ */
+
 class InquiryRegistration extends Mailable
 {
     protected $data = null;

@@ -13,11 +13,19 @@ use App\Services\GeocoderService;
 use App\Services\RoiStatService;
 use App\Services\WebsiteData;
 use App\Statistic;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\View\View;
 use Request as MainRequest;
 
-
+/**
+ * Class HomeController
+ * Handles public page requests
+ *
+ * @package App\Http\Controllers
+ */
 
 class HomeController extends Controller
 {
@@ -32,11 +40,11 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Shows the home page for current domain
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Contracts\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $data = WebsiteData::getOptions();
         $seoTitle = $data['title'];
@@ -70,21 +78,34 @@ class HomeController extends Controller
         }
     }
 
-    public function dashboard() {
+    /**
+     * Show the application dashboard
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function dashboard(): View
+    {
         return view('welcome');
     }
 
-    public function list()
-    {
-        return view('list');
-    }
-
-    public function single(Request $request)
+    /**
+     * Shows single page
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function single(Request $request): View
     {
         return view('single');
     }
 
-    public function singleProperty($slug)
+    /**
+     * Shows singl property page
+     *
+     * @param $slug
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function singleProperty($slug): View
     {
         $hotel = Property::where('slug', $slug)->firstOrFail();
         $data = WebsiteData::getOptions();
@@ -98,7 +119,7 @@ class HomeController extends Controller
 
         //$phoneTrack = new RoiStatService;
         //$phoneNumLandlord = $phoneTrack->getPhone($phoneNumLandlord);
-        //dd($phoneNumLandlord);
+
         $phoneHide = substr($phoneNumLandlord, 0, 3) . 'X XXXXXXX';
 
         if ($hotel->access) {
@@ -120,7 +141,16 @@ class HomeController extends Controller
 
         return view('single', compact('options', 'hotel', 'questions', 'reviews', 'phoneNumAdmin', 'phoneNumLandlord', 'seoTitle', 'seoDescription', 'phoneHide', 'date'));
     }
-    public function singlePropertyAccess(Request $request, $slug) {
+
+    /**
+     * Shows single page with restricted access
+     *
+     * @param Request $request
+     * @param $slug
+     * @return View
+     */
+    public function singlePropertyAccess(Request $request, $slug): View
+    {
         $hotel = Property::where('slug', $slug)->firstOrFail();
         $data = WebsiteData::getOptions();
         $seoTitle = $data['title'];
@@ -162,7 +192,12 @@ class HomeController extends Controller
         return view('single', compact('options', 'hotel', 'questions', 'reviews', 'phoneNumAdmin', 'phoneNumLandlord', 'seoTitle', 'seoDescription', 'phoneHide', 'date'));
     }
 
-    public function favorites()
+    /**
+     * Shows favorites page
+     *
+     * @return View
+     */
+    public function favorites(): View
     {
         $data = WebsiteData::getOptions();
         $seoTitle = $data['title'];
@@ -173,7 +208,14 @@ class HomeController extends Controller
 
         return view('favorites', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
     }
-    public function plans()
+
+    /**
+     * Shows plans page
+     * ToDo: ensure we need this, as plans were moved to Vue-handled template
+     *
+     * @return View
+     */
+    public function plans(): View
     {
         $data = WebsiteData::getOptions();
         $seoTitle = $data['title'];
@@ -183,7 +225,13 @@ class HomeController extends Controller
         $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
         return view('plans', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
     }
-    public function propertyRequest()
+
+    /**
+     * Shows property request page
+     *
+     * @return View
+     */
+    public function propertyRequest(): View
     {
         $data = WebsiteData::getOptions();
         $seoTitle = $data['title'];
@@ -193,7 +241,13 @@ class HomeController extends Controller
         $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
         return view('property-request', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
     }
-    public function rate($code)
+
+    /**
+     * Shows feedback page
+     * @param $code
+     * @return View
+     */
+    public function rate($code): View
     {
         $data = WebsiteData::getOptions();
         $seoTitle = $data['title'];
@@ -204,17 +258,12 @@ class HomeController extends Controller
         return view('rate', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin', 'code'));
     }
 
-    public function city()
-    {
-        $data = WebsiteData::getOptions();
-        $seoTitle = $data['title'];
-        $seoDescription = $data['description'];
-        $options = $data['options'];
-
-        $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
-        return view('city', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
-    }
-    public function registration()
+    /**
+     * Shows registration page
+     *
+     * @return View
+     */
+    public function registration(): View
     {
         $data = WebsiteData::getOptions();
         $seoTitle = $data['title'];
@@ -224,17 +273,23 @@ class HomeController extends Controller
         $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
         return view('registration', compact('options', 'seoTitle', 'seoDescription', 'phoneNumAdmin'));
     }
-    public function registration2()
+
+    /**
+     * Redirects to home page
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function redirect(): RedirectResponse
     {
-        return view('registration2');
-    }
-    public function registration3()
-    {
-        return view('registration3');
-    }
-    public function redirect() {
         return response()->redirectToRoute(app('locale')->routeApply('home'));
     }
+
+    /**
+     * Send roistat data
+     * ToDo: check if we need that
+     *
+     * @param $data
+     */
     public function roistatSend($data) {
         $roistatData = array(
             'roistat' => isset($_COOKIE['roistat_visit']) ? $_COOKIE['roistat_visit'] : 'nocookie',
@@ -270,8 +325,16 @@ class HomeController extends Controller
 	    file_get_contents("https://cloud.roistat.com/api/proxy/1.0/leads/add?" . http_build_query($roistatData));
 
     }
-    public function inquiryForm(InquiryFormRequest $request)
+
+    /**
+     * Processes property request form
+     *
+     * @param InquiryFormRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function inquiryForm(InquiryFormRequest $request): JsonResponse
     {
+
         $data = $request->all();
         if (true || $this->checkRecaptha($data['grecaptcha'])) {
             $property = Property::find($data['property']) ?: null;
@@ -294,7 +357,15 @@ class HomeController extends Controller
             return response()->json(['code' => 'error']);
         }
     }
-    public function singlePage($page) {
+
+    /**
+     * Shows single page
+     *
+     * @param $page
+     * @return View
+     */
+    public function singlePage($page): View
+    {
         $data = WebsiteData::getOptions();
         $seoTitle = $data['title'];
         $seoDescription = $data['description'];
@@ -303,7 +374,13 @@ class HomeController extends Controller
         $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
         return view('page', compact('page', 'seoDescription', 'seoTitle', 'options', 'phoneNumAdmin'));
     }
-    public function checkRecaptha($response)
+
+    /**
+     * Checks Google Recaptcha data to filter spam
+     * @param $response
+     * @return bool
+     */
+    public function checkRecaptha($response): bool
     {
         if (isset($response)) {
             $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
@@ -318,7 +395,14 @@ class HomeController extends Controller
         return false;
     }
 
-    public function getUrlForRedirectOnSubdomain(Request $request, GeocoderService $service)
+    /**
+     * Returns appropriate subdomain URL
+     *
+     * @param Request $request
+     * @param GeocoderService $service
+     * @return JsonResponse
+     */
+    public function getUrlForRedirectOnSubdomain(Request $request, GeocoderService $service): JsonResponse
     {
         $data = $request->all();
         $address = $data['address'];

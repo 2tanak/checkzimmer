@@ -6,6 +6,12 @@ use App\Services\ImageService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Class thumbnailImages
+ * Creates a set of smaller images
+ *
+ * @package App\Console\Commands
+ */
 class thumbnailImages extends Command
 {
     /**
@@ -29,7 +35,7 @@ class thumbnailImages extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Make a set of smaller images for all images in uploads directory';
 
     /**
      * Create a new command instance.
@@ -46,7 +52,7 @@ class thumbnailImages extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         foreach (self::SIZES as $key => $size) {
             $this->checkDirectory('public/images/' . $key);
@@ -56,7 +62,13 @@ class thumbnailImages extends Command
 
         return 0;
     }
-    public function directoryScan($base) {
+    /**
+     * Scan directory for files, process
+     * each file through resize mechanics
+     *
+     * @param string $base - directory base to scan
+     */
+    public function directoryScan(string $base) {
         $imgSvc = new ImageService;
         $directories = Storage::disk('local')->allDirectories($base);
 
@@ -85,6 +97,11 @@ class thumbnailImages extends Command
             }
         }
     }
+
+    /**
+     * Checks if directory exist and creates one if not
+     * @string $dir - directory to check
+     */
     function checkDirectory($dir) {
         if (!Storage::disk('local')->exists($dir)) {
             echo "Creating dir ".$dir."\r\n";

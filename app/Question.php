@@ -5,14 +5,36 @@ namespace App;
 use App\Traits\noCRUD;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Question
+ * Model for storing questions
+ *
+ * @package App
+ */
+
 class Question extends Model
 {
+    /**
+     * Model properties
+     *
+     * @property int $property_id property relation
+     * @property string $question asked question
+     * @property string $response given reply
+     */
+
     use noCRUD;
 
     protected $table = 'questions';
     protected $fillable = ['property_id', 'question', 'response'];
     //protected $with = ['property'];
 
+    /**
+     * Recaptcha test
+     * ToDo: refactoring/testing is needed
+     *
+     * @param $response
+     * @return bool
+     */
     static function reCAPTCHA3($response): bool
     {
         if (!RECAPTCHA_SITE){
@@ -20,7 +42,7 @@ class Question extends Model
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($response)){
-            $recaptcha_url = '<https://www.google.com/recaptcha/api/siteverify';
+            $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
             $recaptcha_secret = RECAPTCHA_SECRET;
             $recaptcha_response = $response;
 
@@ -35,6 +57,11 @@ class Question extends Model
         }
         return false;
     }
+
+    /**
+     * Related property
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     function property() {
         return $this->belongsTo(Property::class);
     }

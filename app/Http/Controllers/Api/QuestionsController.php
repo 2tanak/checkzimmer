@@ -3,35 +3,70 @@
 use App\Property;
 use App\RoomType;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Question;
 
+/**
+ * Class QuestionsController
+ * Handles CRUD for questions asked about property
+ *
+ * @package App\Http\Controllers\Api
+ */
 class QuestionsController extends Controller
 {
-    public function index()
+    /**
+     * Returns all questions
+     * @return JsonResponse
+     */
+    public function index(): JsonResponse
     {
         return response()->json( Question::all() );
     }
 
-    public function indexPublic($property) {
+    /**
+     * Returns all published questions
+     * @param $property
+     * @return JsonResponse
+     */
+    public function indexPublic($property): JsonResponse
+    {
         $property = Property::where('slug', $property)->first();
         return response()->json( Question::where('response', '!=','')->where('property_id', $property->id)->paginate(10) );
     }
-    public function destroy($id)
+
+    /**
+     * Remove the specific question
+     * @param $id
+     * @return JsonResponse
+     */
+    public function destroy($id): JsonResponse
     {
         Question::find($id)->delete();
-
         return response()->json(['code' => 'ok']);
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Update question data
+     *
+     * @param Request $request
+     * @param $id
+     * @return JsonResponse
+     */
+    public function update(Request $request, $id): JsonResponse
     {
         Question::find($id)->update(['response' => $request->answer]);
 
         return response()->json(['code' => 'ok']);
     }
 
-    public function create(Request $request)
+    /**
+     * Create new question
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function create(Request $request): JsonResponse
     {
         $data = $request->all();
         $data['response'] = '';
@@ -41,7 +76,11 @@ class QuestionsController extends Controller
         return response()->json(['code' => 'ok','question' => $item]);
     }
 
-    public function paginated()
+    /**
+     * Return paginated list of questions
+     * @return JsonResponse
+     */
+    public function paginated(): JsonResponse
     {
         return response()->json( Question::with('property')->paginate(50) );
     }

@@ -12,6 +12,13 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Str;
 
+/**
+ * Class BookingDataService
+ * Provides data for properties imported from booking API
+ *
+ * @package App\Http\Services
+ */
+
 class BookingDataService
 {
     /**
@@ -53,6 +60,7 @@ class BookingDataService
     }
 
     /**
+     * Get cities count
      * @return int
      */
     public function getCitiesCount(): int
@@ -61,6 +69,7 @@ class BookingDataService
     }
 
     /**
+     * Get room types
      * @param string $type
      * @return mixed
      */
@@ -69,6 +78,10 @@ class BookingDataService
         return $this->bookingType->params(['type' => $type]);
     }
 
+    /**
+     * Get bed types
+     * @return \string[][]
+     */
     public function getBedTypes()
     {
         return [
@@ -83,6 +96,10 @@ class BookingDataService
         ];
     }
 
+    /**
+     * Get shower types
+     * @return \string[][]
+     */
     public function getShowerTypes()
     {
         return [
@@ -105,6 +122,10 @@ class BookingDataService
         ];
     }
 
+    /**
+     * Get kitchen types
+     * @return \string[][]
+     */
     public function getKitchenTypes()
     {
         return [
@@ -131,6 +152,10 @@ class BookingDataService
         ];
     }
 
+    /**
+     * Get child features
+     * @return mixed
+     */
     public function getChildrenFeatures()
     {
         return $this->bookingFeatures->ind();
@@ -202,6 +227,7 @@ class BookingDataService
     }
 
     /**
+     * Get hotel info from API
      * @param int $hotel_id
      * @return array
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -215,6 +241,7 @@ class BookingDataService
     }
 
     /**
+     * Get city data by its name from Booking API
      * @param string $city
      * @return BookingCity
      * @throws ModelNotFoundException
@@ -224,6 +251,10 @@ class BookingDataService
         return $this->bookingCity->where('name', $city)->firstOrFail();
     }
 
+    /**
+     * Save hotels data
+     * @param array $hotels
+     */
     public function storeHotels(array $hotels)
     {
         foreach($hotels as $hotel) {
@@ -350,6 +381,8 @@ class BookingDataService
     }
 
     /**
+     * Stores property in the database
+     *
      * @param array $hotel_data
      * @return Property
      */
@@ -363,6 +396,7 @@ class BookingDataService
     }
 
     /**
+     * Stores option in the database
      * @param array $data
      * @return Option
      */
@@ -375,6 +409,12 @@ class BookingDataService
         return $option;
     }
 
+    /**
+     * Stores a room in the database
+     *
+     * @param array $roomData
+     * @return Room
+     */
     private function storeRoom(array $roomData)
     {
         $room = new Room();
@@ -383,6 +423,13 @@ class BookingDataService
 
         return $room;
     }
+
+    /**
+     * Get mapping scheme for features
+     * (we need to map booking facilities to our property features scheme)
+     *
+     * @return array
+     */
     static function getFeaturesMap() {
         $mapFeatures = Option::where('key', 'mapping_features')->first();
         $mapBtS = [];
@@ -394,6 +441,11 @@ class BookingDataService
         }
         return $mapBtS;
     }
+
+    /**
+     * Map booking house types to website types
+     * @return array
+     */
     static function getHouseMap() {
         $mapFeatures = Option::where('key', 'mapping_housing')->first();
         $mapBtS = [];

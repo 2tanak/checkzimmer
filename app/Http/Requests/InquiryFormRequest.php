@@ -4,6 +4,13 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class InquiryFormRequest
+ * Checks sets rules for the property request form
+ *
+ * @package App\Http\Requests
+ */
+
 class InquiryFormRequest extends FormRequest
 {
     /**

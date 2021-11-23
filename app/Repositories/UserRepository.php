@@ -6,7 +6,19 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
+/**
+ * Class UserRepository
+ * Repository for users
+ *
+ * @package App\Http\Repositories
+ */
+
 class UserRepository {
+    /**
+     * Register a user
+     * @param $data
+     * @return mixed
+     */
     static function register($data) {
         $userEmail = $data['contact']['email'];
         $user = User::where('email', $userEmail)->first();
@@ -21,6 +33,12 @@ class UserRepository {
         self::addMetaData($user, $data);
         return $user;
     }
+
+    /**
+     * Add user metadata
+     * @param $user
+     * @param $data
+     */
     static function addMetaData($user, $data) {
         foreach ($data as $row => $block) {
             if (!is_array($block)) {

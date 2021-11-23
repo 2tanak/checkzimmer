@@ -4,11 +4,24 @@ use App\User;
 use Auth;
 use Hash;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+
+/**
+ * Class UsersController
+ * Handles CRUD for users
+ *
+ * @package App\Http\Controllers\Api
+ */
 
 class UsersController extends Controller
 {
-    public function index()
+    /**
+     * Show all users
+     *
+     * @return JsonResponse
+     */
+    public function index(): JsonResponse
     {
         $users = User::all();
         return response()->json(
@@ -18,7 +31,12 @@ class UsersController extends Controller
             ], 200);
     }
 
-    public function show($id)
+    /**
+     * Return the specific user data
+     * @param $id
+     * @return JsonResponse
+     */
+    public function show($id): JsonResponse
     {
         $user = User::find($id);
         return response()->json(
@@ -28,7 +46,13 @@ class UsersController extends Controller
             ], 200);
     }
 
-    public function store(Request $request)
+    /**
+     * Creates new user
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function store(Request $request): JsonResponse
     {
         request()->validate([
             'name'     => 'required',
@@ -44,7 +68,14 @@ class UsersController extends Controller
         return $item ? response()->json(['code' => 'ok', 'user' => $item]) : response()->json(['code' => 'error', 'message' => __('Saving error')]);
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Updates user data
+     *
+     * @param Request $request
+     * @param $id
+     * @return JsonResponse
+     */
+    public function update(Request $request, $id): JsonResponse
     {
         request()->validate([
             'name'     => 'required',
@@ -62,6 +93,11 @@ class UsersController extends Controller
         return $user->update($data) ? response()->json(['code' => 'ok']) : response()->json(['code' => 'error', 'message' => __('Saving error')]);
     }
 
+    /**
+     * Delete the specific user
+     * @param $id
+     * @return JsonResponse
+     */
     public function destroy($id)
     {
         User::find($id)->delete();

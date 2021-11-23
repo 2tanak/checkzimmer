@@ -7,14 +7,13 @@ use Illuminate\Mail\Mailable;
 
 /**
  * Class FeedbackForm
- * Notification for property request form
+ * Notification for feedback form request
  *
  * @package App\Http\Requests
  */
 
-class InquiryHotel extends Mailable
+class FeedbackForm extends Mailable
 {
-    protected $hotel = null;
     protected $data = null;
 
     /**
@@ -23,9 +22,8 @@ class InquiryHotel extends Mailable
      * @param Property|null $hotel
      * @param array $data
      */
-    function __construct($hotel, array $data)
+    function __construct(array $data)
     {
-        $this->hotel = $hotel;
         $this->data = $data;
     }
 
@@ -36,11 +34,8 @@ class InquiryHotel extends Mailable
      */
     public function build()
     {
-        return $this->view('email.inquiry')
-            ->subject(__('Rent Inquiry'))
-            ->with([
-                'hotel' => $this->hotel,
-                'data' => $this->data,
-            ]);
+        return $this->view('email.feedbackform')
+            ->subject(__('New feedback'))
+            ->with($this->data);
     }
 }

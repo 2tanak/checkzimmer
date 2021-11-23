@@ -5,6 +5,13 @@ use App\Postcode;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/**
+ * Class PostcodesController
+ * Handles postcodes
+ *
+ * @package App\Http\Controllers\Api
+ */
+
 class PostcodeController extends Controller
 {
     public function index()

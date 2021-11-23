@@ -2,6 +2,7 @@
 <section class="rating-block">
     <form id="feedback-form">
         <input type="hidden" value="{{ $code }}" name="client_id"/>
+        <input type="hidden" name="grecaptcha" value="">
         <div class="rating-block-item">
             <div class="rating-title">{{ __('Furnishing') }}</div>
             <div class="rating-stars">
@@ -104,8 +105,30 @@
             e.preventDefault();
             var data = jQuery('#feedback-form').serialize();
             jQuery.post("{{ route('got-feedback') }}", data, function(resp) {
-                console.log(resp)
-            })
+                jQuery('.thanks-overlay').addClass('active');
+                jQuery('.rating-stars img').removeClass('hodered').removeClass('clicked')
+                    .attr('src', '/svg/i-star.svg');
+                jQuery('.rating-stars input').val(0);
+                jQuery('#name-block-input').val('');
+                jQuery('#comment').val('');
+                document.location = '/';
+            });
         })
-    })
+        function initFBGrecaptcha() {
+            if (typeof grecaptcha === 'undefined') {
+                setTimeout( () => { initFBGrecaptcha() }, 100 );
+                return;
+            }
+            grecaptcha.ready(function() {
+                // ToDo: remove code for GRecaptcha
+                grecaptcha.execute('6LejY9AZAAAAAFpdc0QzQzrqRtaaflf3PfP64qdE', {action: 'submit'}).then(function(token) {
+                    let elements = document.querySelectorAll('[name="grecaptcha"]');
+                    elements.forEach( el => el.value = token);
+                });
+            });
+        }
+        jQuery('.thanks-overlay').click(function() {
+            jQuery(this).removeClass('active');
+        });
+    });
 </script>

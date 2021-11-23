@@ -8,6 +8,13 @@ use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * Class BookingApiService
+ * Access for Booking API
+ *
+ * @package App\Http\Services
+ */
+
 class BookingApiService
 {
     private $options;
@@ -28,11 +35,11 @@ class BookingApiService
         } else {
             $this->client = null;
         }
-
     }
 
     /**
-     * Retrieve options from bd
+     * Retrieve credentials data from DB
+     *
      * @return void
      * @throws Exception
      */
@@ -50,6 +57,8 @@ class BookingApiService
     }
 
     /**
+     * Read data from API
+     *
      * @param string $method
      * @param string $url
      * @return mixed
@@ -63,6 +72,8 @@ class BookingApiService
     }
 
     /**
+     * Get cities from API
+     *
      * @param int $offset
      * @param int $count
      * @return mixed
@@ -74,6 +85,8 @@ class BookingApiService
     }
 
     /**
+     * Get facilities from API
+     *
      * @return mixed
      * @throws GuzzleException
      */
@@ -83,6 +96,7 @@ class BookingApiService
     }
 
     /**
+     * Get hotel facilities from API
      * @return mixed
      * @throws GuzzleException
      */
@@ -92,6 +106,7 @@ class BookingApiService
     }
 
     /**
+     * Get room facilities from API
      * @return mixed
      * @throws GuzzleException
      */
@@ -101,6 +116,8 @@ class BookingApiService
     }
 
     /**
+     * Get room types from API
+     *
      * @return mixed
      * @throws GuzzleException
      */
@@ -110,6 +127,8 @@ class BookingApiService
     }
 
     /**
+     * Get hotel type from API
+     *
      * @return mixed
      * @throws GuzzleException
      */
@@ -119,6 +138,8 @@ class BookingApiService
     }
 
     /**
+     * Get hotels list by city and hotel type
+     *
      * @param int $city_id
      * @param int $type
      * @return mixed
@@ -131,6 +152,8 @@ class BookingApiService
     }
 
     /**
+     * Get hotel info
+     *
      * @param int $hotel_id
      * @return mixed
      * @throws GuzzleException

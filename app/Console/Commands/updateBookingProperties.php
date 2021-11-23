@@ -9,6 +9,7 @@ use Illuminate\Console\Command;
 
 /**
  * Class updateBookingProperties
+ * Updates properties for existing objects via Booking API
  *
  * @package App\Console\Commands
  */

@@ -7,6 +7,13 @@ use App\BookingFeatures;
 use App\BookingType;
 use GuzzleHttp\Exception\GuzzleException;
 
+/**
+ * Class BookingDataImportService
+ * Import data from booking API
+ *
+ * @package App\Http\Services
+ */
+
 class BookingDataImportService
 {
     /**
@@ -48,7 +55,7 @@ class BookingDataImportService
     }
 
     /**
-     * Get cities from booking api
+     * Get cities from booking API
      * @return int
      * @throws GuzzleException
      */
@@ -80,7 +87,7 @@ class BookingDataImportService
     }
 
     /**
-     * Get all types facilities from booking api
+     * Get all types facilities from booking API
      * @return array
      * @throws GuzzleException
      */
@@ -99,7 +106,7 @@ class BookingDataImportService
     }
 
     /**
-     * Get facilities from booking api
+     * Get facilities from booking API
      * @return array
      * @throws GuzzleException
      */
@@ -110,28 +117,29 @@ class BookingDataImportService
     }
 
     /**
-     * Get hotel facilities from booking api
+     * Get hotel facilities from booking API
      * @return array
      * @throws GuzzleException
      */
-    public function getHotelFacilitiesFromApi()
+    public function getHotelFacilitiesFromApi(): array
     {
         $json = $this->bookingApiService->getHotelFacilities();
         return $this->generateFacilitiesArrayFromJson($json, 'hotel');
     }
 
     /**
-     * Get room facilities from booking api
+     * Get room facilities from booking API
      * @return array
      * @throws GuzzleException
      */
-    public function getRoomFacilitiesFromApi()
+    public function getRoomFacilitiesFromApi(): array
     {
         $json = $this->bookingApiService->getRoomFacilities();
         return $this->generateFacilitiesArrayFromJson($json, 'room');
     }
 
     /**
+     * Generate data from facilities JSON
      * @param $json
      * @param string $type
      * @return array
@@ -153,6 +161,7 @@ class BookingDataImportService
     }
 
     /**
+     * Import room types from booking API
      * @throws GuzzleException
      */
     public function importRoomTypesFromBookingApi(): int
@@ -170,6 +179,7 @@ class BookingDataImportService
     }
 
     /**
+     * Get room types from booking API
      * @return array
      * @throws GuzzleException
      */
@@ -180,6 +190,7 @@ class BookingDataImportService
     }
 
     /**
+     * Get hotel types from booking API
      * @return array
      * @throws GuzzleException
      */
@@ -190,6 +201,7 @@ class BookingDataImportService
     }
 
     /**
+     * Generate data from types JSON
      * @param $json
      * @param string $type
      * @return array
