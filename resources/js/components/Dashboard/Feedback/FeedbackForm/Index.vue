@@ -23,6 +23,27 @@
             </div>
         </div>
 
+        <div>
+            <b-button id="show-modal" @click="showModal">Увидеть модалку</b-button>
+
+            <b-modal hide-footer ref="feedback-modal" title="Отзывы клиентов">
+                <div class="mb-5">
+                    <p><strong>Name:</strong> здесь идет имя клиента </p>
+                    <p><strong>Furnish:</strong> здесь будет стоять оценка </p>
+                    <p><strong>Comfort:</strong> здесь будет стоять оценка </p>
+                    <p><strong>Location:</strong> здесь будет стоять оценка </p>
+                    <p><strong>P/Perf:</strong> здесь будет стоять оценка </p>
+                    <p><strong>Cleanliness:</strong> здесь будет стоять оценка </p>
+                    <p><strong>Staff:</strong> здесь будет стоять оценка </p>
+                    <p><strong>Comment:</strong> здесь будет стоять оценка </p>
+                </div>
+                <div style="text-align: right;">
+                    <b-button variant="outline-danger" @click="hideModal">Close</b-button>
+                    <b-button variant="outline-primary" @click="hideModal">Ок</b-button>
+                </div>
+            </b-modal>
+        </div>
+
     </section>
 </template>
 
@@ -120,6 +141,12 @@ export default {
             let month = this.format00(dt.getMonth() + 1);
             let year = dt.getFullYear();
             return `${year}-${month}-${day}`;
+        },
+        showModal() {
+            this.$refs['feedback-modal'].show()
+        },
+        hideModal() {
+            this.$refs['feedback-modal'].hide()
         }
     }
 }
