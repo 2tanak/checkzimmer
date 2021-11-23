@@ -111,6 +111,7 @@
                 jQuery('.rating-stars input').val(0);
                 jQuery('#name-block-input').val('');
                 jQuery('#comment').val('');
+                document.location = '/';
             });
         })
         function initFBGrecaptcha() {
