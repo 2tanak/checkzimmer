@@ -145,34 +145,40 @@ jQuery(document).ready(function() {
     });
 
     jQuery('.rating-stars img').mouseover(function() {
+        var parent = jQuery(this).closest('.rating-stars');
         jQuery(this).addClass('hovered');
 
         var block = false;
-        jQuery('.rating-stars img').each(function() {
+        var count = 0;
+        jQuery(parent).find('img').each(function() {
             if (block) {
+                console.log(count);
                 return;
             }
+            count++;
             jQuery(this).attr('src', '/svg/i-star-active.svg');
             if (jQuery(this).hasClass('hovered')) {
                 block = true;
             }
-        })
+        });
     });
     jQuery('.rating-stars img').mouseout(function() {
-        jQuery('.rating-stars img').removeClass('hovered')
-        jQuery('.rating-stars img').each(function() {
+        var parent = jQuery(this).closest('.rating-stars');
+        jQuery(parent).find('img').removeClass('hovered');
+        jQuery(parent).find('img').each(function() {
             if (!jQuery(this).hasClass('clicked')) {
                 jQuery(this).attr('src', '/svg/i-star.svg');
             }
         })
-    })
+    });
     jQuery('.rating-stars img').click(function() {
-        jQuery('.rating-stars img').removeClass('clicked')
+        var parent = jQuery(this).closest('.rating-stars');
+        jQuery(parent).find('img').removeClass('clicked');
         jQuery(this).addClass('clicked');
 
         var block = false;
         var count = 0;
-        jQuery('.rating-stars img').each(function() {
+        jQuery(parent).find('img').each(function() {
             if (block) {
                 jQuery(this).attr('src', '/svg/i-star.svg');
                 return;
@@ -184,6 +190,7 @@ jQuery(document).ready(function() {
             }
             jQuery(this).addClass('clicked');
         });
+        jQuery(parent).find('input').val(count);
     });
 
 });

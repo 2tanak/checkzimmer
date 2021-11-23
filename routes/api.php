@@ -33,6 +33,7 @@ Route::middleware('auth')->namespace('Api')->group(function () {
     Route::resource('reviews', 'ReviewsController');
     Route::resource('pages', 'PageController');
 
+    Route::get('feedback', 'FeedbackController@index');
     Route::post('property/query', 'PropertyController@query');
     Route::post('features/language', 'FeaturesController@language');
 
@@ -83,6 +84,7 @@ Route::group(['namespace' => 'Api'], function() {
     Route::post('search/tooltip', 'PostcodeController@query');
     Route::post('/image-public', 'ImageUploadController@imageUploadPost');
     Route::post('/registration', 'AuthController@registrationProcess');
+    Route::post('/feedback', 'FeedbackController@store')->name('got-feedback');
 });
 
 Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {

@@ -1,79 +1,62 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+## Checkzimmer web app
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+A codebase for check-zimmer.de project
 
-## About Laravel
+## Front-end specifics
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The project uses Vue on dashboard and on public pages.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Dashboard is completely built on Vue
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Public pages are hybrids, partially built with blade templates and partially with Vue
 
-## Learning Laravel
+Dashboard uses [StarAdmin template](https://www.bootstrapdash.com/product/star-admin-vue/) as a view framework
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Multi domain set up
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+The app is a multi domain project with a single codebase. One base domain is a main domain. And other domains are subdomains of the base one.
 
-## Laravel Sponsors
+For example:
+- `check-zimmer.de` (main domain)
+- `leipzig.check-zimmer.de` (city-related subdomain)
+- etc
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+The base domain is specified in `.env` file, `APP_URL` constant
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
-- [云软科技](http://www.yunruan.ltd/)
+Subdomains are set up via the dashboard. So there will be no subdomains for a fresh launch. And currently they require configuration from web server app.
 
-## Contributing
+So, in order to properly run the project, web server should be configured to work with several domain names pointing to single drectory.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+####NB: In order to run, subdomain should be created and be active on the dashboard side and enabled in web server config
 
-## Code of Conduct
+## Deploy
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. `composer install`
+2. `php artisan migrate --seed`
+3. `php artisan jwt:secret` (optionally)
+4. `npm install`
+5. `npm run dev` (dev) or `npm rn prod` (prod)
 
-## Security Vulnerabilities
+## Start a development session
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. `git pull`
+2. `composer install`
+3. `php artisan migrate`
+4. `npm run watch`
 
-## License
+## Deploy with docker
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. `docker-compose up --build`
+2. `docker-compose exec app composer install`
+3. other commands as in preceding sections with `docker-compose exec app` prefix
+
+The project is configured to run at [http://localhost:8000](http://localhost:8000) with an automatic subdomain support (no server-side setup required)
+
+## ENV constants
+
+- `JWT_SECRET` - secret key for authentication
+- `GOOGLE_MAPS_API` - API key for Google maps
+- `GOOGLE_MAPS_GEOCODING_API_KEY` - API key for Google geocoder
+- `GOOGLE_RECAPTHCA3` - Google reCAPTCHA3 key
+- `GOOGLE_RECAPTHCA3_SECRET` - Google reCAPTCHA3 secret key
+- `MAIL_NOTIFICATION_ADDRESS` - Recipient e-mail for notifications
