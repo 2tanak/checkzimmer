@@ -7,6 +7,12 @@ use App\Services\ImageService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Class optimizeImages
+ * Performs images optimization (smaller size without quality loss)
+ *
+ * @package App\Console\Commands
+ */
 class optimizeImages extends Command
 {
     /**
@@ -32,7 +38,7 @@ class optimizeImages extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Performs optimization for all images of the specified directories';
 
     /**
      * Create a new command instance.
@@ -49,14 +55,20 @@ class optimizeImages extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         foreach (self::FOLDERS as $folder) {
             $this->directoryScan('public/images/' . $folder);
         }
         return 0;
     }
-    public function directoryScan($base) {
+    /**
+     * Scan directory for files, process
+     * each file through optimization engine
+     *
+     * @param string $base - directory base to scan
+     */
+    public function directoryScan(string $base) {
         $imgSvc = new ImageService;
         $directories = Storage::disk('local')->allDirectories($base);
         foreach ($directories as $directory) {

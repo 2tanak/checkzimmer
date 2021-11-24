@@ -8,6 +8,13 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 
+/**
+ * Class ImageUploadController
+ * Handles images upload
+ *
+ * @package App\Http\Controllers\Api
+ */
+
 class ImageUploadController
 {
     /**

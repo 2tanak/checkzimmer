@@ -6,8 +6,23 @@ use Closure;
 use Auth;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
+/**
+ * Class Authenticate
+ * Checks authentication
+ *
+ * @package App\Http\Middleware
+ */
+
 class Authenticate extends Middleware
 {
+    /**
+     * Check if user is authentified
+     *
+     * @param Request $request
+     * @param Closure $next
+     * @param string[] ...$guards
+     * @return JsonResponse|mixed
+     */
     public function handle($request, Closure $next, ...$guards)
     {
         if ($this->authenticate($request, $guards) === 'authentication_error') {
@@ -15,6 +30,14 @@ class Authenticate extends Middleware
         }
         return $next($request);
     }
+
+    /**
+     * Checks if user is authenticated
+     *
+     * @param Request $request
+     * @param array $guards
+     * @return bool|string
+     */
     protected function authenticate($request, array $guards)
     {
 

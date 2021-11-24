@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Console\Command;
 
 /**
- * Class updateBookingProperties
+ * Class mapFeatures
+ * Maps Booking.com features to checkzimmer features system
+ * In case you need mass feature mapping
  *
  * @package App\Console\Commands
  */

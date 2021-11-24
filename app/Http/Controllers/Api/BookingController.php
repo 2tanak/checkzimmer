@@ -9,6 +9,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
+/**
+ * Class BookingController
+ * Works with website authentication
+ *
+ * @package App\Http\Controllers\Api
+ */
 
 class BookingController extends Controller
 {
@@ -35,7 +43,14 @@ class BookingController extends Controller
         $this->bookingDataService = $bookingDataService;
     }
 
-    function test(Request $request)
+    /**
+     * Test connection
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     * @throws GuzzleHttp\Exception\GuzzleException
+     */
+    function test(Request $request): Response
     {
         $fields = $request->all();
         $client = new GuzzleHttp\Client(['base_uri' => $fields['booking_url']]);
@@ -45,6 +60,7 @@ class BookingController extends Controller
     }
 
     /**
+     * Import cities from Booking API
      * @return JsonResponse
      */
     public function importCities(): JsonResponse
@@ -61,6 +77,8 @@ class BookingController extends Controller
     }
 
     /**
+     * Import property facilities from booking API
+     *
      * @return JsonResponse
      * @TODO fix response
      */
@@ -77,7 +95,12 @@ class BookingController extends Controller
         return response()->json($featuresUpdate);
     }
 
-    function importRoomTypes()
+    /**
+     * Import room types from Booking API
+     *
+     * @return JsonResponse
+     */
+    function importRoomTypes(): JsonResponse
     {
         try
         {
@@ -90,7 +113,12 @@ class BookingController extends Controller
         return response()->json(['message' => $count . ' objects imported']);
     }
 
-    function getFeatures()
+    /**
+     * Gets and sorts booking facilities from Booking API
+     *
+     * @return JsonResponse
+     */
+    function getFeatures(): JsonResponse
     {
         $childrenFeatures = $this->bookingDataService->getChildrenFeatures();
         $rootFeatures = $this->bookingDataService->filterFeatures($childrenFeatures, 0);
@@ -98,44 +126,59 @@ class BookingController extends Controller
         return response()->json(['root' => $rootFeatures, 'rooted' => $rootedFeatures, 'children' => $childrenFeatures]);
     }
 
-    public function getRoomTypes()
+    /**
+     * Gets room types
+     *
+     * @return JsonResponse
+     */
+    public function getRoomTypes(): JsonResponse
     {
         $types = $this->bookingDataService->getRoomTypes('hotel');
         return response()->json($types);
     }
 
-    public function getBedTypes()
+    /**
+     * Gets bed types from
+     * @return JsonResponse
+     */
+    public function getBedTypes(): JsonResponse
     {
         $bed = $this->bookingDataService->getBedTypes();
 
         return response()->json($bed);
     }
 
-    public function getShowerTypes()
+    /**
+     * Gets shower types
+     * @return JsonResponse
+     */
+    public function getShowerTypes(): JsonResponse
     {
         $shower = $this->bookingDataService->getShowerTypes();
 
         return response()->json($shower);
     }
 
-    public function getKitchenTypes()
+    public function getKitchenTypes(): JsonResponse
     {
         $shower = $this->bookingDataService->getKitchenTypes();
 
         return response()->json($shower);
     }
 
-    public function getCities()
+    public function getCities(): JsonResponse
     {
         $citiesCount = $this->bookingDataService->getCitiesCount();
         return response()->json(['count' => $citiesCount]);
     }
 
     /**
+     * Gets hotels from Booking API
+     *
      * @param Request $request
      * @return JsonResponse
      */
-    function getHotels(Request $request)
+    function getHotels(Request $request): JsonResponse
     {
         try
         {
@@ -152,7 +195,12 @@ class BookingController extends Controller
         return response()->json($hotelsArray);
     }
 
-    public function saveHotels(Request $request)
+    /**
+     * Saves hotels that are got via Booking API
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function saveHotels(Request $request): JsonResponse
     {
         $hotels = $request->all();
         $this->bookingDataService->storeHotels($hotels);

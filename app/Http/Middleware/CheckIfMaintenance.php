@@ -5,8 +5,22 @@ use App\Option;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class CheckIfMaintenance
+ * Checks if maintenance mode is enabled
+ *
+ * @package App\Http\Middleware
+ */
+
 class CheckIfMaintenance
 {
+    /**
+     * Checks for maintenance mode
+     *
+     * @param $request
+     * @param Closure $next
+     * @return \Illuminate\Http\Response|mixed
+     */
     public function handle($request, Closure $next)
     {
         $maintenance = Option::where('type', 'system')->where('key', 'maintenance')->first();

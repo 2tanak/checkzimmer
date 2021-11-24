@@ -3,8 +3,20 @@
 namespace App\Services;
 use Request;
 
+/**
+ * Class LocaleHelper
+ * Helper functions for locales
+ *
+ * @package App\Http\Services
+ */
 
 class LocaleHelper {
+
+    /**
+     * Get available languages
+     *
+     * @return array|string[]
+     */
     public function getLanguagesAvailable() {
         $dir = __DIR__.'/../../resources/lang';
         $files = scandir($dir);
@@ -17,10 +29,22 @@ class LocaleHelper {
         }, $files);
         return $files;
     }
+
+    /**
+     * Get the default locale
+     *
+     * @return mixed
+     */
     public function getDefaultLocale() {
         return env('APP_DEFAULT_LOCALE', 'de');
     }
 
+    /**
+     * Get URL for the provided locale
+     *
+     * @param $locale
+     * @return string
+     */
     public function getLocaleUrl($locale)
     {
         $path = Request::path();
@@ -43,6 +67,12 @@ class LocaleHelper {
 
         return implode('/', $fullPath);
     }
+
+    /**
+     * Get a proper localized route name by base route name and locale
+     * @param $route
+     * @return string
+     */
     public function routeApply($route) {
         return $route."-".app()->getLocale();
     }

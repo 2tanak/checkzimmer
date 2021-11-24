@@ -3,12 +3,26 @@
 use App\Guest;
 use Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Psy\Util\Json;
+
+/**
+ * Class GuestsController
+ * Handles CRUD for website guests (users with no authorization but with special access)
+ *
+ * @package App\Http\Controllers\Api
+ */
 
 class GuestsController extends Controller
 {
-    public function index()
+    /**
+     * Get all guests
+     *
+     * @return JsonResponse
+     */
+    public function index(): JsonResponse
     {
         $guests = Guest::all();
         return response()->json(
@@ -18,7 +32,12 @@ class GuestsController extends Controller
             ], 200);
     }
 
-    public function show($id)
+    /**
+     * Returns the specific guest data
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function show(int $id): JsonResponse
     {
         $guest = Guest::find($id);
         return response()->json(
@@ -28,7 +47,13 @@ class GuestsController extends Controller
             ], 200);
     }
 
-    public function store(Request $request)
+    /**
+     * Stores new guest in the database
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function store(Request $request): JsonResponse
     {
         $data = $request->input();
         request()->validate([
@@ -46,7 +71,14 @@ class GuestsController extends Controller
         return $item ? response()->json(['code' => 'ok', 'guest' => $item]) : response()->json(['code' => 'error', 'message' => 'Ошибка сохранения']);
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Updates the specific guest data
+     *
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function update(Request $request, int $id): JsonResponse
     {
         request()->validate([
             'pin'     => 'required',
@@ -57,7 +89,13 @@ class GuestsController extends Controller
         return $guest->update($request->input()) ? response()->json(['code' => 'ok']) : response()->json(['code' => 'error', 'message' => 'Ошибка сохранения']);
     }
 
-    public function destroy($id)
+    /**
+     * Deletes the specific guest
+     *
+     * @param $id
+     * @return JsonResponse
+     */
+    public function destroy($id): JsonResponse
     {
         Guest::find($id)->delete();
         return response()->json(['code' => 'ok']);

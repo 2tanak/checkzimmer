@@ -1,0 +1,131 @@
+@import "resources/sass/rate-components/command-slider";
+
+.command-block {
+    .command-content {
+        padding: 0 480px;
+    }
+    .text-block {
+        .title {
+            margin-bottom: 12px;
+            font-weight: 600;
+            font-size: 30px;
+            line-height: 130%;
+            color: #333646;
+        }
+        .description {
+            p {
+                &:last-of-type {
+                    margin-bottom: 0;
+                }
+                font-weight: 400;
+                font-size: 17px;
+                line-height: 160%;
+                color: #545769;
+                margin-top: 0;
+            }
+        }
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin-bottom: 88px;
+    }
+    .number-hotel {
+        width: 480px;
+    }
+    .contact-block {
+        .contact-line {
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 14px;
+        }
+        span {
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 160%;
+            color: #545769;
+            display: block;
+            white-space: nowrap;
+        }
+        span {
+            a {
+                font-weight: 400;
+                font-size: 15px;
+                line-height: 160%;
+                color: #545769;
+                display: block;
+                white-space: nowrap;
+                text-decoration: none;
+                outline: none;
+            }
+        }
+        width: 261px;
+    }
+    padding: 100px 0;
+    background-color: #ffffff;
+}
+
+@media (max-width: 1730px) {
+    .command-block {
+        .command-content {
+            padding: 0 315px;
+        }
+    }
+}
+@media (max-width: 1440px) {
+    .command-block {
+        .command-content {
+            padding: 0 115px;
+        }
+    }
+}
+@media (max-width: 991px) {
+    .command-block {
+        .command-content {
+            padding: 0 16px;
+        }
+        .text-block {
+            .title {
+                font-size: 28px;
+            }
+            margin-bottom: 34px;
+            flex-direction: column;
+        }
+        .number-hotel {
+            width: 100%;
+            margin-bottom: 28px;
+        }
+        .contact-block {
+            width: 100%;
+        }
+        padding: 78px 0;
+    }
+}
+
+@media (max-width: 650px) {
+    .command-block {
+        .text-block {
+            .title {
+                font-size: 20px;
+            }
+            .description {
+                p {
+                    font-size: 14px;
+                    line-height: 140%;
+                }
+            }
+        }
+        .contact-block {
+            .contact-line {
+                margin-bottom: 12px;
+            }
+            span {
+                font-size: 14px;
+            }
+        }
+        padding-top: 48px;
+        padding-bottom: 56px;
+    }
+}

@@ -2,15 +2,29 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 use Image;
 
+/**
+ * Class FilesController
+ * Handles files uploads
+ *
+ * @package App\Http\Controllers\Api
+ */
+
 class FilesController extends Controller
 {
-    public function addNewFile(Request $request)
+    /**
+     * Saves uploaded file
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function addNewFile(Request $request): JsonResponse
     {
         request()->validate([
             'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -33,7 +47,13 @@ class FilesController extends Controller
 
     }
 
-    public function deleteFile(Request $request)
+    /**
+     * Deletes uploaded file
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function deleteFile(Request $request): JsonResponse
     {
         $user_id = Auth::user()->id;
         if (!$user_id) {
@@ -52,7 +72,11 @@ class FilesController extends Controller
         ], 200);
     }
 
-    public function getUserFiles()
+    /**
+     * Gets all files for the authorized user
+     * @return JsonResponse
+     */
+    public function getUserFiles(): JsonResponse
     {
         $a_files = null;
         $files = Storage::disk('local')->allFiles('public\\uploads\\' . Auth::id() . '\\img\\');

@@ -2,11 +2,21 @@
 
 namespace App\Traits;
 
+/**
+ * Trait optionsLink
+ * Options helpers
+ *
+ * @package App\Http\ServiceTraits
+ */
+
 trait optionsLink
 {
     protected $_options = null;
     protected $data = [];
 
+    /**
+     * Cache for options array
+     */
     private function getOptions()
     {
         if ($this->_options == null)
@@ -15,6 +25,12 @@ trait optionsLink
         }
     }
 
+    /**
+     * Get an option from options array
+     *
+     * @param $key
+     * @return mixed|string
+     */
     function getCurrentOption($key) {
         if($this->_options == null) {
             $this->getOptions();

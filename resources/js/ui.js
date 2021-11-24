@@ -1,9 +1,15 @@
+/**
+ * Root file for public pages
+ * @package resources\js
+ */
+
 import Vue from 'vue'
 
+/**
+ * Import public page components
+ */
 import Public from './components/Public/PublicRoot';
 import Home from './components/Public/Home';
-
-//require('./bootstrap');
 
 import axios from 'axios';
 import VueAxios from 'vue-axios';
@@ -30,9 +36,9 @@ Vue.use(VueAuth, auth)
 
 window.Vue = require('vue');
 
-
-//var jQuery = require('jquery')
-
+/**
+ * Init i18n
+ */
 import VueI18n from 'vue-i18n'
 Vue.use(VueI18n)
 
@@ -142,7 +148,55 @@ jQuery(document).ready(function() {
     jQuery('.collapse-button').click(function() {
         var item = jQuery(this).parents('.questions-item');
         item.toggleClass('show').siblings('.show').removeClass('show');
-    })
+    });
+
+    jQuery('.rating-stars img').mouseover(function() {
+        var parent = jQuery(this).closest('.rating-stars');
+        jQuery(this).addClass('hovered');
+
+        var block = false;
+        var count = 0;
+        jQuery(parent).find('img').each(function() {
+            if (block) {
+                return;
+            }
+            count++;
+            jQuery(this).attr('src', '/svg/i-star-active.svg');
+            if (jQuery(this).hasClass('hovered')) {
+                block = true;
+            }
+        });
+    });
+    jQuery('.rating-stars img').mouseout(function() {
+        var parent = jQuery(this).closest('.rating-stars');
+        jQuery(parent).find('img').removeClass('hovered');
+        jQuery(parent).find('img').each(function() {
+            if (!jQuery(this).hasClass('clicked')) {
+                jQuery(this).attr('src', '/svg/i-star.svg');
+            }
+        })
+    });
+    jQuery('.rating-stars img').click(function() {
+        var parent = jQuery(this).closest('.rating-stars');
+        jQuery(parent).find('img').removeClass('clicked');
+        jQuery(this).addClass('clicked');
+
+        var block = false;
+        var count = 0;
+        jQuery(parent).find('img').each(function() {
+            if (block) {
+                jQuery(this).attr('src', '/svg/i-star.svg');
+                return;
+            }
+            count++;
+            if (jQuery(this).hasClass('clicked')) {
+                block = true;
+                return;
+            }
+            jQuery(this).addClass('clicked');
+        });
+        jQuery(parent).find('input').val(count);
+    });
 
 });
 

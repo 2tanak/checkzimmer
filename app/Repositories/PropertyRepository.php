@@ -11,6 +11,13 @@ use Illuminate\Support\Str;
 use App\GeocodeCache;
 use Spatie\Geocoder\Geocoder;
 
+/**
+ * Class PropertyRepository
+ * Repository for properties
+ *
+ * @package App\Http\Repositories
+ */
+
 class PropertyRepository {
     const LANG_CODES = [
         'english' => 'en',
@@ -18,7 +25,18 @@ class PropertyRepository {
         'poland' => 'pl',
         'russian' => 'ru',
     ];
-    static function create($userId, $data, $status = null) {
+
+    /**
+     * Create a new property
+     *
+     * @param $userId
+     * @param $data
+     * @param null $status
+     * @return Property
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    static function create($userId, $data, $status = null): Property
+    {
         $geocode = app()->make(Geocoder::class);
         $service = new GeocoderService($geocode, new GeocodeCache);
         $address = $data['address']['street'] . ' ' . $data['address']['house'];
@@ -64,12 +82,22 @@ class PropertyRepository {
 
         return $item;
     }
+
+    /**
+     * Assign features to a property
+     * @param $property
+     * @param $featureIds
+     */
     static function featureAssign($property, $featureIds) {
-
         $property->features()->detach();
-
         $property->features()->attach($featureIds);
     }
+
+    /**
+     * Attach rooms to a property
+     * @param $property
+     * @param $data
+     */
     static function roomAttach($property, $data) {
         $propertyTypes = RoomType::all()->toArray();
         $propertyNames = array_column($propertyTypes, 'name');
@@ -101,6 +129,11 @@ class PropertyRepository {
         }
     }
 
+    /**
+     * Attach photos to a property
+     * @param $property
+     * @param $photos
+     */
     static function photoAttach($property, $photos) {
         $photosAttached = [];
         foreach ($photos as $photo) {
@@ -118,6 +151,11 @@ class PropertyRepository {
         $property->options()->create($optionsData);
     }
 
+    /**
+     * Update property metadata
+     * @param $property
+     * @param $data
+     */
     static function metaDataUpdate($property, $data) {
         $metadata = [
             'free' => "",
@@ -141,6 +179,12 @@ class PropertyRepository {
         self::optionsAttach($property, $metadata);
     }
 
+    /**
+     * Add options to a property
+     * @param $property
+     * @param $media
+     * @param array $exclude
+     */
     static function optionsAttach($property, $media, $exclude = []) {
         foreach ($media as $key => $value) {
             if (in_array($key, $exclude)) {
@@ -150,6 +194,12 @@ class PropertyRepository {
         }
     }
 
+    /**
+     * Add an option to a property
+     * @param $property
+     * @param $key
+     * @param $value
+     */
     static function optionAdd($property, $key, $value) {
         $optionsData = [
             'key'    => $key,

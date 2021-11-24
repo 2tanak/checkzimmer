@@ -59,7 +59,6 @@
                 </div>
                 <div class="number-personse-block select-block">
                     <label class="desctop-label" for="number-personse">{{ __($options['label_people'] ?? '' ) }}</label>
-                    <label class="mobile-label" for="number-personse">{{ __($options['label_people'] ?? '' ) }}</label>
                     <div class="select-container">
                         <select name="person" id="number-personse" class="number-personse">
                             <option value="1" {{ 1 == ($getData['person'] ?? 1) ? 'selected' : '' }}>1 {{ __('person') }}</option>

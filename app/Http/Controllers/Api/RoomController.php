@@ -6,11 +6,25 @@ use App\Http\Controllers\Controller;
 use App\Option;
 use App\Property;
 use App\Room;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+
+/**
+ * Class RoomController
+ * Handles CRUD for rooms
+ *
+ * @package App\Http\Controllers\Api
+ */
 
 class RoomController extends Controller
 {
-    public function store(Request $request)
+    /**
+     * Creates a new room
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function store(Request $request): JsonResponse
     {
         request()->validate([
 //            'bed'          => 'required',
@@ -55,10 +69,16 @@ class RoomController extends Controller
         return $room ? response()->json(['code' => 'ok', 'room' => $room]) : response()->json(['code' => 'error', 'message' => 'Ошибка сохранения']);
     }
 
-    public function destroy(Room $room)
+    /**
+     * Deletes a new room
+     *
+     * @param Room $room
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function destroy(Room $room): JsonResponse
     {
         Option::where(['parent' => $room->id, 'type' => 'room'])->delete();
-
         $room->delete();
 
         return response()->json(['code' => 'ok']);

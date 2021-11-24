@@ -5,6 +5,13 @@ namespace App\Notifications;
 use App\Property;
 use Illuminate\Mail\Mailable;
 
+/**
+ * Class FeedbackForm
+ * Notification for property request form
+ *
+ * @package App\Http\Requests
+ */
+
 class InquiryHotel extends Mailable
 {
     protected $hotel = null;
