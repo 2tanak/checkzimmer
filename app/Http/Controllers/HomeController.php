@@ -88,6 +88,15 @@ class HomeController extends Controller
         return view('welcome');
     }
 
+
+    public function cabinet(): View
+    {
+		$data = WebsiteData::getOptions();
+        $options = $data['options'];
+        $phoneNumAdmin = Property::phoneFormat($data['options']['website_phone'] ?? '');
+        return view('cabinet', compact('options', 'phoneNumAdmin'));
+        
+    }
     /**
      * Shows single page
      *

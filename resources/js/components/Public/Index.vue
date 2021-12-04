@@ -166,7 +166,7 @@ export default {
     },
     mounted() {
         let that = this;
-
+        
         jQuery('.entry.login-link').click(function(e) {
             that.login(e);
         })
@@ -414,12 +414,21 @@ export default {
                     email: jQuery('#mail-phone').val(),
                     password: jQuery('#password').val()
                 },
-                redirect: '/dashboard',
+                //redirect: '/dashboard',
                 staySignedIn: true,
                 fetchUser: true
             })
             .then((resp) => {
-                document.location = '/dashboard';
+                $('.error-login').css({'display':'block'});
+				if(resp.data.data.role == 'holder'){
+					document.location = '/cabinet';return false;
+				}
+				if(resp.data.data.role == 'admin'){
+				    document.location = '/dashboard';return false;
+				}
+				if(resp.data.error){
+				$('.error-login').css({'display':'block'});
+				}
             });
         },
         modeSwitch(mode) {

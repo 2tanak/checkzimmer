@@ -18,7 +18,11 @@ Route::group([
 ], function () {
     Route::get('/dashboard', 'HomeController@dashboard')->name('home');
     Route::get('/dashboard/{page?}/{subpage?}/{subsubpage?}', 'HomeController@dashboard')->name('dashboard-page');
-
+	
+	//cabinet
+    Route::get('/personal', 'HomeController@cabinet')->name('personal');
+	Route::get('/personal/{page?}/{subpage?}/{subsubpage?}', 'HomeController@cabinet')->name('personal-page');
+	
 });
 Route::get('/de', 'HomeController@redirect');
 
