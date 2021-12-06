@@ -8,7 +8,7 @@ let Index = () => import( './components/Public/Index')
 let Favorites = () => import('./components/Public/Favorites')
 let Single = () => import('./components/Public/Single')
 let Registration = () => import('./components/Public/Registration')
-let Personal = () => import('./components/Public/cabinet/index.vue')
+let Personal = () => import('./components/Public/cabinet/Index.vue')
 
 export default new Router({
     linkActiveClass: 'active',

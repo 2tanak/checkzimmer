@@ -18,11 +18,7 @@ Route::group([
 ], function () {
     Route::get('/dashboard', 'HomeController@dashboard')->name('home');
     Route::get('/dashboard/{page?}/{subpage?}/{subsubpage?}', 'HomeController@dashboard')->name('dashboard-page');
-	
-	//cabinet
-    Route::get('/personal', 'HomeController@cabinet')->name('personal');
-	Route::get('/personal/{page?}/{subpage?}/{subsubpage?}', 'HomeController@cabinet')->name('personal-page');
-	
+
 });
 Route::get('/de', 'HomeController@redirect');
 
@@ -50,7 +46,13 @@ foreach ($locales as $locale) {
         ],
         function () use ($locale) {
             Auth::routes();
-
+            
+			Route::get('/personal/{page?}/{subpage?}/{subsubpage?}', 'HomeController@cabinet')->name("personal-page-$locale");
+            Route::get('/personal/{page?}/{subpage?}/{subsubpage?}', 'HomeController@cabinet')->name("personal-page-personal-$locale");
+            Route::get('/personal/{page?}/{subpage?}/{subsubpage?}', 'HomeController@cabinet')->name("personal-page-contact-$locale");
+            Route::get('/personal/{page?}/{subpage?}/{subsubpage?}', 'HomeController@cabinet')->name("personal-page-property-$locale");
+            Route::get('/personal/{page?}/{subpage?}/{subsubpage?}', 'HomeController@cabinet')->name("personal-page-security-$locale");
+			
             Route::get('/single', 'HomeController@single')->name("single-$locale");
             Route::get('/single/{slug}', 'HomeController@singleProperty')->name("single-$locale");
             Route::post('/single/{slug}', 'HomeController@singlePropertyAccess')->name("single-access-$locale");
