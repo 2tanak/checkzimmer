@@ -5,7 +5,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Example Component</div>
                     <div class="panel-body">
-                        I'm an example component <h1>General !</h1>
+                        I'm an example component <h1>Contact !</h1>
                     </div>
                 </div>
             </div>

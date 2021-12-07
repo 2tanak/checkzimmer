@@ -1,18 +1,21 @@
 <template>
-   <router-view></router-view>
+    <div>
+        <Nav />
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
+import Nav from "./cabinet/partials/Nav";
 export default {
-    name: 'personal',
+    name: "personal",
     components: {
+        Nav
     },
     data() {
-        return {}
+        return {};
     },
-    mounted() {
-    },
-    methods: {
-    }
-}
+    mounted() {},
+    methods: {}
+};
 </script>
