@@ -1,142 +1,165 @@
 <template>
     <div class="container">
-        
-		<RegistrationStepClient v-model="account" :account="account" :plan="plans[account.plan]" @backToPlans="choosePlan" @toPropertyData="toPropertyData" @validate="validate" @dataProceed="dataProceed" />
-		 
-
+        <RegistrationStepClient
+            v-model="account"
+            :account="account"
+            :plan="plans[account.plan]"
+            @backToPlans="choosePlan"
+            @toPropertyData="toPropertyData"
+            @validate="validate"
+            @dataProceed="dataProceed"
+        />
     </div>
 </template>
 
 <script>
-
 import RegistrationStepClient from "../../registration/RegistrationStepClient";
 
 export default {
     name: "profile",
     components: {
-        RegistrationStepClient},
+        RegistrationStepClient
+    },
     data() {
         return {
             step: 2,
-            planActive: 'popular',
+            planActive: "popular",
             plans: {
                 base: {
-                    title: this.$t('Base'),
+                    title: this.$t("Base"),
                     price: 0,
                     annual: 468,
-                    description: this.$t('Our permanently free version'),
+                    description: this.$t("Our permanently free version"),
                     options: [
-                        { text: this.$t('Own analytics platform'), active: true },
-                        { text: this.$t('Chat support'), active: true },
-                        { text: this.$t('Unlimited options'), active: false },
-                        { text: this.$t('Optimization'), active: false },
-                        { text: this.$t('Phone support'), adtive: false },
-                        { text: this.$t('Special application'), active: false },
-                        { text: this.$t('own sub-domain'), active: false }
+                        {
+                            text: this.$t("Own analytics platform"),
+                            active: true
+                        },
+                        { text: this.$t("Chat support"), active: true },
+                        { text: this.$t("Unlimited options"), active: false },
+                        { text: this.$t("Optimization"), active: false },
+                        { text: this.$t("Phone support"), adtive: false },
+                        { text: this.$t("Special application"), active: false },
+                        { text: this.$t("own sub-domain"), active: false }
                     ]
                 },
                 intro: {
-                    title: this.$t('Intro'),
+                    title: this.$t("Intro"),
                     price: 10,
                     annual: 468,
-                    description: this.$t('Perfect for beginners with multiple objects'),
+                    description: this.$t(
+                        "Perfect for beginners with multiple objects"
+                    ),
                     options: [
-                        { text: this.$t('Own analytics platform'), active: true },
-                        { text: this.$t('Chat support'), active: true },
-                        { text: this.$t('Unlimited options'), active: true },
-                        { text: this.$t('Optimization'), active: true },
-                        { text: this.$t('Phone support'), active: true },
-                        { text: this.$t('Special application'), active: false },
-                        { text: this.$t('own sub-domain'), active: false }
+                        {
+                            text: this.$t("Own analytics platform"),
+                            active: true
+                        },
+                        { text: this.$t("Chat support"), active: true },
+                        { text: this.$t("Unlimited options"), active: true },
+                        { text: this.$t("Optimization"), active: true },
+                        { text: this.$t("Phone support"), active: true },
+                        { text: this.$t("Special application"), active: false },
+                        { text: this.$t("own sub-domain"), active: false }
                     ]
                 },
                 popular: {
-                    title: this.$t('Popular'),
+                    title: this.$t("Popular"),
                     price: 20,
                     annual: 468,
-                    description: this.$t('Our recommendation for maximum profit'),
+                    description: this.$t(
+                        "Our recommendation for maximum profit"
+                    ),
                     options: [
-                        { text: this.$t('Own analytics platform'), active: true },
-                        { text: this.$t('Chat support'), active: true },
-                        { text: this.$t('Unlimited options'), active: true },
-                        { text: this.$t('Optimization'), active: true },
-                        { text: this.$t('Phone support'), active: true },
-                        { text: this.$t('Special application'), active: true },
-                        { text: this.$t('own sub-domain'), active: false }
+                        {
+                            text: this.$t("Own analytics platform"),
+                            active: true
+                        },
+                        { text: this.$t("Chat support"), active: true },
+                        { text: this.$t("Unlimited options"), active: true },
+                        { text: this.$t("Optimization"), active: true },
+                        { text: this.$t("Phone support"), active: true },
+                        { text: this.$t("Special application"), active: true },
+                        { text: this.$t("own sub-domain"), active: false }
                     ]
                 },
                 enterprise: {
-                    title: this.$t('Enterprise'),
+                    title: this.$t("Enterprise"),
                     price: 50,
                     annual: 468,
-                    description: this.$t('The luxury version with its own page'),
+                    description: this.$t(
+                        "The luxury version with its own page"
+                    ),
                     options: [
-                        { text: this.$t('Own analytics platform'), active: true },
-                        { text: this.$t('Chat support'), active: true },
-                        { text: this.$t('Unlimited options'), active: true },
-                        { text: this.$t('Optimization'), active: true },
-                        { text: this.$t('Phone support'), active: true },
-                        { text: this.$t('Special application'), active: true },
-                        { text: this.$t('own sub-domain'), active: true }
+                        {
+                            text: this.$t("Own analytics platform"),
+                            active: true
+                        },
+                        { text: this.$t("Chat support"), active: true },
+                        { text: this.$t("Unlimited options"), active: true },
+                        { text: this.$t("Optimization"), active: true },
+                        { text: this.$t("Phone support"), active: true },
+                        { text: this.$t("Special application"), active: true },
+                        { text: this.$t("own sub-domain"), active: true }
                     ]
                 }
             },
-   
+
             account: {
                 validate: false,
-                plan: 'intro',
+                plan: "intro",
                 billing: {
-                    type: 'private',
-                    company: '',
-                    stid: '',
+                    type: "private",
+                    company: "",
+                    stid: "",
                     person: {
-                        addr: this.$t('Mister'),
-                        first_name: '',
-                        last_name: '',
+                        addr: this.$t("Mister"),
+                        first_name: "",
+                        last_name: ""
                     },
                     address: {
-                        street: '',
-                        house: '',
-                        postcode: '',
-                        country: this.$t('Germany'),
-                        city: 'Leipzig'
+                        street: "",
+                        house: "",
+                        postcode: "",
+                        country: this.$t("Germany"),
+                        city: "Leipzig"
                     },
                     match_address: true,
                     match_person: false
                 },
                 post: {
                     person: {
-                        addr: this.$t('Mister'),
-                        first_name: '',
-                        last_name: '',
+                        addr: this.$t("Mister"),
+                        first_name: "",
+                        last_name: ""
                     },
                     address: {
-                        street: '',
-                        house: '',
-                        postcode: '',
-                        country: this.$t('Germany'),
-                        city: 'Leipzig'
-                    },
+                        street: "",
+                        house: "",
+                        postcode: "",
+                        country: this.$t("Germany"),
+                        city: "Leipzig"
+                    }
                 },
                 contact: {
                     person: {
-                        name: '',
-                        addr: '',
+                        name: "",
+                        addr: ""
                     },
-                    email: '',
+                    email: "",
                     email_display: true,
 
-                    phone: '',
+                    phone: "",
                     phone_display: true,
                     phone_whatsapp: false,
-                    phone_fax: '',
-                    phone_fax_enable: '',
-                    phoneAdditional: '',
+                    phone_fax: "",
+                    phone_fax_enable: "",
+                    phoneAdditional: "",
                     phoneAdditional_display: false,
                     phoneAdditional_whatsapp: false,
-                    phoneStat: '',
+                    phoneStat: "",
                     phoneStat_display: false,
-                    website: '',
+                    website: "",
                     website_enable: false
                 },
                 languages: {
@@ -148,52 +171,49 @@ export default {
                 property: {
                     contact: {
                         person: {
-                            name: '',
-                            addr: '',
+                            name: "",
+                            addr: ""
                         },
-                        email: '',
+                        email: "",
                         email_display: true,
-                        phone: '',
+                        phone: "",
                         phone_display: true,
                         phone_whatsapp: false,
-                        phoneAdditional: '',
+                        phoneAdditional: "",
                         phoneAdditional_display: false,
                         phoneAdditional_whatsapp: false,
-                        phoneStat: '',
+                        phoneStat: "",
                         phoneStat_display: false,
-                        phone_fax: '',
-                        phone_fax_enable: '',
-                        website: '',
+                        phone_fax: "",
+                        phone_fax_enable: "",
+                        website: "",
                         website_enable: false,
                         form_display: true
                     },
                     propertyTypes: [
                         {
-                            name: 'Wohnung',
+                            name: "Wohnung",
                             num: 9,
                             persons: 18,
                             price: 10,
-                            rooms: [
-                            ]
-                        },
+                            rooms: []
+                        }
                     ],
                     facilities: [],
                     media: {
-                        photos: [
-                        ],
-                        video: '',
-                        facebook: ''
+                        photos: [],
+                        video: "",
+                        facebook: ""
                     }
                 }
             }
-        }
+        };
     },
     mounted() {
-        let acc = JSON.parse(localStorage.getItem('application-data'))
+        let acc = JSON.parse(localStorage.getItem("application-data"));
         if (acc) {
             this.account = acc;
         }
-
     },
     methods: {
         choosePlan() {
@@ -212,8 +232,11 @@ export default {
             this.account.validate = value;
         },
         dataProceed() {
-            localStorage.setItem('application-data', JSON.stringify(this.account));
+            localStorage.setItem(
+                "application-data",
+                JSON.stringify(this.account)
+            );
         }
     }
-}
+};
 </script>
