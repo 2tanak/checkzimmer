@@ -8,6 +8,7 @@
                 </svg>
             </div>
             <div class="title">{{ __('Login title') }}</div>
+			<div style="text-align:center;padding:10px 0px" class="error-text error-login">не найден логин или пароль</div>
             <form class="modal-form login">
                 <div class="text input-block">
                     <div class="input-block-item">

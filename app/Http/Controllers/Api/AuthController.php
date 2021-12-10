@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
-
+use Hash;
 /**
  * Class AuthController
  * Works with website authentication
@@ -61,9 +61,19 @@ class AuthController extends Controller
      */
     public function login(Request $request): JsonResponse
     {
+		$user = User::where(['email' => $request->email])->whereIn('role', ['admin','holder'])->first();
+	    $role = $user->role;
+		
+		if (!$user){
+            return response()->json(['error' => 'error']);
+		}
+		if (!Hash::check($request->password, $user->password)){
+		    return response()->json(['error' => 'error']);
+		}
+		
         $credentials = $request->only('email', 'password');
         if ($token = $this->guard()->attempt($credentials)) {
-            return response()->json(['status' => 'success'], 200)->header('Authorization', $token)
+            return response()->json(['status' => 'success','role'=>$role], 200)->header('Authorization', $token)
                 ->withCookie(cookie('authDone', true));
         }
         return response()->json(['error' => 'login_error'], 401);

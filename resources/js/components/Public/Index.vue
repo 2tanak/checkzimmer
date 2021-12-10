@@ -396,6 +396,7 @@ export default {
         },
         login(e) {
             e.preventDefault();
+			$('.error-login').css({'display':'none'});
             let res = true;
             jQuery('.modal-form.login input').each(function() {
                 var value = jQuery(this).val();
@@ -418,6 +419,10 @@ export default {
                 fetchUser: true
             })
             .then((resp) => {
+				
+				if(resp.data.error){
+				   $('.error-login').css({'display':'block'});
+				}
                 if(resp.data.data.role == 'holder'){
 					document.location = '/cabinet';
 					return false;
