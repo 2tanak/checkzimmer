@@ -424,7 +424,7 @@ export default {
 				   $('.error-login').css({'display':'block'});
 				}
                 if(resp.data.data.role == 'holder'){
-					document.location = '/cabinet';
+					document.location = '/personal';
 					return false;
 				}
 				if(resp.data.data.role == 'admin'){

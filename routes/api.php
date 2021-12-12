@@ -85,6 +85,7 @@ Route::group(['namespace' => 'Api'], function() {
     Route::post('/image-public', 'ImageUploadController@imageUploadPost');
     Route::post('/registration', 'AuthController@registrationProcess');
     Route::post('/feedback', 'FeedbackController@store')->name('got-feedback');
+
 });
 
 Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {
@@ -94,5 +95,8 @@ Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {
     Route::group(['middleware' => 'auth:api'], function(){
         Route::get('user', 'AuthController@user');
         Route::post('logout', 'AuthController@logout');
+		Route::post('/profile', 'ProfileController@index')->name('profile');
+
+
     });
 });

@@ -14,6 +14,7 @@
 
 <script>
 import RegistrationStepClient from "../../registration/RegistrationStepClient";
+import axios from "axios";
 
 export default {
     name: "profile",
@@ -22,9 +23,7 @@ export default {
     },
     data() {
         return {
-            step: 2,
-            planActive: "popular",
-            plans: {
+           plans: {
                 base: {
                     title: this.$t("Base"),
                     price: 0,
@@ -209,34 +208,26 @@ export default {
             }
         };
     },
-    mounted() {
-        let acc = JSON.parse(localStorage.getItem("application-data"));
-        if (acc) {
-            this.account = acc;
-        }
+    created() {
+        axios
+            .post("/auth/profile", this.account)
+            .then(resp => {
+                this.account = { ...resp.data };
+            })
+            .catch(resp => {
+                this.modalFail = true;
+            });
     },
+    mounted() {},
     methods: {
-        choosePlan() {
-            this.step = 1;
-        },
-        toAccountData() {
-            this.step = 2;
-        },
         toPropertyData() {
-            this.step = 3;
+            //здесь будет отправка на сохранение
         },
-        toSummaryData() {
-            this.step = 4;
-        },
+
         validate(value) {
             this.account.validate = value;
         },
-        dataProceed() {
-            localStorage.setItem(
-                "application-data",
-                JSON.stringify(this.account)
-            );
-        }
+        dataProceed() {}
     }
 };
 </script>
