@@ -98,7 +98,7 @@ class User extends Authenticatable implements JWTSubject
                 'value' => is_array($value) ? json_encode($value) : $value
             ]);
         } else {
-            $option->value = $value;
+            $option->value = is_array($value) ? json_encode($value) : $value;
             $option->save();
         }
         return $option;

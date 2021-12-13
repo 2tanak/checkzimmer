@@ -22,10 +22,13 @@ use JWTAuth;
 class ProfileController extends Controller
 {
 	private $token;
+
+	private $user;
+
 	public function __construct()
 	{
-
 		$this->token = JWTAuth::getToken();
+		$this->user = JWTAuth::toUser($this->token);
 		if (!$this->token) {
 			return response()->json(['error' => 'login_error'], 403);
 		}
@@ -36,10 +39,7 @@ class ProfileController extends Controller
 	public function Index()
 	{
 
-
-
-		$user = JWTAuth::toUser($this->token);
-
+		$user = $this->user;
 
 		foreach ($user->options as $option) {
 
@@ -47,18 +47,85 @@ class ProfileController extends Controller
 				$options[$option->key] = $option->value;
 				continue;
 			}
+
 			$patterns = "/[_]/";
 			$replace = "sep";
 			$k = preg_replace($patterns, $replace, $option->key, 1);
 			$arr_key = explode('sep', $k);
 
 
+			if (in_array('person', $arr_key)) {
+				if ($option->key == 'post_person') {
+					$value_person = explode(' ', $option->value);
+					$key_person = ['addr', 'first_name', 'last_name'];
+					$key_person = collect($key_person);
+					$combined = $key_person->combine($value_person);
+					$option->value = $combined;
+				}
+				if ($option->key == 'billing_person') {
+					$value_person = explode(' ', $option->value);
+					$key_person = ['addr', 'first_name', 'last_name'];
+					$key_person = collect($key_person);
+					$combined = $key_person->combine($value_person);
+					$option->value = $combined;
+				}
+			}
+
 
 			$options[$arr_key[0]][$arr_key[1]] = json_decode($option->value);
+
 			if (empty($options[$arr_key[0]][$arr_key[1]])) {
-				$options[$arr_key[0]][$arr_key[1]] = $option->value;
+
+				if ($option->key == 'contact_person') {
+					$options[$arr_key[0]][$arr_key[1]]['name'] = $option->value;
+				} else {
+					if ($option->value) {
+						$options[$arr_key[0]][$arr_key[1]] = $option->value;
+					}
+				}
 			}
 		}
 		return $options;
+	}
+
+	public function updatePersonal(Request $request)
+	{
+		$data = $request->all();
+
+		$user = $this->user;
+		$registerData = [
+			'plan' => $data['plan'],
+			'post' => $data['post'],
+			'billing' => $data['billing'],
+			'profile' => $data['contact'],
+			'contact' => $data['contact']
+		];
+
+		try {
+			foreach ($data as $row => $block) {
+
+				if (!is_array($block)) {
+					$user->metaUpdate($row, $block);
+					continue;
+				}
+
+				foreach ($block as $key => $item) {
+
+					if ($key == 'person') {
+						if ($row == 'contact' || $row == 'profile') {
+							//so that there are no errors, we skip, because there are no such keys
+						} else {
+							$lastName = $item['last_name'] ?? '';
+							$lastNameSeparator = $lastName ? ' ' : '';
+							$firstName = $item['first_name'] ?? $item['name'];
+							$item = ($item['addr'] ? $item['addr'] . ' ' : '') . $firstName . $lastNameSeparator . $lastName;
+						}
+					}
+					$user->metaUpdate("{$row}_{$key}", $item);
+				}
+			}
+			return response()->json(['status' => 'success'], 200)->header('Authorization', $this->token);
+		} catch (\Exception $e) {
+		}
 	}
 }

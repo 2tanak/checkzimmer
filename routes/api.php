@@ -95,7 +95,8 @@ Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {
     Route::group(['middleware' => 'auth:api'], function(){
         Route::get('user', 'AuthController@user');
         Route::post('logout', 'AuthController@logout');
-		Route::post('/profile', 'ProfileController@index')->name('profile');
+		Route::get('/profile', 'ProfileController@index')->name('profile');
+		Route::post('/profile', 'ProfileController@updatePersonal')->name('profile');
 
 
     });
