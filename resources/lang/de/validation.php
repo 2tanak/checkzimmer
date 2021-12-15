@@ -39,6 +39,11 @@ return [
             "date_format" => "Date format must be d/m/Y",
             "after" => "The date-departure must be a date after arrival-date."
         ],
+		'password' => [
+		    "required" => 'field "Date-departure" is required',
+            "min" => "Field 'Name' must contain at least 6 characters",
+            "confirmed"	=> "Passwörter stimmen nicht überein"		
+		 ]
     ],
 
 ];
