@@ -1,6 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/ui.js": "/js/ui.js",
+    "/js/personal.js": "/js/personal.js",
     "/css/app.css": "/css/app.css",
     "/css/main-subdomain.css": "/css/main-subdomain.css",
     "/css/main.css": "/css/main.css",

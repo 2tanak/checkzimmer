@@ -1,5 +1,8 @@
 <template>
-    <div class="container">
+    <div
+        class="container"
+        v-if="$auth.ready() && $auth.user() !== null && $auth.user().id"
+    >
         <ul class="nav">
             <li class="nav-item">
                 <router-link class="nav-link" :to="{ name: 'general' }">
@@ -38,11 +41,21 @@
 <script>
 export default {
     name: "Nav",
-
+    mounted() {
+        this.$auth.load().then(() => {
+            this.$auth.fetch().then(user => {
+                this.name = user.data.name;
+                this.role = user.data.role;
+            });
+        });
+    },
     methods: {
-        logout() {}
+        logout() {
+            this.$auth.logout({
+                makeRequest: true,
+                redirect: { name: "login" }
+            });
+        }
     }
 };
 </script>
-
-

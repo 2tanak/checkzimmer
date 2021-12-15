@@ -126,6 +126,12 @@ export default {
             width: 100%;
             height: 33px;
         }
+		&.loader{
+			background:#6BB63Furl('/img/loading.gif');
+			background-repeat:no-repeat;
+			background-position:center center;
+			
+		}
         width: 100%;
         height: 54px;
         background: #6BB63F;

@@ -277,9 +277,14 @@ export default {
             this.modalOk = false;
         },
         toPropertyData() {
+            let save_text = $(".save").text();
+            $(".save").text("");
+            $(".save").addClass("loader");
             axios
                 .post("/auth/profile", this.account)
                 .then(resp => {
+                    $(".save").removeClass("loader");
+                    $(".save").text(save_text);
                     this.modalOk = true;
                 })
                 .catch(resp => {

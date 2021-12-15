@@ -8,17 +8,22 @@ let Index = () => import( './components/Public/Index')
 let Favorites = () => import('./components/Public/Favorites')
 let Single = () => import('./components/Public/Single')
 let Registration = () => import('./components/Public/Registration')
-let Personal = () => import('./components/Public/cabinet/Index.vue')
 let General = () => import('./components/Public/cabinet/Index.vue')
 let Profile = () => import('./components/Public/cabinet/pages/Profile.vue')
 let Contact = () => import('./components/Public/cabinet/pages/Contact.vue')
 let Property = () => import('./components/Public/cabinet/pages/Property.vue')
 let Security = () => import('./components/Public/cabinet/pages/Security.vue')
+import login from './StarAdmin/views/sample-pages/login'
 
 export default new Router({
     linkActiveClass: 'active',
     mode: 'history',
     routes: [
+	    {
+            path: '/dashboard/login',
+            name: 'login',
+            component: login
+        },
         {
             path: '/',
             name: 'index',
@@ -42,32 +47,38 @@ export default new Router({
 		 {
             path: '/personal',
             name: 'personal',
-            component: Personal
+            component: General,
+			meta: { auth: true }
         },
 		{
             path: '/personal/general',
             name: 'general',
-            component: General
+            component: General,
+			meta: { auth: true }
         },
 		{
             path: '/personal/profile',
             name: 'profile',
-            component: Profile
+            component: Profile,
+			meta: { auth: true }
         },
 		{
             path: '/personal/contact',
             name: 'contact',
-            component: Contact
+            component: Contact,
+			meta: { auth: true }
         },
 		{
             path: '/personal/property',
             name: 'property',
-            component: Property
+            component: Property,
+			meta: { auth: true }
         },
 		{
             path: '/personal/security',
             name: 'security',
-            component: Security
+            component: Security,
+			meta: { auth: true }
         }
     ]
 });
