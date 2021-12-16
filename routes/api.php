@@ -69,6 +69,7 @@ Route::middleware('auth')->namespace('Api')->group(function () {
 
 Route::group(['namespace' => 'Api'], function() {
     Route::resource('room-types', 'RoomTypesController');
+	Route::resource('advert', 'AdvertController');
     Route::apiResource('property', 'PropertyController');
     Route::get('features-public', 'FeaturesController@index');
     Route::get('languages', 'LanguagesController@index');
@@ -98,6 +99,7 @@ Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {
 		Route::get('/profile', 'ProfileController@index')->name('profile');
 		Route::post('/profile', 'ProfileController@updatePersonal')->name('profile');
 		Route::post('/security', 'SecurityController@change_password')->name('security');
+       
 
 
     });
