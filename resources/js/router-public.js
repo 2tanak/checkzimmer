@@ -13,6 +13,8 @@ let Profile = () => import('./components/Public/cabinet/pages/Profile.vue')
 let Contact = () => import('./components/Public/cabinet/pages/Contact.vue')
 let Property = () => import('./components/Public/cabinet/pages/Property.vue')
 let Security = () => import('./components/Public/cabinet/pages/Security.vue')
+let Show_property = () => import('./components/Public/cabinet/pages/children/property/Update.vue')
+
 import login from './StarAdmin/views/sample-pages/login'
 
 export default new Router({
@@ -72,6 +74,12 @@ export default new Router({
             path: '/personal/property',
             name: 'property',
             component: Property,
+			meta: { auth: true }
+        },
+		{
+            path: '/personal/property/update',
+            name: 'update',
+            component: Show_property,
 			meta: { auth: true }
         },
 		{

@@ -69,8 +69,10 @@ Route::middleware('auth')->namespace('Api')->group(function () {
 
 Route::group(['namespace' => 'Api'], function() {
     Route::resource('room-types', 'RoomTypesController');
-	Route::resource('advert', 'AdvertController');
-    Route::apiResource('property', 'PropertyController');
+	Route::get('advert', 'AdvertController@index');
+	Route::get('advert/{property:id}', 'AdvertController@show');
+	Route::put('advert/{property:id}', 'AdvertController@update');
+	Route::apiResource('property', 'PropertyController');
     Route::get('features-public', 'FeaturesController@index');
     Route::get('languages', 'LanguagesController@index');
     Route::get('questionsPublic/{property}', 'QuestionsController@indexPublic');

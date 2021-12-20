@@ -42,11 +42,18 @@
                                     :item_id="item.id"
                                 />
                             </div>
+                            <div class="red" style="">
+                                <a href="#" @click.prevent="change(item.id)"
+                                    >изменить</a
+                                >
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <router-view></router-view>
     </div>
 </template>
 
@@ -88,9 +95,23 @@ export default {
     created() {},
     mounted() {
         this.submitForm(true);
-        console.log("Component mounted.");
     },
     methods: {
+        change(id) {
+            this.$router.push("/personal/property/update?id=" + id);
+        },
+        create(id) {
+            advert.show(id).then(response => {
+                console.log(response.data);
+                return false;
+            });
+            /*
+		update(id){
+			advert.update(id).then(response => {
+		    console.log(response.data);return false;
+		    });
+		*/
+        },
         submitForm(clear) {
             advert.all().then(resp => {
                 this.property = this.property.concat(resp.data);
@@ -131,6 +152,10 @@ export default {
 };
 </script>
 <style lang="scss">
+.red {
+    margin-bottom: 10px;
+    align-self: flex-end;
+}
 .property-card {
     background: #fff;
 }
