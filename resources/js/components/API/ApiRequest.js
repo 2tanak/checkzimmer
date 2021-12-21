@@ -81,8 +81,8 @@ export default (base) => class ApiRequest {
     create(data) {
         return client.post(`/${base}`, data, getConfig());
     }
-	show(id,data) {
-        return client.get(`/${base}/${id}`, data, getConfig());
+	show(id) {
+        return client.get(`/${base}/${id}`, getConfig());
     }
 };
 

@@ -150,7 +150,8 @@ class AuthController extends Controller
             'post' => $data['post'],
             'billing' => $data['billing'],
             'profile' => $data['contact'],
-            'contact' => $data['contact']
+            'contact' => $data['contact'],
+			'languages' => $data['languages']
         ];
 
         $user = UserRepository::register($registerData);

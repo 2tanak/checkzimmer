@@ -283,6 +283,7 @@ export default {
             axios
                 .post("/auth/profile", this.account)
                 .then(resp => {
+                    //console.log(resp.data);return false;
                     $(".save").removeClass("loader");
                     $(".save").text(save_text);
                     this.modalOk = true;

@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Feature;
-use App\Notifications\InquiryHotel;
-use App\Notifications\InquiryRegistration;
 use App\Repositories\PropertyRepository;
-use App\Repositories\UserRepository;
 use App\User;
 use Cookie;
 use Illuminate\Http\JsonResponse;
@@ -18,6 +14,9 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Property;
 use JWTAuth;
+
+
+
 
 
 class AdvertController extends Controller
@@ -37,6 +36,12 @@ class AdvertController extends Controller
 
 	public function show(Request $request, Property $property)
 	{
+		$token = JWTAuth::getToken();
+		$user = JWTAuth::toUser($token);
+
+		if (!$token) {
+			return response()->json(['error' => 'login_error'], 403);
+		}
 		$array_keys = [];
 		$key = $property->options->pluck('value', 'key');
 		if ($property->rooms->count() > 0) {
@@ -57,6 +62,8 @@ class AdvertController extends Controller
 					return $item->number;
 				});
 				$value->transform(function ($item) {
+					$obj['id'] = $item->id;
+					$obj['room_type_id'] = $item->room_type_id;
 					$obj['persons'] = $item->person;
 					$obj['num'] = $item->number;
 					$obj['price'] = $item->price;
@@ -94,6 +101,22 @@ class AdvertController extends Controller
 				}
 			}
 		}
+		if ($property->address) {
+			$value_address = explode(' ', $property->address);
+
+			$key_address = ['street', 'house'];
+			$key_address = collect($key_address);
+
+			$combined = $key_address->combine($value_address);
+		}
+
+		$array_keys['plan'] = $user->options->where('key', 'plan')->first()->value;;
+		$array_keys['post']['address']['city'] = $property->city ? $property->city : '';
+		$array_keys['post']['address']['country'] = '';
+		$array_keys['post']['address']['house'] = $combined['house'] ? $combined['house'] : '';
+		$array_keys['post']['address']['postcode'] = $property->zip ? $property->zip : '';
+		$array_keys['post']['address']['street'] = $combined['street'] ? $combined['street'] : '';
+
 		$array_keys['property']['contact']['email'] = $key['landlordClientEmail'] ? $key['landlordClientEmail'] : '';
 		$array_keys['property']['contact']['email_display'] = '';
 		$array_keys['property']['contact']['person']['name'] = $key['landlordName'] ? $key['landlordName'] : '';
@@ -130,10 +153,26 @@ class AdvertController extends Controller
 
 	public function update(Request $request, Property $property)
 	{
+
+		$token = JWTAuth::getToken();
+		$user = JWTAuth::toUser($token);
+		if (!$token) {
+			return response()->json(['error' => 'login_error'], 403);
+		}
+
+		$data = $request->all();
+
+		$propertyData = $data['property'];
+		$propertyData['address'] = $data['post']['address'];
+		$propertyData['languages'] = $data['languages'];
+
+
+		$property = PropertyRepository::update($propertyData, $property, $user->id);
 		return $property;
 	}
+
+
 	public function store(Request $request)
 	{
-		return 900;
 	}
 }

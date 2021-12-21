@@ -261,14 +261,7 @@ export default {
             }
         };
     },
-    created() {
-        /*
-		update(id){
-			advert.update(id).then(response => {
-		    console.log(response.data);return false;
-		    });
-		*/
-    },
+    created() {},
     mounted() {
         const params = window.location.search.split("&");
         const id = params[0].split("=")[1];
@@ -277,8 +270,9 @@ export default {
                 console.log(response.data);
                 let account = { ...this.account };
                 account.property = { ...response.data.property };
+                account.post.address = { ...response.data.post.address };
+                account.plan = response.data.plan;
                 this.account = account;
-                //console.log(account);return false;
             });
         }
     },
@@ -287,21 +281,21 @@ export default {
             this.modalOk = false;
         },
         toSummaryData() {
-            /*
+            const params = window.location.search.split("&");
+            const id = params[0].split("=")[1];
             let save_text = $(".save").text();
             $(".save").text("");
             $(".save").addClass("loader");
-            axios
-                .post("/auth/profile", this.account)
-                .then(resp => {
-                    $(".save").removeClass("loader");
-                    $(".save").text(save_text);
+
+            advert.update(id, this.account).then(response => {
+                $(".save").removeClass("loader");
+                $(".save").text(save_text);
+                if (response.data.status == "success") {
                     this.modalOk = true;
-                })
-                .catch(resp => {
-                    //this.modalFail = true;
-                });
-				*/
+                }
+                console.log(response.data);
+                return false;
+            });
         },
 
         validate(value) {
@@ -312,6 +306,42 @@ export default {
 };
 </script>
 <style lang="scss">
+a.save {
+    &::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+        background: #ffffff;
+        box-shadow: 0 4px 30px rgba(107, 182, 63, 0.6);
+        border-radius: 14px;
+        z-index: -1;
+        max-width: 720px;
+        width: 100%;
+        height: 33px;
+    }
+    &.loader {
+        background: #6BB63Furl("/img/loading.gif");
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+    width: 100%;
+    height: 54px;
+    background: #6bb63f;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: #ffffff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+    position: relative;
+}
+
 .register-modal {
     .modal-close {
         position: absolute;

@@ -85,6 +85,26 @@ class ProfileController extends Controller
 				}
 			}
 		}
+		if (isset($options['languages'])) {
+           
+			//вычисляем языки
+			$arr = [
+				'en' => 'english',
+				'ge' => 'german',
+				'pl' => 'poland',
+				'ru' => 'russian',
+			];
+			$languages = explode('|', $option->value);
+			$lang = [];
+			foreach ($arr as $k => $val) {
+				if (in_array($k, $languages)) {
+					$lang[$val] = true;
+				} else {
+					$lang[$val] = false;
+				}
+			}
+			$options['languages'] = collect($lang);
+		}
 		return $options;
 	}
 
@@ -98,11 +118,22 @@ class ProfileController extends Controller
 			'post' => $data['post'],
 			'billing' => $data['billing'],
 			'profile' => $data['contact'],
-			'contact' => $data['contact']
+			'contact' => $data['contact'],
+			'languages' => $data['languages'],
 		];
 
 		try {
-			foreach ($data as $row => $block) {
+			if(count($data['languages']) > 0){
+			foreach ($registerData['languages'] as $lang => $value) {
+				if (!$value) {
+					continue;
+				}
+				$languages[] = PropertyRepository::LANG_CODES[$lang];
+			}
+
+			$registerData['languages'] = implode('|', $languages);
+            }
+			foreach ($registerData as $row => $block) {
 
 				if (!is_array($block)) {
 					$user->metaUpdate($row, $block);

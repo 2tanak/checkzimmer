@@ -40,6 +40,16 @@ class UserRepository {
      * @param $data
      */
     static function addMetaData($user, $data) {
+		if(count($data['languages']) > 0){
+		foreach ($data['languages'] as $lang=>$value) {
+            if (!$value) {
+                continue;
+            }
+            $languages[] = PropertyRepository::LANG_CODES[$lang];
+        }
+       
+        $data['languages'] = implode('|', $languages);
+		}
         foreach ($data as $row => $block) {
             if (!is_array($block)) {
                 $user->metaUpdate($row, $block);
