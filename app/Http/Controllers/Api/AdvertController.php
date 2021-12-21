@@ -39,11 +39,14 @@ class AdvertController extends Controller
 		$token = JWTAuth::getToken();
 		$user = JWTAuth::toUser($token);
 
-		if (!$token) {
+		if (!$token && !$property->id) {
 			return response()->json(['error' => 'login_error'], 403);
 		}
 		$array_keys = [];
-		$key = $property->options->pluck('value', 'key');
+		if ($property->options->count() > 0) {
+			$key = $property->options->pluck('value', 'key');
+		}
+
 		if ($property->rooms->count() > 0) {
 			//вычисляем propertyType(объект с комнатами)
 			$grouped = $property->rooms->groupBy(function ($item, $key) {
@@ -81,26 +84,15 @@ class AdvertController extends Controller
 				$property_type[$k]['rooms'] = $value;
 			}
 			$property_type = collect($property_type)->values();
+		} else {
+			$property_type[0]['name'] = 'Wohnung';
+			$property_type[0]['num'] = 9;
+			$property_type[0]['persons'] = 18;
+			$property_type[0]['price'] = 10;
+			$property_type[0]['rooms'] = [];
 		}
 
-		if ($key['landlordSpeaks']) {
-			//вычисляем языки
-			$arr = [
-				'en' => 'english',
-				'ge' => 'german',
-				'pl' => 'poland',
-				'ru' => 'russian',
-			];
-			$languages = explode('|', $key['landlordSpeaks']);
-			$lang = [];
-			foreach ($arr as $k => $val) {
-				if (in_array($k, $languages)) {
-					$lang[$val] = true;
-				} else {
-					$lang[$val] = false;
-				}
-			}
-		}
+
 		if ($property->address) {
 			$value_address = explode(' ', $property->address);
 
@@ -109,24 +101,28 @@ class AdvertController extends Controller
 
 			$combined = $key_address->combine($value_address);
 		}
-
-		$array_keys['plan'] = $user->options->where('key', 'plan')->first()->value;;
-		$array_keys['post']['address']['city'] = $property->city ? $property->city : '';
+		if ($property->features->count() > 0) {
+			$facilities = $property->features->pluck('id');
+		} else {
+			$facilities = [];
+		}
+		$array_keys['plan'] = $user->options->where('key', 'plan')->first()->value;
+		$array_keys['post']['address']['city'] = isset($property->city) ? $property->city : '';
 		$array_keys['post']['address']['country'] = '';
-		$array_keys['post']['address']['house'] = $combined['house'] ? $combined['house'] : '';
-		$array_keys['post']['address']['postcode'] = $property->zip ? $property->zip : '';
-		$array_keys['post']['address']['street'] = $combined['street'] ? $combined['street'] : '';
+		$array_keys['post']['address']['house'] = isset($combined['house']) ? $combined['house'] : '';
+		$array_keys['post']['address']['postcode'] = isset($property->zip) ? $property->zip : '';
+		$array_keys['post']['address']['street'] = isset($combined['street']) ? $combined['street'] : '';
 
-		$array_keys['property']['contact']['email'] = $key['landlordClientEmail'] ? $key['landlordClientEmail'] : '';
+		$array_keys['property']['contact']['email'] = isset($key['landlordClientEmail']) ? $key['landlordClientEmail'] : '';
 		$array_keys['property']['contact']['email_display'] = '';
-		$array_keys['property']['contact']['person']['name'] = $key['landlordName'] ? $key['landlordName'] : '';
+		$array_keys['property']['contact']['person']['name'] = isset($key['landlordName']) ? $key['landlordName'] : '';
 		if (isset($key['landlordAddr'])) {
 			$array_keys['property']['contact']['person']['addr'] = $key['landlordAddr'] ? $key['landlordAddr'] : '';
 		} else {
 			$array_keys['property']['contact']['person']['addr'] = '';
 		}
-		$array_keys['property']['contact']['phone'] = $key['landlordPhoneNumber'] ? $key['landlordPhoneNumber'] : '';
-		$array_keys['property']['contact']['phone_display'] = $key['landlordHidePhone'] ? $key['landlordHidePhone'] : '';
+		$array_keys['property']['contact']['phone'] = isset($key['landlordPhoneNumber']) ? $key['landlordPhoneNumber'] : '';
+		$array_keys['property']['contact']['phone_display'] = isset($key['landlordHidePhone']) ? $key['landlordHidePhone'] : '';
 		$array_keys['property']['contact']['phoneAdditional'] = '';
 		$array_keys['property']['contact']['phoneAdditional_display'] = '';
 		$array_keys['property']['contact']['phoneAdditional_whatsapp'] = '';
@@ -137,13 +133,14 @@ class AdvertController extends Controller
 		$array_keys['property']['contact']['phone_whatsapp'] = '';
 		$array_keys['property']['contact']['website'] = '';
 		$array_keys['property']['contact']['website_enable'] = '';
-		$array_keys['property']['facilities'] = $property->features->count() > 0 ? $property->features->pluck('id') : '';
-		$array_keys['property']['languages'] = $key['landlordSpeaks'] ? collect($lang) : '';
-		$array_keys['property']['media']['photos'] = $key['photos'] ? json_decode($key['photos']) : [];
-		$array_keys['property']['media']['facebook'] = $key['facebook'] ? $key['facebook'] : '';
-		$array_keys['property']['media']['video'] = $key['video'] ? $key['video'] : '';
-		$array_keys['property']['media']['video'] = $key['video'] ? $key['video'] : '';
+		$array_keys['property']['facilities'] = $facilities;
+		//$array_keys['property']['languages'] = $key['landlordSpeaks'] ? collect($lang) : '';
+		$array_keys['property']['media']['photos'] = isset($key['photos']) ? json_decode($key['photos']) : [];
+		$array_keys['property']['media']['facebook'] = isset($key['facebook']) ? $key['facebook'] : '';
+		$array_keys['property']['media']['video'] = isset($key['video']) ? $key['video'] : '';
+		$array_keys['property']['media']['video'] = isset($key['video']) ? $key['video'] : '';
 		$array_keys['property']['propertyTypes'] = $property_type;
+		//return 300;
 
 
 		return $array_keys;
@@ -171,7 +168,25 @@ class AdvertController extends Controller
 		return $property;
 	}
 
-
+	public function destroy(Property $property)
+	{
+		$token = JWTAuth::getToken();
+		$user = JWTAuth::toUser($token);
+		if (!$token) {
+			return response()->json(['error' => 'login_error'], 403);
+		}
+		if ($property->rooms()->count() > 0) {
+			$property->rooms()->delete();
+		}
+		if ($property->options()->count() > 0) {
+			$property->options()->delete();
+		}
+		if ($property->features()->count() > 0) {
+			$property->features()->detach();
+		}
+		$property->delete();
+		return response()->json(['status' => 'success'], 200);
+	}
 	public function store(Request $request)
 	{
 	}

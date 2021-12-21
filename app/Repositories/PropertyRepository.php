@@ -129,8 +129,6 @@ class PropertyRepository {
         $propertyTypes = RoomType::all()->toArray();
         $propertyNames = array_column($propertyTypes, 'name');
 
-        $property->rooms()->delete();
-
         foreach ($data as $propertyType) {
             $nameIndex = array_search($propertyType['name'], $propertyNames);
             if ($nameIndex === false) {

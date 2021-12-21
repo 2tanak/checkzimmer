@@ -46,6 +46,13 @@
                                 <a href="#" @click.prevent="change(item.id)"
                                     >изменить</a
                                 >
+                                &nbsp&nbsp&nbsp
+                                <a
+                                    class="remove"
+                                    href="#"
+                                    @click.prevent="remove($event, item.id)"
+                                    >удалить</a
+                                >
                             </div>
                         </div>
                     </div>
@@ -100,53 +107,29 @@ export default {
         change(id) {
             this.$router.push("/personal/property/update?id=" + id);
         },
-        create(id) {
-            advert.show(id).then(response => {
-                console.log(response.data);
-                return false;
-            });
-            /*
-		update(id){
-			advert.update(id).then(response => {
-		    console.log(response.data);return false;
-		    });
-		*/
-        },
+
         submitForm(clear) {
             advert.all().then(resp => {
                 this.property = this.property.concat(resp.data);
-
-                console.log(resp.data);
-                //this.room_types = resp.data;
             });
         },
-        send() {
-            $(".text-muted").html("");
-            let save_text = $(".save").text();
-            $(".save").text("");
-            $(".save").addClass("loader");
+        remove: function(event, id) {
+            let thisElement = event.currentTarget;
 
-            axios
-                .post("/auth/security", {
-                    password: this.password,
-                    password_confirmation: this.password_confirmation
-                })
-                .then(resp => {
-                    $(".save").removeClass("loader");
-                    $(".save").text(save_text);
-                    if (resp.data.status == "error") {
-                        $(".text-muted").html(resp.data.view);
-                    }
-                    if (resp.data.status == "success") {
-                        this.modalOk = true;
-                    }
-                })
-                .catch(resp => {
-                    //this.modalFail = true;
-                });
-        },
-        modalCloseOk() {
-            this.modalOk = false;
+            let textR = $(thisElement).text();
+            $(thisElement).text("");
+            $(thisElement).html(
+                "<img src='/img/loading.gif' style='width:50px;height:2px'/>"
+            );
+
+            advert.delete(id).then(resp => {
+                if (resp.data.status == "success") {
+                    $(thisElement).html("");
+                    $(thisElement).text(textR);
+                    this.property = this.property.filter(c => c.id !== id);
+                }
+                
+            });
         }
     }
 };
@@ -159,134 +142,7 @@ export default {
 .property-card {
     background: #fff;
 }
-a.save {
-    &::after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 0;
-        background: #ffffff;
-        box-shadow: 0 4px 30px rgba(107, 182, 63, 0.6);
-        border-radius: 14px;
-        z-index: -1;
-        max-width: 720px;
-        width: 100%;
-        height: 33px;
-    }
-    &.loader {
-        background: #6BB63Furl("/img/loading.gif");
-        background-repeat: no-repeat;
-        background-position: center center;
-    }
-    width: 100%;
-    height: 54px;
-    background: #6bb63f;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 100%;
-    color: #ffffff;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
-    position: relative;
-}
-.register-modal {
-    .modal-close {
-        position: absolute;
-        top: 18px;
-        right: 22px;
-        cursor: pointer;
-    }
-    svg {
-        margin-bottom: 10px;
-    }
-    .modal-title {
-        margin-bottom: 15px;
-    }
-    transform: scale(0.7);
-    opacity: 0;
-    transition: all 0.3s;
-    background: #fff;
-    box-shadow: 0 0 14px rgb(51 54 70 / 14%);
-    border-radius: 12px;
-    width: 468px;
-    padding: 33px 44px;
-}
-.modal-overlay.modal-show {
-    .register-modal {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
 
-@media (max-width: 1040px) {
-    .registration-section {
-        a.save {
-            &::after {
-                width: calc(100% - 60px);
-                max-width: none;
-            }
-            width: calc(100% - 32px);
-            margin: 0 auto;
-        }
-        .registration-sidebar {
-            width: 100%;
-            margin-top: 20px;
-        }
-        .checkbox-line {
-            label {
-                font-size: 14px;
-            }
-        }
-        .billing-address-container {
-            padding: 0;
-            flex-direction: column-reverse;
-        }
-        .main-registration-content {
-            margin-right: 0;
-            width: 100%;
-        }
-        padding-bottom: 40px;
-    }
-    .data-checking-section {
-        .familiarization {
-            padding: 0 16px;
-        }
-    }
-}
-@media (max-width: 700px) {
-    .data-checking-section {
-        .familiarization {
-            br {
-                display: none;
-            }
-        }
-    }
-}
-@media (max-width: 575px) {
-    .registration-section {
-        a.save {
-            padding: 0 16px;
-            text-align: center;
-        }
-        .registration-sidebar {
-            margin-top: 0;
-        }
-    }
-    .register-modal {
-        p {
-            max-width: none !important;
-        }
-        width: 100%;
-        height: 100%;
-        border-radius: 0;
-        padding: 25px;
-    }
-}
 .list-content {
     background: #f7f8fa;
     padding-bottom: 114px;

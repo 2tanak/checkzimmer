@@ -72,6 +72,7 @@ Route::group(['namespace' => 'Api'], function() {
 	Route::get('advert', 'AdvertController@index');
 	Route::get('advert/{property:id}', 'AdvertController@show');
 	Route::put('advert/{property:id}', 'AdvertController@update');
+	Route::delete('advert/{property:id}', 'AdvertController@destroy');
 	Route::apiResource('property', 'PropertyController');
     Route::get('features-public', 'FeaturesController@index');
     Route::get('languages', 'LanguagesController@index');
