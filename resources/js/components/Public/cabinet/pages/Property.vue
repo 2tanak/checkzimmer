@@ -12,6 +12,10 @@
                     <div
                         :class="{ container: true, active: listMode === 'map' }"
                     >
+                        <a href="#" class="create" @click.prevent="create">{{
+                            $t("Button_create")
+                        }}</a>
+
                         <div
                             v-for="(item, index) in property"
                             :key="'prop-id-' + index + '-' + item.id"
@@ -107,7 +111,9 @@ export default {
         change(id) {
             this.$router.push("/personal/property/update?id=" + id);
         },
-
+        create() {
+            this.$router.push("/personal/property/create");
+        },
         submitForm(clear) {
             advert.all().then(resp => {
                 this.property = this.property.concat(resp.data);
@@ -128,7 +134,6 @@ export default {
                     $(thisElement).text(textR);
                     this.property = this.property.filter(c => c.id !== id);
                 }
-                
             });
         }
     }
@@ -142,7 +147,26 @@ export default {
 .property-card {
     background: #fff;
 }
-
+a.create {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    float: right;
+    width: 20%;
+    height: 54px;
+    background: #6bb63f;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: #ffffff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+    position: relative;
+    clear: both;
+}
 .list-content {
     background: #f7f8fa;
     padding-bottom: 114px;

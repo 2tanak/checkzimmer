@@ -267,11 +267,19 @@ export default {
         const id = params[0].split("=")[1];
         if (id) {
             advert.show(id).then(response => {
-                console.log(response.data);
+                
+                if (response.data.status == "success") {
+                    this.account = { ...response.data.data };
+                }
+            });
+        } else {
+            advert.create().then(response => {
                 let account = { ...this.account };
-                account.property = { ...response.data.property };
-                account.post.address = { ...response.data.post.address };
-                account.plan = response.data.plan;
+                let property = account.property;
+                let validate = account.validate;
+                account = { ...response.data };
+                account.property = property;
+                account.validate = validate;
                 this.account = account;
             });
         }
@@ -286,16 +294,26 @@ export default {
             let save_text = $(".save").text();
             $(".save").text("");
             $(".save").addClass("loader");
+            if (id) {
+                advert.update(id, this.account).then(response => {
+                    $(".save").removeClass("loader");
+                    $(".save").text(save_text);
+                    if (response.data.status == "success") {
+                        this.modalOk = true;
+                    }
+                   
+                });
+            } else {
+                advert.create(this.account).then(response => {
+                    $(".save").removeClass("loader");
+                    $(".save").text(save_text);
 
-            advert.update(id, this.account).then(response => {
-                $(".save").removeClass("loader");
-                $(".save").text(save_text);
-                if (response.data.status == "success") {
                     this.modalOk = true;
-                }
-                console.log(response.data);
-                return false;
-            });
+                    this.$router.push("/personal/property");
+
+                    return false;
+                });
+            }
         },
 
         validate(value) {

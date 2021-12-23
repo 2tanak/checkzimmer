@@ -83,6 +83,12 @@ export default new Router({
 			meta: { auth: true }
         },
 		{
+            path: '/personal/property/create',
+            name: 'update',
+            component: Show_property,
+			meta: { auth: true }
+        },
+		{
             path: '/personal/security',
             name: 'security',
             component: Security,

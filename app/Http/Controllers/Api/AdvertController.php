@@ -33,12 +33,17 @@ class AdvertController extends Controller
 		return response()->json(Property::where('user_id', '=', $user->id)->get());
 	}
 
-
+	
+	
 	public function show(Request $request, Property $property)
 	{
 		$token = JWTAuth::getToken();
 		$user = JWTAuth::toUser($token);
-
+        
+		
+		if($property->user_id != $user->id){
+			return response()->json(['error' => 'login_error'], 403);
+         }
 		if (!$token && !$property->id) {
 			return response()->json(['error' => 'login_error'], 403);
 		}
@@ -106,7 +111,7 @@ class AdvertController extends Controller
 		} else {
 			$facilities = [];
 		}
-		$array_keys['plan'] = $user->options->where('key', 'plan')->first()->value;
+		//$array_keys['plan'] = $user->options->where('key', 'plan')->first()->value;
 		$array_keys['post']['address']['city'] = isset($property->city) ? $property->city : '';
 		$array_keys['post']['address']['country'] = '';
 		$array_keys['post']['address']['house'] = isset($combined['house']) ? $combined['house'] : '';
@@ -141,9 +146,12 @@ class AdvertController extends Controller
 		$array_keys['property']['media']['video'] = isset($key['video']) ? $key['video'] : '';
 		$array_keys['property']['propertyTypes'] = $property_type;
 		//return 300;
-
-
-		return $array_keys;
+        $objects_profile = $this->option_user($user);
+		$merge= array_merge($objects_profile,$array_keys);
+		
+		
+        return response()->json(['status' => 'success','data'=>$merge], 200)->header('Authorization', $token)->withCookie(cookie('authDone', true));
+		
 	}
 
 
@@ -170,11 +178,6 @@ class AdvertController extends Controller
 
 	public function destroy(Property $property)
 	{
-		$token = JWTAuth::getToken();
-		$user = JWTAuth::toUser($token);
-		if (!$token) {
-			return response()->json(['error' => 'login_error'], 403);
-		}
 		if ($property->rooms()->count() > 0) {
 			$property->rooms()->delete();
 		}
@@ -189,5 +192,93 @@ class AdvertController extends Controller
 	}
 	public function store(Request $request)
 	{
+		$token = JWTAuth::getToken();
+		$user = JWTAuth::toUser($token);
+		if(count($request->all()) <= 0){
+			$option_user= $this->option_user($user);
+		     return $option_user;
+		}
+		
+		$data = $request->all();
+		$propertyData = $data['property'];
+        $propertyData['address'] = $data['post']['address'];
+		$propertyData['languages'] = $data['languages'];
+        $property = PropertyRepository::create($user->id, $propertyData);
+		return $property->id;
+	}
+	
+	
+	public function option_user($user){
+		
+		
+
+		foreach ($user->options as $option) {
+
+			if (!strpos($option->key, '_', 0)) {
+				$options[$option->key] = $option->value;
+				continue;
+			}
+
+			$patterns = "/[_]/";
+			$replace = "sep";
+			$k = preg_replace($patterns, $replace, $option->key, 1);
+			$arr_key = explode('sep', $k);
+
+
+			if (in_array('person', $arr_key)) {
+				if ($option->key == 'post_person') {
+					$value_person = explode(' ', $option->value);
+					$key_person = ['addr', 'first_name', 'last_name'];
+					$key_person = collect($key_person);
+					$combined = $key_person->combine($value_person);
+					$option->value = $combined;
+				}
+				if ($option->key == 'billing_person') {
+					$value_person = explode(' ', $option->value);
+					$key_person = ['addr', 'first_name', 'last_name'];
+					$key_person = collect($key_person);
+					$combined = $key_person->combine($value_person);
+					$option->value = $combined;
+				}
+			}
+
+
+			$options[$arr_key[0]][$arr_key[1]] = json_decode($option->value);
+
+			if (empty($options[$arr_key[0]][$arr_key[1]])) {
+
+				if ($option->key == 'contact_person') {
+					$options[$arr_key[0]][$arr_key[1]]['name'] = $option->value;
+				} else {
+					if ($option->value) {
+						$options[$arr_key[0]][$arr_key[1]] = $option->value;
+					}
+				}
+			}
+		}
+		if (isset($options['languages'])) {
+           
+			//вычисляем языки
+			$arr = [
+				'en' => 'english',
+				'ge' => 'german',
+				'pl' => 'poland',
+				'ru' => 'russian',
+			];
+			$languages = explode('|', $option->value);
+			$lang = [];
+			foreach ($arr as $k => $val) {
+				if (in_array($k, $languages)) {
+					$lang[$val] = true;
+				} else {
+					$lang[$val] = false;
+				}
+			}
+			$options['languages'] = collect($lang);
+		}
+		return $options;
+		
+		
+		
 	}
 }
