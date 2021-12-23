@@ -10,7 +10,7 @@ let Single = () => import('./components/Public/Single')
 let Registration = () => import('./components/Public/Registration')
 let General = () => import('./components/Public/cabinet/Index.vue')
 let Profile = () => import('./components/Public/cabinet/pages/Profile.vue')
-let Contact = () => import('./components/Public/cabinet/pages/Contact.vue')
+let Tarif = () => import('./components/Public/cabinet/pages/Tarif.vue')
 let Property = () => import('./components/Public/cabinet/pages/Property.vue')
 let Security = () => import('./components/Public/cabinet/pages/Security.vue')
 let Show_property = () => import('./components/Public/cabinet/pages/children/property/Update.vue')
@@ -66,8 +66,8 @@ export default new Router({
         },
 		{
             path: '/personal/contact',
-            name: 'contact',
-            component: Contact,
+            name: 'Tarif',
+            component: Tarif,
 			meta: { auth: true }
         },
 		{

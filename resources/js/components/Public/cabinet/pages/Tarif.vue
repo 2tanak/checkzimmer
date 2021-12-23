@@ -1,13 +1,10 @@
 <template>
     <div class="container">
-        <RegistrationStepClient
-            v-model="account"
-            :account="account"
-            :plan="plans[account.plan]"
-            @backToPlans="choosePlan"
-            @toPropertyData="toPropertyData"
-            @validate="validate"
-            @dataProceed="dataProceed"
+        <RegistrationStepPlans
+            :planActive="planActive"
+            :plans="plans"
+            v-model="account.plan"
+            @input="toAccountData"
         />
 
         <div
@@ -64,17 +61,18 @@
 </template>
 
 <script>
-import RegistrationStepClient from "../../registration/RegistrationStepClient";
+import RegistrationStepPlans from "../../registration/RegistrationStepPlans";
 import axios from "axios";
 
 export default {
-    name: "profile",
+    name: "tarif",
     components: {
-        RegistrationStepClient
+        RegistrationStepPlans
     },
     data() {
         return {
             modalOk: false,
+            planActive: "",
             plans: {
                 base: {
                     title: this.$t("Base"),
@@ -262,9 +260,9 @@ export default {
     },
     created() {
         axios
-            .get("/auth/profile")
+            .get("/auth/profile?page=tarif")
             .then(resp => {
-                this.account = { ...resp.data };
+                this.planActive = resp.data;
             })
             .catch(resp => {
                 //this.modalFail = true;
@@ -275,27 +273,23 @@ export default {
         modalCloseOk() {
             this.modalOk = false;
         },
-        toPropertyData() {
-            let save_text = $(".save").text();
-            $(".save").text("");
-            $(".save").addClass("loader");
+        toAccountData() {
+            let thisElement = event.currentTarget;
+            let save_text = $(thisElement).text();
+            $(thisElement).html(
+                "<img src='/img/loading.gif' style='width:50px;height:2px'/>"
+            );
             axios
-                .post("/auth/profile", this.account)
+                .post("/auth/change-tarif", this.account)
                 .then(resp => {
-                    //console.log(resp.data);return false;
-                    $(".save").removeClass("loader");
-                    $(".save").text(save_text);
+                    $(".choose-plan").text(save_text);
+                    this.planActive = this.account.plan;
                     this.modalOk = true;
                 })
                 .catch(resp => {
                     //this.modalFail = true;
                 });
-        },
-
-        validate(value) {
-            this.account.validate = value;
-        },
-        dataProceed() {}
+        }
     }
 };
 </script>

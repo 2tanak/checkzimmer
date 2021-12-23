@@ -6,33 +6,33 @@
         <ul class="nav">
             <li class="nav-item">
                 <router-link class="nav-link" :to="{ name: 'general' }">
-                    <span class="menu-title">General</span>
+                    <span class="menu-title">{{ $t("General") }}</span>
                 </router-link>
             </li>
             <li class="nav-item">
                 <router-link class="nav-link" :to="{ name: 'profile' }">
-                    <span class="menu-title">Profile</span>
+                    <span class="menu-title">{{ $t("Profile") }}</span>
                 </router-link>
             </li>
             <li class="nav-item">
-                <router-link class="nav-link" :to="{ name: 'contact' }">
-                    <span class="menu-title">Contact</span>
+                <router-link class="nav-link" :to="{ name: 'Tarif' }">
+                    <span class="menu-title">{{ $t("Tarif") }}</span>
                 </router-link>
             </li>
             <li class="nav-item">
                 <router-link class="nav-link" :to="{ name: 'property' }">
-                    <span class="menu-title">Property</span>
+                    <span class="menu-title">{{ $t("Advert") }}</span>
                 </router-link>
             </li>
 
             <li class="nav-item">
                 <router-link class="nav-link" :to="{ name: 'security' }">
-                    <span class="menu-title">Security</span>
+                    <span class="menu-title">{{ $t("Security") }}</span>
                 </router-link>
             </li>
 
             <li class="nav-item" @click.prevent="logout">
-                <a class="nav-link" href="#">Logout</a>
+                <a class="nav-link" href="#">{{ $t("Logout") }}</a>
             </li>
         </ul>
     </div>

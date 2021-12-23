@@ -102,6 +102,7 @@ Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {
         Route::post('logout', 'AuthController@logout');
 		Route::get('/profile', 'ProfileController@index')->name('profile');
 		Route::post('/profile', 'ProfileController@updatePersonal')->name('profile');
+		Route::post('/change-tarif', 'ProfileController@changeTarif')->name('change-tarif');
 		Route::post('/security', 'SecurityController@change_password')->name('security');
        
 

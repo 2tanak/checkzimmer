@@ -36,12 +36,16 @@ class ProfileController extends Controller
 
 
 
-	public function Index()
+	public function Index(Request $request)
 	{
 
 		$user = $this->user;
-
-		foreach ($user->options as $option) {
+		$options_user= $user->options;
+		
+if($request->page == 'tarif'){
+	return $options_user->where('key', 'plan')->first()->value;
+	}
+		foreach ($options_user as $option) {
 
 			if (!strpos($option->key, '_', 0)) {
 				$options[$option->key] = $option->value;
@@ -158,5 +162,14 @@ class ProfileController extends Controller
 			return response()->json(['status' => 'success'], 200)->header('Authorization', $this->token);
 		} catch (\Exception $e) {
 		}
+	}
+	
+	public function changeTarif(Request $request){
+		$optionsData = [
+            'value'  => $request->plan,
+        ];
+		$this->user->options()->updateOrCreate(['key'=>'plan'],$optionsData);
+        return response()->json(['status' => 'success'], 200)->header('Authorization', $this->token)->withCookie(cookie('authDone', true));
+		
 	}
 }

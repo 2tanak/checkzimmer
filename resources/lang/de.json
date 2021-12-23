@@ -722,5 +722,12 @@
     "months": "Monate",
     "ago": "ago",
 	"Change password":"Passwort ändern",
-	"Button_create":"Schaffen"
+	"Button_create":"Schaffen",
+	"General":"General",
+	"Profile":"Profile",
+	"Tarif":"Tarif",
+	"Tarif":"Tarif",
+	"Logout":"Logout",
+	"Advert":"Property"
+	
 }

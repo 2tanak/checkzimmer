@@ -30,6 +30,7 @@ class AdvertController extends Controller
 		if (!$token) {
 			return response()->json(['error' => 'login_error'], 403);
 		}
+		
 		return response()->json(Property::where('user_id', '=', $user->id)->get());
 	}
 
@@ -145,7 +146,7 @@ class AdvertController extends Controller
 		$array_keys['property']['media']['video'] = isset($key['video']) ? $key['video'] : '';
 		$array_keys['property']['media']['video'] = isset($key['video']) ? $key['video'] : '';
 		$array_keys['property']['propertyTypes'] = $property_type;
-		//return 300;
+		
         $objects_profile = $this->option_user($user);
 		$merge= array_merge($objects_profile,$array_keys);
 		
