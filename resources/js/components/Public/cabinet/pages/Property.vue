@@ -4,14 +4,10 @@
             <div class="list-content-item">
                 <div
                     :class="{
-                        property: true,
-                        'not-map': listMode === 'list',
-                        'show-map': listMode === 'map'
+                        property: true
                     }"
                 >
-                    <div
-                        :class="{ container: true, active: listMode === 'map' }"
-                    >
+                    <div :class="{ container: true }">
                         <a href="#" class="create" @click.prevent="create">{{
                             $t("Button_create")
                         }}</a>
@@ -20,9 +16,7 @@
                             v-for="(item, index) in property"
                             :key="'prop-id-' + index + '-' + item.id"
                             :class="{
-                                'property-card': true,
-                                active: activeItems[index],
-                                'collapse-item': !status
+                                'property-card': true
                             }"
                         >
                             <div class="property-card-container">
@@ -46,7 +40,7 @@
                                     :item_id="item.id"
                                 />
                             </div>
-                            <div class="red" style="">
+                            <div class="red">
                                 <a href="#" @click.prevent="change(item.id)"
                                     >изменить</a
                                 >
@@ -58,6 +52,32 @@
                                     >удалить</a
                                 >
                             </div>
+                        </div>
+
+                        <div class="pagination">
+                            <button
+                                class="btn btn-default"
+                                @click="
+                                    fetchPagination(pagination.prev_page_url)
+                                "
+                                :disabled="!pagination.prev_page_url"
+                            >
+                                prev
+                            </button>
+                            <span>
+                                {{ pagination.current_page }}
+                                of&nbsp
+                            </span>
+                            {{ pagination.last_page }}
+                            <button
+                                class="btn btn-default"
+                                @click="
+                                    fetchPagination(pagination.next_page_url)
+                                "
+                                :disabled="!pagination.next_page_url"
+                            >
+                                prev
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -82,28 +102,14 @@ export default {
     },
     data() {
         return {
-            map: null,
-            listMode: "list",
-            loading: true,
-            loadingData: false,
-            endoflist: false,
             property: [],
-            totals: [0, 0, 0],
-            propertyAlt: [],
             page: 1,
-            nocity: 0,
-            nodist: 0,
-            additional_load: true,
-            coords_load: [],
-            additional_pages: true,
-            activeItems: [],
-            fullscreenMap: false,
-            status: true
+            pagination: []
         };
     },
     created() {},
     mounted() {
-        this.submitForm(true);
+        this.getAdverts();
     },
     methods: {
         change(id) {
@@ -112,10 +118,28 @@ export default {
         create() {
             this.$router.push("/personal/property/create");
         },
-        submitForm(clear) {
-            advert.all().then(resp => {
-                this.property = this.property.concat(resp.data);
+        getAdverts() {
+            advert.request("", {}, "get", { page: this.page }).then(resp => {
+                this.makePagination(resp.data);
+                //this.pagination(resp.data);
+                this.property = resp.data.data;
             });
+        },
+        makePagination(data) {
+            let pagination = {
+                current_page: data.current_page,
+                last_page: data.last_page,
+                next_page_url: data.next_page_url,
+                prev_page_url: data.prev_page_url
+            };
+            this.pagination = pagination;
+        },
+        fetchPagination(url) {
+            let regV = /page=\d{1,}/i;
+            let result = url.match(regV);
+            let page = result[0].split("=")[1];
+            this.page = page;
+            this.getAdverts();
         },
         remove: function(event, id) {
             let thisElement = event.currentTarget;
@@ -134,10 +158,21 @@ export default {
                 }
             });
         }
-    }
+    },
+    computed: {}
 };
 </script>
 <style lang="scss">
+.pagination {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-right: 5px;
+    margin-top: 10px;
+}
+.btn-default {
+    border: 1px solid #ccc;
+}
 .red {
     margin-bottom: 10px;
     align-self: flex-end;

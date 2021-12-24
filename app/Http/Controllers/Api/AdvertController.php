@@ -30,21 +30,21 @@ class AdvertController extends Controller
 		if (!$token) {
 			return response()->json(['error' => 'login_error'], 403);
 		}
-		
-		return response()->json(Property::where('user_id', '=', $user->id)->get());
+
+		return Property::where('user_id', '=', $user->id)->paginate(20);
 	}
 
-	
-	
+
+
 	public function show(Request $request, Property $property)
 	{
 		$token = JWTAuth::getToken();
 		$user = JWTAuth::toUser($token);
-        
-		
-		if($property->user_id != $user->id){
+
+
+		if ($property->user_id != $user->id) {
 			return response()->json(['error' => 'login_error'], 403);
-         }
+		}
 		if (!$token && !$property->id) {
 			return response()->json(['error' => 'login_error'], 403);
 		}
@@ -146,13 +146,12 @@ class AdvertController extends Controller
 		$array_keys['property']['media']['video'] = isset($key['video']) ? $key['video'] : '';
 		$array_keys['property']['media']['video'] = isset($key['video']) ? $key['video'] : '';
 		$array_keys['property']['propertyTypes'] = $property_type;
-		
-        $objects_profile = $this->option_user($user);
-		$merge= array_merge($objects_profile,$array_keys);
-		
-		
-        return response()->json(['status' => 'success','data'=>$merge], 200)->header('Authorization', $token)->withCookie(cookie('authDone', true));
-		
+
+		$objects_profile = $this->option_user($user);
+		$merge = array_merge($objects_profile, $array_keys);
+
+
+		return response()->json(['status' => 'success', 'data' => $merge], 200)->header('Authorization', $token)->withCookie(cookie('authDone', true));
 	}
 
 
@@ -195,23 +194,24 @@ class AdvertController extends Controller
 	{
 		$token = JWTAuth::getToken();
 		$user = JWTAuth::toUser($token);
-		if(count($request->all()) <= 0){
-			$option_user= $this->option_user($user);
-		     return $option_user;
+		if (count($request->all()) <= 0) {
+			$option_user = $this->option_user($user);
+			return $option_user;
 		}
-		
+
 		$data = $request->all();
 		$propertyData = $data['property'];
-        $propertyData['address'] = $data['post']['address'];
+		$propertyData['address'] = $data['post']['address'];
 		$propertyData['languages'] = $data['languages'];
-        $property = PropertyRepository::create($user->id, $propertyData);
+		$property = PropertyRepository::create($user->id, $propertyData);
 		return $property->id;
 	}
-	
-	
-	public function option_user($user){
-		
-		
+
+
+	public function option_user($user)
+	{
+
+
 
 		foreach ($user->options as $option) {
 
@@ -258,7 +258,7 @@ class AdvertController extends Controller
 			}
 		}
 		if (isset($options['languages'])) {
-           
+
 			//вычисляем языки
 			$arr = [
 				'en' => 'english',
@@ -278,8 +278,5 @@ class AdvertController extends Controller
 			$options['languages'] = collect($lang);
 		}
 		return $options;
-		
-		
-		
 	}
 }
