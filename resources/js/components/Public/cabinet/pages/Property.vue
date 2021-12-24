@@ -76,7 +76,7 @@
                                 "
                                 :disabled="!pagination.next_page_url"
                             >
-                                prev
+                                next
                             </button>
                         </div>
                     </div>

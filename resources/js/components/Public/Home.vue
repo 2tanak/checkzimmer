@@ -132,7 +132,17 @@ export default {
                 fetchUser: true
             })
                 .then((resp) => {
-                    document.location = '/dashboard';
+				 if(resp.data.error){
+				   $('.error-login').css({'display':'block'});
+				}
+                if(resp.data.data.role == 'holder'){
+					document.location = '/personal';
+					return false;
+				}
+				if(resp.data.data.role == 'admin'){
+				    document.location = '/dashboard';
+					return false;
+				}
                 });
         },
     }
