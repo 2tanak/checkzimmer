@@ -19,15 +19,16 @@ class UserRepository {
      * @param $data
      * @return mixed
      */
-    static function register($data) {
+    static function register($data,$pass=false) {
         $userEmail = $data['contact']['email'];
         $user = User::where('email', $userEmail)->first();
+		if(isset($user->email)){return false;};
         if (!$user) {
             $user = User::create([
                 'name' => $data['contact']['person']['name'],
                 'email' => $userEmail,
                 'role' => 'holder',
-                'password' => Hash::make(Str::random(12))
+                'password' => Hash::make($pass)
                 ]);
         }
         self::addMetaData($user, $data);

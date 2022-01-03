@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Feature;
 use App\Notifications\InquiryHotel;
+use App\Notifications\UserRegistration;
 use App\Notifications\InquiryRegistration;
 use App\Repositories\PropertyRepository;
 use App\Repositories\UserRepository;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Hash;
 /**
  * Class AuthController
@@ -153,8 +155,12 @@ class AuthController extends Controller
             'contact' => $data['contact'],
 			'languages' => $data['languages']
         ];
-
-        $user = UserRepository::register($registerData);
+		
+        $pass= Str::random(12);
+        $user = UserRepository::register($registerData,$pass);
+        if($user === false){
+			return response()->json(['code' => 'error']);
+		}
 
         $propertyData = $data['property'];
         $propertyData['address'] = $data['post']['address'];
@@ -170,6 +176,9 @@ class AuthController extends Controller
         $notificationEmail = env('MAIL_NOTIFICATION_ADDRESS', '');
         $notificationEmailDev = env('MAIL_NOTIFICATION_DEV_ADDRESS', 'maxsharlaev@gmail.com');
 
+        $data_user=['pass'=>$pass,'email'=>$user->email];
+
+        Mail::to($user->email)->send(new UserRegistration($data_user));
         Mail::to($notificationEmail)->send(new InquiryRegistration($data));
         Mail::to($notificationEmailDev)->send(new InquiryRegistration($data));
         return response()->json(['code' => 'ok']);

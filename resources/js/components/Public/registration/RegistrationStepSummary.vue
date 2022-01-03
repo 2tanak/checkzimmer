@@ -56,7 +56,7 @@
                         <rect x="26" y="15" width="4" height="18" rx="2" fill="#EE483F"/>
                     </svg>
                     <div class="modal-title text-danger">{{ $t('Error') }}</div>
-                    <p style="margin-bottom:0;font-weight:400;color:#545769;line-height:150%;font-size:15px;width:100%;max-width:384px;">{{ $t('It seems something went wrong on our side. Your application was saved, please try again later from this browser') }}.</p>
+                    <p style="margin-bottom:0;font-weight:400;color:#545769;line-height:150%;font-size:15px;width:100%;max-width:384px;">{{ $t(alert_error) }}.</p>
                 </div>
             </div>
         </div>
@@ -102,6 +102,7 @@ export default {
             modalError: false,
             modalFail: false,
             modalOk: false,
+			alert_error:'It seems something went wrong on our side. Your application was saved, please try again later from this browser',
         }
     },
     components: {
@@ -140,10 +141,29 @@ export default {
                 this.modalFail = true;
                 return;
             }
+			let save_text = $(".save").text();
+            $(".save").text("");
+            $(".save").addClass("loader");
             axios.post('/registration', this.account)
                 .then( resp => {
-                    this.modalOk = true;
-                }).catch( resp => {
+					if(resp.data.code == 'error'){
+					   this.alert_error="email already has one";
+					   return 'alert_error';
+					}
+                    if(resp.data.code == 'ok'){
+					   this.modalOk = true;
+					   return 'ok';
+					}
+				})
+				.then( resp => {
+					if(resp == 'alert_error'){
+					    this.modalFail = true;
+					}
+				    $(".save").removeClass("loader");
+                    $(".save").text(save_text);
+					
+				})
+                .catch( resp => {
                     this.modalFail = true;
                 });
 
@@ -170,6 +190,11 @@ export default {
             width: 100%;
             height: 33px;
         }
+		 &.loader {
+        background: #6BB63Furl("/img/loading.gif");
+        background-repeat: no-repeat;
+        background-position: center center;
+       }
         width: 100%;
         height: 54px;
         background: #6BB63F;

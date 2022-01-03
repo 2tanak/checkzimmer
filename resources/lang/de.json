@@ -728,6 +728,6 @@
 	"Tarif":"Tarif",
 	"Tarif":"Tarif",
 	"Logout":"Logout",
-	"Advert":"Property"
-	
+	"Advert":"Property",
+	"email already has one":"there is already an email like this"
 }
