@@ -276,6 +276,10 @@ export default {
         }
     },
     mounted() {
+		let that = this;
+		   jQuery('.entry.login-link').click(function(e) {
+			that.login(e);
+        })
         let acc = JSON.parse(localStorage.getItem('application-data'))
         if (acc) {
             this.account = acc;
@@ -283,6 +287,46 @@ export default {
 
     },
     methods: {
+		login(e) {
+			e.preventDefault();
+			$('.error-login').css({'display':'none'});
+            let res = true;
+            jQuery('.modal-form.login input').each(function() {
+                var value = jQuery(this).val();
+                if (value === '') {
+                    jQuery(this).addClass('error');
+                    jQuery(this).closest('.input-block').find('.error-text').addClass('active')
+                    res = false;
+                }
+            })
+
+            if (res === false) {
+                return;
+            }
+            this.$auth.login({
+                data: {
+                    email: jQuery('#mail-phone').val(),
+                    password: jQuery('#password').val()
+                },
+                staySignedIn: true,
+                fetchUser: true
+            })
+            .then((resp) => {
+				
+				if(resp.data.error){
+				   $('.error-login').css({'display':'block'});
+				}
+                if(resp.data.data.role == 'holder'){
+					document.location = '/personal';
+					return false;
+				}
+				if(resp.data.data.role == 'admin'){
+				    document.location = '/dashboard';
+					return false;
+				}
+            });
+        
+        },
         choosePlan() {
             this.step = 1;
         },
@@ -300,7 +344,8 @@ export default {
         },
         dataProceed() {
             localStorage.setItem('application-data', JSON.stringify(this.account));
-        }
+        },
+		
     }
 }
 </script>

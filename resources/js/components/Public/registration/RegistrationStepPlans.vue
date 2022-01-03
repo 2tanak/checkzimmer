@@ -9,7 +9,7 @@
                         <PriceBlockItem v-for="(plan, key) in plans" :active="key === planActive" :plan="plan" @input="planSelect(key)"/>
                     </div>
                 </div>
-                <div class="questions-block">
+                <div v-if ="questions" class="questions-block">
                     <div class="questions-content">
                         <div class="title">{{ $t('Freequently asked Questions') }}</div>
                         <div class="questions-block-item">

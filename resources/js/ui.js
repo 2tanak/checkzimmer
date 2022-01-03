@@ -10,6 +10,7 @@ import Vue from 'vue'
  */
 import Public from './components/Public/PublicRoot';
 import Home from './components/Public/Home';
+import Personal from './components/Public/PersonalArea';
 
 import axios from 'axios';
 import VueAxios from 'vue-axios';
@@ -74,6 +75,7 @@ const app = new Vue({
         //Public,
         Home,
         Public,
+		Personal,
         //Favorites,
         //Single,
         //Registration,

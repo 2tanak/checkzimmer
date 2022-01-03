@@ -69,7 +69,12 @@ Route::middleware('auth')->namespace('Api')->group(function () {
 
 Route::group(['namespace' => 'Api'], function() {
     Route::resource('room-types', 'RoomTypesController');
-    Route::apiResource('property', 'PropertyController');
+	Route::get('advert', 'AdvertController@index');
+	Route::get('advert/{property:id}', 'AdvertController@show');
+	Route::put('advert/{property:id}', 'AdvertController@update');
+	Route::delete('advert/{property:id}', 'AdvertController@destroy');
+	Route::post('advert', 'AdvertController@store');
+	Route::apiResource('property', 'PropertyController');
     Route::get('features-public', 'FeaturesController@index');
     Route::get('languages', 'LanguagesController@index');
     Route::get('questionsPublic/{property}', 'QuestionsController@indexPublic');
@@ -85,6 +90,7 @@ Route::group(['namespace' => 'Api'], function() {
     Route::post('/image-public', 'ImageUploadController@imageUploadPost');
     Route::post('/registration', 'AuthController@registrationProcess');
     Route::post('/feedback', 'FeedbackController@store')->name('got-feedback');
+
 });
 
 Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {
@@ -94,5 +100,12 @@ Route::group(['namespace' => 'Api', 'prefix' => 'auth'], function () {
     Route::group(['middleware' => 'auth:api'], function(){
         Route::get('user', 'AuthController@user');
         Route::post('logout', 'AuthController@logout');
+		Route::get('/profile', 'ProfileController@index')->name('profile');
+		Route::post('/profile', 'ProfileController@updatePersonal')->name('profile');
+		Route::post('/change-tarif', 'ProfileController@changeTarif')->name('change-tarif');
+		Route::post('/security', 'SecurityController@change_password')->name('security');
+       
+
+
     });
 });

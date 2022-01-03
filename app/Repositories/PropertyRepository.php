@@ -35,6 +35,33 @@ class PropertyRepository {
      * @return Property
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
+	 
+	 static function update($data,$property,$userId){
+	 try {
+		foreach ($data['languages'] as $lang=>$value) {
+            if (!$value) {
+                continue;
+            }
+            $languages[] = PropertyRepository::LANG_CODES[$lang];
+        }
+
+        $data['contact']['languages'] = implode('|', $languages);
+		
+		//roomAtach
+		$propertyTypes = RoomType::all()->toArray();
+        $propertyNames = array_column($propertyTypes, 'name');
+        
+		self::roomAttach($property, $data['propertyTypes']);
+		self::metaDataUpdate($property, $data['contact']);
+	    self::photoAttach($property, $data['media']['photos']);
+		self::optionsAttach($property, $data['media'], ['photos']);
+		self::featureAssign($property, $data['facilities']);
+        return response()->json(['status' => 'success'], 200);
+	   }catch(\Exception $e) {
+		 return response()->json(['error' => 'error'], 401);
+	  }
+	} 
+	 
     static function create($userId, $data, $status = null): Property
     {
         $geocode = app()->make(Geocoder::class);
@@ -102,8 +129,6 @@ class PropertyRepository {
         $propertyTypes = RoomType::all()->toArray();
         $propertyNames = array_column($propertyTypes, 'name');
 
-        $property->rooms()->delete();
-
         foreach ($data as $propertyType) {
             $nameIndex = array_search($propertyType['name'], $propertyNames);
             if ($nameIndex === false) {
@@ -113,7 +138,7 @@ class PropertyRepository {
             }
 
             foreach ($propertyType['rooms'] as $room) {
-                Room::create([
+                $rooms =[
                     'property_id' => $property->id,
                     'room_type_id' => $propertyTypes[$nameIndex]['id'],
                     'number' => $room['num'] ?? $room['number'],
@@ -124,7 +149,14 @@ class PropertyRepository {
                     'shower' => 'none',
                     'kitchen' => 'none',
                     'status' => Property::PENDING
-                ]);
+                ];
+				
+			   if(isset($room['id'])){
+			       $property->rooms()->updateOrCreate(['id'=>$room['id'],'property_id'=>$property->id],$rooms);
+			   }else{
+			      Room::create($rooms);
+			   }
+				
             }
         }
     }
@@ -148,7 +180,8 @@ class PropertyRepository {
             'type'   => 'property',
             'value'  => json_encode($photosAttached),
         ];
-        $property->options()->create($optionsData);
+        $property->options()->updateOrCreate(['key'=>'photos'],$optionsData);
+
     }
 
     /**
@@ -207,7 +240,8 @@ class PropertyRepository {
             'type'   => 'property',
             'value'  => $value,
         ];
-        $property->options()->create($optionsData);
+        $property->options()->updateOrCreate(['key'=>$key],$optionsData);
+
     }
 
 }

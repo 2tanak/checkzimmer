@@ -48,7 +48,10 @@ class Property extends Model
     protected $with = ['options', 'user', 'rooms', 'questions', 'rating', 'questions', 'features'];
     protected $fillableRelations = ['options', 'rooms', 'features'];
 
-
+    public function getRouteKeyName()
+    {
+    return ['id','user_id'];
+    }
     /**
      * @var array $children noCRUD-related property
      */

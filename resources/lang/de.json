@@ -720,5 +720,14 @@
     "Local expert": "Lokaler Experte",
     "month": "Monat",
     "months": "Monate",
-    "ago": "ago"
+    "ago": "ago",
+	"Change password":"Passwort ändern",
+	"Button_create":"Schaffen",
+	"General":"General",
+	"Profile":"Profile",
+	"Tarif":"Tarif",
+	"Tarif":"Tarif",
+	"Logout":"Logout",
+	"Advert":"Property",
+	"email already has one":"there is already an email like this"
 }

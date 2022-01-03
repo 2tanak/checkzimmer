@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Feature;
 use App\Notifications\InquiryHotel;
+use App\Notifications\UserRegistration;
 use App\Notifications\InquiryRegistration;
 use App\Repositories\PropertyRepository;
 use App\Repositories\UserRepository;
@@ -16,7 +17,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Str;
+use Hash;
 /**
  * Class AuthController
  * Works with website authentication
@@ -61,9 +63,19 @@ class AuthController extends Controller
      */
     public function login(Request $request): JsonResponse
     {
+		$user = User::where(['email' => $request->email])->whereIn('role', ['admin','holder'])->first();
+	    $role = $user->role;
+		
+		if (!$user){
+            return response()->json(['error' => 'error']);
+		}
+		if (!Hash::check($request->password, $user->password)){
+		    return response()->json(['error' => 'error']);
+		}
+		
         $credentials = $request->only('email', 'password');
         if ($token = $this->guard()->attempt($credentials)) {
-            return response()->json(['status' => 'success'], 200)->header('Authorization', $token)
+            return response()->json(['status' => 'success','role'=>$role], 200)->header('Authorization', $token)
                 ->withCookie(cookie('authDone', true));
         }
         return response()->json(['error' => 'login_error'], 401);
@@ -140,10 +152,15 @@ class AuthController extends Controller
             'post' => $data['post'],
             'billing' => $data['billing'],
             'profile' => $data['contact'],
-            'contact' => $data['contact']
+            'contact' => $data['contact'],
+			'languages' => $data['languages']
         ];
-
-        $user = UserRepository::register($registerData);
+		
+        $pass= Str::random(12);
+        $user = UserRepository::register($registerData,$pass);
+        if($user === false){
+			return response()->json(['code' => 'error']);
+		}
 
         $propertyData = $data['property'];
         $propertyData['address'] = $data['post']['address'];
@@ -159,6 +176,9 @@ class AuthController extends Controller
         $notificationEmail = env('MAIL_NOTIFICATION_ADDRESS', '');
         $notificationEmailDev = env('MAIL_NOTIFICATION_DEV_ADDRESS', 'maxsharlaev@gmail.com');
 
+        $data_user=['pass'=>$pass,'email'=>$user->email];
+
+        Mail::to($user->email)->send(new UserRegistration($data_user));
         Mail::to($notificationEmail)->send(new InquiryRegistration($data));
         Mail::to($notificationEmailDev)->send(new InquiryRegistration($data));
         return response()->json(['code' => 'ok']);

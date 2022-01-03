@@ -152,7 +152,11 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+@if(Request::segment(1) == 'personal')
+<script src="{{ asset('js/personal.js') }}" defer></script>
+@else
 <script src="{{ asset('js/ui.js') }}" defer></script>
+@endif
 
 <script src="{{ asset('js/slick.min.js') }}" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"

@@ -79,7 +79,11 @@ class User extends Authenticatable implements JWTSubject
             return self::whereNull('email_verified_at')->count();
         }
     }
+    public function options()
+    {
+        return $this->hasMany(Option::class, 'parent')->where('type', 'user');
 
+    }
     public function getUserEmail()
     {
         return $this->email;
@@ -94,7 +98,7 @@ class User extends Authenticatable implements JWTSubject
                 'value' => is_array($value) ? json_encode($value) : $value
             ]);
         } else {
-            $option->value = $value;
+            $option->value = is_array($value) ? json_encode($value) : $value;
             $option->save();
         }
         return $option;
