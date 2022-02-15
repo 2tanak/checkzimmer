@@ -21,6 +21,7 @@ Route::group([
 
 });
 Route::get('/de', 'HomeController@redirect');
+Route::get('/test', 'HomeController@test');
 
 
 $locales = app('locale')->getLanguagesAvailable();
